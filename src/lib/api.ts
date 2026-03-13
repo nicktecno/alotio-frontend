@@ -60,8 +60,11 @@ async function request<T>(endpoint: string, options: RequestInit = {}): Promise<
         // Refresh failed
       }
       isRefreshing = false;
-      window.location.href = '/login';
-      throw new ApiError(401, 'Sessão expirada. Redirecionando...');
+      const isAuthCheck = endpoint === '/auth/me';
+      if (!isAuthCheck) {
+        window.location.href = '/login';
+      }
+      throw new ApiError(401, 'Sessão expirada');
     }
     const body = await res.json().catch(() => ({ message: 'Erro desconhecido' }));
     throw new ApiError(res.status, body.message || `Erro ${res.status}`);
