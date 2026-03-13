@@ -1,0 +1,473 @@
+'use client';
+
+import { useEffect, useState } from 'react';
+import Link from 'next/link';
+import { api, assetUrl } from '@/lib/api';
+import { compressImage } from '@/lib/compressImage';
+import Loading from '@/components/Loading';
+import FileOrCameraInput from '@/components/FileOrCameraInput';
+import toast from 'react-hot-toast';
+import type { Profile, State, City, School } from '@/types';
+
+export default function PerfilPage() {
+  const [profile, setProfile] = useState<Profile | null>(null);
+  const [hasProfile, setHasProfile] = useState<boolean | null>(null);
+  const [states, setStates] = useState<State[]>([]);
+  const [cities, setCities] = useState<City[]>([]);
+  const [schools, setSchools] = useState<School[]>([]);
+  const [loading, setLoading] = useState(false);
+
+  const [form, setForm] = useState({
+    displayName: '',
+    prefixo: '',
+    phone: '',
+    bio: '',
+    hasTV: false,
+    hasAC: false,
+    hasMonitor: false,
+    stateId: '',
+    cityId: '',
+    defaultSchoolId: '',
+    secondarySchoolId: '',
+  });
+  const [document, setDocument] = useState<File | null>(null);
+  const [newDocument, setNewDocument] = useState<File | null>(null);
+  const [uploadingDoc, setUploadingDoc] = useState(false);
+
+  const handleResubmitDocument = async () => {
+    if (!newDocument) {
+      toast.error('Selecione um arquivo');
+      return;
+    }
+    setUploadingDoc(true);
+    try {
+      const compressed = await compressImage(newDocument);
+      const fd = new FormData();
+      fd.append('document', compressed);
+      await api.updateDocument(fd);
+      const updated = await api.getMyProfile();
+      setProfile(updated as Profile);
+      setNewDocument(null);
+      toast.success('Documento reenviado! Aguarde nova análise do administrador.');
+    } catch (err: unknown) {
+      toast.error(err instanceof Error ? err.message : 'Erro ao enviar documento');
+    } finally {
+      setUploadingDoc(false);
+    }
+  };
+
+  useEffect(() => {
+    api.getStates().then((data) => setStates(data as State[]));
+  }, []);
+
+  useEffect(() => {
+    api
+      .getMyProfile()
+      .then((data) => {
+        const p = data as Profile;
+        setProfile(p);
+        setHasProfile(true);
+        setForm({
+          displayName: p.displayName,
+          prefixo: p.prefixo,
+          phone: p.phone || '',
+          bio: p.bio || '',
+          hasTV: p.hasTV || false,
+          hasAC: p.hasAC || false,
+          hasMonitor: p.hasMonitor || false,
+          stateId: p.city.state?.id || '',
+          cityId: p.cityId,
+          defaultSchoolId: p.defaultSchoolId,
+          secondarySchoolId: p.secondarySchoolId || '',
+        });
+      })
+      .catch(() => setHasProfile(false));
+  }, []);
+
+  useEffect(() => {
+    if (form.stateId) {
+      api.getCities(form.stateId).then((data) => setCities(data as City[]));
+    }
+  }, [form.stateId]);
+
+  useEffect(() => {
+    if (form.cityId) {
+      api.getSchools(form.cityId).then((data) => setSchools(data as School[]));
+    }
+  }, [form.cityId]);
+
+  const isPremium = profile?.subscriptions && profile.subscriptions.length > 0;
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
+    setForm((prev) => ({ ...prev, [e.target.name]: e.target.value }));
+  };
+
+  const handleCreate = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!document) {
+      toast.error('Envie o documento comprobatório');
+      return;
+    }
+    setLoading(true);
+    try {
+      const compressedDoc = await compressImage(document);
+      const fd = new FormData();
+      fd.append('displayName', form.displayName);
+      fd.append('prefixo', form.prefixo);
+      fd.append('phone', form.phone);
+      fd.append('bio', form.bio);
+      fd.append('cityId', form.cityId);
+      fd.append('defaultSchoolId', form.defaultSchoolId);
+      if (form.secondarySchoolId) fd.append('secondarySchoolId', form.secondarySchoolId);
+      fd.append('document', compressedDoc);
+
+      const data = await api.createProfile(fd);
+      setProfile(data as Profile);
+      setHasProfile(true);
+      toast.success('Perfil criado! Aguarde aprovação do administrador.');
+    } catch (err: unknown) {
+      toast.error(err instanceof Error ? err.message : 'Erro ao criar perfil');
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const handleUpdate = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setLoading(true);
+    const data: Record<string, unknown> = {};
+    if (form.displayName !== profile!.displayName) data.displayName = form.displayName;
+    if (form.phone !== (profile!.phone || '')) data.phone = form.phone;
+    if (form.bio !== (profile!.bio || '')) data.bio = form.bio;
+    if (form.hasTV !== profile!.hasTV) data.hasTV = form.hasTV;
+    if (form.hasAC !== profile!.hasAC) data.hasAC = form.hasAC;
+    if (form.hasMonitor !== profile!.hasMonitor) data.hasMonitor = form.hasMonitor;
+    if (form.cityId !== profile!.cityId) data.cityId = form.cityId;
+    if (form.defaultSchoolId !== profile!.defaultSchoolId) data.defaultSchoolId = form.defaultSchoolId;
+    data.secondarySchoolId = form.secondarySchoolId || null;
+
+    try {
+      const updated = await api.updateMyProfile(data);
+      setProfile(updated as Profile);
+      toast.success('Perfil atualizado!');
+    } catch (err: unknown) {
+      toast.error(err instanceof Error ? err.message : 'Erro ao atualizar');
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  if (hasProfile === null) return <Loading />;
+
+  return (
+    <div className="max-w-2xl">
+      <h1 className="text-2xl font-bold font-heading text-gray-900 mb-6">
+        {hasProfile ? 'Editar Perfil' : 'Criar Perfil'}
+      </h1>
+
+      <form
+        onSubmit={hasProfile ? handleUpdate : handleCreate}
+        className="bg-white rounded-xl border border-gray-200 p-6 space-y-5"
+      >
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
+          <div>
+            <label className="block text-sm font-medium text-gray-700 mb-1">Nome de exibição</label>
+            <input
+              name="displayName"
+              value={form.displayName}
+              onChange={handleChange}
+              required
+              className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-primary outline-none"
+            />
+          </div>
+          <div>
+            <label className="block text-sm font-medium text-gray-700 mb-1">Prefixo (3 dígitos)</label>
+            <input
+              name="prefixo"
+              value={form.prefixo}
+              onChange={handleChange}
+              required
+              maxLength={3}
+              pattern="\d{3}"
+              disabled={hasProfile === true}
+              className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-primary outline-none disabled:bg-gray-100 disabled:text-gray-500"
+            />
+            {hasProfile && (
+              <p className="text-xs text-gray-400 mt-1">O prefixo não pode ser alterado após o cadastro.</p>
+            )}
+          </div>
+        </div>
+
+        <div>
+          <label className="block text-sm font-medium text-gray-700 mb-1">Telefone</label>
+          <input
+            name="phone"
+            value={form.phone}
+            onChange={handleChange}
+            className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-primary outline-none"
+          />
+        </div>
+
+        {isPremium ? (
+          <div>
+            <label className="block text-sm font-medium text-gray-700 mb-1">Descrição</label>
+            <textarea
+              name="bio"
+              value={form.bio}
+              onChange={handleChange}
+              rows={3}
+              placeholder="Fale sobre você, sua experiência e seu serviço..."
+              className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-primary outline-none resize-none"
+            />
+          </div>
+        ) : (
+          <div className="bg-primary-50 border border-primary-200 rounded-lg p-4">
+            <p className="text-sm text-primary-700">
+              <strong>Descrição</strong> — disponível no{' '}
+              <Link href="/dashboard/assinatura" className="underline font-semibold hover:text-primary-900">Plano Premium</Link>.
+              Conte sua história e destaque-se para os pais.
+            </p>
+          </div>
+        )}
+
+        {isPremium ? (
+          <div>
+            <label className="block text-sm font-medium text-gray-700 mb-2">Comodidades do veículo</label>
+            <div className="flex flex-wrap gap-4">
+              <label className="flex items-center gap-2 cursor-pointer">
+                <input
+                  type="checkbox"
+                  checked={form.hasTV}
+                  onChange={(e) => setForm((prev) => ({ ...prev, hasTV: e.target.checked }))}
+                  className="w-4 h-4 text-primary border-gray-300 rounded focus:ring-primary"
+                />
+                <span className="text-sm text-gray-700">📺 TV</span>
+              </label>
+              <label className="flex items-center gap-2 cursor-pointer">
+                <input
+                  type="checkbox"
+                  checked={form.hasAC}
+                  onChange={(e) => setForm((prev) => ({ ...prev, hasAC: e.target.checked }))}
+                  className="w-4 h-4 text-primary border-gray-300 rounded focus:ring-primary"
+                />
+                <span className="text-sm text-gray-700">❄️ Ar-condicionado</span>
+              </label>
+              <label className="flex items-center gap-2 cursor-pointer">
+                <input
+                  type="checkbox"
+                  checked={form.hasMonitor}
+                  onChange={(e) => setForm((prev) => ({ ...prev, hasMonitor: e.target.checked }))}
+                  className="w-4 h-4 text-primary border-gray-300 rounded focus:ring-primary"
+                />
+                <span className="text-sm text-gray-700">👀 Monitor de crianças</span>
+              </label>
+            </div>
+          </div>
+        ) : (
+          <div className="bg-primary-50 border border-primary-200 rounded-lg p-4">
+            <p className="text-sm text-primary-700">
+              <strong>Comodidades do veículo</strong> (TV, Ar-condicionado, Monitor) — disponíveis no{' '}
+              <Link href="/dashboard/assinatura" className="underline font-semibold hover:text-primary-900">Plano Premium</Link>.
+            </p>
+          </div>
+        )}
+
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
+          <div>
+            <label className="block text-sm font-medium text-gray-700 mb-1">Estado</label>
+            <select
+              name="stateId"
+              value={form.stateId}
+              onChange={handleChange}
+              required
+              className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-primary outline-none"
+            >
+              <option value="">Selecione</option>
+              {states.map((s) => (
+                <option key={s.id} value={s.id}>{s.name}</option>
+              ))}
+            </select>
+          </div>
+          <div>
+            <label className="block text-sm font-medium text-gray-700 mb-1">Cidade</label>
+            <select
+              name="cityId"
+              value={form.cityId}
+              onChange={handleChange}
+              required
+              disabled={!form.stateId}
+              className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-primary outline-none disabled:opacity-50"
+            >
+              <option value="">Selecione</option>
+              {cities.map((c) => (
+                <option key={c.id} value={c.id}>{c.name}</option>
+              ))}
+            </select>
+          </div>
+        </div>
+
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
+          <div>
+            <label className="block text-sm font-medium text-gray-700 mb-1">Escola Principal</label>
+            <select
+              name="defaultSchoolId"
+              value={form.defaultSchoolId}
+              onChange={handleChange}
+              required
+              disabled={!form.cityId}
+              className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-primary outline-none disabled:opacity-50"
+            >
+              <option value="">Selecione</option>
+              {schools.map((s) => (
+                <option key={s.id} value={s.id}>{s.name}</option>
+              ))}
+            </select>
+          </div>
+          <div>
+            <label className="block text-sm font-medium text-gray-700 mb-1">
+              Escola Secundária <span className="text-gray-400">(opcional)</span>
+            </label>
+            <select
+              name="secondarySchoolId"
+              value={form.secondarySchoolId}
+              onChange={handleChange}
+              disabled={!form.cityId}
+              className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-primary outline-none disabled:opacity-50"
+            >
+              <option value="">Nenhuma</option>
+              {schools
+                .filter((s) => s.id !== form.defaultSchoolId)
+                .map((s) => (
+                  <option key={s.id} value={s.id}>{s.name}</option>
+                ))}
+            </select>
+          </div>
+        </div>
+
+        {!hasProfile && (
+          <div>
+            <label className="block text-sm font-medium text-gray-700 mb-1">
+              Documento comprobatório
+            </label>
+            <div className="space-y-2">
+              <FileOrCameraInput
+                accept="image/*,.pdf"
+                onChange={(e) => setDocument(e.target.files?.[0] || null)}
+                onFileCapture={(file) => setDocument(file)}
+                uploadLabel="Escolher arquivo"
+                cameraLabel="Tirar foto"
+                uploadClassName="bg-primary-50 hover:bg-primary-100 text-primary-700"
+                cameraClassName="bg-gray-100 hover:bg-gray-200 text-gray-700"
+              />
+              {document && (
+                <p className="text-sm text-green-600 font-medium">
+                  Selecionado: {document.name}
+                </p>
+              )}
+            </div>
+            <p className="text-xs text-gray-400 mt-1">
+              Foto ou PDF comprovando que é tio profissional. Visível apenas para administradores.
+            </p>
+          </div>
+        )}
+
+        <button
+          type="submit"
+          disabled={loading}
+          className="w-full bg-secondary hover:bg-secondary-600 disabled:opacity-50 text-white py-2.5 rounded-lg font-semibold transition cursor-pointer"
+        >
+          {loading ? 'Salvando...' : hasProfile ? 'Salvar Alterações' : 'Criar Perfil'}
+        </button>
+      </form>
+
+      {hasProfile && (
+        <div className="mt-6 bg-white rounded-xl border border-gray-200 p-6 space-y-4">
+          <h2 className="text-lg font-semibold text-gray-900 font-heading">Documento comprobatório</h2>
+
+          {profile!.documents?.length > 0 && (
+            <div className="flex flex-wrap gap-3">
+              {profile!.documents.map((doc) => (
+                <a
+                  key={doc.id}
+                  href={assetUrl(doc.fileUrl) || doc.fileUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-2 bg-gray-50 text-gray-700 px-4 py-2 rounded-lg text-sm font-medium hover:bg-gray-100 transition border border-gray-200"
+                >
+                  <svg className="w-4 h-4" fill="none" stroke="currentColor" strokeWidth={2} viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                  </svg>
+                  {doc.fileName || 'Ver documento'}
+                </a>
+              ))}
+            </div>
+          )}
+
+          {profile!.status === 'REJECTED' && (
+            <div className="border-2 border-red-200 bg-red-50 rounded-lg p-4 space-y-3">
+              <p className="text-sm text-red-700 font-medium">
+                Seu documento foi rejeitado. Envie um novo documento para reavaliação.
+              </p>
+              <FileOrCameraInput
+                accept="image/*,.pdf"
+                onChange={(e) => setNewDocument(e.target.files?.[0] || null)}
+                onFileCapture={(file) => setNewDocument(file)}
+                uploadLabel="Escolher arquivo"
+                cameraLabel="Tirar foto"
+                uploadClassName="bg-red-100 hover:bg-red-200 text-red-700"
+                cameraClassName="bg-gray-100 hover:bg-gray-200 text-gray-700"
+              />
+              {newDocument && (
+                <p className="text-sm text-green-600 font-medium">
+                  Selecionado: {newDocument.name}
+                </p>
+              )}
+              <button
+                onClick={handleResubmitDocument}
+                disabled={!newDocument || uploadingDoc}
+                className="bg-red-600 hover:bg-red-700 disabled:opacity-50 text-white px-5 py-2 rounded-lg text-sm font-semibold transition cursor-pointer"
+              >
+                {uploadingDoc ? 'Enviando...' : 'Reenviar documento'}
+              </button>
+            </div>
+          )}
+
+          {profile!.status === 'PENDING' && (
+            <div className="border border-amber-200 bg-amber-50 rounded-lg p-4 space-y-3">
+              <p className="text-sm text-amber-700 font-medium">
+                Seu documento está em análise. Caso queira, envie um novo documento atualizado.
+              </p>
+              <FileOrCameraInput
+                accept="image/*,.pdf"
+                onChange={(e) => setNewDocument(e.target.files?.[0] || null)}
+                onFileCapture={(file) => setNewDocument(file)}
+                uploadLabel="Escolher arquivo"
+                cameraLabel="Tirar foto"
+                uploadClassName="bg-amber-100 hover:bg-amber-200 text-amber-700"
+                cameraClassName="bg-gray-100 hover:bg-gray-200 text-gray-700"
+              />
+              {newDocument && (
+                <p className="text-sm text-green-600 font-medium">
+                  Selecionado: {newDocument.name}
+                </p>
+              )}
+              <button
+                onClick={handleResubmitDocument}
+                disabled={!newDocument || uploadingDoc}
+                className="bg-amber-600 hover:bg-amber-700 disabled:opacity-50 text-white px-5 py-2 rounded-lg text-sm font-semibold transition cursor-pointer"
+              >
+                {uploadingDoc ? 'Enviando...' : 'Enviar novo documento'}
+              </button>
+            </div>
+          )}
+
+          {profile!.status === 'APPROVED' && (
+            <p className="text-sm text-green-600 font-medium">
+              Seu documento foi aprovado.
+            </p>
+          )}
+        </div>
+      )}
+    </div>
+  );
+}

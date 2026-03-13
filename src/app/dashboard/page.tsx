@@ -1,0 +1,209 @@
+'use client';
+
+import { useEffect, useState } from 'react';
+import Link from 'next/link';
+import { api } from '@/lib/api';
+import Loading from '@/components/Loading';
+import type { Profile } from '@/types';
+
+export default function DashboardPage() {
+  const [profile, setProfile] = useState<Profile | null>(null);
+  const [hasProfile, setHasProfile] = useState<boolean | null>(null);
+
+  useEffect(() => {
+    api
+      .getMyProfile()
+      .then((data) => {
+        setProfile(data as Profile);
+        setHasProfile(true);
+      })
+      .catch(() => setHasProfile(false));
+  }, []);
+
+  if (hasProfile === null) {
+    return <Loading />;
+  }
+
+  if (!hasProfile) {
+    return (
+      <div className="max-w-2xl">
+        <h1 className="text-2xl font-bold font-heading text-gray-900 mb-4">Bem-vindo ao aloTio!</h1>
+        <p className="text-gray-600 mb-6">
+          Você ainda não tem um perfil de Tio. Crie seu perfil para ser encontrado por pais.
+        </p>
+        <Link
+          href="/dashboard/perfil"
+          className="inline-block bg-secondary hover:bg-secondary-600 text-white px-6 py-3 rounded-lg font-semibold transition"
+        >
+          Criar meu perfil
+        </Link>
+      </div>
+    );
+  }
+
+  const isPremium = profile!.subscriptions?.length > 0;
+  const statusColors: Record<string, string> = {
+    PENDING: 'bg-primary-100 text-primary-800',
+    APPROVED: 'bg-green-100 text-green-800',
+    REJECTED: 'bg-red-100 text-red-800',
+  };
+  const statusLabels: Record<string, string> = {
+    PENDING: 'Pendente',
+    APPROVED: 'Aprovado',
+    REJECTED: 'Rejeitado',
+  };
+
+  const isPending = profile!.status === 'PENDING';
+  const isRejected = profile!.status === 'REJECTED';
+
+  return (
+    <div className="max-w-4xl space-y-6">
+      <div className="flex items-center justify-between">
+        <h1 className="text-2xl font-bold font-heading text-gray-900">Meu Painel</h1>
+        <span className={`px-3 py-1 rounded-full text-sm font-medium ${statusColors[profile!.status]}`}>
+          {statusLabels[profile!.status]}
+        </span>
+      </div>
+
+      {isPending && (
+        <div className="border-2 border-amber-400 bg-amber-50 rounded-xl p-5 flex items-start gap-4">
+          <div className="flex-shrink-0 w-10 h-10 rounded-full bg-amber-100 flex items-center justify-center">
+            <svg className="w-5 h-5 text-amber-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+              <path strokeLinecap="round" strokeLinejoin="round" d="M12 9v2m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+            </svg>
+          </div>
+          <div>
+            <h3 className="font-semibold text-amber-800 text-base">Perfil em análise</h3>
+            <p className="text-sm text-amber-700 mt-1">
+              Seus documentos foram enviados e estão aguardando a aprovação de um administrador.
+              Enquanto isso, seu perfil não será exibido nas buscas públicas.
+            </p>
+          </div>
+        </div>
+      )}
+
+      {isRejected && (
+        <div className="border-2 border-red-400 bg-red-50 rounded-xl p-5 flex items-start gap-4">
+          <div className="flex-shrink-0 w-10 h-10 rounded-full bg-red-100 flex items-center justify-center">
+            <svg className="w-5 h-5 text-red-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+              <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
+            </svg>
+          </div>
+          <div>
+            <h3 className="font-semibold text-red-800 text-base">Perfil rejeitado</h3>
+            <p className="text-sm text-red-700 mt-1">
+              Seu cadastro foi rejeitado pelo administrador. Verifique se seus documentos comprobatórios estão corretos
+              e atualize-os na página de perfil para uma nova análise.
+            </p>
+            <Link href="/dashboard/perfil" className="inline-block mt-2 text-sm font-semibold text-red-700 underline hover:text-red-900">
+              Atualizar documentos
+            </Link>
+          </div>
+        </div>
+      )}
+
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+        <div className="bg-white border border-gray-200 rounded-xl p-5">
+          <p className="text-sm text-gray-500 mb-1">Prefixo</p>
+          <p className="text-2xl font-bold text-gray-900">{profile!.prefixo}</p>
+        </div>
+        <div className="bg-white border border-gray-200 rounded-xl p-5">
+          <p className="text-sm text-gray-500 mb-1">Cidade</p>
+          <p className="text-lg font-semibold text-gray-900">{profile!.city.name}</p>
+        </div>
+        <div className="bg-white border border-gray-200 rounded-xl p-5">
+          <p className="text-sm text-gray-500 mb-1">Escolas</p>
+          <p className="text-2xl font-bold text-gray-900">
+            {1 + (profile!.secondarySchool ? 1 : 0) + profile!.schools.length}
+          </p>
+        </div>
+        <div className="bg-white border border-gray-200 rounded-xl p-5">
+          <p className="text-sm text-gray-500 mb-1">Plano</p>
+          <p className={`text-lg font-semibold ${isPremium ? 'text-primary' : 'text-gray-900'}`}>
+            {isPremium ? 'Premium' : 'Gratuito'}
+          </p>
+        </div>
+      </div>
+
+      {!isPremium && (
+        <div className="relative overflow-hidden rounded-xl border-2 border-primary/30 bg-gradient-to-r from-primary-50 via-white to-primary-50 p-6">
+          <div className="absolute top-0 right-0 w-32 h-32 bg-primary/5 rounded-full -translate-y-8 translate-x-8" />
+          <div className="relative flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+            <div>
+              <div className="flex items-center gap-2 mb-1">
+                <span className="text-xl">⭐</span>
+                <h3 className="text-lg font-bold text-gray-900 font-heading">Turbine seu perfil com o Premium</h3>
+              </div>
+              <ul className="mt-2 space-y-1 text-sm text-gray-600">
+                <li className="flex items-center gap-2">
+                  <span className="text-secondary font-bold">✓</span> Até 10 escolas extras
+                </li>
+                <li className="flex items-center gap-2">
+                  <span className="text-secondary font-bold">✓</span> Foto de perfil e veículo exibidas
+                </li>
+                <li className="flex items-center gap-2">
+                  <span className="text-secondary font-bold">✓</span> Selo premium no perfil público
+                </li>
+                <li className="flex items-center gap-2">
+                  <span className="text-secondary font-bold">✓</span> Destaque nos resultados de busca
+                </li>
+              </ul>
+              <p className="mt-2 text-xs text-gray-400">A partir de R$ 14,90/mês</p>
+            </div>
+            <Link
+              href="/dashboard/assinatura"
+              className="flex-shrink-0 bg-primary hover:bg-primary-600 text-white px-6 py-3 rounded-lg font-bold font-heading tracking-wide transition shadow-md hover:shadow-lg cursor-pointer"
+            >
+              Quero ser Premium
+            </Link>
+          </div>
+        </div>
+      )}
+
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <Link
+          href="/dashboard/perfil"
+          className="bg-white border border-gray-200 rounded-xl p-5 hover:shadow-md transition group"
+        >
+          <h3 className="font-semibold text-gray-900 group-hover:text-primary mb-1">
+            Editar Perfil
+          </h3>
+          <p className="text-sm text-gray-500">Atualize suas informações pessoais</p>
+        </Link>
+        <Link
+          href="/dashboard/escolas"
+          className="bg-white border border-gray-200 rounded-xl p-5 hover:shadow-md transition group"
+        >
+          <h3 className="font-semibold text-gray-900 group-hover:text-primary mb-1">
+            Gerenciar Escolas
+          </h3>
+          <p className="text-sm text-gray-500">
+            {isPremium ? 'Adicione até 10 escolas extras' : 'Default + secundária'}
+          </p>
+        </Link>
+        <Link
+          href="/dashboard/fotos"
+          className="bg-white border border-gray-200 rounded-xl p-5 hover:shadow-md transition group"
+        >
+          <h3 className="font-semibold text-gray-900 group-hover:text-primary mb-1">
+            Fotos
+          </h3>
+          <p className="text-sm text-gray-500">
+            {isPremium ? 'Gerencie avatar e fotos do veículo' : 'Disponível no plano premium'}
+          </p>
+        </Link>
+        <Link
+          href="/dashboard/assinatura"
+          className="bg-white border border-gray-200 rounded-xl p-5 hover:shadow-md transition group"
+        >
+          <h3 className="font-semibold text-gray-900 group-hover:text-primary mb-1">
+            Assinatura
+          </h3>
+          <p className="text-sm text-gray-500">
+            {isPremium ? 'Gerencie sua assinatura premium' : 'Assine para mais recursos'}
+          </p>
+        </Link>
+      </div>
+    </div>
+  );
+}

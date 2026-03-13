@@ -1,0 +1,320 @@
+'use client';
+
+import { useEffect, useState, useCallback } from 'react';
+import Link from 'next/link';
+import Header from '@/components/Header';
+import Footer from '@/components/Footer';
+import { api, assetUrl } from '@/lib/api';
+import type { State, City, School, Neighborhood, TioPublicView, PaginatedResponse } from '@/types';
+import Loading from '@/components/Loading';
+
+export default function TiosPage() {
+  const [states, setStates] = useState<State[]>([]);
+  const [cities, setCities] = useState<City[]>([]);
+  const [schools, setSchools] = useState<School[]>([]);
+  const [selectedState, setSelectedState] = useState('');
+  const [selectedCity, setSelectedCity] = useState('');
+  const [selectedSchool, setSelectedSchool] = useState('');
+  const [neighborhoods, setNeighborhoods] = useState<Neighborhood[]>([]);
+  const [selectedNeighborhood, setSelectedNeighborhood] = useState('');
+  const [searchName, setSearchName] = useState('');
+  const [tios, setTios] = useState<TioPublicView[]>([]);
+  const [totalPages, setTotalPages] = useState(0);
+  const [page, setPage] = useState(1);
+  const [loading, setLoading] = useState(false);
+  const [hasSearched, setHasSearched] = useState(false);
+
+  useEffect(() => {
+    api.getStates().then((data) => setStates(data as State[]));
+  }, []);
+
+  const handleStateChange = (value: string) => {
+    setSelectedState(value);
+    setSelectedCity('');
+    setSelectedSchool('');
+    setSelectedNeighborhood('');
+    setCities([]);
+    setSchools([]);
+    setNeighborhoods([]);
+    setTios([]);
+    setHasSearched(false);
+    setPage(1);
+    if (value) {
+      api.getCities(value).then((data) => setCities(data as City[]));
+    }
+  };
+
+  const handleCityChange = (value: string) => {
+    setSelectedCity(value);
+    setSelectedSchool('');
+    setSelectedNeighborhood('');
+    setSchools([]);
+    setNeighborhoods([]);
+    setTios([]);
+    setHasSearched(false);
+    setPage(1);
+    if (value) {
+      api.getSchools(value, undefined, true).then((data) => setSchools(data as School[]));
+      api.getNeighborhoods(value).then((data) => setNeighborhoods(data as Neighborhood[]));
+    }
+  };
+
+  const handleSchoolChange = (value: string) => {
+    setSelectedSchool(value);
+    setSelectedNeighborhood('');
+    setPage(1);
+    if (!value) {
+      setTios([]);
+      setHasSearched(false);
+    }
+  };
+
+  const search = useCallback(async () => {
+    if (!selectedSchool) return;
+    setLoading(true);
+    setHasSearched(true);
+    const params: Record<string, string> = { page: String(page), limit: '12' };
+    if (selectedState) params.stateId = selectedState;
+    if (selectedCity) params.cityId = selectedCity;
+    params.schoolId = selectedSchool;
+    if (selectedNeighborhood) params.neighborhoodId = selectedNeighborhood;
+    if (searchName.trim()) params.name = searchName.trim();
+
+    const res = (await api.searchTios(params)) as PaginatedResponse<TioPublicView>;
+    setTios(res.data);
+    setTotalPages(res.totalPages);
+    setLoading(false);
+  }, [page, selectedState, selectedCity, selectedSchool, selectedNeighborhood, searchName]);
+
+  useEffect(() => {
+    if (selectedSchool) {
+      search();
+    }
+  }, [selectedSchool, selectedNeighborhood, page, search]);
+
+  return (
+    <div className="flex flex-col min-h-screen">
+      <Header />
+      <main className="flex-1 max-w-7xl mx-auto w-full px-4 sm:px-6 lg:px-8 py-8">
+        <h1 className="font-heading text-3xl font-bold text-gray-900 mb-8">Buscar Tios</h1>
+
+        {/* Filters */}
+        <div className="bg-white rounded-xl border border-gray-200 p-6 mb-8">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-1">Estado</label>
+              <select
+                value={selectedState}
+                onChange={(e) => handleStateChange(e.target.value)}
+                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-primary outline-none"
+              >
+                <option value="">Selecione o estado</option>
+                {states.map((s) => (
+                  <option key={s.id} value={s.id}>{s.name} ({s.uf})</option>
+                ))}
+              </select>
+            </div>
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-1">Cidade</label>
+              <select
+                value={selectedCity}
+                onChange={(e) => handleCityChange(e.target.value)}
+                disabled={!selectedState}
+                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-primary outline-none disabled:opacity-50"
+              >
+                <option value="">Selecione a cidade</option>
+                {cities.map((c) => (
+                  <option key={c.id} value={c.id}>{c.name}</option>
+                ))}
+              </select>
+            </div>
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-1">Escola</label>
+              <select
+                value={selectedSchool}
+                onChange={(e) => handleSchoolChange(e.target.value)}
+                disabled={!selectedCity}
+                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-primary outline-none disabled:opacity-50"
+              >
+                <option value="">Selecione a escola</option>
+                {schools.map((s) => (
+                  <option key={s.id} value={s.id}>{s.name}</option>
+                ))}
+              </select>
+            </div>
+          </div>
+
+          {selectedSchool && (
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-4">
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-1">Bairro (opcional)</label>
+                <select
+                  value={selectedNeighborhood}
+                  onChange={(e) => { setSelectedNeighborhood(e.target.value); setPage(1); }}
+                  className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-primary outline-none"
+                >
+                  <option value="">Todos os bairros</option>
+                  {neighborhoods.map((n) => (
+                    <option key={n.id} value={n.id}>{n.name}</option>
+                  ))}
+                </select>
+              </div>
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-1">Nome (opcional)</label>
+                <input
+                  type="text"
+                  value={searchName}
+                  onChange={(e) => setSearchName(e.target.value)}
+                  onKeyDown={(e) => { if (e.key === 'Enter') { setPage(1); search(); } }}
+                  placeholder="Filtrar por nome..."
+                  className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-primary outline-none"
+                />
+              </div>
+            </div>
+          )}
+
+          {!selectedSchool && selectedCity && schools.length === 0 && (
+            <p className="text-sm text-gray-500 mt-4">
+              Nenhuma escola com transportadores cadastrados nesta cidade.
+            </p>
+          )}
+        </div>
+
+        {/* Prompt */}
+        {!hasSearched && !loading && (
+          <div className="text-center py-16">
+            <div className="text-5xl mb-4">🏫</div>
+            <p className="text-gray-500 text-lg">Selecione uma escola para encontrar os transportadores.</p>
+            <p className="text-gray-400 mt-2">Escolha o estado, cidade e escola acima.</p>
+          </div>
+        )}
+
+        {/* Results */}
+        {loading ? (
+          <Loading />
+        ) : hasSearched && tios.length === 0 ? (
+          <div className="text-center py-16">
+            <p className="text-gray-500 text-lg">Nenhum transportador encontrado para esta escola.</p>
+          </div>
+        ) : tios.length > 0 ? (
+          <>
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+              {tios.map((tio) => (
+                <Link
+                  key={tio.id}
+                  href={`/tios/${tio.id}`}
+                  className="bg-white rounded-xl border border-gray-200 p-6 hover:shadow-lg transition group"
+                >
+                  <div className="flex items-center gap-4 mb-4">
+                    <div className="w-14 h-14 rounded-full bg-primary-50 flex items-center justify-center shrink-0">
+                      {tio.avatarUrl ? (
+                        <img
+                          src={assetUrl(tio.avatarUrl)!}
+                          alt={tio.displayName}
+                          className="w-14 h-14 rounded-full object-cover"
+                        />
+                      ) : (
+                        <span className="text-2xl text-primary font-bold">
+                          {tio.displayName.charAt(0)}
+                        </span>
+                      )}
+                    </div>
+                    <div className="min-w-0">
+                      <h3 className="font-semibold text-gray-900 group-hover:text-primary transition truncate">
+                        {tio.displayName}
+                      </h3>
+                      <p className="text-sm text-gray-500">
+                        Prefixo {tio.prefixo} &bull; {tio.city.name}/{tio.city.state.uf}
+                      </p>
+                    </div>
+                    {tio.isPremium && (
+                      <span className="ml-auto bg-primary-50 text-primary text-xs font-semibold px-2 py-1 rounded-full shrink-0">
+                        Premium
+                      </span>
+                    )}
+                  </div>
+
+                  {tio.bio && (
+                    <p className="text-sm text-gray-600 mb-3 line-clamp-2">{tio.bio}</p>
+                  )}
+
+                  {(tio.hasTV || tio.hasAC || tio.hasMonitor) && (
+                    <div className="flex flex-wrap gap-1.5 mb-3">
+                      {tio.hasTV && (
+                        <span className="bg-purple-50 text-purple-700 text-xs px-2 py-0.5 rounded-full">📺 TV</span>
+                      )}
+                      {tio.hasAC && (
+                        <span className="bg-blue-50 text-blue-700 text-xs px-2 py-0.5 rounded-full">❄️ AC</span>
+                      )}
+                      {tio.hasMonitor && (
+                        <span className="bg-green-50 text-green-700 text-xs px-2 py-0.5 rounded-full">👀 Monitor</span>
+                      )}
+                    </div>
+                  )}
+
+                  <div className="flex flex-wrap gap-1.5">
+                    {tio.schools.slice(0, 3).map((s) => (
+                      <span
+                        key={s.id}
+                        className="bg-blue-50 text-blue-700 text-xs px-2 py-0.5 rounded-full"
+                      >
+                        {s.name}
+                      </span>
+                    ))}
+                    {tio.schools.length > 3 && (
+                      <span className="text-xs text-gray-400">
+                        +{tio.schools.length - 3} escolas
+                      </span>
+                    )}
+                  </div>
+
+                  {tio.neighborhoods.length > 0 && (
+                    <div className="flex flex-wrap gap-1.5 mt-2">
+                      {tio.neighborhoods.slice(0, 3).map((n) => (
+                        <span
+                          key={n.id}
+                          className="bg-green-50 text-green-700 text-xs px-2 py-0.5 rounded-full"
+                        >
+                          {n.name}
+                        </span>
+                      ))}
+                      {tio.neighborhoods.length > 3 && (
+                        <span className="text-xs text-gray-400">
+                          +{tio.neighborhoods.length - 3} bairros
+                        </span>
+                      )}
+                    </div>
+                  )}
+                </Link>
+              ))}
+            </div>
+
+            {/* Pagination */}
+            {totalPages > 1 && (
+              <div className="flex justify-center gap-2 mt-8">
+                <button
+                  onClick={() => setPage(Math.max(1, page - 1))}
+                  disabled={page === 1}
+                  className="px-4 py-2 border border-gray-300 rounded-lg disabled:opacity-50 hover:bg-gray-50 transition"
+                >
+                  Anterior
+                </button>
+                <span className="px-4 py-2 text-gray-600">
+                  {page} de {totalPages}
+                </span>
+                <button
+                  onClick={() => setPage(Math.min(totalPages, page + 1))}
+                  disabled={page === totalPages}
+                  className="px-4 py-2 border border-gray-300 rounded-lg disabled:opacity-50 hover:bg-gray-50 transition"
+                >
+                  Próxima
+                </button>
+              </div>
+            )}
+          </>
+        ) : null}
+      </main>
+      <Footer />
+    </div>
+  );
+}

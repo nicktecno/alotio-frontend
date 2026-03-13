@@ -1,0 +1,638 @@
+'use client';
+
+import { useEffect, useState } from 'react';
+import { useParams, useRouter } from 'next/navigation';
+import Link from 'next/link';
+import { api, assetUrl } from '@/lib/api';
+import toast from 'react-hot-toast';
+import Loading from '@/components/Loading';
+import ImageLightbox from '@/components/ImageLightbox';
+import type { Profile, State, City, School, Neighborhood } from '@/types';
+
+export default function AdminProfileDetailPage() {
+  const { id } = useParams<{ id: string }>();
+  const router = useRouter();
+
+  const [profile, setProfile] = useState<Profile | null>(null);
+  const [loading, setLoading] = useState(true);
+  const [saving, setSaving] = useState(false);
+  const [editing, setEditing] = useState(false);
+
+  const [states, setStates] = useState<State[]>([]);
+  const [cities, setCities] = useState<City[]>([]);
+  const [schools, setSchools] = useState<School[]>([]);
+  const [cityNeighborhoods, setCityNeighborhoods] = useState<Neighborhood[]>([]);
+
+  const [editingAssociations, setEditingAssociations] = useState(false);
+  const [selectedNeighborhoodIds, setSelectedNeighborhoodIds] = useState<string[]>([]);
+  const [selectedExtraSchoolIds, setSelectedExtraSchoolIds] = useState<string[]>([]);
+  const [assocDefaultSchoolId, setAssocDefaultSchoolId] = useState('');
+  const [assocSecondarySchoolId, setAssocSecondarySchoolId] = useState('');
+  const [savingAssociations, setSavingAssociations] = useState(false);
+
+  const [displayName, setDisplayName] = useState('');
+  const [prefixo, setPrefixo] = useState('');
+  const [phone, setPhone] = useState('');
+  const [bio, setBio] = useState('');
+  const [selectedState, setSelectedState] = useState('');
+  const [selectedCity, setSelectedCity] = useState('');
+  const [defaultSchoolId, setDefaultSchoolId] = useState('');
+  const [secondarySchoolId, setSecondarySchoolId] = useState('');
+  const [status, setStatus] = useState('');
+
+  const [lightbox, setLightbox] = useState<{ images: string[]; index: number } | null>(null);
+
+  useEffect(() => {
+    if (!id) return;
+    api.adminGetProfile(id).then((data) => {
+      const p = data as Profile;
+      setProfile(p);
+      populateForm(p);
+      setLoading(false);
+    });
+    api.getStates().then((data) => setStates(data as State[]));
+  }, [id]);
+
+  const populateForm = (p: Profile) => {
+    setDisplayName(p.displayName);
+    setPrefixo(p.prefixo);
+    setPhone(p.phone || '');
+    setBio(p.bio || '');
+    setStatus(p.status);
+    setDefaultSchoolId(p.defaultSchoolId);
+    setSecondarySchoolId(p.secondarySchoolId || '');
+    if (p.city?.state) {
+      setSelectedState(p.city.state.id);
+      api.getCities(p.city.state.id).then((data) => setCities(data as City[]));
+    }
+    setSelectedCity(p.cityId);
+    api.getSchools(p.cityId).then((data) => setSchools(data as School[]));
+    api.getNeighborhoods(p.cityId).then((data) => setCityNeighborhoods(data as Neighborhood[]));
+    setSelectedNeighborhoodIds(p.neighborhoods.map((n) => n.neighborhood.id));
+    setSelectedExtraSchoolIds(p.schools.map((s) => s.school.id));
+    setAssocDefaultSchoolId(p.defaultSchoolId);
+    setAssocSecondarySchoolId(p.secondarySchoolId || '');
+  };
+
+  const handleStateChange = (stateId: string) => {
+    setSelectedState(stateId);
+    setSelectedCity('');
+    setDefaultSchoolId('');
+    setSecondarySchoolId('');
+    setCities([]);
+    setSchools([]);
+    if (stateId) {
+      api.getCities(stateId).then((data) => setCities(data as City[]));
+    }
+  };
+
+  const handleCityChange = (cityId: string) => {
+    setSelectedCity(cityId);
+    setDefaultSchoolId('');
+    setSecondarySchoolId('');
+    setSchools([]);
+    if (cityId) {
+      api.getSchools(cityId).then((data) => setSchools(data as School[]));
+    }
+  };
+
+  const handleSave = async () => {
+    if (!profile) return;
+    setSaving(true);
+    try {
+      const data: Record<string, unknown> = {
+        displayName,
+        prefixo,
+        phone: phone || null,
+        bio: bio || null,
+        cityId: selectedCity,
+        defaultSchoolId,
+        secondarySchoolId: secondarySchoolId || null,
+        status,
+      };
+      await api.adminUpdateProfile(profile.id, data);
+      toast.success('Perfil atualizado!');
+      const updated = (await api.adminGetProfile(profile.id)) as Profile;
+      setProfile(updated);
+      populateForm(updated);
+      setEditing(false);
+    } catch (err: unknown) {
+      toast.error(err instanceof Error ? err.message : 'Erro ao salvar');
+    } finally {
+      setSaving(false);
+    }
+  };
+
+  const handleDelete = async () => {
+    if (!profile) return;
+    if (!confirm('Tem certeza que deseja deletar este perfil? Essa ação é irreversível.')) return;
+    try {
+      await api.adminDeleteProfile(profile.id);
+      toast.success('Perfil deletado');
+      router.push('/admin/perfis');
+    } catch (err: unknown) {
+      toast.error(err instanceof Error ? err.message : 'Erro ao deletar');
+    }
+  };
+
+  const handleApprove = async () => {
+    if (!profile) return;
+    try {
+      await api.adminApproveProfile(profile.id);
+      toast.success('Perfil aprovado!');
+      const updated = (await api.adminGetProfile(profile.id)) as Profile;
+      setProfile(updated);
+      populateForm(updated);
+    } catch (err: unknown) {
+      toast.error(err instanceof Error ? err.message : 'Erro');
+    }
+  };
+
+  const handleReject = async () => {
+    if (!profile) return;
+    const reason = prompt('Motivo da rejeição:');
+    if (!reason) return;
+    try {
+      await api.adminRejectProfile(profile.id, reason);
+      toast.success('Perfil rejeitado');
+      const updated = (await api.adminGetProfile(profile.id)) as Profile;
+      setProfile(updated);
+      populateForm(updated);
+    } catch (err: unknown) {
+      toast.error(err instanceof Error ? err.message : 'Erro');
+    }
+  };
+
+  if (loading) return <Loading />;
+  if (!profile) return <p className="text-gray-500">Perfil não encontrado.</p>;
+
+  const statusColors: Record<string, string> = {
+    PENDING: 'bg-primary-100 text-primary-700',
+    APPROVED: 'bg-green-100 text-green-800',
+    REJECTED: 'bg-red-100 text-red-800',
+  };
+
+  const isPremium = profile.subscriptions?.some((s) => s.status === 'ACTIVE');
+
+  return (
+    <div className="max-w-3xl space-y-6">
+      <div className="flex items-center justify-between">
+        <div>
+          <Link href="/admin/perfis" className="text-primary hover:underline text-sm">
+            &larr; Voltar
+          </Link>
+          <h1 className="text-2xl font-bold text-gray-900 mt-1">{profile.displayName}</h1>
+        </div>
+        <div className="flex items-center gap-2">
+          <span className={`px-3 py-1 rounded-full text-xs font-medium ${statusColors[profile.status]}`}>
+            {profile.status}
+          </span>
+          {isPremium && (
+            <span className="bg-primary-50 text-primary text-xs font-semibold px-3 py-1 rounded-full">
+              Premium
+            </span>
+          )}
+        </div>
+      </div>
+
+      {/* Actions bar */}
+      <div className="flex flex-wrap gap-2">
+        {profile.status === 'PENDING' && (
+          <>
+            <button onClick={handleApprove} className="bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded-lg text-sm font-medium transition">
+              Aprovar
+            </button>
+            <button onClick={handleReject} className="bg-red-600 hover:bg-red-700 text-white px-4 py-2 rounded-lg text-sm font-medium transition">
+              Rejeitar
+            </button>
+          </>
+        )}
+        {!editing ? (
+          <button onClick={() => setEditing(true)} className="bg-primary hover:bg-primary-600 text-white px-4 py-2 rounded-lg text-sm font-medium transition">
+            Editar dados
+          </button>
+        ) : (
+          <>
+            <button onClick={handleSave} disabled={saving} className="bg-secondary hover:bg-secondary-600 text-white px-4 py-2 rounded-lg text-sm font-medium transition disabled:opacity-50">
+              {saving ? 'Salvando...' : 'Salvar'}
+            </button>
+            <button onClick={() => { setEditing(false); populateForm(profile); }} className="bg-gray-200 hover:bg-gray-300 text-gray-700 px-4 py-2 rounded-lg text-sm font-medium transition">
+              Cancelar
+            </button>
+          </>
+        )}
+        <button onClick={handleDelete} className="ml-auto bg-red-50 hover:bg-red-100 text-red-600 px-4 py-2 rounded-lg text-sm font-medium transition">
+          Deletar perfil
+        </button>
+      </div>
+
+      {/* Profile info / Edit form */}
+      <div className="bg-white rounded-xl border border-gray-200 p-6 space-y-5">
+        <h2 className="font-semibold text-gray-900 border-b pb-2">Informações do Perfil</h2>
+
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          <div>
+            <label className="block text-sm font-medium text-gray-600 mb-1">Nome de exibição</label>
+            {editing ? (
+              <input value={displayName} onChange={(e) => setDisplayName(e.target.value)} className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-primary outline-none" />
+            ) : (
+              <p className="text-gray-900">{profile.displayName}</p>
+            )}
+          </div>
+          <div>
+            <label className="block text-sm font-medium text-gray-600 mb-1">Prefixo</label>
+            {editing ? (
+              <input value={prefixo} onChange={(e) => setPrefixo(e.target.value)} maxLength={3} className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-primary outline-none" />
+            ) : (
+              <p className="text-gray-900">{profile.prefixo}</p>
+            )}
+          </div>
+          <div>
+            <label className="block text-sm font-medium text-gray-600 mb-1">Telefone</label>
+            {editing ? (
+              <input value={phone} onChange={(e) => setPhone(e.target.value)} className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-primary outline-none" />
+            ) : (
+              <p className="text-gray-900">{profile.phone || '—'}</p>
+            )}
+          </div>
+          <div>
+            <label className="block text-sm font-medium text-gray-600 mb-1">Status</label>
+            {editing ? (
+              <select value={status} onChange={(e) => setStatus(e.target.value)} className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-primary outline-none">
+                <option value="PENDING">Pendente</option>
+                <option value="APPROVED">Aprovado</option>
+                <option value="REJECTED">Rejeitado</option>
+              </select>
+            ) : (
+              <span className={`px-2 py-0.5 rounded-full text-xs font-medium ${statusColors[profile.status]}`}>
+                {profile.status}
+              </span>
+            )}
+          </div>
+        </div>
+
+        <div>
+          <label className="block text-sm font-medium text-gray-600 mb-1">Bio</label>
+          {editing ? (
+            <textarea value={bio} onChange={(e) => setBio(e.target.value)} rows={3} className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-primary outline-none" />
+          ) : (
+            <p className="text-gray-900 whitespace-pre-wrap">{profile.bio || '—'}</p>
+          )}
+        </div>
+
+        <h2 className="font-semibold text-gray-900 border-b pb-2 pt-2">Localização</h2>
+
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+          <div>
+            <label className="block text-sm font-medium text-gray-600 mb-1">Estado</label>
+            {editing ? (
+              <select value={selectedState} onChange={(e) => handleStateChange(e.target.value)} className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-primary outline-none">
+                <option value="">Selecione</option>
+                {states.map((s) => (
+                  <option key={s.id} value={s.id}>{s.name} ({s.uf})</option>
+                ))}
+              </select>
+            ) : (
+              <p className="text-gray-900">{profile.city?.state?.name} ({profile.city?.state?.uf})</p>
+            )}
+          </div>
+          <div>
+            <label className="block text-sm font-medium text-gray-600 mb-1">Cidade</label>
+            {editing ? (
+              <select value={selectedCity} onChange={(e) => handleCityChange(e.target.value)} disabled={!selectedState} className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-primary outline-none disabled:opacity-50">
+                <option value="">Selecione</option>
+                {cities.map((c) => (
+                  <option key={c.id} value={c.id}>{c.name}</option>
+                ))}
+              </select>
+            ) : (
+              <p className="text-gray-900">{profile.city?.name}</p>
+            )}
+          </div>
+          <div>
+            <label className="block text-sm font-medium text-gray-600 mb-1">Escola principal</label>
+            {editing ? (
+              <select value={defaultSchoolId} onChange={(e) => setDefaultSchoolId(e.target.value)} disabled={!selectedCity} className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-primary outline-none disabled:opacity-50">
+                <option value="">Selecione</option>
+                {schools.map((s) => (
+                  <option key={s.id} value={s.id}>{s.name}</option>
+                ))}
+              </select>
+            ) : (
+              <p className="text-gray-900">{profile.defaultSchool?.name}</p>
+            )}
+          </div>
+        </div>
+
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          <div>
+            <label className="block text-sm font-medium text-gray-600 mb-1">Escola secundária</label>
+            {editing ? (
+              <select value={secondarySchoolId} onChange={(e) => setSecondarySchoolId(e.target.value)} disabled={!selectedCity} className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-primary outline-none disabled:opacity-50">
+                <option value="">Nenhuma</option>
+                {schools.filter((s) => s.id !== defaultSchoolId).map((s) => (
+                  <option key={s.id} value={s.id}>{s.name}</option>
+                ))}
+              </select>
+            ) : (
+              <p className="text-gray-900">{profile.secondarySchool?.name || '—'}</p>
+            )}
+          </div>
+        </div>
+      </div>
+
+      {/* Document */}
+      {profile.documents?.length > 0 && (
+        <div className="bg-white rounded-xl border border-gray-200 p-6">
+          <h2 className="font-semibold text-gray-900 mb-3">Documento comprobatório</h2>
+          <div className="flex flex-wrap gap-3">
+            {profile.documents.map((doc) => (
+              <a
+                key={doc.id}
+                href={assetUrl(doc.fileUrl) || doc.fileUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 bg-blue-50 text-blue-700 px-4 py-2 rounded-lg text-sm font-medium hover:bg-blue-100 transition"
+              >
+                <svg className="w-4 h-4" fill="none" stroke="currentColor" strokeWidth={2} viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                </svg>
+                {doc.fileName || 'Ver documento'}
+              </a>
+            ))}
+          </div>
+        </div>
+      )}
+
+      {/* Avatar & Vehicle Photos */}
+      {(profile.avatarUrl || profile.vehiclePhotos.length > 0) && (
+        <div className="bg-white rounded-xl border border-gray-200 p-6 space-y-4">
+          <h2 className="font-semibold text-gray-900">Fotos</h2>
+
+          {profile.avatarUrl && (
+            <div>
+              <p className="text-sm text-gray-600 mb-2">Avatar</p>
+              <div className="flex items-end gap-3">
+                <img
+                  src={assetUrl(profile.avatarUrl)!}
+                  alt="Avatar"
+                  className="w-20 h-20 rounded-full object-cover cursor-pointer hover:opacity-80 transition"
+                  onClick={() => setLightbox({ images: [assetUrl(profile.avatarUrl)!], index: 0 })}
+                />
+                <button
+                  onClick={async () => {
+                    if (!confirm('Remover avatar deste perfil?')) return;
+                    try {
+                      await api.adminDeleteAvatar(profile.id);
+                      toast.success('Avatar removido');
+                      const updated = (await api.adminGetProfile(profile.id)) as Profile;
+                      setProfile(updated);
+                      populateForm(updated);
+                    } catch (err: unknown) {
+                      toast.error(err instanceof Error ? err.message : 'Erro');
+                    }
+                  }}
+                  className="text-red-500 hover:text-red-600 text-xs font-medium"
+                >
+                  Remover avatar
+                </button>
+              </div>
+            </div>
+          )}
+
+          {profile.vehiclePhotos.length > 0 && (
+            <div>
+              <p className="text-sm text-gray-600 mb-2">Fotos do veículo</p>
+              <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
+                {profile.vehiclePhotos.map((photo, idx) => (
+                  <div key={photo.id} className="relative group">
+                    <img
+                      src={assetUrl(photo.url)!}
+                      alt="Veículo"
+                      className="w-full h-32 object-cover rounded-lg cursor-pointer hover:opacity-80 transition"
+                      onClick={() =>
+                        setLightbox({
+                          images: profile.vehiclePhotos.map((p) => assetUrl(p.url)!),
+                          index: idx,
+                        })
+                      }
+                    />
+                    <button
+                      onClick={async (e) => {
+                        e.stopPropagation();
+                        if (!confirm('Remover esta foto?')) return;
+                        try {
+                          await api.adminDeleteVehiclePhoto(profile.id, photo.id);
+                          toast.success('Foto removida');
+                          const updated = (await api.adminGetProfile(profile.id)) as Profile;
+                          setProfile(updated);
+                          populateForm(updated);
+                        } catch (err: unknown) {
+                          toast.error(err instanceof Error ? err.message : 'Erro');
+                        }
+                      }}
+                      className="absolute top-2 right-2 bg-red-500 text-white w-7 h-7 rounded-full text-xs font-bold opacity-0 group-hover:opacity-100 transition flex items-center justify-center"
+                    >
+                      X
+                    </button>
+                  </div>
+                ))}
+              </div>
+            </div>
+          )}
+        </div>
+      )}
+
+      {/* Schools & Neighborhoods */}
+      <div className="bg-white rounded-xl border border-gray-200 p-6 space-y-5">
+        <div className="flex items-center justify-between">
+          <h2 className="font-semibold text-gray-900">Escolas e bairros associados</h2>
+          {!editingAssociations ? (
+            <button
+              onClick={() => setEditingAssociations(true)}
+              className="text-primary hover:text-primary-600 text-sm font-medium"
+            >
+              Editar
+            </button>
+          ) : (
+            <div className="flex gap-2">
+              <button
+                onClick={async () => {
+                  setSavingAssociations(true);
+                  try {
+                    await api.adminUpdateProfile(profile.id, {
+                      defaultSchoolId: assocDefaultSchoolId,
+                      secondarySchoolId: assocSecondarySchoolId || null,
+                      neighborhoodIds: selectedNeighborhoodIds,
+                      extraSchoolIds: selectedExtraSchoolIds.filter(
+                        (id) => id !== assocDefaultSchoolId && id !== assocSecondarySchoolId
+                      ),
+                    });
+                    toast.success('Associações atualizadas!');
+                    const updated = (await api.adminGetProfile(profile.id)) as Profile;
+                    setProfile(updated);
+                    populateForm(updated);
+                    setEditingAssociations(false);
+                  } catch (err: unknown) {
+                    toast.error(err instanceof Error ? err.message : 'Erro');
+                  } finally {
+                    setSavingAssociations(false);
+                  }
+                }}
+                disabled={savingAssociations}
+                className="bg-secondary hover:bg-secondary-600 text-white px-3 py-1 rounded-lg text-sm font-medium transition disabled:opacity-50"
+              >
+                {savingAssociations ? 'Salvando...' : 'Salvar'}
+              </button>
+              <button
+                onClick={() => {
+                  setEditingAssociations(false);
+                  setSelectedNeighborhoodIds(profile.neighborhoods.map((n) => n.neighborhood.id));
+                  setSelectedExtraSchoolIds(profile.schools.map((s) => s.school.id));
+                  setAssocDefaultSchoolId(profile.defaultSchoolId);
+                  setAssocSecondarySchoolId(profile.secondarySchoolId || '');
+                }}
+                className="bg-gray-200 hover:bg-gray-300 text-gray-700 px-3 py-1 rounded-lg text-sm font-medium transition"
+              >
+                Cancelar
+              </button>
+            </div>
+          )}
+        </div>
+
+        {/* Base schools */}
+        <div>
+          <p className="text-sm text-gray-600 mb-2">Escolas base</p>
+          {editingAssociations ? (
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+              <div>
+                <label className="block text-xs text-gray-500 mb-1">Principal</label>
+                <select
+                  value={assocDefaultSchoolId}
+                  onChange={(e) => setAssocDefaultSchoolId(e.target.value)}
+                  className="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:ring-2 focus:ring-primary focus:border-primary outline-none"
+                >
+                  <option value="">Selecione</option>
+                  {schools
+                    .filter((s) => s.id !== assocSecondarySchoolId)
+                    .map((s) => (
+                      <option key={s.id} value={s.id}>{s.name}</option>
+                    ))}
+                </select>
+              </div>
+              <div>
+                <label className="block text-xs text-gray-500 mb-1">Secundária (opcional)</label>
+                <select
+                  value={assocSecondarySchoolId}
+                  onChange={(e) => setAssocSecondarySchoolId(e.target.value)}
+                  className="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:ring-2 focus:ring-primary focus:border-primary outline-none"
+                >
+                  <option value="">Nenhuma</option>
+                  {schools
+                    .filter((s) => s.id !== assocDefaultSchoolId)
+                    .map((s) => (
+                      <option key={s.id} value={s.id}>{s.name}</option>
+                    ))}
+                </select>
+              </div>
+            </div>
+          ) : (
+            <div className="flex flex-wrap gap-1.5">
+              <span className="bg-blue-50 text-blue-700 text-xs px-2.5 py-1 rounded-full font-medium">
+                {profile.defaultSchool?.name} (principal)
+              </span>
+              {profile.secondarySchool && (
+                <span className="bg-blue-50 text-blue-700 text-xs px-2.5 py-1 rounded-full font-medium">
+                  {profile.secondarySchool.name} (secundária)
+                </span>
+              )}
+            </div>
+          )}
+        </div>
+
+        {/* Extra schools */}
+        <div>
+          <p className="text-sm text-gray-600 mb-2">
+            Escolas extras ({editingAssociations ? selectedExtraSchoolIds.length : profile.schools.length})
+          </p>
+          {editingAssociations ? (
+            <div className="space-y-1.5 max-h-48 overflow-y-auto border border-gray-200 rounded-lg p-3">
+              {schools
+                .filter((s) => s.id !== assocDefaultSchoolId && s.id !== assocSecondarySchoolId)
+                .map((school) => (
+                  <label key={school.id} className={`flex items-center gap-2 p-2 rounded-lg cursor-pointer text-sm transition ${
+                    selectedExtraSchoolIds.includes(school.id) ? 'bg-purple-50 border border-purple-200' : 'hover:bg-gray-50'
+                  }`}>
+                    <input
+                      type="checkbox"
+                      checked={selectedExtraSchoolIds.includes(school.id)}
+                      onChange={() => setSelectedExtraSchoolIds((prev) =>
+                        prev.includes(school.id) ? prev.filter((x) => x !== school.id) : [...prev, school.id]
+                      )}
+                      className="accent-primary"
+                    />
+                    <span className="text-gray-900">{school.name}</span>
+                    <span className="text-gray-400 text-xs ml-auto">{school.type}</span>
+                  </label>
+                ))}
+            </div>
+          ) : profile.schools.length > 0 ? (
+            <div className="flex flex-wrap gap-1.5">
+              {profile.schools.map((ts) => (
+                <span key={ts.school.id} className="bg-purple-50 text-purple-700 text-xs px-2.5 py-1 rounded-full font-medium">
+                  {ts.school.name}
+                </span>
+              ))}
+            </div>
+          ) : (
+            <p className="text-xs text-gray-400">Nenhuma escola extra</p>
+          )}
+        </div>
+
+        {/* Neighborhoods */}
+        <div>
+          <p className="text-sm text-gray-600 mb-2">
+            Bairros ({editingAssociations ? selectedNeighborhoodIds.length : profile.neighborhoods.length})
+          </p>
+          {editingAssociations ? (
+            <div className="space-y-1.5 max-h-48 overflow-y-auto border border-gray-200 rounded-lg p-3">
+              {cityNeighborhoods.map((nb) => (
+                <label key={nb.id} className={`flex items-center gap-2 p-2 rounded-lg cursor-pointer text-sm transition ${
+                  selectedNeighborhoodIds.includes(nb.id) ? 'bg-green-50 border border-green-200' : 'hover:bg-gray-50'
+                }`}>
+                  <input
+                    type="checkbox"
+                    checked={selectedNeighborhoodIds.includes(nb.id)}
+                    onChange={() => setSelectedNeighborhoodIds((prev) =>
+                      prev.includes(nb.id) ? prev.filter((x) => x !== nb.id) : [...prev, nb.id]
+                    )}
+                    className="accent-secondary"
+                  />
+                  <span className="text-gray-900">{nb.name}</span>
+                </label>
+              ))}
+            </div>
+          ) : profile.neighborhoods.length > 0 ? (
+            <div className="flex flex-wrap gap-1.5">
+              {profile.neighborhoods.map((tn) => (
+                <span key={tn.neighborhood.id} className="bg-green-50 text-green-700 text-xs px-2.5 py-1 rounded-full font-medium">
+                  {tn.neighborhood.name}
+                </span>
+              ))}
+            </div>
+          ) : (
+            <p className="text-xs text-gray-400">Nenhum bairro</p>
+          )}
+        </div>
+      </div>
+
+      {lightbox && (
+        <ImageLightbox
+          images={lightbox.images}
+          initialIndex={lightbox.index}
+          onClose={() => setLightbox(null)}
+        />
+      )}
+    </div>
+  );
+}
