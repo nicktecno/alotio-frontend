@@ -17,10 +17,59 @@ class ApiError extends Error {
   }
 }
 
+// --------------- In-memory GET cache ---------------
+const CACHE_TTL = 5 * 60 * 1000; // 5 min
+const NO_CACHE_ENDPOINTS = ['/auth/me', '/auth/refresh'];
+
+interface CacheEntry { data: unknown; ts: number }
+const cache = new Map<string, CacheEntry>();
+
+function getCached<T>(key: string): T | null {
+  const entry = cache.get(key);
+  if (!entry) return null;
+  if (Date.now() - entry.ts > CACHE_TTL) { cache.delete(key); return null; }
+  return entry.data as T;
+}
+
+function setCache(key: string, data: unknown) {
+  cache.set(key, { data, ts: Date.now() });
+}
+
+function resourceBase(endpoint: string): string {
+  return endpoint.split('?')[0].replace(/\/[^/]+$/, '') || endpoint.split('?')[0];
+}
+
+function invalidateByPrefix(prefix: string) {
+  for (const key of cache.keys()) {
+    if (key.startsWith(prefix) || key === prefix) cache.delete(key);
+  }
+}
+
+function invalidateRelated(endpoint: string) {
+  const base = resourceBase(endpoint);
+  invalidateByPrefix(base);
+  const parts = endpoint.split('?')[0].split('/').filter(Boolean);
+  if (parts.length >= 2) {
+    invalidateByPrefix('/' + parts.slice(0, 2).join('/'));
+  }
+}
+
+export function clearApiCache() {
+  cache.clear();
+}
+// ---------------------------------------------------
+
 let isRefreshing = false;
 
 async function request<T>(endpoint: string, options: RequestInit = {}): Promise<T> {
   const { headers: customHeaders, ...rest } = options;
+  const method = (rest.method || 'GET').toUpperCase();
+  const isGet = method === 'GET';
+
+  if (isGet && !NO_CACHE_ENDPOINTS.includes(endpoint.split('?')[0])) {
+    const cached = getCached<T>(endpoint);
+    if (cached) return cached;
+  }
 
   const headers: Record<string, string> = {
     ...((customHeaders as Record<string, string>) || {}),
@@ -70,8 +119,22 @@ async function request<T>(endpoint: string, options: RequestInit = {}): Promise<
     throw new ApiError(res.status, body.message || `Erro ${res.status}`);
   }
 
-  if (res.status === 204) return {} as T;
-  return res.json();
+  if (res.status === 204) {
+    if (!isGet) invalidateRelated(endpoint);
+    return {} as T;
+  }
+
+  const data = await res.json();
+
+  if (isGet && !NO_CACHE_ENDPOINTS.includes(endpoint.split('?')[0])) {
+    setCache(endpoint, data);
+  }
+
+  if (!isGet) {
+    invalidateRelated(endpoint);
+  }
+
+  return data;
 }
 
 export const api = {
