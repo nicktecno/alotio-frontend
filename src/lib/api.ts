@@ -247,6 +247,10 @@ export const api = {
     request(`/admin/neighborhoods/${id}`, { method: 'PATCH', body: JSON.stringify(data) }),
   adminDeleteNeighborhood: (id: string) =>
     request(`/admin/neighborhoods/${id}`, { method: 'DELETE' }),
+
+  // Contact
+  sendContact: (data: { name: string; email: string; message: string }) =>
+    request<{ message: string }>('/contact', { method: 'POST', body: JSON.stringify(data) }),
 };
 
 export { ApiError };
