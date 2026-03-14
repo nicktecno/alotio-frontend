@@ -5,69 +5,51 @@ import Link from 'next/link';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import { api, assetUrl } from '@/lib/api';
-import type { State, City, School, Neighborhood, TioPublicView, PaginatedResponse } from '@/types';
+import { useStates, useCities, useSchools, useNeighborhoods } from '@/lib/swr';
+import type { TioPublicView, PaginatedResponse } from '@/types';
 import Loading from '@/components/Loading';
 
 export default function TiosPage() {
-  const [states, setStates] = useState<State[]>([]);
-  const [cities, setCities] = useState<City[]>([]);
-  const [schools, setSchools] = useState<School[]>([]);
   const [selectedState, setSelectedState] = useState('');
   const [selectedCity, setSelectedCity] = useState('');
   const [selectedSchool, setSelectedSchool] = useState('');
-  const [neighborhoods, setNeighborhoods] = useState<Neighborhood[]>([]);
   const [selectedNeighborhood, setSelectedNeighborhood] = useState('');
   const [searchName, setSearchName] = useState('');
   const [tios, setTios] = useState<TioPublicView[]>([]);
   const [totalPages, setTotalPages] = useState(0);
   const [page, setPage] = useState(1);
   const [loading, setLoading] = useState(false);
-  const [loadingCities, setLoadingCities] = useState(false);
-  const [loadingSchools, setLoadingSchools] = useState(false);
   const [hasSearched, setHasSearched] = useState(false);
 
-  useEffect(() => {
-    api.getStates().then((data) => setStates(data as State[]));
-  }, []);
+  const { data: states = [] } = useStates();
+  const { data: cities = [], isLoading: loadingCities } = useCities(selectedState || undefined);
+  const { data: schools = [], isLoading: loadingSchoolsData } = useSchools(
+    selectedCity || undefined,
+    undefined,
+    true,
+  );
+  const { data: neighborhoods = [], isLoading: loadingNeighborhoods } = useNeighborhoods(
+    selectedCity || undefined,
+  );
+  const loadingSchools = loadingSchoolsData || loadingNeighborhoods;
 
-  const handleStateChange = async (value: string) => {
+  const handleStateChange = (value: string) => {
     setSelectedState(value);
     setSelectedCity('');
     setSelectedSchool('');
     setSelectedNeighborhood('');
-    setCities([]);
-    setSchools([]);
-    setNeighborhoods([]);
     setTios([]);
     setHasSearched(false);
     setPage(1);
-    if (value) {
-      setLoadingCities(true);
-      const data = await api.getCities(value);
-      setCities(data as City[]);
-      setLoadingCities(false);
-    }
   };
 
-  const handleCityChange = async (value: string) => {
+  const handleCityChange = (value: string) => {
     setSelectedCity(value);
     setSelectedSchool('');
     setSelectedNeighborhood('');
-    setSchools([]);
-    setNeighborhoods([]);
     setTios([]);
     setHasSearched(false);
     setPage(1);
-    if (value) {
-      setLoadingSchools(true);
-      const [schoolsData, nbData] = await Promise.all([
-        api.getSchools(value, undefined, true),
-        api.getNeighborhoods(value),
-      ]);
-      setSchools(schoolsData as School[]);
-      setNeighborhoods(nbData as Neighborhood[]);
-      setLoadingSchools(false);
-    }
   };
 
   const handleSchoolChange = (value: string) => {
@@ -198,7 +180,7 @@ export default function TiosPage() {
             </div>
           )}
 
-          {!selectedSchool && selectedCity && schools.length === 0 && (
+          {!selectedSchool && selectedCity && schools.length === 0 && !loadingSchools && (
             <p className="text-sm text-gray-500 mt-4">
               Nenhuma escola com transportadores cadastrados nesta cidade.
             </p>

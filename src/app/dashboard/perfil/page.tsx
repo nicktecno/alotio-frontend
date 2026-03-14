@@ -1,23 +1,21 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useRef } from 'react';
 import Link from 'next/link';
 import { api, assetUrl } from '@/lib/api';
+import { useMyProfile, useStates, useCities, useSchools, invalidateProfile } from '@/lib/swr';
 import { compressImage } from '@/lib/compressImage';
 import Loading from '@/components/Loading';
 import FileOrCameraInput from '@/components/FileOrCameraInput';
 import toast from 'react-hot-toast';
-import type { Profile, State, City, School } from '@/types';
+import type { Profile } from '@/types';
 
 export default function PerfilPage() {
-  const [profile, setProfile] = useState<Profile | null>(null);
-  const [hasProfile, setHasProfile] = useState<boolean | null>(null);
-  const [states, setStates] = useState<State[]>([]);
-  const [cities, setCities] = useState<City[]>([]);
-  const [schools, setSchools] = useState<School[]>([]);
+  const { data: profile, error: profileError, isLoading: profileLoading, mutate: mutateProfile } = useMyProfile();
+  const hasProfile = !profileLoading && !profileError && !!profile;
+  const noProfile = !profileLoading && (!!profileError || profile === null);
+
   const [loading, setLoading] = useState(false);
-  const [loadingCities, setLoadingCities] = useState(false);
-  const [loadingSchools, setLoadingSchools] = useState(false);
 
   const [form, setForm] = useState({
     displayName: '',
@@ -36,6 +34,33 @@ export default function PerfilPage() {
   const [newDocument, setNewDocument] = useState<File | null>(null);
   const [uploadingDoc, setUploadingDoc] = useState(false);
 
+  const initializedRef = useRef(false);
+
+  const { data: states = [] } = useStates();
+  const { data: cities = [], isLoading: loadingCities } = useCities(form.stateId || undefined);
+  const { data: schools = [], isLoading: loadingSchools } = useSchools(form.cityId || undefined);
+
+  useEffect(() => {
+    if (profile && !initializedRef.current) {
+      initializedRef.current = true;
+      setForm({
+        displayName: profile.displayName,
+        prefixo: profile.prefixo,
+        phone: profile.phone || '',
+        bio: profile.bio || '',
+        hasTV: profile.hasTV || false,
+        hasAC: profile.hasAC || false,
+        hasMonitor: profile.hasMonitor || false,
+        stateId: profile.city.state?.id || '',
+        cityId: profile.cityId,
+        defaultSchoolId: profile.defaultSchoolId,
+        secondarySchoolId: profile.secondarySchoolId || '',
+      });
+    }
+  }, [profile]);
+
+  const isPremium = profile?.subscriptions && profile.subscriptions.length > 0;
+
   const handleResubmitDocument = async () => {
     if (!newDocument) {
       toast.error('Selecione um arquivo');
@@ -47,8 +72,7 @@ export default function PerfilPage() {
       const fd = new FormData();
       fd.append('document', compressed);
       await api.updateDocument(fd);
-      const updated = await api.getMyProfile();
-      setProfile(updated as Profile);
+      mutateProfile();
       setNewDocument(null);
       toast.success('Documento reenviado! Aguarde nova análise do administrador.');
     } catch (err: unknown) {
@@ -57,56 +81,6 @@ export default function PerfilPage() {
       setUploadingDoc(false);
     }
   };
-
-  useEffect(() => {
-    api.getStates().then((data) => setStates(data as State[]));
-  }, []);
-
-  useEffect(() => {
-    api
-      .getMyProfile()
-      .then((data) => {
-        const p = data as Profile;
-        setProfile(p);
-        setHasProfile(true);
-        setForm({
-          displayName: p.displayName,
-          prefixo: p.prefixo,
-          phone: p.phone || '',
-          bio: p.bio || '',
-          hasTV: p.hasTV || false,
-          hasAC: p.hasAC || false,
-          hasMonitor: p.hasMonitor || false,
-          stateId: p.city.state?.id || '',
-          cityId: p.cityId,
-          defaultSchoolId: p.defaultSchoolId,
-          secondarySchoolId: p.secondarySchoolId || '',
-        });
-      })
-      .catch(() => setHasProfile(false));
-  }, []);
-
-  useEffect(() => {
-    if (form.stateId) {
-      setLoadingCities(true);
-      api.getCities(form.stateId).then((data) => {
-        setCities(data as City[]);
-        setLoadingCities(false);
-      });
-    }
-  }, [form.stateId]);
-
-  useEffect(() => {
-    if (form.cityId) {
-      setLoadingSchools(true);
-      api.getSchools(form.cityId).then((data) => {
-        setSchools(data as School[]);
-        setLoadingSchools(false);
-      });
-    }
-  }, [form.cityId]);
-
-  const isPremium = profile?.subscriptions && profile.subscriptions.length > 0;
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
     setForm((prev) => ({ ...prev, [e.target.name]: e.target.value }));
@@ -131,9 +105,8 @@ export default function PerfilPage() {
       if (form.secondarySchoolId) fd.append('secondarySchoolId', form.secondarySchoolId);
       fd.append('document', compressedDoc);
 
-      const data = await api.createProfile(fd);
-      setProfile(data as Profile);
-      setHasProfile(true);
+      await api.createProfile(fd);
+      invalidateProfile();
       toast.success('Perfil criado! Aguarde aprovação do administrador.');
     } catch (err: unknown) {
       toast.error(err instanceof Error ? err.message : 'Erro ao criar perfil');
@@ -157,8 +130,8 @@ export default function PerfilPage() {
     data.secondarySchoolId = form.secondarySchoolId || null;
 
     try {
-      const updated = await api.updateMyProfile(data);
-      setProfile(updated as Profile);
+      await api.updateMyProfile(data);
+      invalidateProfile();
       toast.success('Perfil atualizado!');
     } catch (err: unknown) {
       toast.error(err instanceof Error ? err.message : 'Erro ao atualizar');
@@ -167,7 +140,7 @@ export default function PerfilPage() {
     }
   };
 
-  if (hasProfile === null) return <Loading />;
+  if (profileLoading) return <Loading />;
 
   return (
     <div className="max-w-2xl">
@@ -375,7 +348,7 @@ export default function PerfilPage() {
           </div>
         </div>
 
-        {!hasProfile && (
+        {noProfile && (
           <div>
             <label className="block text-sm font-medium text-gray-700 mb-1">
               Documento comprobatório
@@ -411,13 +384,13 @@ export default function PerfilPage() {
         </button>
       </form>
 
-      {hasProfile && (
+      {hasProfile && profile && (
         <div className="mt-6 bg-white rounded-xl border border-gray-200 p-6 space-y-4">
           <h2 className="text-lg font-semibold text-gray-900 font-heading">Documento comprobatório</h2>
 
-          {profile!.documents?.length > 0 && (
+          {profile.documents?.length > 0 && (
             <div className="flex flex-wrap gap-3">
-              {profile!.documents.map((doc) => (
+              {profile.documents.map((doc) => (
                 <a
                   key={doc.id}
                   href={assetUrl(doc.fileUrl) || doc.fileUrl}
@@ -434,7 +407,7 @@ export default function PerfilPage() {
             </div>
           )}
 
-          {profile!.status === 'REJECTED' && (
+          {profile.status === 'REJECTED' && (
             <div className="border-2 border-red-200 bg-red-50 rounded-lg p-4 space-y-3">
               <p className="text-sm text-red-700 font-medium">
                 Seu documento foi rejeitado. Envie um novo documento para reavaliação.
@@ -463,7 +436,7 @@ export default function PerfilPage() {
             </div>
           )}
 
-          {profile!.status === 'PENDING' && (
+          {profile.status === 'PENDING' && (
             <div className="border border-amber-200 bg-amber-50 rounded-lg p-4 space-y-3">
               <p className="text-sm text-amber-700 font-medium">
                 Seu documento está em análise. Caso queira, envie um novo documento atualizado.
@@ -492,7 +465,7 @@ export default function PerfilPage() {
             </div>
           )}
 
-          {profile!.status === 'APPROVED' && (
+          {profile.status === 'APPROVED' && (
             <p className="text-sm text-green-600 font-medium">
               Seu documento foi aprovado.
             </p>

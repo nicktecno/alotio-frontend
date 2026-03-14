@@ -1,25 +1,24 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useRef } from 'react';
 import { api } from '@/lib/api';
+import { useMyProfile, useSchools, invalidateProfile } from '@/lib/swr';
 import Loading from '@/components/Loading';
 import toast from 'react-hot-toast';
-import type { Profile, School } from '@/types';
 
 export default function EscolasPage() {
-  const [profile, setProfile] = useState<Profile | null>(null);
-  const [citySchools, setCitySchools] = useState<School[]>([]);
+  const { data: profile } = useMyProfile();
+  const { data: citySchools = [] } = useSchools(profile?.cityId);
   const [extraSchoolIds, setExtraSchoolIds] = useState<string[]>([]);
   const [loading, setLoading] = useState(false);
+  const initializedRef = useRef(false);
 
   useEffect(() => {
-    api.getMyProfile().then((data) => {
-      const p = data as Profile;
-      setProfile(p);
-      setExtraSchoolIds(p.schools.map((s) => s.school.id));
-      api.getSchools(p.cityId).then((schools) => setCitySchools(schools as School[]));
-    });
-  }, []);
+    if (profile && !initializedRef.current) {
+      initializedRef.current = true;
+      setExtraSchoolIds(profile.schools.map((s) => s.school.id));
+    }
+  }, [profile]);
 
   const isPremium = profile?.subscriptions && profile.subscriptions.length > 0;
 
@@ -33,6 +32,7 @@ export default function EscolasPage() {
     setLoading(true);
     try {
       await api.updateMySchools(extraSchoolIds);
+      invalidateProfile();
       toast.success('Escolas extras atualizadas!');
     } catch (err: unknown) {
       toast.error(err instanceof Error ? err.message : 'Erro ao salvar');

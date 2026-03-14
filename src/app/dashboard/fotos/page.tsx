@@ -2,26 +2,23 @@
 
 import { useEffect, useState } from 'react';
 import { api, assetUrl } from '@/lib/api';
+import { useMyProfile, invalidateProfile } from '@/lib/swr';
 import { compressImage } from '@/lib/compressImage';
 import Loading from '@/components/Loading';
 import ImageLightbox from '@/components/ImageLightbox';
 import FileOrCameraInput from '@/components/FileOrCameraInput';
 import toast from 'react-hot-toast';
-import type { Profile, VehiclePhoto } from '@/types';
+import type { VehiclePhoto } from '@/types';
 
 export default function FotosPage() {
-  const [profile, setProfile] = useState<Profile | null>(null);
+  const { data: profile, isLoading: profileLoading } = useMyProfile();
   const [photos, setPhotos] = useState<VehiclePhoto[]>([]);
   const [uploading, setUploading] = useState(false);
   const [lightbox, setLightbox] = useState<{ images: string[]; index: number } | null>(null);
 
   useEffect(() => {
-    api.getMyProfile().then((data) => {
-      const p = data as Profile;
-      setProfile(p);
-      setPhotos(p.vehiclePhotos);
-    });
-  }, []);
+    if (profile?.vehiclePhotos) setPhotos(profile.vehiclePhotos);
+  }, [profile]);
 
   const isPremium = profile?.subscriptions && profile.subscriptions.length > 0;
 
@@ -33,8 +30,7 @@ export default function FotosPage() {
       fd.append('avatar', compressed);
       await api.uploadAvatar(fd);
       toast.success('Avatar atualizado!');
-      const updated = (await api.getMyProfile()) as Profile;
-      setProfile(updated);
+      invalidateProfile();
     } catch (err: unknown) {
       toast.error(err instanceof Error ? err.message : 'Erro ao enviar');
     } finally {
@@ -51,8 +47,7 @@ export default function FotosPage() {
     try {
       await api.deleteAvatar();
       toast.success('Avatar removido');
-      const updated = (await api.getMyProfile()) as Profile;
-      setProfile(updated);
+      invalidateProfile();
     } catch (err: unknown) {
       toast.error(err instanceof Error ? err.message : 'Erro');
     }
@@ -66,8 +61,7 @@ export default function FotosPage() {
       fd.append('photo', compressed);
       await api.uploadVehiclePhoto(fd);
       toast.success('Foto adicionada!');
-      const updated = (await api.getMyProfile()) as Profile;
-      setPhotos(updated.vehiclePhotos);
+      invalidateProfile();
     } catch (err: unknown) {
       toast.error(err instanceof Error ? err.message : 'Erro ao enviar');
     } finally {
@@ -85,10 +79,13 @@ export default function FotosPage() {
       await api.deleteVehiclePhoto(photoId);
       setPhotos((prev) => prev.filter((p) => p.id !== photoId));
       toast.success('Foto removida');
+      invalidateProfile();
     } catch (err: unknown) {
       toast.error(err instanceof Error ? err.message : 'Erro');
     }
   };
+
+  if (profileLoading || profile === undefined) return <Loading />;
 
   if (!profile) return <Loading />;
 

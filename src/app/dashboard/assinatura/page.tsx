@@ -1,45 +1,20 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { api } from '@/lib/api';
+import { usePlans, useMySubscription, invalidateSubscription, invalidateProfile } from '@/lib/swr';
 import toast from 'react-hot-toast';
 import Loading from '@/components/Loading';
-import type { SubscriptionPlan, Subscription } from '@/types';
+import type { Subscription } from '@/types';
 
 export default function AssinaturaPage() {
-  const [plans, setPlans] = useState<SubscriptionPlan[]>([]);
-  const [subscription, setSubscription] = useState<Subscription | null>(null);
-  const [isPremium, setIsPremium] = useState(false);
-  const [loadingPage, setLoadingPage] = useState(true);
+  const { data: plans = [], isLoading: loadingPlans } = usePlans();
+  const { data: subData, isLoading: loadingSub } = useMySubscription();
   const [loadingAction, setLoadingAction] = useState('');
 
-  useEffect(() => {
-    const load = async () => {
-      try {
-        const [plansData] = await Promise.all([
-          api.getPlans(),
-          (async () => {
-            try {
-              const data = await api.getMySubscription() as {
-                isPremium: boolean;
-                subscription: Subscription | null;
-              };
-              setIsPremium(data.isPremium);
-              setSubscription(data.subscription);
-            } catch {
-              // Profile may not exist yet
-            }
-          })(),
-        ]);
-        setPlans(plansData as SubscriptionPlan[]);
-      } catch {
-        toast.error('Erro ao carregar planos');
-      } finally {
-        setLoadingPage(false);
-      }
-    };
-    load();
-  }, []);
+  const isPremium = subData?.isPremium ?? false;
+  const subscription = (subData?.subscription as Subscription | null) ?? null;
+  const loadingPage = loadingPlans || loadingSub;
 
   const handleCheckout = async (planId: string) => {
     setLoadingAction(planId);
@@ -88,14 +63,8 @@ export default function AssinaturaPage() {
       const result = await api.cancelSubscription();
       toast.success(result.message);
       setShowManageModal(false);
-      if (result.refunded) {
-        setIsPremium(false);
-        setSubscription(null);
-      } else {
-        setSubscription((prev) =>
-          prev ? { ...prev, cancelAtPeriodEnd: true } : prev,
-        );
-      }
+      invalidateSubscription();
+      invalidateProfile();
     } catch (err: unknown) {
       toast.error(
         err instanceof Error ? err.message : 'Erro ao cancelar assinatura',

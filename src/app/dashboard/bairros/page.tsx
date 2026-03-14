@@ -1,25 +1,24 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useRef } from 'react';
 import { api } from '@/lib/api';
+import { useMyProfile, useNeighborhoods, invalidateProfile } from '@/lib/swr';
 import Loading from '@/components/Loading';
 import toast from 'react-hot-toast';
-import type { Profile, Neighborhood } from '@/types';
 
 export default function BairrosPage() {
-  const [profile, setProfile] = useState<Profile | null>(null);
-  const [cityNeighborhoods, setCityNeighborhoods] = useState<Neighborhood[]>([]);
+  const { data: profile } = useMyProfile();
+  const { data: cityNeighborhoods = [] } = useNeighborhoods(profile?.cityId);
   const [selectedIds, setSelectedIds] = useState<string[]>([]);
   const [loading, setLoading] = useState(false);
+  const initializedRef = useRef(false);
 
   useEffect(() => {
-    api.getMyProfile().then((data) => {
-      const p = data as Profile;
-      setProfile(p);
-      setSelectedIds(p.neighborhoods.map((n) => n.neighborhood.id));
-      api.getNeighborhoods(p.cityId).then((nb) => setCityNeighborhoods(nb as Neighborhood[]));
-    });
-  }, []);
+    if (profile && !initializedRef.current) {
+      initializedRef.current = true;
+      setSelectedIds(profile.neighborhoods.map((n) => n.neighborhood.id));
+    }
+  }, [profile]);
 
   const toggleNeighborhood = (id: string) => {
     setSelectedIds((prev) => (prev.includes(id) ? prev.filter((x) => x !== id) : [...prev, id]));
@@ -29,6 +28,7 @@ export default function BairrosPage() {
     setLoading(true);
     try {
       await api.updateMyNeighborhoods(selectedIds);
+      invalidateProfile();
       toast.success('Bairros atualizados!');
     } catch (err: unknown) {
       toast.error(err instanceof Error ? err.message : 'Erro ao salvar');

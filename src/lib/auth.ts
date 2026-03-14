@@ -1,7 +1,8 @@
 'use client';
 
 import { create } from 'zustand';
-import { api, clearApiCache } from './api';
+import { api } from './api';
+import { clearSwrCache } from './swr';
 
 interface AuthState {
   user: { id: string; email: string; role: string } | null;
@@ -31,7 +32,7 @@ export const useAuth = create<AuthState>((set) => ({
     } catch {
       // Ignore logout errors
     }
-    clearApiCache();
+    clearSwrCache();
     set({ user: null });
   },
 
