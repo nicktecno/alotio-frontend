@@ -29,10 +29,19 @@ export default function CadastroPage() {
     } catch (err: unknown) {
       const message = err instanceof Error ? err.message : 'Erro ao criar conta';
       toast.error(message);
-    } finally {
       setLoading(false);
     }
   };
+
+  if (loading) {
+    return (
+      <div className="min-h-screen bg-primary-600 flex flex-col items-center justify-center gap-6">
+        <img src="/alotio-title.svg" alt="aloTio" className="h-12" />
+        <img src="/bus.gif" alt="Carregando" className="w-52 h-auto" />
+        <p className="text-primary-200 text-sm font-medium">Criando sua conta...</p>
+      </div>
+    );
+  }
 
   return (
     <div className="min-h-screen bg-primary-600 flex items-center justify-center px-4 py-12">
@@ -95,7 +104,7 @@ export default function CadastroPage() {
             disabled={loading}
             className="w-full bg-secondary hover:bg-secondary-600 disabled:opacity-50 text-white py-3 rounded-lg font-bold font-heading text-lg tracking-wide transition"
           >
-            {loading ? 'Criando conta...' : 'Cadastrar'}
+            Cadastrar
           </button>
         </form>
 

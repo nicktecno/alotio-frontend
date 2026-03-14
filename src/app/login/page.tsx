@@ -24,15 +24,23 @@ export default function LoginPage() {
     } catch (err: unknown) {
       const message = err instanceof Error ? err.message : 'Erro ao fazer login';
       toast.error(message);
-    } finally {
       setLoading(false);
     }
   };
 
+  if (loading) {
+    return (
+      <div className="min-h-screen bg-primary-600 flex flex-col items-center justify-center gap-6">
+        <img src="/alotio-title.svg" alt="aloTio" className="h-12" />
+        <img src="/bus.gif" alt="Carregando" className="w-52 h-auto" />
+        <p className="text-primary-200 text-sm font-medium">Entrando...</p>
+      </div>
+    );
+  }
+
   return (
     <div className="min-h-screen bg-primary-600 flex items-center justify-center px-4">
       <div className="w-full max-w-md">
-        {/* Top bar */}
         <div className="flex items-center justify-between mb-8">
           <Link href="/" className="text-primary-100 hover:text-white transition text-sm">
             &larr; Voltar
@@ -91,7 +99,7 @@ export default function LoginPage() {
             disabled={loading}
             className="w-full bg-secondary hover:bg-secondary-600 disabled:opacity-50 text-white py-3 rounded-lg font-bold font-heading text-lg tracking-wide transition cursor-pointer"
           >
-            {loading ? 'Entrando...' : 'Login'}
+            Login
           </button>
         </form>
 
