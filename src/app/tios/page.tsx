@@ -22,13 +22,15 @@ export default function TiosPage() {
   const [totalPages, setTotalPages] = useState(0);
   const [page, setPage] = useState(1);
   const [loading, setLoading] = useState(false);
+  const [loadingCities, setLoadingCities] = useState(false);
+  const [loadingSchools, setLoadingSchools] = useState(false);
   const [hasSearched, setHasSearched] = useState(false);
 
   useEffect(() => {
     api.getStates().then((data) => setStates(data as State[]));
   }, []);
 
-  const handleStateChange = (value: string) => {
+  const handleStateChange = async (value: string) => {
     setSelectedState(value);
     setSelectedCity('');
     setSelectedSchool('');
@@ -40,11 +42,14 @@ export default function TiosPage() {
     setHasSearched(false);
     setPage(1);
     if (value) {
-      api.getCities(value).then((data) => setCities(data as City[]));
+      setLoadingCities(true);
+      const data = await api.getCities(value);
+      setCities(data as City[]);
+      setLoadingCities(false);
     }
   };
 
-  const handleCityChange = (value: string) => {
+  const handleCityChange = async (value: string) => {
     setSelectedCity(value);
     setSelectedSchool('');
     setSelectedNeighborhood('');
@@ -54,8 +59,14 @@ export default function TiosPage() {
     setHasSearched(false);
     setPage(1);
     if (value) {
-      api.getSchools(value, undefined, true).then((data) => setSchools(data as School[]));
-      api.getNeighborhoods(value).then((data) => setNeighborhoods(data as Neighborhood[]));
+      setLoadingSchools(true);
+      const [schoolsData, nbData] = await Promise.all([
+        api.getSchools(value, undefined, true),
+        api.getNeighborhoods(value),
+      ]);
+      setSchools(schoolsData as School[]);
+      setNeighborhoods(nbData as Neighborhood[]);
+      setLoadingSchools(false);
     }
   };
 
@@ -116,31 +127,45 @@ export default function TiosPage() {
             </div>
             <div>
               <label className="block text-sm font-medium text-gray-700 mb-1">Cidade</label>
-              <select
-                value={selectedCity}
-                onChange={(e) => handleCityChange(e.target.value)}
-                disabled={!selectedState}
-                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-primary outline-none disabled:opacity-50"
-              >
-                <option value="">Selecione a cidade</option>
-                {cities.map((c) => (
-                  <option key={c.id} value={c.id}>{c.name}</option>
-                ))}
-              </select>
+              <div className="relative">
+                <select
+                  value={selectedCity}
+                  onChange={(e) => handleCityChange(e.target.value)}
+                  disabled={!selectedState || loadingCities}
+                  className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-primary outline-none disabled:opacity-50"
+                >
+                  <option value="">{loadingCities ? 'Carregando cidades...' : 'Selecione a cidade'}</option>
+                  {cities.map((c) => (
+                    <option key={c.id} value={c.id}>{c.name}</option>
+                  ))}
+                </select>
+                {loadingCities && (
+                  <div className="absolute right-8 top-1/2 -translate-y-1/2">
+                    <div className="w-4 h-4 border-2 border-primary border-t-transparent rounded-full animate-spin" />
+                  </div>
+                )}
+              </div>
             </div>
             <div>
               <label className="block text-sm font-medium text-gray-700 mb-1">Escola</label>
-              <select
-                value={selectedSchool}
-                onChange={(e) => handleSchoolChange(e.target.value)}
-                disabled={!selectedCity}
-                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-primary outline-none disabled:opacity-50"
-              >
-                <option value="">Selecione a escola</option>
-                {schools.map((s) => (
-                  <option key={s.id} value={s.id}>{s.name}</option>
-                ))}
-              </select>
+              <div className="relative">
+                <select
+                  value={selectedSchool}
+                  onChange={(e) => handleSchoolChange(e.target.value)}
+                  disabled={!selectedCity || loadingSchools}
+                  className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-primary outline-none disabled:opacity-50"
+                >
+                  <option value="">{loadingSchools ? 'Carregando escolas...' : 'Selecione a escola'}</option>
+                  {schools.map((s) => (
+                    <option key={s.id} value={s.id}>{s.name}</option>
+                  ))}
+                </select>
+                {loadingSchools && (
+                  <div className="absolute right-8 top-1/2 -translate-y-1/2">
+                    <div className="w-4 h-4 border-2 border-primary border-t-transparent rounded-full animate-spin" />
+                  </div>
+                )}
+              </div>
             </div>
           </div>
 

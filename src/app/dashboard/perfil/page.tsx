@@ -16,6 +16,8 @@ export default function PerfilPage() {
   const [cities, setCities] = useState<City[]>([]);
   const [schools, setSchools] = useState<School[]>([]);
   const [loading, setLoading] = useState(false);
+  const [loadingCities, setLoadingCities] = useState(false);
+  const [loadingSchools, setLoadingSchools] = useState(false);
 
   const [form, setForm] = useState({
     displayName: '',
@@ -86,13 +88,21 @@ export default function PerfilPage() {
 
   useEffect(() => {
     if (form.stateId) {
-      api.getCities(form.stateId).then((data) => setCities(data as City[]));
+      setLoadingCities(true);
+      api.getCities(form.stateId).then((data) => {
+        setCities(data as City[]);
+        setLoadingCities(false);
+      });
     }
   }, [form.stateId]);
 
   useEffect(() => {
     if (form.cityId) {
-      api.getSchools(form.cityId).then((data) => setSchools(data as School[]));
+      setLoadingSchools(true);
+      api.getSchools(form.cityId).then((data) => {
+        setSchools(data as School[]);
+        setLoadingSchools(false);
+      });
     }
   }, [form.cityId]);
 
@@ -290,57 +300,78 @@ export default function PerfilPage() {
           </div>
           <div>
             <label className="block text-sm font-medium text-gray-700 mb-1">Cidade</label>
-            <select
-              name="cityId"
-              value={form.cityId}
-              onChange={handleChange}
-              required
-              disabled={!form.stateId}
-              className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-primary outline-none disabled:opacity-50"
-            >
-              <option value="">Selecione</option>
-              {cities.map((c) => (
-                <option key={c.id} value={c.id}>{c.name}</option>
-              ))}
-            </select>
+            <div className="relative">
+              <select
+                name="cityId"
+                value={form.cityId}
+                onChange={handleChange}
+                required
+                disabled={!form.stateId || loadingCities}
+                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-primary outline-none disabled:opacity-50"
+              >
+                <option value="">{loadingCities ? 'Carregando cidades...' : 'Selecione'}</option>
+                {cities.map((c) => (
+                  <option key={c.id} value={c.id}>{c.name}</option>
+                ))}
+              </select>
+              {loadingCities && (
+                <div className="absolute right-8 top-1/2 -translate-y-1/2">
+                  <div className="w-4 h-4 border-2 border-primary border-t-transparent rounded-full animate-spin" />
+                </div>
+              )}
+            </div>
           </div>
         </div>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
           <div>
             <label className="block text-sm font-medium text-gray-700 mb-1">Escola Principal</label>
-            <select
-              name="defaultSchoolId"
-              value={form.defaultSchoolId}
-              onChange={handleChange}
-              required
-              disabled={!form.cityId}
-              className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-primary outline-none disabled:opacity-50"
-            >
-              <option value="">Selecione</option>
-              {schools.map((s) => (
-                <option key={s.id} value={s.id}>{s.name}</option>
-              ))}
-            </select>
+            <div className="relative">
+              <select
+                name="defaultSchoolId"
+                value={form.defaultSchoolId}
+                onChange={handleChange}
+                required
+                disabled={!form.cityId || loadingSchools}
+                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-primary outline-none disabled:opacity-50"
+              >
+                <option value="">{loadingSchools ? 'Carregando escolas...' : 'Selecione'}</option>
+                {schools.map((s) => (
+                  <option key={s.id} value={s.id}>{s.name}</option>
+                ))}
+              </select>
+              {loadingSchools && (
+                <div className="absolute right-8 top-1/2 -translate-y-1/2">
+                  <div className="w-4 h-4 border-2 border-primary border-t-transparent rounded-full animate-spin" />
+                </div>
+              )}
+            </div>
           </div>
           <div>
             <label className="block text-sm font-medium text-gray-700 mb-1">
               Escola Secundária <span className="text-gray-400">(opcional)</span>
             </label>
-            <select
-              name="secondarySchoolId"
-              value={form.secondarySchoolId}
-              onChange={handleChange}
-              disabled={!form.cityId}
-              className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-primary outline-none disabled:opacity-50"
-            >
-              <option value="">Nenhuma</option>
-              {schools
-                .filter((s) => s.id !== form.defaultSchoolId)
-                .map((s) => (
-                  <option key={s.id} value={s.id}>{s.name}</option>
-                ))}
-            </select>
+            <div className="relative">
+              <select
+                name="secondarySchoolId"
+                value={form.secondarySchoolId}
+                onChange={handleChange}
+                disabled={!form.cityId || loadingSchools}
+                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-primary outline-none disabled:opacity-50"
+              >
+                <option value="">{loadingSchools ? 'Carregando escolas...' : 'Nenhuma'}</option>
+                {schools
+                  .filter((s) => s.id !== form.defaultSchoolId)
+                  .map((s) => (
+                    <option key={s.id} value={s.id}>{s.name}</option>
+                  ))}
+              </select>
+              {loadingSchools && (
+                <div className="absolute right-8 top-1/2 -translate-y-1/2">
+                  <div className="w-4 h-4 border-2 border-primary border-t-transparent rounded-full animate-spin" />
+                </div>
+              )}
+            </div>
           </div>
         </div>
 
