@@ -9,26 +9,30 @@ import toast from 'react-hot-toast';
 export default function LoginPage() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [loading, setLoading] = useState(false);
+  const [submitting, setSubmitting] = useState(false);
+  const [redirecting, setRedirecting] = useState(false);
+  const [error, setError] = useState('');
   const { login } = useAuth();
   const router = useRouter();
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setLoading(true);
+    setError('');
+    setSubmitting(true);
     try {
       await login(email, password);
       const user = useAuth.getState().user;
       toast.success('Login realizado!');
+      setRedirecting(true);
       router.push(user?.role === 'ADMIN' ? '/admin' : '/dashboard');
     } catch (err: unknown) {
       const message = err instanceof Error ? err.message : 'Erro ao fazer login';
-      toast.error(message);
-      setLoading(false);
+      setError(message);
+      setSubmitting(false);
     }
   };
 
-  if (loading) {
+  if (redirecting) {
     return (
       <div className="min-h-screen bg-primary-600 flex flex-col items-center justify-center gap-6">
         <img src="/alotio-title.svg" alt="aloTio" className="h-12" />
@@ -56,6 +60,15 @@ export default function LoginPage() {
           </h1>
         </div>
 
+        {error && (
+          <div className="mb-5 flex items-start gap-3 bg-red-500/20 border border-red-400/40 text-white px-4 py-3 rounded-lg text-sm">
+            <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 text-red-300 shrink-0 mt-0.5" viewBox="0 0 20 20" fill="currentColor">
+              <path fillRule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z" clipRule="evenodd" />
+            </svg>
+            <span>{error}</span>
+          </div>
+        )}
+
         <form onSubmit={handleSubmit} className="space-y-5">
           <div>
             <label className="block text-sm font-medium text-primary-100 mb-1.5">
@@ -64,7 +77,7 @@ export default function LoginPage() {
             <input
               type="email"
               value={email}
-              onChange={(e) => setEmail(e.target.value)}
+              onChange={(e) => { setEmail(e.target.value); setError(''); }}
               required
               className="w-full px-4 py-3 bg-primary-700/50 border border-primary-400/30 rounded-lg text-white placeholder-primary-300 focus:ring-2 focus:ring-secondary focus:border-secondary outline-none transition"
               placeholder="seu@email.com"
@@ -78,7 +91,7 @@ export default function LoginPage() {
             <input
               type="password"
               value={password}
-              onChange={(e) => setPassword(e.target.value)}
+              onChange={(e) => { setPassword(e.target.value); setError(''); }}
               required
               className="w-full px-4 py-3 bg-primary-700/50 border border-primary-400/30 rounded-lg text-white placeholder-primary-300 focus:ring-2 focus:ring-secondary focus:border-secondary outline-none transition"
               placeholder="••••••••"
@@ -96,10 +109,20 @@ export default function LoginPage() {
 
           <button
             type="submit"
-            disabled={loading}
-            className="w-full bg-secondary hover:bg-secondary-600 disabled:opacity-50 text-white py-3 rounded-lg font-bold font-heading text-lg tracking-wide transition cursor-pointer"
+            disabled={submitting}
+            className="w-full bg-secondary hover:bg-secondary-600 disabled:opacity-50 text-white py-3 rounded-lg font-bold font-heading text-lg tracking-wide transition cursor-pointer flex items-center justify-center gap-2"
           >
-            Login
+            {submitting ? (
+              <>
+                <svg className="animate-spin h-5 w-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                  <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
+                  <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z" />
+                </svg>
+                Entrando...
+              </>
+            ) : (
+              'Login'
+            )}
           </button>
         </form>
 
