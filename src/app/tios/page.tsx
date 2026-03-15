@@ -22,7 +22,7 @@ export default function TiosPage() {
   const [hasSearched, setHasSearched] = useState(false);
 
   const { data: states = [] } = useStates();
-  const { data: cities = [], isLoading: loadingCities } = useCities(selectedState || undefined);
+  const { data: cities = [], isLoading: loadingCities } = useCities(selectedState || undefined, true);
   const { data: schools = [], isLoading: loadingSchoolsData } = useSchools(
     selectedCity || undefined,
     undefined,

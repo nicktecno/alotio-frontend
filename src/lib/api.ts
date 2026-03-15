@@ -154,7 +154,13 @@ export const api = {
   // Public - States, Cities, Schools, Neighborhoods
   getStates: () => request('/states'),
   getStateByUf: (uf: string) => request(`/states/${uf}`),
-  getCities: (stateId?: string) => request(`/cities${stateId ? `?stateId=${stateId}` : ''}`),
+  getCities: (stateId?: string, withTios?: boolean) => {
+    const params = new URLSearchParams();
+    if (stateId) params.set('stateId', stateId);
+    if (withTios) params.set('withTios', 'true');
+    const qs = params.toString();
+    return request(`/cities${qs ? `?${qs}` : ''}`);
+  },
   getCityBySlug: (slug: string) => request(`/cities/${slug}`),
   getSchools: (cityId?: string, type?: string, withTios?: boolean) => {
     const params = new URLSearchParams();

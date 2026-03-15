@@ -30,10 +30,10 @@ export function useStates() {
   return useSWR('states', () => api.getStates() as Promise<State[]>, LONG_CACHE);
 }
 
-export function useCities(stateId?: string) {
+export function useCities(stateId?: string, withTios?: boolean) {
   return useSWR(
-    stateId ? `cities-${stateId}` : null,
-    () => api.getCities(stateId) as Promise<City[]>,
+    stateId ? `cities-${stateId}-${withTios || ''}` : null,
+    () => api.getCities(stateId, withTios) as Promise<City[]>,
     LONG_CACHE,
   );
 }
