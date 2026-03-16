@@ -48,6 +48,8 @@ export default function AdminProfileDetailPage() {
   const [showCourtesyModal, setShowCourtesyModal] = useState(false);
   const [courtesyMonths, setCourtesyMonths] = useState(1);
 
+  const [actionLoading, setActionLoading] = useState(false);
+
   useEffect(() => {
     if (!id) return;
     api.adminGetProfile(id).then((data) => {
@@ -132,17 +134,21 @@ export default function AdminProfileDetailPage() {
   const handleDelete = async () => {
     if (!profile) return;
     if (!confirm('Tem certeza que deseja deletar este perfil? Essa ação é irreversível.')) return;
+    setActionLoading(true);
     try {
       await api.adminDeleteProfile(profile.id);
       toast.success('Perfil deletado');
       router.push('/admin/perfis');
     } catch (err: unknown) {
       toast.error(err instanceof Error ? err.message : 'Erro ao deletar');
+    } finally {
+      setActionLoading(false);
     }
   };
 
   const handleApprove = async () => {
     if (!profile) return;
+    setActionLoading(true);
     try {
       await api.adminApproveProfile(profile.id);
       toast.success('Perfil aprovado!');
@@ -151,6 +157,8 @@ export default function AdminProfileDetailPage() {
       populateForm(updated);
     } catch (err: unknown) {
       toast.error(err instanceof Error ? err.message : 'Erro');
+    } finally {
+      setActionLoading(false);
     }
   };
 
@@ -158,6 +166,7 @@ export default function AdminProfileDetailPage() {
     if (!profile) return;
     const reason = prompt('Motivo da rejeição:');
     if (!reason) return;
+    setActionLoading(true);
     try {
       await api.adminRejectProfile(profile.id, reason);
       toast.success('Perfil rejeitado');
@@ -166,11 +175,14 @@ export default function AdminProfileDetailPage() {
       populateForm(updated);
     } catch (err: unknown) {
       toast.error(err instanceof Error ? err.message : 'Erro');
+    } finally {
+      setActionLoading(false);
     }
   };
 
   const handleGrantCourtesy = async () => {
     if (!profile) return;
+    setActionLoading(true);
     try {
       await api.adminGrantCourtesy(profile.id, courtesyMonths);
       toast.success(`Cortesia de ${courtesyMonths} mês(es) concedida!`);
@@ -181,12 +193,15 @@ export default function AdminProfileDetailPage() {
       populateForm(updated);
     } catch (err: unknown) {
       toast.error(err instanceof Error ? err.message : 'Erro');
+    } finally {
+      setActionLoading(false);
     }
   };
 
   const handleRevokeCourtesy = async () => {
     if (!profile) return;
     if (!confirm('Remover a cortesia premium deste perfil?')) return;
+    setActionLoading(true);
     try {
       await api.adminRevokeCourtesy(profile.id);
       toast.success('Cortesia removida');
@@ -195,11 +210,14 @@ export default function AdminProfileDetailPage() {
       populateForm(updated);
     } catch (err: unknown) {
       toast.error(err instanceof Error ? err.message : 'Erro');
+    } finally {
+      setActionLoading(false);
     }
   };
 
   const handlePause = async () => {
     if (!profile || !pauseReason.trim()) return;
+    setActionLoading(true);
     try {
       await api.adminPauseProfile(profile.id, pauseReason.trim());
       toast.success('Perfil pausado');
@@ -210,11 +228,14 @@ export default function AdminProfileDetailPage() {
       populateForm(updated);
     } catch (err: unknown) {
       toast.error(err instanceof Error ? err.message : 'Erro');
+    } finally {
+      setActionLoading(false);
     }
   };
 
   const handleReactivate = async () => {
     if (!profile) return;
+    setActionLoading(true);
     try {
       await api.adminReactivateProfile(profile.id);
       toast.success('Perfil reativado!');
@@ -223,6 +244,8 @@ export default function AdminProfileDetailPage() {
       populateForm(updated);
     } catch (err: unknown) {
       toast.error(err instanceof Error ? err.message : 'Erro');
+    } finally {
+      setActionLoading(false);
     }
   };
 
@@ -272,50 +295,50 @@ export default function AdminProfileDetailPage() {
       <div className="flex flex-wrap gap-2">
         {profile.status === 'PENDING' && (
           <>
-            <button onClick={handleApprove} className="bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded-lg text-sm font-medium transition">
-              Aprovar
+            <button onClick={handleApprove} disabled={actionLoading} className="bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded-lg text-sm font-medium transition cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed">
+              {actionLoading ? 'Aprovando...' : 'Aprovar'}
             </button>
-            <button onClick={handleReject} className="bg-red-600 hover:bg-red-700 text-white px-4 py-2 rounded-lg text-sm font-medium transition">
+            <button onClick={handleReject} disabled={actionLoading} className="bg-red-600 hover:bg-red-700 text-white px-4 py-2 rounded-lg text-sm font-medium transition cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed">
               Rejeitar
             </button>
           </>
         )}
         {profile.status === 'APPROVED' && (
-          <button onClick={() => setShowPauseModal(true)} className="bg-amber-500 hover:bg-amber-600 text-white px-4 py-2 rounded-lg text-sm font-medium transition">
+          <button onClick={() => setShowPauseModal(true)} disabled={actionLoading} className="bg-amber-500 hover:bg-amber-600 text-white px-4 py-2 rounded-lg text-sm font-medium transition cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed">
             Pausar perfil
           </button>
         )}
         {profile.status === 'PAUSED' && (
-          <button onClick={handleReactivate} className="bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded-lg text-sm font-medium transition">
-            Reativar perfil
+          <button onClick={handleReactivate} disabled={actionLoading} className="bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded-lg text-sm font-medium transition cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed">
+            {actionLoading ? 'Reativando...' : 'Reativar perfil'}
           </button>
         )}
         {!editing ? (
-          <button onClick={() => setEditing(true)} className="bg-primary hover:bg-primary-600 text-white px-4 py-2 rounded-lg text-sm font-medium transition">
+          <button onClick={() => setEditing(true)} disabled={actionLoading} className="bg-primary hover:bg-primary-600 text-white px-4 py-2 rounded-lg text-sm font-medium transition cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed">
             Editar dados
           </button>
         ) : (
           <>
-            <button onClick={handleSave} disabled={saving} className="bg-secondary hover:bg-secondary-600 text-white px-4 py-2 rounded-lg text-sm font-medium transition disabled:opacity-50">
+            <button onClick={handleSave} disabled={saving || actionLoading} className="bg-secondary hover:bg-secondary-600 text-white px-4 py-2 rounded-lg text-sm font-medium transition cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed">
               {saving ? 'Salvando...' : 'Salvar'}
             </button>
-            <button onClick={() => { setEditing(false); populateForm(profile); }} className="bg-gray-200 hover:bg-gray-300 text-gray-700 px-4 py-2 rounded-lg text-sm font-medium transition">
+            <button onClick={() => { setEditing(false); populateForm(profile); }} className="bg-gray-200 hover:bg-gray-300 text-gray-700 px-4 py-2 rounded-lg text-sm font-medium transition cursor-pointer">
               Cancelar
             </button>
           </>
         )}
         {!isCourtesy && !isPremium && (
-          <button onClick={() => setShowCourtesyModal(true)} className="bg-amber-50 hover:bg-amber-100 text-amber-700 px-4 py-2 rounded-lg text-sm font-medium transition">
+          <button onClick={() => setShowCourtesyModal(true)} disabled={actionLoading} className="bg-amber-50 hover:bg-amber-100 text-amber-700 px-4 py-2 rounded-lg text-sm font-medium transition cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed">
             Conceder cortesia
           </button>
         )}
         {isCourtesy && (
-          <button onClick={handleRevokeCourtesy} className="bg-amber-50 hover:bg-amber-100 text-amber-700 px-4 py-2 rounded-lg text-sm font-medium transition">
-            Remover cortesia
+          <button onClick={handleRevokeCourtesy} disabled={actionLoading} className="bg-amber-50 hover:bg-amber-100 text-amber-700 px-4 py-2 rounded-lg text-sm font-medium transition cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed">
+            {actionLoading ? 'Removendo...' : 'Remover cortesia'}
           </button>
         )}
-        <button onClick={handleDelete} className="ml-auto bg-red-50 hover:bg-red-100 text-red-600 px-4 py-2 rounded-lg text-sm font-medium transition">
-          Deletar perfil
+        <button onClick={handleDelete} disabled={actionLoading} className="ml-auto bg-red-50 hover:bg-red-100 text-red-600 px-4 py-2 rounded-lg text-sm font-medium transition cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed">
+          {actionLoading ? 'Deletando...' : 'Deletar perfil'}
         </button>
       </div>
 
@@ -544,7 +567,7 @@ export default function AdminProfileDetailPage() {
           {!editingAssociations ? (
             <button
               onClick={() => setEditingAssociations(true)}
-              className="text-primary hover:text-primary-600 text-sm font-medium"
+              className="text-primary hover:text-primary-600 text-sm font-medium cursor-pointer"
             >
               Editar
             </button>
@@ -574,7 +597,7 @@ export default function AdminProfileDetailPage() {
                   }
                 }}
                 disabled={savingAssociations}
-                className="bg-secondary hover:bg-secondary-600 text-white px-3 py-1 rounded-lg text-sm font-medium transition disabled:opacity-50"
+                className="bg-secondary hover:bg-secondary-600 text-white px-3 py-1 rounded-lg text-sm font-medium transition cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed"
               >
                 {savingAssociations ? 'Salvando...' : 'Salvar'}
               </button>
@@ -586,7 +609,7 @@ export default function AdminProfileDetailPage() {
                   setAssocDefaultSchoolId(profile.defaultSchoolId);
                   setAssocSecondarySchoolId(profile.secondarySchoolId || '');
                 }}
-                className="bg-gray-200 hover:bg-gray-300 text-gray-700 px-3 py-1 rounded-lg text-sm font-medium transition"
+                className="bg-gray-200 hover:bg-gray-300 text-gray-700 px-3 py-1 rounded-lg text-sm font-medium transition cursor-pointer"
               >
                 Cancelar
               </button>
@@ -745,16 +768,17 @@ export default function AdminProfileDetailPage() {
             <div className="flex justify-end gap-2">
               <button
                 onClick={() => { setShowPauseModal(false); setPauseReason(''); }}
-                className="px-4 py-2 text-sm font-medium text-gray-700 bg-gray-100 hover:bg-gray-200 rounded-lg transition"
+                disabled={actionLoading}
+                className="px-4 py-2 text-sm font-medium text-gray-700 bg-gray-100 hover:bg-gray-200 rounded-lg transition cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed"
               >
                 Cancelar
               </button>
               <button
                 onClick={handlePause}
-                disabled={!pauseReason.trim()}
-                className="px-4 py-2 text-sm font-medium text-white bg-amber-500 hover:bg-amber-600 rounded-lg transition disabled:opacity-50"
+                disabled={!pauseReason.trim() || actionLoading}
+                className="px-4 py-2 text-sm font-medium text-white bg-amber-500 hover:bg-amber-600 rounded-lg transition cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed"
               >
-                Confirmar pausa
+                {actionLoading ? 'Pausando...' : 'Confirmar pausa'}
               </button>
             </div>
           </div>
@@ -783,15 +807,17 @@ export default function AdminProfileDetailPage() {
             <div className="flex justify-end gap-2">
               <button
                 onClick={() => { setShowCourtesyModal(false); setCourtesyMonths(1); }}
-                className="px-4 py-2 text-sm font-medium text-gray-700 bg-gray-100 hover:bg-gray-200 rounded-lg transition"
+                disabled={actionLoading}
+                className="px-4 py-2 text-sm font-medium text-gray-700 bg-gray-100 hover:bg-gray-200 rounded-lg transition cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed"
               >
                 Cancelar
               </button>
               <button
                 onClick={handleGrantCourtesy}
-                className="px-4 py-2 text-sm font-medium text-white bg-amber-500 hover:bg-amber-600 rounded-lg transition"
+                disabled={actionLoading}
+                className="px-4 py-2 text-sm font-medium text-white bg-amber-500 hover:bg-amber-600 rounded-lg transition cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed"
               >
-                Conceder cortesia
+                {actionLoading ? 'Concedendo...' : 'Conceder cortesia'}
               </button>
             </div>
           </div>
