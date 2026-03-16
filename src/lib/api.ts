@@ -219,6 +219,13 @@ export const api = {
       method: 'PATCH',
       body: JSON.stringify({ reason }),
     }),
+  adminPauseProfile: (id: string, reason: string) =>
+    request(`/admin/profiles/${id}/pause`, {
+      method: 'PATCH',
+      body: JSON.stringify({ reason }),
+    }),
+  adminReactivateProfile: (id: string) =>
+    request(`/admin/profiles/${id}/reactivate`, { method: 'PATCH' }),
   adminDeleteAvatar: (id: string) =>
     request(`/admin/profiles/${id}/avatar`, { method: 'DELETE' }),
   adminDeleteVehiclePhoto: (profileId: string, photoId: string) =>

@@ -46,15 +46,18 @@ export default function DashboardPage() {
     PENDING: 'bg-primary-100 text-primary-800',
     APPROVED: 'bg-green-100 text-green-800',
     REJECTED: 'bg-red-100 text-red-800',
+    PAUSED: 'bg-amber-100 text-amber-800',
   };
   const statusLabels: Record<string, string> = {
     PENDING: 'Pendente',
     APPROVED: 'Aprovado',
     REJECTED: 'Rejeitado',
+    PAUSED: 'Pausado',
   };
 
   const isPending = profile!.status === 'PENDING';
   const isRejected = profile!.status === 'REJECTED';
+  const isPaused = profile!.status === 'PAUSED';
 
   return (
     <div className="max-w-4xl space-y-6">
@@ -98,6 +101,31 @@ export default function DashboardPage() {
             <Link href="/dashboard/perfil" className="inline-block mt-2 text-sm font-semibold text-red-700 underline hover:text-red-900">
               Atualizar documentos
             </Link>
+          </div>
+        </div>
+      )}
+
+      {isPaused && (
+        <div className="border-2 border-amber-400 bg-amber-50 rounded-xl p-5 flex items-start gap-4">
+          <div className="flex-shrink-0 w-10 h-10 rounded-full bg-amber-100 flex items-center justify-center">
+            <svg className="w-5 h-5 text-amber-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+              <path strokeLinecap="round" strokeLinejoin="round" d="M10 9v6m4-6v6m7-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+            </svg>
+          </div>
+          <div>
+            <h3 className="font-semibold text-amber-800 text-base">Perfil pausado</h3>
+            <p className="text-sm text-amber-700 mt-1">
+              Seu perfil foi temporariamente pausado por um administrador e não está sendo exibido nas buscas públicas.
+            </p>
+            {profile!.rejectedReason && (
+              <div className="mt-3 bg-white border border-amber-200 rounded-lg p-3">
+                <p className="text-xs font-semibold text-amber-800 mb-1">Mensagem do administrador:</p>
+                <p className="text-sm text-amber-700 whitespace-pre-wrap">{profile!.rejectedReason}</p>
+              </div>
+            )}
+            <p className="text-xs text-amber-600 mt-2">
+              Entre em contato pelo <Link href="/contato" className="font-semibold underline hover:text-amber-800">Fale Conosco</Link> se tiver dúvidas.
+            </p>
           </div>
         </div>
       )}

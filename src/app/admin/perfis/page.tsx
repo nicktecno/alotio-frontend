@@ -62,6 +62,7 @@ export default function AdminPerfisPage() {
     PENDING: 'bg-primary-100 text-primary-700',
     APPROVED: 'bg-green-100 text-green-800',
     REJECTED: 'bg-red-100 text-red-800',
+    PAUSED: 'bg-amber-100 text-amber-800',
   };
 
   return (
@@ -77,6 +78,7 @@ export default function AdminPerfisPage() {
           <option value="PENDING">Pendentes</option>
           <option value="APPROVED">Aprovados</option>
           <option value="REJECTED">Rejeitados</option>
+          <option value="PAUSED">Pausados</option>
         </select>
       </div>
 

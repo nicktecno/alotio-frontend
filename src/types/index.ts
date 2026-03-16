@@ -1,5 +1,5 @@
 export type UserRole = 'TIO' | 'ADMIN';
-export type ProfileStatus = 'PENDING' | 'APPROVED' | 'REJECTED';
+export type ProfileStatus = 'PENDING' | 'APPROVED' | 'REJECTED' | 'PAUSED';
 export type SchoolType = 'ESTADUAL' | 'MUNICIPAL' | 'PARTICULAR' | 'FEDERAL';
 export type SubscriptionStatus = 'ACTIVE' | 'PAST_DUE' | 'CANCELLED' | 'EXPIRED';
 export type PlanInterval = 'MONTHLY' | 'YEARLY';
@@ -60,6 +60,7 @@ export interface Profile {
   defaultSchoolId: string;
   secondarySchoolId: string | null;
   status: ProfileStatus;
+  rejectedReason: string | null;
   stripeCustomerId: string | null;
   createdAt: string;
   updatedAt: string;

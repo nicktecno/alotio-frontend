@@ -42,6 +42,9 @@ export default function AdminProfileDetailPage() {
 
   const [lightbox, setLightbox] = useState<{ images: string[]; index: number } | null>(null);
 
+  const [showPauseModal, setShowPauseModal] = useState(false);
+  const [pauseReason, setPauseReason] = useState('');
+
   useEffect(() => {
     if (!id) return;
     api.adminGetProfile(id).then((data) => {
@@ -163,6 +166,34 @@ export default function AdminProfileDetailPage() {
     }
   };
 
+  const handlePause = async () => {
+    if (!profile || !pauseReason.trim()) return;
+    try {
+      await api.adminPauseProfile(profile.id, pauseReason.trim());
+      toast.success('Perfil pausado');
+      setShowPauseModal(false);
+      setPauseReason('');
+      const updated = (await api.adminGetProfile(profile.id)) as Profile;
+      setProfile(updated);
+      populateForm(updated);
+    } catch (err: unknown) {
+      toast.error(err instanceof Error ? err.message : 'Erro');
+    }
+  };
+
+  const handleReactivate = async () => {
+    if (!profile) return;
+    try {
+      await api.adminReactivateProfile(profile.id);
+      toast.success('Perfil reativado!');
+      const updated = (await api.adminGetProfile(profile.id)) as Profile;
+      setProfile(updated);
+      populateForm(updated);
+    } catch (err: unknown) {
+      toast.error(err instanceof Error ? err.message : 'Erro');
+    }
+  };
+
   if (loading) return <Loading />;
   if (!profile) return <p className="text-gray-500">Perfil não encontrado.</p>;
 
@@ -170,6 +201,7 @@ export default function AdminProfileDetailPage() {
     PENDING: 'bg-primary-100 text-primary-700',
     APPROVED: 'bg-green-100 text-green-800',
     REJECTED: 'bg-red-100 text-red-800',
+    PAUSED: 'bg-amber-100 text-amber-800',
   };
 
   const isPremium = profile.subscriptions?.some((s) => s.status === 'ACTIVE');
@@ -206,6 +238,16 @@ export default function AdminProfileDetailPage() {
               Rejeitar
             </button>
           </>
+        )}
+        {profile.status === 'APPROVED' && (
+          <button onClick={() => setShowPauseModal(true)} className="bg-amber-500 hover:bg-amber-600 text-white px-4 py-2 rounded-lg text-sm font-medium transition">
+            Pausar perfil
+          </button>
+        )}
+        {profile.status === 'PAUSED' && (
+          <button onClick={handleReactivate} className="bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded-lg text-sm font-medium transition">
+            Reativar perfil
+          </button>
         )}
         {!editing ? (
           <button onClick={() => setEditing(true)} className="bg-primary hover:bg-primary-600 text-white px-4 py-2 rounded-lg text-sm font-medium transition">
@@ -262,6 +304,7 @@ export default function AdminProfileDetailPage() {
                 <option value="PENDING">Pendente</option>
                 <option value="APPROVED">Aprovado</option>
                 <option value="REJECTED">Rejeitado</option>
+                <option value="PAUSED">Pausado</option>
               </select>
             ) : (
               <span className={`px-2 py-0.5 rounded-full text-xs font-medium ${statusColors[profile.status]}`}>
@@ -632,6 +675,39 @@ export default function AdminProfileDetailPage() {
           initialIndex={lightbox.index}
           onClose={() => setLightbox(null)}
         />
+      )}
+
+      {showPauseModal && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 p-4">
+          <div className="bg-white rounded-2xl shadow-xl max-w-md w-full p-6 space-y-4">
+            <h3 className="text-lg font-bold text-gray-900">Pausar perfil</h3>
+            <p className="text-sm text-gray-600">
+              Informe o motivo da pausa. O transportador receberá um email com esta mensagem para saber o que precisa fazer.
+            </p>
+            <textarea
+              value={pauseReason}
+              onChange={(e) => setPauseReason(e.target.value)}
+              placeholder="Descreva o motivo da pausa..."
+              rows={4}
+              className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-amber-500 outline-none text-sm resize-none"
+            />
+            <div className="flex justify-end gap-2">
+              <button
+                onClick={() => { setShowPauseModal(false); setPauseReason(''); }}
+                className="px-4 py-2 text-sm font-medium text-gray-700 bg-gray-100 hover:bg-gray-200 rounded-lg transition"
+              >
+                Cancelar
+              </button>
+              <button
+                onClick={handlePause}
+                disabled={!pauseReason.trim()}
+                className="px-4 py-2 text-sm font-medium text-white bg-amber-500 hover:bg-amber-600 rounded-lg transition disabled:opacity-50"
+              >
+                Confirmar pausa
+              </button>
+            </div>
+          </div>
+        </div>
       )}
     </div>
   );
