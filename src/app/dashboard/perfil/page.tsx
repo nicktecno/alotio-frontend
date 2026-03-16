@@ -32,7 +32,8 @@ export default function PerfilPage() {
     defaultSchoolId: '',
     secondarySchoolId: '',
   });
-  const [schoolCityId, setSchoolCityId] = useState('');
+  const [defaultSchoolCityId, setDefaultSchoolCityId] = useState('');
+  const [secondarySchoolCityId, setSecondarySchoolCityId] = useState('');
   const [document, setDocument] = useState<File | null>(null);
   const [newDocument, setNewDocument] = useState<File | null>(null);
   const [uploadingDoc, setUploadingDoc] = useState(false);
@@ -41,8 +42,11 @@ export default function PerfilPage() {
 
   const { data: states = [] } = useStates();
   const { data: cities = [], isLoading: loadingCities } = useCities(form.stateId || undefined);
-  const activeSchoolCityId = form.isIntermunicipal && schoolCityId ? schoolCityId : form.cityId;
-  const { data: schools = [], isLoading: loadingSchools } = useSchools(activeSchoolCityId || undefined);
+  const showCityPicker = form.isIntermunicipal && !!form.secondaryCityId;
+  const effectiveDefaultCityId = showCityPicker ? (defaultSchoolCityId || form.cityId) : form.cityId;
+  const effectiveSecondaryCityId = showCityPicker ? (secondarySchoolCityId || form.cityId) : form.cityId;
+  const { data: defaultSchools = [], isLoading: loadingDefaultSchools } = useSchools(effectiveDefaultCityId || undefined);
+  const { data: secondarySchools = [], isLoading: loadingSecondarySchools } = useSchools(effectiveSecondaryCityId || undefined);
 
   useEffect(() => {
     if (profile && !initializedRef.current) {
@@ -62,7 +66,12 @@ export default function PerfilPage() {
         defaultSchoolId: profile.defaultSchoolId,
         secondarySchoolId: profile.secondarySchoolId || '',
       });
-      setSchoolCityId(profile.cityId);
+      if (profile.defaultSchool) {
+        setDefaultSchoolCityId(profile.defaultSchool.cityId);
+      }
+      if (profile.secondarySchool) {
+        setSecondarySchoolCityId(profile.secondarySchool.cityId);
+      }
     }
   }, [profile]);
 
@@ -325,7 +334,10 @@ export default function PerfilPage() {
                   isIntermunicipal: checked,
                   secondaryCityId: checked ? prev.secondaryCityId : '',
                 }));
-                if (!checked) setSchoolCityId(form.cityId);
+                if (!checked) {
+                  setDefaultSchoolCityId(form.cityId);
+                  setSecondarySchoolCityId(form.cityId);
+                }
               }}
               className="w-4 h-4 text-primary border-gray-300 rounded focus:ring-primary"
             />
@@ -363,80 +375,103 @@ export default function PerfilPage() {
           </div>
         )}
 
-        {form.isIntermunicipal && form.secondaryCityId && (
-          <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">Escolas de qual cidade?</label>
-            <div className="flex gap-2">
-              <button
-                type="button"
-                onClick={() => setSchoolCityId(form.cityId)}
-                className={`flex-1 px-3 py-2 rounded-lg text-sm font-medium border transition ${
-                  activeSchoolCityId === form.cityId
-                    ? 'bg-primary text-white border-primary'
-                    : 'bg-white text-gray-700 border-gray-300 hover:bg-gray-50'
-                }`}
-              >
-                {cities.find((c) => c.id === form.cityId)?.name || 'Cidade principal'}
-              </button>
-              <button
-                type="button"
-                onClick={() => setSchoolCityId(form.secondaryCityId)}
-                className={`flex-1 px-3 py-2 rounded-lg text-sm font-medium border transition ${
-                  activeSchoolCityId === form.secondaryCityId
-                    ? 'bg-primary text-white border-primary'
-                    : 'bg-white text-gray-700 border-gray-300 hover:bg-gray-50'
-                }`}
-              >
-                {cities.find((c) => c.id === form.secondaryCityId)?.name || 'Cidade secundária'}
-              </button>
-            </div>
-          </div>
-        )}
-
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
+        <div className="space-y-4">
           <div>
             <label className="block text-sm font-medium text-gray-700 mb-1">Escola Principal</label>
+            {showCityPicker && (
+              <div className="flex gap-1.5 mb-1.5">
+                <button
+                  type="button"
+                  onClick={() => { setDefaultSchoolCityId(form.cityId); setForm((prev) => ({ ...prev, defaultSchoolId: '' })); }}
+                  className={`px-2.5 py-1 rounded-md text-xs font-medium border transition ${
+                    effectiveDefaultCityId === form.cityId
+                      ? 'bg-primary text-white border-primary'
+                      : 'bg-white text-gray-600 border-gray-300 hover:bg-gray-50'
+                  }`}
+                >
+                  {cities.find((c) => c.id === form.cityId)?.name || 'Principal'}
+                </button>
+                <button
+                  type="button"
+                  onClick={() => { setDefaultSchoolCityId(form.secondaryCityId); setForm((prev) => ({ ...prev, defaultSchoolId: '' })); }}
+                  className={`px-2.5 py-1 rounded-md text-xs font-medium border transition ${
+                    effectiveDefaultCityId === form.secondaryCityId
+                      ? 'bg-primary text-white border-primary'
+                      : 'bg-white text-gray-600 border-gray-300 hover:bg-gray-50'
+                  }`}
+                >
+                  {cities.find((c) => c.id === form.secondaryCityId)?.name || 'Secundária'}
+                </button>
+              </div>
+            )}
             <div className="relative">
               <select
                 name="defaultSchoolId"
                 value={form.defaultSchoolId}
                 onChange={handleChange}
                 required
-                disabled={!activeSchoolCityId || loadingSchools}
+                disabled={!effectiveDefaultCityId || loadingDefaultSchools}
                 className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-primary outline-none disabled:opacity-50"
               >
-                <option value="">{loadingSchools ? 'Carregando escolas...' : 'Selecione'}</option>
-                {schools.map((s) => (
+                <option value="">{loadingDefaultSchools ? 'Carregando escolas...' : 'Selecione'}</option>
+                {defaultSchools.map((s) => (
                   <option key={s.id} value={s.id}>{s.name}</option>
                 ))}
               </select>
-              {loadingSchools && (
+              {loadingDefaultSchools && (
                 <div className="absolute right-8 top-1/2 -translate-y-1/2">
                   <div className="w-4 h-4 border-2 border-primary border-t-transparent rounded-full animate-spin" />
                 </div>
               )}
             </div>
           </div>
+
           <div>
             <label className="block text-sm font-medium text-gray-700 mb-1">
               Escola Secundária <span className="text-gray-400">(opcional)</span>
             </label>
+            {showCityPicker && (
+              <div className="flex gap-1.5 mb-1.5">
+                <button
+                  type="button"
+                  onClick={() => { setSecondarySchoolCityId(form.cityId); setForm((prev) => ({ ...prev, secondarySchoolId: '' })); }}
+                  className={`px-2.5 py-1 rounded-md text-xs font-medium border transition ${
+                    effectiveSecondaryCityId === form.cityId
+                      ? 'bg-primary text-white border-primary'
+                      : 'bg-white text-gray-600 border-gray-300 hover:bg-gray-50'
+                  }`}
+                >
+                  {cities.find((c) => c.id === form.cityId)?.name || 'Principal'}
+                </button>
+                <button
+                  type="button"
+                  onClick={() => { setSecondarySchoolCityId(form.secondaryCityId); setForm((prev) => ({ ...prev, secondarySchoolId: '' })); }}
+                  className={`px-2.5 py-1 rounded-md text-xs font-medium border transition ${
+                    effectiveSecondaryCityId === form.secondaryCityId
+                      ? 'bg-primary text-white border-primary'
+                      : 'bg-white text-gray-600 border-gray-300 hover:bg-gray-50'
+                  }`}
+                >
+                  {cities.find((c) => c.id === form.secondaryCityId)?.name || 'Secundária'}
+                </button>
+              </div>
+            )}
             <div className="relative">
               <select
                 name="secondarySchoolId"
                 value={form.secondarySchoolId}
                 onChange={handleChange}
-                disabled={!activeSchoolCityId || loadingSchools}
+                disabled={!effectiveSecondaryCityId || loadingSecondarySchools}
                 className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-primary outline-none disabled:opacity-50"
               >
-                <option value="">{loadingSchools ? 'Carregando escolas...' : 'Nenhuma'}</option>
-                {schools
+                <option value="">{loadingSecondarySchools ? 'Carregando escolas...' : 'Nenhuma'}</option>
+                {secondarySchools
                   .filter((s) => s.id !== form.defaultSchoolId)
                   .map((s) => (
                     <option key={s.id} value={s.id}>{s.name}</option>
                   ))}
               </select>
-              {loadingSchools && (
+              {loadingSecondarySchools && (
                 <div className="absolute right-8 top-1/2 -translate-y-1/2">
                   <div className="w-4 h-4 border-2 border-primary border-t-transparent rounded-full animate-spin" />
                 </div>
