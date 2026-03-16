@@ -126,12 +126,16 @@ export default function LoginPage() {
           </button>
         </form>
 
-        <p className="text-center text-primary-100 text-sm mt-6">
-          Ainda não tem cadastro?{' '}
-          <Link href="/cadastro" className="text-white hover:text-secondary font-semibold underline">
-            Faça agora!
+        <div className="mt-8 border border-primary-400/30 rounded-xl p-5 text-center bg-primary-700/30">
+          <p className="text-white font-semibold text-base mb-1">Ainda não tem cadastro?</p>
+          <p className="text-primary-200 text-sm mb-4">Cadastre-se gratuitamente e comece a ser encontrado por famílias da sua região.</p>
+          <Link
+            href="/cadastro"
+            className="inline-block bg-secondary hover:bg-secondary-600 text-white px-6 py-2.5 rounded-lg font-bold text-sm tracking-wide transition"
+          >
+            Criar minha conta
           </Link>
-        </p>
+        </div>
       </div>
     </div>
   );
