@@ -64,10 +64,12 @@ export default function TioDetailPage() {
       },
     },
     serviceType: 'Transporte Escolar',
-    areaServed: {
-      '@type': 'City',
-      name: tio.city.name,
-    },
+    areaServed: tio.isIntermunicipal && tio.secondaryCity
+      ? [
+          { '@type': 'City', name: tio.city.name },
+          { '@type': 'City', name: tio.secondaryCity.name },
+        ]
+      : { '@type': 'City', name: tio.city.name },
   };
 
   return (
@@ -101,16 +103,24 @@ export default function TioDetailPage() {
                 )}
               </div>
               <div className="text-white">
-                <div className="flex items-center gap-3">
+                <div className="flex items-center gap-3 flex-wrap">
                   <h1 className="font-heading text-3xl font-bold">{tio.displayName}</h1>
                   {tio.isPremium && (
                     <span className="bg-white/20 text-white text-xs font-semibold px-3 py-1 rounded-full">
                       Premium
                     </span>
                   )}
+                  {tio.isIntermunicipal && (
+                    <span className="bg-amber-400/30 text-white text-xs font-semibold px-3 py-1 rounded-full">
+                      Intermunicipal
+                    </span>
+                  )}
                 </div>
                 <p className="text-primary-100 mt-1">
                   Prefixo {tio.prefixo} &bull; {tio.city.name}/{tio.city.state.uf}
+                  {tio.isIntermunicipal && tio.secondaryCity && (
+                    <span> &bull; {tio.secondaryCity.name}/{tio.secondaryCity.state.uf}</span>
+                  )}
                 </p>
                 {tio.phone && (
                   <div className="flex flex-wrap gap-2 mt-3">

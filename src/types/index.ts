@@ -54,7 +54,9 @@ export interface Profile {
   hasAC: boolean;
   hasMonitor: boolean;
   avatarUrl: string | null;
+  isIntermunicipal: boolean;
   cityId: string;
+  secondaryCityId: string | null;
   defaultSchoolId: string;
   secondarySchoolId: string | null;
   status: ProfileStatus;
@@ -62,6 +64,7 @@ export interface Profile {
   createdAt: string;
   updatedAt: string;
   city: City;
+  secondaryCity: City | null;
   defaultSchool: School;
   secondarySchool: School | null;
   schools: { school: School }[];
@@ -111,6 +114,7 @@ export interface TioPublicView {
   bio: string | null;
   avatarUrl: string | null;
   isPremium: boolean;
+  isIntermunicipal: boolean;
   hasTV: boolean;
   hasAC: boolean;
   hasMonitor: boolean;
@@ -122,6 +126,11 @@ export interface TioPublicView {
     name: string;
     state: { id: string; name: string; uf: string };
   };
+  secondaryCity: {
+    id: string;
+    name: string;
+    state: { id: string; name: string; uf: string };
+  } | null;
 }
 
 export interface PaginatedResponse<T> {

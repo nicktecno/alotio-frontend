@@ -25,8 +25,11 @@ export default function PerfilPage() {
     hasTV: false,
     hasAC: false,
     hasMonitor: false,
+    isIntermunicipal: false,
     stateId: '',
     cityId: '',
+    secondaryStateId: '',
+    secondaryCityId: '',
     defaultSchoolId: '',
     secondarySchoolId: '',
   });
@@ -38,6 +41,7 @@ export default function PerfilPage() {
 
   const { data: states = [] } = useStates();
   const { data: cities = [], isLoading: loadingCities } = useCities(form.stateId || undefined);
+  const { data: secondaryCities = [], isLoading: loadingSecondaryCities } = useCities(form.secondaryStateId || undefined);
   const { data: schools = [], isLoading: loadingSchools } = useSchools(form.cityId || undefined);
 
   useEffect(() => {
@@ -51,8 +55,11 @@ export default function PerfilPage() {
         hasTV: profile.hasTV || false,
         hasAC: profile.hasAC || false,
         hasMonitor: profile.hasMonitor || false,
+        isIntermunicipal: profile.isIntermunicipal || false,
         stateId: profile.city.state?.id || '',
         cityId: profile.cityId,
+        secondaryStateId: profile.secondaryCity?.state?.id || '',
+        secondaryCityId: profile.secondaryCityId || '',
         defaultSchoolId: profile.defaultSchoolId,
         secondarySchoolId: profile.secondarySchoolId || '',
       });
@@ -101,6 +108,10 @@ export default function PerfilPage() {
       fd.append('phone', form.phone);
       fd.append('bio', form.bio);
       fd.append('cityId', form.cityId);
+      if (form.isIntermunicipal) {
+        fd.append('isIntermunicipal', 'true');
+        if (form.secondaryCityId) fd.append('secondaryCityId', form.secondaryCityId);
+      }
       fd.append('defaultSchoolId', form.defaultSchoolId);
       if (form.secondarySchoolId) fd.append('secondarySchoolId', form.secondarySchoolId);
       fd.append('document', compressedDoc);
@@ -125,6 +136,12 @@ export default function PerfilPage() {
     if (form.hasTV !== profile!.hasTV) data.hasTV = form.hasTV;
     if (form.hasAC !== profile!.hasAC) data.hasAC = form.hasAC;
     if (form.hasMonitor !== profile!.hasMonitor) data.hasMonitor = form.hasMonitor;
+    if (form.isIntermunicipal !== profile!.isIntermunicipal) data.isIntermunicipal = form.isIntermunicipal;
+    if (form.isIntermunicipal) {
+      data.secondaryCityId = form.secondaryCityId || null;
+    } else if (profile!.isIntermunicipal) {
+      data.secondaryCityId = null;
+    }
     if (form.cityId !== profile!.cityId) data.cityId = form.cityId;
     if (form.defaultSchoolId !== profile!.defaultSchoolId) data.defaultSchoolId = form.defaultSchoolId;
     data.secondarySchoolId = form.secondarySchoolId || null;
@@ -295,6 +312,72 @@ export default function PerfilPage() {
             </div>
           </div>
         </div>
+
+        <div>
+          <label className="flex items-center gap-3 cursor-pointer">
+            <input
+              type="checkbox"
+              checked={form.isIntermunicipal}
+              onChange={(e) => {
+                const checked = e.target.checked;
+                setForm((prev) => ({
+                  ...prev,
+                  isIntermunicipal: checked,
+                  secondaryStateId: checked ? prev.secondaryStateId : '',
+                  secondaryCityId: checked ? prev.secondaryCityId : '',
+                }));
+              }}
+              className="w-4 h-4 text-primary border-gray-300 rounded focus:ring-primary"
+            />
+            <span className="text-sm font-medium text-gray-700">Sou motorista intermunicipal</span>
+          </label>
+          <p className="text-xs text-gray-400 mt-1 ml-7">
+            Marque se você atende em mais de uma cidade. Você poderá escolher escolas da cidade secundária.
+          </p>
+        </div>
+
+        {form.isIntermunicipal && (
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-1">Estado secundário</label>
+              <select
+                value={form.secondaryStateId}
+                onChange={(e) => setForm((prev) => ({ ...prev, secondaryStateId: e.target.value, secondaryCityId: '' }))}
+                required={form.isIntermunicipal}
+                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-primary outline-none"
+              >
+                <option value="">Selecione</option>
+                {states.map((s) => (
+                  <option key={s.id} value={s.id}>{s.name}</option>
+                ))}
+              </select>
+            </div>
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-1">Cidade secundária</label>
+              <div className="relative">
+                <select
+                  value={form.secondaryCityId}
+                  onChange={(e) => setForm((prev) => ({ ...prev, secondaryCityId: e.target.value }))}
+                  required={form.isIntermunicipal}
+                  disabled={!form.secondaryStateId || loadingSecondaryCities}
+                  className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-primary outline-none disabled:opacity-50"
+                >
+                  <option value="">{loadingSecondaryCities ? 'Carregando cidades...' : 'Selecione'}</option>
+                  {secondaryCities
+                    .filter((c) => c.id !== form.cityId)
+                    .map((c) => (
+                      <option key={c.id} value={c.id}>{c.name}</option>
+                    ))}
+                </select>
+                {loadingSecondaryCities && (
+                  <div className="absolute right-8 top-1/2 -translate-y-1/2">
+                    <div className="w-4 h-4 border-2 border-primary border-t-transparent rounded-full animate-spin" />
+                  </div>
+                )}
+              </div>
+            </div>
+          </div>
+        )}
 
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
           <div>

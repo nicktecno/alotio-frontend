@@ -232,13 +232,23 @@ export default function TiosPage() {
                       </h3>
                       <p className="text-sm text-gray-500">
                         Prefixo {tio.prefixo} &bull; {tio.city.name}/{tio.city.state.uf}
+                        {tio.isIntermunicipal && tio.secondaryCity && (
+                          <span> &bull; {tio.secondaryCity.name}/{tio.secondaryCity.state.uf}</span>
+                        )}
                       </p>
                     </div>
-                    {tio.isPremium && (
-                      <span className="ml-auto bg-primary-50 text-primary text-xs font-semibold px-2 py-1 rounded-full shrink-0">
-                        Premium
-                      </span>
-                    )}
+                    <div className="ml-auto flex flex-col items-end gap-1 shrink-0">
+                      {tio.isPremium && (
+                        <span className="bg-primary-50 text-primary text-xs font-semibold px-2 py-1 rounded-full">
+                          Premium
+                        </span>
+                      )}
+                      {tio.isIntermunicipal && (
+                        <span className="bg-amber-50 text-amber-700 text-xs font-semibold px-2 py-1 rounded-full">
+                          Intermunicipal
+                        </span>
+                      )}
+                    </div>
                   </div>
 
                   {tio.bio && (
