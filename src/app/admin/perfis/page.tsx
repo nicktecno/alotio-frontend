@@ -65,6 +65,13 @@ export default function AdminPerfisPage() {
     PAUSED: 'bg-amber-100 text-amber-800',
   };
 
+  const statusLabels: Record<string, string> = {
+    PENDING: 'Pendente',
+    APPROVED: 'Aprovado',
+    REJECTED: 'Rejeitado',
+    PAUSED: 'Pausado',
+  };
+
   return (
     <div>
       <div className="flex items-center justify-between mb-6">
@@ -107,7 +114,7 @@ export default function AdminPerfisPage() {
                   <td className="px-4 py-3 text-gray-600">{p.city?.name}</td>
                   <td className="px-4 py-3">
                     <span className={`px-2 py-0.5 rounded-full text-xs font-medium ${statusColors[p.status]}`}>
-                      {p.status}
+                      {statusLabels[p.status] || p.status}
                     </span>
                   </td>
                   <td className="px-4 py-3">

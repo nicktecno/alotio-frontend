@@ -204,6 +204,13 @@ export default function AdminProfileDetailPage() {
     PAUSED: 'bg-amber-100 text-amber-800',
   };
 
+  const statusLabels: Record<string, string> = {
+    PENDING: 'Pendente',
+    APPROVED: 'Aprovado',
+    REJECTED: 'Rejeitado',
+    PAUSED: 'Pausado',
+  };
+
   const isPremium = profile.subscriptions?.some((s) => s.status === 'ACTIVE');
 
   return (
@@ -217,7 +224,7 @@ export default function AdminProfileDetailPage() {
         </div>
         <div className="flex items-center gap-2">
           <span className={`px-3 py-1 rounded-full text-xs font-medium ${statusColors[profile.status]}`}>
-            {profile.status}
+            {statusLabels[profile.status] || profile.status}
           </span>
           {isPremium && (
             <span className="bg-primary-50 text-primary text-xs font-semibold px-3 py-1 rounded-full">
@@ -308,7 +315,7 @@ export default function AdminProfileDetailPage() {
               </select>
             ) : (
               <span className={`px-2 py-0.5 rounded-full text-xs font-medium ${statusColors[profile.status]}`}>
-                {profile.status}
+                {statusLabels[profile.status] || profile.status}
               </span>
             )}
           </div>
