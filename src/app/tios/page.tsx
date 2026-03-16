@@ -285,23 +285,34 @@ export default function TiosPage() {
                     )}
                   </div>
 
-                  {tio.neighborhoods.length > 0 && (
-                    <div className="flex flex-wrap gap-1.5 mt-2">
-                      {tio.neighborhoods.slice(0, 3).map((n) => (
-                        <span
-                          key={n.id}
-                          className="bg-green-50 text-green-700 text-xs px-2 py-0.5 rounded-full"
-                        >
-                          {n.name}
-                        </span>
-                      ))}
-                      {tio.neighborhoods.length > 3 && (
-                        <span className="text-xs text-gray-400">
-                          +{tio.neighborhoods.length - 3} bairros
-                        </span>
-                      )}
-                    </div>
-                  )}
+                  {tio.neighborhoods.length > 0 && (() => {
+                    const grouped = tio.neighborhoods.reduce<Record<string, typeof tio.neighborhoods>>((acc, n) => {
+                      const key = n.cityName || tio.city.name;
+                      if (!acc[key]) acc[key] = [];
+                      acc[key].push(n);
+                      return acc;
+                    }, {});
+                    const entries = Object.entries(grouped);
+                    return (
+                      <div className="mt-2 space-y-1">
+                        {entries.map(([cityName, nbs]) => (
+                          <div key={cityName} className="flex flex-wrap gap-1.5 items-center">
+                            {entries.length > 1 && (
+                              <span className="text-xs text-gray-400 font-medium">{cityName}:</span>
+                            )}
+                            {nbs.slice(0, 3).map((n) => (
+                              <span key={n.id} className="bg-green-50 text-green-700 text-xs px-2 py-0.5 rounded-full">
+                                {n.name}
+                              </span>
+                            ))}
+                            {nbs.length > 3 && (
+                              <span className="text-xs text-gray-400">+{nbs.length - 3}</span>
+                            )}
+                          </div>
+                        ))}
+                      </div>
+                    );
+                  })()}
                 </Link>
               ))}
             </div>

@@ -195,21 +195,39 @@ export default function TioDetailPage() {
             </div>
 
             {/* Neighborhoods */}
-            {tio.neighborhoods.length > 0 && (
-              <div>
-                <h2 className="font-heading text-lg font-semibold text-gray-900 mb-3">Bairros atendidos</h2>
-                <div className="flex flex-wrap gap-2">
-                  {tio.neighborhoods.map((n) => (
-                    <span
-                      key={n.id}
-                      className="bg-green-50 text-green-700 px-3 py-1.5 rounded-lg text-sm font-medium"
-                    >
-                      {n.name}
-                    </span>
-                  ))}
+            {tio.neighborhoods.length > 0 && (() => {
+              const grouped = tio.neighborhoods.reduce<Record<string, typeof tio.neighborhoods>>((acc, n) => {
+                const key = n.cityName || tio.city.name;
+                if (!acc[key]) acc[key] = [];
+                acc[key].push(n);
+                return acc;
+              }, {});
+              const entries = Object.entries(grouped);
+              return (
+                <div>
+                  <h2 className="font-heading text-lg font-semibold text-gray-900 mb-3">Bairros atendidos</h2>
+                  <div className="space-y-3">
+                    {entries.map(([cityName, nbs]) => (
+                      <div key={cityName}>
+                        {entries.length > 1 && (
+                          <p className="text-sm font-medium text-gray-500 mb-1.5">{cityName}</p>
+                        )}
+                        <div className="flex flex-wrap gap-2">
+                          {nbs.map((n) => (
+                            <span
+                              key={n.id}
+                              className="bg-green-50 text-green-700 px-3 py-1.5 rounded-lg text-sm font-medium"
+                            >
+                              {n.name}
+                            </span>
+                          ))}
+                        </div>
+                      </div>
+                    ))}
+                  </div>
                 </div>
-              </div>
-            )}
+              );
+            })()}
 
             {/* Vehicle Photos (premium only) */}
             {tio.vehiclePhotos.length > 0 && (

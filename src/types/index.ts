@@ -119,7 +119,7 @@ export interface TioPublicView {
   hasAC: boolean;
   hasMonitor: boolean;
   schools: { id: string; name: string }[];
-  neighborhoods: { id: string; name: string }[];
+  neighborhoods: { id: string; name: string; cityId: string; cityName: string }[];
   vehiclePhotos: { id: string; url: string }[];
   city: {
     id: string;
