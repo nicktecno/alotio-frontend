@@ -3,12 +3,14 @@
 import { useEffect, useState } from 'react';
 import Link from 'next/link';
 import { api } from '@/lib/api';
+import toast from 'react-hot-toast';
 import Loading from '@/components/Loading';
 import type { Profile } from '@/types';
 
 export default function DashboardPage() {
   const [profile, setProfile] = useState<Profile | null>(null);
   const [hasProfile, setHasProfile] = useState<boolean | null>(null);
+  const [confirming, setConfirming] = useState(false);
 
   useEffect(() => {
     api
@@ -19,6 +21,19 @@ export default function DashboardPage() {
       })
       .catch(() => setHasProfile(false));
   }, []);
+
+  const handleConfirmActive = async () => {
+    setConfirming(true);
+    try {
+      const updated = (await api.confirmActive()) as Profile;
+      setProfile(updated);
+      toast.success('Cadastro confirmado com sucesso!');
+    } catch {
+      toast.error('Erro ao confirmar cadastro');
+    } finally {
+      setConfirming(false);
+    }
+  };
 
   if (hasProfile === null) {
     return <Loading />;
@@ -58,6 +73,7 @@ export default function DashboardPage() {
   const isPending = profile!.status === 'PENDING';
   const isRejected = profile!.status === 'REJECTED';
   const isPaused = profile!.status === 'PAUSED';
+  const needsConfirmation = !!profile!.confirmationRequestedAt;
 
   return (
     <div className="max-w-4xl space-y-6">
@@ -115,17 +131,50 @@ export default function DashboardPage() {
           <div>
             <h3 className="font-semibold text-amber-800 text-base">Perfil pausado</h3>
             <p className="text-sm text-amber-700 mt-1">
-              Seu perfil foi temporariamente pausado por um administrador e não está sendo exibido nas buscas públicas.
+              Seu perfil foi temporariamente pausado e não está sendo exibido nas buscas públicas.
             </p>
             {profile!.rejectedReason && (
               <div className="mt-3 bg-white border border-amber-200 rounded-lg p-3">
-                <p className="text-xs font-semibold text-amber-800 mb-1">Mensagem do administrador:</p>
+                <p className="text-xs font-semibold text-amber-800 mb-1">Mensagem:</p>
                 <p className="text-sm text-amber-700 whitespace-pre-wrap">{profile!.rejectedReason}</p>
               </div>
             )}
-            <p className="text-xs text-amber-600 mt-2">
-              Entre em contato pelo <Link href="/contato" className="font-semibold underline hover:text-amber-800">Fale Conosco</Link> se tiver dúvidas.
+            {needsConfirmation ? (
+              <button
+                onClick={handleConfirmActive}
+                disabled={confirming}
+                className="mt-3 bg-green-600 hover:bg-green-700 disabled:opacity-50 text-white px-5 py-2 rounded-lg text-sm font-bold transition"
+              >
+                {confirming ? 'Confirmando...' : 'Confirmo que ainda sou transportador escolar'}
+              </button>
+            ) : (
+              <p className="text-xs text-amber-600 mt-2">
+                Entre em contato pelo <Link href="/contato" className="font-semibold underline hover:text-amber-800">Fale Conosco</Link> se tiver dúvidas.
+              </p>
+            )}
+          </div>
+        </div>
+      )}
+
+      {!isPaused && needsConfirmation && (
+        <div className="border-2 border-blue-400 bg-blue-50 rounded-xl p-5 flex items-start gap-4">
+          <div className="flex-shrink-0 w-10 h-10 rounded-full bg-blue-100 flex items-center justify-center">
+            <svg className="w-5 h-5 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+              <path strokeLinecap="round" strokeLinejoin="round" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+            </svg>
+          </div>
+          <div>
+            <h3 className="font-semibold text-blue-800 text-base">Confirmação anual necessária</h3>
+            <p className="text-sm text-blue-700 mt-1">
+              Faz um ano que você está cadastrado no aloTio. Para manter seu perfil ativo, confirme que ainda atua como transportador escolar.
             </p>
+            <button
+              onClick={handleConfirmActive}
+              disabled={confirming}
+              className="mt-3 bg-green-600 hover:bg-green-700 disabled:opacity-50 text-white px-5 py-2 rounded-lg text-sm font-bold transition"
+            >
+              {confirming ? 'Confirmando...' : 'Confirmo que ainda sou transportador escolar'}
+            </button>
           </div>
         </div>
       )}

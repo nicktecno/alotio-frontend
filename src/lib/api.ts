@@ -117,6 +117,9 @@ export const api = {
   updateDocument: (formData: FormData) =>
     request('/profiles/me/document', { method: 'PATCH', body: formData }),
 
+  confirmActive: () =>
+    request('/profiles/me/confirm-active', { method: 'POST' }),
+
   getMySchools: () => request('/profiles/me/schools'),
 
   updateMySchools: (schoolIds: string[]) =>

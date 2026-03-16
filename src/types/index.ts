@@ -61,6 +61,9 @@ export interface Profile {
   secondarySchoolId: string | null;
   status: ProfileStatus;
   rejectedReason: string | null;
+  lastConfirmedAt: string | null;
+  confirmationRequestedAt: string | null;
+  confirmationReminderSentAt: string | null;
   stripeCustomerId: string | null;
   createdAt: string;
   updatedAt: string;
