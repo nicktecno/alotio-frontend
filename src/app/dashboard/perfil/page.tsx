@@ -28,11 +28,11 @@ export default function PerfilPage() {
     isIntermunicipal: false,
     stateId: '',
     cityId: '',
-    secondaryStateId: '',
     secondaryCityId: '',
     defaultSchoolId: '',
     secondarySchoolId: '',
   });
+  const [schoolCityId, setSchoolCityId] = useState('');
   const [document, setDocument] = useState<File | null>(null);
   const [newDocument, setNewDocument] = useState<File | null>(null);
   const [uploadingDoc, setUploadingDoc] = useState(false);
@@ -41,8 +41,8 @@ export default function PerfilPage() {
 
   const { data: states = [] } = useStates();
   const { data: cities = [], isLoading: loadingCities } = useCities(form.stateId || undefined);
-  const { data: secondaryCities = [], isLoading: loadingSecondaryCities } = useCities(form.secondaryStateId || undefined);
-  const { data: schools = [], isLoading: loadingSchools } = useSchools(form.cityId || undefined);
+  const activeSchoolCityId = form.isIntermunicipal && schoolCityId ? schoolCityId : form.cityId;
+  const { data: schools = [], isLoading: loadingSchools } = useSchools(activeSchoolCityId || undefined);
 
   useEffect(() => {
     if (profile && !initializedRef.current) {
@@ -58,11 +58,11 @@ export default function PerfilPage() {
         isIntermunicipal: profile.isIntermunicipal || false,
         stateId: profile.city.state?.id || '',
         cityId: profile.cityId,
-        secondaryStateId: profile.secondaryCity?.state?.id || '',
         secondaryCityId: profile.secondaryCityId || '',
         defaultSchoolId: profile.defaultSchoolId,
         secondarySchoolId: profile.secondarySchoolId || '',
       });
+      setSchoolCityId(profile.cityId);
     }
   }, [profile]);
 
@@ -323,58 +323,72 @@ export default function PerfilPage() {
                 setForm((prev) => ({
                   ...prev,
                   isIntermunicipal: checked,
-                  secondaryStateId: checked ? prev.secondaryStateId : '',
                   secondaryCityId: checked ? prev.secondaryCityId : '',
                 }));
+                if (!checked) setSchoolCityId(form.cityId);
               }}
               className="w-4 h-4 text-primary border-gray-300 rounded focus:ring-primary"
             />
             <span className="text-sm font-medium text-gray-700">Sou motorista intermunicipal</span>
           </label>
           <p className="text-xs text-gray-400 mt-1 ml-7">
-            Marque se você atende em mais de uma cidade. Você poderá escolher escolas da cidade secundária.
+            Marque se você atende em mais de uma cidade do mesmo estado.
           </p>
         </div>
 
         {form.isIntermunicipal && (
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
-            <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">Estado secundário</label>
+          <div>
+            <label className="block text-sm font-medium text-gray-700 mb-1">Cidade secundária</label>
+            <div className="relative">
               <select
-                value={form.secondaryStateId}
-                onChange={(e) => setForm((prev) => ({ ...prev, secondaryStateId: e.target.value, secondaryCityId: '' }))}
+                value={form.secondaryCityId}
+                onChange={(e) => setForm((prev) => ({ ...prev, secondaryCityId: e.target.value }))}
                 required={form.isIntermunicipal}
-                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-primary outline-none"
+                disabled={!form.stateId || loadingCities}
+                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-primary outline-none disabled:opacity-50"
               >
-                <option value="">Selecione</option>
-                {states.map((s) => (
-                  <option key={s.id} value={s.id}>{s.name}</option>
-                ))}
+                <option value="">{loadingCities ? 'Carregando cidades...' : 'Selecione'}</option>
+                {cities
+                  .filter((c) => c.id !== form.cityId)
+                  .map((c) => (
+                    <option key={c.id} value={c.id}>{c.name}</option>
+                  ))}
               </select>
+              {loadingCities && (
+                <div className="absolute right-8 top-1/2 -translate-y-1/2">
+                  <div className="w-4 h-4 border-2 border-primary border-t-transparent rounded-full animate-spin" />
+                </div>
+              )}
             </div>
-            <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">Cidade secundária</label>
-              <div className="relative">
-                <select
-                  value={form.secondaryCityId}
-                  onChange={(e) => setForm((prev) => ({ ...prev, secondaryCityId: e.target.value }))}
-                  required={form.isIntermunicipal}
-                  disabled={!form.secondaryStateId || loadingSecondaryCities}
-                  className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-primary outline-none disabled:opacity-50"
-                >
-                  <option value="">{loadingSecondaryCities ? 'Carregando cidades...' : 'Selecione'}</option>
-                  {secondaryCities
-                    .filter((c) => c.id !== form.cityId)
-                    .map((c) => (
-                      <option key={c.id} value={c.id}>{c.name}</option>
-                    ))}
-                </select>
-                {loadingSecondaryCities && (
-                  <div className="absolute right-8 top-1/2 -translate-y-1/2">
-                    <div className="w-4 h-4 border-2 border-primary border-t-transparent rounded-full animate-spin" />
-                  </div>
-                )}
-              </div>
+          </div>
+        )}
+
+        {form.isIntermunicipal && form.secondaryCityId && (
+          <div>
+            <label className="block text-sm font-medium text-gray-700 mb-1">Escolas de qual cidade?</label>
+            <div className="flex gap-2">
+              <button
+                type="button"
+                onClick={() => setSchoolCityId(form.cityId)}
+                className={`flex-1 px-3 py-2 rounded-lg text-sm font-medium border transition ${
+                  activeSchoolCityId === form.cityId
+                    ? 'bg-primary text-white border-primary'
+                    : 'bg-white text-gray-700 border-gray-300 hover:bg-gray-50'
+                }`}
+              >
+                {cities.find((c) => c.id === form.cityId)?.name || 'Cidade principal'}
+              </button>
+              <button
+                type="button"
+                onClick={() => setSchoolCityId(form.secondaryCityId)}
+                className={`flex-1 px-3 py-2 rounded-lg text-sm font-medium border transition ${
+                  activeSchoolCityId === form.secondaryCityId
+                    ? 'bg-primary text-white border-primary'
+                    : 'bg-white text-gray-700 border-gray-300 hover:bg-gray-50'
+                }`}
+              >
+                {cities.find((c) => c.id === form.secondaryCityId)?.name || 'Cidade secundária'}
+              </button>
             </div>
           </div>
         )}
@@ -388,7 +402,7 @@ export default function PerfilPage() {
                 value={form.defaultSchoolId}
                 onChange={handleChange}
                 required
-                disabled={!form.cityId || loadingSchools}
+                disabled={!activeSchoolCityId || loadingSchools}
                 className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-primary outline-none disabled:opacity-50"
               >
                 <option value="">{loadingSchools ? 'Carregando escolas...' : 'Selecione'}</option>
@@ -412,7 +426,7 @@ export default function PerfilPage() {
                 name="secondarySchoolId"
                 value={form.secondarySchoolId}
                 onChange={handleChange}
-                disabled={!form.cityId || loadingSchools}
+                disabled={!activeSchoolCityId || loadingSchools}
                 className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-primary outline-none disabled:opacity-50"
               >
                 <option value="">{loadingSchools ? 'Carregando escolas...' : 'Nenhuma'}</option>
