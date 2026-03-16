@@ -107,6 +107,7 @@ export interface Subscription {
   createdAt: string;
   currentPeriodEnd: string;
   cancelAtPeriodEnd: boolean;
+  isCourtesy: boolean;
   plan?: SubscriptionPlan;
 }
 

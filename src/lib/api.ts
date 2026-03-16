@@ -222,6 +222,13 @@ export const api = {
       method: 'PATCH',
       body: JSON.stringify({ reason }),
     }),
+  adminGrantCourtesy: (id: string, months: number) =>
+    request(`/admin/profiles/${id}/courtesy`, {
+      method: 'POST',
+      body: JSON.stringify({ months }),
+    }),
+  adminRevokeCourtesy: (id: string) =>
+    request(`/admin/profiles/${id}/courtesy`, { method: 'DELETE' }),
   adminPauseProfile: (id: string, reason: string) =>
     request(`/admin/profiles/${id}/pause`, {
       method: 'PATCH',

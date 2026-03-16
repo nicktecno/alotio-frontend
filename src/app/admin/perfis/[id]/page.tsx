@@ -45,6 +45,9 @@ export default function AdminProfileDetailPage() {
   const [showPauseModal, setShowPauseModal] = useState(false);
   const [pauseReason, setPauseReason] = useState('');
 
+  const [showCourtesyModal, setShowCourtesyModal] = useState(false);
+  const [courtesyMonths, setCourtesyMonths] = useState(1);
+
   useEffect(() => {
     if (!id) return;
     api.adminGetProfile(id).then((data) => {
@@ -166,6 +169,35 @@ export default function AdminProfileDetailPage() {
     }
   };
 
+  const handleGrantCourtesy = async () => {
+    if (!profile) return;
+    try {
+      await api.adminGrantCourtesy(profile.id, courtesyMonths);
+      toast.success(`Cortesia de ${courtesyMonths} mês(es) concedida!`);
+      setShowCourtesyModal(false);
+      setCourtesyMonths(1);
+      const updated = (await api.adminGetProfile(profile.id)) as Profile;
+      setProfile(updated);
+      populateForm(updated);
+    } catch (err: unknown) {
+      toast.error(err instanceof Error ? err.message : 'Erro');
+    }
+  };
+
+  const handleRevokeCourtesy = async () => {
+    if (!profile) return;
+    if (!confirm('Remover a cortesia premium deste perfil?')) return;
+    try {
+      await api.adminRevokeCourtesy(profile.id);
+      toast.success('Cortesia removida');
+      const updated = (await api.adminGetProfile(profile.id)) as Profile;
+      setProfile(updated);
+      populateForm(updated);
+    } catch (err: unknown) {
+      toast.error(err instanceof Error ? err.message : 'Erro');
+    }
+  };
+
   const handlePause = async () => {
     if (!profile || !pauseReason.trim()) return;
     try {
@@ -211,7 +243,9 @@ export default function AdminProfileDetailPage() {
     PAUSED: 'Pausado',
   };
 
-  const isPremium = profile.subscriptions?.some((s) => s.status === 'ACTIVE');
+  const activeSubscription = profile.subscriptions?.find((s) => s.status === 'ACTIVE');
+  const isPremium = !!activeSubscription;
+  const isCourtesy = activeSubscription?.isCourtesy ?? false;
 
   return (
     <div className="max-w-3xl space-y-6">
@@ -227,8 +261,8 @@ export default function AdminProfileDetailPage() {
             {statusLabels[profile.status] || profile.status}
           </span>
           {isPremium && (
-            <span className="bg-primary-50 text-primary text-xs font-semibold px-3 py-1 rounded-full">
-              Premium
+            <span className={`text-xs font-semibold px-3 py-1 rounded-full ${isCourtesy ? 'bg-amber-50 text-amber-700' : 'bg-primary-50 text-primary'}`}>
+              {isCourtesy ? `Cortesia (até ${new Date(activeSubscription!.currentPeriodEnd).toLocaleDateString('pt-BR')})` : 'Premium'}
             </span>
           )}
         </div>
@@ -269,6 +303,16 @@ export default function AdminProfileDetailPage() {
               Cancelar
             </button>
           </>
+        )}
+        {!isCourtesy && !isPremium && (
+          <button onClick={() => setShowCourtesyModal(true)} className="bg-amber-50 hover:bg-amber-100 text-amber-700 px-4 py-2 rounded-lg text-sm font-medium transition">
+            Conceder cortesia
+          </button>
+        )}
+        {isCourtesy && (
+          <button onClick={handleRevokeCourtesy} className="bg-amber-50 hover:bg-amber-100 text-amber-700 px-4 py-2 rounded-lg text-sm font-medium transition">
+            Remover cortesia
+          </button>
         )}
         <button onClick={handleDelete} className="ml-auto bg-red-50 hover:bg-red-100 text-red-600 px-4 py-2 rounded-lg text-sm font-medium transition">
           Deletar perfil
@@ -711,6 +755,43 @@ export default function AdminProfileDetailPage() {
                 className="px-4 py-2 text-sm font-medium text-white bg-amber-500 hover:bg-amber-600 rounded-lg transition disabled:opacity-50"
               >
                 Confirmar pausa
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {showCourtesyModal && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 p-4">
+          <div className="bg-white rounded-2xl shadow-xl max-w-md w-full p-6 space-y-4">
+            <h3 className="text-lg font-bold text-gray-900">Conceder cortesia Premium</h3>
+            <p className="text-sm text-gray-600">
+              O transportador terá acesso premium gratuito pelo período selecionado, sem passar pelo Stripe.
+            </p>
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-1">Duração (meses)</label>
+              <select
+                value={courtesyMonths}
+                onChange={(e) => setCourtesyMonths(Number(e.target.value))}
+                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-amber-500 outline-none text-sm"
+              >
+                {[1, 2, 3, 6, 12].map((m) => (
+                  <option key={m} value={m}>{m} {m === 1 ? 'mês' : 'meses'}</option>
+                ))}
+              </select>
+            </div>
+            <div className="flex justify-end gap-2">
+              <button
+                onClick={() => { setShowCourtesyModal(false); setCourtesyMonths(1); }}
+                className="px-4 py-2 text-sm font-medium text-gray-700 bg-gray-100 hover:bg-gray-200 rounded-lg transition"
+              >
+                Cancelar
+              </button>
+              <button
+                onClick={handleGrantCourtesy}
+                className="px-4 py-2 text-sm font-medium text-white bg-amber-500 hover:bg-amber-600 rounded-lg transition"
+              >
+                Conceder cortesia
               </button>
             </div>
           </div>
