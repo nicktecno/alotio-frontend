@@ -37,7 +37,7 @@ async function request<T>(endpoint: string, options: RequestInit = {}): Promise<
   });
 
   if (!res.ok) {
-    if (res.status === 401 && !isRefreshing && typeof window !== 'undefined') {
+    if (res.status === 401 && !isRefreshing && !endpoint.startsWith('/auth/') && typeof window !== 'undefined') {
       isRefreshing = true;
       try {
         const refreshRes = await fetch(`${API_URL}/auth/refresh`, {
@@ -60,8 +60,8 @@ async function request<T>(endpoint: string, options: RequestInit = {}): Promise<
         // Refresh failed
       }
       isRefreshing = false;
-      const isAuthCheck = endpoint === '/auth/me';
-      if (!isAuthCheck) {
+      const isAuthEndpoint = endpoint.startsWith('/auth/');
+      if (!isAuthEndpoint) {
         window.location.href = '/login';
       }
       throw new ApiError(401, 'Sessão expirada');
