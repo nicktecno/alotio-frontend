@@ -21,7 +21,7 @@ export default function TiosPage() {
   const [loading, setLoading] = useState(false);
   const [hasSearched, setHasSearched] = useState(false);
 
-  const { data: states = [] } = useStates();
+  const { data: states = [], isLoading: loadingStates } = useStates();
   const { data: cities = [], isLoading: loadingCities } = useCities(selectedState || undefined, true);
   const { data: schools = [], isLoading: loadingSchoolsData } = useSchools(
     selectedCity || undefined,
@@ -96,16 +96,24 @@ export default function TiosPage() {
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
             <div>
               <label className="block text-sm font-medium text-gray-700 mb-1">Estado</label>
-              <select
-                value={selectedState}
-                onChange={(e) => handleStateChange(e.target.value)}
-                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-primary outline-none"
-              >
-                <option value="">Selecione o estado</option>
-                {states.map((s) => (
-                  <option key={s.id} value={s.id}>{s.name} ({s.uf})</option>
-                ))}
-              </select>
+              <div className="relative">
+                <select
+                  value={selectedState}
+                  onChange={(e) => handleStateChange(e.target.value)}
+                  disabled={loadingStates}
+                  className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-primary outline-none disabled:opacity-50 disabled:cursor-wait"
+                >
+                  <option value="">{loadingStates ? 'Carregando estados...' : 'Selecione o estado'}</option>
+                  {states.map((s) => (
+                    <option key={s.id} value={s.id}>{s.name} ({s.uf})</option>
+                  ))}
+                </select>
+                {loadingStates && (
+                  <div className="absolute right-8 top-1/2 -translate-y-1/2 pointer-events-none">
+                    <div className="w-4 h-4 border-2 border-primary border-t-transparent rounded-full animate-spin" />
+                  </div>
+                )}
+              </div>
             </div>
             <div>
               <label className="block text-sm font-medium text-gray-700 mb-1">Cidade</label>
@@ -114,7 +122,7 @@ export default function TiosPage() {
                   value={selectedCity}
                   onChange={(e) => handleCityChange(e.target.value)}
                   disabled={!selectedState || loadingCities}
-                  className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-primary outline-none disabled:opacity-50"
+                  className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-primary outline-none disabled:opacity-50 disabled:cursor-wait"
                 >
                   <option value="">{loadingCities ? 'Carregando cidades...' : 'Selecione a cidade'}</option>
                   {cities.map((c) => (
@@ -122,7 +130,7 @@ export default function TiosPage() {
                   ))}
                 </select>
                 {loadingCities && (
-                  <div className="absolute right-8 top-1/2 -translate-y-1/2">
+                  <div className="absolute right-8 top-1/2 -translate-y-1/2 pointer-events-none">
                     <div className="w-4 h-4 border-2 border-primary border-t-transparent rounded-full animate-spin" />
                   </div>
                 )}
@@ -135,7 +143,7 @@ export default function TiosPage() {
                   value={selectedSchool}
                   onChange={(e) => handleSchoolChange(e.target.value)}
                   disabled={!selectedCity || loadingSchools}
-                  className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-primary outline-none disabled:opacity-50"
+                  className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-primary outline-none disabled:opacity-50 disabled:cursor-wait"
                 >
                   <option value="">{loadingSchools ? 'Carregando escolas...' : 'Selecione a escola'}</option>
                   {schools.map((s) => (
@@ -143,7 +151,7 @@ export default function TiosPage() {
                   ))}
                 </select>
                 {loadingSchools && (
-                  <div className="absolute right-8 top-1/2 -translate-y-1/2">
+                  <div className="absolute right-8 top-1/2 -translate-y-1/2 pointer-events-none">
                     <div className="w-4 h-4 border-2 border-primary border-t-transparent rounded-full animate-spin" />
                   </div>
                 )}
