@@ -486,7 +486,7 @@ export default function PerfilPage() {
               Documento comprobatório
             </label>
             <p className="text-sm text-gray-600 mb-2">
-              Envie um documento que <strong>comprove que você é transportador escolar</strong>, por exemplo: licença ou autorização para transporte escolar, registro no órgão competente ou documento equivalente. Aceito em foto ou PDF. O arquivo é visível apenas para a administração do AloTio.
+              <strong>Obrigatório para aprovação.</strong> Envie um documento que comprove que você é transportador escolar (ex.: licença, autorização para transporte escolar, registro no órgão competente). Esse passo é necessário para validar seu cadastro e evitar fraudes. Aceito em foto ou PDF. O arquivo é visível apenas para a administração do AloTio.
             </p>
             <div className="space-y-2">
               <FileOrCameraInput
@@ -520,7 +520,7 @@ export default function PerfilPage() {
         <div className="mt-6 bg-white rounded-xl border border-gray-200 p-6 space-y-4">
           <h2 className="text-lg font-semibold text-gray-900 font-heading">Documento comprobatório</h2>
           <p className="text-sm text-gray-600">
-            Documento que comprova que você atua como transportador escolar (ex.: licença, autorização municipal, registro). Visível apenas para administradores.
+            Documento obrigatório para aprovação do perfil, que comprova que você atua como transportador escolar (ex.: licença, autorização municipal, registro). Necessário para validar o cadastro e evitar fraudes. Visível apenas para administradores.
           </p>
 
           {profile.documents?.length > 0 && (
