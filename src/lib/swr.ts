@@ -14,7 +14,8 @@ import type {
 
 const LONG_CACHE = {
   revalidateOnFocus: false,
-  dedupingInterval: 300_000,
+  revalidateIfStale: false,
+  dedupingInterval: 600_000, // 10 min – estados, cidades, escolas, bairros, planos mudam pouco
   errorRetryCount: 2,
 };
 
