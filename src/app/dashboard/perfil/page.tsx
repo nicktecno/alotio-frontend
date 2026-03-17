@@ -485,6 +485,9 @@ export default function PerfilPage() {
             <label className="block text-sm font-medium text-gray-700 mb-1">
               Documento comprobatório
             </label>
+            <p className="text-sm text-gray-600 mb-2">
+              Envie um documento que <strong>comprove que você é transportador escolar</strong>, por exemplo: licença ou autorização para transporte escolar, registro no órgão competente ou documento equivalente. Aceito em foto ou PDF. O arquivo é visível apenas para a administração do AloTio.
+            </p>
             <div className="space-y-2">
               <FileOrCameraInput
                 accept="image/*,.pdf"
@@ -501,9 +504,6 @@ export default function PerfilPage() {
                 </p>
               )}
             </div>
-            <p className="text-xs text-gray-400 mt-1">
-              Foto ou PDF comprovando que é tio profissional. Visível apenas para administradores.
-            </p>
           </div>
         )}
 
@@ -519,6 +519,9 @@ export default function PerfilPage() {
       {hasProfile && profile && (
         <div className="mt-6 bg-white rounded-xl border border-gray-200 p-6 space-y-4">
           <h2 className="text-lg font-semibold text-gray-900 font-heading">Documento comprobatório</h2>
+          <p className="text-sm text-gray-600">
+            Documento que comprova que você atua como transportador escolar (ex.: licença, autorização municipal, registro). Visível apenas para administradores.
+          </p>
 
           {profile.documents?.length > 0 && (
             <div className="flex flex-wrap gap-3">
