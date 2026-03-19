@@ -11,6 +11,7 @@ export default function AdminUsuariosPage() {
   const { user: currentUser } = useAuth();
   const [users, setUsers] = useState<User[]>([]);
   const [loading, setLoading] = useState(true);
+  const [sendingReminderId, setSendingReminderId] = useState<string | null>(null);
 
   const loadUsers = async () => {
     setLoading(true);
@@ -31,6 +32,18 @@ export default function AdminUsuariosPage() {
       loadUsers();
     } catch (err: unknown) {
       toast.error(err instanceof Error ? err.message : 'Erro');
+    }
+  };
+
+  const handleSendReminder = async (id: string) => {
+    setSendingReminderId(id);
+    try {
+      await api.adminSendProfileReminder(id);
+      toast.success('E-mail de lembrete enviado');
+    } catch (err: unknown) {
+      toast.error(err instanceof Error ? err.message : 'Erro ao enviar lembrete');
+    } finally {
+      setSendingReminderId(null);
     }
   };
 
@@ -73,16 +86,25 @@ export default function AdminUsuariosPage() {
                   <td className="px-4 py-3 text-gray-500">
                     {new Date(u.createdAt).toLocaleDateString('pt-BR')}
                   </td>
-                  <td className="px-4 py-3 text-right">
+                  <td className="px-4 py-3 text-right space-x-2">
                     {u.id === currentUser?.id ? (
                       <span className="text-gray-400 text-xs italic">Você</span>
                     ) : (
-                      <button
-                        onClick={() => handleDelete(u.id)}
-                        className="text-red-500 hover:text-red-700 text-xs font-medium"
-                      >
-                        Deletar
-                      </button>
+                      <>
+                        <button
+                          onClick={() => handleSendReminder(u.id)}
+                          disabled={!!sendingReminderId}
+                          className="text-primary hover:text-primary-700 text-xs font-medium disabled:opacity-50"
+                        >
+                          {sendingReminderId === u.id ? 'Enviando...' : 'Enviar lembrete'}
+                        </button>
+                        <button
+                          onClick={() => handleDelete(u.id)}
+                          className="text-red-500 hover:text-red-700 text-xs font-medium"
+                        >
+                          Deletar
+                        </button>
+                      </>
                     )}
                   </td>
                 </tr>

@@ -206,6 +206,8 @@ export const api = {
   adminGetUser: (id: string) => request(`/admin/users/${id}`),
   adminDeleteUser: (id: string) =>
     request(`/admin/users/${id}`, { method: 'DELETE' }),
+  adminSendProfileReminder: (id: string) =>
+    request<{ message: string }>(`/admin/users/${id}/send-profile-reminder`, { method: 'POST' }),
 
   adminGetProfiles: (params?: Record<string, string>) => {
     const qs = params ? new URLSearchParams(params).toString() : '';
