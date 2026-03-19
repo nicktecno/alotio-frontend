@@ -3,7 +3,7 @@
 import { useEffect, useState } from 'react';
 import { useParams, useRouter } from 'next/navigation';
 import Link from 'next/link';
-import { api, assetUrl } from '@/lib/api';
+import { api, assetUrl, ApiError } from '@/lib/api';
 import toast from 'react-hot-toast';
 import Loading from '@/components/Loading';
 import ImageLightbox from '@/components/ImageLightbox';
@@ -751,8 +751,9 @@ export default function AdminProfileDetailPage() {
                   try {
                     await api.adminSendNeighborhoodsReminder(profile.id);
                     toast.success('E-mail de lembrete sobre bairros enviado.');
-                  } catch {
-                    toast.error('Falha ao enviar e-mail.');
+                  } catch (err) {
+                    const msg = err instanceof ApiError ? err.message : 'Falha ao enviar e-mail.';
+                    toast.error(msg);
                   } finally {
                     setNeighborhoodsReminderLoading(false);
                   }
