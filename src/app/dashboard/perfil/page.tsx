@@ -191,6 +191,9 @@ export default function PerfilPage() {
           </div>
           <div>
             <label className="block text-sm font-medium text-gray-700 mb-1">Prefixo (3 dígitos)</label>
+            <p className="text-xs text-gray-600 mb-1.5">
+              Número de identificação do transporte escolar exibido na van (ex.: placa ou adesivo).
+            </p>
             <input
               name="prefixo"
               value={form.prefixo}

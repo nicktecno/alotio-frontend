@@ -91,13 +91,15 @@ export default function AdminUsuariosPage() {
                       <span className="text-gray-400 text-xs italic">Você</span>
                     ) : (
                       <>
-                        <button
-                          onClick={() => handleSendReminder(u.id)}
-                          disabled={!!sendingReminderId}
-                          className="text-primary hover:text-primary-700 text-xs font-medium disabled:opacity-50"
-                        >
-                          {sendingReminderId === u.id ? 'Enviando...' : 'Enviar lembrete'}
-                        </button>
+                        {!(u as User & { profile?: { id: string } }).profile && (
+                          <button
+                            onClick={() => handleSendReminder(u.id)}
+                            disabled={!!sendingReminderId}
+                            className="text-primary hover:text-primary-700 text-xs font-medium disabled:opacity-50"
+                          >
+                            {sendingReminderId === u.id ? 'Enviando...' : 'Enviar lembrete'}
+                          </button>
+                        )}
                         <button
                           onClick={() => handleDelete(u.id)}
                           className="text-red-500 hover:text-red-700 text-xs font-medium"

@@ -237,6 +237,24 @@ export default function DashboardPage() {
         </div>
       )}
 
+      {profile!.neighborhoods?.length === 0 && (
+        <div className="rounded-xl border-2 border-amber-300 bg-amber-50 p-4 flex items-start gap-3">
+          <span className="text-2xl shrink-0">📍</span>
+          <div>
+            <h3 className="font-semibold text-amber-900">Informe os bairros que você atende</h3>
+            <p className="text-sm text-amber-800 mt-0.5">
+              Os bairros ajudam as famílias a encontrá-lo na busca. Não deixe de preencher.
+            </p>
+            <Link
+              href="/dashboard/bairros"
+              className="inline-block mt-2 text-sm font-semibold text-amber-700 underline hover:text-amber-900"
+            >
+              Ir para Meus Bairros →
+            </Link>
+          </div>
+        </div>
+      )}
+
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
         <Link
           href="/dashboard/perfil"
@@ -246,6 +264,17 @@ export default function DashboardPage() {
             Editar Perfil
           </h3>
           <p className="text-sm text-gray-500">Atualize suas informações pessoais</p>
+        </Link>
+        <Link
+          href="/dashboard/bairros"
+          className="bg-white border border-gray-200 rounded-xl p-5 hover:shadow-md transition group"
+        >
+          <h3 className="font-semibold text-gray-900 group-hover:text-primary mb-1">
+            Meus Bairros
+          </h3>
+          <p className="text-sm text-gray-500">
+            {profile!.neighborhoods?.length ? `${profile!.neighborhoods.length} bairro(s) informado(s)` : 'Informe os bairros que você atende'}
+          </p>
         </Link>
         <Link
           href="/dashboard/escolas"

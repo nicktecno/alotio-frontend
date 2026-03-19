@@ -56,7 +56,16 @@ export default function BairrosPage() {
 
   return (
     <div className="max-w-2xl">
-      <h1 className="text-2xl font-bold font-heading text-gray-900 mb-6">Meus Bairros</h1>
+      <h1 className="text-2xl font-bold font-heading text-gray-900 mb-2">Meus Bairros</h1>
+      <p className="text-gray-600 mb-6">
+        Informe em quais bairros você atende para que as famílias possam encontrá-lo na busca.
+      </p>
+
+      <div className="bg-secondary/10 border-2 border-secondary/30 rounded-xl p-4 mb-6">
+        <p className="text-sm font-medium text-gray-800">
+          <strong>Importante:</strong> Os bairros que você seleciona aparecem no seu perfil e nas buscas. Quem procura por transporte na sua região usa essa informação para entrar em contato. Não deixe de preencher!
+        </p>
+      </div>
 
       <div className="bg-white rounded-xl border border-gray-200 p-6">
         <p className="text-sm text-gray-500 mb-4">

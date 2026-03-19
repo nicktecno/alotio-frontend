@@ -49,6 +49,7 @@ export default function AdminProfileDetailPage() {
   const [courtesyMonths, setCourtesyMonths] = useState(1);
 
   const [actionLoading, setActionLoading] = useState(false);
+  const [neighborhoodsReminderLoading, setNeighborhoodsReminderLoading] = useState(false);
 
   useEffect(() => {
     if (!id) return;
@@ -739,6 +740,29 @@ export default function AdminProfileDetailPage() {
             </div>
           ) : (
             <p className="text-xs text-gray-400">Nenhum bairro</p>
+          )}
+          {profile.neighborhoods.length === 0 && (
+            <div className="mt-3">
+              <button
+                type="button"
+                onClick={async () => {
+                  if (!profile?.id) return;
+                  setNeighborhoodsReminderLoading(true);
+                  try {
+                    await api.adminSendNeighborhoodsReminder(profile.id);
+                    toast.success('E-mail de lembrete sobre bairros enviado.');
+                  } catch {
+                    toast.error('Falha ao enviar e-mail.');
+                  } finally {
+                    setNeighborhoodsReminderLoading(false);
+                  }
+                }}
+                disabled={neighborhoodsReminderLoading}
+                className="text-sm font-medium text-primary hover:underline disabled:opacity-50 disabled:cursor-not-allowed"
+              >
+                {neighborhoodsReminderLoading ? 'Enviando…' : 'Enviar lembrete por e-mail (cadastrar bairros)'}
+              </button>
+            </div>
           )}
         </div>
       </div>

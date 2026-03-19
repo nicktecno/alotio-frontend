@@ -244,6 +244,8 @@ export const api = {
     request(`/admin/profiles/${profileId}/photos/${photoId}`, { method: 'DELETE' }),
   adminDeleteProfile: (id: string) =>
     request(`/admin/profiles/${id}`, { method: 'DELETE' }),
+  adminSendNeighborhoodsReminder: (profileId: string) =>
+    request<{ message?: string }>(`/admin/profiles/${profileId}/send-neighborhoods-reminder`, { method: 'POST' }),
 
   adminCreateState: (data: { name: string; uf: string }) =>
     request('/admin/states', { method: 'POST', body: JSON.stringify(data) }),
