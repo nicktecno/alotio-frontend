@@ -8,7 +8,6 @@ import { compressImage } from '@/lib/compressImage';
 import Loading from '@/components/Loading';
 import FileOrCameraInput from '@/components/FileOrCameraInput';
 import toast from 'react-hot-toast';
-import type { Profile } from '@/types';
 
 export default function PerfilPage() {
   const { data: profile, error: profileError, isLoading: profileLoading, mutate: mutateProfile } = useMyProfile();
@@ -35,6 +34,8 @@ export default function PerfilPage() {
   const [defaultSchoolCityId, setDefaultSchoolCityId] = useState('');
   const [secondarySchoolCityId, setSecondarySchoolCityId] = useState('');
   const [selectedNeighborhoodIds, setSelectedNeighborhoodIds] = useState<string[]>([]);
+  const [activeCityIdBairros, setActiveCityIdBairros] = useState('');
+  const [savingNeighborhoods, setSavingNeighborhoods] = useState(false);
   const [document, setDocument] = useState<File | null>(null);
   const [newDocument, setNewDocument] = useState<File | null>(null);
   const [uploadingDoc, setUploadingDoc] = useState(false);
@@ -48,8 +49,10 @@ export default function PerfilPage() {
   const effectiveSecondaryCityId = showCityPicker ? (secondarySchoolCityId || form.cityId) : form.cityId;
   const { data: defaultSchools = [], isLoading: loadingDefaultSchools } = useSchools(effectiveDefaultCityId || undefined);
   const { data: secondarySchools = [], isLoading: loadingSecondarySchools } = useSchools(effectiveSecondaryCityId || undefined);
-  const { data: primaryNeighborhoods = [] } = useNeighborhoods(form.cityId || undefined);
-  const { data: secondaryNeighborhoods = [] } = useNeighborhoods(form.isIntermunicipal && form.secondaryCityId ? form.secondaryCityId : undefined);
+  const cityIdForNeighborhoods = profile?.cityId ?? form.cityId;
+  const secondaryCityIdForNeighborhoods = profile?.secondaryCityId ?? (form.isIntermunicipal && form.secondaryCityId ? form.secondaryCityId : undefined);
+  const { data: primaryNeighborhoods = [] } = useNeighborhoods(cityIdForNeighborhoods || undefined);
+  const { data: secondaryNeighborhoods = [] } = useNeighborhoods(secondaryCityIdForNeighborhoods || undefined);
 
   useEffect(() => {
     if (profile && !initializedRef.current) {
@@ -75,10 +78,25 @@ export default function PerfilPage() {
       if (profile.secondarySchool) {
         setSecondarySchoolCityId(profile.secondarySchool.cityId);
       }
+      setSelectedNeighborhoodIds(profile.neighborhoods.map((n) => n.neighborhood.id));
+      setActiveCityIdBairros(profile.cityId);
     }
   }, [profile]);
 
   const isPremium = profile?.subscriptions && profile.subscriptions.length > 0;
+
+  const handleSaveNeighborhoods = async () => {
+    setSavingNeighborhoods(true);
+    try {
+      await api.updateMyNeighborhoods(selectedNeighborhoodIds);
+      invalidateProfile();
+      toast.success('Bairros atualizados!');
+    } catch (err: unknown) {
+      toast.error(err instanceof Error ? err.message : 'Erro ao salvar');
+    } finally {
+      setSavingNeighborhoods(false);
+    }
+  };
 
   const handleResubmitDocument = async () => {
     if (!newDocument) {
@@ -600,6 +618,88 @@ export default function PerfilPage() {
       </form>
 
       {hasProfile && profile && (
+        <>
+        <div className="mt-6 bg-white rounded-xl border border-gray-200 p-6 space-y-4">
+          <h2 className="text-lg font-semibold text-gray-900 font-heading">Bairros que você atende</h2>
+          <p className="text-sm text-gray-600">
+            Os bairros que você seleciona aparecem no seu perfil e nas buscas. Quem procura por transporte na sua região usa essa informação para entrar em contato.
+          </p>
+          {profile.cityId && (
+            <>
+              {profile.isIntermunicipal && profile.secondaryCityId && (
+                <div className="flex gap-2 mb-4">
+                  <button
+                    type="button"
+                    onClick={() => setActiveCityIdBairros(profile.cityId)}
+                    className={`flex-1 px-3 py-2 rounded-lg text-sm font-medium border transition ${
+                      activeCityIdBairros === profile.cityId
+                        ? 'bg-primary text-white border-primary'
+                        : 'bg-white text-gray-700 border-gray-300 hover:bg-gray-50'
+                    }`}
+                  >
+                    {profile.city.name}
+                    {selectedNeighborhoodIds.filter((id) => primaryNeighborhoods.some((n) => n.id === id)).length > 0 && (
+                      <span className="ml-1.5 bg-white/20 text-xs px-1.5 py-0.5 rounded-full">
+                        {selectedNeighborhoodIds.filter((id) => primaryNeighborhoods.some((n) => n.id === id)).length}
+                      </span>
+                    )}
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => setActiveCityIdBairros(profile.secondaryCityId!)}
+                    className={`flex-1 px-3 py-2 rounded-lg text-sm font-medium border transition ${
+                      activeCityIdBairros === profile.secondaryCityId
+                        ? 'bg-primary text-white border-primary'
+                        : 'bg-white text-gray-700 border-gray-300 hover:bg-gray-50'
+                    }`}
+                  >
+                    {profile.secondaryCity?.name}
+                    {selectedNeighborhoodIds.filter((id) => secondaryNeighborhoods.some((n) => n.id === id)).length > 0 && (
+                      <span className="ml-1.5 bg-white/20 text-xs px-1.5 py-0.5 rounded-full">
+                        {selectedNeighborhoodIds.filter((id) => secondaryNeighborhoods.some((n) => n.id === id)).length}
+                      </span>
+                    )}
+                  </button>
+                </div>
+              )}
+              <div className="space-y-2 max-h-64 overflow-y-auto">
+                {(activeCityIdBairros === profile.secondaryCityId ? secondaryNeighborhoods : primaryNeighborhoods).map((nb) => (
+                  <label
+                    key={nb.id}
+                    className={`flex items-center gap-3 p-3 rounded-lg cursor-pointer transition ${
+                      selectedNeighborhoodIds.includes(nb.id)
+                        ? 'bg-secondary/10 border border-secondary/30'
+                        : 'bg-gray-50 hover:bg-gray-100'
+                    }`}
+                  >
+                    <input
+                      type="checkbox"
+                      checked={selectedNeighborhoodIds.includes(nb.id)}
+                      onChange={() => setSelectedNeighborhoodIds((prev) =>
+                        prev.includes(nb.id) ? prev.filter((x) => x !== nb.id) : [...prev, nb.id]
+                      )}
+                      className="accent-secondary"
+                    />
+                    <span className="text-gray-900 text-sm">{nb.name}</span>
+                  </label>
+                ))}
+              </div>
+              <p className="text-xs text-gray-400">
+                {selectedNeighborhoodIds.length} bairro(s) selecionado(s)
+                {profile.isIntermunicipal && profile.secondaryCity && ` (${selectedNeighborhoodIds.filter((id) => primaryNeighborhoods.some((n) => n.id === id)).length} em ${profile.city.name}, ${selectedNeighborhoodIds.filter((id) => secondaryNeighborhoods.some((n) => n.id === id)).length} em ${profile.secondaryCity.name})`}
+              </p>
+              <button
+                type="button"
+                onClick={handleSaveNeighborhoods}
+                disabled={savingNeighborhoods}
+                className="w-full bg-secondary hover:bg-secondary-600 disabled:opacity-50 text-white py-2 rounded-lg font-semibold transition"
+              >
+                {savingNeighborhoods ? 'Salvando...' : 'Salvar Bairros'}
+              </button>
+            </>
+          )}
+        </div>
+
         <div className="mt-6 bg-white rounded-xl border border-gray-200 p-6 space-y-4">
           <h2 className="text-lg font-semibold text-gray-900 font-heading">Documento comprobatório</h2>
           <p className="text-sm text-gray-600">
@@ -689,6 +789,7 @@ export default function PerfilPage() {
             </p>
           )}
         </div>
+        </>
       )}
     </div>
   );

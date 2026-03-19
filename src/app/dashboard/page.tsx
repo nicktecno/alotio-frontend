@@ -246,10 +246,10 @@ export default function DashboardPage() {
               Os bairros ajudam as famílias a encontrá-lo na busca. Não deixe de preencher.
             </p>
             <Link
-              href="/dashboard/bairros"
+              href="/dashboard/perfil"
               className="inline-block mt-2 text-sm font-semibold text-amber-700 underline hover:text-amber-900"
             >
-              Ir para Meus Bairros →
+              Completar no perfil →
             </Link>
           </div>
         </div>
@@ -263,18 +263,7 @@ export default function DashboardPage() {
           <h3 className="font-semibold text-gray-900 group-hover:text-primary mb-1">
             Editar Perfil
           </h3>
-          <p className="text-sm text-gray-500">Atualize suas informações pessoais</p>
-        </Link>
-        <Link
-          href="/dashboard/bairros"
-          className="bg-white border border-gray-200 rounded-xl p-5 hover:shadow-md transition group"
-        >
-          <h3 className="font-semibold text-gray-900 group-hover:text-primary mb-1">
-            Meus Bairros
-          </h3>
-          <p className="text-sm text-gray-500">
-            {profile!.neighborhoods?.length ? `${profile!.neighborhoods.length} bairro(s) informado(s)` : 'Informe os bairros que você atende'}
-          </p>
+          <p className="text-sm text-gray-500">Atualize suas informações pessoais e bairros</p>
         </Link>
         <Link
           href="/dashboard/escolas"

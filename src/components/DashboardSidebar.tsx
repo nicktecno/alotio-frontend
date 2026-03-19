@@ -7,7 +7,6 @@ const links = [
   { href: '/dashboard', label: 'Visão Geral', icon: '📊' },
   { href: '/dashboard/perfil', label: 'Meu Perfil', icon: '👤' },
   { href: '/dashboard/escolas', label: 'Escolas', icon: '🏫' },
-  { href: '/dashboard/bairros', label: 'Bairros', icon: '📍' },
   { href: '/dashboard/fotos', label: 'Fotos', icon: '📷' },
   { href: '/dashboard/assinatura', label: 'Assinatura', icon: '⭐' },
 ];
