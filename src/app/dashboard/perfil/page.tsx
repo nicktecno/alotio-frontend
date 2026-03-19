@@ -3,7 +3,7 @@
 import { useEffect, useState, useRef } from 'react';
 import Link from 'next/link';
 import { api, assetUrl } from '@/lib/api';
-import { useMyProfile, useStates, useCities, useSchools, invalidateProfile } from '@/lib/swr';
+import { useMyProfile, useStates, useCities, useSchools, useNeighborhoods, invalidateProfile } from '@/lib/swr';
 import { compressImage } from '@/lib/compressImage';
 import Loading from '@/components/Loading';
 import FileOrCameraInput from '@/components/FileOrCameraInput';
@@ -34,6 +34,7 @@ export default function PerfilPage() {
   });
   const [defaultSchoolCityId, setDefaultSchoolCityId] = useState('');
   const [secondarySchoolCityId, setSecondarySchoolCityId] = useState('');
+  const [selectedNeighborhoodIds, setSelectedNeighborhoodIds] = useState<string[]>([]);
   const [document, setDocument] = useState<File | null>(null);
   const [newDocument, setNewDocument] = useState<File | null>(null);
   const [uploadingDoc, setUploadingDoc] = useState(false);
@@ -47,6 +48,8 @@ export default function PerfilPage() {
   const effectiveSecondaryCityId = showCityPicker ? (secondarySchoolCityId || form.cityId) : form.cityId;
   const { data: defaultSchools = [], isLoading: loadingDefaultSchools } = useSchools(effectiveDefaultCityId || undefined);
   const { data: secondarySchools = [], isLoading: loadingSecondarySchools } = useSchools(effectiveSecondaryCityId || undefined);
+  const { data: primaryNeighborhoods = [] } = useNeighborhoods(form.cityId || undefined);
+  const { data: secondaryNeighborhoods = [] } = useNeighborhoods(form.isIntermunicipal && form.secondaryCityId ? form.secondaryCityId : undefined);
 
   useEffect(() => {
     if (profile && !initializedRef.current) {
@@ -123,6 +126,7 @@ export default function PerfilPage() {
       }
       fd.append('defaultSchoolId', form.defaultSchoolId);
       if (form.secondarySchoolId) fd.append('secondarySchoolId', form.secondarySchoolId);
+      if (selectedNeighborhoodIds.length > 0) fd.append('neighborhoodIds', JSON.stringify(selectedNeighborhoodIds));
       fd.append('document', compressedDoc);
 
       await api.createProfile(fd);
@@ -178,9 +182,12 @@ export default function PerfilPage() {
         onSubmit={hasProfile ? handleUpdate : handleCreate}
         className="bg-white rounded-xl border border-gray-200 p-6 space-y-5"
       >
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
-          <div>
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-5 items-start">
+          <div className="flex flex-col">
             <label className="block text-sm font-medium text-gray-700 mb-1">Nome de exibição</label>
+            <p className="text-xs text-gray-600 mb-1.5 min-h-[2.5rem]">
+              Esse nome aparecerá no card de busca. Não é necessário incluir &quot;transporte escolar&quot; no nome.
+            </p>
             <input
               name="displayName"
               value={form.displayName}
@@ -189,9 +196,9 @@ export default function PerfilPage() {
               className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-primary outline-none"
             />
           </div>
-          <div>
+          <div className="flex flex-col">
             <label className="block text-sm font-medium text-gray-700 mb-1">Prefixo (4 dígitos)</label>
-            <p className="text-xs text-gray-600 mb-1.5">
+            <p className="text-xs text-gray-600 mb-1.5 min-h-[2.5rem]">
               Número de identificação do transporte escolar exibido na van (ex.: placa ou adesivo).
             </p>
             <input
@@ -482,6 +489,79 @@ export default function PerfilPage() {
             </div>
           </div>
         </div>
+
+        {noProfile && (
+          <div>
+            <label className="block text-sm font-medium text-gray-700 mb-2">Bairros que você atende</label>
+            <p className="text-xs text-gray-500 mb-3">
+              Selecione os bairros em que você faz transporte. Assim as famílias encontram você na busca. Você pode alterar depois em Meus Bairros.
+            </p>
+            {form.cityId ? (
+              <>
+                {form.isIntermunicipal && form.secondaryCityId ? (
+                  <div className="space-y-3">
+                    <div className="flex gap-2">
+                      <span className="text-xs font-medium text-gray-500 py-1.5">Cidade principal:</span>
+                      <span className="text-sm text-gray-700">{cities.find((c) => c.id === form.cityId)?.name}</span>
+                    </div>
+                    <div className="space-y-1.5 max-h-40 overflow-y-auto border border-gray-200 rounded-lg p-3">
+                      {primaryNeighborhoods.map((nb) => (
+                        <label key={nb.id} className="flex items-center gap-2 p-2 rounded-lg cursor-pointer text-sm hover:bg-gray-50">
+                          <input
+                            type="checkbox"
+                            checked={selectedNeighborhoodIds.includes(nb.id)}
+                            onChange={() => setSelectedNeighborhoodIds((prev) =>
+                              prev.includes(nb.id) ? prev.filter((x) => x !== nb.id) : [...prev, nb.id]
+                            )}
+                            className="accent-secondary"
+                          />
+                          <span className="text-gray-900">{nb.name}</span>
+                        </label>
+                      ))}
+                    </div>
+                    <div className="flex gap-2 mt-3">
+                      <span className="text-xs font-medium text-gray-500 py-1.5">Cidade secundária:</span>
+                      <span className="text-sm text-gray-700">{cities.find((c) => c.id === form.secondaryCityId)?.name}</span>
+                    </div>
+                    <div className="space-y-1.5 max-h-40 overflow-y-auto border border-gray-200 rounded-lg p-3">
+                      {secondaryNeighborhoods.map((nb) => (
+                        <label key={nb.id} className="flex items-center gap-2 p-2 rounded-lg cursor-pointer text-sm hover:bg-gray-50">
+                          <input
+                            type="checkbox"
+                            checked={selectedNeighborhoodIds.includes(nb.id)}
+                            onChange={() => setSelectedNeighborhoodIds((prev) =>
+                              prev.includes(nb.id) ? prev.filter((x) => x !== nb.id) : [...prev, nb.id]
+                            )}
+                            className="accent-secondary"
+                          />
+                          <span className="text-gray-900">{nb.name}</span>
+                        </label>
+                      ))}
+                    </div>
+                  </div>
+                ) : (
+                  <div className="space-y-1.5 max-h-48 overflow-y-auto border border-gray-200 rounded-lg p-3">
+                    {primaryNeighborhoods.map((nb) => (
+                      <label key={nb.id} className="flex items-center gap-2 p-2 rounded-lg cursor-pointer text-sm hover:bg-gray-50">
+                        <input
+                          type="checkbox"
+                          checked={selectedNeighborhoodIds.includes(nb.id)}
+                          onChange={() => setSelectedNeighborhoodIds((prev) =>
+                            prev.includes(nb.id) ? prev.filter((x) => x !== nb.id) : [...prev, nb.id]
+                          )}
+                          className="accent-secondary"
+                        />
+                        <span className="text-gray-900">{nb.name}</span>
+                      </label>
+                    ))}
+                  </div>
+                )}
+              </>
+            ) : (
+              <p className="text-sm text-gray-400">Selecione estado e cidade acima para carregar os bairros.</p>
+            )}
+          </div>
+        )}
 
         {noProfile && (
           <div>
