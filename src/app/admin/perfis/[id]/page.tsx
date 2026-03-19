@@ -126,7 +126,8 @@ export default function AdminProfileDetailPage() {
       populateForm(updated);
       setEditing(false);
     } catch (err: unknown) {
-      toast.error(err instanceof Error ? err.message : 'Erro ao salvar');
+      const msg = err instanceof ApiError ? err.message : (err instanceof Error ? err.message : 'Erro ao salvar');
+      toast.error(msg);
     } finally {
       setSaving(false);
     }
@@ -359,7 +360,7 @@ export default function AdminProfileDetailPage() {
           <div>
             <label className="block text-sm font-medium text-gray-600 mb-1">Prefixo</label>
             {editing ? (
-              <input value={prefixo} onChange={(e) => setPrefixo(e.target.value)} maxLength={3} className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-primary outline-none" />
+              <input value={prefixo} onChange={(e) => setPrefixo(e.target.value)} maxLength={4} className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-primary outline-none" />
             ) : (
               <p className="text-gray-900">{profile.prefixo}</p>
             )}

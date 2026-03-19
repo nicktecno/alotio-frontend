@@ -190,7 +190,7 @@ export default function PerfilPage() {
             />
           </div>
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">Prefixo (3 dígitos)</label>
+            <label className="block text-sm font-medium text-gray-700 mb-1">Prefixo (4 dígitos)</label>
             <p className="text-xs text-gray-600 mb-1.5">
               Número de identificação do transporte escolar exibido na van (ex.: placa ou adesivo).
             </p>
@@ -199,8 +199,8 @@ export default function PerfilPage() {
               value={form.prefixo}
               onChange={handleChange}
               required
-              maxLength={3}
-              pattern="\d{3}"
+              maxLength={4}
+              pattern="\d{4}"
               disabled={hasProfile === true}
               className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-primary outline-none disabled:bg-gray-100 disabled:text-gray-500"
             />
