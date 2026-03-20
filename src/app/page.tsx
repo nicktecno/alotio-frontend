@@ -80,7 +80,7 @@ export default function Home() {
               {/* Left - Logo + text */}
               <div className="text-center lg:text-left">
                 <img
-                  src="/logo-alotio.png"
+                  src="/logoAloTio.png"
                   alt="Alô Tio"
                   className="h-20 sm:h-24 lg:h-28 w-auto max-w-full mx-auto lg:mx-0 mb-6 object-contain drop-shadow-md"
                 />
@@ -107,10 +107,10 @@ export default function Home() {
                 </div>
               </div>
 
-              {/* Right - Ilustração (antigo alotio-logo) */}
+              {/* Right - Ilustração (banner) */}
               <div className="flex justify-center lg:justify-end">
                 <img
-                  src="/alotio-logo.png"
+                  src="/bannerAlotio.png"
                   alt="Alô Tio - Transporte escolar"
                   className="w-64 sm:w-72 lg:w-80 max-w-full h-auto object-contain drop-shadow-2xl"
                 />
@@ -165,7 +165,7 @@ export default function Home() {
         <section className="py-20 bg-gradient-to-r from-primary-700 to-primary">
           <div className="max-w-4xl mx-auto px-4 text-center">
             <img
-              src="/alotio-logo.png"
+              src="/bannerAlotio.png"
               alt="Alô Tio"
               className="w-40 sm:w-48 h-auto max-w-full mx-auto mb-6 opacity-95 object-contain"
             />

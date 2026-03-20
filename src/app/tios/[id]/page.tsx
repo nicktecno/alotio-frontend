@@ -42,7 +42,7 @@ export async function generateMetadata({
         type: 'profile',
         images: tio.avatarUrl
           ? [{ url: tio.avatarUrl.startsWith('http') ? tio.avatarUrl : `${apiUrl.replace(/\/api$/, '')}${tio.avatarUrl}`, alt: tio.displayName }]
-          : [{ url: '/alotio-logo.png', alt: 'Alô Tio' }],
+          : [{ url: '/bannerAlotio.png', alt: 'Alô Tio' }],
       },
       twitter: {
         card: 'summary',

@@ -44,7 +44,7 @@ export default function DashboardPage() {
       <div className="max-w-2xl">
         <div className="mb-6 flex justify-center">
           <img
-            src="/alotio-logo.png"
+            src="/bannerAlotio.png"
             alt="Alô Tio — transporte escolar"
             className="w-full max-w-sm sm:max-w-md h-auto object-contain rounded-2xl shadow-lg"
           />
@@ -86,7 +86,7 @@ export default function DashboardPage() {
     <div className="max-w-4xl space-y-6">
       <div className="flex justify-center lg:justify-start">
         <img
-          src="/alotio-logo.png"
+          src="/bannerAlotio.png"
           alt="Alô Tio — transporte escolar"
           className="w-full max-w-xs sm:max-w-sm md:max-w-md h-auto object-contain rounded-2xl shadow-md"
         />

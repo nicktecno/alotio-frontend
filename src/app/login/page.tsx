@@ -36,7 +36,7 @@ export default function LoginPage() {
     return (
       <div className="min-h-screen bg-primary-600 flex flex-col items-center justify-center gap-6">
         <img
-          src="/logo-alotio.png"
+          src="/logoAloTio.png"
           alt="Alô Tio"
           className="h-14 w-auto max-h-16 object-contain"
         />
@@ -55,7 +55,7 @@ export default function LoginPage() {
           </Link>
           <Link href="/" className="flex items-center gap-2">
             <img
-              src="/logo-alotio.png"
+              src="/logoAloTio.png"
               alt="Alô Tio"
               className="h-10 w-auto max-h-11 object-contain"
             />

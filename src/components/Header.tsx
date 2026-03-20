@@ -25,7 +25,7 @@ export default function Header() {
         <div className="flex justify-between items-center h-16">
           <Link href="/" className="flex items-center gap-2">
             <img
-              src="/logo-alotio.png"
+              src="/logoAloTio.png"
               alt="Alô Tio"
               className="h-9 w-auto max-h-10 object-contain"
             />
