@@ -37,7 +37,7 @@ export default function CadastroPage() {
     return (
       <div className="min-h-screen bg-primary-600 flex flex-col items-center justify-center gap-6">
         <img
-          src="/logoAloTio.png"
+          src="/logoAloTioVector.svg"
           alt="Alô Tio"
           className="h-14 w-auto max-h-16 object-contain"
         />
@@ -53,7 +53,7 @@ export default function CadastroPage() {
         <div className="text-center mb-8">
           <Link href="/" className="inline-flex items-center gap-2 mb-6">
             <img
-              src="/logoAloTio.png"
+              src="/logoAloTioVector.svg"
               alt="Alô Tio"
               className="h-12 w-auto max-h-14 object-contain"
             />

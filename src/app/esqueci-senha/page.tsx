@@ -38,7 +38,7 @@ export default function ForgotPasswordPage() {
           </Link>
           <Link href="/" className="flex items-center gap-2">
             <img
-              src="/logoAloTio.png"
+              src="/logoAloTioVector.svg"
               alt="Alô Tio"
               className="h-10 w-auto max-h-11 object-contain"
             />

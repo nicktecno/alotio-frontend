@@ -80,7 +80,7 @@ export default function Home() {
               {/* Left - Logo + text */}
               <div className="text-center lg:text-left">
                 <img
-                  src="/logoAloTio.png"
+                  src="/logoAloTioVector.svg"
                   alt="Alô Tio"
                   className="h-20 sm:h-24 lg:h-28 w-auto max-w-full mx-auto lg:mx-0 mb-6 object-contain drop-shadow-md"
                 />
