@@ -136,7 +136,11 @@ export default function ResetPasswordPage() {
             &larr; Voltar ao login
           </Link>
           <Link href="/" className="flex items-center gap-2">
-            <img src="/alotio-title.svg" alt="aloTio" className="h-8" />
+            <img
+              src="/logo-alotio.png"
+              alt="Alô Tio"
+              className="h-10 w-auto max-h-11 object-contain"
+            />
           </Link>
         </div>
 

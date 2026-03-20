@@ -6,7 +6,11 @@ export default function Footer() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         <div className="flex flex-col md:flex-row justify-between items-center gap-4">
           <div className="flex items-center gap-2">
-            <img src="/alotio-title.svg" alt="aloTio" className="h-6" />
+            <img
+              src="/logo-alotio.png"
+              alt="Alô Tio"
+              className="h-7 w-auto max-h-8 object-contain"
+            />
           </div>
           <div className="flex items-center gap-4 text-sm">
             <Link href="/contato" className="text-primary-200 hover:text-white transition">

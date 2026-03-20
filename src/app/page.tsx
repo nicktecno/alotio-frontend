@@ -80,9 +80,9 @@ export default function Home() {
               {/* Left - Logo + text */}
               <div className="text-center lg:text-left">
                 <img
-                  src="/alotio-title.svg"
-                  alt="aloTio"
-                  className="h-16 lg:h-20 mx-auto lg:mx-0 mb-6"
+                  src="/logo-alotio.png"
+                  alt="Alô Tio"
+                  className="h-20 sm:h-24 lg:h-28 w-auto max-w-full mx-auto lg:mx-0 mb-6 object-contain drop-shadow-md"
                 />
                 <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-white leading-tight font-heading">
                   Encontre o Tio para o transporte do seu filho
@@ -107,12 +107,12 @@ export default function Home() {
                 </div>
               </div>
 
-              {/* Right - Original illustration */}
+              {/* Right - Ilustração (antigo alotio-logo) */}
               <div className="flex justify-center lg:justify-end">
                 <img
-                  src="/alotio-logo.svg"
-                  alt="aloTio - Transporte escolar"
-                  className="w-64 sm:w-80 lg:w-96 drop-shadow-2xl"
+                  src="/alotio-logo.png"
+                  alt="Alô Tio - Transporte escolar"
+                  className="w-64 sm:w-72 lg:w-80 max-w-full h-auto object-contain drop-shadow-2xl"
                 />
               </div>
             </div>
@@ -165,9 +165,9 @@ export default function Home() {
         <section className="py-20 bg-gradient-to-r from-primary-700 to-primary">
           <div className="max-w-4xl mx-auto px-4 text-center">
             <img
-              src="/alotio-logo.svg"
-              alt="aloTio"
-              className="w-24 h-24 mx-auto mb-6 opacity-80"
+              src="/alotio-logo.png"
+              alt="Alô Tio"
+              className="w-40 sm:w-48 h-auto max-w-full mx-auto mb-6 opacity-95 object-contain"
             />
             <h2 className="text-3xl font-bold text-white mb-4 font-heading">
               É Tio? Cadastre-se gratuitamente!

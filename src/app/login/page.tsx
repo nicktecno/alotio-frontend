@@ -35,7 +35,11 @@ export default function LoginPage() {
   if (redirecting) {
     return (
       <div className="min-h-screen bg-primary-600 flex flex-col items-center justify-center gap-6">
-        <img src="/alotio-title.svg" alt="aloTio" className="h-12" />
+        <img
+          src="/logo-alotio.png"
+          alt="Alô Tio"
+          className="h-14 w-auto max-h-16 object-contain"
+        />
         <img src="/bus.gif" alt="Carregando" className="w-52 h-auto" />
         <p className="text-primary-200 text-sm font-medium">Entrando...</p>
       </div>
@@ -50,7 +54,11 @@ export default function LoginPage() {
             &larr; Voltar
           </Link>
           <Link href="/" className="flex items-center gap-2">
-            <img src="/alotio-title.svg" alt="aloTio" className="h-8" />
+            <img
+              src="/logo-alotio.png"
+              alt="Alô Tio"
+              className="h-10 w-auto max-h-11 object-contain"
+            />
           </Link>
         </div>
 

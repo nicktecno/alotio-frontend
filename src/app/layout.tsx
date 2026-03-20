@@ -78,7 +78,7 @@ export const metadata: Metadata = {
       'Encontre transporte escolar seguro e verificado. Pesquise por escola, cidade ou bairro e conecte-se com profissionais de van escolar na sua região.',
     images: [
       {
-        url: '/alotio-logo.svg',
+        url: '/alotio-logo.png',
         width: 512,
         height: 512,
         alt: 'aloTio - Transporte Escolar',
@@ -90,7 +90,7 @@ export const metadata: Metadata = {
     title: 'aloTio - Transporte Escolar | Encontre o Tio da Van Escolar',
     description:
       'Encontre transporte escolar seguro e verificado. Pesquise por escola e conecte-se com profissionais de van escolar na sua região.',
-    images: ['/alotio-logo.svg'],
+    images: ['/alotio-logo.png'],
   },
   alternates: {
     canonical: siteUrl,

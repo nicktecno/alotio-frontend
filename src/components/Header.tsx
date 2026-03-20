@@ -24,7 +24,11 @@ export default function Header() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-16">
           <Link href="/" className="flex items-center gap-2">
-            <img src="/alotio-title.svg" alt="aloTio" className="h-8" />
+            <img
+              src="/logo-alotio.png"
+              alt="Alô Tio"
+              className="h-9 w-auto max-h-10 object-contain"
+            />
           </Link>
 
           <nav className="hidden md:flex items-center gap-6">

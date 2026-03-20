@@ -42,6 +42,13 @@ export default function DashboardPage() {
   if (!hasProfile) {
     return (
       <div className="max-w-2xl">
+        <div className="mb-6 flex justify-center">
+          <img
+            src="/alotio-logo.png"
+            alt="Alô Tio — transporte escolar"
+            className="w-full max-w-sm sm:max-w-md h-auto object-contain rounded-2xl shadow-lg"
+          />
+        </div>
         <h1 className="text-2xl font-bold font-heading text-gray-900 mb-4">Bem-vindo ao aloTio!</h1>
         <p className="text-gray-600 mb-6">
           Você ainda não tem um perfil de Tio. Crie seu perfil para ser encontrado por pais.
@@ -77,6 +84,13 @@ export default function DashboardPage() {
 
   return (
     <div className="max-w-4xl space-y-6">
+      <div className="flex justify-center lg:justify-start">
+        <img
+          src="/alotio-logo.png"
+          alt="Alô Tio — transporte escolar"
+          className="w-full max-w-xs sm:max-w-sm md:max-w-md h-auto object-contain rounded-2xl shadow-md"
+        />
+      </div>
       <div className="flex items-center justify-between">
         <h1 className="text-2xl font-bold font-heading text-gray-900">Meu Painel</h1>
         <span className={`px-3 py-1 rounded-full text-sm font-medium ${statusColors[profile!.status]}`}>

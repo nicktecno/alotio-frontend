@@ -36,7 +36,11 @@ export default function CadastroPage() {
   if (loading) {
     return (
       <div className="min-h-screen bg-primary-600 flex flex-col items-center justify-center gap-6">
-        <img src="/alotio-title.svg" alt="aloTio" className="h-12" />
+        <img
+          src="/logo-alotio.png"
+          alt="Alô Tio"
+          className="h-14 w-auto max-h-16 object-contain"
+        />
         <img src="/bus.gif" alt="Carregando" className="w-52 h-auto" />
         <p className="text-primary-200 text-sm font-medium">Criando sua conta...</p>
       </div>
@@ -48,7 +52,11 @@ export default function CadastroPage() {
       <div className="w-full max-w-md">
         <div className="text-center mb-8">
           <Link href="/" className="inline-flex items-center gap-2 mb-6">
-            <img src="/alotio-title.svg" alt="aloTio" className="h-10" />
+            <img
+              src="/logo-alotio.png"
+              alt="Alô Tio"
+              className="h-12 w-auto max-h-14 object-contain"
+            />
           </Link>
           <h1 className="text-4xl font-bold text-white font-heading">
             Crie seu cadastro como Tio(a)
