@@ -112,7 +112,7 @@ export default function Home() {
                 <img
                   src="/bannerAlotio.png"
                   alt="Alô Tio - Transporte escolar"
-                  className="w-64 sm:w-72 lg:w-80 max-w-full h-auto object-contain drop-shadow-2xl"
+                  className="w-full max-w-md sm:max-w-xl lg:max-w-2xl xl:max-w-3xl h-auto object-contain drop-shadow-2xl"
                 />
               </div>
             </div>
@@ -167,7 +167,7 @@ export default function Home() {
             <img
               src="/bannerAlotio.png"
               alt="Alô Tio"
-              className="w-40 sm:w-48 h-auto max-w-full mx-auto mb-6 opacity-95 object-contain"
+              className="w-full max-w-xs sm:max-w-md md:max-w-lg lg:max-w-xl h-auto mx-auto mb-6 opacity-95 object-contain"
             />
             <h2 className="text-3xl font-bold text-white mb-4 font-heading">
               É Tio? Cadastre-se gratuitamente!

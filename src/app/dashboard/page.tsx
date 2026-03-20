@@ -46,7 +46,7 @@ export default function DashboardPage() {
           <img
             src="/bannerAlotio.png"
             alt="Alô Tio — transporte escolar"
-            className="w-full max-w-sm sm:max-w-md h-auto object-contain rounded-2xl shadow-lg"
+            className="w-full max-w-lg sm:max-w-xl lg:max-w-2xl h-auto object-contain rounded-2xl shadow-lg"
           />
         </div>
         <h1 className="text-2xl font-bold font-heading text-gray-900 mb-4">Bem-vindo ao aloTio!</h1>
@@ -88,7 +88,7 @@ export default function DashboardPage() {
         <img
           src="/bannerAlotio.png"
           alt="Alô Tio — transporte escolar"
-          className="w-full max-w-xs sm:max-w-sm md:max-w-md h-auto object-contain rounded-2xl shadow-md"
+          className="w-full max-w-lg sm:max-w-xl lg:max-w-2xl h-auto object-contain rounded-2xl shadow-md"
         />
       </div>
       <div className="flex items-center justify-between">
