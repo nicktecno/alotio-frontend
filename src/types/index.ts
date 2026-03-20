@@ -1,3 +1,15 @@
+/** Resposta paginada da API (cidades, escolas, bairros) */
+export interface Paginated<T> {
+  data: T[];
+  total: number;
+  page: number;
+  limit: number;
+  totalPages: number;
+}
+
+/** Tamanho de página nas listagens do admin */
+export const ADMIN_LIST_PAGE_SIZE = 30;
+
 export type UserRole = 'TIO' | 'ADMIN';
 export type ProfileStatus = 'PENDING' | 'APPROVED' | 'REJECTED' | 'PAUSED';
 export type SchoolType = 'ESTADUAL' | 'MUNICIPAL' | 'PARTICULAR' | 'FEDERAL';

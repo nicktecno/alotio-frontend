@@ -3,8 +3,15 @@
 import { useEffect, useState } from 'react';
 import { api } from '@/lib/api';
 import toast from 'react-hot-toast';
-import type { School, City, State } from '@/types';
+import {
+  type School,
+  type City,
+  type State,
+  type Paginated,
+  ADMIN_LIST_PAGE_SIZE,
+} from '@/types';
 import Loading from '@/components/Loading';
+import AdminPagination from '@/components/AdminPagination';
 
 export default function AdminEscolasPage() {
   const [schools, setSchools] = useState<School[]>([]);
@@ -12,6 +19,9 @@ export default function AdminEscolasPage() {
   const [cities, setCities] = useState<City[]>([]);
   const [filterState, setFilterState] = useState('');
   const [filterCity, setFilterCity] = useState('');
+  const [page, setPage] = useState(1);
+  const [total, setTotal] = useState(0);
+  const [totalPages, setTotalPages] = useState(1);
   const [loading, setLoading] = useState(true);
   const [showForm, setShowForm] = useState(false);
   const [form, setForm] = useState({ name: '', type: 'MUNICIPAL', cityId: '', address: '' });
@@ -27,17 +37,32 @@ export default function AdminEscolasPage() {
     if (filterState) {
       api.getCities(filterState).then((data) => setCities(data as City[]));
       setFilterCity('');
+    } else {
+      setCities([]);
     }
   }, [filterState]);
 
+  useEffect(() => {
+    setPage(1);
+  }, [filterState, filterCity]);
+
   const load = async () => {
     setLoading(true);
-    const data = await api.getSchools(filterCity || undefined);
-    setSchools(data as School[]);
+    const data = (await api.getSchools(
+      filterCity || undefined,
+      undefined,
+      undefined,
+      { page, limit: ADMIN_LIST_PAGE_SIZE },
+    )) as Paginated<School>;
+    setSchools(data.data);
+    setTotal(data.total);
+    setTotalPages(data.totalPages);
     setLoading(false);
   };
 
-  useEffect(() => { load(); }, [filterCity]); // eslint-disable-line react-hooks/exhaustive-deps
+  useEffect(() => {
+    load();
+  }, [filterCity, page]); // eslint-disable-line react-hooks/exhaustive-deps
 
   const handleCreate = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -227,6 +252,14 @@ export default function AdminEscolasPage() {
               ))}
             </tbody>
           </table>
+          <AdminPagination
+            page={page}
+            totalPages={totalPages}
+            total={total}
+            pageSize={ADMIN_LIST_PAGE_SIZE}
+            onPageChange={setPage}
+            disabled={loading}
+          />
         </div>
       )}
     </div>

@@ -3,13 +3,22 @@
 import { useEffect, useState } from 'react';
 import { api } from '@/lib/api';
 import toast from 'react-hot-toast';
-import type { City, State } from '@/types';
+import {
+  type City,
+  type State,
+  type Paginated,
+  ADMIN_LIST_PAGE_SIZE,
+} from '@/types';
 import Loading from '@/components/Loading';
+import AdminPagination from '@/components/AdminPagination';
 
 export default function AdminCidadesPage() {
   const [cities, setCities] = useState<City[]>([]);
   const [states, setStates] = useState<State[]>([]);
   const [filterState, setFilterState] = useState('');
+  const [page, setPage] = useState(1);
+  const [total, setTotal] = useState(0);
+  const [totalPages, setTotalPages] = useState(1);
   const [loading, setLoading] = useState(true);
   const [showForm, setShowForm] = useState(false);
   const [form, setForm] = useState({ name: '', stateId: '', phonePrefix: '' });
@@ -19,14 +28,25 @@ export default function AdminCidadesPage() {
     api.getStates().then((data) => setStates(data as State[]));
   }, []);
 
+  useEffect(() => {
+    setPage(1);
+  }, [filterState]);
+
   const load = async () => {
     setLoading(true);
-    const data = await api.getCities(filterState || undefined);
-    setCities(data as City[]);
+    const data = (await api.getCities(filterState || undefined, false, {
+      page,
+      limit: ADMIN_LIST_PAGE_SIZE,
+    })) as Paginated<City>;
+    setCities(data.data);
+    setTotal(data.total);
+    setTotalPages(data.totalPages);
     setLoading(false);
   };
 
-  useEffect(() => { load(); }, [filterState]); // eslint-disable-line react-hooks/exhaustive-deps
+  useEffect(() => {
+    load();
+  }, [filterState, page]); // eslint-disable-line react-hooks/exhaustive-deps
 
   const handleCreate = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -121,7 +141,7 @@ export default function AdminCidadesPage() {
         <Loading />
       ) : (
         <div className="bg-white rounded-xl border border-gray-200 overflow-hidden">
-          <table className="w-full text-sm">
+          <table className="w-full text-sm min-h-[200px]">
             <thead>
               <tr className="border-b border-gray-200 bg-gray-50">
                 <th className="text-left px-4 py-3 font-medium text-gray-600">Nome</th>
@@ -148,6 +168,14 @@ export default function AdminCidadesPage() {
               ))}
             </tbody>
           </table>
+          <AdminPagination
+            page={page}
+            totalPages={totalPages}
+            total={total}
+            pageSize={ADMIN_LIST_PAGE_SIZE}
+            onPageChange={setPage}
+            disabled={loading}
+          />
         </div>
       )}
     </div>

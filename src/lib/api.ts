@@ -157,25 +157,54 @@ export const api = {
   // Public - States, Cities, Schools, Neighborhoods
   getStates: () => request('/states'),
   getStateByUf: (uf: string) => request(`/states/${uf}`),
-  getCities: (stateId?: string, withTios?: boolean) => {
+  /** Sem `pagination`: lista completa (perfil, busca). Com `pagination`: admin. */
+  getCities: (
+    stateId?: string,
+    withTios?: boolean,
+    pagination?: { page: number; limit?: number },
+  ) => {
     const params = new URLSearchParams();
     if (stateId) params.set('stateId', stateId);
     if (withTios) params.set('withTios', 'true');
+    if (pagination) {
+      params.set('page', String(pagination.page));
+      params.set('limit', String(pagination.limit ?? 30));
+    }
     const qs = params.toString();
     return request(`/cities${qs ? `?${qs}` : ''}`);
   },
   getCityBySlug: (slug: string) => request(`/cities/${slug}`),
-  getSchools: (cityId?: string, type?: string, withTios?: boolean) => {
+  getSchools: (
+    cityId?: string,
+    type?: string,
+    withTios?: boolean,
+    pagination?: { page: number; limit?: number },
+  ) => {
     const params = new URLSearchParams();
     if (cityId) params.set('cityId', cityId);
     if (type) params.set('type', type);
     if (withTios) params.set('withTios', 'true');
+    if (pagination) {
+      params.set('page', String(pagination.page));
+      params.set('limit', String(pagination.limit ?? 30));
+    }
     const qs = params.toString();
     return request(`/schools${qs ? `?${qs}` : ''}`);
   },
   getSchoolById: (id: string) => request(`/schools/${id}`),
-  getNeighborhoods: (cityId?: string) =>
-    request(`/neighborhoods${cityId ? `?cityId=${cityId}` : ''}`),
+  getNeighborhoods: (
+    cityId?: string,
+    pagination?: { page: number; limit?: number },
+  ) => {
+    const params = new URLSearchParams();
+    if (cityId) params.set('cityId', cityId);
+    if (pagination) {
+      params.set('page', String(pagination.page));
+      params.set('limit', String(pagination.limit ?? 30));
+    }
+    const qs = params.toString();
+    return request(`/neighborhoods${qs ? `?${qs}` : ''}`);
+  },
 
   // Public - Tios
   searchTios: (params: Record<string, string>) => {
