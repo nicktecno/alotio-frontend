@@ -5,7 +5,7 @@ import { api } from '@/lib/api';
 import { usePlans, useMySubscription, invalidateSubscription, invalidateProfile } from '@/lib/swr';
 import toast from 'react-hot-toast';
 import Loading from '@/components/Loading';
-import type { Subscription } from '@/types';
+import type { Subscription, SubscriptionPlan } from '@/types';
 
 export default function AssinaturaPage() {
   const { data: plans = [], isLoading: loadingPlans } = usePlans();
@@ -77,13 +77,28 @@ export default function AssinaturaPage() {
   const formatPrice = (cents: number) =>
     new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(cents / 100);
 
-  /** Evita cards duplicados se a API retornar o mesmo plano mais de uma vez */
+  /**
+   * No máximo 2 cards: 1 mensal + 1 anual (o mais barato de cada tipo).
+   * Cobre API com registros duplicados, intervalo inconsistente ou array repetido.
+   */
   const uniquePlans = useMemo(() => {
-    const byId = new Map<string, (typeof plans)[0]>();
-    for (const p of plans) {
-      if (!byId.has(p.id)) byId.set(p.id, p);
-    }
-    return [...byId.values()];
+    const list = Array.isArray(plans) ? plans : [];
+    const isMonthly = (p: SubscriptionPlan) =>
+      p.interval === 'MONTHLY' || /mensal/i.test(p.name);
+    const isYearly = (p: SubscriptionPlan) =>
+      p.interval === 'YEARLY' || /anual/i.test(p.name);
+
+    const pickCheapest = (subset: SubscriptionPlan[]) =>
+      subset.length === 0
+        ? undefined
+        : subset.reduce((a, b) => (a.priceCents <= b.priceCents ? a : b));
+
+    const monthly = pickCheapest(list.filter(isMonthly));
+    const yearly = pickCheapest(list.filter(isYearly));
+    const ordered: SubscriptionPlan[] = [];
+    if (monthly) ordered.push(monthly);
+    if (yearly && yearly.id !== monthly?.id) ordered.push(yearly);
+    return ordered;
   }, [plans]);
 
   if (loadingPage) return <Loading />;
@@ -182,111 +197,92 @@ export default function AssinaturaPage() {
         </div>
       )}
 
-      {uniquePlans.length === 0 && !loadingPage && (
+      {!isPremium && uniquePlans.length === 0 && !loadingPage && (
         <div className="bg-gray-50 rounded-xl p-8 text-center">
           <p className="text-gray-500">Nenhum plano disponível no momento.</p>
         </div>
       )}
 
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-        {uniquePlans.map((plan) => (
-          <div
-            key={plan.id}
-            className={`bg-white rounded-xl border-2 p-6 transition relative ${
-              plan.interval === 'YEARLY'
-                ? 'border-primary shadow-lg ring-1 ring-primary/20'
-                : 'border-gray-200'
-            }`}
-          >
-            {plan.interval === 'YEARLY' && (
-              <span className="absolute -top-3 left-1/2 -translate-x-1/2 inline-block bg-primary text-white text-xs font-semibold px-4 py-1 rounded-full shadow-sm">
-                Melhor custo-benefício
-              </span>
-            )}
-            <h3 className="text-lg font-bold text-gray-900 mt-1">{plan.name}</h3>
-            <div className="mt-2 mb-4">
-              <span className="text-3xl font-bold text-gray-900">
-                {formatPrice(plan.priceCents)}
-              </span>
-              <span className="text-gray-500">
-                /{plan.interval === 'MONTHLY' ? 'mês' : 'ano'}
-              </span>
-              {plan.interval === 'YEARLY' && (
-                <p className="text-xs text-secondary font-medium mt-1">
-                  Equivale a {formatPrice(Math.round(plan.priceCents / 12))}/mês
-                </p>
-              )}
-            </div>
-
-            <ul className="space-y-2 text-sm text-gray-600 mb-6">
-              <li className="flex items-center gap-2">
-                <span className="text-secondary font-bold">✓</span> Até 10 escolas extras
-              </li>
-              <li className="flex items-center gap-2">
-                <span className="text-secondary font-bold">✓</span> Foto de perfil exibida
-              </li>
-              <li className="flex items-center gap-2">
-                <span className="text-secondary font-bold">✓</span> Fotos do veículo exibidas
-              </li>
-              <li className="flex items-center gap-2">
-                <span className="text-secondary font-bold">✓</span> Selo premium no perfil
-              </li>
-              <li className="flex items-center gap-2">
-                <span className="text-secondary font-bold">✓</span> Destaque nos resultados de busca
-              </li>
-            </ul>
-
-            {!isPremium && (
-              <button
-                onClick={() => handleCheckout(plan.id)}
-                disabled={!!loadingAction}
-                className={`w-full py-3 rounded-lg font-bold transition cursor-pointer ${
+      {/* Com Premium ativo, o banner acima já basta — não repetir cards Mensal/Anual com "Plano ativo" */}
+      {!isPremium && uniquePlans.length > 0 && (
+        <>
+          <p className="text-sm text-gray-600 mb-4">
+            Plano atual: <strong>Gratuito</strong>. Os planos abaixo liberam foto, veículo, mais escolas e destaque na busca.
+          </p>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            {uniquePlans.map((plan) => (
+              <div
+                key={`${plan.interval}-${plan.id}`}
+                className={`bg-white rounded-xl border-2 p-6 transition relative ${
                   plan.interval === 'YEARLY'
-                    ? 'bg-primary hover:bg-primary-600 text-white shadow-md'
-                    : 'bg-secondary hover:bg-secondary-600 text-white'
-                } disabled:opacity-50`}
+                    ? 'border-primary shadow-lg ring-1 ring-primary/20'
+                    : 'border-gray-200'
+                }`}
               >
-                {loadingAction === plan.id ? (
-                  <span className="flex items-center justify-center gap-2">
-                    <svg className="animate-spin h-4 w-4" viewBox="0 0 24 24">
-                      <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" fill="none" />
-                      <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z" />
-                    </svg>
-                    Redirecionando...
+                {plan.interval === 'YEARLY' && (
+                  <span className="absolute -top-3 left-1/2 -translate-x-1/2 inline-block bg-primary text-white text-xs font-semibold px-4 py-1 rounded-full shadow-sm">
+                    Melhor custo-benefício
                   </span>
-                ) : (
-                  'Assinar agora'
                 )}
-              </button>
-            )}
+                <h3 className="text-lg font-bold text-gray-900 mt-1">{plan.name}</h3>
+                <div className="mt-2 mb-4">
+                  <span className="text-3xl font-bold text-gray-900">
+                    {formatPrice(plan.priceCents)}
+                  </span>
+                  <span className="text-gray-500">
+                    /{plan.interval === 'MONTHLY' ? 'mês' : 'ano'}
+                  </span>
+                  {plan.interval === 'YEARLY' && (
+                    <p className="text-xs text-secondary font-medium mt-1">
+                      Equivale a {formatPrice(Math.round(plan.priceCents / 12))}/mês
+                    </p>
+                  )}
+                </div>
 
-            {isPremium && (
-              <div className="w-full py-2.5 rounded-lg text-center text-sm font-medium text-primary bg-primary-50">
-                Plano ativo
+                <ul className="space-y-2 text-sm text-gray-600 mb-6">
+                  <li className="flex items-center gap-2">
+                    <span className="text-secondary font-bold">✓</span> Até 10 escolas extras
+                  </li>
+                  <li className="flex items-center gap-2">
+                    <span className="text-secondary font-bold">✓</span> Foto de perfil exibida
+                  </li>
+                  <li className="flex items-center gap-2">
+                    <span className="text-secondary font-bold">✓</span> Fotos do veículo exibidas
+                  </li>
+                  <li className="flex items-center gap-2">
+                    <span className="text-secondary font-bold">✓</span> Selo premium no perfil
+                  </li>
+                  <li className="flex items-center gap-2">
+                    <span className="text-secondary font-bold">✓</span> Destaque nos resultados de busca
+                  </li>
+                </ul>
+
+                <button
+                  type="button"
+                  onClick={() => handleCheckout(plan.id)}
+                  disabled={!!loadingAction}
+                  className={`w-full py-3 rounded-lg font-bold transition cursor-pointer ${
+                    plan.interval === 'YEARLY'
+                      ? 'bg-primary hover:bg-primary-600 text-white shadow-md'
+                      : 'bg-secondary hover:bg-secondary-600 text-white'
+                  } disabled:opacity-50`}
+                >
+                  {loadingAction === plan.id ? (
+                    <span className="flex items-center justify-center gap-2">
+                      <svg className="animate-spin h-4 w-4" viewBox="0 0 24 24">
+                        <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" fill="none" />
+                        <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z" />
+                      </svg>
+                      Redirecionando...
+                    </span>
+                  ) : (
+                    'Assinar agora'
+                  )}
+                </button>
               </div>
-            )}
+            ))}
           </div>
-        ))}
-      </div>
-
-      {!isPremium && (
-        <div className="mt-8 bg-gray-50 rounded-xl p-6">
-          <h3 className="font-semibold text-gray-900 mb-3">Plano Gratuito (atual)</h3>
-          <ul className="space-y-2 text-sm text-gray-600">
-            <li className="flex items-center gap-2">
-              <span className="text-green-500">✓</span> 1 escola principal + 1 secundária
-            </li>
-            <li className="flex items-center gap-2">
-              <span className="text-green-500">✓</span> Bairros ilimitados
-            </li>
-            <li className="flex items-center gap-2">
-              <span className="text-gray-400">✗</span> Sem foto de perfil exibida
-            </li>
-            <li className="flex items-center gap-2">
-              <span className="text-gray-400">✗</span> Sem fotos do veículo
-            </li>
-          </ul>
-        </div>
+        </>
       )}
 
       <p className="text-xs text-gray-400 text-center mt-6">

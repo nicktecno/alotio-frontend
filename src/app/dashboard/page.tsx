@@ -221,7 +221,7 @@ export default function DashboardPage() {
         </div>
       )}
 
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
         <Link
           href="/dashboard/perfil"
           className="bg-white border border-gray-200 rounded-xl p-5 hover:shadow-md transition group"
@@ -253,18 +253,10 @@ export default function DashboardPage() {
             {isPremium ? 'Gerencie avatar e fotos do veículo' : 'Disponível no plano premium'}
           </p>
         </Link>
-        <Link
-          href="/dashboard/assinatura"
-          className="bg-white border border-gray-200 rounded-xl p-5 hover:shadow-md transition group"
-        >
-          <h3 className="font-semibold text-gray-900 group-hover:text-primary mb-1">
-            Assinatura
-          </h3>
-          <p className="text-sm text-gray-500">
-            {isPremium ? 'Gerencie sua assinatura premium' : 'Assine para mais recursos'}
-          </p>
-        </Link>
       </div>
+      <p className="text-sm text-gray-500">
+        Assinatura e plano: use o item <strong className="text-gray-700">Assinatura</strong> no menu à esquerda.
+      </p>
     </div>
   );
 }
