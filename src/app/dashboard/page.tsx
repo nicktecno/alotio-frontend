@@ -84,13 +84,6 @@ export default function DashboardPage() {
 
   return (
     <div className="max-w-4xl space-y-6">
-      <div className="flex justify-center lg:justify-start">
-        <img
-          src="/bannerAlotio.png"
-          alt="Alô Tio — transporte escolar"
-          className="w-full max-w-lg sm:max-w-xl lg:max-w-2xl h-auto object-contain rounded-2xl shadow-md"
-        />
-      </div>
       <div className="flex items-center justify-between">
         <h1 className="text-2xl font-bold font-heading text-gray-900">Meu Painel</h1>
         <span className={`px-3 py-1 rounded-full text-sm font-medium ${statusColors[profile!.status]}`}>
@@ -215,41 +208,6 @@ export default function DashboardPage() {
           </p>
         </div>
       </div>
-
-      {!isPremium && (
-        <div className="relative overflow-hidden rounded-xl border-2 border-primary/30 bg-gradient-to-r from-primary-50 via-white to-primary-50 p-6">
-          <div className="absolute top-0 right-0 w-32 h-32 bg-primary/5 rounded-full -translate-y-8 translate-x-8" />
-          <div className="relative flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
-            <div>
-              <div className="flex items-center gap-2 mb-1">
-                <span className="text-xl">⭐</span>
-                <h3 className="text-lg font-bold text-gray-900 font-heading">Turbine seu perfil com o Premium</h3>
-              </div>
-              <ul className="mt-2 space-y-1 text-sm text-gray-600">
-                <li className="flex items-center gap-2">
-                  <span className="text-secondary font-bold">✓</span> Até 10 escolas extras
-                </li>
-                <li className="flex items-center gap-2">
-                  <span className="text-secondary font-bold">✓</span> Foto de perfil e veículo exibidas
-                </li>
-                <li className="flex items-center gap-2">
-                  <span className="text-secondary font-bold">✓</span> Selo premium no perfil público
-                </li>
-                <li className="flex items-center gap-2">
-                  <span className="text-secondary font-bold">✓</span> Destaque nos resultados de busca
-                </li>
-              </ul>
-              <p className="mt-2 text-xs text-gray-400">A partir de R$ 14,90/mês</p>
-            </div>
-            <Link
-              href="/dashboard/assinatura"
-              className="flex-shrink-0 bg-primary hover:bg-primary-600 text-white px-6 py-3 rounded-lg font-bold font-heading tracking-wide transition shadow-md hover:shadow-lg cursor-pointer"
-            >
-              Quero ser Premium
-            </Link>
-          </div>
-        </div>
-      )}
 
       {profile!.neighborhoods?.length === 0 && (
         <div className="rounded-xl border-2 border-amber-300 bg-amber-50 p-4 flex items-start gap-3">

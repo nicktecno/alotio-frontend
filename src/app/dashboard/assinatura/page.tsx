@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useMemo, useState } from 'react';
 import { api } from '@/lib/api';
 import { usePlans, useMySubscription, invalidateSubscription, invalidateProfile } from '@/lib/swr';
 import toast from 'react-hot-toast';
@@ -76,6 +76,15 @@ export default function AssinaturaPage() {
 
   const formatPrice = (cents: number) =>
     new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(cents / 100);
+
+  /** Evita cards duplicados se a API retornar o mesmo plano mais de uma vez */
+  const uniquePlans = useMemo(() => {
+    const byId = new Map<string, (typeof plans)[0]>();
+    for (const p of plans) {
+      if (!byId.has(p.id)) byId.set(p.id, p);
+    }
+    return [...byId.values()];
+  }, [plans]);
 
   if (loadingPage) return <Loading />;
 
@@ -173,27 +182,14 @@ export default function AssinaturaPage() {
         </div>
       )}
 
-      {!isPremium && (
-        <div className="bg-gradient-to-r from-primary-50 to-secondary/10 border border-primary/20 rounded-xl p-5 mb-8 flex items-start gap-3">
-          <span className="text-2xl flex-shrink-0">⭐</span>
-          <div>
-            <h3 className="font-semibold text-gray-900">Desbloqueie todo o potencial do seu perfil!</h3>
-            <p className="text-sm text-gray-600 mt-1">
-              Com o plano Premium, seus pais poderão ver sua foto de perfil e do veículo,
-              e você poderá cadastrar até 10 escolas extras. Escolha seu plano abaixo:
-            </p>
-          </div>
-        </div>
-      )}
-
-      {plans.length === 0 && !loadingPage && (
+      {uniquePlans.length === 0 && !loadingPage && (
         <div className="bg-gray-50 rounded-xl p-8 text-center">
           <p className="text-gray-500">Nenhum plano disponível no momento.</p>
         </div>
       )}
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-        {plans.map((plan) => (
+        {uniquePlans.map((plan) => (
           <div
             key={plan.id}
             className={`bg-white rounded-xl border-2 p-6 transition relative ${
