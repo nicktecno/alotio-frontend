@@ -186,7 +186,7 @@ export default function DashboardPage() {
         </div>
       )}
 
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
         <div className="bg-white border border-gray-200 rounded-xl p-5">
           <p className="text-sm text-gray-500 mb-1">Prefixo</p>
           <p className="text-2xl font-bold text-gray-900">{profile!.prefixo}</p>
@@ -199,12 +199,6 @@ export default function DashboardPage() {
           <p className="text-sm text-gray-500 mb-1">Escolas</p>
           <p className="text-2xl font-bold text-gray-900">
             {1 + (profile!.secondarySchool ? 1 : 0) + profile!.schools.length}
-          </p>
-        </div>
-        <div className="bg-white border border-gray-200 rounded-xl p-5">
-          <p className="text-sm text-gray-500 mb-1">Plano</p>
-          <p className={`text-lg font-semibold ${isPremium ? 'text-primary' : 'text-gray-900'}`}>
-            {isPremium ? 'Premium' : 'Gratuito'}
           </p>
         </div>
       </div>
