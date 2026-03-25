@@ -49,7 +49,7 @@ export default function DashboardPage() {
             className="w-full max-w-lg sm:max-w-xl lg:max-w-2xl h-auto object-contain rounded-2xl shadow-lg"
           />
         </div>
-        <h1 className="text-2xl font-bold font-heading text-gray-900 mb-4">Bem-vindo ao aloTio!</h1>
+        <h1 className="text-2xl font-bold font-heading text-gray-900 mb-4">Bem-vindo ao Alô Tio!</h1>
         <p className="text-gray-600 mb-6">
           Você ainda não tem um perfil de Tio. Crie seu perfil para ser encontrado por pais.
         </p>
@@ -173,7 +173,7 @@ export default function DashboardPage() {
           <div>
             <h3 className="font-semibold text-blue-800 text-base">Confirmação anual necessária</h3>
             <p className="text-sm text-blue-700 mt-1">
-              Faz um ano que você está cadastrado no aloTio. Para manter seu perfil ativo, confirme que ainda atua como transportador escolar.
+              Faz um ano que você está cadastrado no Alô Tio. Para manter seu perfil ativo, confirme que ainda atua como transportador escolar.
             </p>
             <button
               onClick={handleConfirmActive}

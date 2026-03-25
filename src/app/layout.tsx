@@ -27,8 +27,8 @@ const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://alotio.com.br';
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
   title: {
-    default: 'aloTio - Transporte Escolar | Encontre o Tio da Van Escolar',
-    template: '%s | aloTio - Transporte Escolar',
+    default: 'Alô Tio - Transporte Escolar | Encontre o Tio da Van Escolar',
+    template: '%s | Alô Tio - Transporte Escolar',
   },
   description:
     'Encontre transporte escolar seguro e verificado. Pesquise por escola, cidade ou bairro e conecte-se com profissionais de van escolar cadastrados na sua região.',
@@ -54,9 +54,9 @@ export const metadata: Metadata = {
     'serviço de transporte escolar',
     'buscar transporte escolar',
   ],
-  authors: [{ name: 'aloTio' }],
-  creator: 'aloTio',
-  publisher: 'aloTio',
+  authors: [{ name: 'Alô Tio' }],
+  creator: 'Alô Tio',
+  publisher: 'Alô Tio',
   robots: {
     index: true,
     follow: true,
@@ -72,8 +72,8 @@ export const metadata: Metadata = {
     type: 'website',
     locale: 'pt_BR',
     url: siteUrl,
-    siteName: 'aloTio',
-    title: 'aloTio - Transporte Escolar | Encontre o Tio da Van Escolar',
+    siteName: 'Alô Tio',
+    title: 'Alô Tio - Transporte Escolar | Encontre o Tio da Van Escolar',
     description:
       'Encontre transporte escolar seguro e verificado. Pesquise por escola, cidade ou bairro e conecte-se com profissionais de van escolar na sua região.',
     images: [
@@ -81,13 +81,13 @@ export const metadata: Metadata = {
         url: '/bannerAlotio.png',
         width: 1536,
         height: 1024,
-        alt: 'aloTio - Transporte Escolar',
+        alt: 'Alô Tio - Transporte Escolar',
       },
     ],
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'aloTio - Transporte Escolar | Encontre o Tio da Van Escolar',
+    title: 'Alô Tio - Transporte Escolar | Encontre o Tio da Van Escolar',
     description:
       'Encontre transporte escolar seguro e verificado. Pesquise por escola e conecte-se com profissionais de van escolar na sua região.',
     images: ['/bannerAlotio.png'],
@@ -103,7 +103,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   const jsonLd = {
     '@context': 'https://schema.org',
     '@type': 'WebApplication',
-    name: 'aloTio',
+    name: 'Alô Tio',
     url: siteUrl,
     description:
       'Plataforma para encontrar transporte escolar seguro e verificado. Pesquise por escola, cidade ou bairro.',
@@ -117,7 +117,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     },
     provider: {
       '@type': 'Organization',
-      name: 'aloTio',
+      name: 'Alô Tio',
       url: siteUrl,
     },
   };

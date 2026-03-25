@@ -23,7 +23,7 @@ export async function generateMetadata({
     const title = `${tio.displayName} - Transporte Escolar em ${cityName}/${stateName}`;
     const description = `${tio.displayName} oferece transporte escolar em ${cityName}/${stateName}. ${
       schoolNames ? `Atende: ${schoolNames}.` : ''
-    } Prefixo ${tio.prefixo}. Encontre van escolar segura no aloTio.`;
+    } Prefixo ${tio.prefixo}. Encontre van escolar segura no Alô Tio.`;
 
     return {
       title,
@@ -56,7 +56,7 @@ export async function generateMetadata({
   } catch {
     return {
       title: 'Transportador Escolar',
-      description: 'Encontre transporte escolar seguro e verificado no aloTio.',
+      description: 'Encontre transporte escolar seguro e verificado no Alô Tio.',
     };
   }
 }

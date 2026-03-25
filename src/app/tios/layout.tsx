@@ -15,7 +15,7 @@ export const metadata: Metadata = {
     'van escolar cadastrada',
   ],
   openGraph: {
-    title: 'Buscar Transporte Escolar | aloTio',
+    title: 'Buscar Transporte Escolar | Alô Tio',
     description:
       'Busque transporte escolar por escola, cidade e bairro. Encontre profissionais de van escolar verificados.',
   },

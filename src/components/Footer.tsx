@@ -32,7 +32,7 @@ export default function Footer() {
             </a>
           </div>
           <p className="text-primary-100 text-sm">
-            &copy; {new Date().getFullYear()} aloTio. Todos os direitos reservados.
+            &copy; {new Date().getFullYear()} Alô Tio. Todos os direitos reservados.
           </p>
         </div>
       </div>

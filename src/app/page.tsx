@@ -4,7 +4,7 @@ import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 
 export const metadata: Metadata = {
-  title: 'aloTio - Transporte Escolar | Encontre o Tio da Van Escolar',
+  title: 'Alô Tio - Transporte Escolar | Encontre o Tio da Van Escolar',
   description:
     'Encontre transporte escolar seguro e verificado para seu filho. Pesquise por escola, cidade ou bairro e conecte-se com motoristas de van escolar cadastrados na sua região. Serviço gratuito.',
   alternates: {
@@ -18,7 +18,7 @@ export default function Home() {
   const localBusinessSchema = {
     '@context': 'https://schema.org',
     '@type': 'LocalBusiness',
-    name: 'aloTio - Transporte Escolar',
+    name: 'Alô Tio - Transporte Escolar',
     description: 'Plataforma para encontrar transporte escolar seguro e verificado por escola, cidade e bairro.',
     url: siteUrl,
     areaServed: {
@@ -38,15 +38,15 @@ export default function Home() {
         name: 'Como encontrar transporte escolar para meu filho?',
         acceptedAnswer: {
           '@type': 'Answer',
-          text: 'No aloTio, selecione o estado, a cidade e a escola do seu filho. A plataforma mostrará todos os transportadores escolares cadastrados que atendem aquela escola, com informações de contato, fotos do veículo e bairros atendidos.',
+          text: 'No Alô Tio, selecione o estado, a cidade e a escola do seu filho. A plataforma mostrará todos os transportadores escolares cadastrados que atendem aquela escola, com informações de contato, fotos do veículo e bairros atendidos.',
         },
       },
       {
         '@type': 'Question',
-        name: 'O aloTio é gratuito para pais?',
+        name: 'O Alô Tio é gratuito para pais?',
         acceptedAnswer: {
           '@type': 'Answer',
-          text: 'Sim, a busca por transporte escolar no aloTio é totalmente gratuita para pais e responsáveis. Basta acessar a plataforma e pesquisar pela escola.',
+          text: 'Sim, a busca por transporte escolar no Alô Tio é totalmente gratuita para pais e responsáveis. Basta acessar a plataforma e pesquisar pela escola.',
         },
       },
       {
