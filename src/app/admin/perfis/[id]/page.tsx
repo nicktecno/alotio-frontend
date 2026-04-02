@@ -428,6 +428,19 @@ export default function AdminProfileDetailPage() {
               <p className="text-gray-900">{profile.city?.name}</p>
             )}
           </div>
+          {!editing && profile.isIntermunicipal && (
+            <div className="sm:col-span-3 flex flex-wrap items-center gap-2">
+              <span className="inline-flex items-center rounded-full bg-amber-50 text-amber-800 text-xs font-semibold px-2.5 py-1 border border-amber-200">
+                Intermunicipal
+              </span>
+              {profile.secondaryCity && (
+                <span className="text-sm text-gray-700">
+                  Também atende: <strong>{profile.secondaryCity.name}</strong>
+                  {profile.secondaryCity.state?.uf ? `/${profile.secondaryCity.state.uf}` : ''}
+                </span>
+              )}
+            </div>
+          )}
           <div>
             <label className="block text-sm font-medium text-gray-600 mb-1">Escola principal</label>
             {editing ? (

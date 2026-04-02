@@ -111,7 +111,15 @@ export default function AdminPerfisPage() {
                 <tr key={p.id} className="hover:bg-gray-50">
                   <td className="px-4 py-3 font-medium text-gray-900">{p.displayName}</td>
                   <td className="px-4 py-3 text-gray-600">{p.prefixo}</td>
-                  <td className="px-4 py-3 text-gray-600">{p.city?.name}</td>
+                  <td className="px-4 py-3 text-gray-600">
+                    <span className="block">{p.city?.name}</span>
+                    {p.isIntermunicipal && (
+                      <span className="block text-xs text-amber-700 font-medium mt-0.5">Intermunicipal</span>
+                    )}
+                    {p.isIntermunicipal && p.secondaryCity && (
+                      <span className="block text-xs text-gray-500">e {p.secondaryCity.name}</span>
+                    )}
+                  </td>
                   <td className="px-4 py-3">
                     <span className={`px-2 py-0.5 rounded-full text-xs font-medium ${statusColors[p.status]}`}>
                       {statusLabels[p.status] || p.status}
