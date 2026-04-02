@@ -155,7 +155,8 @@ export const api = {
     }),
 
   // Public - States, Cities, Schools, Neighborhoods
-  getStates: () => request('/states'),
+  getStates: (withTios?: boolean) =>
+    request(withTios ? '/states?withTios=true' : '/states'),
   getStateByUf: (uf: string) => request(`/states/${uf}`),
   /** Sem `pagination`: lista completa (perfil, busca). Com `pagination`: admin. */
   getCities: (

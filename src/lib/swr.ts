@@ -27,8 +27,9 @@ const SHORT_CACHE = {
 
 // ─── Public data (long cache, rarely changes) ───
 
-export function useStates() {
-  return useSWR('states', () => api.getStates() as Promise<State[]>, LONG_CACHE);
+export function useStates(withTiosOnly?: boolean) {
+  const key = withTiosOnly ? 'states-with-tios' : 'states';
+  return useSWR(key, () => api.getStates(withTiosOnly) as Promise<State[]>, LONG_CACHE);
 }
 
 export function useCities(stateId?: string, withTios?: boolean) {

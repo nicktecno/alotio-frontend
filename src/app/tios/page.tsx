@@ -21,7 +21,7 @@ export default function TiosPage() {
   const [loading, setLoading] = useState(false);
   const [hasSearched, setHasSearched] = useState(false);
 
-  const { data: states = [], isLoading: loadingStates } = useStates();
+  const { data: states = [], isLoading: loadingStates } = useStates(true);
   const { data: cities = [], isLoading: loadingCities } = useCities(selectedState || undefined, true);
   const { data: schools = [], isLoading: loadingSchoolsData } = useSchools(
     selectedCity || undefined,
@@ -238,12 +238,17 @@ export default function TiosPage() {
                       <h3 className="font-semibold text-gray-900 group-hover:text-primary transition truncate">
                         {tio.displayName}
                       </h3>
-                      <p className="text-sm text-gray-500">
-                        Prefixo {tio.prefixo} &bull; {tio.city.name}/{tio.city.state.uf}
-                        {tio.isIntermunicipal && tio.secondaryCity && (
-                          <span> &bull; {tio.secondaryCity.name}/{tio.secondaryCity.state.uf}</span>
-                        )}
-                      </p>
+                      <p className="text-sm text-gray-500">Prefixo {tio.prefixo}</p>
+                      {tio.isIntermunicipal && tio.secondaryCity ? (
+                        <div className="text-sm text-gray-600 mt-1 space-y-0.5">
+                          <div>{tio.city.name}/{tio.city.state.uf}</div>
+                          <div className="text-gray-500">e {tio.secondaryCity.name}/{tio.secondaryCity.state.uf}</div>
+                        </div>
+                      ) : (
+                        <p className="text-sm text-gray-600 mt-1">
+                          {tio.city.name}/{tio.city.state.uf}
+                        </p>
+                      )}
                     </div>
                     <div className="ml-auto flex flex-col items-end gap-1 shrink-0">
                       {tio.isPremium && (

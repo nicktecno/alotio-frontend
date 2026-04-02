@@ -116,12 +116,17 @@ export default function TioDetailPage() {
                     </span>
                   )}
                 </div>
-                <p className="text-primary-100 mt-1">
-                  Prefixo {tio.prefixo} &bull; {tio.city.name}/{tio.city.state.uf}
-                  {tio.isIntermunicipal && tio.secondaryCity && (
-                    <span> &bull; {tio.secondaryCity.name}/{tio.secondaryCity.state.uf}</span>
-                  )}
-                </p>
+                <p className="text-primary-100 mt-1">Prefixo {tio.prefixo}</p>
+                {tio.isIntermunicipal && tio.secondaryCity ? (
+                  <div className="text-primary-100/95 mt-1 space-y-0.5 text-sm">
+                    <div>{tio.city.name}/{tio.city.state.uf}</div>
+                    <div>e {tio.secondaryCity.name}/{tio.secondaryCity.state.uf}</div>
+                  </div>
+                ) : (
+                  <p className="text-primary-100 mt-1">
+                    {tio.city.name}/{tio.city.state.uf}
+                  </p>
+                )}
                 {tio.phone && (
                   <div className="flex flex-wrap gap-2 mt-3">
                     <a
