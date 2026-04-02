@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useMemo } from 'react';
 import { useParams, useRouter } from 'next/navigation';
 import Link from 'next/link';
 import { api, assetUrl, ApiError } from '@/lib/api';
@@ -20,7 +20,6 @@ export default function AdminProfileDetailPage() {
 
   const [states, setStates] = useState<State[]>([]);
   const [cities, setCities] = useState<City[]>([]);
-  const [schools, setSchools] = useState<School[]>([]);
   const [cityNeighborhoods, setCityNeighborhoods] = useState<Neighborhood[]>([]);
 
   const [editingAssociations, setEditingAssociations] = useState(false);
@@ -36,6 +35,14 @@ export default function AdminProfileDetailPage() {
   const [bio, setBio] = useState('');
   const [selectedState, setSelectedState] = useState('');
   const [selectedCity, setSelectedCity] = useState('');
+  const [isIntermunicipal, setIsIntermunicipal] = useState(false);
+  const [selectedSecondaryCity, setSelectedSecondaryCity] = useState('');
+  const [defaultSchoolCityId, setDefaultSchoolCityId] = useState('');
+  const [secondarySchoolCityId, setSecondarySchoolCityId] = useState('');
+  const [schoolsDefault, setSchoolsDefault] = useState<School[]>([]);
+  const [schoolsSecondary, setSchoolsSecondary] = useState<School[]>([]);
+  const [loadingSchoolsDefault, setLoadingSchoolsDefault] = useState(false);
+  const [loadingSchoolsSecondary, setLoadingSchoolsSecondary] = useState(false);
   const [defaultSchoolId, setDefaultSchoolId] = useState('');
   const [secondarySchoolId, setSecondarySchoolId] = useState('');
   const [status, setStatus] = useState('');
@@ -50,6 +57,55 @@ export default function AdminProfileDetailPage() {
 
   const [actionLoading, setActionLoading] = useState(false);
   const [neighborhoodsReminderLoading, setNeighborhoodsReminderLoading] = useState(false);
+
+  const showCityPicker = isIntermunicipal && !!selectedSecondaryCity;
+  const effectiveDefaultCityId = showCityPicker ? defaultSchoolCityId || selectedCity : selectedCity;
+  const effectiveSecondaryCityId = showCityPicker ? secondarySchoolCityId || selectedCity : selectedCity;
+
+  const needSchoolLists = editing || editingAssociations;
+
+  const schoolsUnion = useMemo(() => {
+    const m = new Map<string, School>();
+    for (const s of schoolsDefault) m.set(s.id, s);
+    for (const s of schoolsSecondary) m.set(s.id, s);
+    return Array.from(m.values());
+  }, [schoolsDefault, schoolsSecondary]);
+
+  useEffect(() => {
+    if (!needSchoolLists || !effectiveDefaultCityId) {
+      if (needSchoolLists) setSchoolsDefault([]);
+      return;
+    }
+    let cancelled = false;
+    setLoadingSchoolsDefault(true);
+    api.getSchools(effectiveDefaultCityId).then((d) => {
+      if (!cancelled) {
+        setSchoolsDefault(d as School[]);
+        setLoadingSchoolsDefault(false);
+      }
+    });
+    return () => {
+      cancelled = true;
+    };
+  }, [needSchoolLists, effectiveDefaultCityId]);
+
+  useEffect(() => {
+    if (!needSchoolLists || !effectiveSecondaryCityId) {
+      if (needSchoolLists) setSchoolsSecondary([]);
+      return;
+    }
+    let cancelled = false;
+    setLoadingSchoolsSecondary(true);
+    api.getSchools(effectiveSecondaryCityId).then((d) => {
+      if (!cancelled) {
+        setSchoolsSecondary(d as School[]);
+        setLoadingSchoolsSecondary(false);
+      }
+    });
+    return () => {
+      cancelled = true;
+    };
+  }, [needSchoolLists, effectiveSecondaryCityId]);
 
   useEffect(() => {
     if (!id) return;
@@ -68,6 +124,12 @@ export default function AdminProfileDetailPage() {
     setPhone(p.phone || '');
     setBio(p.bio || '');
     setStatus(p.status);
+    setIsIntermunicipal(p.isIntermunicipal || false);
+    setSelectedSecondaryCity(p.secondaryCityId || '');
+    const defSchCity = p.defaultSchool?.cityId || p.cityId;
+    const secSchCity = p.secondarySchool?.cityId || p.cityId;
+    setDefaultSchoolCityId(defSchCity);
+    setSecondarySchoolCityId(p.secondarySchool ? secSchCity : p.cityId);
     setDefaultSchoolId(p.defaultSchoolId);
     setSecondarySchoolId(p.secondarySchoolId || '');
     if (p.city?.state) {
@@ -75,7 +137,6 @@ export default function AdminProfileDetailPage() {
       api.getCities(p.city.state.id).then((data) => setCities(data as City[]));
     }
     setSelectedCity(p.cityId);
-    api.getSchools(p.cityId).then((data) => setSchools(data as School[]));
     api.getNeighborhoods(p.cityId).then((data) => setCityNeighborhoods(data as Neighborhood[]));
     setSelectedNeighborhoodIds(p.neighborhoods.map((n) => n.neighborhood.id));
     setSelectedExtraSchoolIds(p.schools.map((s) => s.school.id));
@@ -86,10 +147,13 @@ export default function AdminProfileDetailPage() {
   const handleStateChange = (stateId: string) => {
     setSelectedState(stateId);
     setSelectedCity('');
+    setIsIntermunicipal(false);
+    setSelectedSecondaryCity('');
+    setDefaultSchoolCityId('');
+    setSecondarySchoolCityId('');
     setDefaultSchoolId('');
     setSecondarySchoolId('');
     setCities([]);
-    setSchools([]);
     if (stateId) {
       api.getCities(stateId).then((data) => setCities(data as City[]));
     }
@@ -99,14 +163,21 @@ export default function AdminProfileDetailPage() {
     setSelectedCity(cityId);
     setDefaultSchoolId('');
     setSecondarySchoolId('');
-    setSchools([]);
-    if (cityId) {
-      api.getSchools(cityId).then((data) => setSchools(data as School[]));
+    setDefaultSchoolCityId(cityId);
+    setSecondarySchoolCityId(cityId);
+    if (selectedSecondaryCity === cityId) {
+      setSelectedSecondaryCity('');
     }
   };
 
   const handleSave = async () => {
     if (!profile) return;
+    if (isIntermunicipal) {
+      if (!selectedSecondaryCity || selectedSecondaryCity === selectedCity) {
+        toast.error('Selecione uma cidade secundária diferente da cidade principal.');
+        return;
+      }
+    }
     setSaving(true);
     try {
       const data: Record<string, unknown> = {
@@ -115,6 +186,8 @@ export default function AdminProfileDetailPage() {
         phone: phone || null,
         bio: bio || null,
         cityId: selectedCity,
+        isIntermunicipal,
+        secondaryCityId: isIntermunicipal ? selectedSecondaryCity : null,
         defaultSchoolId,
         secondarySchoolId: secondarySchoolId || null,
         status,
@@ -401,7 +474,7 @@ export default function AdminProfileDetailPage() {
 
         <h2 className="font-semibold text-gray-900 border-b pb-2 pt-2">Localização</h2>
 
-        <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
           <div>
             <label className="block text-sm font-medium text-gray-600 mb-1">Estado</label>
             {editing ? (
@@ -416,7 +489,7 @@ export default function AdminProfileDetailPage() {
             )}
           </div>
           <div>
-            <label className="block text-sm font-medium text-gray-600 mb-1">Cidade</label>
+            <label className="block text-sm font-medium text-gray-600 mb-1">Cidade principal</label>
             {editing ? (
               <select value={selectedCity} onChange={(e) => handleCityChange(e.target.value)} disabled={!selectedState} className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-primary outline-none disabled:opacity-50">
                 <option value="">Selecione</option>
@@ -428,25 +501,106 @@ export default function AdminProfileDetailPage() {
               <p className="text-gray-900">{profile.city?.name}</p>
             )}
           </div>
-          {!editing && profile.isIntermunicipal && (
-            <div className="sm:col-span-3 flex flex-wrap items-center gap-2">
-              <span className="inline-flex items-center rounded-full bg-amber-50 text-amber-800 text-xs font-semibold px-2.5 py-1 border border-amber-200">
-                Intermunicipal
+        </div>
+
+        {editing && (
+          <div className="space-y-3 pt-1">
+            <label className="flex items-center gap-3 cursor-pointer">
+              <input
+                type="checkbox"
+                checked={isIntermunicipal}
+                onChange={(e) => {
+                  const checked = e.target.checked;
+                  setIsIntermunicipal(checked);
+                  if (!checked) {
+                    setSelectedSecondaryCity('');
+                    setDefaultSchoolCityId(selectedCity);
+                    setSecondarySchoolCityId(selectedCity);
+                  } else {
+                    setDefaultSchoolCityId((prev) => prev || selectedCity);
+                    setSecondarySchoolCityId((prev) => prev || selectedCity);
+                  }
+                }}
+                className="w-4 h-4 text-primary border-gray-300 rounded focus:ring-primary"
+              />
+              <span className="text-sm font-medium text-gray-700">Motorista intermunicipal (duas cidades no mesmo estado)</span>
+            </label>
+            {isIntermunicipal && (
+              <div>
+                <label className="block text-sm font-medium text-gray-600 mb-1">Cidade secundária</label>
+                <select
+                  value={selectedSecondaryCity}
+                  onChange={(e) => {
+                    const v = e.target.value;
+                    setSelectedSecondaryCity(v);
+                    if (v && defaultSchoolCityId && v === defaultSchoolCityId) setDefaultSchoolCityId(selectedCity);
+                    if (v && secondarySchoolCityId && v === secondarySchoolCityId) setSecondarySchoolCityId(selectedCity);
+                  }}
+                  disabled={!selectedState}
+                  className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-primary outline-none disabled:opacity-50"
+                >
+                  <option value="">Selecione a segunda cidade</option>
+                  {cities.filter((c) => c.id !== selectedCity).map((c) => (
+                    <option key={c.id} value={c.id}>{c.name}</option>
+                  ))}
+                </select>
+              </div>
+            )}
+          </div>
+        )}
+
+        {!editing && profile.isIntermunicipal && (
+          <div className="flex flex-wrap items-center gap-2 pt-1">
+            <span className="inline-flex items-center rounded-full bg-amber-50 text-amber-800 text-xs font-semibold px-2.5 py-1 border border-amber-200">
+              Intermunicipal
+            </span>
+            {profile.secondaryCity && (
+              <span className="text-sm text-gray-700">
+                Também atende: <strong>{profile.secondaryCity.name}</strong>
+                {profile.secondaryCity.state?.uf ? `/${profile.secondaryCity.state.uf}` : ''}
               </span>
-              {profile.secondaryCity && (
-                <span className="text-sm text-gray-700">
-                  Também atende: <strong>{profile.secondaryCity.name}</strong>
-                  {profile.secondaryCity.state?.uf ? `/${profile.secondaryCity.state.uf}` : ''}
-                </span>
-              )}
-            </div>
-          )}
+            )}
+          </div>
+        )}
+
+        <div className="space-y-4 pt-2">
           <div>
             <label className="block text-sm font-medium text-gray-600 mb-1">Escola principal</label>
+            {editing && showCityPicker && (
+              <div className="flex flex-wrap gap-1.5 mb-2">
+                <button
+                  type="button"
+                  onClick={() => { setDefaultSchoolCityId(selectedCity); setDefaultSchoolId(''); }}
+                  className={`px-2.5 py-1 rounded-md text-xs font-medium border transition ${
+                    effectiveDefaultCityId === selectedCity
+                      ? 'bg-primary text-white border-primary'
+                      : 'bg-white text-gray-600 border-gray-300 hover:bg-gray-50'
+                  }`}
+                >
+                  {cities.find((c) => c.id === selectedCity)?.name || 'Principal'}
+                </button>
+                <button
+                  type="button"
+                  onClick={() => { setDefaultSchoolCityId(selectedSecondaryCity); setDefaultSchoolId(''); }}
+                  className={`px-2.5 py-1 rounded-md text-xs font-medium border transition ${
+                    effectiveDefaultCityId === selectedSecondaryCity
+                      ? 'bg-primary text-white border-primary'
+                      : 'bg-white text-gray-600 border-gray-300 hover:bg-gray-50'
+                  }`}
+                >
+                  {cities.find((c) => c.id === selectedSecondaryCity)?.name || 'Secundária'}
+                </button>
+              </div>
+            )}
             {editing ? (
-              <select value={defaultSchoolId} onChange={(e) => setDefaultSchoolId(e.target.value)} disabled={!selectedCity} className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-primary outline-none disabled:opacity-50">
-                <option value="">Selecione</option>
-                {schools.map((s) => (
+              <select
+                value={defaultSchoolId}
+                onChange={(e) => setDefaultSchoolId(e.target.value)}
+                disabled={!effectiveDefaultCityId || loadingSchoolsDefault}
+                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-primary outline-none disabled:opacity-50"
+              >
+                <option value="">{loadingSchoolsDefault ? 'Carregando...' : 'Selecione'}</option>
+                {schoolsDefault.map((s) => (
                   <option key={s.id} value={s.id}>{s.name}</option>
                 ))}
               </select>
@@ -454,15 +608,46 @@ export default function AdminProfileDetailPage() {
               <p className="text-gray-900">{profile.defaultSchool?.name}</p>
             )}
           </div>
-        </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
           <div>
-            <label className="block text-sm font-medium text-gray-600 mb-1">Escola secundária</label>
+            <label className="block text-sm font-medium text-gray-600 mb-1">
+              Escola secundária <span className="text-gray-400 font-normal">(opcional)</span>
+            </label>
+            {editing && showCityPicker && (
+              <div className="flex flex-wrap gap-1.5 mb-2">
+                <button
+                  type="button"
+                  onClick={() => { setSecondarySchoolCityId(selectedCity); setSecondarySchoolId(''); }}
+                  className={`px-2.5 py-1 rounded-md text-xs font-medium border transition ${
+                    effectiveSecondaryCityId === selectedCity
+                      ? 'bg-primary text-white border-primary'
+                      : 'bg-white text-gray-600 border-gray-300 hover:bg-gray-50'
+                  }`}
+                >
+                  {cities.find((c) => c.id === selectedCity)?.name || 'Principal'}
+                </button>
+                <button
+                  type="button"
+                  onClick={() => { setSecondarySchoolCityId(selectedSecondaryCity); setSecondarySchoolId(''); }}
+                  className={`px-2.5 py-1 rounded-md text-xs font-medium border transition ${
+                    effectiveSecondaryCityId === selectedSecondaryCity
+                      ? 'bg-primary text-white border-primary'
+                      : 'bg-white text-gray-600 border-gray-300 hover:bg-gray-50'
+                  }`}
+                >
+                  {cities.find((c) => c.id === selectedSecondaryCity)?.name || 'Secundária'}
+                </button>
+              </div>
+            )}
             {editing ? (
-              <select value={secondarySchoolId} onChange={(e) => setSecondarySchoolId(e.target.value)} disabled={!selectedCity} className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-primary outline-none disabled:opacity-50">
-                <option value="">Nenhuma</option>
-                {schools.filter((s) => s.id !== defaultSchoolId).map((s) => (
+              <select
+                value={secondarySchoolId}
+                onChange={(e) => setSecondarySchoolId(e.target.value)}
+                disabled={!effectiveSecondaryCityId || loadingSchoolsSecondary}
+                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-primary outline-none disabled:opacity-50"
+              >
+                <option value="">{loadingSchoolsSecondary ? 'Carregando...' : 'Nenhuma'}</option>
+                {schoolsSecondary.filter((s) => s.id !== defaultSchoolId).map((s) => (
                   <option key={s.id} value={s.id}>{s.name}</option>
                 ))}
               </select>
@@ -645,7 +830,7 @@ export default function AdminProfileDetailPage() {
                   className="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:ring-2 focus:ring-primary focus:border-primary outline-none"
                 >
                   <option value="">Selecione</option>
-                  {schools
+                  {schoolsUnion
                     .filter((s) => s.id !== assocSecondarySchoolId)
                     .map((s) => (
                       <option key={s.id} value={s.id}>{s.name}</option>
@@ -660,7 +845,7 @@ export default function AdminProfileDetailPage() {
                   className="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:ring-2 focus:ring-primary focus:border-primary outline-none"
                 >
                   <option value="">Nenhuma</option>
-                  {schools
+                  {schoolsUnion
                     .filter((s) => s.id !== assocDefaultSchoolId)
                     .map((s) => (
                       <option key={s.id} value={s.id}>{s.name}</option>
@@ -689,7 +874,7 @@ export default function AdminProfileDetailPage() {
           </p>
           {editingAssociations ? (
             <div className="space-y-1.5 max-h-48 overflow-y-auto border border-gray-200 rounded-lg p-3">
-              {schools
+              {schoolsUnion
                 .filter((s) => s.id !== assocDefaultSchoolId && s.id !== assocSecondarySchoolId)
                 .map((school) => (
                   <label key={school.id} className={`flex items-center gap-2 p-2 rounded-lg cursor-pointer text-sm transition ${
