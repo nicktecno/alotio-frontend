@@ -75,6 +75,56 @@ async function request<T>(endpoint: string, options: RequestInit = {}): Promise<
   return res.json();
 }
 
+
+
+async function publicRequest<T>(endpoint: string, options: RequestInit = {}): Promise<T> {
+  const headers: Record<string, string> = {
+    'Content-Type': 'application/json',
+    ...((options.headers as Record<string, string>) || {}),
+  };
+  const res = await fetch(`${API_URL}${endpoint}`, { ...options, headers });
+  if (!res.ok) {
+    const body = await res.json().catch(() => ({ message: 'Erro desconhecido' }));
+    throw new ApiError(res.status, body.message || `Erro ${res.status}`);
+  }
+  if (res.status === 204) return {} as T;
+  return res.json();
+}
+
+async function authBlob(endpoint: string): Promise<Blob> {
+  const doFetch = () => fetch(`${API_URL}${endpoint}`, { credentials: 'include' });
+
+  let res = await doFetch();
+
+  if (!res.ok) {
+    if (res.status === 401 && !isRefreshing && !endpoint.startsWith('/auth/') && typeof window !== 'undefined') {
+      isRefreshing = true;
+      try {
+        const refreshRes = await fetch(`${API_URL}/auth/refresh`, {
+          method: 'POST',
+          credentials: 'include',
+        });
+        if (refreshRes.ok) {
+          isRefreshing = false;
+          res = await doFetch();
+          if (res.ok) {
+            return res.blob();
+          }
+        }
+      } catch {
+        /* refresh failed */
+      }
+      isRefreshing = false;
+      window.location.href = '/login';
+      throw new ApiError(401, 'Sessão expirada');
+    }
+    const body = await res.json().catch(() => ({ message: 'Erro' }));
+    throw new ApiError(res.status, body.message || `Erro ${res.status}`);
+  }
+
+  return res.blob();
+}
+
 export const api = {
   // Auth
   register: (data: { email: string; password: string }) =>
@@ -308,6 +358,52 @@ export const api = {
   // Contact
   sendContact: (data: { name: string; email: string; message: string }) =>
     request<{ message: string }>('/contact', { method: 'POST', body: JSON.stringify(data) }),
+
+  servedParentsList: () => request<unknown[]>('/served-parents'),
+  servedParentsCreate: (data: Record<string, unknown>) =>
+    request('/served-parents', { method: 'POST', body: JSON.stringify(data) }),
+  servedParentsUpdate: (id: string, data: Record<string, unknown>) =>
+    request(`/served-parents/parents/${id}`, { method: 'PATCH', body: JSON.stringify(data) }),
+  servedParentsDelete: (id: string) =>
+    request(`/served-parents/parents/${id}`, { method: 'DELETE' }),
+  servedParentsInvite: () =>
+    request<{ url: string; expiresAt: string }>('/served-parents/invites', { method: 'POST' }),
+  servedParentsReceiptPdf: (parentId: string, month: number, year: number) => {
+    const q = new URLSearchParams({ month: String(month), year: String(year) });
+    return authBlob(`/served-parents/parents/${parentId}/receipt-pdf?${q}`);
+  },
+  contractsList: () => request<unknown[]>('/served-parents/contracts'),
+  contractsCreate: (data: Record<string, unknown>) =>
+    request('/served-parents/contracts', { method: 'POST', body: JSON.stringify(data) }),
+  contractsSignTio: (id: string) =>
+    request(`/served-parents/contracts/${id}/sign-tio`, { method: 'POST' }),
+  contractsParentLink: (id: string) =>
+    request<{ url: string; expiresAt: string }>(
+      `/served-parents/contracts/${id}/parent-link`,
+      { method: 'POST' },
+    ),
+  contractsPdf: (id: string) => authBlob(`/served-parents/contracts/${id}/pdf`),
+  contractsDelete: (id: string) =>
+    request(`/served-parents/contracts/${id}`, { method: 'DELETE' }),
+
+  publicParentInvitePreview: (token: string) =>
+    publicRequest<{ valid: boolean; transportadorName: string }>(
+      `/public/parent-invites/${encodeURIComponent(token)}`,
+    ),
+  publicParentInviteComplete: (token: string, data: Record<string, unknown>) =>
+    publicRequest(`/public/parent-invites/${encodeURIComponent(token)}`, {
+      method: 'POST',
+      body: JSON.stringify(data),
+    }),
+  publicContractParentPreview: (token: string) =>
+    publicRequest<{ previewText: string; transportadorName: string }>(
+      `/public/contracts/parent/${encodeURIComponent(token)}`,
+    ),
+  publicContractParentAccept: (token: string) =>
+    publicRequest<{ ok: boolean; finalPdfUrl: string | null }>(
+      `/public/contracts/parent/${encodeURIComponent(token)}/accept`,
+      { method: 'POST' },
+    ),
 };
 
 export { ApiError };

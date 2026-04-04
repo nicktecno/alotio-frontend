@@ -59,6 +59,9 @@ export interface Profile {
   id: string;
   userId: string;
   displayName: string;
+  legalName?: string | null;
+  cnpj?: string | null;
+  transportadorCpf?: string | null;
   prefixo: string;
   phone: string | null;
   bio: string | null;
@@ -126,6 +129,9 @@ export interface Subscription {
 export interface TioPublicView {
   id: string;
   displayName: string;
+  legalName?: string | null;
+  cnpj?: string | null;
+  transportadorCpf?: string | null;
   prefixo: string;
   phone: string | null;
   bio: string | null;
