@@ -1,6 +1,7 @@
 'use client';
 
 import Link from 'next/link';
+import Loading from '@/components/Loading';
 import { useMyProfile } from '@/lib/swr';
 import { MeuTransporteNoProfile } from './_components/no-profile';
 
@@ -36,7 +37,7 @@ export default function MeuTransportePage() {
   const { data: profile, isLoading: profileLoading } = useMyProfile();
 
   if (profileLoading) {
-    return <div className="text-gray-600">Carregando…</div>;
+    return <Loading />;
   }
 
   if (!profile) {

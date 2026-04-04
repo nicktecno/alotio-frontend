@@ -2,6 +2,7 @@
 
 import { useCallback, useEffect, useState } from 'react';
 import { FaWhatsapp } from 'react-icons/fa';
+import Loading from '@/components/Loading';
 import { api } from '@/lib/api';
 import { useMyProfile, useStates, useCities, useNeighborhoods } from '@/lib/swr';
 import toast from 'react-hot-toast';
@@ -247,7 +248,7 @@ export default function MeuTransporteResponsaveisPage() {
   };
 
   if (profileLoading) {
-    return <div className="text-gray-600">Carregando…</div>;
+    return <Loading />;
   }
 
   if (!profile) {
@@ -255,7 +256,7 @@ export default function MeuTransporteResponsaveisPage() {
   }
 
   if (loading) {
-    return <div className="text-gray-600">Carregando…</div>;
+    return <Loading />;
   }
 
   return (

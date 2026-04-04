@@ -5,6 +5,7 @@ import { api } from '@/lib/api';
 import { useMyProfile, invalidateProfile } from '@/lib/swr';
 import toast from 'react-hot-toast';
 import { digitsOnly, formatCnpjMask, formatCpfMask, isValidCpfDigits } from '@/lib/br-input';
+import Loading from '@/components/Loading';
 import { Field } from '../_components/field';
 import { MeuTransporteNoProfile } from '../_components/no-profile';
 
@@ -55,7 +56,7 @@ export default function MeuTransporteDadosPage() {
   };
 
   if (profileLoading) {
-    return <div className="text-gray-600">Carregando…</div>;
+    return <Loading />;
   }
 
   if (!profile) {

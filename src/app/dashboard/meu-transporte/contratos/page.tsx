@@ -2,6 +2,7 @@
 
 import Link from 'next/link';
 import { useCallback, useEffect, useState } from 'react';
+import Loading from '@/components/Loading';
 import { api } from '@/lib/api';
 import { useMyProfile } from '@/lib/swr';
 import toast from 'react-hot-toast';
@@ -143,7 +144,7 @@ export default function MeuTransporteContratosPage() {
   };
 
   if (profileLoading) {
-    return <div className="text-gray-600">Carregando…</div>;
+    return <Loading />;
   }
 
   if (!profile) {
@@ -151,7 +152,7 @@ export default function MeuTransporteContratosPage() {
   }
 
   if (loading) {
-    return <div className="text-gray-600">Carregando…</div>;
+    return <Loading />;
   }
 
   return (
