@@ -8,6 +8,7 @@ import { compressImage } from '@/lib/compressImage';
 import Loading from '@/components/Loading';
 import FileOrCameraInput from '@/components/FileOrCameraInput';
 import toast from 'react-hot-toast';
+import { SchoolRegistrationModal } from './_components/school-registration-modal';
 
 export default function PerfilPage() {
   const { data: profile, error: profileError, isLoading: profileLoading, mutate: mutateProfile } = useMyProfile();
@@ -39,6 +40,7 @@ export default function PerfilPage() {
   const [document, setDocument] = useState<File | null>(null);
   const [newDocument, setNewDocument] = useState<File | null>(null);
   const [uploadingDoc, setUploadingDoc] = useState(false);
+  const [schoolRegOpen, setSchoolRegOpen] = useState(false);
 
   const initializedRef = useRef(false);
 
@@ -185,6 +187,41 @@ export default function PerfilPage() {
       toast.error(err instanceof Error ? err.message : 'Erro ao atualizar');
     } finally {
       setLoading(false);
+    }
+  };
+
+  const handleSchoolRegistrationSubmit = async (cityInput: string, schoolInput: string) => {
+    const me = await api.me();
+    const state = states.find((s) => s.id === form.stateId);
+    if (!state?.uf) {
+      toast.error('Selecione o estado no formulário acima para identificar a região (UF).');
+      throw new Error('no-uf');
+    }
+    const cityLabel = form.cityId ? cities.find((c) => c.id === form.cityId)?.name : undefined;
+    const details = [
+      `Conta (login): ${me.email}`,
+      profile ? `ID do perfil: ${profile.id}` : 'Perfil ainda não criado',
+      `Nome no formulário: ${form.displayName}`,
+      `Telefone: ${form.phone?.trim() || '—'}`,
+      `Estado selecionado: ${state.name} (${state.uf})`,
+      `Cidade já escolhida na lista: ${cityLabel ?? '—'}`,
+    ].join('\n');
+    try {
+      await api.sendSchoolRegistrationRequest({
+        name: (profile?.displayName?.trim() || form.displayName?.trim() || me.email.split('@')[0]).slice(
+          0,
+          100,
+        ),
+        email: me.email,
+        uf: state.uf,
+        ...(cityInput && { cityName: cityInput }),
+        ...(schoolInput && { schoolName: schoolInput }),
+        details,
+      });
+      toast.success('Pedido enviado! A equipe cadastra e avisa quando estiver disponível.');
+    } catch (e) {
+      toast.error(e instanceof Error ? e.message : 'Não foi possível enviar o pedido.');
+      throw e;
     }
   };
 
@@ -403,6 +440,20 @@ export default function PerfilPage() {
           </div>
         )}
 
+        <div className="rounded-xl border border-dashed border-primary/40 bg-primary/5 px-4 py-3 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
+          <p className="text-sm text-gray-700">
+            <span className="font-medium text-gray-900">Não encontrou cidade ou escola na lista?</span>{' '}
+            A gente cadastra para você.
+          </p>
+          <button
+            type="button"
+            onClick={() => setSchoolRegOpen(true)}
+            className="shrink-0 text-sm font-semibold text-primary hover:text-primary-800 underline decoration-2 underline-offset-2 text-left sm:text-right"
+          >
+            Avise aqui
+          </button>
+        </div>
+
         <div className="space-y-4">
           <div>
             <label className="block text-sm font-medium text-gray-700 mb-1">Escola Principal</label>
@@ -616,6 +667,12 @@ export default function PerfilPage() {
           {loading ? 'Salvando...' : hasProfile ? 'Salvar Alterações' : 'Criar Perfil'}
         </button>
       </form>
+
+      <SchoolRegistrationModal
+        open={schoolRegOpen}
+        onClose={() => setSchoolRegOpen(false)}
+        onSubmit={handleSchoolRegistrationSubmit}
+      />
 
       {hasProfile && profile && (
         <>

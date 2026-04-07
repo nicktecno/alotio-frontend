@@ -359,6 +359,20 @@ export const api = {
   sendContact: (data: { name: string; email: string; message: string }) =>
     request<{ message: string }>('/contact', { method: 'POST', body: JSON.stringify(data) }),
 
+  /** Transportador: não encontrou cidade/escola — envia para admin (Resend). */
+  sendSchoolRegistrationRequest: (data: {
+    name: string;
+    email: string;
+    uf: string;
+    cityName?: string;
+    schoolName?: string;
+    details?: string;
+  }) =>
+    request<{ message: string }>('/contact/school-registration-request', {
+      method: 'POST',
+      body: JSON.stringify(data),
+    }),
+
   servedParentsList: () => request<unknown[]>('/served-parents'),
   servedParentsCreate: (data: Record<string, unknown>) =>
     request('/served-parents', { method: 'POST', body: JSON.stringify(data) }),
