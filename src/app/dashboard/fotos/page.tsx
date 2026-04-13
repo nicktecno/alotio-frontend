@@ -20,7 +20,7 @@ export default function FotosPage() {
     if (profile?.vehiclePhotos) setPhotos(profile.vehiclePhotos);
   }, [profile]);
 
-  const isPremium = profile?.subscriptions && profile.subscriptions.length > 0;
+  const isPremium = Boolean(profile?.subscriptions?.length);
 
   const processAvatarFile = async (file: File) => {
     setUploading(true);
@@ -89,35 +89,17 @@ export default function FotosPage() {
 
   if (!profile) return <Loading />;
 
-  if (!isPremium) {
-    return (
-      <div className="max-w-2xl">
-        <h1 className="text-2xl font-bold font-heading text-gray-900 mb-6">Fotos</h1>
-        <div className="bg-white rounded-xl border border-gray-200 p-8 text-center">
-          <div className="text-4xl mb-4">📷</div>
-          <h2 className="text-lg font-semibold text-gray-900 mb-2">Recurso Premium</h2>
-          <p className="text-gray-500 mb-6">
-            Avatar e fotos do veículo são exibidos apenas para assinantes premium.
-          </p>
-          <a
-            href="/dashboard/assinatura"
-            className="inline-block bg-secondary hover:bg-secondary-600 text-white px-6 py-2.5 rounded-lg font-semibold transition"
-          >
-            Ver planos
-          </a>
-        </div>
-      </div>
-    );
-  }
-
   return (
     <div className="max-w-2xl space-y-6">
       <h1 className="text-2xl font-bold font-heading text-gray-900">Fotos</h1>
 
-      {/* Avatar */}
+      {/* Avatar — disponível para todos os transportadores */}
       <div className="bg-white rounded-xl border border-gray-200 p-6">
         <h2 className="font-semibold text-gray-900 mb-4">Avatar</h2>
-          <div className="flex items-center gap-6">
+        <p className="text-sm text-gray-500 mb-4">
+          Sua foto aparece na busca e no perfil público para as famílias reconhecerem você.
+        </p>
+        <div className="flex items-center gap-6">
           <div className="w-20 h-20 rounded-full bg-primary-100 flex items-center justify-center shrink-0 overflow-hidden">
             {profile.avatarUrl ? (
               <img
@@ -159,50 +141,66 @@ export default function FotosPage() {
         </div>
       </div>
 
-      {/* Vehicle Photos */}
-      <div className="bg-white rounded-xl border border-gray-200 p-6">
-        <div className="flex items-center justify-between mb-4">
-          <h2 className="font-semibold text-gray-900">Fotos do Veículo</h2>
-          <span className="text-xs text-gray-500">{photos.length}/5</span>
+      {/* Fotos do veículo — premium */}
+      {isPremium ? (
+        <div className="bg-white rounded-xl border border-gray-200 p-6">
+          <div className="flex items-center justify-between mb-4">
+            <h2 className="font-semibold text-gray-900">Fotos do Veículo</h2>
+            <span className="text-xs text-gray-500">{photos.length}/5</span>
+          </div>
+          <div className="grid grid-cols-2 md:grid-cols-3 gap-4 mb-4">
+            {photos.map((photo, idx) => (
+              <div key={photo.id} className="relative group">
+                <img
+                  src={assetUrl(photo.url)!}
+                  alt="Veículo"
+                  className="w-full h-32 object-cover rounded-lg cursor-pointer hover:opacity-80 transition"
+                  onClick={() =>
+                    setLightbox({
+                      images: photos.map((p) => assetUrl(p.url)!),
+                      index: idx,
+                    })
+                  }
+                />
+                <button
+                  onClick={() => handleDeletePhoto(photo.id)}
+                  className="absolute top-2 right-2 bg-red-500 text-white w-7 h-7 rounded-full text-xs font-bold opacity-0 group-hover:opacity-100 transition flex items-center justify-center"
+                >
+                  X
+                </button>
+              </div>
+            ))}
+          </div>
+          {photos.length >= 5 ? (
+            <p className="text-sm text-gray-500">Limite de 5 fotos atingido. Remova uma para adicionar outra.</p>
+          ) : uploading ? (
+            <span className="inline-block text-sm text-gray-500 font-medium">Enviando...</span>
+          ) : (
+            <FileOrCameraInput
+              accept="image/*"
+              onChange={handlePhotoUpload}
+              onFileCapture={processPhotoFile}
+              disabled={uploading}
+              uploadLabel="Escolher foto"
+              cameraLabel="Tirar foto"
+            />
+          )}
         </div>
-        <div className="grid grid-cols-2 md:grid-cols-3 gap-4 mb-4">
-          {photos.map((photo, idx) => (
-            <div key={photo.id} className="relative group">
-              <img
-                src={assetUrl(photo.url)!}
-                alt="Veículo"
-                className="w-full h-32 object-cover rounded-lg cursor-pointer hover:opacity-80 transition"
-                onClick={() =>
-                  setLightbox({
-                    images: photos.map((p) => assetUrl(p.url)!),
-                    index: idx,
-                  })
-                }
-              />
-              <button
-                onClick={() => handleDeletePhoto(photo.id)}
-                className="absolute top-2 right-2 bg-red-500 text-white w-7 h-7 rounded-full text-xs font-bold opacity-0 group-hover:opacity-100 transition flex items-center justify-center"
-              >
-                X
-              </button>
-            </div>
-          ))}
+      ) : (
+        <div className="bg-white rounded-xl border border-gray-200 p-8 text-center">
+          <div className="text-4xl mb-4">🚐</div>
+          <h2 className="text-lg font-semibold text-gray-900 mb-2">Fotos do veículo (Premium)</h2>
+          <p className="text-gray-500 mb-6">
+            Galeria do veículo no perfil público é um recurso do plano premium. O avatar acima é gratuito para todos.
+          </p>
+          <a
+            href="/dashboard/assinatura"
+            className="inline-block bg-secondary hover:bg-secondary-600 text-white px-6 py-2.5 rounded-lg font-semibold transition"
+          >
+            Ver planos
+          </a>
         </div>
-        {photos.length >= 5 ? (
-          <p className="text-sm text-gray-500">Limite de 5 fotos atingido. Remova uma para adicionar outra.</p>
-        ) : uploading ? (
-          <span className="inline-block text-sm text-gray-500 font-medium">Enviando...</span>
-        ) : (
-          <FileOrCameraInput
-            accept="image/*"
-            onChange={handlePhotoUpload}
-            onFileCapture={processPhotoFile}
-            disabled={uploading}
-            uploadLabel="Escolher foto"
-            cameraLabel="Tirar foto"
-          />
-        )}
-      </div>
+      )}
 
       {lightbox && (
         <ImageLightbox

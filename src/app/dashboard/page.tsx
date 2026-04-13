@@ -239,7 +239,7 @@ export default function DashboardPage() {
             Gerenciar Escolas
           </h3>
           <p className="text-sm text-gray-500">
-            {isPremium ? 'Adicione até 10 escolas extras' : 'Default + secundária'}
+            {isPremium ? 'Adicione até 10 escolas extras' : 'Principal + secundária'}
           </p>
         </Link>
         <Link
@@ -250,7 +250,9 @@ export default function DashboardPage() {
             Fotos
           </h3>
           <p className="text-sm text-gray-500">
-            {isPremium ? 'Gerencie avatar e fotos do veículo' : 'Disponível no plano premium'}
+            {isPremium
+              ? 'Avatar e fotos do veículo'
+              : 'Foto de perfil grátis; galeria do veículo no premium'}
           </p>
         </Link>
       </div>
