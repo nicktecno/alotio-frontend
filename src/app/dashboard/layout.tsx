@@ -6,6 +6,7 @@ import { useAuth } from '@/lib/auth';
 import Header from '@/components/Header';
 import DashboardSidebar from '@/components/DashboardSidebar';
 import FullScreenLoading from '@/components/FullScreenLoading';
+import EmailCaptureModal from '@/components/EmailCaptureModal';
 
 export default function DashboardLayout({ children }: { children: React.ReactNode }) {
   const { user, isLoading, checkAuth } = useAuth();
@@ -28,8 +29,12 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
 
   if (!user) return null;
 
+  const showEmailCapture =
+    user.role === 'TIO' && user.mustCaptureEmail === true;
+
   return (
     <div className="min-h-screen bg-gray-50">
+      {showEmailCapture && <EmailCaptureModal />}
       <Header />
       <div className="flex">
         <DashboardSidebar isOpen={sidebarOpen} onClose={() => setSidebarOpen(false)} />

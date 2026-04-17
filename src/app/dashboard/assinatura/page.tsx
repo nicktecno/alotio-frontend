@@ -207,7 +207,7 @@ export default function AssinaturaPage() {
       {!isPremium && uniquePlans.length > 0 && (
         <>
           <p className="text-sm text-gray-600 mb-4">
-            Plano atual: <strong>Gratuito</strong>. Os planos abaixo liberam foto, veículo, mais escolas e destaque na busca.
+            Plano atual: <strong>Gratuito</strong>. O premium inclui galeria do veículo no perfil, até 10 escolas extras, selo premium e destaque na busca.
           </p>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             {uniquePlans.map((plan) => (
@@ -242,9 +242,6 @@ export default function AssinaturaPage() {
                 <ul className="space-y-2 text-sm text-gray-600 mb-6">
                   <li className="flex items-center gap-2">
                     <span className="text-secondary font-bold">✓</span> Até 10 escolas extras
-                  </li>
-                  <li className="flex items-center gap-2">
-                    <span className="text-secondary font-bold">✓</span> Foto de perfil exibida
                   </li>
                   <li className="flex items-center gap-2">
                     <span className="text-secondary font-bold">✓</span> Fotos do veículo exibidas

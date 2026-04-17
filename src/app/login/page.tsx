@@ -80,15 +80,16 @@ export default function LoginPage() {
         <form onSubmit={handleSubmit} className="space-y-5">
           <div>
             <label className="block text-sm font-medium text-primary-100 mb-1.5">
-              Email
+              E-mail ou telefone
             </label>
             <input
-              type="email"
+              type="text"
+              autoComplete="username"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               required
               className="w-full px-4 py-3 bg-primary-700/50 border border-primary-400/30 rounded-lg text-white placeholder-primary-300 focus:ring-2 focus:ring-secondary focus:border-secondary outline-none transition"
-              placeholder="seu@email.com"
+              placeholder="seu@email.com ou (11) 99999-9999"
             />
           </div>
 

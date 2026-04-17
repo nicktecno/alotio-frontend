@@ -131,14 +131,37 @@ export const api = {
     request('/auth/register', { method: 'POST', body: JSON.stringify(data) }),
 
   login: (data: { email: string; password: string }) =>
-    request<{ user: { id: string; email: string; role: string } }>(
-      '/auth/login',
-      { method: 'POST', body: JSON.stringify(data) },
-    ),
+    request<{
+      user: {
+        id: string;
+        email: string;
+        role: string;
+        mustCaptureEmail?: boolean;
+      };
+    }>('/auth/login', { method: 'POST', body: JSON.stringify(data) }),
 
   logout: () => request('/auth/logout', { method: 'POST' }),
 
-  me: () => request<{ id: string; email: string; role: string }>('/auth/me'),
+  me: () =>
+    request<{
+      id: string;
+      email: string;
+      role: string;
+      mustCaptureEmail?: boolean;
+    }>('/auth/me'),
+
+  updateCapturedEmail: (email: string) =>
+    request<{
+      user: {
+        id: string;
+        email: string;
+        role: string;
+        mustCaptureEmail?: boolean;
+      };
+    }>('/auth/me/email', {
+      method: 'PATCH',
+      body: JSON.stringify({ email }),
+    }),
 
   forgotPassword: (email: string) =>
     request<{ message: string }>('/auth/forgot-password', {
