@@ -87,12 +87,6 @@ export default function Home() {
                     Login para os Tios
                   </Link>
                 </div>
-                <p className="mt-6 text-sm text-primary-100/95">
-                  <Link href="/transporte-escolar" className="underline underline-offset-2 hover:text-white font-medium">
-                    Transporte escolar por cidade e bairro
-                  </Link>{' '}
-                  — condutor escolar, van escolar e motoristas na sua região.
-                </p>
               </div>
 
               {/* Right - Ilustração (banner) */}
