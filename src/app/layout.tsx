@@ -4,6 +4,7 @@ import './globals.css';
 import Providers from '@/components/Providers';
 import GoogleAnalytics from '@/components/GoogleAnalytics';
 import { organizationSameAsUrls } from '@/lib/seo-env';
+import { SEO_CORE_KEYWORDS } from '@/lib/seo-keywords';
 
 const poppins = Poppins({
   subsets: ['latin'],
@@ -32,11 +33,9 @@ export const metadata: Metadata = {
     template: '%s | Alô Tio - Transporte Escolar',
   },
   description:
-    'Encontre transporte escolar seguro e verificado. Pesquise por escola, cidade ou bairro e conecte-se com profissionais de van escolar cadastrados na sua região.',
+    'Encontre transporte escolar seguro e verificado. Condutor escolar, van escolar e motoristas por escola, cidade ou bairro. Profissionais cadastrados na sua região.',
   keywords: [
-    'transporte escolar',
-    'van escolar',
-    'tio da van',
+    ...SEO_CORE_KEYWORDS,
     'tio de escola',
     'transporte escolar seguro',
     'transporte de crianças',
@@ -47,11 +46,6 @@ export const metadata: Metadata = {
     'transporte escolar SP',
     'encontrar van escolar',
     'transporte escolar perto de mim',
-    'motorista escolar',
-    'transporte de alunos',
-    'van escolar cadastrada',
-    'transporte escolar confiável',
-    'perua escolar',
     'serviço de transporte escolar',
     'buscar transporte escolar',
   ],
@@ -76,7 +70,7 @@ export const metadata: Metadata = {
     siteName: 'Alô Tio',
     title: 'Alô Tio - Transporte Escolar | Encontre o Tio da Van Escolar',
     description:
-      'Encontre transporte escolar seguro e verificado. Pesquise por escola, cidade ou bairro e conecte-se com profissionais de van escolar na sua região.',
+      'Encontre transporte escolar seguro e verificado. Condutor escolar, van escolar e motoristas por escola, cidade ou bairro.',
     images: [
       {
         url: '/bannerAlotio.png',

@@ -1,18 +1,17 @@
 import type { Metadata } from 'next';
+import { SEO_CORE_KEYWORDS } from '@/lib/seo-keywords';
 
 export const metadata: Metadata = {
   title: 'Buscar Transporte Escolar - Van Escolar por Escola e Cidade',
   description:
-    'Busque transporte escolar por escola, cidade e bairro. Encontre motoristas de van escolar verificados e cadastrados na sua região. Serviço gratuito.',
+    'Busque transporte escolar por escola, cidade e bairro. Condutor escolar, van escolar e motoristas verificados na sua região. Serviço gratuito.',
   keywords: [
+    ...SEO_CORE_KEYWORDS,
     'buscar transporte escolar',
     'encontrar van escolar',
     'transporte escolar por escola',
     'van escolar perto de mim',
-    'tio da van',
-    'motorista escolar',
     'transporte escolar seguro',
-    'van escolar cadastrada',
   ],
   openGraph: {
     title: 'Buscar Transporte Escolar | Alô Tio',

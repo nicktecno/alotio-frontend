@@ -17,6 +17,10 @@ export default function Footer() {
               Fale Conosco
             </Link>
             <span className="text-primary-700">|</span>
+            <Link href="/transporte-escolar" className="text-primary-200 hover:text-white transition">
+              Transporte escolar por cidade
+            </Link>
+            <span className="text-primary-700">|</span>
             <a href="mailto:contato@alotio.com.br" className="text-primary-200 hover:text-white transition">
               contato@alotio.com.br
             </a>

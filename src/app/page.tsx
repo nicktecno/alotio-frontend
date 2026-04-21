@@ -6,7 +6,7 @@ import Footer from '@/components/Footer';
 export const metadata: Metadata = {
   title: 'Alô Tio - Transporte Escolar | Encontre o Tio da Van Escolar',
   description:
-    'Encontre transporte escolar seguro e verificado para seu filho. Pesquise por escola, cidade ou bairro e conecte-se com motoristas de van escolar cadastrados na sua região. Serviço gratuito.',
+    'Encontre transporte escolar seguro e verificado para seu filho. Condutor escolar, van escolar e motoristas por escola, cidade ou bairro. Serviço gratuito.',
   alternates: {
     canonical: process.env.NEXT_PUBLIC_SITE_URL || 'https://alotio.com.br',
   },
@@ -87,6 +87,12 @@ export default function Home() {
                     Login para os Tios
                   </Link>
                 </div>
+                <p className="mt-6 text-sm text-primary-100/95">
+                  <Link href="/transporte-escolar" className="underline underline-offset-2 hover:text-white font-medium">
+                    Transporte escolar por cidade e bairro
+                  </Link>{' '}
+                  — condutor escolar, van escolar e motoristas na sua região.
+                </p>
               </div>
 
               {/* Right - Ilustração (banner) */}

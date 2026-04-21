@@ -1,4 +1,6 @@
 import type { MetadataRoute } from 'next';
+import { fetchAllCitiesWithTios, fetchNeighborhoodsForCity } from '@/lib/seo-transporte-api';
+import { neighborhoodSlug } from '@/lib/slug';
 
 const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://alotio.com.br';
 
@@ -65,10 +67,19 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       changeFrequency: 'monthly',
       priority: 0.4,
     },
+    {
+      url: `${siteUrl}/transporte-escolar`,
+      lastModified: new Date(),
+      changeFrequency: 'weekly',
+      priority: 0.85,
+    },
   ];
 
   const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3001/api';
-  const tioIds = await fetchAllTioIds(apiUrl);
+  const [tioIds, citiesWithTios] = await Promise.all([
+    fetchAllTioIds(apiUrl),
+    fetchAllCitiesWithTios(),
+  ]);
 
   const tioPages: MetadataRoute.Sitemap = tioIds.map((id) => ({
     url: `${siteUrl}/tios/${id}`,
@@ -77,5 +88,34 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     priority: 0.7,
   }));
 
-  return [...staticPages, ...tioPages];
+  const transporteCidadePages: MetadataRoute.Sitemap = citiesWithTios.map((c) => ({
+    url: `${siteUrl}/transporte-escolar/${c.slug}`,
+    lastModified: new Date(),
+    changeFrequency: 'weekly' as const,
+    priority: 0.72,
+  }));
+
+  const transporteBairroPages: MetadataRoute.Sitemap = [];
+  const chunk = 12;
+  for (let i = 0; i < citiesWithTios.length; i += chunk) {
+    const slice = citiesWithTios.slice(i, i + chunk);
+    const batches = await Promise.all(slice.map((c) => fetchNeighborhoodsForCity(c.id)));
+    slice.forEach((c, j) => {
+      for (const n of batches[j] ?? []) {
+        transporteBairroPages.push({
+          url: `${siteUrl}/transporte-escolar/${c.slug}/bairro/${neighborhoodSlug(n.name)}`,
+          lastModified: new Date(),
+          changeFrequency: 'monthly' as const,
+          priority: 0.55,
+        });
+      }
+    });
+  }
+
+  return [
+    ...staticPages,
+    ...transporteCidadePages,
+    ...transporteBairroPages,
+    ...tioPages,
+  ];
 }

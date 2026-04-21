@@ -2,6 +2,7 @@
 
 # Público (browser)
 NEXT_PUBLIC_SITE_URL=https://alotio.com.br
+# Usado no sitemap e nas páginas /transporte-escolar (ISR) — deve apontar para a API em produção no deploy.
 NEXT_PUBLIC_API_URL=https://api.seudominio.com/api
 
 # Google Analytics (opcional)
