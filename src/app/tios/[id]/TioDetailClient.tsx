@@ -9,6 +9,9 @@ import ImageLightbox from '@/components/ImageLightbox';
 import { api, assetUrl } from '@/lib/api';
 import type { TioPublicView } from '@/types';
 import Loading from '@/components/Loading';
+import BreadcrumbJsonLd from '@/components/BreadcrumbJsonLd';
+
+const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://alotio.com.br';
 
 export default function TioDetailPage() {
   const { id } = useParams<{ id: string }>();
@@ -77,6 +80,13 @@ export default function TioDetailPage() {
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(personSchema) }}
+      />
+      <BreadcrumbJsonLd
+        items={[
+          { name: 'Início', url: siteUrl },
+          { name: 'Buscar transporte escolar', url: `${siteUrl}/tios` },
+          { name: tio.displayName, url: `${siteUrl}/tios/${tio.id}` },
+        ]}
       />
       <Header />
       <main className="flex-1 max-w-4xl mx-auto w-full px-4 sm:px-6 lg:px-8 py-8">

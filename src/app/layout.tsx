@@ -3,6 +3,7 @@ import { Poppins, Rajdhani, Archivo } from 'next/font/google';
 import './globals.css';
 import Providers from '@/components/Providers';
 import GoogleAnalytics from '@/components/GoogleAnalytics';
+import { organizationSameAsUrls } from '@/lib/seo-env';
 
 const poppins = Poppins({
   subsets: ['latin'],
@@ -96,12 +97,30 @@ export const metadata: Metadata = {
     canonical: siteUrl,
   },
   category: 'transportation',
-  verification: {},
+  ...(process.env.GOOGLE_SITE_VERIFICATION
+    ? {
+        verification: {
+          google: process.env.GOOGLE_SITE_VERIFICATION,
+        },
+      }
+    : {}),
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
-  const jsonLd = {
-    '@context': 'https://schema.org',
+  const logoUrl = `${siteUrl}/bannerAlotio.png`;
+  const sameAs = organizationSameAsUrls();
+
+  const organizationJsonLd = {
+    '@type': 'Organization',
+    name: 'Alô Tio',
+    url: siteUrl,
+    logo: logoUrl,
+    description:
+      'Plataforma para encontrar transporte escolar seguro e verificado por escola, cidade e bairro.',
+    ...(sameAs.length > 0 ? { sameAs } : {}),
+  };
+
+  const webAppJsonLd = {
     '@type': 'WebApplication',
     name: 'Alô Tio',
     url: siteUrl,
@@ -115,11 +134,15 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       priceCurrency: 'BRL',
       description: 'Busca gratuita por transporte escolar',
     },
-    provider: {
-      '@type': 'Organization',
-      name: 'Alô Tio',
-      url: siteUrl,
-    },
+    provider: { '@id': `${siteUrl}#organization` },
+  };
+
+  const jsonLd = {
+    '@context': 'https://schema.org',
+    '@graph': [
+      { ...organizationJsonLd, '@id': `${siteUrl}#organization` },
+      webAppJsonLd,
+    ],
   };
 
   return (

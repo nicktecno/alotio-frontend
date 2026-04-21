@@ -15,20 +15,6 @@ export const metadata: Metadata = {
 export default function Home() {
   const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://alotio.com.br';
 
-  const localBusinessSchema = {
-    '@context': 'https://schema.org',
-    '@type': 'LocalBusiness',
-    name: 'Alô Tio - Transporte Escolar',
-    description: 'Plataforma para encontrar transporte escolar seguro e verificado por escola, cidade e bairro.',
-    url: siteUrl,
-    areaServed: {
-      '@type': 'State',
-      name: 'São Paulo',
-    },
-    serviceType: 'Transporte Escolar',
-    priceRange: 'Gratuito para busca',
-  };
-
   const faqSchema = {
     '@context': 'https://schema.org',
     '@type': 'FAQPage',
@@ -62,10 +48,6 @@ export default function Home() {
 
   return (
     <div className="flex flex-col min-h-screen">
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(localBusinessSchema) }}
-      />
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}

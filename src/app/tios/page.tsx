@@ -8,6 +8,9 @@ import { api, assetUrl } from '@/lib/api';
 import { useStates, useCities, useSchools, useNeighborhoods } from '@/lib/swr';
 import type { TioPublicView, PaginatedResponse } from '@/types';
 import Loading from '@/components/Loading';
+import BreadcrumbJsonLd from '@/components/BreadcrumbJsonLd';
+
+const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://alotio.com.br';
 
 export default function TiosPage() {
   const [selectedState, setSelectedState] = useState('');
@@ -87,6 +90,12 @@ export default function TiosPage() {
 
   return (
     <div className="flex flex-col min-h-screen">
+      <BreadcrumbJsonLd
+        items={[
+          { name: 'Início', url: siteUrl },
+          { name: 'Buscar transporte escolar', url: `${siteUrl}/tios` },
+        ]}
+      />
       <Header />
       <main className="flex-1 max-w-7xl mx-auto w-full px-4 sm:px-6 lg:px-8 py-8">
         <h1 className="font-heading text-3xl font-bold text-gray-900 mb-8">Buscar Tios</h1>

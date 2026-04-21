@@ -1,0 +1,14 @@
+# Copie para .env.local e preencha. (Arquivo .env* está no .gitignore.)
+
+# Público (browser)
+NEXT_PUBLIC_SITE_URL=https://alotio.com.br
+NEXT_PUBLIC_API_URL=https://api.seudominio.com/api
+
+# Google Analytics (opcional)
+NEXT_PUBLIC_GA_ID=
+
+# SEO: verificação do Google Search Console (valor da meta tag content)
+GOOGLE_SITE_VERIFICATION=
+
+# SEO: redes do Organization (JSON-LD sameAs), URLs separadas por vírgula
+# NEXT_PUBLIC_ORGANIZATION_SAME_AS=https://www.instagram.com/seu_perfil,https://www.facebook.com/...
