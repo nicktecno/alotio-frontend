@@ -1,4 +1,9 @@
-import type { CityResolveFromLocation, Paginated, Profile } from '@/types';
+import type {
+  AdminUserListRow,
+  CityResolveFromLocation,
+  Paginated,
+  Profile,
+} from '@/types';
 
 const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3000/api';
 const BACKEND_URL = API_URL.replace(/\/api$/, '');
@@ -316,8 +321,12 @@ export const api = {
 
   // Admin
   adminGetStats: () => request('/admin/dashboard/stats'),
-  adminGetUsers: (role?: string) =>
-    request(`/admin/users${role ? `?role=${role}` : ''}`),
+  adminGetUsers: (params?: Record<string, string>) => {
+    const qs = params ? new URLSearchParams(params).toString() : '';
+    return request<Paginated<AdminUserListRow>>(
+      `/admin/users${qs ? `?${qs}` : ''}`,
+    );
+  },
   adminGetUser: (id: string) => request(`/admin/users/${id}`),
   adminDeleteUser: (id: string) =>
     request(`/admin/users/${id}`, { method: 'DELETE' }),

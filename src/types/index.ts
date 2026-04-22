@@ -24,6 +24,16 @@ export interface User {
   createdAt: string;
 }
 
+/** Linha da listagem GET /admin/users (inclui perfil quando existir). */
+export interface AdminUserListRow extends User {
+  profile?: {
+    id: string;
+    displayName: string;
+    status: ProfileStatus;
+    prefixo: string;
+  } | null;
+}
+
 export interface State {
   id: string;
   name: string;

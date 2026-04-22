@@ -1,6 +1,6 @@
 'use client';
 
-import { useCallback, useEffect, useState } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 import Link from 'next/link';
 import { api, assetUrl } from '@/lib/api';
 import toast from 'react-hot-toast';
@@ -10,10 +10,28 @@ import Loading from '@/components/Loading';
 export default function AdminPerfisPage() {
   const [profiles, setProfiles] = useState<Profile[]>([]);
   const [filter, setFilter] = useState('');
+  const [searchInput, setSearchInput] = useState('');
+  const [search, setSearch] = useState('');
+  const lastDebouncedSearch = useRef<string | undefined>(undefined);
   const [page, setPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
   const [total, setTotal] = useState(0);
   const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const t = setTimeout(() => {
+      const next = searchInput.trim();
+      if (
+        lastDebouncedSearch.current !== undefined &&
+        lastDebouncedSearch.current !== next
+      ) {
+        setPage(1);
+      }
+      lastDebouncedSearch.current = next;
+      setSearch(next);
+    }, 400);
+    return () => clearTimeout(t);
+  }, [searchInput]);
 
   const loadProfiles = useCallback(async () => {
     setLoading(true);
@@ -23,6 +41,7 @@ export default function AdminPerfisPage() {
         limit: String(ADMIN_LIST_PAGE_SIZE),
       };
       if (filter) params.status = filter;
+      if (search) params.search = search;
       const res = await api.adminGetProfiles(params);
       if (res.totalPages >= 1 && page > res.totalPages) {
         setPage(res.totalPages);
@@ -36,7 +55,7 @@ export default function AdminPerfisPage() {
     } finally {
       setLoading(false);
     }
-  }, [filter, page]);
+  }, [filter, page, search]);
 
   useEffect(() => {
     void loadProfiles();
@@ -91,22 +110,32 @@ export default function AdminPerfisPage() {
 
   return (
     <div>
-      <div className="flex items-center justify-between mb-6">
+      <div className="flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between mb-6">
         <h1 className="text-2xl font-bold text-gray-900">Perfis</h1>
-        <select
-          value={filter}
-          onChange={(e) => {
-            setFilter(e.target.value);
-            setPage(1);
-          }}
-          className="px-3 py-2 border border-gray-300 rounded-lg text-sm focus:ring-2 focus:ring-primary focus:border-primary outline-none"
-        >
-          <option value="">Todos</option>
-          <option value="PENDING">Pendentes</option>
-          <option value="APPROVED">Aprovados</option>
-          <option value="REJECTED">Rejeitados</option>
-          <option value="PAUSED">Pausados</option>
-        </select>
+        <div className="flex flex-col sm:flex-row gap-3 sm:items-center w-full sm:w-auto sm:max-w-2xl">
+          <input
+            type="search"
+            value={searchInput}
+            onChange={(e) => setSearchInput(e.target.value)}
+            placeholder="Nome ou prefixo…"
+            className="w-full sm:min-w-[200px] px-3 py-2 border border-gray-300 rounded-lg text-sm focus:ring-2 focus:ring-primary focus:border-primary outline-none"
+            aria-label="Filtrar por nome ou prefixo"
+          />
+          <select
+            value={filter}
+            onChange={(e) => {
+              setFilter(e.target.value);
+              setPage(1);
+            }}
+            className="w-full sm:w-auto px-3 py-2 border border-gray-300 rounded-lg text-sm focus:ring-2 focus:ring-primary focus:border-primary outline-none"
+          >
+            <option value="">Todos</option>
+            <option value="PENDING">Pendentes</option>
+            <option value="APPROVED">Aprovados</option>
+            <option value="REJECTED">Rejeitados</option>
+            <option value="PAUSED">Pausados</option>
+          </select>
+        </div>
       </div>
 
       {loading ? (
