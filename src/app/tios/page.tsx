@@ -198,9 +198,8 @@ export default function TiosPage() {
         <div className="bg-white rounded-xl border border-gray-200 p-6 mb-8">
           <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-4 mb-5 pb-5 border-b border-gray-100">
             <p className="text-sm text-gray-600 max-w-xl leading-relaxed">
-              Use sua localização para preencher <strong>estado</strong> e, quando houver cadastros
-              ativos na região, <strong>cidade</strong> automaticamente. Depois basta escolher a{' '}
-              <strong>escola</strong>.
+              A localização preenche estado e cidade quando houver tios na região. Depois escolha a
+              escola.
             </p>
             <button
               type="button"
