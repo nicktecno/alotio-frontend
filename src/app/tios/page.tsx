@@ -1,10 +1,12 @@
 'use client';
 
-import { useEffect, useState, useCallback } from 'react';
+import { useEffect, useState, useCallback, useRef } from 'react';
 import Link from 'next/link';
+import { MdMyLocation } from 'react-icons/md';
+import toast from 'react-hot-toast';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
-import { api, assetUrl } from '@/lib/api';
+import { api, assetUrl, ApiError } from '@/lib/api';
 import { useStates, useCities, useSchools, useNeighborhoods } from '@/lib/swr';
 import type { TioPublicView, PaginatedResponse } from '@/types';
 import Loading from '@/components/Loading';
@@ -23,6 +25,10 @@ export default function TiosPage() {
   const [page, setPage] = useState(1);
   const [loading, setLoading] = useState(false);
   const [hasSearched, setHasSearched] = useState(false);
+  const [locatingGeo, setLocatingGeo] = useState(false);
+  const [pendingCityId, setPendingCityId] = useState<string | null>(null);
+  const pendingCityIdRef = useRef<string | null>(null);
+  pendingCityIdRef.current = pendingCityId;
 
   const { data: states = [], isLoading: loadingStates } = useStates(true);
   const { data: cities = [], isLoading: loadingCities } = useCities(selectedState || undefined, true);
@@ -37,6 +43,7 @@ export default function TiosPage() {
   const loadingSchools = loadingSchoolsData || loadingNeighborhoods;
 
   const handleStateChange = (value: string) => {
+    setPendingCityId(null);
     setSelectedState(value);
     setSelectedCity('');
     setSelectedSchool('');
@@ -47,6 +54,7 @@ export default function TiosPage() {
   };
 
   const handleCityChange = (value: string) => {
+    setPendingCityId(null);
     setSelectedCity(value);
     setSelectedSchool('');
     setSelectedNeighborhood('');
@@ -88,6 +96,92 @@ export default function TiosPage() {
     }
   }, [selectedSchool, selectedNeighborhood, page, search]);
 
+  /** Após escolher o estado, aplica cidade vinda da geolocalização quando a lista SWR carregar. */
+  useEffect(() => {
+    const pending = pendingCityIdRef.current;
+    if (!pending || !selectedState) return;
+    if (loadingCities) return;
+    const found = cities.find((c) => c.id === pending);
+    if (found) {
+      setSelectedCity(pending);
+      setSelectedSchool('');
+      setSelectedNeighborhood('');
+      setTios([]);
+      setHasSearched(false);
+      setPage(1);
+      setPendingCityId(null);
+      toast.success(`${found.name} — escolha a escola abaixo.`);
+      return;
+    }
+    if (cities.length > 0) {
+      setPendingCityId(null);
+      toast.error(
+        'Não encontramos uma cidade com transportadores cadastrados que corresponda exatamente à sua posição. Escolha a cidade manualmente.',
+      );
+      return;
+    }
+    setPendingCityId(null);
+    toast.error(
+      'Nenhuma cidade com transportadores neste estado para combinar com o GPS. Escolha a cidade manualmente.',
+    );
+  }, [pendingCityId, selectedState, cities, loadingCities]);
+
+  const useMyLocation = useCallback(() => {
+    if (!navigator.geolocation) {
+      toast.error('Seu navegador não suporta localização.');
+      return;
+    }
+    setLocatingGeo(true);
+    navigator.geolocation.getCurrentPosition(
+      async (pos) => {
+        try {
+          const res = await api.resolveCityFromLocation(
+            pos.coords.latitude,
+            pos.coords.longitude,
+            true,
+          );
+          setPendingCityId(null);
+          setSelectedState(res.stateId);
+          setSelectedCity('');
+          setSelectedSchool('');
+          setSelectedNeighborhood('');
+          setTios([]);
+          setHasSearched(false);
+          setPage(1);
+          if (res.cityId) {
+            setPendingCityId(res.cityId);
+          } else {
+            toast(
+              `${res.stateName}: não há cidade com transportadores cadastrados que corresponda à sua posição. Selecione a cidade na lista.`,
+              { icon: '📍', duration: 5000 },
+            );
+          }
+        } catch (e) {
+          const msg =
+            e instanceof ApiError
+              ? e.message
+              : 'Não foi possível usar a localização.';
+          toast.error(msg);
+        } finally {
+          setLocatingGeo(false);
+        }
+      },
+      (err: GeolocationPositionError) => {
+        setLocatingGeo(false);
+        if (err.code === 1) {
+          toast.error('Permissão de localização negada.');
+        } else if (err.code === 2) {
+          toast.error('Posição indisponível. Tente de novo ou escolha manualmente.');
+        } else if (err.code === 3) {
+          toast.error('Tempo esgotado ao obter a localização.');
+        } else {
+          toast.error('Não foi possível obter a localização.');
+        }
+      },
+      { enableHighAccuracy: true, timeout: 18_000, maximumAge: 120_000 },
+    );
+  }, []);
+
   return (
     <div className="flex flex-col min-h-screen">
       <BreadcrumbJsonLd
@@ -102,6 +196,26 @@ export default function TiosPage() {
 
         {/* Filters */}
         <div className="bg-white rounded-xl border border-gray-200 p-6 mb-8">
+          <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-4 mb-5 pb-5 border-b border-gray-100">
+            <p className="text-sm text-gray-600 max-w-xl leading-relaxed">
+              Use sua localização para preencher <strong>estado</strong> e, quando houver cadastros
+              ativos na região, <strong>cidade</strong> automaticamente. Depois basta escolher a{' '}
+              <strong>escola</strong>.
+            </p>
+            <button
+              type="button"
+              onClick={useMyLocation}
+              disabled={locatingGeo || loadingStates}
+              className="inline-flex shrink-0 items-center justify-center gap-2 rounded-lg bg-primary px-4 py-2.5 text-sm font-semibold text-white shadow-sm transition hover:opacity-95 disabled:cursor-not-allowed disabled:opacity-50"
+            >
+              {locatingGeo ? (
+                <span className="h-4 w-4 border-2 border-white border-t-transparent rounded-full animate-spin" />
+              ) : (
+                <MdMyLocation className="text-lg" aria-hidden />
+              )}
+              {locatingGeo ? 'Obtendo localização…' : 'Usar minha localização'}
+            </button>
+          </div>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
             <div>
               <label className="block text-sm font-medium text-gray-700 mb-1">Estado</label>

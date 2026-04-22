@@ -40,6 +40,16 @@ export interface City {
   isActive: boolean;
 }
 
+/** GET /cities/resolve-from-location — preenche estado/cidade a partir de lat/lng (geocodificação reversa). */
+export interface CityResolveFromLocation {
+  stateId: string;
+  stateUf: string;
+  stateName: string;
+  cityId: string | null;
+  cityName: string | null;
+  placeLabel: string | null;
+}
+
 export interface School {
   id: string;
   name: string;

@@ -1,29 +1,46 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import Link from 'next/link';
 import { api, assetUrl } from '@/lib/api';
 import toast from 'react-hot-toast';
-import type { Profile } from '@/types';
+import { ADMIN_LIST_PAGE_SIZE, type Profile } from '@/types';
 import Loading from '@/components/Loading';
 
 export default function AdminPerfisPage() {
   const [profiles, setProfiles] = useState<Profile[]>([]);
   const [filter, setFilter] = useState('');
+  const [page, setPage] = useState(1);
+  const [totalPages, setTotalPages] = useState(1);
+  const [total, setTotal] = useState(0);
   const [loading, setLoading] = useState(true);
 
-  const loadProfiles = async () => {
+  const loadProfiles = useCallback(async () => {
     setLoading(true);
-    const params: Record<string, string> = {};
-    if (filter) params.status = filter;
-    const data = await api.adminGetProfiles(params);
-    setProfiles(data as Profile[]);
-    setLoading(false);
-  };
+    try {
+      const params: Record<string, string> = {
+        page: String(page),
+        limit: String(ADMIN_LIST_PAGE_SIZE),
+      };
+      if (filter) params.status = filter;
+      const res = await api.adminGetProfiles(params);
+      if (res.totalPages >= 1 && page > res.totalPages) {
+        setPage(res.totalPages);
+        return;
+      }
+      setProfiles(res.data);
+      setTotalPages(res.totalPages);
+      setTotal(res.total);
+    } catch (err: unknown) {
+      toast.error(err instanceof Error ? err.message : 'Erro ao carregar perfis');
+    } finally {
+      setLoading(false);
+    }
+  }, [filter, page]);
 
   useEffect(() => {
-    loadProfiles();
-  }, [filter]); // eslint-disable-line react-hooks/exhaustive-deps
+    void loadProfiles();
+  }, [loadProfiles]);
 
   const handleApprove = async (id: string) => {
     try {
@@ -78,7 +95,10 @@ export default function AdminPerfisPage() {
         <h1 className="text-2xl font-bold text-gray-900">Perfis</h1>
         <select
           value={filter}
-          onChange={(e) => setFilter(e.target.value)}
+          onChange={(e) => {
+            setFilter(e.target.value);
+            setPage(1);
+          }}
           className="px-3 py-2 border border-gray-300 rounded-lg text-sm focus:ring-2 focus:ring-primary focus:border-primary outline-none"
         >
           <option value="">Todos</option>
@@ -94,6 +114,7 @@ export default function AdminPerfisPage() {
       ) : profiles.length === 0 ? (
         <p className="text-gray-500">Nenhum perfil encontrado.</p>
       ) : (
+        <div className="space-y-4">
         <div className="bg-white rounded-xl border border-gray-200 overflow-hidden">
           <table className="w-full text-sm">
             <thead>
@@ -171,6 +192,41 @@ export default function AdminPerfisPage() {
               ))}
             </tbody>
           </table>
+        </div>
+
+        {!loading && total > 0 && (
+          <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 text-sm text-gray-600">
+            <p>
+              {total} perfil{total === 1 ? '' : 'is'}
+              {totalPages > 1 && (
+                <>
+                  {' '}
+                  · página {page} de {totalPages} ({ADMIN_LIST_PAGE_SIZE} por página)
+                </>
+              )}
+            </p>
+            {totalPages > 1 && (
+              <div className="flex items-center gap-2">
+                <button
+                  type="button"
+                  onClick={() => setPage((p) => Math.max(1, p - 1))}
+                  disabled={page <= 1}
+                  className="px-4 py-2 border border-gray-300 rounded-lg disabled:opacity-50 disabled:cursor-not-allowed hover:bg-gray-50 transition"
+                >
+                  Anterior
+                </button>
+                <button
+                  type="button"
+                  onClick={() => setPage((p) => Math.min(totalPages, p + 1))}
+                  disabled={page >= totalPages}
+                  className="px-4 py-2 border border-gray-300 rounded-lg disabled:opacity-50 disabled:cursor-not-allowed hover:bg-gray-50 transition"
+                >
+                  Próxima
+                </button>
+              </div>
+            )}
+          </div>
+        )}
         </div>
       )}
     </div>

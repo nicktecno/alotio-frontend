@@ -1,3 +1,5 @@
+import type { CityResolveFromLocation, Paginated, Profile } from '@/types';
+
 const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3000/api';
 const BACKEND_URL = API_URL.replace(/\/api$/, '');
 
@@ -247,6 +249,16 @@ export const api = {
     const qs = params.toString();
     return request(`/cities${qs ? `?${qs}` : ''}`);
   },
+  resolveCityFromLocation: (lat: number, lng: number, withTios = true) => {
+    const params = new URLSearchParams({
+      lat: String(lat),
+      lng: String(lng),
+    });
+    if (!withTios) params.set('withTios', 'false');
+    return request<CityResolveFromLocation>(
+      `/cities/resolve-from-location?${params.toString()}`,
+    );
+  },
   getCityBySlug: (slug: string) => request(`/cities/${slug}`),
   getSchools: (
     cityId?: string,
@@ -314,7 +326,9 @@ export const api = {
 
   adminGetProfiles: (params?: Record<string, string>) => {
     const qs = params ? new URLSearchParams(params).toString() : '';
-    return request(`/admin/profiles${qs ? `?${qs}` : ''}`);
+    return request<Paginated<Profile>>(
+      `/admin/profiles${qs ? `?${qs}` : ''}`,
+    );
   },
   adminGetPendingProfiles: () => request('/admin/profiles/pending'),
   adminGetProfile: (id: string) => request(`/admin/profiles/${id}`),
