@@ -178,11 +178,16 @@ export default function AdminProfileDetailPage() {
         return;
       }
     }
+    const pfxNorm = prefixo.trim().toLowerCase().replace(/[^a-z0-9]/g, '').slice(0, 4);
+    if (!/^[a-z0-9]{1,4}$/.test(pfxNorm)) {
+      toast.error('Prefixo (CRM): use de 1 a 4 letras ou números.');
+      return;
+    }
     setSaving(true);
     try {
       const data: Record<string, unknown> = {
         displayName,
-        prefixo,
+        prefixo: pfxNorm,
         phone: phone || null,
         bio: bio || null,
         cityId: selectedCity,
@@ -431,11 +436,31 @@ export default function AdminProfileDetailPage() {
             )}
           </div>
           <div>
-            <label className="block text-sm font-medium text-gray-600 mb-1">Prefixo</label>
+            <label className="block text-sm font-medium text-gray-600 mb-1">Prefixo (CRM)</label>
             {editing ? (
-              <input value={prefixo} onChange={(e) => setPrefixo(e.target.value)} maxLength={4} className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-primary outline-none" />
+              <>
+                <input
+                  value={prefixo}
+                  onChange={(e) => {
+                    const v = e.target.value
+                      .toLowerCase()
+                      .replace(/[^a-z0-9]/g, '')
+                      .slice(0, 4);
+                    setPrefixo(v);
+                  }}
+                  maxLength={4}
+                  inputMode="text"
+                  autoComplete="off"
+                  spellCheck={false}
+                  placeholder="ex.: 8557"
+                  className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-primary outline-none font-mono"
+                />
+                <p className="text-xs text-gray-500 mt-1">
+                  1 a 4 caracteres (letras ou números), único na cidade principal. Pode alterar aqui.
+                </p>
+              </>
             ) : (
-              <p className="text-gray-900">{profile.prefixo}</p>
+              <p className="text-gray-900 font-mono">{profile.prefixo}</p>
             )}
           </div>
           <div>
