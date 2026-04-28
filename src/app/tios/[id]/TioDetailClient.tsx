@@ -177,16 +177,6 @@ export default function TioDetailPage() {
             )}
 
             {/* Amenities */}
-            <TioReviewsPanel
-              profileId={tio.id}
-              reviewsApprovedCount={tio.reviewsApprovedCount ?? 0}
-              reviewAvgOverall={tio.reviewAvgOverall ?? null}
-              reviewAvgPunctuality={tio.reviewAvgPunctuality ?? null}
-              reviewAvgCommunication={tio.reviewAvgCommunication ?? null}
-              reviewAvgSafety={tio.reviewAvgSafety ?? null}
-              onStatsRefresh={refreshTio}
-            />
-
             {(tio.hasTV || tio.hasAC || tio.hasMonitor) && (
               <div>
                 <h2 className="font-heading text-lg font-semibold text-gray-900 mb-3">Comodidades do veículo</h2>
@@ -310,6 +300,17 @@ export default function TioDetailPage() {
                 </div>
               </div>
             )}
+
+            {/* Avaliações — após demais dados do transportador */}
+            <TioReviewsPanel
+              profileId={tio.id}
+              reviewsApprovedCount={tio.reviewsApprovedCount ?? 0}
+              reviewAvgOverall={tio.reviewAvgOverall ?? null}
+              reviewAvgPunctuality={tio.reviewAvgPunctuality ?? null}
+              reviewAvgCommunication={tio.reviewAvgCommunication ?? null}
+              reviewAvgSafety={tio.reviewAvgSafety ?? null}
+              onStatsRefresh={refreshTio}
+            />
           </div>
         </div>
       </main>
