@@ -239,7 +239,7 @@ export default function DashboardPage() {
             Gerenciar Escolas
           </h3>
           <p className="text-sm text-gray-500">
-            {isPremium ? 'Adicione até 10 escolas extras' : 'Principal + secundária'}
+            Principal, secundária e até 10 escolas extras na cidade
           </p>
         </Link>
         <Link
