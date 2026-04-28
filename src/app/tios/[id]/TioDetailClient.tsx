@@ -209,6 +209,34 @@ export default function TioDetailPage() {
               </div>
             </div>
 
+            {(tio.vacanciesMorning != null ||
+              tio.vacanciesAfternoon != null ||
+              tio.vacanciesNight != null) && (
+              <div>
+                <h2 className="font-heading text-lg font-semibold text-gray-900 mb-3">Vagas por período</h2>
+                <ul className="space-y-2 text-gray-700">
+                  {tio.vacanciesMorning != null && tio.vacanciesMorning > 0 && (
+                    <li className="flex justify-between gap-4 max-w-sm border-b border-gray-100 pb-2">
+                      <span className="text-gray-600">Manhã</span>
+                      <span className="font-semibold text-gray-900">{tio.vacanciesMorning} vagas</span>
+                    </li>
+                  )}
+                  {tio.vacanciesAfternoon != null && tio.vacanciesAfternoon > 0 && (
+                    <li className="flex justify-between gap-4 max-w-sm border-b border-gray-100 pb-2">
+                      <span className="text-gray-600">Tarde</span>
+                      <span className="font-semibold text-gray-900">{tio.vacanciesAfternoon} vagas</span>
+                    </li>
+                  )}
+                  {tio.vacanciesNight != null && tio.vacanciesNight > 0 && (
+                    <li className="flex justify-between gap-4 max-w-sm">
+                      <span className="text-gray-600">Noite</span>
+                      <span className="font-semibold text-gray-900">{tio.vacanciesNight} vagas</span>
+                    </li>
+                  )}
+                </ul>
+              </div>
+            )}
+
             {/* Neighborhoods */}
             {tio.neighborhoods.length > 0 && (() => {
               const grouped = tio.neighborhoods.reduce<Record<string, typeof tio.neighborhoods>>((acc, n) => {

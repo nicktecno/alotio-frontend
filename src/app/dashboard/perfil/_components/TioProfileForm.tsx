@@ -24,7 +24,8 @@ type TioProfileFormProps = {
 
 export function TioProfileForm({ variant, profile, onSubmittingChange }: TioProfileFormProps) {
   const router = useRouter();
-  const { register, login } = useAuth();
+  const { register, login, checkAuth } = useAuth();
+  const authUser = useAuth((s) => s.user);
 
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -54,6 +55,13 @@ export function TioProfileForm({ variant, profile, onSubmittingChange }: TioProf
     secondaryCityId: '',
     defaultSchoolId: '',
     secondarySchoolId: '',
+    vacancyMorning: false,
+    vacancyMorningQty: 1,
+    vacancyAfternoon: false,
+    vacancyAfternoonQty: 1,
+    vacancyNight: false,
+    vacancyNightQty: 1,
+    acceptTransportadorTerms: false,
   });
   const [defaultSchoolCityId, setDefaultSchoolCityId] = useState('');
   const [secondarySchoolCityId, setSecondarySchoolCityId] = useState('');
@@ -97,6 +105,20 @@ export function TioProfileForm({ variant, profile, onSubmittingChange }: TioProf
         secondaryCityId: profile.secondaryCityId || '',
         defaultSchoolId: profile.defaultSchoolId,
         secondarySchoolId: profile.secondarySchoolId || '',
+        vacancyMorning: (profile.vacanciesMorning ?? 0) > 0,
+        vacancyMorningQty:
+          profile.vacanciesMorning != null && profile.vacanciesMorning > 0
+            ? profile.vacanciesMorning
+            : 1,
+        vacancyAfternoon: (profile.vacanciesAfternoon ?? 0) > 0,
+        vacancyAfternoonQty:
+          profile.vacanciesAfternoon != null && profile.vacanciesAfternoon > 0
+            ? profile.vacanciesAfternoon
+            : 1,
+        vacancyNight: (profile.vacanciesNight ?? 0) > 0,
+        vacancyNightQty:
+          profile.vacanciesNight != null && profile.vacanciesNight > 0 ? profile.vacanciesNight : 1,
+        acceptTransportadorTerms: false,
       });
       if (profile.defaultSchool) {
         setDefaultSchoolCityId(profile.defaultSchool.cityId);
@@ -107,6 +129,12 @@ export function TioProfileForm({ variant, profile, onSubmittingChange }: TioProf
       setSelectedNeighborhoodIds(profile.neighborhoods.map((n) => n.neighborhood.id));
     }
   }, [variant, profile]);
+
+  useEffect(() => {
+    if (noProfile && authUser?.transportadorTermsAcceptedAt) {
+      setForm((prev) => ({ ...prev, acceptTransportadorTerms: true }));
+    }
+  }, [noProfile, authUser?.transportadorTermsAcceptedAt]);
 
   const isPremium =
     variant === 'dashboard' && Boolean(profile?.subscriptions?.length);
@@ -131,6 +159,10 @@ export function TioProfileForm({ variant, profile, onSubmittingChange }: TioProf
     if (selectedNeighborhoodIds.length > 0) {
       fd.append('neighborhoodIds', JSON.stringify(selectedNeighborhoodIds));
     }
+    fd.append(
+      'acceptTransportadorTerms',
+      form.acceptTransportadorTerms ? 'true' : 'false',
+    );
     fd.append('document', compressedDoc);
     return fd;
   };
@@ -154,6 +186,12 @@ export function TioProfileForm({ variant, profile, onSubmittingChange }: TioProf
     if (form.cityId !== profile.cityId) data.cityId = form.cityId;
     if (form.defaultSchoolId !== profile.defaultSchoolId) data.defaultSchoolId = form.defaultSchoolId;
     data.secondarySchoolId = form.secondarySchoolId || null;
+
+    const clampVacancyQty = (n: number) =>
+      Math.min(99, Math.max(1, Number.isFinite(n) ? Math.round(n) : 1));
+    data.vacanciesMorning = form.vacancyMorning ? clampVacancyQty(form.vacancyMorningQty) : null;
+    data.vacanciesAfternoon = form.vacancyAfternoon ? clampVacancyQty(form.vacancyAfternoonQty) : null;
+    data.vacanciesNight = form.vacancyNight ? clampVacancyQty(form.vacancyNightQty) : null;
 
     try {
       await api.updateMyProfile(data);
@@ -214,6 +252,10 @@ export function TioProfileForm({ variant, profile, onSubmittingChange }: TioProf
       await handleUpdate();
       return;
     }
+    if (!form.acceptTransportadorTerms) {
+      toast.error('Aceite os Termos para transportadores para continuar.');
+      return;
+    }
     if (!document) {
       toast.error('Envie o documento comprobatório');
       return;
@@ -233,6 +275,7 @@ export function TioProfileForm({ variant, profile, onSubmittingChange }: TioProf
       const fd = await buildCreateFormData(compressedDoc);
       await api.createProfile(fd);
       invalidateProfile();
+      await checkAuth();
       if (variant === 'cadastro') {
         toast.success('Conta e perfil criados! Aguarde aprovação do administrador.');
         router.push('/dashboard');
@@ -675,6 +718,63 @@ export function TioProfileForm({ variant, profile, onSubmittingChange }: TioProf
           </div>
         </div>
 
+        {hasProfile && (
+          <div className="rounded-xl border border-gray-200 bg-gray-50/90 p-4 space-y-3">
+            <div>
+              <h3 className="text-sm font-semibold text-gray-900">Vagas disponíveis (opcional)</h3>
+              <p className="text-xs text-gray-500 mt-0.5">
+                Marque os períodos e a quantidade. Na lista de busca aparece só o total de vagas; no perfil público, o detalhe por turno (manhã, tarde e noite).
+              </p>
+            </div>
+            <div className="space-y-2">
+              {(
+                [
+                  ['vacancyMorning', 'vacancyMorningQty', 'Manhã'] as const,
+                  ['vacancyAfternoon', 'vacancyAfternoonQty', 'Tarde'] as const,
+                  ['vacancyNight', 'vacancyNightQty', 'Noite'] as const,
+                ] as const
+              ).map(([chk, qty, label]) => (
+                <label
+                  key={chk}
+                  className="flex flex-wrap items-center gap-3 p-2 rounded-lg bg-white border border-gray-100"
+                >
+                  <input
+                    type="checkbox"
+                    checked={form[chk]}
+                    onChange={(e) => {
+                      const on = e.target.checked;
+                      setForm((prev) => ({
+                        ...prev,
+                        [chk]: on,
+                        ...(on && (prev[qty] as number) < 1 ? { [qty]: 1 } : {}),
+                      }));
+                    }}
+                    className="w-4 h-4 text-secondary border-gray-300 rounded focus:ring-secondary"
+                  />
+                  <span className="text-sm font-medium text-gray-800 w-16">{label}</span>
+                  <span className="text-xs text-gray-500">Quantidade</span>
+                  <input
+                    type="number"
+                    min={1}
+                    max={99}
+                    disabled={!form[chk]}
+                    value={form[chk] ? form[qty] : ''}
+                    onChange={(e) => {
+                      const raw = e.target.value;
+                      const n = raw === '' ? 1 : parseInt(raw, 10);
+                      setForm((prev) => ({
+                        ...prev,
+                        [qty]: Number.isFinite(n) ? Math.min(99, Math.max(1, n)) : 1,
+                      }));
+                    }}
+                    className="w-20 px-2 py-1.5 border border-gray-300 rounded-lg text-sm disabled:bg-gray-100 disabled:text-gray-400"
+                  />
+                </label>
+              ))}
+            </div>
+          </div>
+        )}
+
         {noProfile && (
           <div>
             <label className="block text-sm font-medium text-gray-700 mb-2">Bairros que você atende</label>
@@ -751,6 +851,38 @@ export function TioProfileForm({ variant, profile, onSubmittingChange }: TioProf
             ) : (
               <p className="text-sm text-gray-400">Selecione estado e cidade acima para carregar os bairros.</p>
             )}
+          </div>
+        )}
+
+        {noProfile && (
+          <div className="rounded-xl border border-gray-200 bg-amber-50/60 p-4">
+            <label className="flex items-start gap-3 cursor-pointer">
+              <input
+                type="checkbox"
+                checked={form.acceptTransportadorTerms}
+                disabled={!!authUser?.transportadorTermsAcceptedAt}
+                onChange={(e) =>
+                  setForm((prev) => ({
+                    ...prev,
+                    acceptTransportadorTerms: e.target.checked,
+                  }))
+                }
+                className="mt-1 w-4 h-4 text-secondary border-gray-300 rounded focus:ring-secondary shrink-0 disabled:opacity-70"
+              />
+              <span className="text-sm text-gray-800 leading-snug">
+                Li e aceito os{' '}
+                <Link
+                  href="/termos-transportador"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-primary font-semibold underline hover:text-primary-800"
+                >
+                  Termos para transportadores
+                </Link>
+                , inclusive sobre a veracidade das minhas informações e minha responsabilidade pelo
+                serviço de transporte escolar.
+              </span>
+            </label>
           </div>
         )}
 

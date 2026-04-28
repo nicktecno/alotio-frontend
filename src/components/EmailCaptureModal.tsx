@@ -19,7 +19,12 @@ export default function EmailCaptureModal() {
     try {
       const { user } = await api.updateCapturedEmail(email.trim());
       useAuth.setState({
-        user: { ...user, mustCaptureEmail: user.mustCaptureEmail ?? false },
+        user: {
+          ...user,
+          mustCaptureEmail: user.mustCaptureEmail ?? false,
+          transportadorTermsAcceptedAt:
+            user.transportadorTermsAcceptedAt ?? null,
+        },
       });
       toast.success('E-mail salvo com sucesso!');
     } catch (err: unknown) {

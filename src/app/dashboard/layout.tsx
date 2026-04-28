@@ -7,6 +7,7 @@ import Header from '@/components/Header';
 import DashboardSidebar from '@/components/DashboardSidebar';
 import FullScreenLoading from '@/components/FullScreenLoading';
 import EmailCaptureModal from '@/components/EmailCaptureModal';
+import TransportadorTermsModal from '@/components/TransportadorTermsModal';
 
 export default function DashboardLayout({ children }: { children: React.ReactNode }) {
   const { user, isLoading, checkAuth } = useAuth();
@@ -32,9 +33,17 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
   const showEmailCapture =
     user.role === 'TIO' && user.mustCaptureEmail === true;
 
+  const needsTransportadorTerms =
+    user.role === 'TIO' &&
+    !user.mustCaptureEmail &&
+    !user.transportadorTermsAcceptedAt;
+
   return (
     <div className="min-h-screen bg-gray-50">
       {showEmailCapture && <EmailCaptureModal />}
+      {!showEmailCapture && needsTransportadorTerms && (
+        <TransportadorTermsModal />
+      )}
       <Header />
       <div className="flex">
         <DashboardSidebar isOpen={sidebarOpen} onClose={() => setSidebarOpen(false)} />

@@ -386,6 +386,12 @@ export default function TiosPage() {
                     </div>
                   </div>
 
+                  {tio.vacancyTotal != null && tio.vacancyTotal > 0 && (
+                    <p className="text-sm font-semibold text-secondary mb-2">
+                      {tio.vacancyTotal} {tio.vacancyTotal === 1 ? 'vaga disponível' : 'vagas disponíveis'}
+                    </p>
+                  )}
+
                   {tio.bio && (
                     <p className="text-sm text-gray-600 mb-3 line-clamp-2">{tio.bio}</p>
                   )}

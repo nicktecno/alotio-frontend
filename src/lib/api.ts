@@ -144,6 +144,7 @@ export const api = {
         email: string;
         role: string;
         mustCaptureEmail?: boolean;
+        transportadorTermsAcceptedAt?: string | null;
       };
     }>('/auth/login', { method: 'POST', body: JSON.stringify(data) }),
 
@@ -155,6 +156,7 @@ export const api = {
       email: string;
       role: string;
       mustCaptureEmail?: boolean;
+      transportadorTermsAcceptedAt?: string | null;
     }>('/auth/me'),
 
   updateCapturedEmail: (email: string) =>
@@ -164,11 +166,23 @@ export const api = {
         email: string;
         role: string;
         mustCaptureEmail?: boolean;
+        transportadorTermsAcceptedAt?: string | null;
       };
     }>('/auth/me/email', {
       method: 'PATCH',
       body: JSON.stringify({ email }),
     }),
+
+  acceptTransportadorTerms: () =>
+    request<{
+      user: {
+        id: string;
+        email: string;
+        role: string;
+        mustCaptureEmail?: boolean;
+        transportadorTermsAcceptedAt?: string | null;
+      };
+    }>('/auth/me/accept-transportador-terms', { method: 'POST' }),
 
   forgotPassword: (email: string) =>
     request<{ message: string }>('/auth/forgot-password', {

@@ -10,6 +10,8 @@ export type AuthUser = {
   role: string;
   /** Conta com e-mail provisório (import); precisa informar e-mail real no app. */
   mustCaptureEmail?: boolean;
+  /** ISO date quando aceitou os termos do transportador; null = pendente (modal no dashboard). */
+  transportadorTermsAcceptedAt?: string | null;
 };
 
 interface AuthState {
@@ -31,6 +33,8 @@ export const useAuth = create<AuthState>((set) => ({
       user: {
         ...res.user,
         mustCaptureEmail: res.user.mustCaptureEmail ?? false,
+        transportadorTermsAcceptedAt:
+          res.user.transportadorTermsAcceptedAt ?? null,
       },
     });
   },
@@ -56,6 +60,8 @@ export const useAuth = create<AuthState>((set) => ({
         user: {
           ...user,
           mustCaptureEmail: user.mustCaptureEmail ?? false,
+          transportadorTermsAcceptedAt:
+            user.transportadorTermsAcceptedAt ?? null,
         },
         isLoading: false,
       });

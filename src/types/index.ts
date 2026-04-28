@@ -88,6 +88,10 @@ export interface Profile {
   hasTV: boolean;
   hasAC: boolean;
   hasMonitor: boolean;
+  /** Vagas por turno (opcional); usado na busca pública. */
+  vacanciesMorning?: number | null;
+  vacanciesAfternoon?: number | null;
+  vacanciesNight?: number | null;
   avatarUrl: string | null;
   isIntermunicipal: boolean;
   cityId: string;
@@ -174,7 +178,13 @@ export interface TioPublicView {
     name: string;
     state: { id: string; name: string; uf: string };
   } | null;
+  /** Soma de vagas nos turnos informados; null se não divulgar vagas. */
+  vacancyTotal?: number | null;
+  vacanciesMorning?: number | null;
+  vacanciesAfternoon?: number | null;
+  vacanciesNight?: number | null;
 }
+
 
 export interface PaginatedResponse<T> {
   data: T[];
