@@ -269,7 +269,7 @@ export default function TioReviewsPanel({
         <h3 className="font-heading text-base font-semibold text-gray-900 mb-1">Deixe sua avaliação</h3>
         <p className="text-sm text-gray-600 mb-4">
           Enviaremos um código de verificação para o seu e-mail. Cada e-mail pode avaliar este transportador
-          uma vez. Limite de 5 avaliações por dia para o seu endereço de rede.
+          uma vez.
         </p>
 
         {step === 'email' && (
