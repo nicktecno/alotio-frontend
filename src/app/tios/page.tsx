@@ -392,6 +392,17 @@ export default function TiosPage() {
                     </p>
                   )}
 
+                  {(tio.reviewsApprovedCount ?? 0) > 0 && tio.reviewAvgOverall != null && (
+                    <p className="text-sm text-amber-800 mb-2 flex items-center gap-1.5 flex-wrap">
+                      <span className="text-amber-500 text-base leading-none">★</span>
+                      <span className="font-bold">{tio.reviewAvgOverall.toFixed(1)}</span>
+                      <span className="text-gray-500 font-normal">
+                        ({tio.reviewsApprovedCount}{' '}
+                        {tio.reviewsApprovedCount === 1 ? 'avaliação' : 'avaliações'})
+                      </span>
+                    </p>
+                  )}
+
                   {tio.bio && (
                     <p className="text-sm text-gray-600 mb-3 line-clamp-2">{tio.bio}</p>
                   )}

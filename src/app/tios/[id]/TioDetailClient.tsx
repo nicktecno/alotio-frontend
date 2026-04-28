@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { useParams } from 'next/navigation';
 import Link from 'next/link';
 import Header from '@/components/Header';
@@ -10,6 +10,7 @@ import { api, assetUrl } from '@/lib/api';
 import type { TioPublicView } from '@/types';
 import Loading from '@/components/Loading';
 import BreadcrumbJsonLd from '@/components/BreadcrumbJsonLd';
+import TioReviewsPanel from '@/components/TioReviewsPanel';
 
 const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://alotio.com.br';
 
@@ -18,6 +19,11 @@ export default function TioDetailPage() {
   const [tio, setTio] = useState<TioPublicView | null>(null);
   const [loading, setLoading] = useState(true);
   const [lightbox, setLightbox] = useState<{ images: string[]; index: number } | null>(null);
+
+  const refreshTio = useCallback(() => {
+    if (!id) return;
+    api.getTioById(id).then((data) => setTio(data as TioPublicView));
+  }, [id]);
 
   useEffect(() => {
     if (id) {
@@ -171,6 +177,16 @@ export default function TioDetailPage() {
             )}
 
             {/* Amenities */}
+            <TioReviewsPanel
+              profileId={tio.id}
+              reviewsApprovedCount={tio.reviewsApprovedCount ?? 0}
+              reviewAvgOverall={tio.reviewAvgOverall ?? null}
+              reviewAvgPunctuality={tio.reviewAvgPunctuality ?? null}
+              reviewAvgCommunication={tio.reviewAvgCommunication ?? null}
+              reviewAvgSafety={tio.reviewAvgSafety ?? null}
+              onStatsRefresh={refreshTio}
+            />
+
             {(tio.hasTV || tio.hasAC || tio.hasMonitor) && (
               <div>
                 <h2 className="font-heading text-lg font-semibold text-gray-900 mb-3">Comodidades do veículo</h2>

@@ -318,6 +318,69 @@ export const api = {
   },
   getTioById: (id: string) => request(`/tios/${id}`),
 
+  requestReviewCode: (body: { profileId: string; email: string }) =>
+    publicRequest<{ message: string }>('/reviews/request-code', {
+      method: 'POST',
+      body: JSON.stringify(body),
+    }),
+
+  submitReview: (body: {
+    profileId: string;
+    email: string;
+    reviewerName: string;
+    code: string;
+    punctuality: number;
+    communication: number;
+    safety: number;
+    comment: string;
+  }) =>
+    publicRequest<{ message: string }>('/reviews/submit', {
+      method: 'POST',
+      body: JSON.stringify(body),
+    }),
+
+  getPublicReviews: (profileId: string, page = 1, limit = 30) =>
+    publicRequest<{
+      data: Array<{
+        id: string;
+        reviewerName: string;
+        punctuality: number;
+        communication: number;
+        safety: number;
+        comment: string;
+        createdAt: string;
+      }>;
+      total: number;
+      page: number;
+      limit: number;
+      totalPages: number;
+    }>(`/reviews/profile/${profileId}?page=${page}&limit=${limit}`),
+
+  adminListPendingReviews: (page = 1) =>
+    request<{
+      data: Array<{
+        id: string;
+        reviewerName: string;
+        reviewerEmail: string;
+        punctuality: number;
+        communication: number;
+        safety: number;
+        comment: string;
+        createdAt: string;
+        profile: { id: string; displayName: string; prefixo: string };
+      }>;
+      total: number;
+      page: number;
+      limit: number;
+      totalPages: number;
+    }>(`/admin/reviews/pending?page=${page}`),
+
+  adminApproveReview: (id: string) =>
+    request(`/admin/reviews/${id}/approve`, { method: 'POST' }),
+
+  adminRejectReview: (id: string) =>
+    request(`/admin/reviews/${id}/reject`, { method: 'POST' }),
+
   // Subscriptions
   getPlans: () => request('/subscriptions/plans'),
   getMySubscription: () => request('/subscriptions/me'),

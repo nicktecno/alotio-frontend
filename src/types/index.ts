@@ -183,6 +183,21 @@ export interface TioPublicView {
   vacanciesMorning?: number | null;
   vacanciesAfternoon?: number | null;
   vacanciesNight?: number | null;
+  reviewsApprovedCount?: number;
+  reviewAvgOverall?: number | null;
+  reviewAvgPunctuality?: number | null;
+  reviewAvgCommunication?: number | null;
+  reviewAvgSafety?: number | null;
+}
+
+export interface TioPublicReview {
+  id: string;
+  reviewerName: string;
+  punctuality: number;
+  communication: number;
+  safety: number;
+  comment: string;
+  createdAt: string;
 }
 
 
