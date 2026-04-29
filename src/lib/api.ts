@@ -479,7 +479,12 @@ export const api = {
     request(`/admin/neighborhoods/${id}`, { method: 'DELETE' }),
 
   // Contact
-  sendContact: (data: { name: string; email: string; message: string }) =>
+  sendContact: (data: {
+    name: string;
+    email: string;
+    phone: string;
+    message: string;
+  }) =>
     request<{ message: string }>('/contact', { method: 'POST', body: JSON.stringify(data) }),
 
   /** Transportador: não encontrou cidade/escola — envia para admin (Resend). */

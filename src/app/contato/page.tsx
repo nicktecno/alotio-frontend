@@ -7,7 +7,12 @@ import { api } from '@/lib/api';
 import toast from 'react-hot-toast';
 
 export default function ContatoPage() {
-  const [form, setForm] = useState({ name: '', email: '', message: '' });
+  const [form, setForm] = useState({
+    name: '',
+    email: '',
+    phone: '',
+    message: '',
+  });
   const [loading, setLoading] = useState(false);
   const [sent, setSent] = useState(false);
 
@@ -43,10 +48,13 @@ export default function ContatoPage() {
             <div className="text-5xl mb-4">✅</div>
             <h2 className="text-xl font-semibold text-gray-900 mb-2">Mensagem enviada!</h2>
             <p className="text-gray-500 mb-6">
-              Recebemos sua mensagem e entraremos em contato em breve pelo email informado.
+              Recebemos sua mensagem e entraremos em contato em breve pelo email ou telefone informados.
             </p>
             <button
-              onClick={() => { setSent(false); setForm({ name: '', email: '', message: '' }); }}
+              onClick={() => {
+                setSent(false);
+                setForm({ name: '', email: '', phone: '', message: '' });
+              }}
               className="bg-primary hover:bg-primary-600 text-white px-6 py-2.5 rounded-lg font-semibold transition cursor-pointer"
             >
               Enviar outra mensagem
@@ -81,6 +89,28 @@ export default function ContatoPage() {
                 placeholder="seu@email.com"
                 className="w-full px-3 py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-primary outline-none"
               />
+            </div>
+
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-1">
+                Telefone (WhatsApp)
+              </label>
+              <input
+                name="phone"
+                type="tel"
+                inputMode="tel"
+                autoComplete="tel"
+                value={form.phone}
+                onChange={handleChange}
+                required
+                minLength={8}
+                maxLength={30}
+                placeholder="(00) 00000-0000"
+                className="w-full px-3 py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-primary outline-none"
+              />
+              <p className="text-xs text-gray-400 mt-1">
+                Usamos para retornar seu contato, se necessário.
+              </p>
             </div>
 
             <div>
