@@ -209,6 +209,28 @@ export interface PaginatedResponse<T> {
   totalPages: number;
 }
 
+export type ContactSubmissionSource = 'FALE_CONOSCO' | 'CADASTRO_ESCOLA';
+export type ContactSubmissionStatus = 'PENDING' | 'REPLIED';
+
+/** Mensagens do site (Fale Conosco / cadastro escola) — GET /admin/contact-submissions */
+export interface ContactSubmission {
+  id: string;
+  source: ContactSubmissionSource;
+  name: string;
+  email: string;
+  phone: string | null;
+  message: string;
+  extraJson: Record<string, unknown> | null;
+  status: ContactSubmissionStatus;
+  repliedAt: string | null;
+  replyText: string | null;
+  replySubject: string | null;
+  repliedById: string | null;
+  createdAt: string;
+  updatedAt: string;
+  repliedBy?: { id: string; email: string } | null;
+}
+
 export interface AuthResponse {
   accessToken: string;
   refreshToken: string;

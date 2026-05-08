@@ -4,7 +4,7 @@ import Link from 'next/link';
 import { useCallback, useEffect, useState } from 'react';
 import Loading from '@/components/Loading';
 import { api } from '@/lib/api';
-import { useMyProfile } from '@/lib/swr';
+import { useMyProfile, useMySubscription } from '@/lib/swr';
 import toast from 'react-hot-toast';
 import {
   digitsOnly,
@@ -13,7 +13,7 @@ import {
 } from '@/lib/br-input';
 import { DeleteConfirmModal } from '../_components/delete-confirm-modal';
 import { Field } from '../_components/field';
-import { MeuTransporteNoProfile } from '../_components/no-profile';
+import { MeuTransportePremiumGate } from '../_components/premium-gate';
 import {
   CONTRACT_STATUS_PT,
   type ContractRow,
@@ -23,6 +23,8 @@ import {
 
 export default function MeuTransporteContratosPage() {
   const { data: profile, isLoading: profileLoading } = useMyProfile();
+  const { data: subData, isLoading: loadingSub } = useMySubscription();
+  const isPremium = subData?.isPremium ?? false;
   const [parents, setParents] = useState<ServedParentRow[]>([]);
   const [contracts, setContracts] = useState<ContractRow[]>([]);
   const [loading, setLoading] = useState(true);
@@ -43,7 +45,7 @@ export default function MeuTransporteContratosPage() {
   const [deleteSubmitting, setDeleteSubmitting] = useState(false);
 
   const load = useCallback(async () => {
-    if (!profile) return;
+    if (!profile || !isPremium) return;
     setLoading(true);
     try {
       const [p, c] = await Promise.all([
@@ -57,12 +59,20 @@ export default function MeuTransporteContratosPage() {
     } finally {
       setLoading(false);
     }
-  }, [profile]);
+  }, [profile, isPremium]);
 
   useEffect(() => {
-    if (profile) load();
-    else if (!profileLoading) setLoading(false);
-  }, [profile, profileLoading, load]);
+    if (loadingSub) return;
+    if (!profile) {
+      if (!profileLoading) setLoading(false);
+      return;
+    }
+    if (!isPremium) {
+      setLoading(false);
+      return;
+    }
+    void load();
+  }, [profile, profileLoading, isPremium, loadingSub, load]);
 
   const createContract = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -143,19 +153,11 @@ export default function MeuTransporteContratosPage() {
     }
   };
 
-  if (profileLoading) {
-    return <Loading />;
-  }
-
-  if (!profile) {
-    return <MeuTransporteNoProfile />;
-  }
-
-  if (loading) {
-    return <Loading />;
-  }
-
   return (
+    <MeuTransportePremiumGate title="Contratos de transporte escolar">
+    {profileLoading || loadingSub || loading ? (
+      <Loading />
+    ) : (
     <div className="max-w-4xl space-y-10">
       <div>
         <h1 className="text-2xl font-semibold text-primary-800">Contratos de transporte escolar</h1>
@@ -402,5 +404,7 @@ export default function MeuTransporteContratosPage() {
         submitting={deleteSubmitting}
       />
     </div>
+    )}
+    </MeuTransportePremiumGate>
   );
 }

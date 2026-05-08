@@ -1,7 +1,9 @@
 import type {
   AdminUserListRow,
   CityResolveFromLocation,
+  ContactSubmission,
   Paginated,
+  PaginatedResponse,
   Profile,
 } from '@/types';
 
@@ -398,6 +400,31 @@ export const api = {
 
   // Admin
   adminGetStats: () => request('/admin/dashboard/stats'),
+
+  adminListContactSubmissions: (params?: {
+    page?: number;
+    limit?: number;
+    status?: 'PENDING' | 'REPLIED';
+  }) => {
+    const q = new URLSearchParams();
+    if (params?.page != null) q.set('page', String(params.page));
+    if (params?.limit != null) q.set('limit', String(params.limit));
+    if (params?.status) q.set('status', params.status);
+    const qs = q.toString();
+    return request<PaginatedResponse<ContactSubmission>>(
+      `/admin/contact-submissions${qs ? `?${qs}` : ''}`,
+    );
+  },
+  adminGetContactSubmission: (id: string) =>
+    request<ContactSubmission>(`/admin/contact-submissions/${id}`),
+  adminReplyContactSubmission: (
+    id: string,
+    body: { message: string; subject?: string },
+  ) =>
+    request<{ message: string }>(`/admin/contact-submissions/${id}/reply`, {
+      method: 'POST',
+      body: JSON.stringify(body),
+    }),
   adminGetUsers: (params?: Record<string, string>) => {
     const qs = params ? new URLSearchParams(params).toString() : '';
     return request<Paginated<AdminUserListRow>>(

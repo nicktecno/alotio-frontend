@@ -1,9 +1,7 @@
 'use client';
 
 import Link from 'next/link';
-import Loading from '@/components/Loading';
-import { useMyProfile } from '@/lib/swr';
-import { MeuTransporteNoProfile } from './_components/no-profile';
+import { MeuTransportePremiumGate } from './_components/premium-gate';
 
 const sections: {
   href: string;
@@ -34,17 +32,8 @@ const sections: {
 ];
 
 export default function MeuTransportePage() {
-  const { data: profile, isLoading: profileLoading } = useMyProfile();
-
-  if (profileLoading) {
-    return <Loading />;
-  }
-
-  if (!profile) {
-    return <MeuTransporteNoProfile />;
-  }
-
   return (
+    <MeuTransportePremiumGate title="Meu transporte">
     <div className="max-w-4xl space-y-10">
       <div>
         <h1 className="text-2xl font-semibold text-primary-800">Meu transporte</h1>
@@ -80,5 +69,6 @@ export default function MeuTransportePage() {
         </ul>
       </div>
     </div>
+    </MeuTransportePremiumGate>
   );
 }

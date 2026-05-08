@@ -5,12 +5,11 @@ import { api } from '@/lib/api';
 import { useMyProfile, invalidateProfile } from '@/lib/swr';
 import toast from 'react-hot-toast';
 import { digitsOnly, formatCnpjMask, formatCpfMask, isValidCpfDigits } from '@/lib/br-input';
-import Loading from '@/components/Loading';
 import { Field } from '../_components/field';
-import { MeuTransporteNoProfile } from '../_components/no-profile';
+import { MeuTransportePremiumGate } from '../_components/premium-gate';
 
 export default function MeuTransporteDadosPage() {
-  const { data: profile, isLoading: profileLoading } = useMyProfile();
+  const { data: profile } = useMyProfile();
   const [legalForContract, setLegalForContract] = useState({
     legalName: '',
     cnpj: '',
@@ -55,15 +54,8 @@ export default function MeuTransporteDadosPage() {
     }
   };
 
-  if (profileLoading) {
-    return <Loading />;
-  }
-
-  if (!profile) {
-    return <MeuTransporteNoProfile />;
-  }
-
   return (
+    <MeuTransportePremiumGate title="Dados do transportador">
     <div className="max-w-4xl space-y-8">
       <div>
         <h1 className="text-2xl font-semibold text-primary-800">Dados do transportador</h1>
@@ -138,5 +130,6 @@ export default function MeuTransporteDadosPage() {
         </form>
       </section>
     </div>
+    </MeuTransportePremiumGate>
   );
 }

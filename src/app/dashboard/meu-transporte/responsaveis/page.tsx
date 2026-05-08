@@ -4,7 +4,13 @@ import { useCallback, useEffect, useState } from 'react';
 import { FaWhatsapp } from 'react-icons/fa';
 import Loading from '@/components/Loading';
 import { api } from '@/lib/api';
-import { useMyProfile, useStates, useCities, useNeighborhoods } from '@/lib/swr';
+import {
+  useMyProfile,
+  useMySubscription,
+  useStates,
+  useCities,
+  useNeighborhoods,
+} from '@/lib/swr';
 import toast from 'react-hot-toast';
 import {
   digitsOnly,
@@ -15,7 +21,7 @@ import {
 } from '@/lib/br-input';
 import { DeleteConfirmModal } from '../_components/delete-confirm-modal';
 import { Field } from '../_components/field';
-import { MeuTransporteNoProfile } from '../_components/no-profile';
+import { MeuTransportePremiumGate } from '../_components/premium-gate';
 import {
   RECEIPT_MONTHS_PT,
   type ServedParentRow,
@@ -24,6 +30,8 @@ import {
 
 export default function MeuTransporteResponsaveisPage() {
   const { data: profile, isLoading: profileLoading } = useMyProfile();
+  const { data: subData, isLoading: loadingSub } = useMySubscription();
+  const isPremium = subData?.isPremium ?? false;
   const [parents, setParents] = useState<ServedParentRow[]>([]);
   const [loading, setLoading] = useState(true);
   const [inviteUrl, setInviteUrl] = useState<string | null>(null);
@@ -54,7 +62,7 @@ export default function MeuTransporteResponsaveisPage() {
   const { data: neighborhoods = [] } = useNeighborhoods(form.cityId || undefined);
 
   const load = useCallback(async () => {
-    if (!profile) return;
+    if (!profile || !isPremium) return;
     setLoading(true);
     try {
       const p = (await api.servedParentsList()) as ServedParentRow[];
@@ -64,12 +72,20 @@ export default function MeuTransporteResponsaveisPage() {
     } finally {
       setLoading(false);
     }
-  }, [profile]);
+  }, [profile, isPremium]);
 
   useEffect(() => {
-    if (profile) load();
-    else if (!profileLoading) setLoading(false);
-  }, [profile, profileLoading, load]);
+    if (loadingSub) return;
+    if (!profile) {
+      if (!profileLoading) setLoading(false);
+      return;
+    }
+    if (!isPremium) {
+      setLoading(false);
+      return;
+    }
+    void load();
+  }, [profile, profileLoading, isPremium, loadingSub, load]);
 
   const submitParent = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -247,19 +263,11 @@ export default function MeuTransporteResponsaveisPage() {
     }
   };
 
-  if (profileLoading) {
-    return <Loading />;
-  }
-
-  if (!profile) {
-    return <MeuTransporteNoProfile />;
-  }
-
-  if (loading) {
-    return <Loading />;
-  }
-
   return (
+    <MeuTransportePremiumGate title="Responsáveis e recibos">
+    {profileLoading || loadingSub || loading ? (
+      <Loading />
+    ) : (
     <div className="max-w-4xl space-y-10">
       <div>
         <h1 className="text-2xl font-semibold text-primary-800">Responsáveis e recibos</h1>
@@ -524,5 +532,7 @@ export default function MeuTransporteResponsaveisPage() {
         submitting={deleteSubmitting}
       />
     </div>
+    )}
+    </MeuTransportePremiumGate>
   );
 }

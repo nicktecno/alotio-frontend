@@ -207,7 +207,7 @@ export default function AssinaturaPage() {
       {!isPremium && uniquePlans.length > 0 && (
         <>
           <p className="text-sm text-gray-600 mb-4">
-            Plano atual: <strong>Gratuito</strong>. O premium inclui galeria do veículo no perfil, selo premium e destaque na busca.
+            Plano atual: <strong>Gratuito</strong>. O premium inclui galeria do veículo no perfil, selo premium, destaque na busca e as ferramentas de transporte (dados para PDF, responsáveis, recibos e contratos).
           </p>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             {uniquePlans.map((plan) => (
@@ -248,6 +248,15 @@ export default function AssinaturaPage() {
                   </li>
                   <li className="flex items-center gap-2">
                     <span className="text-secondary font-bold">✓</span> Destaque nos resultados de busca
+                  </li>
+                  <li className="flex items-center gap-2">
+                    <span className="text-secondary font-bold">✓</span> Dados do transportador para contratos e recibos (PDF)
+                  </li>
+                  <li className="flex items-center gap-2">
+                    <span className="text-secondary font-bold">✓</span> Cadastro de responsáveis, convite por link e recibos mensais
+                  </li>
+                  <li className="flex items-center gap-2">
+                    <span className="text-secondary font-bold">✓</span> Contratos de transporte escolar com assinatura digital
                   </li>
                 </ul>
 
