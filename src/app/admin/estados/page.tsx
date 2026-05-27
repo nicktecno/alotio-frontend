@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { api } from '@/lib/api';
 import toast from 'react-hot-toast';
 import type { State } from '@/types';
@@ -12,15 +12,29 @@ export default function AdminEstadosPage() {
   const [showForm, setShowForm] = useState(false);
   const [form, setForm] = useState({ name: '', uf: '' });
   const [saving, setSaving] = useState(false);
+  const [cacheConfigured, setCacheConfigured] = useState<boolean | null>(null);
+  const [cacheIndefinite, setCacheIndefinite] = useState(true);
+  const [invalidatingId, setInvalidatingId] = useState<string | null>(null);
+  const [invalidatingAll, setInvalidatingAll] = useState(false);
 
-  const load = async () => {
+  const load = useCallback(async () => {
     setLoading(true);
-    const data = await api.getStates();
-    setStates(data as State[]);
-    setLoading(false);
-  };
+    try {
+      const [data, cacheStatus] = await Promise.all([
+        api.getStates(),
+        api.adminSearchCacheStatus().catch(() => null),
+      ]);
+      setStates(data as State[]);
+      setCacheConfigured(cacheStatus?.configured ?? false);
+      setCacheIndefinite(cacheStatus?.indefiniteTtl ?? true);
+    } finally {
+      setLoading(false);
+    }
+  }, []);
 
-  useEffect(() => { load(); }, []);
+  useEffect(() => {
+    void load();
+  }, [load]);
 
   const handleCreate = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -49,6 +63,44 @@ export default function AdminEstadosPage() {
     }
   };
 
+  const handleInvalidateCache = async (state: State) => {
+    if (
+      !confirm(
+        `Invalidar o cache de busca de transportadores em ${state.name} (${state.uf})? A próxima busca recarrega do banco.`,
+      )
+    ) {
+      return;
+    }
+    setInvalidatingId(state.id);
+    try {
+      const res = await api.adminInvalidateSearchCache(state.id);
+      toast.success(res.message);
+    } catch (err: unknown) {
+      toast.error(err instanceof Error ? err.message : 'Erro ao invalidar cache');
+    } finally {
+      setInvalidatingId(null);
+    }
+  };
+
+  const handleInvalidateAllScope = async () => {
+    if (
+      !confirm(
+        'Invalidar cache de buscas sem filtro de estado (escopo global)?',
+      )
+    ) {
+      return;
+    }
+    setInvalidatingAll(true);
+    try {
+      const res = await api.adminInvalidateSearchCacheAllScope();
+      toast.success(res.message);
+    } catch (err: unknown) {
+      toast.error(err instanceof Error ? err.message : 'Erro');
+    } finally {
+      setInvalidatingAll(false);
+    }
+  };
+
   return (
     <div>
       <div className="flex items-center justify-between mb-6">
@@ -59,6 +111,34 @@ export default function AdminEstadosPage() {
         >
           {showForm ? 'Cancelar' : '+ Novo Estado'}
         </button>
+      </div>
+
+      <div className="bg-white rounded-xl border border-gray-200 p-4 mb-6 text-sm text-gray-600">
+        <h2 className="font-semibold text-gray-900 mb-1">Cache da busca pública</h2>
+        {cacheConfigured === null ? (
+          <p>Carregando status do cache…</p>
+        ) : cacheConfigured ? (
+          <p>
+            Redis ativo. TTL{' '}
+            {cacheIndefinite
+              ? 'indeterminado — entradas só mudam ao invalidar ou ao cadastrar transportador no estado.'
+              : 'com expiração configurada no servidor.'}
+          </p>
+        ) : (
+          <p className="text-amber-700">
+            Cache desativado (Upstash não configurado). Invalidação manual não se aplica.
+          </p>
+        )}
+        {cacheConfigured && (
+          <button
+            type="button"
+            onClick={handleInvalidateAllScope}
+            disabled={invalidatingAll}
+            className="mt-3 text-primary font-medium hover:underline disabled:opacity-50"
+          >
+            {invalidatingAll ? 'Invalidando…' : 'Invalidar cache global (busca sem UF)'}
+          </button>
+        )}
       </div>
 
       {showForm && (
@@ -113,7 +193,17 @@ export default function AdminEstadosPage() {
                       {s.isActive ? 'Sim' : 'Não'}
                     </span>
                   </td>
-                  <td className="px-4 py-3 text-right">
+                  <td className="px-4 py-3 text-right space-x-3">
+                    {cacheConfigured && (
+                      <button
+                        type="button"
+                        onClick={() => handleInvalidateCache(s)}
+                        disabled={invalidatingId === s.id}
+                        className="text-primary hover:text-primary-800 text-xs font-medium disabled:opacity-50"
+                      >
+                        {invalidatingId === s.id ? 'Invalidando…' : 'Invalidar cache'}
+                      </button>
+                    )}
                     <button
                       onClick={() => handleDelete(s.id)}
                       className="text-red-500 hover:text-red-700 text-xs font-medium"

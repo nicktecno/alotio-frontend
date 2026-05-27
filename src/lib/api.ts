@@ -484,6 +484,31 @@ export const api = {
   adminDeleteState: (id: string) =>
     request(`/admin/states/${id}`, { method: 'DELETE' }),
 
+  adminSearchCacheStatus: () =>
+    request<{
+      configured: boolean;
+      entryTtlSec: number | null;
+      indefiniteTtl: boolean;
+    }>('/admin/search-cache/status'),
+
+  adminInvalidateSearchCache: (stateId: string) =>
+    request<{
+      stateId: string;
+      name: string;
+      uf: string;
+      version: number | null;
+      message: string;
+    }>('/admin/search-cache/invalidate', {
+      method: 'POST',
+      body: JSON.stringify({ stateId }),
+    }),
+
+  adminInvalidateSearchCacheAllScope: () =>
+    request<{ scope: string; version: number | null; message: string }>(
+      '/admin/search-cache/invalidate-all-scope',
+      { method: 'POST' },
+    ),
+
   adminCreateCity: (data: Record<string, unknown>) =>
     request('/admin/cities', { method: 'POST', body: JSON.stringify(data) }),
   adminUpdateCity: (id: string, data: Record<string, unknown>) =>
