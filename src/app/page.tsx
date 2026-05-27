@@ -2,11 +2,11 @@ import type { Metadata } from 'next';
 import Link from 'next/link';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
+import { SEO_SITE_DESCRIPTION, SEO_SITE_TITLE } from '@/lib/seo-copy';
 
 export const metadata: Metadata = {
-  title: 'Alô Tio - Transporte Escolar | Encontre o Tio da Van Escolar',
-  description:
-    'Encontre transporte escolar seguro e verificado para seu filho. Condutor escolar, van escolar e motoristas por escola, cidade ou bairro. Serviço gratuito.',
+  title: SEO_SITE_TITLE,
+  description: SEO_SITE_DESCRIPTION,
   alternates: {
     canonical: process.env.NEXT_PUBLIC_SITE_URL || 'https://alotio.com.br',
   },
@@ -37,10 +37,18 @@ export default function Home() {
       },
       {
         '@type': 'Question',
-        name: 'Como me cadastrar como motorista de transporte escolar?',
+        name: 'O que é condutor escolar?',
         acceptedAnswer: {
           '@type': 'Answer',
-          text: 'Crie sua conta gratuitamente, preencha seu perfil com seu prefixo, escolas atendidas e bairros. Envie seu documento profissional para verificação. Após aprovação, seu perfil ficará visível para pais da sua região.',
+          text: 'Condutor escolar é o profissional autorizado a transportar alunos entre casa e escola, em van escolar ou perua. No Alô Tio você encontra condutores cadastrados por escola e bairro atendido.',
+        },
+      },
+      {
+        '@type': 'Question',
+        name: 'Como me cadastrar como condutor de transporte escolar?',
+        acceptedAnswer: {
+          '@type': 'Answer',
+          text: 'Crie sua conta gratuitamente, preencha seu perfil com prefixo, escolas atendidas e bairros. Envie seu documento profissional para verificação. Após aprovação, seu perfil ficará visível para pais que buscam transporte escolar na sua região.',
         },
       },
     ],
@@ -67,18 +75,19 @@ export default function Home() {
                   className="h-20 sm:h-24 lg:h-28 w-auto max-w-full mx-auto lg:mx-0 mb-6 object-contain drop-shadow-md"
                 />
                 <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-white leading-tight font-heading">
-                  Encontre o Tio para o transporte do seu filho
+                  Encontre transporte escolar e condutor escolar na sua região
                 </h1>
                 <p className="mt-4 text-lg text-primary-100 max-w-xl">
-                  Pesquise por escola, cidade ou bairro e encontre profissionais verificados
-                  para o transporte escolar com segurança e confiança.
+                  Busque por escola, cidade ou bairro e encontre van escolar, motorista e tio da
+                  van verificados — o jeito mais fácil de encontrar transporte escolar com
+                  segurança.
                 </p>
                 <div className="mt-8 flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
                   <Link
                     href="/tios"
                     className="bg-secondary hover:bg-secondary-600 text-white px-8 py-4 rounded-lg text-lg font-bold font-heading tracking-wide transition shadow-lg text-center"
                   >
-                    Procurar por Tios
+                    Encontrar transporte escolar
                   </Link>
                   <Link
                     href="/login"
@@ -93,7 +102,7 @@ export default function Home() {
               <div className="flex justify-center lg:justify-end">
                 <img
                   src="/bannerAlotio.png"
-                  alt="Alô Tio - Transporte escolar"
+                  alt="Encontrar transporte escolar — Alô Tio"
                   className="w-full max-w-md sm:max-w-xl lg:max-w-2xl xl:max-w-3xl h-auto object-contain drop-shadow-2xl"
                 />
               </div>
@@ -111,7 +120,7 @@ export default function Home() {
               {[
                 {
                   title: 'Busque por escola',
-                  desc: 'Selecione o estado, a cidade e a escola do seu filho para encontrar os tios disponíveis.',
+                  desc: 'Selecione estado, cidade e escola para encontrar transporte escolar e condutores disponíveis.',
                   icon: '🔍',
                   color: 'bg-primary-50 border-primary-200',
                 },
@@ -123,7 +132,7 @@ export default function Home() {
                 },
                 {
                   title: 'Entre em contato',
-                  desc: 'Ligue ou envie mensagem diretamente para o tio e combine o transporte escolar.',
+                  desc: 'Ligue ou envie mensagem ao condutor escolar e combine o transporte do seu filho.',
                   icon: '📱',
                   color: 'bg-primary-50 border-primary-200',
                 },
@@ -140,6 +149,27 @@ export default function Home() {
                 </div>
               ))}
             </div>
+          </div>
+        </section>
+
+        <section className="py-16 bg-white border-t border-gray-100">
+          <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <h2 className="text-2xl sm:text-3xl font-bold text-primary-900 font-heading mb-4">
+              Plataforma para encontrar transporte escolar
+            </h2>
+            <p className="text-gray-600 leading-relaxed">
+              O <strong>Alô Tio</strong> conecta famílias a <strong>condutor escolar</strong>,
+              van escolar e motoristas de transporte escolar cadastrados por escola e bairro. Se
+              você procura <strong>encontrar transporte escolar</strong> perto da escola do seu
+              filho, use a busca gratuita — também conhecido como tio da van ou perua escolar em
+              muitas cidades.
+            </p>
+            <Link
+              href="/transporte-escolar"
+              className="inline-block mt-6 text-primary font-semibold hover:underline"
+            >
+              Ver transporte escolar por cidade e bairro →
+            </Link>
           </div>
         </section>
 

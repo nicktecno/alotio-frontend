@@ -6,6 +6,7 @@ import GoogleAnalytics from '@/components/GoogleAnalytics';
 import { organizationSameAsUrls } from '@/lib/seo-env';
 import { SEO_CORE_KEYWORDS } from '@/lib/seo-keywords';
 import { seoKeywordsFromRegisteredCities } from '@/lib/seo-city-keywords';
+import { SEO_SITE_DESCRIPTION, SEO_SITE_TITLE } from '@/lib/seo-copy';
 
 const poppins = Poppins({
   subsets: ['latin'],
@@ -33,11 +34,10 @@ export async function generateMetadata(): Promise<Metadata> {
   return {
     metadataBase: new URL(siteUrl),
     title: {
-      default: 'Alô Tio - Transporte Escolar | Encontre o Tio da Van Escolar',
-      template: '%s | Alô Tio - Transporte Escolar',
+      default: SEO_SITE_TITLE,
+      template: '%s | Alô Tio',
     },
-    description:
-      'Encontre transporte escolar seguro e verificado. Condutor escolar, van escolar e motoristas por escola, cidade ou bairro. Profissionais cadastrados na sua região.',
+    description: SEO_SITE_DESCRIPTION,
     keywords: [
       ...SEO_CORE_KEYWORDS,
       'tio de escola',
@@ -46,7 +46,6 @@ export async function generateMetadata(): Promise<Metadata> {
       'encontrar van escolar',
       'transporte escolar perto de mim',
       'serviço de transporte escolar',
-      'buscar transporte escolar',
       ...regionKeywords,
     ],
     authors: [{ name: 'Alô Tio' }],
@@ -68,23 +67,21 @@ export async function generateMetadata(): Promise<Metadata> {
       locale: 'pt_BR',
       url: siteUrl,
       siteName: 'Alô Tio',
-      title: 'Alô Tio - Transporte Escolar | Encontre o Tio da Van Escolar',
-      description:
-        'Encontre transporte escolar seguro e verificado. Condutor escolar, van escolar e motoristas por escola, cidade ou bairro.',
+      title: SEO_SITE_TITLE,
+      description: SEO_SITE_DESCRIPTION,
       images: [
         {
           url: '/bannerAlotio.png',
           width: 1536,
           height: 1024,
-          alt: 'Alô Tio - Transporte Escolar',
+          alt: 'Alô Tio — encontrar transporte escolar e condutor escolar',
         },
       ],
     },
     twitter: {
       card: 'summary_large_image',
-      title: 'Alô Tio - Transporte Escolar | Encontre o Tio da Van Escolar',
-      description:
-        'Encontre transporte escolar seguro e verificado. Pesquise por escola e conecte-se com profissionais de van escolar na sua região.',
+      title: SEO_SITE_TITLE,
+      description: SEO_SITE_DESCRIPTION,
       images: ['/bannerAlotio.png'],
     },
     alternates: {
@@ -110,25 +107,57 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     name: 'Alô Tio',
     url: siteUrl,
     logo: logoUrl,
-    description:
-      'Plataforma para encontrar transporte escolar seguro e verificado por escola, cidade e bairro.',
+    description: SEO_SITE_DESCRIPTION,
+    knowsAbout: [
+      'Transporte escolar',
+      'Condutor escolar',
+      'Van escolar',
+      'Motorista escolar',
+    ],
     ...(sameAs.length > 0 ? { sameAs } : {}),
+  };
+
+  const webSiteJsonLd = {
+    '@type': 'WebSite',
+    '@id': `${siteUrl}#website`,
+    name: 'Alô Tio',
+    url: siteUrl,
+    description: SEO_SITE_DESCRIPTION,
+    inLanguage: 'pt-BR',
+    publisher: { '@id': `${siteUrl}#organization` },
+    potentialAction: {
+      '@type': 'SearchAction',
+      target: {
+        '@type': 'EntryPoint',
+        urlTemplate: `${siteUrl}/tios`,
+      },
+      'query-input': 'required name=search_term_string',
+    },
   };
 
   const webAppJsonLd = {
     '@type': 'WebApplication',
-    name: 'Alô Tio',
+    name: 'Alô Tio — encontrar transporte escolar',
     url: siteUrl,
-    description:
-      'Plataforma para encontrar transporte escolar seguro e verificado. Pesquise por escola, cidade ou bairro.',
+    description: SEO_SITE_DESCRIPTION,
     applicationCategory: 'TransportApplication',
     operatingSystem: 'Web',
     offers: {
       '@type': 'Offer',
       price: '0',
       priceCurrency: 'BRL',
-      description: 'Busca gratuita por transporte escolar',
+      description: 'Busca gratuita para encontrar transporte escolar e condutor escolar',
     },
+    provider: { '@id': `${siteUrl}#organization` },
+  };
+
+  const serviceJsonLd = {
+    '@type': 'Service',
+    name: 'Busca de transporte escolar e condutor escolar',
+    description:
+      'Serviço gratuito para encontrar transporte escolar, condutor escolar e van escolar por escola, cidade e bairro.',
+    serviceType: 'Transporte escolar',
+    areaServed: { '@type': 'Country', name: 'Brasil' },
     provider: { '@id': `${siteUrl}#organization` },
   };
 
@@ -136,7 +165,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     '@context': 'https://schema.org',
     '@graph': [
       { ...organizationJsonLd, '@id': `${siteUrl}#organization` },
+      webSiteJsonLd,
       webAppJsonLd,
+      serviceJsonLd,
     ],
   };
 

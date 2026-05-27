@@ -9,10 +9,10 @@ import { SEO_CORE_KEYWORDS } from '@/lib/seo-keywords';
 const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://alotio.com.br';
 
 const PAGE_DESCRIPTION =
-  'Encontre condutor escolar, van escolar e transporte escolar por cidade e bairro. Motoristas verificados, perua escolar e tio da van na sua região. Busca gratuita no Alô Tio.';
+  'Encontre e busque transporte escolar, condutor escolar e van escolar por cidade e bairro. Motoristas verificados e perua escolar na sua região. Busca gratuita no Alô Tio.';
 
 export const metadata: Metadata = {
-  title: 'Transporte escolar por cidade e bairro — condutor e van escolar',
+  title: 'Encontrar transporte escolar por cidade e bairro — condutor escolar',
   description: PAGE_DESCRIPTION,
   keywords: [
     ...SEO_CORE_KEYWORDS,
@@ -22,9 +22,9 @@ export const metadata: Metadata = {
   ],
   alternates: { canonical: `${siteUrl}/transporte-escolar` },
   openGraph: {
-    title: 'Transporte escolar por cidade e bairro | Alô Tio',
+    title: 'Encontrar transporte escolar por cidade e bairro | Alô Tio',
     description:
-      'Condutor escolar, van escolar e motoristas de transporte escolar verificados por região.',
+      'Encontre condutor escolar, van escolar e transporte escolar verificados por região.',
     url: `${siteUrl}/transporte-escolar`,
     locale: 'pt_BR',
     type: 'website',

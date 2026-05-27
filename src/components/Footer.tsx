@@ -26,10 +26,19 @@ export default function Footer() {
               |
             </span>
             <Link
+              href="/tios"
+              className="text-primary-200 hover:text-white transition [overflow-wrap:anywhere] max-w-full"
+            >
+              Encontrar transporte escolar
+            </Link>
+            <span className="text-primary-700 select-none hidden sm:inline" aria-hidden>
+              |
+            </span>
+            <Link
               href="/transporte-escolar"
               className="text-primary-200 hover:text-white transition [overflow-wrap:anywhere] max-w-full"
             >
-              Transporte escolar por cidade
+              Condutor escolar por cidade
             </Link>
             <span className="text-primary-700 select-none hidden sm:inline" aria-hidden>
               |

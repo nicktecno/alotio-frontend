@@ -1,22 +1,22 @@
 import type { Metadata } from 'next';
 import { SEO_CORE_KEYWORDS } from '@/lib/seo-keywords';
+import { SEO_SEARCH_PAGE_DESCRIPTION, SEO_SEARCH_PAGE_TITLE } from '@/lib/seo-copy';
 
 export const metadata: Metadata = {
-  title: 'Buscar Transporte Escolar - Van Escolar por Escola e Cidade',
-  description:
-    'Busque transporte escolar por escola, cidade e bairro. Condutor escolar, van escolar e motoristas verificados na sua região. Serviço gratuito.',
+  title: SEO_SEARCH_PAGE_TITLE,
+  description: SEO_SEARCH_PAGE_DESCRIPTION,
+  alternates: {
+    canonical: `${process.env.NEXT_PUBLIC_SITE_URL || 'https://alotio.com.br'}/tios`,
+  },
   keywords: [
     ...SEO_CORE_KEYWORDS,
-    'buscar transporte escolar',
-    'encontrar van escolar',
     'transporte escolar por escola',
     'van escolar perto de mim',
     'transporte escolar seguro',
   ],
   openGraph: {
-    title: 'Buscar Transporte Escolar | Alô Tio',
-    description:
-      'Busque transporte escolar por escola, cidade e bairro. Encontre profissionais de van escolar verificados.',
+    title: SEO_SEARCH_PAGE_TITLE,
+    description: SEO_SEARCH_PAGE_DESCRIPTION,
   },
 };
 

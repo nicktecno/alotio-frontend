@@ -187,19 +187,25 @@ export default function TiosPage() {
       <BreadcrumbJsonLd
         items={[
           { name: 'Início', url: siteUrl },
-          { name: 'Buscar transporte escolar', url: `${siteUrl}/tios` },
+          { name: 'Encontrar transporte escolar', url: `${siteUrl}/tios` },
         ]}
       />
       <Header />
       <main className="flex-1 max-w-7xl mx-auto w-full px-4 sm:px-6 lg:px-8 py-8">
-        <h1 className="font-heading text-3xl font-bold text-gray-900 mb-8">Buscar Tios</h1>
+        <h1 className="font-heading text-3xl font-bold text-gray-900 mb-2">
+          Encontrar transporte escolar
+        </h1>
+        <p className="text-gray-600 mb-8 max-w-2xl leading-relaxed">
+          Busque <strong>condutor escolar</strong>, van escolar e motoristas por escola, cidade e
+          bairro. Perfis verificados do Alô Tio (tio da van) na sua região.
+        </p>
 
         {/* Filters */}
         <div className="bg-white rounded-xl border border-gray-200 p-6 mb-8">
           <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-4 mb-5 pb-5 border-b border-gray-100">
             <p className="text-sm text-gray-600 max-w-xl leading-relaxed">
-              A localização preenche estado e cidade quando houver tios na região. Depois escolha a
-              escola.
+              A localização preenche estado e cidade quando houver transportadores na região.
+              Depois escolha a escola.
             </p>
             <button
               type="button"

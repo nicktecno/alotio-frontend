@@ -36,7 +36,7 @@ export default function Header() {
               href="/tios"
               className="text-primary-100 hover:text-white transition font-medium"
             >
-              Buscar Tios
+              Encontrar transporte escolar
             </Link>
             {loaded && !isLoading && (
               <>
