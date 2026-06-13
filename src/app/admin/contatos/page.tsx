@@ -21,6 +21,9 @@ export default function AdminContatosPage() {
   const [selected, setSelected] = useState<ContactSubmission | null>(null);
   const [replyText, setReplyText] = useState('');
   const [replySubject, setReplySubject] = useState('');
+  const [replyChannel, setReplyChannel] = useState<'email' | 'whatsapp' | 'both'>(
+    'email',
+  );
   const [sending, setSending] = useState(false);
 
   const load = useCallback(async () => {
@@ -61,6 +64,7 @@ export default function AdminContatosPage() {
     setSelected(null);
     setReplyText('');
     setReplySubject('');
+    setReplyChannel('email');
   };
 
   const sendReply = async () => {
@@ -74,9 +78,16 @@ export default function AdminContatosPage() {
     try {
       await api.adminReplyContactSubmission(selected.id, {
         message: msg,
+        channel: replyChannel,
         ...(replySubject.trim() ? { subject: replySubject.trim() } : {}),
       });
-      toast.success('E-mail enviado ao visitante.');
+      toast.success(
+        replyChannel === 'email'
+          ? 'E-mail enviado ao visitante.'
+          : replyChannel === 'whatsapp'
+            ? 'WhatsApp enviado.'
+            : 'E-mail e WhatsApp enviados.',
+      );
       closeDetail();
       await load();
     } catch (e: unknown) {
@@ -262,17 +273,60 @@ export default function AdminContatosPage() {
 
               {selected.status === 'PENDING' && (
                 <div className="border-t border-gray-100 pt-4 space-y-3">
-                  <p className="text-sm font-medium text-gray-800">Responder por e-mail</p>
-                  <label className="block text-xs text-gray-500">
-                    Assunto (opcional)
-                    <input
-                      type="text"
-                      value={replySubject}
-                      onChange={(e) => setReplySubject(e.target.value)}
-                      placeholder="Padrão: aloTio — resposta ao seu contato"
-                      className="mt-1 w-full px-3 py-2 border border-gray-200 rounded-lg text-sm text-gray-900"
-                    />
-                  </label>
+                  <p className="text-sm font-medium text-gray-800">Responder</p>
+                  <fieldset className="space-y-2">
+                    <legend className="text-xs text-gray-500 mb-1">Canal</legend>
+                    <label className="flex items-center gap-2 text-sm text-gray-700">
+                      <input
+                        type="radio"
+                        name="reply-channel"
+                        checked={replyChannel === 'email'}
+                        onChange={() => setReplyChannel('email')}
+                      />
+                      Só e-mail
+                    </label>
+                    <label
+                      className={`flex items-center gap-2 text-sm ${
+                        selected.phone ? 'text-gray-700' : 'text-gray-400'
+                      }`}
+                    >
+                      <input
+                        type="radio"
+                        name="reply-channel"
+                        checked={replyChannel === 'whatsapp'}
+                        onChange={() => setReplyChannel('whatsapp')}
+                        disabled={!selected.phone}
+                      />
+                      Só WhatsApp
+                      {!selected.phone ? ' (sem telefone)' : ''}
+                    </label>
+                    <label
+                      className={`flex items-center gap-2 text-sm ${
+                        selected.phone ? 'text-gray-700' : 'text-gray-400'
+                      }`}
+                    >
+                      <input
+                        type="radio"
+                        name="reply-channel"
+                        checked={replyChannel === 'both'}
+                        onChange={() => setReplyChannel('both')}
+                        disabled={!selected.phone}
+                      />
+                      E-mail e WhatsApp
+                    </label>
+                  </fieldset>
+                  {replyChannel !== 'whatsapp' && (
+                    <label className="block text-xs text-gray-500">
+                      Assunto do e-mail (opcional)
+                      <input
+                        type="text"
+                        value={replySubject}
+                        onChange={(e) => setReplySubject(e.target.value)}
+                        placeholder="Padrão: aloTio — resposta ao seu contato"
+                        className="mt-1 w-full px-3 py-2 border border-gray-200 rounded-lg text-sm text-gray-900"
+                      />
+                    </label>
+                  )}
                   <label className="block text-xs text-gray-500">
                     Mensagem
                     <textarea
@@ -280,9 +334,16 @@ export default function AdminContatosPage() {
                       onChange={(e) => setReplyText(e.target.value)}
                       rows={8}
                       className="mt-1 w-full px-3 py-2 border border-gray-200 rounded-lg text-sm text-gray-900"
-                      placeholder="Sua resposta ao visitante…"
+                      placeholder="Sua resposta…"
                     />
                   </label>
+                  {replyChannel !== 'email' && selected.phone && (
+                    <p className="text-xs text-gray-500">
+                      Se o contato já mandou WhatsApp para o número da plataforma nas
+                      últimas 24h, a resposta vai em texto livre; caso contrário, usa o
+                      template configurado (ex.: alotio_mensagem).
+                    </p>
+                  )}
                   <button
                     type="button"
                     disabled={sending}

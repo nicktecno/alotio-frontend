@@ -231,6 +231,30 @@ export interface ContactSubmission {
   repliedBy?: { id: string; email: string } | null;
 }
 
+export type WhatsAppMessageDirection = 'INBOUND' | 'OUTBOUND';
+export type WhatsAppMessageKind = 'TEXT' | 'TEMPLATE';
+export type WhatsAppMessageStatus = 'SENT' | 'FAILED';
+
+export interface WhatsAppMessageLog {
+  id: string;
+  direction: WhatsAppMessageDirection;
+  kind: WhatsAppMessageKind;
+  waId: string;
+  recipientLabel: string | null;
+  bodyText: string | null;
+  templateName: string | null;
+  status: WhatsAppMessageStatus;
+  waMessageId: string | null;
+  errorMessage: string | null;
+  profileId: string | null;
+  contactSubmissionId: string | null;
+  bulkCampaignId: string | null;
+  sentById: string | null;
+  createdAt: string;
+  profile?: { id: string; displayName: string } | null;
+  sentBy?: { id: string; email: string } | null;
+}
+
 export interface AuthResponse {
   accessToken: string;
   refreshToken: string;

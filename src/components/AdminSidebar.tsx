@@ -6,6 +6,7 @@ import { usePathname } from 'next/navigation';
 const links = [
   { href: '/admin', label: 'Dashboard', icon: '📊' },
   { href: '/admin/contatos', label: 'Mensagens', icon: '✉️' },
+  { href: '/admin/whatsapp', label: 'WhatsApp', icon: '💬' },
   { href: '/admin/avaliacoes', label: 'Avaliações', icon: '⭐' },
   { href: '/admin/perfis', label: 'Perfis', icon: '👤' },
   { href: '/admin/usuarios', label: 'Usuários', icon: '👥' },

@@ -5,6 +5,7 @@ import type {
   Paginated,
   PaginatedResponse,
   Profile,
+  WhatsAppMessageLog,
 } from '@/types';
 
 const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3000/api';
@@ -419,12 +420,58 @@ export const api = {
     request<ContactSubmission>(`/admin/contact-submissions/${id}`),
   adminReplyContactSubmission: (
     id: string,
-    body: { message: string; subject?: string },
+    body: {
+      message: string;
+      subject?: string;
+      channel?: 'email' | 'whatsapp' | 'both';
+    },
   ) =>
     request<{ message: string }>(`/admin/contact-submissions/${id}/reply`, {
       method: 'POST',
       body: JSON.stringify(body),
     }),
+
+  adminWhatsAppStatus: () =>
+    request<{
+      configured: boolean;
+      monthlyLimit: number;
+      sentThisMonth: number;
+      remaining: number;
+      monthLabel: string;
+    }>('/admin/whatsapp/status'),
+
+  adminWhatsAppBulk: (body: {
+    profileIds: string[];
+    message: string;
+    templateName?: string;
+    label?: string;
+  }) =>
+    request<{
+      campaignId: string;
+      total: number;
+      sentCount: number;
+      failedCount: number;
+      results: {
+        profileId: string;
+        displayName: string;
+        ok: boolean;
+        error?: string;
+      }[];
+    }>('/admin/whatsapp/bulk', {
+      method: 'POST',
+      body: JSON.stringify(body),
+    }),
+
+  adminWhatsAppMessages: (params?: { page?: number; limit?: number }) => {
+    const q = new URLSearchParams();
+    if (params?.page != null) q.set('page', String(params.page));
+    if (params?.limit != null) q.set('limit', String(params.limit));
+    const qs = q.toString();
+    return request<PaginatedResponse<WhatsAppMessageLog>>(
+      `/admin/whatsapp/messages${qs ? `?${qs}` : ''}`,
+    );
+  },
+
   adminGetUsers: (params?: Record<string, string>) => {
     const qs = params ? new URLSearchParams(params).toString() : '';
     return request<Paginated<AdminUserListRow>>(
