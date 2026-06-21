@@ -14,7 +14,7 @@ async function fetchAllTioIds(apiBase: string): Promise<string[]> {
   try {
     do {
       const res = await fetch(`${apiBase}/tios?page=${page}&limit=${limit}`, {
-        next: { revalidate: 3600 },
+        next: { revalidate: 86_400 },
       });
       if (!res.ok) break;
       const data = (await res.json()) as {

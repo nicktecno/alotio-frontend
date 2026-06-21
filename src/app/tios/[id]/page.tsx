@@ -12,7 +12,7 @@ export async function generateMetadata({
   const { id } = await params;
 
   try {
-    const res = await fetch(`${apiUrl}/tios/${id}`, { next: { revalidate: 300 } });
+    const res = await fetch(`${apiUrl}/tios/${id}`, { next: { revalidate: 86_400 } });
     if (!res.ok) throw new Error('Not found');
 
     const tio = await res.json();
