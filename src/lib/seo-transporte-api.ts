@@ -31,8 +31,26 @@ async function fetchJson<T>(url: string): Promise<T | null> {
 }
 
 export async function fetchCityBySlug(slug: string): Promise<CitySeo | null> {
-  const data = await fetchJson<CitySeo>(`${apiBase()}/cities/${encodeURIComponent(slug)}`);
-  return data && data.slug ? data : null;
+  const norm = slug.trim().toLowerCase();
+  let data = await fetchJson<CitySeo>(
+    `${apiBase()}/cities/${encodeURIComponent(norm)}`,
+  );
+  if (data?.slug) return data;
+
+  // Fallback até API resolver slug curto (ex.: sorocaba → sorocaba-sp).
+  if (!/-[a-z]{2}$/i.test(norm)) {
+    const cities = await fetchAllCitiesWithTios();
+    const matches = cities.filter(
+      (c) => c.slug === norm || c.slug.startsWith(`${norm}-`),
+    );
+    if (matches.length === 1) return matches[0];
+    const byUf = matches.filter(
+      (c) => c.slug === `${norm}-${c.state.uf.toLowerCase()}`,
+    );
+    if (byUf.length === 1) return byUf[0];
+  }
+
+  return null;
 }
 
 export async function fetchAllCitiesWithTios(): Promise<CitySeo[]> {

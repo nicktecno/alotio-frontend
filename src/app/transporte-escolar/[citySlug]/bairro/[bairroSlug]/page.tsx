@@ -1,6 +1,6 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
-import { notFound } from 'next/navigation';
+import { notFound, redirect } from 'next/navigation';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import { JsonLd } from '@/components/seo/JsonLd';
@@ -69,6 +69,11 @@ export default async function TransporteEscolarBairroPage({ params }: Props) {
   const { citySlug, bairroSlug } = await params;
   const city = await fetchCityBySlug(citySlug);
   if (!city) notFound();
+  if (city.slug !== citySlug.trim().toLowerCase()) {
+    redirect(
+      `/transporte-escolar/${city.slug}/bairro/${bairroSlug}`,
+    );
+  }
 
   const neighborhoods = await fetchNeighborhoodsForCity(city.id);
   const match = neighborhoods.find((n) => neighborhoodSlug(n.name) === bairroSlug);
