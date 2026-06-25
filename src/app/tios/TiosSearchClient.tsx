@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useState, useCallback, useRef } from 'react';
+import { useEffect, useState, useCallback, useRef, type ReactNode } from 'react';
 import Link from 'next/link';
 import { MdMyLocation } from 'react-icons/md';
 import toast from 'react-hot-toast';
@@ -22,8 +22,11 @@ export type TiosSearchInitialFilters = {
 
 export default function TiosSearchClient({
   initialFilters,
+  geoPreview,
 }: {
   initialFilters?: TiosSearchInitialFilters;
+  /** HTML indexável (SSR) quando a URL traz stateId/cityId — oculto após busca por escola. */
+  geoPreview?: ReactNode;
 }) {
   const init = initialFilters ?? {};
   const [selectedState, setSelectedState] = useState(init.stateId ?? '');
@@ -225,6 +228,8 @@ export default function TiosSearchClient({
           Busque <strong>condutor escolar</strong>, van escolar e motoristas por escola, cidade e
           bairro. Perfis verificados do Alô Tio (tio da van) na sua região.
         </p>
+
+        {!hasSearched && geoPreview}
 
         {/* Filters */}
         <div className="bg-white rounded-xl border border-gray-200 p-6 mb-8">
