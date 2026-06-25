@@ -2,19 +2,14 @@ import TiosSearchClient, {
   type TiosSearchInitialFilters,
 } from './TiosSearchClient';
 import { TiosGeoPreview } from '@/components/seo/TiosGeoPreview';
-import { fetchTiosForGeo } from '@/lib/seo-transporte-api';
+import {
+  fetchTiosForGeo,
+  resolveTiosSearchParams,
+} from '@/lib/seo-transporte-api';
 
 type Props = {
   searchParams: Promise<Record<string, string | string[] | undefined>>;
 };
-
-function pickParam(
-  sp: Record<string, string | string[] | undefined>,
-  key: string,
-): string | undefined {
-  const v = sp[key];
-  return typeof v === 'string' && v.trim() ? v.trim() : undefined;
-}
 
 /**
  * ISR 24h por URL completa (incl. query GEO). /tios sem params = shell estático, sem fetch extra.
@@ -23,35 +18,30 @@ export const revalidate = 86_400;
 
 export default async function TiosPage({ searchParams }: Props) {
   const sp = await searchParams;
+  const resolved = await resolveTiosSearchParams(sp);
+
   const initialFilters: TiosSearchInitialFilters = {
-    stateId: pickParam(sp, 'stateId'),
-    cityId: pickParam(sp, 'cityId'),
-    neighborhoodId: pickParam(sp, 'neighborhoodId'),
-    schoolId: pickParam(sp, 'schoolId'),
-    page: (() => {
-      const p = pickParam(sp, 'page');
-      if (!p) return undefined;
-      const n = parseInt(p, 10);
-      return Number.isFinite(n) && n > 1 ? n : undefined;
-    })(),
+    stateId: resolved.stateId,
+    cityId: resolved.cityId,
+    neighborhoodId: resolved.neighborhoodId,
+    schoolId: resolved.schoolId,
+    page: resolved.page,
   };
 
-  const hasGeoFilter = Boolean(
-    initialFilters.cityId || initialFilters.stateId,
-  );
+  const hasGeoFilter = Boolean(resolved.cityId || resolved.stateId);
 
   const geoPreview = hasGeoFilter
     ? await fetchTiosForGeo({
-        cityId: initialFilters.cityId,
-        stateId: initialFilters.stateId,
-        neighborhoodId: initialFilters.neighborhoodId,
+        cityId: resolved.cityId,
+        stateId: resolved.stateId,
+        neighborhoodId: resolved.neighborhoodId,
         limit: 12,
       })
     : null;
 
   const regionLabel =
     geoPreview?.data[0]?.city?.name &&
-    geoPreview.data[0]?.city?.state?.uf
+    geoPreview?.data[0]?.city?.state?.uf
       ? `${geoPreview.data[0].city.name} (${geoPreview.data[0].city.state.uf})`
       : undefined;
 

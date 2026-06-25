@@ -78,8 +78,8 @@ export default async function TransporteEscolarCidadePage({ params }: Props) {
   ]);
   const shown = neighborhoods.slice(0, 72);
   const searchHref = tiosSearchHref({
-    stateId: city.stateId,
-    cityId: city.id,
+    uf: city.state.uf,
+    cidade: city.slug,
   });
 
   const breadcrumbLd = {

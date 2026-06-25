@@ -12,6 +12,7 @@ import type { TioPublicView, PaginatedResponse } from '@/types';
 import Loading from '@/components/Loading';
 import BreadcrumbJsonLd from '@/components/BreadcrumbJsonLd';
 import { syncTiosSearchUrl } from '@/lib/seo-search-url';
+import { neighborhoodSlug } from '@/lib/slug';
 
 const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://alotio.com.br';
 
@@ -28,7 +29,7 @@ export default function TiosSearchClient({
   geoPreview,
 }: {
   initialFilters?: TiosSearchInitialFilters;
-  /** HTML indexável (SSR) quando a URL traz stateId/cityId — oculto após busca por escola. */
+  /** HTML indexável (SSR) quando a URL traz uf/cidade — oculto após busca por escola. */
   geoPreview?: ReactNode;
 }) {
   const init = initialFilters ?? {};
@@ -145,7 +146,7 @@ export default function TiosSearchClient({
     );
   }, [pendingCityId, selectedState, cities, loadingCities]);
 
-  /** Filtros vindos de páginas GEO (?stateId=&cityId=&neighborhoodId=). */
+  /** Filtros vindos de páginas GEO (?uf=&cidade=&bairro=). */
   useEffect(() => {
     if (!init.neighborhoodId || !selectedCity || loadingNeighborhoods) return;
     if (neighborhoods.some((n) => n.id === init.neighborhoodId)) {
@@ -158,7 +159,7 @@ export default function TiosSearchClient({
     loadingNeighborhoods,
   ]);
 
-  /** Escola vinda da URL (?schoolId=) após carregar a lista. */
+  /** Escola vinda da URL (?escola=) após carregar a lista. */
   useEffect(() => {
     if (!init.schoolId || !selectedCity || loadingSchoolsData) return;
     if (schools.some((s) => s.id === init.schoolId) && !selectedSchool) {
@@ -168,11 +169,19 @@ export default function TiosSearchClient({
 
   /** URL compartilhável — replaceState (sem round-trip ao server / Vercel). */
   useEffect(() => {
+    if (selectedState && loadingStates) return;
+    if (selectedCity && loadingCities) return;
+    if (selectedNeighborhood && loadingNeighborhoods) return;
+
+    const state = states.find((s) => s.id === selectedState);
+    const city = cities.find((c) => c.id === selectedCity);
+    const neighborhood = neighborhoods.find((n) => n.id === selectedNeighborhood);
+
     syncTiosSearchUrl({
-      stateId: selectedState || undefined,
-      cityId: selectedCity || undefined,
-      neighborhoodId: selectedNeighborhood || undefined,
-      schoolId: selectedSchool || undefined,
+      uf: state?.uf,
+      cidade: city?.slug,
+      bairro: neighborhood ? neighborhoodSlug(neighborhood.name) : undefined,
+      escola: selectedSchool || undefined,
       page: selectedSchool ? page : undefined,
     });
   }, [
@@ -181,6 +190,12 @@ export default function TiosSearchClient({
     selectedNeighborhood,
     selectedSchool,
     page,
+    states,
+    cities,
+    neighborhoods,
+    loadingStates,
+    loadingCities,
+    loadingNeighborhoods,
   ]);
 
   const useMyLocation = useCallback(() => {

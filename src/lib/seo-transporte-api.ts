@@ -2,6 +2,7 @@
  * Fetches públicos (server) para páginas de SEO /transporte-escolar.
  */
 import type { PaginatedResponse, TioPublicView } from '@/types';
+import { neighborhoodSlug } from '@/lib/slug';
 import { seoFetchInit } from '@/lib/seo-revalidate';
 
 const apiBase = () => process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3001/api';
@@ -28,6 +29,18 @@ async function fetchJson<T>(url: string): Promise<T | null> {
   } catch {
     return null;
   }
+}
+
+export type StateSeo = {
+  id: string;
+  name: string;
+  uf: string;
+};
+
+export async function fetchStateByUf(uf: string): Promise<StateSeo | null> {
+  const norm = uf.trim().toUpperCase();
+  if (!/^[A-Z]{2}$/.test(norm)) return null;
+  return fetchJson<StateSeo>(`${apiBase()}/states/${encodeURIComponent(norm)}`);
 }
 
 export async function fetchCityBySlug(slug: string): Promise<CitySeo | null> {
@@ -126,3 +139,72 @@ export async function fetchTiosForGeo(filters: {
     return empty;
   }
 }
+
+export type ResolvedTiosSearchFilters = {
+  stateId?: string;
+  cityId?: string;
+  neighborhoodId?: string;
+  schoolId?: string;
+  page?: number;
+};
+
+function pickSearchParam(
+  sp: Record<string, string | string[] | undefined>,
+  key: string,
+): string | undefined {
+  const v = sp[key];
+  return typeof v === 'string' && v.trim() ? v.trim() : undefined;
+}
+
+/**
+ * Converte query legível (?uf=SP&cidade=sorocaba-sp) ou legada (?stateId=uuid) em IDs para a busca.
+ */
+export async function resolveTiosSearchParams(
+  sp: Record<string, string | string[] | undefined>,
+): Promise<ResolvedTiosSearchFilters> {
+  const uf = pickSearchParam(sp, 'uf');
+  const cidade = pickSearchParam(sp, 'cidade');
+  const bairro = pickSearchParam(sp, 'bairro');
+  const escola =
+    pickSearchParam(sp, 'escola') ?? pickSearchParam(sp, 'schoolId');
+
+  let stateId = pickSearchParam(sp, 'stateId');
+  let cityId = pickSearchParam(sp, 'cityId');
+  let neighborhoodId = pickSearchParam(sp, 'neighborhoodId');
+
+  if (cidade) {
+    const city = await fetchCityBySlug(cidade);
+    if (city) {
+      cityId = city.id;
+      stateId = city.stateId;
+    }
+  } else if (uf && !stateId) {
+    const state = await fetchStateByUf(uf);
+    if (state) stateId = state.id;
+  }
+
+  if (bairro && cityId) {
+    const neighborhoods = await fetchNeighborhoodsForCity(cityId);
+    const normBairro = bairro.toLowerCase();
+    const match = neighborhoods.find(
+      (n) => neighborhoodSlug(n.name) === normBairro,
+    );
+    if (match) neighborhoodId = match.id;
+  }
+
+  const pageRaw = pickSearchParam(sp, 'page');
+  let page: number | undefined;
+  if (pageRaw) {
+    const n = parseInt(pageRaw, 10);
+    if (Number.isFinite(n) && n > 1) page = n;
+  }
+
+  return {
+    stateId,
+    cityId,
+    neighborhoodId,
+    schoolId: escola,
+    page,
+  };
+}
+

@@ -86,9 +86,9 @@ export default async function TransporteEscolarBairroPage({ params }: Props) {
   });
 
   const searchHref = tiosSearchHref({
-    stateId: city.stateId,
-    cityId: city.id,
-    neighborhoodId: match.id,
+    uf: city.state.uf,
+    cidade: city.slug,
+    bairro: neighborhoodSlug(match.name),
   });
 
   const breadcrumbLd = {
