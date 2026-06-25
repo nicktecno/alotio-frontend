@@ -1,6 +1,9 @@
 /**
  * Fetches públicos (server) para páginas de SEO /transporte-escolar.
  */
+import type { PaginatedResponse, TioPublicView } from '@/types';
+import { seoFetchInit } from '@/lib/seo-revalidate';
+
 const apiBase = () => process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3001/api';
 
 export type CitySeo = {
@@ -19,7 +22,7 @@ export type NeighborhoodSeo = {
 
 async function fetchJson<T>(url: string): Promise<T | null> {
   try {
-    const res = await fetch(url, { next: { revalidate: 86_400 } });
+    const res = await fetch(url, seoFetchInit());
     if (!res.ok) return null;
     return (await res.json()) as T;
   } catch {
@@ -68,4 +71,40 @@ export async function fetchNeighborhoodsForCity(cityId: string): Promise<Neighbo
     page++;
   } while (page <= totalPages && page < 500);
   return out;
+}
+
+export type TiosGeoSearch = {
+  data: TioPublicView[];
+  total: number;
+  totalPages: number;
+};
+
+/** Listagem pública para páginas GEO (ISR). */
+export async function fetchTiosForGeo(filters: {
+  cityId?: string;
+  stateId?: string;
+  neighborhoodId?: string;
+  page?: number;
+  limit?: number;
+}): Promise<TiosGeoSearch> {
+  const q = new URLSearchParams();
+  q.set('page', String(filters.page ?? 1));
+  q.set('limit', String(filters.limit ?? 12));
+  if (filters.cityId) q.set('cityId', filters.cityId);
+  if (filters.stateId) q.set('stateId', filters.stateId);
+  if (filters.neighborhoodId) q.set('neighborhoodId', filters.neighborhoodId);
+
+  const empty: TiosGeoSearch = { data: [], total: 0, totalPages: 0 };
+  try {
+    const res = await fetch(`${apiBase()}/tios?${q.toString()}`, seoFetchInit());
+    if (!res.ok) return empty;
+    const body = (await res.json()) as PaginatedResponse<TioPublicView>;
+    return {
+      data: body.data ?? [],
+      total: body.total ?? 0,
+      totalPages: body.totalPages ?? 0,
+    };
+  } catch {
+    return empty;
+  }
 }

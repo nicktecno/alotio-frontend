@@ -1,5 +1,6 @@
 import type { MetadataRoute } from 'next';
 import { fetchAllCitiesWithTios, fetchNeighborhoodsForCity } from '@/lib/seo-transporte-api';
+import { SEO_REVALIDATE_SEC, seoFetchInit } from '@/lib/seo-revalidate';
 import { neighborhoodSlug } from '@/lib/slug';
 
 const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://alotio.com.br';
@@ -13,9 +14,7 @@ async function fetchAllTioIds(apiBase: string): Promise<string[]> {
 
   try {
     do {
-      const res = await fetch(`${apiBase}/tios?page=${page}&limit=${limit}`, {
-        next: { revalidate: 86_400 },
-      });
+      const res = await fetch(`${apiBase}/tios?page=${page}&limit=${limit}`, seoFetchInit());
       if (!res.ok) break;
       const data = (await res.json()) as {
         data?: { id: string }[];

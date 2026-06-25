@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 import TioDetailClient from './TioDetailClient';
+import { seoFetchInit } from '@/lib/seo-revalidate';
 
 const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3001/api';
 const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://alotio.com.br';
@@ -12,7 +13,7 @@ export async function generateMetadata({
   const { id } = await params;
 
   try {
-    const res = await fetch(`${apiUrl}/tios/${id}`, { next: { revalidate: 86_400 } });
+    const res = await fetch(`${apiUrl}/tios/${id}`, seoFetchInit());
     if (!res.ok) throw new Error('Not found');
 
     const tio = await res.json();

@@ -31,6 +31,7 @@ export const metadata: Metadata = {
   },
 };
 
+/** 24h — alinhar com SEO_REVALIDATE_SEC nos fetches (seo-revalidate.ts). */
 export const revalidate = 86_400;
 
 export default async function TransporteEscolarHubPage() {

@@ -8,6 +8,9 @@ NEXT_PUBLIC_API_URL=https://api.seudominio.com/api
 # Google Analytics (opcional)
 NEXT_PUBLIC_GA_ID=
 
+# SEO: revalidate dos fetches server-side (segundos). Páginas ISR = 86400 (24h) no código.
+# SEO_REVALIDATE_SEC=86400
+
 # SEO: verificação do Google Search Console (valor da meta tag content)
 GOOGLE_SITE_VERIFICATION=
 
