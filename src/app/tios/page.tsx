@@ -27,6 +27,13 @@ export default async function TiosPage({ searchParams }: Props) {
     stateId: pickParam(sp, 'stateId'),
     cityId: pickParam(sp, 'cityId'),
     neighborhoodId: pickParam(sp, 'neighborhoodId'),
+    schoolId: pickParam(sp, 'schoolId'),
+    page: (() => {
+      const p = pickParam(sp, 'page');
+      if (!p) return undefined;
+      const n = parseInt(p, 10);
+      return Number.isFinite(n) && n > 1 ? n : undefined;
+    })(),
   };
 
   const hasGeoFilter = Boolean(

@@ -11,6 +11,7 @@ import { useStates, useCities, useSchools, useNeighborhoods } from '@/lib/swr';
 import type { TioPublicView, PaginatedResponse } from '@/types';
 import Loading from '@/components/Loading';
 import BreadcrumbJsonLd from '@/components/BreadcrumbJsonLd';
+import { syncTiosSearchUrl } from '@/lib/seo-search-url';
 
 const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://alotio.com.br';
 
@@ -18,6 +19,8 @@ export type TiosSearchInitialFilters = {
   stateId?: string;
   cityId?: string;
   neighborhoodId?: string;
+  schoolId?: string;
+  page?: number;
 };
 
 export default function TiosSearchClient({
@@ -31,14 +34,14 @@ export default function TiosSearchClient({
   const init = initialFilters ?? {};
   const [selectedState, setSelectedState] = useState(init.stateId ?? '');
   const [selectedCity, setSelectedCity] = useState(init.cityId ?? '');
-  const [selectedSchool, setSelectedSchool] = useState('');
+  const [selectedSchool, setSelectedSchool] = useState(init.schoolId ?? '');
   const [selectedNeighborhood, setSelectedNeighborhood] = useState(
     init.neighborhoodId ?? '',
   );
   const [searchName, setSearchName] = useState('');
   const [tios, setTios] = useState<TioPublicView[]>([]);
   const [totalPages, setTotalPages] = useState(0);
-  const [page, setPage] = useState(1);
+  const [page, setPage] = useState(Math.max(1, init.page ?? 1));
   const [loading, setLoading] = useState(false);
   const [hasSearched, setHasSearched] = useState(false);
   const [locatingGeo, setLocatingGeo] = useState(false);
@@ -153,6 +156,31 @@ export default function TiosSearchClient({
     selectedCity,
     neighborhoods,
     loadingNeighborhoods,
+  ]);
+
+  /** Escola vinda da URL (?schoolId=) após carregar a lista. */
+  useEffect(() => {
+    if (!init.schoolId || !selectedCity || loadingSchoolsData) return;
+    if (schools.some((s) => s.id === init.schoolId) && !selectedSchool) {
+      setSelectedSchool(init.schoolId);
+    }
+  }, [init.schoolId, selectedCity, schools, loadingSchoolsData, selectedSchool]);
+
+  /** URL compartilhável — replaceState (sem round-trip ao server / Vercel). */
+  useEffect(() => {
+    syncTiosSearchUrl({
+      stateId: selectedState || undefined,
+      cityId: selectedCity || undefined,
+      neighborhoodId: selectedNeighborhood || undefined,
+      schoolId: selectedSchool || undefined,
+      page: selectedSchool ? page : undefined,
+    });
+  }, [
+    selectedState,
+    selectedCity,
+    selectedNeighborhood,
+    selectedSchool,
+    page,
   ]);
 
   const useMyLocation = useCallback(() => {
