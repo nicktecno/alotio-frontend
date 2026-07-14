@@ -8,8 +8,8 @@ NEXT_PUBLIC_API_URL=https://api.seudominio.com/api
 # Google Analytics (opcional)
 NEXT_PUBLIC_GA_ID=
 
-# SEO: revalidate ISR / fetches (segundos). Padrão no código = 30 dias (2592000).
-# SEO_REVALIDATE_SEC=2592000
+# SEO: revalidate ISR = 2592000 (30 dias) no código (literal estático Next.js).
+# SEO_REVALIDATE_SEC não altera mais export const revalidate das pages.
 
 # SEO: verificação do Google Search Console (valor da meta tag content)
 GOOGLE_SITE_VERIFICATION=

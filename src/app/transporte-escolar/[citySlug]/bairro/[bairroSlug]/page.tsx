@@ -13,14 +13,13 @@ import {
 import { tiosSearchHref } from '@/lib/seo-search-url';
 import { neighborhoodSlug } from '@/lib/slug';
 import { SEO_CORE_KEYWORDS } from '@/lib/seo-keywords';
-import { SEO_REVALIDATE_SEC } from '@/lib/seo-revalidate';
 
 const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://alotio.com.br';
 
 type Props = { params: Promise<{ citySlug: string; bairroSlug: string }> };
 
-/** ISR ~mensal — alinhar com SEO_REVALIDATE_SEC. */
-export const revalidate = SEO_REVALIDATE_SEC;
+/** ISR 30 dias (literal estático exigido pelo Next.js). */
+export const revalidate = 2_592_000;
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { citySlug, bairroSlug } = await params;

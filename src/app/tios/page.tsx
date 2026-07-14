@@ -6,16 +6,16 @@ import {
   fetchTiosForGeo,
   resolveTiosSearchParams,
 } from '@/lib/seo-transporte-api';
-import { SEO_REVALIDATE_SEC } from '@/lib/seo-revalidate';
 
 type Props = {
   searchParams: Promise<Record<string, string | string[] | undefined>>;
 };
 
 /**
- * ISR ~mensal por URL completa (incl. query GEO). /tios sem params = shell estático.
+ * ISR 30 dias por URL (literal estático exigido pelo Next.js).
+ * /tios sem params = shell estático.
  */
-export const revalidate = SEO_REVALIDATE_SEC;
+export const revalidate = 2_592_000;
 
 export default async function TiosPage({ searchParams }: Props) {
   const sp = await searchParams;

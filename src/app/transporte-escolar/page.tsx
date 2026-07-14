@@ -5,7 +5,6 @@ import Footer from '@/components/Footer';
 import { JsonLd } from '@/components/seo/JsonLd';
 import { fetchAllCitiesWithTios } from '@/lib/seo-transporte-api';
 import { SEO_CORE_KEYWORDS } from '@/lib/seo-keywords';
-import { SEO_REVALIDATE_SEC } from '@/lib/seo-revalidate';
 
 const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://alotio.com.br';
 
@@ -32,8 +31,8 @@ export const metadata: Metadata = {
   },
 };
 
-/** ISR ~mensal — alinhar com SEO_REVALIDATE_SEC. */
-export const revalidate = SEO_REVALIDATE_SEC;
+/** ISR 30 dias (literal estático exigido pelo Next.js). */
+export const revalidate = 2_592_000;
 
 export default async function TransporteEscolarHubPage() {
   const cities = await fetchAllCitiesWithTios();

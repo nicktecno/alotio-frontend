@@ -1,12 +1,12 @@
 import type { MetadataRoute } from 'next';
 import { fetchAllCitiesWithTios, fetchNeighborhoodsForCity } from '@/lib/seo-transporte-api';
-import { SEO_REVALIDATE_SEC, seoFetchInit } from '@/lib/seo-revalidate';
+import { seoFetchInit } from '@/lib/seo-revalidate';
 import { neighborhoodSlug } from '@/lib/slug';
 
 const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://alotio.com.br';
 
-/** Regenera o sitemap no máximo 1× / SEO_REVALIDATE_SEC (padrão 30 dias). */
-export const revalidate = SEO_REVALIDATE_SEC;
+/** Regenera o sitemap no máximo a cada 30 dias (literal estático exigido pelo Next.js). */
+export const revalidate = 2_592_000;
 
 /** Busca todos os perfis aprovados para o sitemap (paginação na API). */
 async function fetchAllTioIds(apiBase: string): Promise<string[]> {
