@@ -5,6 +5,9 @@ import { neighborhoodSlug } from '@/lib/slug';
 
 const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://alotio.com.br';
 
+/** Regenera o sitemap no máximo 1× / SEO_REVALIDATE_SEC (padrão 30 dias). */
+export const revalidate = SEO_REVALIDATE_SEC;
+
 /** Busca todos os perfis aprovados para o sitemap (paginação na API). */
 async function fetchAllTioIds(apiBase: string): Promise<string[]> {
   const limit = 250;
@@ -39,13 +42,13 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     {
       url: siteUrl,
       lastModified: new Date(),
-      changeFrequency: 'weekly',
+      changeFrequency: 'monthly',
       priority: 1,
     },
     {
       url: `${siteUrl}/tios`,
       lastModified: new Date(),
-      changeFrequency: 'daily',
+      changeFrequency: 'weekly',
       priority: 0.9,
     },
     {
@@ -69,7 +72,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     {
       url: `${siteUrl}/transporte-escolar`,
       lastModified: new Date(),
-      changeFrequency: 'weekly',
+      changeFrequency: 'monthly',
       priority: 0.85,
     },
   ];
@@ -83,14 +86,14 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const tioPages: MetadataRoute.Sitemap = tioIds.map((id) => ({
     url: `${siteUrl}/tios/${id}`,
     lastModified: new Date(),
-    changeFrequency: 'weekly' as const,
+    changeFrequency: 'monthly' as const,
     priority: 0.7,
   }));
 
   const transporteCidadePages: MetadataRoute.Sitemap = citiesWithTios.map((c) => ({
     url: `${siteUrl}/transporte-escolar/${c.slug}`,
     lastModified: new Date(),
-    changeFrequency: 'weekly' as const,
+    changeFrequency: 'monthly' as const,
     priority: 0.72,
   }));
 

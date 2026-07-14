@@ -1,10 +1,12 @@
 import type { Metadata } from 'next';
 import TioDetailClient from './TioDetailClient';
-import { seoFetchInit } from '@/lib/seo-revalidate';
+import { SEO_REVALIDATE_SEC, seoFetchInit } from '@/lib/seo-revalidate';
 
 const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3001/api';
 const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://alotio.com.br';
 
+/** ISR ~mensal — metadata/perfil público. */
+export const revalidate = SEO_REVALIDATE_SEC;
 export async function generateMetadata({
   params,
 }: {

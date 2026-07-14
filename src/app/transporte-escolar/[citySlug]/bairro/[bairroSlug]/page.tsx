@@ -13,13 +13,14 @@ import {
 import { tiosSearchHref } from '@/lib/seo-search-url';
 import { neighborhoodSlug } from '@/lib/slug';
 import { SEO_CORE_KEYWORDS } from '@/lib/seo-keywords';
+import { SEO_REVALIDATE_SEC } from '@/lib/seo-revalidate';
 
 const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://alotio.com.br';
 
 type Props = { params: Promise<{ citySlug: string; bairroSlug: string }> };
 
-/** 24h — alinhar com SEO_REVALIDATE_SEC nos fetches. */
-export const revalidate = 86_400;
+/** ISR ~mensal — alinhar com SEO_REVALIDATE_SEC. */
+export const revalidate = SEO_REVALIDATE_SEC;
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { citySlug, bairroSlug } = await params;

@@ -6,15 +6,16 @@ import {
   fetchTiosForGeo,
   resolveTiosSearchParams,
 } from '@/lib/seo-transporte-api';
+import { SEO_REVALIDATE_SEC } from '@/lib/seo-revalidate';
 
 type Props = {
   searchParams: Promise<Record<string, string | string[] | undefined>>;
 };
 
 /**
- * ISR 24h por URL completa (incl. query GEO). /tios sem params = shell estático, sem fetch extra.
+ * ISR ~mensal por URL completa (incl. query GEO). /tios sem params = shell estático.
  */
-export const revalidate = 86_400;
+export const revalidate = SEO_REVALIDATE_SEC;
 
 export default async function TiosPage({ searchParams }: Props) {
   const sp = await searchParams;
