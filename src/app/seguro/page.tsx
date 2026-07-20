@@ -149,12 +149,12 @@ export default function SeguroPage() {
           </div>
 
           <a
-            href="https://wa.me/5511947073340"
+            href="https://golplus.com.br/cotacao/?in=lDGnPPYq"
             target="_blank"
             rel="noopener noreferrer"
             className="mt-2 inline-flex items-center gap-2 bg-orange-500 hover:bg-orange-600 text-white font-bold px-8 py-4 rounded-xl text-lg transition shadow-lg shadow-orange-500/20"
           >
-            💬 Quero me proteger agora
+            🛡️ Quero me proteger agora
           </a>
         </div>
       </section>
@@ -491,28 +491,25 @@ export default function SeguroPage() {
             para garantir os descontos exclusivos.
           </p>
 
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <a
-              href="https://wa.me/5511947073340"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center justify-center gap-2 bg-orange-500 hover:bg-orange-600 text-white font-bold px-8 py-4 rounded-xl text-lg transition shadow-lg shadow-orange-500/20"
-            >
-              💬 Falar via WhatsApp
-            </a>
-            <a
-              href="mailto:mzanarolli@live.com"
-              className="inline-flex items-center justify-center gap-2 bg-white/6 hover:bg-white/10 border border-white/15 text-white font-bold px-8 py-4 rounded-xl text-lg transition"
-            >
-              ✉️ Enviar e-mail
-            </a>
-          </div>
+          <a
+            href="https://golplus.com.br/cotacao/?in=lDGnPPYq"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center justify-center gap-2 bg-orange-500 hover:bg-orange-600 text-white font-bold px-8 py-4 rounded-xl text-lg transition shadow-lg shadow-orange-500/20"
+          >
+            🛡️ Fazer minha cotação agora
+          </a>
 
-          <p className="mt-8 text-base text-gray-300">
-            Parceiro responsável:{' '}
-            <strong className="text-white">Marcus Alexandre Zanarolli Filho</strong>
-            {' '}· (11) 94707-3340 · mzanarolli@live.com
-          </p>
+          <div className="mt-10 flex flex-col items-center gap-3">
+            <p className="text-sm text-gray-400 uppercase tracking-widest font-bold">
+              Ou escaneie o QR code
+            </p>
+            <img
+              src="/qrcode-golplus.png"
+              alt="QR Code — Cotação GOL PLUS"
+              className="w-36 h-36 rounded-2xl border-4 border-orange-500/40 shadow-lg shadow-orange-500/10"
+            />
+          </div>
         </div>
       </section>
 
