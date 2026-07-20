@@ -159,6 +159,38 @@ export default function SeguroPage() {
         </div>
       </section>
 
+      {/* VEÍCULOS ACEITOS */}
+      <section className="bg-[#111e2e] border-y border-white/6 py-8">
+        <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="flex flex-col sm:flex-row items-center gap-4 sm:gap-8 justify-center text-center sm:text-left">
+            <p className="text-sm font-bold text-gray-400 uppercase tracking-widest whitespace-nowrap">
+              Aceita qualquer veículo
+            </p>
+            <div className="hidden sm:block w-px h-8 bg-white/10" />
+            <div className="flex flex-wrap justify-center sm:justify-start gap-3">
+              {[
+                { icon: '🏍️', label: 'Moto' },
+                { icon: '🚗', label: 'Carro' },
+                { icon: '🚐', label: 'Van / Kombi' },
+                { icon: '🚚', label: 'Caminhão' },
+              ].map((v) => (
+                <span
+                  key={v.label}
+                  className="inline-flex items-center gap-2 bg-white/5 border border-white/10 rounded-xl px-4 py-2 text-base font-semibold text-white"
+                >
+                  <span className="text-xl">{v.icon}</span>
+                  {v.label}
+                </span>
+              ))}
+            </div>
+            <div className="hidden sm:block w-px h-8 bg-white/10" />
+            <p className="text-sm text-gray-400 max-w-xs">
+              O valor da proteção varia conforme o veículo — solicite uma cotação personalizada.
+            </p>
+          </div>
+        </div>
+      </section>
+
       {/* COBERTURAS */}
       <section className="bg-[#0a1520] py-20">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
