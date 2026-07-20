@@ -38,6 +38,12 @@ export default function Header() {
             >
               Encontrar transporte escolar
             </Link>
+            <Link
+              href="/seguro"
+              className="flex items-center gap-1.5 text-orange-400 hover:text-orange-300 transition font-semibold"
+            >
+              🛡️ Proteção Veicular
+            </Link>
             {loaded && !isLoading && (
               <>
                 {user ? (
