@@ -117,7 +117,7 @@ export default function SeguroPage() {
           </p>
 
           {/* Logos */}
-          <div className="flex items-center gap-6 bg-white/4 border border-white/10 rounded-2xl px-8 py-4">
+          <div className="flex items-center gap-4 sm:gap-6 bg-white/4 border border-white/10 rounded-2xl px-5 py-3 sm:px-8 sm:py-4">
             <span className="text-3xl font-black tracking-tight">
               <span className="text-white">gol</span>
               <span className="text-orange-400">plus</span>

@@ -176,27 +176,26 @@ export default function Home() {
         {/* Banner GOL PLUS */}
         <section className="bg-[#0d1b2a] py-12">
           <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="flex flex-col sm:flex-row items-center justify-between gap-6 bg-gradient-to-r from-orange-500/10 to-orange-500/4 border border-orange-500/25 rounded-2xl px-6 sm:px-10 py-6">
-              <div className="text-center sm:text-left">
-                <div className="text-xs font-bold text-orange-400 uppercase tracking-widest mb-1">
+            <div className="flex flex-col items-center gap-5 text-center sm:flex-row sm:items-center sm:justify-between sm:text-left bg-gradient-to-r from-orange-500/10 to-orange-500/4 border border-orange-500/25 rounded-2xl px-6 sm:px-10 py-7">
+              <div className="flex flex-col items-center sm:items-start gap-2">
+                <div className="text-xs font-bold text-orange-400 uppercase tracking-widest">
                   Parceria Exclusiva
                 </div>
-                <h3 className="flex items-center gap-2 text-xl sm:text-2xl font-extrabold text-white flex-wrap">
-                  <span>
+                <div className="flex items-center justify-center sm:justify-start gap-2 flex-wrap">
+                  <span className="text-2xl font-black tracking-tight">
                     <span className="text-white">gol</span>
                     <span className="text-orange-400">plus</span>
                   </span>
-                  <span className="text-gray-500 font-light">×</span>
+                  <span className="text-gray-500 font-light text-xl">×</span>
                   <img src="/logoAloTioVector.svg" alt="Alô Tio" className="h-7 w-auto object-contain" />
-                  <span className="text-white font-extrabold">— Proteção Veicular</span>
-                </h3>
-                <p className="text-sm text-gray-400 mt-1">
+                </div>
+                <p className="text-sm text-gray-300 max-w-sm">
                   Proteção veicular completa com desconto exclusivo para motoristas cadastrados na plataforma.
                 </p>
               </div>
               <Link
                 href="/seguro"
-                className="flex-shrink-0 inline-flex items-center gap-2 bg-orange-500 hover:bg-orange-600 text-white font-bold px-6 py-3 rounded-xl text-sm transition shadow-lg shadow-orange-500/20 whitespace-nowrap"
+                className="flex-shrink-0 inline-flex items-center gap-2 bg-orange-500 hover:bg-orange-600 text-white font-bold px-7 py-3 rounded-xl text-sm transition shadow-lg shadow-orange-500/20 w-full justify-center sm:w-auto"
               >
                 🛡️ Ver parceria
               </Link>
