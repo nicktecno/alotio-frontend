@@ -1,6 +1,6 @@
 'use client';
 
-import { useCallback, useEffect, useState } from 'react';
+import { Suspense, useCallback, useEffect, useState } from 'react';
 import { useSearchParams } from 'next/navigation';
 import toast from 'react-hot-toast';
 import { api } from '@/lib/api';
@@ -24,6 +24,14 @@ function formatMoney(cents: number | null, currency = 'brl') {
 }
 
 export default function LojistaPlanoPage() {
+  return (
+    <Suspense fallback={null}>
+      <PlanoContent />
+    </Suspense>
+  );
+}
+
+function PlanoContent() {
   const searchParams = useSearchParams();
   const [plan, setPlan] = useState<StorePlan>('FREE');
   const [sub, setSub] = useState<{

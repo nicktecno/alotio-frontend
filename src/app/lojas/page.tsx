@@ -1,3 +1,4 @@
+import { Suspense } from 'react';
 import type { Metadata } from 'next';
 import LojasClient from './LojasClient';
 
@@ -8,5 +9,9 @@ export const metadata: Metadata = {
 };
 
 export default function LojasPage() {
-  return <LojasClient />;
+  return (
+    <Suspense fallback={null}>
+      <LojasClient />
+    </Suspense>
+  );
 }
