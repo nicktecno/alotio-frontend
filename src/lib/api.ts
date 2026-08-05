@@ -662,6 +662,22 @@ export const api = {
   },
   marketplaceFeatured: (limit = 6) =>
     publicRequest<Store[]>(`/marketplace/featured?limit=${limit}`),
+  marketplaceProducts: (type: StoreType, limit = 12) =>
+    publicRequest<
+      Array<{
+        id: string;
+        title: string;
+        priceCents: number | null;
+        category: string | null;
+        images: { url: string }[];
+        store: {
+          slug: string;
+          displayName: string;
+          type: StoreType;
+          plan: StorePlan;
+        };
+      }>
+    >(`/marketplace/products?type=${type}&limit=${limit}`),
   marketplaceGetStore: (slug: string) =>
     publicRequest<Store>(`/marketplace/stores/${encodeURIComponent(slug)}`),
 

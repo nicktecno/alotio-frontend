@@ -8,6 +8,8 @@ import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import { useAuth } from '@/lib/auth';
 
+const LOJISTA_ROLE = 'LOJISTA';
+
 export default function CadastroLojistaPage() {
   const router = useRouter();
   const { register, login } = useAuth();
@@ -28,7 +30,7 @@ export default function CadastroLojistaPage() {
     }
     setLoading(true);
     try {
-      await register(email.trim(), password, 'LOJISTA');
+      await register(email.trim(), password, LOJISTA_ROLE);
       await login(email.trim(), password);
       toast.success('Conta criada! Vamos configurar sua loja.');
       router.push('/lojista');

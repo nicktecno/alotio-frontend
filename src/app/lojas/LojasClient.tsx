@@ -2,6 +2,7 @@
 
 import { useCallback, useEffect, useState } from 'react';
 import Link from 'next/link';
+import { useSearchParams } from 'next/navigation';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import { api, assetUrl } from '@/lib/api';
@@ -67,10 +68,15 @@ function StoreCard({ store }: { store: Store }) {
 }
 
 export default function LojasClient() {
+  const searchParams = useSearchParams();
+  const initialType =
+    searchParams.get('type') === 'VAN' || searchParams.get('type') === 'PECAS'
+      ? (searchParams.get('type') as StoreType)
+      : '';
   const [stores, setStores] = useState<Store[]>([]);
   const [featured, setFeatured] = useState<Store[]>([]);
   const [loading, setLoading] = useState(true);
-  const [type, setType] = useState<StoreType | ''>('');
+  const [type, setType] = useState<StoreType | ''>(initialType);
   const [searchInput, setSearchInput] = useState('');
   const [search, setSearch] = useState('');
   const [states, setStates] = useState<State[]>([]);

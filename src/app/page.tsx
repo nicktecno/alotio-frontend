@@ -3,6 +3,7 @@ import Link from 'next/link';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import FeaturedStores from '@/components/FeaturedStores';
+import ProductCarousel from '@/components/ProductCarousel';
 import { SEO_SITE_DESCRIPTION, SEO_SITE_TITLE } from '@/lib/seo-copy';
 
 export const metadata: Metadata = {
@@ -175,6 +176,72 @@ export default function Home() {
         </section>
 
         <FeaturedStores />
+
+        <ProductCarousel
+          type="VAN"
+          title="Vans e veículos à venda"
+          subtitle="Anúncios de vans e veículos das lojas parceiras"
+        />
+
+        <ProductCarousel
+          type="PECAS"
+          title="Peças e acessórios"
+          subtitle="Encontre peças e acessórios para transporte escolar"
+        />
+
+        {/* CTA para lojistas */}
+        <section className="py-16 bg-primary-700">
+          <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="grid md:grid-cols-2 gap-8 items-center">
+              <div>
+                <h2 className="text-2xl sm:text-3xl font-bold text-white font-heading">
+                  Tem uma loja de vans ou peças?
+                </h2>
+                <p className="mt-3 text-primary-100">
+                  Anuncie no Alô Tio e apareça para milhares de famílias e
+                  transportadores. É rápido de começar:
+                </p>
+                <ul className="mt-5 space-y-2 text-primary-50">
+                  <li className="flex items-start gap-2">
+                    <span className="text-secondary font-bold">✓</span>
+                    Crie sua conta de lojista gratuitamente
+                  </li>
+                  <li className="flex items-start gap-2">
+                    <span className="text-secondary font-bold">✓</span>
+                    Monte sua loja e escolha as cidades que você atende
+                  </li>
+                  <li className="flex items-start gap-2">
+                    <span className="text-secondary font-bold">✓</span>
+                    Publique até 20 anúncios grátis — ou ilimitados no Premium
+                    (R$ 29,90/mês) com destaque na home
+                  </li>
+                  <li className="flex items-start gap-2">
+                    <span className="text-secondary font-bold">✓</span>
+                    Sem venda pelo site: o cliente fala direto com você pelo
+                    WhatsApp
+                  </li>
+                </ul>
+                <div className="mt-7 flex flex-col sm:flex-row gap-3">
+                  <Link
+                    href="/cadastro-lojista"
+                    className="bg-secondary hover:bg-secondary-600 text-white px-7 py-3.5 rounded-lg font-bold font-heading tracking-wide transition shadow-lg text-center"
+                  >
+                    Anunciar minha loja
+                  </Link>
+                  <Link
+                    href="/lojas"
+                    className="bg-primary-300 hover:bg-primary-400 text-white px-7 py-3.5 rounded-lg font-bold font-heading tracking-wide transition text-center"
+                  >
+                    Ver as lojas
+                  </Link>
+                </div>
+              </div>
+              <div className="hidden md:flex justify-center">
+                <div className="text-[120px] leading-none select-none">🚐🔧</div>
+              </div>
+            </div>
+          </div>
+        </section>
 
         {/* Banner GOL PLUS */}
         <section className="bg-[#0d1b2a] py-12">
