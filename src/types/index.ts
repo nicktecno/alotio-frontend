@@ -10,11 +10,66 @@ export interface Paginated<T> {
 /** Tamanho de página nas listagens do admin */
 export const ADMIN_LIST_PAGE_SIZE = 30;
 
-export type UserRole = 'TIO' | 'ADMIN';
+export type UserRole = 'TIO' | 'ADMIN' | 'LOJISTA';
 export type ProfileStatus = 'PENDING' | 'APPROVED' | 'REJECTED' | 'PAUSED';
 export type SchoolType = 'ESTADUAL' | 'MUNICIPAL' | 'PARTICULAR' | 'FEDERAL';
 export type SubscriptionStatus = 'ACTIVE' | 'PAST_DUE' | 'CANCELLED' | 'EXPIRED';
 export type PlanInterval = 'MONTHLY' | 'YEARLY';
+
+// -------------------------------------------------------------- Marketplace (lojista)
+export type StoreType = 'VAN' | 'PECAS';
+export type StorePlan = 'FREE' | 'PREMIUM';
+export type ProductStatus = 'ACTIVE' | 'PAUSED' | 'BLOCKED';
+
+export interface ProductImage {
+  id: string;
+  url: string;
+  sortOrder: number;
+}
+
+export interface Product {
+  id: string;
+  storeId: string;
+  title: string;
+  description: string | null;
+  priceCents: number | null;
+  category: string | null;
+  status: ProductStatus;
+  blockedReason: string | null;
+  createdAt: string;
+  images: ProductImage[];
+}
+
+export interface Store {
+  id: string;
+  userId?: string;
+  displayName: string;
+  slug: string;
+  type: StoreType;
+  plan: StorePlan;
+  phone: string | null;
+  whatsapp: string | null;
+  email: string | null;
+  bio: string | null;
+  logoUrl: string | null;
+  cityId?: string | null;
+  isBlocked?: boolean;
+  createdAt: string;
+  city?: { id: string; name: string; slug?: string; state?: { uf: string } } | null;
+  serviceCities?: {
+    city: { id: string; name: string; slug?: string; stateId?: string; state?: { uf: string } };
+  }[];
+  isPremium?: boolean;
+  products?: Product[];
+  _count?: { products: number };
+}
+
+export interface MyStoreResponse {
+  store: Store | null;
+  isPremium?: boolean;
+  activeProductsCount?: number;
+  activeProductsLimit?: number | null;
+}
 
 export interface User {
   id: string;

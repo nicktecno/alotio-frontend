@@ -18,7 +18,7 @@ interface AuthState {
   user: AuthUser | null;
   isLoading: boolean;
   login: (email: string, password: string) => Promise<void>;
-  register: (email: string, password: string) => Promise<void>;
+  register: (email: string, password: string, role?: string) => Promise<void>;
   logout: () => Promise<void>;
   checkAuth: () => Promise<void>;
 }
@@ -39,8 +39,8 @@ export const useAuth = create<AuthState>((set) => ({
     });
   },
 
-  register: async (email, password) => {
-    await api.register({ email, password });
+  register: async (email, password, role) => {
+    await api.register({ email, password, ...(role ? { role } : {}) });
   },
 
   logout: async () => {

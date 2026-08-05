@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import Link from 'next/link';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
+import FeaturedStores from '@/components/FeaturedStores';
 import { SEO_SITE_DESCRIPTION, SEO_SITE_TITLE } from '@/lib/seo-copy';
 
 export const metadata: Metadata = {
@@ -172,6 +173,8 @@ export default function Home() {
             </Link>
           </div>
         </section>
+
+        <FeaturedStores />
 
         {/* Banner GOL PLUS */}
         <section className="bg-[#0d1b2a] py-12">

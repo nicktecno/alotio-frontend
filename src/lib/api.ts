@@ -2,9 +2,16 @@ import type {
   AdminUserListRow,
   CityResolveFromLocation,
   ContactSubmission,
+  MyStoreResponse,
   Paginated,
   PaginatedResponse,
+  Product,
+  ProductImage,
+  ProductStatus,
   Profile,
+  Store,
+  StorePlan,
+  StoreType,
   WhatsAppMessageLog,
 } from '@/types';
 
@@ -137,7 +144,7 @@ async function authBlob(endpoint: string): Promise<Blob> {
 
 export const api = {
   // Auth
-  register: (data: { email: string; password: string }) =>
+  register: (data: { email: string; password: string; role?: string }) =>
     request('/auth/register', { method: 'POST', body: JSON.stringify(data) }),
 
   login: (data: { email: string; password: string }) =>
@@ -645,6 +652,149 @@ export const api = {
       `/public/contracts/parent/${encodeURIComponent(token)}/accept`,
       { method: 'POST' },
     ),
+
+  // -------------------------------------------------------------- Marketplace (público)
+  marketplaceListStores: (params?: Record<string, string>) => {
+    const qs = params ? new URLSearchParams(params).toString() : '';
+    return publicRequest<Paginated<Store>>(
+      `/marketplace/stores${qs ? `?${qs}` : ''}`,
+    );
+  },
+  marketplaceFeatured: (limit = 6) =>
+    publicRequest<Store[]>(`/marketplace/featured?limit=${limit}`),
+  marketplaceGetStore: (slug: string) =>
+    publicRequest<Store>(`/marketplace/stores/${encodeURIComponent(slug)}`),
+
+  // -------------------------------------------------------------- Loja (lojista)
+  getMyStore: () => request<MyStoreResponse>('/stores/me'),
+  createStore: (data: {
+    displayName: string;
+    type: StoreType;
+    phone?: string;
+    whatsapp?: string;
+    email?: string;
+    bio?: string;
+    cityId?: string;
+    cityIds?: string[];
+  }) => request<Store>('/stores', { method: 'POST', body: JSON.stringify(data) }),
+  updateMyStore: (data: Record<string, unknown>) =>
+    request<Store>('/stores/me', { method: 'PATCH', body: JSON.stringify(data) }),
+  uploadStoreLogo: (formData: FormData) =>
+    request<{ logoUrl: string }>('/stores/me/logo', {
+      method: 'POST',
+      body: formData,
+    }),
+
+  listMyProducts: (params?: Record<string, string>) => {
+    const qs = params ? new URLSearchParams(params).toString() : '';
+    return request<Paginated<Product>>(
+      `/stores/me/products${qs ? `?${qs}` : ''}`,
+    );
+  },
+  createProduct: (data: {
+    title: string;
+    description?: string;
+    priceCents?: number;
+    category?: string;
+    status?: ProductStatus;
+  }) =>
+    request<Product>('/stores/me/products', {
+      method: 'POST',
+      body: JSON.stringify(data),
+    }),
+  createProductsBulk: (
+    products: Array<{
+      title: string;
+      description?: string;
+      priceCents?: number;
+      category?: string;
+      status?: ProductStatus;
+    }>,
+  ) =>
+    request<{ created: number }>('/stores/me/products/bulk', {
+      method: 'POST',
+      body: JSON.stringify({ products }),
+    }),
+  updateProduct: (id: string, data: Record<string, unknown>) =>
+    request<Product>(`/stores/me/products/${id}`, {
+      method: 'PATCH',
+      body: JSON.stringify(data),
+    }),
+  deleteProduct: (id: string) =>
+    request(`/stores/me/products/${id}`, { method: 'DELETE' }),
+  uploadProductImage: (productId: string, formData: FormData) =>
+    request<ProductImage>(`/stores/me/products/${productId}/images`, {
+      method: 'POST',
+      body: formData,
+    }),
+  deleteProductImage: (imageId: string) =>
+    request(`/stores/me/product-images/${imageId}`, { method: 'DELETE' }),
+
+  // Store subscription (plano lojista R$ 29,90/mês)
+  getMyStoreSubscription: () =>
+    request<{
+      isPremium: boolean;
+      plan: StorePlan;
+      subscription: { currentPeriodEnd: string; cancelAtPeriodEnd: boolean } | null;
+      plans: Array<{
+        interval: 'monthly' | 'yearly';
+        priceId: string;
+        priceCents: number | null;
+        currency: string;
+      }>;
+    }>('/subscriptions/store/me'),
+  getStorePlans: () =>
+    request<
+      Array<{
+        interval: 'monthly' | 'yearly';
+        priceId: string;
+        priceCents: number | null;
+        currency: string;
+      }>
+    >('/subscriptions/store/plans'),
+  createStoreCheckout: (interval: 'monthly' | 'yearly' = 'monthly') =>
+    request<{ url: string }>('/subscriptions/store/checkout', {
+      method: 'POST',
+      body: JSON.stringify({ interval }),
+    }),
+  createStorePortal: () =>
+    request<{ url: string }>('/subscriptions/store/portal', { method: 'POST' }),
+  cancelStoreSubscription: () =>
+    request<{ message: string }>('/subscriptions/store/cancel', {
+      method: 'POST',
+    }),
+
+  // -------------------------------------------------------------- Admin marketplace
+  adminListStores: (params?: Record<string, string>) => {
+    const qs = params ? new URLSearchParams(params).toString() : '';
+    return request<Paginated<Store & { user?: { email: string } }>>(
+      `/admin/stores${qs ? `?${qs}` : ''}`,
+    );
+  },
+  adminBlockStore: (id: string, reason: string) =>
+    request(`/admin/stores/${id}/block`, {
+      method: 'POST',
+      body: JSON.stringify({ reason }),
+    }),
+  adminUnblockStore: (id: string) =>
+    request(`/admin/stores/${id}/unblock`, { method: 'POST' }),
+  adminListProducts: (params?: Record<string, string>) => {
+    const qs = params ? new URLSearchParams(params).toString() : '';
+    return request<
+      Paginated<
+        Product & {
+          store: { id: string; displayName: string; slug: string; type: StoreType };
+        }
+      >
+    >(`/admin/products${qs ? `?${qs}` : ''}`);
+  },
+  adminBlockProduct: (id: string, reason: string) =>
+    request(`/admin/products/${id}/block`, {
+      method: 'POST',
+      body: JSON.stringify({ reason }),
+    }),
+  adminUnblockProduct: (id: string) =>
+    request(`/admin/products/${id}/unblock`, { method: 'POST' }),
 };
 
 export { ApiError };

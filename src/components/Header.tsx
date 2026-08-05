@@ -19,6 +19,13 @@ export default function Header() {
     router.push('/');
   };
 
+  const panelHref =
+    user?.role === 'ADMIN'
+      ? '/admin'
+      : user?.role === 'LOJISTA'
+        ? '/lojista'
+        : '/dashboard';
+
   return (
     <header className="bg-primary-700 shadow-md">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -39,6 +46,12 @@ export default function Header() {
               Encontrar transporte escolar
             </Link>
             <Link
+              href="/lojas"
+              className="text-primary-100 hover:text-white transition font-medium"
+            >
+              Lojas
+            </Link>
+            <Link
               href="/seguro"
               className="flex items-center gap-1.5 text-orange-400 hover:text-orange-300 transition font-semibold"
             >
@@ -57,7 +70,7 @@ export default function Header() {
                       </Link>
                     ) : (
                       <Link
-                        href="/dashboard"
+                        href={panelHref}
                         className="text-primary-100 hover:text-white transition font-medium"
                       >
                         Meu Painel
@@ -92,7 +105,7 @@ export default function Header() {
 
           <div className="md:hidden">
             <Link
-              href={user ? (user.role === 'ADMIN' ? '/admin' : '/dashboard') : '/login'}
+              href={user ? panelHref : '/login'}
               className="bg-secondary hover:bg-secondary-600 text-white px-4 py-2 rounded-lg transition text-sm font-semibold"
             >
               {user ? 'Painel' : 'Entrar'}
