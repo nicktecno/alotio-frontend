@@ -74,6 +74,18 @@ export default function AdminAnunciosPage() {
     }
   };
 
+  const remove = async (p: AdminProduct) => {
+    if (!confirm(`Excluir definitivamente o anúncio "${p.title}"? Esta ação não pode ser desfeita.`))
+      return;
+    try {
+      await api.adminDeleteProduct(p.id);
+      toast.success('Anúncio excluído.');
+      load();
+    } catch (err) {
+      toast.error(err instanceof Error ? err.message : 'Erro.');
+    }
+  };
+
   return (
     <div>
       <h1 className="text-2xl font-bold text-primary-900 mb-6">Anúncios</h1>
@@ -143,7 +155,7 @@ export default function AdminAnunciosPage() {
                   </p>
                 )}
               </div>
-              <div className="shrink-0">
+              <div className="shrink-0 flex items-center gap-2">
                 {p.status === 'BLOCKED' ? (
                   <button
                     onClick={() => unblock(p)}
@@ -159,6 +171,12 @@ export default function AdminAnunciosPage() {
                     Bloquear
                   </button>
                 )}
+                <button
+                  onClick={() => remove(p)}
+                  className="text-sm px-3 py-1.5 rounded-lg border border-gray-300 text-gray-600 hover:bg-gray-100 transition"
+                >
+                  Excluir
+                </button>
               </div>
             </div>
           ))}

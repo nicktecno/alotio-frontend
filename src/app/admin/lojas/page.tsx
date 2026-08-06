@@ -61,6 +61,18 @@ export default function AdminLojasPage() {
     }
   };
 
+  const remove = async (s: AdminStore) => {
+    if (!confirm(`Excluir definitivamente a loja "${s.displayName}" e TODOS os seus anúncios? Esta ação não pode ser desfeita.`))
+      return;
+    try {
+      await api.adminDeleteStore(s.id);
+      toast.success('Loja excluída.');
+      load();
+    } catch (err) {
+      toast.error(err instanceof Error ? err.message : 'Erro.');
+    }
+  };
+
   return (
     <div>
       <h1 className="text-2xl font-bold text-primary-900 mb-6">Lojas</h1>
@@ -132,7 +144,7 @@ export default function AdminLojasPage() {
                   {s.user?.email ? ` · ${s.user.email}` : ''}
                 </p>
               </div>
-              <div className="shrink-0">
+              <div className="shrink-0 flex items-center gap-2">
                 {s.isBlocked ? (
                   <button
                     onClick={() => unblock(s)}
@@ -148,6 +160,12 @@ export default function AdminLojasPage() {
                     Bloquear
                   </button>
                 )}
+                <button
+                  onClick={() => remove(s)}
+                  className="text-sm px-3 py-1.5 rounded-lg border border-gray-300 text-gray-600 hover:bg-gray-100 transition"
+                >
+                  Excluir
+                </button>
               </div>
             </div>
           ))}

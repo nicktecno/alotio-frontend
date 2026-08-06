@@ -794,6 +794,8 @@ export const api = {
     }),
   adminUnblockStore: (id: string) =>
     request(`/admin/stores/${id}/unblock`, { method: 'POST' }),
+  adminDeleteStore: (id: string) =>
+    request(`/admin/stores/${id}`, { method: 'DELETE' }),
   adminListProducts: (params?: Record<string, string>) => {
     const qs = params ? new URLSearchParams(params).toString() : '';
     return request<
@@ -811,6 +813,8 @@ export const api = {
     }),
   adminUnblockProduct: (id: string) =>
     request(`/admin/products/${id}/unblock`, { method: 'POST' }),
+  adminDeleteProduct: (id: string) =>
+    request(`/admin/products/${id}`, { method: 'DELETE' }),
 };
 
 export { ApiError };
