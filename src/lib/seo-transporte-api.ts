@@ -104,6 +104,27 @@ export async function fetchNeighborhoodsForCity(cityId: string): Promise<Neighbo
   return out;
 }
 
+/** Ids de todos os perfis aprovados (sitemap + pré-renderização). */
+export async function fetchAllApprovedTioIds(): Promise<string[]> {
+  const out: string[] = [];
+  let page = 1;
+  let totalPages = 1;
+  const base = apiBase();
+  do {
+    const res = await fetchJson<{
+      data?: { id: string }[];
+      totalPages?: number;
+    }>(`${base}/tios?page=${page}&limit=250`);
+    if (!res?.data?.length) break;
+    for (const t of res.data) {
+      if (t?.id) out.push(t.id);
+    }
+    totalPages = Math.max(1, res.totalPages ?? 1);
+    page++;
+  } while (page <= totalPages && page <= 400);
+  return out;
+}
+
 export type TiosGeoSearch = {
   data: TioPublicView[];
   total: number;

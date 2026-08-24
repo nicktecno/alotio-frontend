@@ -1,41 +1,15 @@
 import type { MetadataRoute } from 'next';
-import { fetchAllCitiesWithTios, fetchNeighborhoodsForCity } from '@/lib/seo-transporte-api';
-import { seoFetchInit } from '@/lib/seo-revalidate';
+import {
+  fetchAllApprovedTioIds,
+  fetchAllCitiesWithTios,
+  fetchNeighborhoodsForCity,
+} from '@/lib/seo-transporte-api';
 import { neighborhoodSlug } from '@/lib/slug';
 
 const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://alotio.com.br';
 
 /** Regenera o sitemap no máximo a cada 30 dias (literal estático exigido pelo Next.js). */
 export const revalidate = 2_592_000;
-
-/** Busca todos os perfis aprovados para o sitemap (paginação na API). */
-async function fetchAllTioIds(apiBase: string): Promise<string[]> {
-  const limit = 250;
-  const ids: string[] = [];
-  let page = 1;
-  let totalPages = 1;
-
-  try {
-    do {
-      const res = await fetch(`${apiBase}/tios?page=${page}&limit=${limit}`, seoFetchInit());
-      if (!res.ok) break;
-      const data = (await res.json()) as {
-        data?: { id: string }[];
-        totalPages?: number;
-      };
-      const batch = data.data ?? [];
-      totalPages = Math.max(1, data.totalPages ?? 1);
-      for (const t of batch) {
-        if (t?.id) ids.push(t.id);
-      }
-      page++;
-    } while (page <= totalPages && page <= 400);
-  } catch {
-    /* build / API indisponível */
-  }
-
-  return ids;
-}
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const staticPages: MetadataRoute.Sitemap = [
@@ -77,9 +51,8 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     },
   ];
 
-  const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3001/api';
   const [tioIds, citiesWithTios] = await Promise.all([
-    fetchAllTioIds(apiUrl),
+    fetchAllApprovedTioIds(),
     fetchAllCitiesWithTios(),
   ]);
 

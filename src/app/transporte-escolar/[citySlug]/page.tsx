@@ -12,6 +12,7 @@ import {
 } from '@/lib/seo-transporte-api';
 import { tiosSearchHref } from '@/lib/seo-search-url';
 import { neighborhoodSlug } from '@/lib/slug';
+import { cityStaticParams } from '@/lib/seo-static-params';
 import { SEO_CORE_KEYWORDS } from '@/lib/seo-keywords';
 
 const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://alotio.com.br';
@@ -20,6 +21,10 @@ type Props = { params: Promise<{ citySlug: string }> };
 
 /** ISR 30 dias (literal estático exigido pelo Next.js). */
 export const revalidate = 2_592_000;
+
+export async function generateStaticParams() {
+  return cityStaticParams();
+}
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { citySlug } = await params;
