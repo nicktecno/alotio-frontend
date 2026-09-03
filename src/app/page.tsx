@@ -4,6 +4,7 @@ import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import FeaturedStores from '@/components/FeaturedStores';
 import ProductCarousel from '@/components/ProductCarousel';
+import AdSlot from '@/components/AdSlot';
 import { SEO_SITE_DESCRIPTION, SEO_SITE_TITLE } from '@/lib/seo-copy';
 
 export const metadata: Metadata = {
@@ -175,6 +176,12 @@ export default function Home() {
           </div>
         </section>
 
+        <AdSlot
+          slot={process.env.NEXT_PUBLIC_ADSENSE_SLOT_HOME_TOP}
+          format="horizontal"
+          className="py-8 bg-white border-t border-gray-100"
+        />
+
         <FeaturedStores />
 
         <ProductCarousel
@@ -187,6 +194,12 @@ export default function Home() {
           type="PECAS"
           title="Peças e acessórios"
           subtitle="Encontre peças e acessórios para transporte escolar"
+        />
+
+        <AdSlot
+          slot={process.env.NEXT_PUBLIC_ADSENSE_SLOT_HOME_MID}
+          format="horizontal"
+          className="py-8 bg-gray-50"
         />
 
         {/* CTA para lojistas */}
@@ -296,6 +309,12 @@ export default function Home() {
             </Link>
           </div>
         </section>
+
+        <AdSlot
+          slot={process.env.NEXT_PUBLIC_ADSENSE_SLOT_HOME_BOTTOM}
+          format="horizontal"
+          className="py-8 bg-white"
+        />
 
       </main>
       <Footer />

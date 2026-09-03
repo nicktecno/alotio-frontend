@@ -8,6 +8,14 @@ NEXT_PUBLIC_API_URL=https://api.seudominio.com/api
 # Google Analytics (opcional)
 NEXT_PUBLIC_GA_ID=
 
+# Google AdSense (opcional). Sem NEXT_PUBLIC_ADSENSE_CLIENT nenhum anúncio é renderizado.
+# Formato: ca-pub-XXXXXXXXXXXXXXXX
+NEXT_PUBLIC_ADSENSE_CLIENT=
+# IDs dos blocos (data-ad-slot) criados no painel do AdSense. Slot vazio = espaço não renderizado.
+NEXT_PUBLIC_ADSENSE_SLOT_HOME_TOP=
+NEXT_PUBLIC_ADSENSE_SLOT_HOME_MID=
+NEXT_PUBLIC_ADSENSE_SLOT_HOME_BOTTOM=
+
 # SEO: revalidate ISR = 2592000 (30 dias) no código (literal estático Next.js).
 # SEO_REVALIDATE_SEC não altera mais export const revalidate das pages.
 
