@@ -199,6 +199,39 @@ export default function Home() {
           subtitle="Encontre peças e acessórios para transporte escolar"
         />
 
+        <section className="bg-[#fff8e8] border-y border-amber-100 py-14">
+          <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="grid md:grid-cols-[1fr_auto] gap-8 items-center">
+              <div>
+                <p className="text-xs font-bold uppercase tracking-widest text-amber-700 mb-2">
+                  Novidade no Alô Tio
+                </p>
+                <h2 className="text-2xl sm:text-3xl font-bold text-primary-900 font-heading">
+                  Escolas parceiras, benefícios e promoções
+                </h2>
+                <p className="mt-3 text-gray-600 max-w-2xl leading-relaxed">
+                  Famílias podem conhecer instituições, diferenciais e campanhas de matrícula.
+                  Escolas ganham uma página própria para divulgar fotos, benefícios e promoções.
+                </p>
+              </div>
+              <div className="flex flex-col sm:flex-row md:flex-col gap-3 md:min-w-56">
+                <Link
+                  href="/escolas-parceiras"
+                  className="bg-primary hover:bg-primary-600 text-white px-6 py-3 rounded-lg font-bold text-center transition"
+                >
+                  Conhecer escolas
+                </Link>
+                <Link
+                  href="/cadastro-escola-parceira"
+                  className="bg-white border border-amber-300 text-primary-900 hover:bg-amber-50 px-6 py-3 rounded-lg font-bold text-center transition"
+                >
+                  Anunciar minha escola
+                </Link>
+              </div>
+            </div>
+          </div>
+        </section>
+
         <AdSlot
           slot={process.env.NEXT_PUBLIC_ADSENSE_SLOT_HOME_MID}
           format="horizontal"

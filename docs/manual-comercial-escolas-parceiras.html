@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Manual Comercial - Escolas Parceiras | Alô Tio</title>
+  <style>
+    :root {
+      --primary: #5a3fb0;
+      --primary-light: #8257e5;
+      --accent: #fcc434;
+      --ink: #172033;
+      --muted: #566074;
+      --paper: #ffffff;
+      --soft: #f5f1ff;
+      --warm: #fff8e8;
+      --green: #11734b;
+      --line: #ded8ed;
+    }
+    * { box-sizing: border-box; }
+    html, body { margin: 0; padding: 0; }
+    body {
+      background: #e9e6ef;
+      color: var(--ink);
+      font-family: "Avenir Next", "Segoe UI", sans-serif;
+      font-size: 11.5px;
+      line-height: 1.45;
+    }
+    .page {
+      position: relative;
+      width: 210mm;
+      min-height: 297mm;
+      margin: 0 auto 12px;
+      padding: 17mm 18mm 16mm;
+      background: var(--paper);
+      page-break-after: always;
+      overflow: hidden;
+    }
+    .page:last-child { page-break-after: auto; }
+    .cover {
+      display: flex;
+      min-height: 297mm;
+      flex-direction: column;
+      justify-content: space-between;
+      padding: 22mm 20mm;
+      color: white;
+      background: var(--primary);
+    }
+    .brand { font-size: 25px; font-weight: 900; }
+    .brand span { color: var(--accent); }
+    .eyebrow {
+      margin: 0 0 9px;
+      color: var(--primary);
+      font-size: 10px;
+      font-weight: 800;
+      letter-spacing: 1.1px;
+      text-transform: uppercase;
+    }
+    .cover .eyebrow { color: var(--accent); }
+    h1, h2, h3 { margin-top: 0; letter-spacing: 0; }
+    h1 { max-width: 150mm; margin-bottom: 12px; font-size: 35px; line-height: 1.08; }
+    h2 { margin-bottom: 13px; color: var(--primary); font-size: 23px; line-height: 1.15; }
+    h3 { margin: 16px 0 6px; color: var(--primary); font-size: 14px; }
+    p { margin: 0 0 9px; }
+    ul, ol { margin: 6px 0 11px; padding-left: 20px; }
+    li { margin-bottom: 5px; }
+    a { color: inherit; }
+    .lead { max-width: 145mm; font-size: 16px; line-height: 1.5; }
+    .cover-note { max-width: 125mm; color: #e8e0ff; font-size: 12px; }
+    .tag {
+      display: inline-block;
+      padding: 5px 10px;
+      border-radius: 4px;
+      color: #332600;
+      background: var(--accent);
+      font-size: 10px;
+      font-weight: 800;
+      text-transform: uppercase;
+    }
+    .rule { width: 34mm; height: 4px; margin: 0 0 16px; background: var(--accent); }
+    .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+    .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 9px; }
+    .card {
+      padding: 12px;
+      border: 1px solid var(--line);
+      border-radius: 6px;
+      background: white;
+      break-inside: avoid;
+    }
+    .card strong { display: block; margin-bottom: 4px; color: var(--primary); font-size: 12px; }
+    .card p:last-child { margin-bottom: 0; }
+    .callout {
+      margin: 12px 0;
+      padding: 11px 13px;
+      border-left: 4px solid var(--primary-light);
+      background: var(--soft);
+    }
+    .callout.warm { border-color: var(--accent); background: var(--warm); }
+    .callout.green { border-color: var(--green); background: #eefaf5; }
+    .flow {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 7px;
+      margin: 14px 0;
+      counter-reset: flow;
+    }
+    .flow div {
+      min-height: 75px;
+      padding: 10px;
+      border-top: 4px solid var(--accent);
+      background: var(--soft);
+      counter-increment: flow;
+    }
+    .flow div::before {
+      content: counter(flow, decimal-leading-zero);
+      display: block;
+      margin-bottom: 5px;
+      color: var(--primary);
+      font-size: 17px;
+      font-weight: 900;
+    }
+    table { width: 100%; margin: 10px 0 14px; border-collapse: collapse; }
+    th, td { padding: 8px 9px; border: 1px solid var(--line); text-align: left; vertical-align: top; }
+    th { color: white; background: var(--primary); }
+    tr:nth-child(even) td { background: #faf8ff; }
+    .script {
+      margin: 9px 0;
+      padding: 11px 13px;
+      border: 1px solid #edd68f;
+      border-radius: 6px;
+      background: var(--warm);
+      font-size: 12px;
+    }
+    .route {
+      padding: 1px 5px;
+      border-radius: 3px;
+      color: #fff;
+      background: #252c3b;
+      font-family: Menlo, monospace;
+      font-size: 10px;
+    }
+    .checklist { list-style: none; padding-left: 0; }
+    .checklist li { position: relative; padding-left: 24px; }
+    .checklist li::before {
+      position: absolute;
+      top: 1px;
+      left: 0;
+      width: 13px;
+      height: 13px;
+      border: 1.5px solid var(--primary);
+      border-radius: 2px;
+      content: "";
+    }
+    .footer {
+      position: absolute;
+      right: 18mm;
+      bottom: 8mm;
+      left: 18mm;
+      display: flex;
+      justify-content: space-between;
+      padding-top: 5px;
+      border-top: 1px solid var(--line);
+      color: #7b8393;
+      font-size: 9px;
+    }
+    .small { color: var(--muted); font-size: 9.5px; }
+    @media print {
+      body { background: white; print-color-adjust: exact; -webkit-print-color-adjust: exact; }
+      .page { margin: 0; }
+    }
+    @page { size: A4; margin: 0; }
+  </style>
+</head>
+<body>
+  <section class="page cover">
+    <div class="brand">Alô <span>Tio</span></div>
+    <div>
+      <p class="eyebrow">Material de apoio ao vendedor</p>
+      <h1>Manual comercial de Escolas Parceiras</h1>
+      <p class="lead">Como apresentar, demonstrar e vender a nova vitrine digital do Alô Tio para instituições de ensino.</p>
+      <p style="margin-top:22px"><span class="tag">Edição setembro de 2026</span></p>
+    </div>
+    <p class="cover-note">Uso interno. Os valores e condições devem ser confirmados na plataforma antes de cada proposta comercial.</p>
+  </section>
+
+  <section class="page">
+    <p class="eyebrow">01 · Visão geral</p>
+    <h2>O que estamos vendendo?</h2>
+    <div class="rule"></div>
+    <p class="lead" style="font-size:14px">Uma presença patrocinada dentro de uma plataforma usada por famílias e profissionais ligados ao transporte escolar.</p>
+    <div class="callout">
+      <strong>Em uma frase:</strong> a escola ganha uma página própria no Alô Tio para apresentar sua instituição, divulgar benefícios, publicar campanhas e receber contatos pelo WhatsApp.
+    </div>
+
+    <h3>Onde a escola aparece</h3>
+    <div class="grid-2">
+      <div class="card"><strong>Carrossel da home</strong><p>Escolas Premium podem aparecer na seção “Escolas parceiras”, identificada como conteúdo patrocinado.</p></div>
+      <div class="card"><strong>Catálogo exclusivo</strong><p>A página <span class="route">/escolas-parceiras</span> reúne instituições anunciantes sem misturá-las às escolas da busca de transporte.</p></div>
+      <div class="card"><strong>Página pública</strong><p>Logo, apresentação, cidade, contatos, benefícios, promoções, novidades e fotos em endereço próprio.</p></div>
+      <div class="card"><strong>Contato direto</strong><p>O responsável pode abrir uma conversa no WhatsApp informado pela escola.</p></div>
+    </div>
+
+    <h3>Separação importante</h3>
+    <div class="callout warm">
+      As Escolas Parceiras são anúncios comerciais. Elas não ganham prioridade na busca por transportadores e não alteram o cadastro de escolas utilizado pelas famílias para localizar vans. Toda presença comercial é identificada como <strong>Patrocinado</strong>.
+    </div>
+
+    <h3>Para quem faz sentido</h3>
+    <ul>
+      <li>Escolas particulares em período de matrícula ou rematrícula.</li>
+      <li>Instituições que oferecem bolsa, desconto, visita guiada ou condição especial.</li>
+      <li>Escolas que querem alcançar famílias da própria cidade.</li>
+      <li>Instituições que precisam apresentar diferenciais além de um anúncio curto.</li>
+    </ul>
+    <div class="footer"><span>Manual comercial · Escolas Parceiras</span><span>2</span></div>
+  </section>
+
+  <section class="page">
+    <p class="eyebrow">02 · Produto</p>
+    <h2>Como a plataforma funciona</h2>
+    <div class="rule"></div>
+
+    <div class="flow">
+      <div><strong>A escola cria a conta</strong><br />Cadastro pelo endereço exclusivo de escolas parceiras.</div>
+      <div><strong>Monta o perfil</strong><br />Adiciona nome, logo, apresentação, contatos e cidade.</div>
+      <div><strong>Publica campanhas</strong><br />Cria promoções e novidades com título, texto, categoria, valor opcional e fotos.</div>
+      <div><strong>Recebe visitas</strong><br />A família conhece a escola e inicia contato direto.</div>
+    </div>
+
+    <h3>Conteúdo que a escola pode divulgar</h3>
+    <table>
+      <tr><th>Área</th><th>Exemplos de uso</th></tr>
+      <tr><td>Apresentação</td><td>Proposta pedagógica, níveis de ensino, estrutura, atividades e diferenciais.</td></tr>
+      <tr><td>Benefícios</td><td>Período integral, alimentação, atividades extracurriculares, acessibilidade e segurança.</td></tr>
+      <tr><td>Promoções</td><td>Desconto de matrícula, bolsa, campanha de indicação, visita e evento aberto.</td></tr>
+      <tr><td>Fotos</td><td>Fachada, salas, espaços esportivos, biblioteca e imagens da campanha.</td></tr>
+      <tr><td>Contato</td><td>Telefone, e-mail e WhatsApp para conversar diretamente com a instituição.</td></tr>
+    </table>
+
+    <h3>Plano gratuito e Premium</h3>
+    <div class="grid-2">
+      <div class="card">
+        <strong>Gratuito</strong>
+        <ul>
+          <li>Página pública da escola.</li>
+          <li>Até 20 publicações ativas.</li>
+          <li>Sem destaque na home.</li>
+        </ul>
+      </div>
+      <div class="card">
+        <strong>Premium</strong>
+        <ul>
+          <li>Publicações ilimitadas.</li>
+          <li>Destaque no carrossel da home.</li>
+          <li>Selo Premium.</li>
+          <li>Plano mensal exibido atualmente a partir de R$ 29,90.</li>
+        </ul>
+      </div>
+    </div>
+    <p class="small">O plano anual depende da configuração vigente. Sempre consulte a tela “Plano” antes de informar valores, descontos ou disponibilidade.</p>
+    <div class="footer"><span>Manual comercial · Escolas Parceiras</span><span>3</span></div>
+  </section>
+
+  <section class="page">
+    <p class="eyebrow">03 · Demonstração</p>
+    <h2>Roteiro para apresentar ao cliente</h2>
+    <div class="rule"></div>
+
+    <h3>1. Comece pela experiência da família</h3>
+    <ol>
+      <li>Abra a home do Alô Tio.</li>
+      <li>Mostre a chamada “Escolas parceiras, benefícios e promoções”.</li>
+      <li>Acesse <span class="route">/escolas-parceiras</span>.</li>
+      <li>Explique que a área comercial é separada da busca de transporte.</li>
+      <li>Abra uma escola para demonstrar página, promoções, fotos e WhatsApp.</li>
+    </ol>
+
+    <h3>2. Mostre como a escola administra</h3>
+    <ol>
+      <li>Acesse <span class="route">/cadastro-escola-parceira</span>.</li>
+      <li>Explique que a instituição cria e controla a própria conta.</li>
+      <li>No painel, selecione “Escola parceira” e crie o perfil.</li>
+      <li>Em “Perfil do anunciante”, adicione logo, contatos, descrição e cidades.</li>
+      <li>Em “Publicações”, crie uma promoção e envie as fotos.</li>
+      <li>Em “Plano”, mostre as modalidades disponíveis e o pagamento seguro pelo Stripe.</li>
+    </ol>
+
+    <h3>3. Termine com o resultado</h3>
+    <div class="script">
+      “Sua escola passa a ter uma vitrine própria dentro do Alô Tio. Vocês conseguem atualizar benefícios e campanhas, colocar fotos e direcionar o responsável para uma conversa no WhatsApp. No Premium, a escola também pode ganhar exposição no carrossel da página inicial.”
+    </div>
+
+    <div class="callout green">
+      <strong>Boa demonstração:</strong> use uma promoção realista, como “Condição especial de matrícula”, com foto, prazo descrito no texto e chamada para conversar. Isso torna o valor do produto concreto.
+    </div>
+
+    <h3>O que não prometer</h3>
+    <ul>
+      <li>Número garantido de matrículas, contatos, cliques ou visualizações.</li>
+      <li>Primeira posição permanente ou exclusividade por cidade.</li>
+      <li>Integração com a busca orgânica de transporte.</li>
+      <li>Validação pedagógica ou recomendação da escola pelo Alô Tio.</li>
+    </ul>
+    <div class="footer"><span>Manual comercial · Escolas Parceiras</span><span>4</span></div>
+  </section>
+
+  <section class="page">
+    <p class="eyebrow">04 · Venda</p>
+    <h2>Abordagem comercial e objeções</h2>
+    <div class="rule"></div>
+
+    <h3>Mensagem inicial sugerida</h3>
+    <div class="script">
+      “Olá, [nome]. Sou [vendedor], do Alô Tio, plataforma que aproxima famílias de profissionais e serviços ligados ao transporte escolar. Criamos uma área de Escolas Parceiras em que a instituição pode apresentar seus diferenciais, publicar campanhas de matrícula, fotos e receber contatos pelo WhatsApp. Posso te mostrar em cinco minutos como a página da escola funciona?”
+    </div>
+
+    <h3>Perguntas para qualificar a oportunidade</h3>
+    <ul>
+      <li>A escola está com matrículas ou rematrículas abertas?</li>
+      <li>Existe alguma condição, evento ou benefício que precisa de divulgação?</li>
+      <li>Quem atualiza o conteúdo digital da instituição?</li>
+      <li>Qual é o principal canal de entrada de interessados hoje?</li>
+      <li>O WhatsApp comercial está preparado para receber contatos?</li>
+    </ul>
+
+    <h3>Objeções frequentes</h3>
+    <table>
+      <tr><th>Objeção</th><th>Resposta recomendada</th></tr>
+      <tr><td>“Já temos Instagram.”</td><td>O perfil social continua importante. A página no Alô Tio acrescenta presença em um ambiente específico de famílias e transporte escolar, com conteúdo organizado e contato direto.</td></tr>
+      <tr><td>“Não sei se vai gerar matrícula.”</td><td>Não garantimos matrícula. A proposta é ampliar a exposição qualificada e criar mais um ponto de contato para campanhas da escola.</td></tr>
+      <tr><td>“Não temos tempo para atualizar.”</td><td>O perfil pode permanecer institucional e as promoções são atualizadas apenas quando houver campanha. A operação é simples e feita pelo próprio painel.</td></tr>
+      <tr><td>“Quero testar primeiro.”</td><td>Apresente o plano gratuito disponível e combine uma data para revisar o perfil e discutir o destaque Premium.</td></tr>
+      <tr><td>“A escola aparece na busca de vans?”</td><td>Não como publicidade. A vitrine patrocinada é separada para preservar a neutralidade da busca de transporte.</td></tr>
+    </table>
+    <div class="footer"><span>Manual comercial · Escolas Parceiras</span><span>5</span></div>
+  </section>
+
+  <section class="page">
+    <p class="eyebrow">05 · Fechamento</p>
+    <h2>Cadastro, conteúdo e acompanhamento</h2>
+    <div class="rule"></div>
+
+    <h3>Checklist antes de publicar</h3>
+    <div class="grid-2">
+      <ul class="checklist">
+        <li>Nome oficial da instituição.</li>
+        <li>Logo em boa resolução.</li>
+        <li>Telefone, e-mail e WhatsApp corretos.</li>
+        <li>Cidade de atuação selecionada.</li>
+        <li>Descrição clara dos níveis e diferenciais.</li>
+      </ul>
+      <ul class="checklist">
+        <li>Fotos autorizadas pela escola.</li>
+        <li>Promoção com regras e validade no texto.</li>
+        <li>Valores revisados pela instituição.</li>
+        <li>Links e contato testados.</li>
+        <li>Plano escolhido e pagamento confirmado.</li>
+      </ul>
+    </div>
+
+    <h3>Responsabilidades da instituição</h3>
+    <ul>
+      <li>Manter informações, valores, condições e contatos atualizados.</li>
+      <li>Ter autorização para usar logos, marcas, textos e fotografias publicados.</li>
+      <li>Evitar dados pessoais de alunos e imagens de crianças sem autorização adequada.</li>
+      <li>Cumprir a oferta divulgada e informar regras, restrições e prazo da promoção.</li>
+    </ul>
+
+    <h3>Responsabilidades do vendedor</h3>
+    <ul>
+      <li>Apresentar o produto sem prometer resultados garantidos.</li>
+      <li>Confirmar preços na tela do plano antes de enviar a proposta.</li>
+      <li>Orientar a escola a identificar corretamente promoções e benefícios.</li>
+      <li>Registrar dúvidas técnicas e encaminhá-las ao suporte.</li>
+      <li>Fazer retorno após o cadastro para conferir se o perfil está completo.</li>
+    </ul>
+
+    <div class="callout warm">
+      <strong>Atenção à comunicação:</strong> os anúncios são direcionados aos pais e responsáveis. Nunca proponha segmentação baseada em dados pessoais de crianças e não solicite informações de alunos para criar o perfil comercial.
+    </div>
+
+    <h3>Próximo passo sugerido</h3>
+    <p>Ao final da apresentação, envie o endereço <strong>https://alotio.com.br/cadastro-escola-parceira</strong> e combine uma data objetiva para acompanhar a criação do perfil.</p>
+    <div class="footer"><span>Manual comercial · Escolas Parceiras</span><span>6</span></div>
+  </section>
+
+  <section class="page">
+    <p class="eyebrow">06 · Consulta rápida</p>
+    <h2>Resumo para levar à reunião</h2>
+    <div class="rule"></div>
+
+    <div class="grid-3">
+      <div class="card"><strong>Produto</strong><p>Página patrocinada para divulgar a escola, benefícios, fotos e campanhas.</p></div>
+      <div class="card"><strong>Público</strong><p>Pais, responsáveis e profissionais do ecossistema de transporte escolar.</p></div>
+      <div class="card"><strong>Conversão</strong><p>Contato direto pelo WhatsApp informado pela instituição.</p></div>
+      <div class="card"><strong>Gratuito</strong><p>Página pública e até 20 publicações ativas, sem destaque na home.</p></div>
+      <div class="card"><strong>Premium</strong><p>Publicações ilimitadas, selo e possibilidade de destaque no carrossel.</p></div>
+      <div class="card"><strong>Transparência</strong><p>Conteúdo comercial identificado como patrocinado e separado da busca.</p></div>
+    </div>
+
+    <h3>Links importantes</h3>
+    <table>
+      <tr><th>Finalidade</th><th>Endereço</th></tr>
+      <tr><td>Conhecer escolas parceiras</td><td>alotio.com.br/escolas-parceiras</td></tr>
+      <tr><td>Cadastrar uma escola</td><td>alotio.com.br/cadastro-escola-parceira</td></tr>
+      <tr><td>Entrar no painel</td><td>alotio.com.br/login</td></tr>
+      <tr><td>Gerenciar perfil</td><td>alotio.com.br/lojista/loja</td></tr>
+      <tr><td>Gerenciar promoções</td><td>alotio.com.br/lojista/produtos</td></tr>
+      <tr><td>Consultar ou assinar plano</td><td>alotio.com.br/lojista/plano</td></tr>
+    </table>
+
+    <h3>Fechamento sugerido</h3>
+    <div class="script">
+      “Podemos criar a conta gratuita agora e montar o perfil inicial da escola. Depois que vocês visualizarem a página no ar, avaliamos o Premium para ampliar as publicações e ganhar destaque na página inicial.”
+    </div>
+
+    <div class="callout green">
+      Venda o que já existe e pode ser demonstrado. A clareza da página, a facilidade para publicar e o contato direto são argumentos mais fortes do que estimativas sem histórico.
+    </div>
+
+    <p class="small" style="margin-top:30px">Documento preparado para a equipe comercial do Alô Tio. Revisão recomendada sempre que preços, limites ou recursos dos planos forem alterados.</p>
+    <div class="footer"><span>Manual comercial · Escolas Parceiras</span><span>7</span></div>
+  </section>
+</body>
+</html>
