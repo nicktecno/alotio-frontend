@@ -3,6 +3,7 @@ import Link from 'next/link';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import FeaturedStores from '@/components/FeaturedStores';
+import PartnerSchoolsCarousel from '@/components/PartnerSchoolsCarousel';
 import ProductCarousel from '@/components/ProductCarousel';
 import AdSlot from '@/components/AdSlot';
 import { SEO_SITE_DESCRIPTION, SEO_SITE_TITLE } from '@/lib/seo-copy';
@@ -183,6 +184,8 @@ export default function Home() {
         />
 
         <FeaturedStores />
+
+        <PartnerSchoolsCarousel />
 
         <ProductCarousel
           type="VAN"

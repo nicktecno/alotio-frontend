@@ -147,7 +147,9 @@ export default function LojaSettingsPage() {
 
   return (
     <div className="max-w-2xl">
-      <h1 className="text-2xl font-bold text-primary-900 mb-6">Minha Loja</h1>
+      <h1 className="text-2xl font-bold text-primary-900 mb-6">
+        {store.type === 'ESCOLA' ? 'Perfil da escola' : 'Minha Loja'}
+      </h1>
 
       <div className="bg-white border border-gray-200 rounded-xl p-6 shadow-sm mb-6 flex items-center gap-4">
         <div className="w-20 h-20 rounded-lg bg-gray-100 overflow-hidden flex items-center justify-center shrink-0">
@@ -188,7 +190,7 @@ export default function LojaSettingsPage() {
       >
         <div>
           <label className="block text-sm font-medium text-gray-700 mb-1">
-            Nome da loja
+            {store.type === 'ESCOLA' ? 'Nome da escola' : 'Nome da loja'}
           </label>
           <input
             value={form.displayName}
@@ -209,6 +211,7 @@ export default function LojaSettingsPage() {
           >
             <option value="VAN">Vans / veículos</option>
             <option value="PECAS">Peças e acessórios</option>
+            <option value="ESCOLA">Escola parceira</option>
           </select>
         </div>
         <div className="grid sm:grid-cols-2 gap-4">

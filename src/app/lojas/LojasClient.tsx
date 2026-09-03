@@ -85,7 +85,10 @@ export default function LojasClient() {
   const [cityId, setCityId] = useState('');
 
   useEffect(() => {
-    api.marketplaceFeatured(6).then(setFeatured).catch(() => setFeatured([]));
+    api
+      .marketplaceFeatured(6, { excludeType: 'ESCOLA' })
+      .then(setFeatured)
+      .catch(() => setFeatured([]));
     (api.getStates(true) as Promise<State[]>)
       .then(setStates)
       .catch(() => setStates([]));
@@ -106,7 +109,7 @@ export default function LojasClient() {
   const load = useCallback(async () => {
     setLoading(true);
     try {
-      const params: Record<string, string> = { limit: '24' };
+      const params: Record<string, string> = { limit: '24', excludeType: 'ESCOLA' };
       if (type) params.type = type;
       if (search) params.search = search;
       if (cityId) params.cityId = cityId;

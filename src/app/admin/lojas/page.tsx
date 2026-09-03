@@ -89,6 +89,7 @@ export default function AdminLojasPage() {
           <option value="">Todos os tipos</option>
           <option value="VAN">Vans</option>
           <option value="PECAS">Peças</option>
+          <option value="ESCOLA">Escolas parceiras</option>
         </select>
         <select
           value={plan}
@@ -139,7 +140,7 @@ export default function AdminLojasPage() {
                   )}
                 </div>
                 <p className="text-sm text-gray-500">
-                  {s.type === 'VAN' ? 'Vans' : 'Peças'} ·{' '}
+                  {s.type === 'VAN' ? 'Vans' : s.type === 'PECAS' ? 'Peças' : 'Escola parceira'} ·{' '}
                   {s._count?.products ?? 0} anúncio(s)
                   {s.user?.email ? ` · ${s.user.email}` : ''}
                 </p>

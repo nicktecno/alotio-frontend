@@ -4,7 +4,7 @@ import { useCallback, useEffect, useRef, useState } from 'react';
 import toast from 'react-hot-toast';
 import { api, assetUrl } from '@/lib/api';
 import { compressImage } from '@/lib/compressImage';
-import type { Product } from '@/types';
+import type { Product, StoreType } from '@/types';
 
 function formatPrice(cents: number | null): string {
   if (cents == null) return 'Sob consulta';
@@ -59,6 +59,7 @@ function parseCsv(text: string): string[][] {
 
 export default function ProdutosPage() {
   const [products, setProducts] = useState<Product[]>([]);
+  const [storeType, setStoreType] = useState<StoreType | null>(null);
   const [loading, setLoading] = useState(true);
   const [showForm, setShowForm] = useState(false);
   const [saving, setSaving] = useState(false);
@@ -76,8 +77,12 @@ export default function ProdutosPage() {
   const load = useCallback(async () => {
     setLoading(true);
     try {
-      const res = await api.listMyProducts({ limit: '100' });
-      setProducts(res.data);
+      const [productsResponse, storeResponse] = await Promise.all([
+        api.listMyProducts({ limit: '100' }),
+        api.getMyStore(),
+      ]);
+      setProducts(productsResponse.data);
+      setStoreType(storeResponse.store?.type ?? null);
     } catch (err) {
       toast.error(err instanceof Error ? err.message : 'Erro ao carregar.');
     } finally {
@@ -96,10 +101,12 @@ export default function ProdutosPage() {
     return Number.isFinite(n) ? Math.round(n * 100) : undefined;
   };
 
+  const isSchool = storeType === 'ESCOLA';
+
   const handleCreate = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!form.title.trim()) {
-      toast.error('Informe o título do anúncio.');
+      toast.error(`Informe o título ${isSchool ? 'da promoção' : 'do anúncio'}.`);
       return;
     }
     setSaving(true);
@@ -110,7 +117,7 @@ export default function ProdutosPage() {
         priceCents: priceToCents(form.price),
         category: form.category.trim() || undefined,
       });
-      toast.success('Anúncio publicado!');
+      toast.success(isSchool ? 'Promoção publicada!' : 'Anúncio publicado!');
       setForm({ title: '', description: '', price: '', category: '' });
       setShowForm(false);
       await load();
@@ -167,10 +174,10 @@ export default function ProdutosPage() {
   };
 
   const remove = async (p: Product) => {
-    if (!confirm(`Excluir o anúncio "${p.title}"?`)) return;
+    if (!confirm(`Excluir ${isSchool ? 'a promoção' : 'o anúncio'} "${p.title}"?`)) return;
     try {
       await api.deleteProduct(p.id);
-      toast.success('Anúncio excluído.');
+      toast.success(isSchool ? 'Promoção excluída.' : 'Anúncio excluído.');
       await load();
     } catch (err) {
       toast.error(err instanceof Error ? err.message : 'Erro ao excluir.');
@@ -201,7 +208,9 @@ export default function ProdutosPage() {
   return (
     <div>
       <div className="flex items-center justify-between flex-wrap gap-3 mb-6">
-        <h1 className="text-2xl font-bold text-primary-900">Meus Anúncios</h1>
+        <h1 className="text-2xl font-bold text-primary-900">
+          {isSchool ? 'Promoções da escola' : 'Meus Anúncios'}
+        </h1>
         <div className="flex gap-2">
           <button
             onClick={() => csvRef.current?.click()}
@@ -225,14 +234,14 @@ export default function ProdutosPage() {
             onClick={() => setShowForm((s) => !s)}
             className="bg-primary hover:bg-primary-600 text-white px-4 py-2 rounded-lg text-sm font-semibold transition"
           >
-            + Novo anúncio
+            {isSchool ? '+ Nova promoção' : '+ Novo anúncio'}
           </button>
         </div>
       </div>
 
       <p className="text-xs text-gray-500 mb-4">
         CSV: colunas <code>título, descrição, preço, categoria</code> (uma linha
-        por anúncio). O preço é opcional.
+        por {isSchool ? 'promoção' : 'anúncio'}). O preço é opcional.
       </p>
 
       {showForm && (
@@ -291,7 +300,7 @@ export default function ProdutosPage() {
             disabled={saving}
             className="bg-primary hover:bg-primary-600 text-white px-5 py-2.5 rounded-lg font-semibold transition disabled:opacity-60"
           >
-            {saving ? 'Publicando…' : 'Publicar anúncio'}
+            {saving ? 'Publicando…' : isSchool ? 'Publicar promoção' : 'Publicar anúncio'}
           </button>
         </form>
       )}
@@ -300,7 +309,7 @@ export default function ProdutosPage() {
         <p className="text-gray-500">Carregando…</p>
       ) : products.length === 0 ? (
         <p className="text-gray-600">
-          Você ainda não tem anúncios. Crie o primeiro acima.
+          Você ainda não tem {isSchool ? 'promoções' : 'anúncios'}. Crie a primeira publicação acima.
         </p>
       ) : (
         <div className="space-y-3">

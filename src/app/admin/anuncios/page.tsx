@@ -129,7 +129,7 @@ export default function AdminAnunciosPage() {
                   />
                 ) : (
                   <span className="text-2xl text-gray-300">
-                    {p.store.type === 'VAN' ? '🚐' : '🔧'}
+                    {p.store.type === 'VAN' ? '🚐' : p.store.type === 'PECAS' ? '🔧' : '🏫'}
                   </span>
                 )}
               </div>

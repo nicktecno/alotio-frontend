@@ -660,8 +660,15 @@ export const api = {
       `/marketplace/stores${qs ? `?${qs}` : ''}`,
     );
   },
-  marketplaceFeatured: (limit = 6) =>
-    publicRequest<Store[]>(`/marketplace/featured?limit=${limit}`),
+  marketplaceFeatured: (
+    limit = 6,
+    filters?: { type?: StoreType; excludeType?: StoreType },
+  ) => {
+    const params = new URLSearchParams({ limit: String(limit) });
+    if (filters?.type) params.set('type', filters.type);
+    if (filters?.excludeType) params.set('excludeType', filters.excludeType);
+    return publicRequest<Store[]>(`/marketplace/featured?${params}`);
+  },
   marketplaceProducts: (type: StoreType, limit = 12) =>
     publicRequest<
       Array<{

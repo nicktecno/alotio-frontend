@@ -5,8 +5,8 @@ import { usePathname } from 'next/navigation';
 
 const links = [
   { href: '/lojista', label: 'Visão Geral', icon: '📊' },
-  { href: '/lojista/produtos', label: 'Meus Anúncios', icon: '🏷️' },
-  { href: '/lojista/loja', label: 'Minha Loja', icon: '🏪' },
+  { href: '/lojista/produtos', label: 'Publicações', icon: '🏷️' },
+  { href: '/lojista/loja', label: 'Perfil do anunciante', icon: '🏪' },
   { href: '/lojista/plano', label: 'Plano', icon: '⭐' },
 ] as const;
 

@@ -10,7 +10,7 @@ export default function FeaturedStores() {
 
   useEffect(() => {
     api
-      .marketplaceFeatured(6)
+      .marketplaceFeatured(6, { excludeType: 'ESCOLA' })
       .then(setStores)
       .catch(() => setStores([]));
   }, []);

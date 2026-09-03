@@ -29,6 +29,9 @@ export default function LojistaOverviewPage() {
   }, []);
 
   useEffect(() => {
+    if (new URLSearchParams(window.location.search).get('tipo') === 'ESCOLA') {
+      setType('ESCOLA');
+    }
     load();
   }, [load]);
 
@@ -45,7 +48,11 @@ export default function LojistaOverviewPage() {
         type,
         whatsapp: whatsapp.trim() || undefined,
       });
-      toast.success('Loja criada! Agora publique seus anúncios.');
+      toast.success(
+        type === 'ESCOLA'
+          ? 'Escola criada! Agora cadastre suas promoções.'
+          : 'Loja criada! Agora publique seus anúncios.',
+      );
       await load();
     } catch (err) {
       toast.error(err instanceof Error ? err.message : 'Erro ao criar loja.');
@@ -97,6 +104,7 @@ export default function LojistaOverviewPage() {
             >
               <option value="VAN">Vans / veículos</option>
               <option value="PECAS">Peças e acessórios</option>
+              <option value="ESCOLA">Escola parceira</option>
             </select>
           </div>
           <div>
@@ -156,16 +164,16 @@ export default function LojistaOverviewPage() {
         <div className="bg-white border border-gray-200 rounded-xl p-5 shadow-sm">
           <p className="text-sm text-gray-500">Tipo</p>
           <p className="text-2xl font-bold text-primary-900">
-            {store.type === 'VAN' ? 'Vans' : 'Peças'}
+            {store.type === 'VAN' ? 'Vans' : store.type === 'PECAS' ? 'Peças' : 'Escola'}
           </p>
         </div>
         <div className="bg-white border border-gray-200 rounded-xl p-5 shadow-sm">
           <p className="text-sm text-gray-500">Página pública</p>
           <Link
-            href={`/lojas/${store.slug}`}
+            href={store.type === 'ESCOLA' ? `/escolas-parceiras/${store.slug}` : `/lojas/${store.slug}`}
             className="text-primary font-semibold hover:underline break-all"
           >
-            /lojas/{store.slug}
+            {store.type === 'ESCOLA' ? '/escolas-parceiras/' : '/lojas/'}{store.slug}
           </Link>
         </div>
       </div>
@@ -173,11 +181,11 @@ export default function LojistaOverviewPage() {
       {limit != null && activeCount >= limit && (
         <div className="bg-amber-50 border border-amber-200 rounded-xl p-4 mb-6">
           <p className="text-sm text-amber-800">
-            Você atingiu o limite de {limit} anúncios ativos do plano gratuito.{' '}
+            Você atingiu o limite de {limit} {store.type === 'ESCOLA' ? 'promoções' : 'anúncios'} ativos do plano gratuito.{' '}
             <Link href="/lojista/plano" className="font-semibold underline">
               Faça upgrade para o Premium
             </Link>{' '}
-            e tenha anúncios ilimitados + destaque.
+            e tenha publicações ilimitadas + destaque.
           </p>
         </div>
       )}
@@ -186,7 +194,7 @@ export default function LojistaOverviewPage() {
         <div className="bg-blue-50 border border-blue-200 rounded-xl p-4 mb-6">
           <p className="text-sm text-blue-800">
             Você ainda não definiu as <strong>regiões que atende</strong>. Sem
-            isso, sua loja não aparece quando os clientes filtram por estado e
+            isso, {store.type === 'ESCOLA' ? 'sua escola' : 'sua loja'} não aparece quando os clientes filtram por estado e
             cidade.{' '}
             <Link href="/lojista/loja" className="font-semibold underline">
               Definir regiões
@@ -201,13 +209,13 @@ export default function LojistaOverviewPage() {
           href="/lojista/produtos"
           className="bg-primary hover:bg-primary-600 text-white px-5 py-2.5 rounded-lg font-semibold transition"
         >
-          Gerenciar anúncios
+          {store.type === 'ESCOLA' ? 'Gerenciar promoções' : 'Gerenciar anúncios'}
         </Link>
         <Link
           href="/lojista/loja"
           className="bg-white border border-gray-300 text-gray-700 hover:bg-gray-50 px-5 py-2.5 rounded-lg font-semibold transition"
         >
-          Editar dados da loja
+          {store.type === 'ESCOLA' ? 'Editar perfil da escola' : 'Editar dados da loja'}
         </Link>
       </div>
     </div>
