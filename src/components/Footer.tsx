@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import CookiePreferencesButton from '@/components/CookiePreferencesButton';
 
 export default function Footer() {
   return (
@@ -22,6 +23,28 @@ export default function Footer() {
             >
               Fale Conosco
             </Link>
+            <span className="text-primary-700 select-none hidden sm:inline" aria-hidden>
+              |
+            </span>
+            <Link href="/sobre" className="text-primary-200 hover:text-white transition">
+              Sobre
+            </Link>
+            <span className="text-primary-700 select-none hidden sm:inline" aria-hidden>
+              |
+            </span>
+            <Link href="/privacidade" className="text-primary-200 hover:text-white transition">
+              Privacidade
+            </Link>
+            <span className="text-primary-700 select-none hidden sm:inline" aria-hidden>
+              |
+            </span>
+            <Link href="/termos-de-uso" className="text-primary-200 hover:text-white transition">
+              Termos de Uso
+            </Link>
+            <span className="text-primary-700 select-none hidden sm:inline" aria-hidden>
+              |
+            </span>
+            <CookiePreferencesButton />
             <span className="text-primary-700 select-none hidden sm:inline" aria-hidden>
               |
             </span>

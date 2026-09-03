@@ -1,6 +1,7 @@
 'use client';
 
 import { useState } from 'react';
+import Link from 'next/link';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import { api } from '@/lib/api';
@@ -135,6 +136,14 @@ export default function ContatoPage() {
             >
               {loading ? 'Enviando...' : 'Enviar mensagem'}
             </button>
+            <p className="text-xs leading-5 text-gray-500">
+              Ao enviar, você concorda com o tratamento desses dados para responder à solicitação,
+              conforme a nossa{' '}
+              <Link href="/privacidade" className="font-medium text-primary hover:underline">
+                Política de Privacidade
+              </Link>
+              .
+            </p>
           </form>
         )}
 

@@ -82,8 +82,8 @@ export default function Home() {
                 </h1>
                 <p className="mt-4 text-lg text-primary-100 max-w-xl">
                   Busque por escola, cidade ou bairro e encontre van escolar, motorista e tio da
-                  van verificados — o jeito mais fácil de encontrar transporte escolar com
-                  segurança.
+                  van cadastrados. Antes de contratar, confirme diretamente as credenciais,
+                  autorizações, condições do veículo e referências do profissional.
                 </p>
                 <div className="mt-8 flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
                   <Link

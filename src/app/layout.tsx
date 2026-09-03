@@ -2,8 +2,7 @@ import type { Metadata } from 'next';
 import { Poppins, Rajdhani, Archivo } from 'next/font/google';
 import './globals.css';
 import Providers from '@/components/Providers';
-import GoogleAnalytics from '@/components/GoogleAnalytics';
-import AdSense from '@/components/AdSense';
+import CookieConsent from '@/components/CookieConsent';
 import { organizationSameAsUrls } from '@/lib/seo-env';
 import { SEO_CORE_KEYWORDS } from '@/lib/seo-keywords';
 import { seoKeywordsFromRegisteredCities } from '@/lib/seo-city-keywords';
@@ -182,8 +181,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         />
       </head>
       <body className={`${poppins.variable} ${rajdhani.variable} ${archivo.variable} font-sans antialiased`}>
-        <GoogleAnalytics />
-        <AdSense />
+        <CookieConsent />
         <Providers>{children}</Providers>
       </body>
     </html>
