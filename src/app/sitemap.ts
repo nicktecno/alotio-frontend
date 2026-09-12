@@ -2,9 +2,8 @@ import type { MetadataRoute } from 'next';
 import {
   fetchAllApprovedTioIds,
   fetchAllCitiesWithTios,
-  fetchNeighborhoodsForCity,
 } from '@/lib/seo-transporte-api';
-import { neighborhoodSlug } from '@/lib/slug';
+import { ARTICLES } from '@/lib/articles-data';
 
 const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://alotio.com.br';
 
@@ -79,7 +78,20 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       changeFrequency: 'monthly',
       priority: 0.5,
     },
+    {
+      url: `${siteUrl}/guias`,
+      lastModified: new Date(),
+      changeFrequency: 'weekly',
+      priority: 0.9,
+    },
   ];
+
+  const guiaPages: MetadataRoute.Sitemap = ARTICLES.map((a) => ({
+    url: `${siteUrl}/guias/${a.slug}`,
+    lastModified: new Date(a.updatedAt),
+    changeFrequency: 'monthly' as const,
+    priority: 0.85,
+  }));
 
   const [tioIds, citiesWithTios] = await Promise.all([
     fetchAllApprovedTioIds(),
@@ -97,30 +109,13 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     url: `${siteUrl}/transporte-escolar/${c.slug}`,
     lastModified: new Date(),
     changeFrequency: 'monthly' as const,
-    priority: 0.72,
+    priority: 0.75,
   }));
-
-  const transporteBairroPages: MetadataRoute.Sitemap = [];
-  const chunk = 12;
-  for (let i = 0; i < citiesWithTios.length; i += chunk) {
-    const slice = citiesWithTios.slice(i, i + chunk);
-    const batches = await Promise.all(slice.map((c) => fetchNeighborhoodsForCity(c.id)));
-    slice.forEach((c, j) => {
-      for (const n of batches[j] ?? []) {
-        transporteBairroPages.push({
-          url: `${siteUrl}/transporte-escolar/${c.slug}/bairro/${neighborhoodSlug(n.name)}`,
-          lastModified: new Date(),
-          changeFrequency: 'monthly' as const,
-          priority: 0.55,
-        });
-      }
-    });
-  }
 
   return [
     ...staticPages,
+    ...guiaPages,
     ...transporteCidadePages,
-    ...transporteBairroPages,
     ...tioPages,
   ];
 }

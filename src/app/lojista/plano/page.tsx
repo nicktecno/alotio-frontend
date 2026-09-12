@@ -4,7 +4,7 @@ import { Suspense, useCallback, useEffect, useState } from 'react';
 import { useSearchParams } from 'next/navigation';
 import toast from 'react-hot-toast';
 import { api } from '@/lib/api';
-import type { StorePlan } from '@/types';
+import type { StorePlan, StoreType } from '@/types';
 
 const FREE_LIMIT = 20;
 
@@ -34,6 +34,7 @@ export default function LojistaPlanoPage() {
 function PlanoContent() {
   const searchParams = useSearchParams();
   const [plan, setPlan] = useState<StorePlan>('FREE');
+  const [storeType, setStoreType] = useState<StoreType | null>(null);
   const [sub, setSub] = useState<{
     currentPeriodEnd: string;
     cancelAtPeriodEnd: boolean;
@@ -47,6 +48,7 @@ function PlanoContent() {
     try {
       const res = await api.getMyStoreSubscription();
       setPlan(res.plan);
+      setStoreType(res.storeType);
       setSub(res.subscription);
       setPlans(res.plans ?? []);
     } catch (err) {
@@ -114,6 +116,7 @@ function PlanoContent() {
   if (loading) return <p className="text-gray-500">Carregando…</p>;
 
   const isPremium = plan === 'PREMIUM';
+  const isSchool = storeType === 'ESCOLA';
   const monthly = plans.find((p) => p.interval === 'monthly');
   const yearly = plans.find((p) => p.interval === 'yearly');
 
@@ -153,8 +156,15 @@ function PlanoContent() {
         </div>
       )}
 
-      <div className="grid sm:grid-cols-3 gap-4">
-        <div
+      {isSchool && !isPremium && (
+        <div className="bg-amber-50 border border-amber-300 rounded-xl p-5 mb-6">
+          <h2 className="font-bold text-primary-900">Ative a página da escola</h2>
+          <p className="text-sm text-gray-700 mt-1">Não há plano gratuito para escolas parceiras. Escolha uma assinatura para publicar até 20 promoções e aparecer no site.</p>
+        </div>
+      )}
+
+      <div className={`grid gap-4 ${isSchool ? 'sm:grid-cols-2' : 'sm:grid-cols-3'}`}>
+        {!isSchool && <div
           className={`rounded-xl p-6 border ${
             isPremium ? 'border-gray-200 bg-white' : 'border-primary-300 bg-primary-50'
           }`}
@@ -166,7 +176,7 @@ function PlanoContent() {
             <li>✓ Página pública da loja</li>
             <li>✗ Sem destaque na home</li>
           </ul>
-        </div>
+        </div>}
 
         <div
           className={`rounded-xl p-6 border ${
@@ -179,7 +189,7 @@ function PlanoContent() {
             <span className="text-base font-normal text-gray-500">/mês</span>
           </p>
           <ul className="text-sm text-gray-600 mt-4 space-y-2">
-            <li>✓ Anúncios ilimitados</li>
+            <li>✓ {isSchool ? 'Até 20 publicações ativas' : 'Anúncios ilimitados'}</li>
             <li>✓ Destaque na home e buscas</li>
             <li>✓ Selo Premium</li>
           </ul>
@@ -210,7 +220,7 @@ function PlanoContent() {
             <span className="text-base font-normal text-gray-500">/ano</span>
           </p>
           <ul className="text-sm text-gray-600 mt-4 space-y-2">
-            <li>✓ Tudo do mensal</li>
+            <li>✓ {isSchool ? 'Até 20 publicações ativas' : 'Tudo do mensal'}</li>
             <li>✓ Economize pagando anual</li>
             <li>✓ Sem preocupação mensal</li>
           </ul>

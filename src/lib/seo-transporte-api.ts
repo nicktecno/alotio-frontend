@@ -45,7 +45,7 @@ export async function fetchStateByUf(uf: string): Promise<StateSeo | null> {
 
 export async function fetchCityBySlug(slug: string): Promise<CitySeo | null> {
   const norm = slug.trim().toLowerCase();
-  let data = await fetchJson<CitySeo>(
+  const data = await fetchJson<CitySeo>(
     `${apiBase()}/cities/${encodeURIComponent(norm)}`,
   );
   if (data?.slug) return data;

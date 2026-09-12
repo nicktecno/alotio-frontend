@@ -38,7 +38,8 @@ export default function PartnerSchoolSignupPage() {
       <main className="flex-1 bg-[#fffdf7] flex items-center justify-center px-4 py-12">
         <div className="w-full max-w-md">
           <h1 className="text-3xl font-bold text-primary-900">Divulgue sua escola</h1>
-          <p className="text-gray-600 mt-2 mb-6">Crie o perfil da instituição e publique promoções, benefícios e campanhas de matrícula.</p>
+          <p className="text-gray-600 mt-2 mb-3">Crie o perfil da instituição e publique promoções, benefícios e campanhas de matrícula.</p>
+          <p className="text-sm font-semibold text-amber-800 bg-amber-50 border border-amber-200 rounded-lg px-4 py-3 mb-6">A divulgação de escolas é paga e permite até 20 publicações ativas.</p>
           <form onSubmit={submit} className="bg-white border border-amber-200 rounded-lg p-6 shadow-sm space-y-4">
             <label className="block text-sm font-medium text-gray-700">E-mail<input type="email" required value={email} onChange={(event) => setEmail(event.target.value)} className="mt-1 w-full bg-gray-50 border border-gray-300 px-4 py-2 rounded-lg focus:ring-2 focus:ring-primary outline-none" /></label>
             <label className="block text-sm font-medium text-gray-700">Senha<input type="password" required value={password} onChange={(event) => setPassword(event.target.value)} className="mt-1 w-full bg-gray-50 border border-gray-300 px-4 py-2 rounded-lg focus:ring-2 focus:ring-primary outline-none" /></label>

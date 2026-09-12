@@ -60,6 +60,10 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       `transporte escolar ${city.name}`,
     ],
     alternates: { canonical: `${siteUrl}${path}` },
+    robots: {
+      index: total > 0,
+      follow: true,
+    },
     openGraph: {
       title,
       description,
@@ -183,13 +187,28 @@ export default async function TransporteEscolarBairroPage({ params }: Props) {
           )}
         </p>
 
-        <div className="mb-8 max-w-none space-y-4 text-gray-700">
+        <div className="mb-8 max-w-none space-y-4 text-gray-700 leading-relaxed">
           <p>
-            Quem busca <strong>transporte escolar no bairro {match.name}</strong> costuma usar
-            também <strong>condutor escolar</strong>, <strong>van escolar</strong>,{' '}
-            <strong>motorista escolar</strong>, <strong>perua escolar</strong> ou{' '}
-            <strong>tio da van</strong>. No Alô Tio você encontra perfis verificados na região.
+            Quem busca <strong>transporte escolar no bairro {match.name}</strong> costuma procurar por{' '}
+            <strong>condutor escolar</strong>, <strong>van escolar</strong> ou{' '}
+            <strong>tio da van</strong> cadastrado para atender as escolas da região de {city.name}.
           </p>
+          <div className="rounded-xl border border-blue-100 bg-blue-50/60 p-5 text-sm text-gray-700">
+            <h3 className="font-heading font-bold text-blue-900 mb-2">
+              💡 Dicas para contratar transporte escolar no bairro {match.name}:
+            </h3>
+            <ul className="list-disc list-inside space-y-1.5 text-gray-600">
+              <li>Confirme se o condutor possui autorização e vistoria atualizadas no órgão de trânsito de {city.name}.</li>
+              <li>Verifique o tempo de trajeto entre sua residência no bairro {match.name} e a escola do seu filho.</li>
+              <li>Pergunte sobre a presença de monitor(a) acompanhante para crianças da educação infantil.</li>
+              <li>Exija sempre a formalização de contrato de prestação de serviços com cláusulas claras.</li>
+            </ul>
+            <p className="mt-3">
+              <Link href="/guias/como-escolher-transporte-escolar-seguro" className="font-semibold text-primary hover:underline">
+                Consulte nosso Guia Completo de Segurança no Transporte Escolar →
+              </Link>
+            </p>
+          </div>
         </div>
 
         {tiosResult.data.length > 0 && (
@@ -210,21 +229,31 @@ export default async function TransporteEscolarBairroPage({ params }: Props) {
           </section>
         )}
 
-        <Link
-          href={searchHref}
-          className="inline-block rounded-lg bg-primary px-6 py-3 font-semibold text-white transition hover:bg-primary-600"
-        >
-          Buscar por escola em {match.name}
-        </Link>
+        {tiosResult.data.length === 0 && (
+          <div className="mb-8 rounded-xl border border-gray-200 bg-white p-6 text-center">
+            <p className="text-gray-600 mb-4">
+              No momento ainda não há motoristas com cadastro verificado exclusivamente no bairro {match.name}.
+            </p>
+            <p className="text-sm text-gray-500">
+              Muitos condutores de {city.name} cobrem múltiplos bairros ao longo da rota. Recomendamos buscar diretamente pela escola do seu filho.
+            </p>
+          </div>
+        )}
 
-        <p className="mt-8 text-sm text-gray-500">
+        <div className="flex flex-wrap gap-3 mb-8">
+          <Link
+            href={searchHref}
+            className="inline-block rounded-lg bg-primary px-6 py-3 font-semibold text-white transition hover:bg-primary-600"
+          >
+            Buscar por escola em {city.name}
+          </Link>
           <Link
             href={`/transporte-escolar/${city.slug}`}
-            className="text-primary hover:underline"
+            className="inline-block rounded-lg border border-gray-300 bg-white px-6 py-3 font-medium text-gray-800 transition hover:bg-gray-50"
           >
-            Ver outros bairros em {city.name}
+            Ver todos os bairros em {city.name}
           </Link>
-        </p>
+        </div>
       </main>
       <Footer />
     </div>

@@ -2,11 +2,13 @@
 
 import { useCallback, useEffect, useState } from 'react';
 import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 import toast from 'react-hot-toast';
 import { api } from '@/lib/api';
 import type { MyStoreResponse, StoreType } from '@/types';
 
 export default function LojistaOverviewPage() {
+  const router = useRouter();
   const [data, setData] = useState<MyStoreResponse | null>(null);
   const [loading, setLoading] = useState(true);
 
@@ -50,10 +52,14 @@ export default function LojistaOverviewPage() {
       });
       toast.success(
         type === 'ESCOLA'
-          ? 'Escola criada! Agora cadastre suas promoções.'
+          ? 'Escola criada! Escolha o plano para ativar sua página.'
           : 'Loja criada! Agora publique seus anúncios.',
       );
-      await load();
+      if (type === 'ESCOLA') {
+        router.push('/lojista/plano');
+      } else {
+        await load();
+      }
     } catch (err) {
       toast.error(err instanceof Error ? err.message : 'Erro ao criar loja.');
     } finally {
@@ -71,12 +77,12 @@ export default function LojistaOverviewPage() {
     return (
       <div className="max-w-lg">
         <h1 className="text-2xl font-bold text-primary-900 mb-2">
-          Crie sua loja
+          {type === 'ESCOLA' ? 'Cadastre sua escola' : 'Crie sua loja'}
         </h1>
         <p className="text-gray-600 mb-6">
-          Anuncie vans ou peças no Alô Tio. Contas gratuitas publicam até 20
-          anúncios ativos; o plano Premium (R$ 29,90/mês) libera anúncios
-          ilimitados e destaque na home.
+          {type === 'ESCOLA'
+            ? 'Escolas parceiras precisam de assinatura ativa. O plano permite até 20 promoções e publicações ativas, com página pública e destaque na home.'
+            : 'Anuncie vans ou peças no Alô Tio. Contas gratuitas publicam até 20 anúncios ativos; o plano Premium libera anúncios ilimitados e destaque na home.'}
         </p>
         <form
           onSubmit={handleCreate}
@@ -84,12 +90,12 @@ export default function LojistaOverviewPage() {
         >
           <div>
             <label className="block text-sm font-medium text-gray-700 mb-1">
-              Nome da loja
+              {type === 'ESCOLA' ? 'Nome da escola' : 'Nome da loja'}
             </label>
             <input
               value={displayName}
               onChange={(e) => setDisplayName(e.target.value)}
-              placeholder="Ex.: Vans do João"
+              placeholder={type === 'ESCOLA' ? 'Ex.: Colégio Horizonte' : 'Ex.: Vans do João'}
               className="w-full bg-gray-50 border border-gray-300 px-4 py-2 rounded-lg focus:ring-2 focus:ring-primary outline-none"
             />
           </div>
@@ -123,7 +129,7 @@ export default function LojistaOverviewPage() {
             disabled={creating}
             className="w-full bg-primary hover:bg-primary-600 text-white px-4 py-2.5 rounded-lg font-semibold transition disabled:opacity-60"
           >
-            {creating ? 'Criando…' : 'Criar loja'}
+            {creating ? 'Criando…' : type === 'ESCOLA' ? 'Continuar para o plano' : 'Criar loja'}
           </button>
         </form>
       </div>
@@ -145,7 +151,7 @@ export default function LojistaOverviewPage() {
               : 'bg-gray-100 text-gray-600'
           }`}
         >
-          {isPremium ? '⭐ Premium' : 'Plano gratuito'}
+          {isPremium ? '⭐ Plano ativo' : store.type === 'ESCOLA' ? 'Aguardando assinatura' : 'Plano gratuito'}
         </span>
       </div>
 
@@ -181,11 +187,12 @@ export default function LojistaOverviewPage() {
       {limit != null && activeCount >= limit && (
         <div className="bg-amber-50 border border-amber-200 rounded-xl p-4 mb-6">
           <p className="text-sm text-amber-800">
-            Você atingiu o limite de {limit} {store.type === 'ESCOLA' ? 'promoções' : 'anúncios'} ativos do plano gratuito.{' '}
-            <Link href="/lojista/plano" className="font-semibold underline">
-              Faça upgrade para o Premium
-            </Link>{' '}
-            e tenha publicações ilimitadas + destaque.
+            {store.type === 'ESCOLA'
+              ? `Você atingiu o limite de ${limit} publicações ativas do plano da escola.`
+              : `Você atingiu o limite de ${limit} anúncios ativos do plano gratuito. `}
+            {store.type !== 'ESCOLA' && (
+              <><Link href="/lojista/plano" className="font-semibold underline">Faça upgrade para o Premium</Link> e tenha publicações ilimitadas + destaque.</>
+            )}
           </p>
         </div>
       )}

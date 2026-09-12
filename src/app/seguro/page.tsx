@@ -160,7 +160,7 @@ export default function SeguroPage() {
       </section>
 
       {/* VEÍCULOS ACEITOS */}
-      <section className="bg-[#111e2e] border-y border-white/6 py-8">
+      <section className="bg-[#0a1520] border-y border-white/6 py-8">
         <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex flex-col sm:flex-row items-center gap-4 sm:gap-8 justify-center text-center sm:text-left">
             <p className="text-sm font-bold text-gray-400 uppercase tracking-widest whitespace-nowrap">

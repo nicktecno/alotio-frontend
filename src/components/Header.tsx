@@ -58,6 +58,12 @@ export default function Header() {
               Escolas parceiras
             </Link>
             <Link
+              href="/guias"
+              className="text-primary-100 hover:text-white transition font-medium"
+            >
+              Guias & Dicas
+            </Link>
+            <Link
               href="/seguro"
               className="flex items-center gap-1.5 text-orange-400 hover:text-orange-300 transition font-semibold"
             >

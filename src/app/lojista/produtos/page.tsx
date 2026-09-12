@@ -1,6 +1,7 @@
 'use client';
 
 import { useCallback, useEffect, useRef, useState } from 'react';
+import Link from 'next/link';
 import toast from 'react-hot-toast';
 import { api, assetUrl } from '@/lib/api';
 import { compressImage } from '@/lib/compressImage';
@@ -60,6 +61,7 @@ function parseCsv(text: string): string[][] {
 export default function ProdutosPage() {
   const [products, setProducts] = useState<Product[]>([]);
   const [storeType, setStoreType] = useState<StoreType | null>(null);
+  const [isPremium, setIsPremium] = useState(false);
   const [loading, setLoading] = useState(true);
   const [showForm, setShowForm] = useState(false);
   const [saving, setSaving] = useState(false);
@@ -83,6 +85,7 @@ export default function ProdutosPage() {
       ]);
       setProducts(productsResponse.data);
       setStoreType(storeResponse.store?.type ?? null);
+      setIsPremium(storeResponse.isPremium ?? false);
     } catch (err) {
       toast.error(err instanceof Error ? err.message : 'Erro ao carregar.');
     } finally {
@@ -102,6 +105,7 @@ export default function ProdutosPage() {
   };
 
   const isSchool = storeType === 'ESCOLA';
+  const schoolNeedsPayment = isSchool && !isPremium;
 
   const handleCreate = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -211,7 +215,7 @@ export default function ProdutosPage() {
         <h1 className="text-2xl font-bold text-primary-900">
           {isSchool ? 'Promoções da escola' : 'Meus Anúncios'}
         </h1>
-        <div className="flex gap-2">
+        {!schoolNeedsPayment && <div className="flex gap-2">
           <button
             onClick={() => csvRef.current?.click()}
             disabled={importing}
@@ -236,15 +240,27 @@ export default function ProdutosPage() {
           >
             {isSchool ? '+ Nova promoção' : '+ Novo anúncio'}
           </button>
-        </div>
+        </div>}
       </div>
 
-      <p className="text-xs text-gray-500 mb-4">
+      {schoolNeedsPayment && (
+        <div className="bg-amber-50 border border-amber-300 rounded-xl p-6 mb-6">
+          <h2 className="text-lg font-bold text-primary-900">Assinatura necessária</h2>
+          <p className="text-sm text-gray-700 mt-2">
+            Escolas parceiras precisam de um plano ativo para publicar promoções e aparecer no site. O plano permite até 20 publicações ativas.
+          </p>
+          <Link href="/lojista/plano" className="inline-block mt-4 bg-primary hover:bg-primary-600 text-white px-5 py-2.5 rounded-lg font-semibold transition">
+            Escolher plano
+          </Link>
+        </div>
+      )}
+
+      {!schoolNeedsPayment && <p className="text-xs text-gray-500 mb-4">
         CSV: colunas <code>título, descrição, preço, categoria</code> (uma linha
         por {isSchool ? 'promoção' : 'anúncio'}). O preço é opcional.
-      </p>
+      </p>}
 
-      {showForm && (
+      {!schoolNeedsPayment && showForm && (
         <form
           onSubmit={handleCreate}
           className="bg-white border border-gray-200 rounded-xl p-6 shadow-sm space-y-4 mb-6"

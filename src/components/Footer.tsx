@@ -32,6 +32,12 @@ export default function Footer() {
             <span className="text-primary-700 select-none hidden sm:inline" aria-hidden>
               |
             </span>
+            <Link href="/guias" className="text-primary-200 hover:text-white transition">
+              Guias & Dicas
+            </Link>
+            <span className="text-primary-700 select-none hidden sm:inline" aria-hidden>
+              |
+            </span>
             <Link href="/privacidade" className="text-primary-200 hover:text-white transition">
               Privacidade
             </Link>

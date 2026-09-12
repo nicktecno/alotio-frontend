@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Manual Comercial - Lojas | Alô Tio</title>
+  <style>
+    :root { --primary:#165c55; --accent:#fcc434; --ink:#172033; --muted:#566074; --soft:#edf8f6; --warm:#fff8e8; --line:#d4e4e1; }
+    * { box-sizing:border-box; }
+    html,body { margin:0; padding:0; }
+    body { background:#e5eceb; color:var(--ink); font:11.5px/1.45 "Avenir Next","Segoe UI",sans-serif; }
+    .page { position:relative; width:210mm; min-height:297mm; margin:0 auto 12px; padding:17mm 18mm 16mm; overflow:hidden; background:#fff; page-break-after:always; }
+    .page:last-child { page-break-after:auto; }
+    .cover { display:flex; min-height:297mm; flex-direction:column; justify-content:space-between; padding:22mm 20mm; color:#fff; background:var(--primary); }
+    .brand { font-size:25px; font-weight:900; } .brand span { color:var(--accent); }
+    .eyebrow { margin:0 0 9px; color:var(--primary); font-size:10px; font-weight:800; letter-spacing:1.1px; text-transform:uppercase; }
+    .cover .eyebrow { color:var(--accent); }
+    h1,h2,h3 { margin-top:0; letter-spacing:0; } h1 { max-width:150mm; margin-bottom:12px; font-size:35px; line-height:1.08; }
+    h2 { margin-bottom:13px; color:var(--primary); font-size:23px; line-height:1.15; } h3 { margin:16px 0 6px; color:var(--primary); font-size:14px; }
+    p { margin:0 0 9px; } ul,ol { margin:6px 0 11px; padding-left:20px; } li { margin-bottom:5px; }
+    .lead { max-width:145mm; font-size:16px; line-height:1.5; } .cover-note { max-width:125mm; color:#d9efec; font-size:12px; }
+    .tag { display:inline-block; padding:5px 10px; border-radius:4px; color:#332600; background:var(--accent); font-size:10px; font-weight:800; text-transform:uppercase; }
+    .rule { width:34mm; height:4px; margin:0 0 16px; background:var(--accent); }
+    .grid-2 { display:grid; grid-template-columns:1fr 1fr; gap:12px; } .grid-3 { display:grid; grid-template-columns:repeat(3,1fr); gap:9px; }
+    .card { padding:12px; border:1px solid var(--line); border-radius:6px; background:#fff; break-inside:avoid; }
+    .card strong { display:block; margin-bottom:4px; color:var(--primary); font-size:12px; } .card p:last-child { margin-bottom:0; }
+    .callout { margin:12px 0; padding:11px 13px; border-left:4px solid #23877d; background:var(--soft); }
+    .callout.warm,.script { border-color:var(--accent); background:var(--warm); } .callout.green { border-color:#11734b; background:#eefaf5; }
+    .flow { display:grid; grid-template-columns:repeat(4,1fr); gap:7px; margin:14px 0; counter-reset:flow; }
+    .flow div { min-height:75px; padding:10px; border-top:4px solid var(--accent); background:var(--soft); counter-increment:flow; }
+    .flow div::before { display:block; margin-bottom:5px; color:var(--primary); font-size:17px; font-weight:900; content:counter(flow,decimal-leading-zero); }
+    table { width:100%; margin:10px 0 14px; border-collapse:collapse; } th,td { padding:8px 9px; border:1px solid var(--line); text-align:left; vertical-align:top; }
+    th { color:#fff; background:var(--primary); } tr:nth-child(even) td { background:#f6fbfa; }
+    .script { margin:9px 0; padding:11px 13px; border:1px solid #edd68f; border-radius:6px; font-size:12px; }
+    .route { padding:1px 5px; border-radius:3px; color:#fff; background:#252c3b; font:10px Menlo,monospace; }
+    .checklist { padding-left:0; list-style:none; } .checklist li { position:relative; padding-left:24px; }
+    .checklist li::before { position:absolute; top:1px; left:0; width:13px; height:13px; border:1.5px solid var(--primary); border-radius:2px; content:""; }
+    .footer { position:absolute; right:18mm; bottom:8mm; left:18mm; display:flex; justify-content:space-between; padding-top:5px; border-top:1px solid var(--line); color:#7b8393; font-size:9px; }
+    .small { color:var(--muted); font-size:9.5px; }
+    @media print { body { background:#fff; print-color-adjust:exact; -webkit-print-color-adjust:exact; } .page { margin:0; } }
+    @page { size:A4; margin:0; }
+  </style>
+</head>
+<body>
+  <section class="page cover">
+    <div class="brand">Alô <span>Tio</span></div>
+    <div><p class="eyebrow">Material de apoio ao vendedor</p><h1>Manual comercial para Lojas</h1><p class="lead">Como apresentar, demonstrar e vender a vitrine digital do Alô Tio para lojas de vans, peças e acessórios.</p><p style="margin-top:22px"><span class="tag">Edição setembro de 2026</span></p></div>
+    <p class="cover-note">Uso interno. Os valores e condições devem ser confirmados na plataforma antes de cada proposta comercial.</p>
+  </section>
+
+  <section class="page">
+    <p class="eyebrow">01 · Visão geral</p><h2>O que estamos vendendo?</h2><div class="rule"></div>
+    <p class="lead" style="font-size:14px">Uma vitrine especializada para empresas que querem vender a profissionais e famílias ligados ao transporte escolar.</p>
+    <div class="callout"><strong>Em uma frase:</strong> a empresa ganha uma página própria no Alô Tio para apresentar sua marca, anunciar veículos, peças e acessórios e receber contatos diretamente pelo WhatsApp.</div>
+    <h3>Onde a loja aparece</h3>
+    <div class="grid-2">
+      <div class="card"><strong>Catálogo de lojas</strong><p>A página <span class="route">/lojas</span> reúne empresas de vans, veículos, peças e acessórios.</p></div>
+      <div class="card"><strong>Busca por região</strong><p>O visitante pode localizar anunciantes por estado, cidade, nome e categoria.</p></div>
+      <div class="card"><strong>Página pública</strong><p>Logo, apresentação, regiões atendidas, contatos e catálogo de anúncios em endereço próprio.</p></div>
+      <div class="card"><strong>Contato direto</strong><p>O interessado pode conversar pelo WhatsApp informado pela própria empresa.</p></div>
+    </div>
+    <h3>Para quem faz sentido</h3>
+    <ul><li>Concessionárias e revendas de vans, micro-ônibus e veículos adaptados.</li><li>Lojas de peças, pneus, acessórios, equipamentos e itens de segurança.</li><li>Empresas que vendem para condutores e proprietários de transporte escolar.</li><li>Negócios que querem gerar contatos sem depender somente das redes sociais.</li></ul>
+    <div class="callout warm">O Alô Tio oferece exposição e contato direto, mas não participa da negociação, não recebe o pagamento da venda e não garante resultados comerciais.</div>
+    <div class="footer"><span>Manual comercial · Lojas</span><span>2</span></div>
+  </section>
+
+  <section class="page">
+    <p class="eyebrow">02 · Produto</p><h2>Como a plataforma funciona</h2><div class="rule"></div>
+    <div class="flow"><div><strong>A empresa cria a conta</strong><br />Seleciona vans ou peças e informa os dados iniciais.</div><div><strong>Monta a vitrine</strong><br />Adiciona logo, apresentação, contatos e regiões atendidas.</div><div><strong>Publica anúncios</strong><br />Inclui título, descrição, categoria, preço opcional e fotos.</div><div><strong>Recebe contatos</strong><br />O interessado conhece a oferta e chama a loja.</div></div>
+    <h3>Conteúdo que a loja pode divulgar</h3>
+    <table><tr><th>Área</th><th>Exemplos de uso</th></tr><tr><td>Veículos</td><td>Vans, micro-ônibus, seminovos, veículos adaptados e oportunidades de estoque.</td></tr><tr><td>Peças</td><td>Pneus, componentes mecânicos, elétrica, lataria e itens de manutenção.</td></tr><tr><td>Acessórios</td><td>Câmeras, rastreadores, bancos, comunicação visual e equipamentos de segurança.</td></tr><tr><td>Ofertas</td><td>Descontos, condições de pagamento, liquidação e novidades da empresa.</td></tr><tr><td>Fotos e contato</td><td>Imagens reais do produto e WhatsApp para negociação direta.</td></tr></table>
+    <h3>Planos disponíveis</h3>
+    <div class="grid-2"><div class="card"><strong>Gratuito</strong><ul><li>Página pública da loja.</li><li>Até 20 anúncios ativos.</li><li>Sem destaque na página inicial.</li></ul></div><div class="card"><strong>Premium</strong><ul><li>Anúncios ativos ilimitados.</li><li>Destaque na home e nas buscas.</li><li>Selo Premium.</li><li>Plano mensal exibido atualmente a partir de R$ 29,90.</li></ul></div></div>
+    <p class="small">O plano anual depende da configuração vigente. Sempre consulte a tela “Plano” antes de informar valores, descontos ou disponibilidade.</p>
+    <div class="footer"><span>Manual comercial · Lojas</span><span>3</span></div>
+  </section>
+
+  <section class="page">
+    <p class="eyebrow">03 · Demonstração</p><h2>Roteiro para apresentar ao cliente</h2><div class="rule"></div>
+    <h3>1. Comece pela experiência do comprador</h3>
+    <ol><li>Abra a home do Alô Tio e apresente o público da plataforma.</li><li>Acesse <span class="route">/lojas</span> e mostre as categorias vans e peças.</li><li>Demonstre os filtros por estado, cidade e nome da empresa.</li><li>Abra uma loja para mostrar apresentação, catálogo e formas de contato.</li><li>Abra um anúncio com fotos, descrição, preço e chamada para WhatsApp.</li></ol>
+    <h3>2. Mostre como a empresa administra</h3>
+    <ol><li>Acesse <span class="route">/lojista</span> e crie o perfil do anunciante.</li><li>Selecione “Vans / veículos” ou “Peças e acessórios”.</li><li>Em “Perfil do anunciante”, adicione logo, contatos, descrição e regiões.</li><li>Em “Meus anúncios”, publique um produto e envie fotos reais.</li><li>Em “Plano”, compare as modalidades gratuita, mensal e anual.</li></ol>
+    <h3>3. Termine com o resultado</h3>
+    <div class="script">“Sua empresa passa a ter uma vitrine própria dentro de um ambiente ligado ao transporte escolar. Vocês podem organizar os produtos, incluir fotos e preços e receber o interessado diretamente no WhatsApp. O cadastro gratuito permite começar com até 20 anúncios ativos, e o Premium amplia o catálogo e a visibilidade.”</div>
+    <div class="callout green"><strong>Boa demonstração:</strong> use um produto real, com fotos claras, descrição objetiva, localização e preço atualizado. Uma oferta completa deixa o valor da vitrine evidente.</div>
+    <h3>O que não prometer</h3>
+    <ul><li>Número garantido de vendas, contatos, cliques ou visualizações.</li><li>Primeira posição permanente ou exclusividade por região.</li><li>Aprovação, garantia ou inspeção dos produtos pelo Alô Tio.</li><li>Intermediação de pagamento, entrega, financiamento ou negociação.</li></ul>
+    <div class="footer"><span>Manual comercial · Lojas</span><span>4</span></div>
+  </section>
+
+  <section class="page">
+    <p class="eyebrow">04 · Venda</p><h2>Abordagem comercial e objeções</h2><div class="rule"></div>
+    <h3>Mensagem inicial sugerida</h3>
+    <div class="script">“Olá, [nome]. Sou [vendedor], do Alô Tio, plataforma voltada ao ecossistema de transporte escolar. Temos uma área em que lojas e revendas podem divulgar vans, peças e acessórios, montar um catálogo próprio e receber contatos diretamente pelo WhatsApp. Posso te mostrar em cinco minutos como funciona?”</div>
+    <h3>Perguntas para qualificar a oportunidade</h3>
+    <ul><li>Quais produtos têm maior prioridade de venda hoje?</li><li>A empresa atende somente a cidade ou também outras regiões?</li><li>Quantos itens vocês gostariam de manter anunciados?</li><li>Quem atualiza preços, fotos e disponibilidade do estoque?</li><li>O WhatsApp comercial está preparado para receber interessados?</li></ul>
+    <h3>Objeções frequentes</h3>
+    <table><tr><th>Objeção</th><th>Resposta recomendada</th></tr><tr><td>“Já vendemos pelas redes sociais.”</td><td>As redes continuam importantes. O Alô Tio acrescenta uma vitrine organizada em um ambiente ligado diretamente ao transporte escolar.</td></tr><tr><td>“Não sei se vai gerar venda.”</td><td>Não garantimos vendas. A proposta é ampliar a exposição e criar um novo canal de contato com um público especializado.</td></tr><tr><td>“Temos muitos produtos.”</td><td>O Premium permite anúncios ilimitados, facilitando a divulgação de um catálogo maior e de novas entradas no estoque.</td></tr><tr><td>“Quero testar primeiro.”</td><td>A modalidade gratuita permite publicar até 20 anúncios ativos e validar a operação antes de contratar mais exposição.</td></tr><tr><td>“Não temos tempo para atualizar.”</td><td>Comece pelos itens de maior interesse. O painel permite pausar, editar e substituir anúncios conforme o estoque mudar.</td></tr></table>
+    <div class="footer"><span>Manual comercial · Lojas</span><span>5</span></div>
+  </section>
+
+  <section class="page">
+    <p class="eyebrow">05 · Fechamento</p><h2>Cadastro, conteúdo e acompanhamento</h2><div class="rule"></div>
+    <h3>Checklist antes de publicar</h3>
+    <div class="grid-2"><ul class="checklist"><li>Nome comercial correto.</li><li>Logo em boa resolução.</li><li>Telefone, e-mail e WhatsApp revisados.</li><li>Cidades e regiões atendidas definidas.</li><li>Descrição objetiva da empresa.</li></ul><ul class="checklist"><li>Fotos reais e autorizadas.</li><li>Títulos e categorias corretos.</li><li>Preços e condições atualizados.</li><li>Estoque ou disponibilidade conferidos.</li><li>Contato testado.</li></ul></div>
+    <h3>Responsabilidades da empresa</h3>
+    <ul><li>Manter estoque, preços, condições, informações e contatos atualizados.</li><li>Ter autorização para usar marcas, textos e fotografias publicados.</li><li>Descrever corretamente estado, características e condições do produto.</li><li>Conduzir diretamente venda, pagamento, garantia e entrega.</li></ul>
+    <h3>Responsabilidades do vendedor</h3>
+    <ul><li>Apresentar o produto sem prometer resultados garantidos.</li><li>Confirmar preços e recursos na tela do plano antes da proposta.</li><li>Explicar a diferença entre visibilidade gratuita e Premium.</li><li>Orientar o cliente a usar imagens e descrições de qualidade.</li><li>Fazer retorno após o cadastro para conferir se a vitrine está completa.</li></ul>
+    <div class="callout warm"><strong>Atenção:</strong> o Alô Tio funciona como canal de divulgação. A loja é responsável pela veracidade do anúncio, atendimento, negociação, pagamento, garantia e entrega.</div>
+    <h3>Próximo passo sugerido</h3><p>Envie o endereço <strong>https://alotio.com.br/lojista</strong> e combine uma data para conferir a publicação dos primeiros produtos.</p>
+    <div class="footer"><span>Manual comercial · Lojas</span><span>6</span></div>
+  </section>
+
+  <section class="page">
+    <p class="eyebrow">06 · Consulta rápida</p><h2>Resumo para levar à reunião</h2><div class="rule"></div>
+    <div class="grid-3"><div class="card"><strong>Produto</strong><p>Vitrine para lojas de vans, veículos, peças e acessórios.</p></div><div class="card"><strong>Público</strong><p>Profissionais, empresas e famílias ligados ao transporte escolar.</p></div><div class="card"><strong>Conversão</strong><p>Contato direto pelo WhatsApp da empresa.</p></div><div class="card"><strong>Gratuito</strong><p>Página pública e até 20 anúncios ativos, sem destaque na home.</p></div><div class="card"><strong>Premium</strong><p>Anúncios ilimitados, selo e destaque na home e nas buscas.</p></div><div class="card"><strong>Operação</strong><p>A negociação e a venda acontecem diretamente com a loja.</p></div></div>
+    <h3>Links importantes</h3>
+    <table><tr><th>Finalidade</th><th>Endereço</th></tr><tr><td>Conhecer as lojas</td><td>alotio.com.br/lojas</td></tr><tr><td>Cadastrar uma loja</td><td>alotio.com.br/lojista</td></tr><tr><td>Entrar no painel</td><td>alotio.com.br/login</td></tr><tr><td>Gerenciar perfil</td><td>alotio.com.br/lojista/loja</td></tr><tr><td>Gerenciar anúncios</td><td>alotio.com.br/lojista/produtos</td></tr><tr><td>Consultar ou assinar plano</td><td>alotio.com.br/lojista/plano</td></tr></table>
+    <h3>Fechamento sugerido</h3>
+    <div class="script">“Podemos criar gratuitamente a página da empresa agora e publicar os primeiros produtos. Com até 20 anúncios ativos, vocês já apresentam o estoque e recebem contatos; quando precisarem de catálogo ilimitado e mais destaque, o Premium está disponível.”</div>
+    <div class="callout green">Venda o que pode ser demonstrado: vitrine organizada, público especializado, gestão simples dos anúncios e contato direto.</div>
+    <p class="small" style="margin-top:30px">Documento preparado para a equipe comercial do Alô Tio. Revise sempre que preços, limites ou recursos forem alterados.</p>
+    <div class="footer"><span>Manual comercial · Lojas</span><span>7</span></div>
+  </section>
+</body>
+</html>

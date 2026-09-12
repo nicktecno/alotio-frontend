@@ -758,6 +758,7 @@ export const api = {
     request<{
       isPremium: boolean;
       plan: StorePlan;
+      storeType: StoreType;
       subscription: { currentPeriodEnd: string; cancelAtPeriodEnd: boolean } | null;
       plans: Array<{
         interval: 'monthly' | 'yearly';
