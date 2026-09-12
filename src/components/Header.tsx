@@ -3,18 +3,26 @@
 import Link from 'next/link';
 import { useAuth } from '@/lib/auth';
 import { useEffect, useState } from 'react';
-import { useRouter } from 'next/navigation';
+import { useRouter, usePathname } from 'next/navigation';
 
 export default function Header() {
   const { user, logout, checkAuth, isLoading } = useAuth();
   const [loaded, setLoaded] = useState(false);
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const router = useRouter();
+  const pathname = usePathname();
 
   useEffect(() => {
     checkAuth().then(() => setLoaded(true));
   }, [checkAuth]);
 
+  // Fecha o menu mobile quando a rota mudar
+  useEffect(() => {
+    setIsMobileMenuOpen(false);
+  }, [pathname]);
+
   const handleLogout = async () => {
+    setIsMobileMenuOpen(false);
     await logout();
     router.push('/');
   };
@@ -27,10 +35,11 @@ export default function Header() {
         : '/dashboard';
 
   return (
-    <header className="bg-primary-700 shadow-md">
+    <header className="bg-primary-700 shadow-md sticky top-0 z-50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-16">
-          <Link href="/" className="flex items-center gap-2">
+          {/* Logo */}
+          <Link href="/" className="flex items-center gap-2 shrink-0">
             <img
               src="/logoAloTioVector.svg"
               alt="Alô Tio"
@@ -38,34 +47,35 @@ export default function Header() {
             />
           </Link>
 
+          {/* Desktop Navigation */}
           <nav className="hidden md:flex items-center gap-6">
             <Link
               href="/tios"
-              className="text-primary-100 hover:text-white transition font-medium"
+              className="text-primary-100 hover:text-white transition font-medium text-sm lg:text-base"
             >
               Encontrar transporte escolar
             </Link>
             <Link
               href="/lojas"
-              className="text-primary-100 hover:text-white transition font-medium"
+              className="text-primary-100 hover:text-white transition font-medium text-sm lg:text-base"
             >
               Lojas
             </Link>
             <Link
               href="/escolas-parceiras"
-              className="text-primary-100 hover:text-white transition font-medium"
+              className="text-primary-100 hover:text-white transition font-medium text-sm lg:text-base"
             >
               Escolas parceiras
             </Link>
             <Link
               href="/guias"
-              className="text-primary-100 hover:text-white transition font-medium"
+              className="text-primary-100 hover:text-white transition font-medium text-sm lg:text-base"
             >
               Guias & Dicas
             </Link>
             <Link
               href="/seguro"
-              className="flex items-center gap-1.5 text-orange-400 hover:text-orange-300 transition font-semibold"
+              className="flex items-center gap-1.5 text-orange-400 hover:text-orange-300 transition font-semibold text-sm lg:text-base"
             >
               🛡️ Proteção Veicular
             </Link>
@@ -76,21 +86,21 @@ export default function Header() {
                     {user.role === 'ADMIN' ? (
                       <Link
                         href="/admin"
-                        className="text-primary-100 hover:text-white transition font-medium"
+                        className="text-primary-100 hover:text-white transition font-medium text-sm lg:text-base"
                       >
                         Admin
                       </Link>
                     ) : (
                       <Link
                         href={panelHref}
-                        className="text-primary-100 hover:text-white transition font-medium"
+                        className="text-primary-100 hover:text-white transition font-medium text-sm lg:text-base"
                       >
                         Meu Painel
                       </Link>
                     )}
                     <button
                       onClick={handleLogout}
-                      className="text-primary-200 hover:text-red-300 transition font-medium cursor-pointer"
+                      className="text-primary-200 hover:text-red-300 transition font-medium cursor-pointer text-sm lg:text-base"
                     >
                       Sair
                     </button>
@@ -99,13 +109,13 @@ export default function Header() {
                   <>
                     <Link
                       href="/login"
-                      className="text-primary-100 hover:text-white transition font-medium"
+                      className="text-primary-100 hover:text-white transition font-medium text-sm lg:text-base"
                     >
                       Entrar
                     </Link>
                     <Link
                       href="/cadastro"
-                      className="bg-secondary hover:bg-secondary-600 text-white px-5 py-2 rounded-lg transition font-semibold"
+                      className="bg-secondary hover:bg-secondary-600 text-white px-4 py-2 rounded-lg transition font-semibold text-sm lg:text-base"
                     >
                       Cadastrar
                     </Link>
@@ -115,16 +125,122 @@ export default function Header() {
             )}
           </nav>
 
-          <div className="md:hidden">
+          {/* Mobile Actions: Botão de ação rápida + Botão Sanduíche */}
+          <div className="flex items-center gap-2 md:hidden">
             <Link
               href={user ? panelHref : '/login'}
-              className="bg-secondary hover:bg-secondary-600 text-white px-4 py-2 rounded-lg transition text-sm font-semibold"
+              className="bg-secondary hover:bg-secondary-600 text-white px-3 py-1.5 rounded-lg transition text-xs font-semibold"
             >
               {user ? 'Painel' : 'Entrar'}
             </Link>
+            <button
+              type="button"
+              onClick={() => setIsMobileMenuOpen((prev) => !prev)}
+              aria-label={isMobileMenuOpen ? 'Fechar menu' : 'Abrir menu de navegação'}
+              aria-expanded={isMobileMenuOpen}
+              className="text-primary-100 hover:text-white p-2 rounded-lg hover:bg-primary-600 focus:outline-none focus:ring-2 focus:ring-white/20 transition cursor-pointer"
+            >
+              {isMobileMenuOpen ? (
+                <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M6 18L18 6M6 6l12 12" />
+                </svg>
+              ) : (
+                <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M4 6h16M4 12h16M4 18h16" />
+                </svg>
+              )}
+            </button>
           </div>
         </div>
       </div>
+
+      {/* Mobile Menu Dropdown */}
+      {isMobileMenuOpen && (
+        <div className="md:hidden border-t border-primary-600/80 bg-primary-800 px-4 py-4 space-y-1 shadow-2xl">
+          <Link
+            href="/tios"
+            onClick={() => setIsMobileMenuOpen(false)}
+            className="flex items-center gap-3 px-3 py-2.5 rounded-lg text-primary-100 hover:text-white hover:bg-primary-700 font-medium transition"
+          >
+            <span className="text-lg">🚐</span>
+            <span>Encontrar transporte escolar</span>
+          </Link>
+          <Link
+            href="/lojas"
+            onClick={() => setIsMobileMenuOpen(false)}
+            className="flex items-center gap-3 px-3 py-2.5 rounded-lg text-primary-100 hover:text-white hover:bg-primary-700 font-medium transition"
+          >
+            <span className="text-lg">🏪</span>
+            <span>Lojas</span>
+          </Link>
+          <Link
+            href="/escolas-parceiras"
+            onClick={() => setIsMobileMenuOpen(false)}
+            className="flex items-center gap-3 px-3 py-2.5 rounded-lg text-primary-100 hover:text-white hover:bg-primary-700 font-medium transition"
+          >
+            <span className="text-lg">🏫</span>
+            <span>Escolas parceiras</span>
+          </Link>
+          <Link
+            href="/guias"
+            onClick={() => setIsMobileMenuOpen(false)}
+            className="flex items-center gap-3 px-3 py-2.5 rounded-lg text-primary-100 hover:text-white hover:bg-primary-700 font-medium transition"
+          >
+            <span className="text-lg">📚</span>
+            <span>Guias & Dicas</span>
+          </Link>
+          <Link
+            href="/seguro"
+            onClick={() => setIsMobileMenuOpen(false)}
+            className="flex items-center gap-3 px-3 py-2.5 rounded-lg text-orange-400 hover:text-orange-300 hover:bg-primary-700 font-semibold transition"
+          >
+            <span className="text-lg">🛡️</span>
+            <span>Proteção Veicular</span>
+          </Link>
+
+          {/* Seção de Autenticação no Mobile */}
+          <div className="pt-4 mt-3 border-t border-primary-600/60">
+            {loaded && !isLoading && (
+              <>
+                {user ? (
+                  <div className="space-y-2">
+                    <Link
+                      href={panelHref}
+                      onClick={() => setIsMobileMenuOpen(false)}
+                      className="flex items-center justify-center w-full bg-primary-600 hover:bg-primary-500 text-white py-2.5 rounded-lg font-semibold transition text-sm"
+                    >
+                      {user.role === 'ADMIN' ? 'Acessar Painel Admin' : 'Acessar Meu Painel'}
+                    </Link>
+                    <button
+                      onClick={handleLogout}
+                      className="flex items-center justify-center w-full text-red-300 hover:text-red-200 py-2 font-medium transition text-sm cursor-pointer"
+                    >
+                      Sair da conta
+                    </button>
+                  </div>
+                ) : (
+                  <div className="grid grid-cols-2 gap-3 pt-1">
+                    <Link
+                      href="/login"
+                      onClick={() => setIsMobileMenuOpen(false)}
+                      className="flex items-center justify-center border border-primary-500 text-primary-100 hover:text-white py-2.5 rounded-lg font-medium transition text-sm hover:bg-primary-700"
+                    >
+                      Entrar
+                    </Link>
+                    <Link
+                      href="/cadastro"
+                      onClick={() => setIsMobileMenuOpen(false)}
+                      className="flex items-center justify-center bg-secondary hover:bg-secondary-600 text-white py-2.5 rounded-lg font-semibold transition text-sm shadow"
+                    >
+                      Cadastrar
+                    </Link>
+                  </div>
+                )}
+              </>
+            )}
+          </div>
+        </div>
+      )}
     </header>
   );
 }
