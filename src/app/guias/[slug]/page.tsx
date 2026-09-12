@@ -348,3 +348,4 @@ export default async function GuiaSlugPage({ params }: Props) {
     </div>
   );
 }
+

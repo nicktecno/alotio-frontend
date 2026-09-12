@@ -105,17 +105,14 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     priority: 0.7,
   }));
 
-  const transporteCidadePages: MetadataRoute.Sitemap = citiesWithTios.map((c) => ({
-    url: `${siteUrl}/transporte-escolar/${c.slug}`,
-    lastModified: new Date(),
-    changeFrequency: 'monthly' as const,
-    priority: 0.75,
-  }));
+  const transporteCidadePages: MetadataRoute.Sitemap = citiesWithTios.map(
+    (c) => ({
+      url: `${siteUrl}/transporte-escolar/${c.slug}`,
+      lastModified: new Date(),
+      changeFrequency: 'monthly' as const,
+      priority: 0.75,
+    }),
+  );
 
-  return [
-    ...staticPages,
-    ...guiaPages,
-    ...transporteCidadePages,
-    ...tioPages,
-  ];
+  return [...staticPages, ...guiaPages, ...transporteCidadePages, ...tioPages];
 }

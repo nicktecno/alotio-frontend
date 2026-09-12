@@ -2,7 +2,12 @@ export interface Article {
   slug: string;
   title: string;
   subtitle: string;
-  category: 'Segurança' | 'Legislação' | 'Dicas para Pais' | 'Para Condutores' | 'Contratos';
+  category:
+    | 'Segurança'
+    | 'Legislação'
+    | 'Dicas para Pais'
+    | 'Para Condutores'
+    | 'Contratos';
   publishedAt: string;
   updatedAt: string;
   readTime: string;
@@ -18,8 +23,10 @@ export interface Article {
 export const ARTICLES: Article[] = [
   {
     slug: 'como-escolher-transporte-escolar-seguro',
-    title: 'Como escolher um transporte escolar seguro para seu filho: Guia Completo',
-    subtitle: 'Confira o checklist indispensável de vistorias, credenciais, equipamentos de segurança e dicas para contratar com tranquilidade.',
+    title:
+      'Como escolher um transporte escolar seguro para seu filho: Guia Completo',
+    subtitle:
+      'Confira o checklist indispensável de vistorias, credenciais, equipamentos de segurança e dicas para contratar com tranquilidade.',
     category: 'Segurança',
     publishedAt: '2026-08-15',
     updatedAt: '2026-09-10',
@@ -28,8 +35,15 @@ export const ARTICLES: Article[] = [
       name: 'Equipe Editorial Alô Tio',
       role: 'Especialistas em Mobilidade e Transporte Escolar',
     },
-    excerpt: 'Saiba o que avaliar antes de contratar a van escolar do seu filho. Checklist completo com documentação obrigatória, vistorias, equipamentos do veículo e direitos dos pais.',
-    tags: ['transporte escolar seguro', 'van escolar', 'segurança infantil', 'contratar van escolar', 'checklist para pais'],
+    excerpt:
+      'Saiba o que avaliar antes de contratar a van escolar do seu filho. Checklist completo com documentação obrigatória, vistorias, equipamentos do veículo e direitos dos pais.',
+    tags: [
+      'transporte escolar seguro',
+      'van escolar',
+      'segurança infantil',
+      'contratar van escolar',
+      'checklist para pais',
+    ],
     content: `A escolha do transporte escolar é uma das decisões mais importantes que as famílias tomam a cada início de ano letivo ou mudança de escola. Colocar a segurança e o bem-estar de uma criança sob a responsabilidade de um terceiro exige cuidado, pesquisa prévia e verificação criteriosa de documentos.
 
 No Brasil, o transporte escolar é uma atividade rigorosamente regulamentada pelo Código de Trânsito Brasileiro (CTB) e supervisionada pelos órgãos municipais de trânsito (como secretarias municipais de transportes ou autarquias como DTP, BHTrans, EPTC e similares). No entanto, a presença de veículos não autorizados ainda representa um risco silencioso em diversas cidades.
@@ -112,12 +126,14 @@ Antes de assinar o contrato, marque mentalmente ou no papel:
 - [ ] As referências com outros pais ou com a coordenação da escola foram favoráveis?
 - [ ] Foi formalizado um contrato de prestação de serviços com regras claras?
 
-Contratar com atenção e critério é a melhor forma de garantir a segurança dos pequenos e o sono tranquilo dos pais todos os dias letivos.`
+Contratar com atenção e critério é a melhor forma de garantir a segurança dos pequenos e o sono tranquilo dos pais todos os dias letivos.`,
   },
   {
     slug: 'legislacao-transporte-escolar-ctb',
-    title: 'Legislação do Transporte Escolar no Brasil: O que diz o CTB e as Prefeituras',
-    subtitle: 'Entenda os artigos 136 a 139 do Código de Trânsito Brasileiro e as regras municipais para a condução de estudantes.',
+    title:
+      'Legislação do Transporte Escolar no Brasil: O que diz o CTB e as Prefeituras',
+    subtitle:
+      'Entenda os artigos 136 a 139 do Código de Trânsito Brasileiro e as regras municipais para a condução de estudantes.',
     category: 'Legislação',
     publishedAt: '2026-08-20',
     updatedAt: '2026-09-08',
@@ -126,8 +142,15 @@ Contratar com atenção e critério é a melhor forma de garantir a segurança d
       name: 'Equipe Editorial Alô Tio',
       role: 'Especialistas em Legislação de Trânsito',
     },
-    excerpt: 'Conheça em detalhes o que a lei brasileira exige dos veículos e condutores de transporte escolar. Normas do CTB, vistorias obrigatórias e penalidades para irregulares.',
-    tags: ['legislação trânsito', 'CTB transporte escolar', 'artigo 136 CTB', 'regras van escolar', 'detran escolar'],
+    excerpt:
+      'Conheça em detalhes o que a lei brasileira exige dos veículos e condutores de transporte escolar. Normas do CTB, vistorias obrigatórias e penalidades para irregulares.',
+    tags: [
+      'legislação trânsito',
+      'CTB transporte escolar',
+      'artigo 136 CTB',
+      'regras van escolar',
+      'detran escolar',
+    ],
     content: `O transporte de estudantes no Brasil é regido principalmente pela Lei Federal nº 9.503/1997, o Código de Trânsito Brasileiro (CTB), especificamente em seu Capítulo XIII (Artigos 136 a 139), complementado por Resoluções do Conselho Nacional de Trânsito (CONTRAN) e legislações municipais próprias.
 
 O objetivo do legislador ao criar um capítulo exclusivo para a condução coletiva de escolares foi blindar as crianças e adolescentes contra a negligência mecânica e condutores desqualificados. 
@@ -181,12 +204,14 @@ Conduzir veículo escolar sem a autorização exigida pelo Artigo 136 constitui 
 - **Remoção do Veículo ao Pátio:** O veículo é apreendido imediatamente.
 - **Responsabilidade Civil e Criminal:** Em caso de acidente ou incidente com passageiros a bordo, o condutor clandestino responde civilmente por todos os danos e criminalmente por expor a vida ou a saúde de terceiros a perigo direto e iminente (Art. 132 do Código Penal).
 
-Conhecer a legislação é o primeiro passo para exigir dos prestadores de serviço aquilo que a lei garante: o transporte seguro, responsável e digno para todas as crianças.`
+Conhecer a legislação é o primeiro passo para exigir dos prestadores de serviço aquilo que a lei garante: o transporte seguro, responsável e digno para todas as crianças.`,
   },
   {
     slug: 'contrato-transporte-escolar-cuidados',
-    title: 'Contrato de Transporte Escolar: Direitos dos Pais, Deveres e Cuidados Essenciais',
-    subtitle: 'Veja quais cláusulas são indispensáveis, como funciona a cobrança nas férias escolares e o que o Código de Defesa do Consumidor diz sobre multas.',
+    title:
+      'Contrato de Transporte Escolar: Direitos dos Pais, Deveres e Cuidados Essenciais',
+    subtitle:
+      'Veja quais cláusulas são indispensáveis, como funciona a cobrança nas férias escolares e o que o Código de Defesa do Consumidor diz sobre multas.',
     category: 'Contratos',
     publishedAt: '2026-08-25',
     updatedAt: '2026-09-05',
@@ -195,8 +220,15 @@ Conhecer a legislação é o primeiro passo para exigir dos prestadores de servi
       name: 'Equipe Editorial Alô Tio',
       role: 'Especialistas em Direitos do Consumidor',
     },
-    excerpt: 'Tudo o que pais e transportadores precisam saber sobre o contrato de van escolar: pagamento nas férias, cancelamento, quebra do veículo e direitos do consumidor.',
-    tags: ['contrato van escolar', 'férias escolares pagamento', 'procon transporte escolar', 'direitos do consumidor', 'mensalidade van'],
+    excerpt:
+      'Tudo o que pais e transportadores precisam saber sobre o contrato de van escolar: pagamento nas férias, cancelamento, quebra do veículo e direitos do consumidor.',
+    tags: [
+      'contrato van escolar',
+      'férias escolares pagamento',
+      'procon transporte escolar',
+      'direitos do consumidor',
+      'mensalidade van',
+    ],
     content: `A contratação do transporte escolar é uma relação jurídica de prestação de serviços enquadrada perfeitamente no Código de Defesa do Consumidor (Lei Federal nº 8.078/1990). Isso significa que os pais são consumidores e o transportador escolar (seja ele autônomo, MEI ou pessoa jurídica) é o fornecedor do serviço.
 
 Apesar da relação de confiança e proximidade que comumente se estabelece entre as famílias e o "tio da van", a formalização de um contrato por escrito é fundamental para proteger ambas as partes, evitando desentendimentos futuros sobre valores, horários, férias e cancelamentos.
@@ -248,12 +280,14 @@ Falhas mecânicas imprevistas podem ocorrer com qualquer veículo. No entanto, a
 
 ## Dica Final: Guarde Sempre uma Via Assinada
 
-Nunca assine contratos em branco ou concorde com cláusulas verbais que alterem o que está escrito. Mantenha uma via física ou digitalizada assinada por ambas as partes e solicite recibos ou comprovantes a cada mensalidade paga. Essa organização garante a tranquilidade de todos e mantém o foco no que realmente importa: o trajeto seguro e feliz das crianças.`
+Nunca assine contratos em branco ou concorde com cláusulas verbais que alterem o que está escrito. Mantenha uma via física ou digitalizada assinada por ambas as partes e solicite recibos ou comprovantes a cada mensalidade paga. Essa organização garante a tranquilidade de todos e mantém o foco no que realmente importa: o trajeto seguro e feliz das crianças.`,
   },
   {
     slug: 'transporte-escolar-legalizado-vs-clandestino',
-    title: 'Transporte Escolar Legalizado vs. Clandestino: Os Riscos Invisíveis para as Crianças',
-    subtitle: 'Por que o transporte irregular cobra menos e quais perigos ele esconde por trás do preço baixo.',
+    title:
+      'Transporte Escolar Legalizado vs. Clandestino: Os Riscos Invisíveis para as Crianças',
+    subtitle:
+      'Por que o transporte irregular cobra menos e quais perigos ele esconde por trás do preço baixo.',
     category: 'Segurança',
     publishedAt: '2026-08-30',
     updatedAt: '2026-09-02',
@@ -262,8 +296,15 @@ Nunca assine contratos em branco ou concorde com cláusulas verbais que alterem 
       name: 'Equipe Editorial Alô Tio',
       role: 'Especialistas em Trânsito e Mobilidade',
     },
-    excerpt: 'Entenda a diferença real entre o transporte escolar legalizado e o clandestino. Riscos de acidentes, falta de seguro para passageiros e como denunciar vans irregulares.',
-    tags: ['transporte clandestino', 'van clandestina', 'segurança escolar', 'perigo transporte irregular', 'fiscalização detran'],
+    excerpt:
+      'Entenda a diferença real entre o transporte escolar legalizado e o clandestino. Riscos de acidentes, falta de seguro para passageiros e como denunciar vans irregulares.',
+    tags: [
+      'transporte clandestino',
+      'van clandestina',
+      'segurança escolar',
+      'perigo transporte irregular',
+      'fiscalização detran',
+    ],
     content: `Em muitas cidades e portas de colégios, pais se deparam com ofertas de transporte escolar com mensalidades significativamente inferiores às cobradas pela média do mercado. À primeira vista, a economia mensal pode parecer tentadora no orçamento doméstico. Mas você já parou para pensar em como o transporte clandestino consegue cobrar tão pouco?
 
 A resposta é alarmante: o desconto no preço é obtido abrindo mão diretamente da segurança, das vistorias técnicas, do seguro dos passageiros e da checagem de antecedentes. 
@@ -331,12 +372,14 @@ Quando uma van clandestina é interceptada em blitz:
 | **Identificação Visual** | Faixa de 40 cm "ESCOLAR" e número do alvará | Descaracterizado ou com adesivos falsos |
 | **Embarque e Desembarque** | Locais autorizados pela prefeitura | Paradas irregulares com risco de atropelamento |
 
-A vida e a segurança dos seus filhos não têm preço. O valor ligeiramente menor da mensalidade nunca compensará o risco incalculável de um acidente sem amparo ou de um trajeto sem segurança.`
+A vida e a segurança dos seus filhos não têm preço. O valor ligeiramente menor da mensalidade nunca compensará o risco incalculável de um acidente sem amparo ou de um trajeto sem segurança.`,
   },
   {
     slug: 'dicas-para-condutores-de-van-escolar',
-    title: 'Guia para Condutores Escolares: Gestão de Rotas, Manutenção e Confiança das Famílias',
-    subtitle: 'Boas práticas para profissionais de transporte escolar: como fidelizar clientes, reduzir custos com combustível e dirigir com excelência.',
+    title:
+      'Guia para Condutores Escolares: Gestão de Rotas, Manutenção e Confiança das Famílias',
+    subtitle:
+      'Boas práticas para profissionais de transporte escolar: como fidelizar clientes, reduzir custos com combustível e dirigir com excelência.',
     category: 'Para Condutores',
     publishedAt: '2026-09-01',
     updatedAt: '2026-09-09',
@@ -345,8 +388,15 @@ A vida e a segurança dos seus filhos não têm preço. O valor ligeiramente men
       name: 'Equipe Editorial Alô Tio',
       role: 'Especialistas em Gestão de Frotas e Transporte',
     },
-    excerpt: 'Dicas práticas para motoristas de transporte escolar melhorarem a gestão do seu negócio: planejamento de rotas, manutenção preventiva, pontualidade e relacionamento com os pais.',
-    tags: ['dicas motorista van', 'gestão transporte escolar', 'manutenção van escolar', 'rotas van escolar', 'atendimento aos pais'],
+    excerpt:
+      'Dicas práticas para motoristas de transporte escolar melhorarem a gestão do seu negócio: planejamento de rotas, manutenção preventiva, pontualidade e relacionamento com os pais.',
+    tags: [
+      'dicas motorista van',
+      'gestão transporte escolar',
+      'manutenção van escolar',
+      'rotas van escolar',
+      'atendimento aos pais',
+    ],
     content: `A profissão de condutor escolar — carinhosamente chamado de "Tio" ou "Tia" da van — é uma das mais nobres e de maior responsabilidade no trânsito urbano. Mais do que transportar passageiros do ponto A ao ponto B, o profissional cuida diariamente do bem mais precioso de dezenas de famílias.
 
 Com o aumento dos custos operacionais (combustível, pneus, manutenção e licenciamentos), o transportador que deseja manter sua van cheia e ter um negócio sustentável e lucrativo precisa aliar direção segura a uma boa gestão financeira e de relacionamento.
@@ -396,12 +446,14 @@ Tratar o transporte escolar como uma empresa profissional protege seu patrimôni
 - **Formalização como MEI:** O transportador escolar pode se cadastrar como Microempreendedor Individual (MEI - CNAE de transporte escolar), garantindo cobertura previdenciária (aposentadoria, auxílio-doença) e facilidade na emissão de notas fiscais para famílias que solicitam comprovação no Imposto de Renda.
 - **Contratos Claros:** Sempre firme contratos com regras de vencimento, formas de cobrança nas férias e política de cancelamento. Isso elimina o estresse de inadimplência e estabelece profissionalismo desde o primeiro contato.
 
-Ao manter seu veículo impecável, suas autorizações em dia e um relacionamento transparente com as famílias, sua vaga no transporte escolar se tornará concorrida e sua reputação crescerá organicamente por indicação.`
+Ao manter seu veículo impecável, suas autorizações em dia e um relacionamento transparente com as famílias, sua vaga no transporte escolar se tornará concorrida e sua reputação crescerá organicamente por indicação.`,
   },
   {
     slug: 'direitos-dos-pais-no-transporte-escolar',
-    title: 'Direitos do Consumidor no Transporte Escolar: Dúvidas Mais Frequentes',
-    subtitle: 'O que o PROCON diz sobre pagamentos em feriados, rescisão de contrato, reajustes e cancelamento unilateral.',
+    title:
+      'Direitos do Consumidor no Transporte Escolar: Dúvidas Mais Frequentes',
+    subtitle:
+      'O que o PROCON diz sobre pagamentos em feriados, rescisão de contrato, reajustes e cancelamento unilateral.',
     category: 'Dicas para Pais',
     publishedAt: '2026-09-03',
     updatedAt: '2026-09-11',
@@ -410,8 +462,15 @@ Ao manter seu veículo impecável, suas autorizações em dia e um relacionament
       name: 'Equipe Editorial Alô Tio',
       role: 'Consultoria Jurídica e Direitos do Consumidor',
     },
-    excerpt: 'Tire suas dúvidas sobre os direitos dos pais na contratação do transporte escolar: Procon, cancelamento, reajuste de mensalidades e responsabilidades do condutor.',
-    tags: ['direitos dos pais', 'procon van escolar', 'dúvidas transporte escolar', 'reajuste mensalidade van', 'código defesa consumidor'],
+    excerpt:
+      'Tire suas dúvidas sobre os direitos dos pais na contratação do transporte escolar: Procon, cancelamento, reajuste de mensalidades e responsabilidades do condutor.',
+    tags: [
+      'direitos dos pais',
+      'procon van escolar',
+      'dúvidas transporte escolar',
+      'reajuste mensalidade van',
+      'código defesa consumidor',
+    ],
     content: `A contratação do transporte escolar envolve questões financeiras e contratuais que costumam gerar atritos entre contratantes e prestadores de serviço quando as regras não são previamente compreendidas.
 
 Com o objetivo de esclarecer dúvidas recorrentes de pais e responsáveis, reunimos as respostas fundamentadas nas orientações dos órgãos de proteção ao consumidor (PROCON) e no Código de Defesa do Consumidor (CDC).
@@ -461,8 +520,8 @@ Se o veículo estiver constantemente atrasado, apresentar problemas mecânicos r
 2. **Rescindir com justa causa:** Se a falha persistir, o contrato pode ser rompido imediatamente sem o pagamento de multa rescisória, com base no Artigo 20 do Código de Defesa do Consumidor.
 3. **Acionar os órgãos competentes:** Notificar o PROCON municipal para mediação de valores e comunicar o órgão de fiscalização de trânsito caso haja risco à segurança das crianças.
 
-A relação entre família e condutor deve ser sempre pautada pelo diálogo respeitoso e pela priorização absoluta da segurança física e emocional dos pequenos passageiros.`
-  }
+A relação entre família e condutor deve ser sempre pautada pelo diálogo respeitoso e pela priorização absoluta da segurança física e emocional dos pequenos passageiros.`,
+  },
 ];
 
 export function getArticleBySlug(slug: string): Article | undefined {

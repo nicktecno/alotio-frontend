@@ -5,7 +5,8 @@ import type { PaginatedResponse, TioPublicView } from '@/types';
 import { neighborhoodSlug } from '@/lib/slug';
 import { seoFetchInit } from '@/lib/seo-revalidate';
 
-const apiBase = () => process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3001/api';
+const apiBase = () =>
+  process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3001/api';
 
 export type CitySeo = {
   id: string;
@@ -85,7 +86,9 @@ export async function fetchAllCitiesWithTios(): Promise<CitySeo[]> {
   return out;
 }
 
-export async function fetchNeighborhoodsForCity(cityId: string): Promise<NeighborhoodSeo[]> {
+export async function fetchNeighborhoodsForCity(
+  cityId: string,
+): Promise<NeighborhoodSeo[]> {
   const out: NeighborhoodSeo[] = [];
   let page = 1;
   let totalPages = 1;
@@ -148,7 +151,10 @@ export async function fetchTiosForGeo(filters: {
 
   const empty: TiosGeoSearch = { data: [], total: 0, totalPages: 0 };
   try {
-    const res = await fetch(`${apiBase()}/tios?${q.toString()}`, seoFetchInit());
+    const res = await fetch(
+      `${apiBase()}/tios?${q.toString()}`,
+      seoFetchInit(),
+    );
     if (!res.ok) return empty;
     const body = (await res.json()) as PaginatedResponse<TioPublicView>;
     return {
@@ -228,4 +234,3 @@ export async function resolveTiosSearchParams(
     page,
   };
 }
-
