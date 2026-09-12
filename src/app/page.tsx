@@ -233,61 +233,6 @@ export default function Home() {
           </div>
         </section>
 
-        {/* Seção Central de Guias & Artigos */}
-        <section className="py-16 bg-white border-t border-gray-100">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="flex flex-col sm:flex-row sm:items-end justify-between mb-10">
-              <div>
-                <span className="text-xs font-bold uppercase tracking-wider text-primary-700">
-                  Conteúdo Educativo
-                </span>
-                <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 font-heading mt-1">
-                  Guias e Dicas sobre Transporte Escolar
-                </h2>
-                <p className="mt-2 text-gray-600 max-w-xl">
-                  Artigos práticos sobre legislação, segurança infantil, dicas de contratação e direitos das famílias.
-                </p>
-              </div>
-              <Link
-                href="/guias"
-                className="mt-4 sm:mt-0 inline-flex items-center text-primary font-bold hover:text-primary-700 transition"
-              >
-                Ver todos os artigos →
-              </Link>
-            </div>
-
-            <div className="grid gap-6 md:grid-cols-3">
-              {ARTICLES.slice(0, 3).map((article) => (
-                <div
-                  key={article.slug}
-                  className="flex flex-col justify-between rounded-2xl border border-gray-200 bg-gray-50/50 p-6 hover:shadow-md hover:border-primary-300 transition"
-                >
-                  <div>
-                    <span className="inline-block rounded bg-primary-100 px-2.5 py-0.5 text-xs font-bold text-primary-800 mb-3">
-                      {article.category}
-                    </span>
-                    <h3 className="font-heading text-lg font-bold text-gray-900 mb-2 hover:text-primary transition line-clamp-2">
-                      <Link href={`/guias/${article.slug}`}>{article.title}</Link>
-                    </h3>
-                    <p className="text-sm text-gray-600 line-clamp-3 leading-relaxed mb-4">
-                      {article.excerpt}
-                    </p>
-                  </div>
-                  <div className="pt-4 border-t border-gray-200/60 flex items-center justify-between text-xs text-gray-500 font-medium">
-                    <span>{article.readTime}</span>
-                    <Link
-                      href={`/guias/${article.slug}`}
-                      className="text-primary font-bold hover:underline"
-                    >
-                      Ler artigo →
-                    </Link>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
-        </section>
-
         <AdSlot
           slot={process.env.NEXT_PUBLIC_ADSENSE_SLOT_HOME_MID}
           format="horizontal"
@@ -399,6 +344,61 @@ export default function Home() {
             >
               Criar meu perfil
             </Link>
+          </div>
+        </section>
+
+        {/* Seção Central de Guias & Artigos (por último) */}
+        <section className="py-16 bg-gray-50 border-t border-gray-200">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="flex flex-col sm:flex-row sm:items-end justify-between mb-10">
+              <div>
+                <span className="text-xs font-bold uppercase tracking-wider text-primary-700">
+                  Conteúdo Educativo
+                </span>
+                <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 font-heading mt-1">
+                  Guias e Dicas sobre Transporte Escolar
+                </h2>
+                <p className="mt-2 text-gray-600 max-w-xl">
+                  Artigos práticos sobre legislação, segurança infantil, dicas de contratação e direitos das famílias.
+                </p>
+              </div>
+              <Link
+                href="/guias"
+                className="mt-4 sm:mt-0 inline-flex items-center text-primary font-bold hover:text-primary-700 transition"
+              >
+                Ver todos os artigos →
+              </Link>
+            </div>
+
+            <div className="grid gap-6 md:grid-cols-3">
+              {ARTICLES.slice(0, 3).map((article) => (
+                <div
+                  key={article.slug}
+                  className="flex flex-col justify-between rounded-2xl border border-gray-200 bg-white p-6 hover:shadow-md hover:border-primary-300 transition"
+                >
+                  <div>
+                    <span className="inline-block rounded bg-primary-100 px-2.5 py-0.5 text-xs font-bold text-primary-800 mb-3">
+                      {article.category}
+                    </span>
+                    <h3 className="font-heading text-lg font-bold text-gray-900 mb-2 hover:text-primary transition line-clamp-2">
+                      <Link href={`/guias/${article.slug}`}>{article.title}</Link>
+                    </h3>
+                    <p className="text-sm text-gray-600 line-clamp-3 leading-relaxed mb-4">
+                      {article.excerpt}
+                    </p>
+                  </div>
+                  <div className="pt-4 border-t border-gray-100 flex items-center justify-between text-xs text-gray-500 font-medium">
+                    <span>{article.readTime}</span>
+                    <Link
+                      href={`/guias/${article.slug}`}
+                      className="text-primary font-bold hover:underline"
+                    >
+                      Ler artigo →
+                    </Link>
+                  </div>
+                </div>
+              ))}
+            </div>
           </div>
         </section>
 
