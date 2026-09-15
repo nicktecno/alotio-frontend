@@ -9,7 +9,7 @@ const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://alotio.com.br';
 export const metadata: Metadata = {
   title: 'Cartão de Visita Digital — Transporte Escolar | Alô Tio',
   description:
-    'Crie cartão de visita digital grátis para transporte escolar: nome, prefixo, WhatsApp, escolas e QR code. Baixe PNG para Instagram Stories, feed e grupos de pais.',
+    'Crie cartão de visita digital grátis para transporte escolar: nome, prefixo, WhatsApp, escolas e foto da van. Baixe PNG para Instagram Stories, feed e grupos de pais.',
   alternates: {
     canonical: `${siteUrl}/ferramentas/cartao-digital`,
   },
@@ -32,11 +32,15 @@ export const metadata: Metadata = {
 const faq = [
   {
     q: 'Para que serve o cartão digital do Alô Tio?',
-    a: 'É uma imagem personalizada com seus dados de contato, escolas e bairros atendidos, com QR code para seu perfil. Ideal para bio do Instagram, Stories e grupos de WhatsApp de pais.',
+    a: 'É uma imagem personalizada com foto da van ou logo, dados de contato, escolas e bairros atendidos. Ideal para bio do Instagram, Stories e grupos de pais.',
   },
   {
     q: 'Preciso estar cadastrado para usar?',
-    a: 'Não. Qualquer condutor pode montar o cartão manualmente. Se você tem perfil no Alô Tio, os dados são preenchidos automaticamente e o QR code aponta para sua página pública.',
+    a: 'Não. Qualquer condutor pode montar o cartão manualmente, com imagem padrão ou foto própria. Se você tem perfil aprovado no Alô Tio, os dados são preenchidos automaticamente.',
+  },
+  {
+    q: 'Posso usar sem foto no cartão?',
+    a: 'Sim. Por padrão o cartão vem com uma ilustração de van, mas você pode enviar foto da sua van ou logo da empresa, ou desmarcar a opção para deixar o cartão sem imagem.',
   },
   {
     q: 'Quais formatos posso baixar?',

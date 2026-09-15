@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react';
 import Link from 'next/link';
 import toast from 'react-hot-toast';
 import DigitalCardPreview from '@/components/DigitalCardPreview';
-import { api } from '@/lib/api';
+import { api, assetUrl } from '@/lib/api';
 import { digitsOnly, formatBrazilMobileMask } from '@/lib/br-input';
 import {
   DEFAULT_CARD_DATA,
@@ -50,14 +50,25 @@ export default function DigitalCardGenerator({ variant = 'full' }: Props) {
   useEffect(() => {
     api
       .getMyProfile()
-      .then((p) => setData(profileFromApi(p as Profile)))
+      .then((p) => {
+        const profileData = profileFromApi(p as Profile, assetUrl);
+        if (compact) {
+          setData({ ...profileData, showImage: false, imageUrl: null });
+        } else {
+          setData(profileData);
+        }
+      })
       .catch(() => {
         /* visitante anônimo */
       });
-  }, []);
+  }, [compact]);
 
   const update = (patch: Partial<DigitalCardData>) =>
     setData((prev) => ({ ...prev, ...patch }));
+
+  const exportData: DigitalCardData = compact
+    ? { ...data, showImage: false, imageUrl: null }
+    : data;
 
   const handleDownload = async () => {
     if (!data.displayName.trim()) {
@@ -66,7 +77,7 @@ export default function DigitalCardGenerator({ variant = 'full' }: Props) {
     }
     setExporting(true);
     try {
-      const blob = await exportDigitalCardPng(data, format);
+      const blob = await exportDigitalCardPng(exportData, compact ? 'feed' : format);
       const url = URL.createObjectURL(blob);
       const a = document.createElement('a');
       const slug = data.displayName.replace(/\s+/g, '-').slice(0, 30);
@@ -91,13 +102,39 @@ export default function DigitalCardGenerator({ variant = 'full' }: Props) {
     }
   };
 
-  const copyProfileLink = async () => {
+  const copyShareLink = async () => {
+    const link = profilePublicUrl(data.profileId) || whatsAppUrl(data.phone);
+    if (!link) {
+      toast.error('Informe o WhatsApp ou cadastre seu perfil para copiar um link');
+      return;
+    }
     try {
-      await navigator.clipboard.writeText(profilePublicUrl(data.profileId));
-      toast.success('Link do perfil copiado');
+      await navigator.clipboard.writeText(link);
+      toast.success(
+        data.profileId ? 'Link do perfil copiado' : 'Link do WhatsApp copiado',
+      );
     } catch {
       toast.error('Não foi possível copiar');
     }
+  };
+
+  const handleImageUpload = (file: File | null) => {
+    if (!file) return;
+    if (!file.type.startsWith('image/')) {
+      toast.error('Envie uma imagem (JPG, PNG ou WebP)');
+      return;
+    }
+    if (file.size > 5 * 1024 * 1024) {
+      toast.error('Imagem muito grande (máx. 5 MB)');
+      return;
+    }
+    const reader = new FileReader();
+    reader.onload = () => {
+      update({ imageUrl: String(reader.result), showImage: true });
+      toast.success('Foto adicionada ao cartão');
+    };
+    reader.onerror = () => toast.error('Não foi possível ler a imagem');
+    reader.readAsDataURL(file);
   };
 
   const openWhatsApp = () => {
@@ -118,13 +155,21 @@ export default function DigitalCardGenerator({ variant = 'full' }: Props) {
         <h3 className="font-heading text-xl sm:text-2xl font-bold text-white mt-1">
           Cartão de visita digital
         </h3>
-        <p className="text-sm text-white/90 mt-1">
-          Para bio do Instagram, grupos de pais e WhatsApp.
+        <p className={`text-sm text-white/90 mt-1 ${compact ? 'max-w-xl' : ''}`}>
+          {compact
+            ? 'Nome, prefixo e WhatsApp — rápido para divulgar.'
+            : 'Para bio do Instagram, grupos de pais e WhatsApp.'}
         </p>
       </div>
 
-      <div className="grid lg:grid-cols-2 gap-0">
-        <div className="p-5 sm:p-6 space-y-4 border-b lg:border-b-0 lg:border-r border-gray-100">
+      <div className={compact ? 'p-5 sm:p-6 space-y-4' : 'grid lg:grid-cols-2 gap-0'}>
+        <div
+          className={
+            compact
+              ? 'space-y-4'
+              : 'p-5 sm:p-6 space-y-4 border-b lg:border-b-0 lg:border-r border-gray-100'
+          }
+        >
           <Field label="Nome / apelido">
             <input
               className={inputClass}
@@ -151,6 +196,61 @@ export default function DigitalCardGenerator({ variant = 'full' }: Props) {
               />
             </Field>
           </div>
+          {!compact && (
+            <Field label="Foto da van ou logo">
+              <div className="space-y-2">
+                <label className="flex cursor-pointer items-center justify-center rounded-lg border-2 border-dashed border-gray-300 bg-gray-50 px-4 py-6 text-center hover:border-primary/40 hover:bg-primary/5 transition">
+                  <input
+                    type="file"
+                    accept="image/*"
+                    className="sr-only"
+                    onChange={(e) => {
+                      handleImageUpload(e.target.files?.[0] ?? null);
+                      e.target.value = '';
+                    }}
+                  />
+                  <span className="text-sm text-gray-600">
+                    <span className="font-semibold text-primary">Escolher imagem</span>
+                    <br />
+                    JPG, PNG ou WebP — até 5 MB
+                  </span>
+                </label>
+                <div className="flex flex-wrap gap-2">
+                  <button
+                    type="button"
+                    onClick={() => update({ showImage: true })}
+                    className={`px-3 py-2 rounded-lg text-sm font-semibold transition ${
+                      data.showImage
+                        ? 'bg-primary text-white'
+                        : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+                    }`}
+                  >
+                    Com imagem
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => update({ showImage: false })}
+                    className={`px-3 py-2 rounded-lg text-sm font-semibold transition ${
+                      !data.showImage
+                        ? 'bg-primary text-white'
+                        : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+                    }`}
+                  >
+                    Sem imagem
+                  </button>
+                </div>
+                {data.showImage && data.imageUrl ? (
+                  <button
+                    type="button"
+                    onClick={() => update({ imageUrl: null })}
+                    className="text-xs font-semibold text-gray-500 hover:text-gray-800"
+                  >
+                    Voltar para imagem padrão
+                  </button>
+                ) : null}
+              </div>
+            </Field>
+          )}
           {!compact && (
             <>
               <Field label="Escolas atendidas">
@@ -197,59 +297,72 @@ export default function DigitalCardGenerator({ variant = 'full' }: Props) {
               </Field>
             </>
           )}
-          {compact && (
-            <p className="text-xs text-gray-500">
-              <Link href="/ferramentas/cartao-digital" className="text-primary font-semibold hover:underline">
-                Abrir gerador completo
-              </Link>
-              {' '}
-              com escolas, bairros e formatos para Stories.
-            </p>
-          )}
         </div>
 
-        <div className="p-5 sm:p-6 bg-gray-50 flex flex-col gap-4">
-          <DigitalCardPreview data={data} />
-          <div className="grid grid-cols-2 gap-2">
+        <div
+          className={
+            compact
+              ? 'flex items-center gap-4 rounded-xl bg-gray-50 p-4'
+              : 'p-5 sm:p-6 bg-gray-50 flex flex-col gap-4'
+          }
+        >
+          <DigitalCardPreview
+            data={exportData}
+            format={format}
+            compact={compact}
+            className={compact ? 'shrink-0' : undefined}
+          />
+          <div className={compact ? 'min-w-0 flex-1 space-y-2' : 'grid grid-cols-2 gap-2 w-full'}>
             <button
               type="button"
               onClick={handleDownload}
               disabled={exporting}
-              className="col-span-2 bg-secondary hover:bg-secondary-600 disabled:opacity-60 text-white font-bold py-3 px-4 rounded-lg transition text-sm"
+              className={
+                compact
+                  ? 'w-full bg-secondary hover:bg-secondary-600 disabled:opacity-60 text-white font-bold py-2.5 px-4 rounded-lg transition text-sm'
+                  : 'col-span-2 bg-secondary hover:bg-secondary-600 disabled:opacity-60 text-white font-bold py-3 px-4 rounded-lg transition text-sm'
+              }
             >
               {exporting ? 'Gerando PNG…' : 'Baixar cartão (PNG)'}
             </button>
-            <button
-              type="button"
-              onClick={copyCaption}
-              className="bg-white border border-gray-300 hover:bg-gray-50 text-gray-800 font-semibold py-2.5 px-3 rounded-lg text-sm transition"
-            >
-              Copiar texto
-            </button>
-            <button
-              type="button"
-              onClick={copyProfileLink}
-              className="bg-white border border-gray-300 hover:bg-gray-50 text-gray-800 font-semibold py-2.5 px-3 rounded-lg text-sm transition"
-            >
-              Copiar link
-            </button>
-            <button
-              type="button"
-              onClick={openWhatsApp}
-              className="col-span-2 bg-[#25D366] hover:bg-[#20bd5a] text-white font-bold py-2.5 px-4 rounded-lg text-sm transition"
-            >
-              Compartilhar no WhatsApp
-            </button>
+            {!compact && (
+              <>
+                <button
+                  type="button"
+                  onClick={copyCaption}
+                  className="bg-white border border-gray-300 hover:bg-gray-50 text-gray-800 font-semibold py-2.5 px-3 rounded-lg text-sm transition"
+                >
+                  Copiar texto
+                </button>
+                <button
+                  type="button"
+                  onClick={copyShareLink}
+                  className="bg-white border border-gray-300 hover:bg-gray-50 text-gray-800 font-semibold py-2.5 px-3 rounded-lg text-sm transition"
+                >
+                  {data.profileId ? 'Copiar perfil' : 'Copiar WhatsApp'}
+                </button>
+                <button
+                  type="button"
+                  onClick={openWhatsApp}
+                  className="col-span-2 bg-[#25D366] hover:bg-[#20bd5a] text-white font-bold py-2.5 px-4 rounded-lg text-sm transition"
+                >
+                  Compartilhar no WhatsApp
+                </button>
+              </>
+            )}
+            {compact && (
+              <p className="text-xs text-gray-500">
+                <Link
+                  href="/ferramentas/cartao-digital"
+                  className="text-primary font-semibold hover:underline"
+                >
+                  Gerador completo
+                </Link>
+                {' '}
+                com foto da van, escolas, bairros e formatos para Stories.
+              </p>
+            )}
           </div>
-          {!data.profileId && (
-            <p className="text-xs text-center text-gray-500">
-              <Link href="/cadastro" className="text-primary font-semibold hover:underline">
-                Cadastre-se
-              </Link>
-              {' '}
-              para incluir link do seu perfil público e QR code.
-            </p>
-          )}
         </div>
       </div>
     </div>

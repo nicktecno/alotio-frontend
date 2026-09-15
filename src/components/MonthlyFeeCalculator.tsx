@@ -24,9 +24,16 @@ function Field({
   children: React.ReactNode;
 }) {
   return (
-    <label className="block">
-      <span className="text-sm font-semibold text-gray-800">{label}</span>
-      {hint ? <span className="block text-xs text-gray-500 mt-0.5">{hint}</span> : null}
+    <label className="block h-full">
+      <span className="text-sm font-semibold text-gray-800 leading-snug">{label}</span>
+      <span
+        className={`mt-0.5 block min-h-[2rem] text-xs leading-snug ${
+          hint ? 'text-gray-500' : 'text-transparent'
+        }`}
+        aria-hidden={!hint}
+      >
+        {hint || 'Reservado para alinhar campos'}
+      </span>
       <div className="mt-1.5">{children}</div>
     </label>
   );
@@ -75,7 +82,7 @@ export default function MonthlyFeeCalculator({ variant = 'full' }: Props) {
 
       <div className="grid lg:grid-cols-2 gap-0">
         <div className="p-5 sm:p-6 space-y-4 border-b lg:border-b-0 lg:border-r border-gray-100">
-          <div className={compact ? 'grid sm:grid-cols-2 gap-4' : 'grid sm:grid-cols-2 gap-4'}>
+          <div className="grid sm:grid-cols-2 gap-4 items-start">
             <Field label="Km rodados por mês" hint="Ida + volta × dias úteis">
               <input
                 type="number"

@@ -10,7 +10,14 @@ export type DigitalCardData = {
   neighborhoods: string;
   profileId?: string;
   tagline: string;
+  /** Exibir foto/logo no cartão (padrão: sim). */
+  showImage: boolean;
+  /** URL ou data URL personalizada; null usa a imagem padrão quando showImage. */
+  imageUrl: string | null;
 };
+
+/** Ilustração padrão de van quando o transportador não envia foto própria. */
+export const DEFAULT_CARD_IMAGE = '/cartao-digital-van.svg';
 
 export const DEFAULT_CARD_DATA: DigitalCardData = {
   displayName: 'Tio Carlos',
@@ -19,6 +26,8 @@ export const DEFAULT_CARD_DATA: DigitalCardData = {
   schools: 'Colégio Adventista, Odete São Paio',
   neighborhoods: 'Colubandê, Alcântara',
   tagline: 'Transporte escolar legalizado',
+  showImage: true,
+  imageUrl: null,
 };
 
 export const CARD_FORMATS: { id: CardFormat; label: string; w: number; h: number }[] = [
@@ -29,9 +38,14 @@ export const CARD_FORMATS: { id: CardFormat; label: string; w: number; h: number
 
 const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://alotio.com.br';
 
-export function profilePublicUrl(profileId?: string): string {
-  if (profileId) return `${siteUrl}/tios/${profileId}`;
-  return `${siteUrl}/cadastro`;
+export function profilePublicUrl(profileId?: string): string | null {
+  if (!profileId) return null;
+  return `${siteUrl}/tios/${profileId}`;
+}
+
+export function cardImageSrc(data: DigitalCardData): string | null {
+  if (!data.showImage) return null;
+  return data.imageUrl || DEFAULT_CARD_IMAGE;
 }
 
 export function whatsAppUrl(phoneDigits: string, message?: string): string {
@@ -57,21 +71,31 @@ export function buildShareCaption(data: DigitalCardData): string {
     phone ? `WhatsApp: ${phone}` : null,
     data.schools ? `Escolas: ${data.schools}` : null,
     data.neighborhoods ? `Bairros: ${data.neighborhoods}` : null,
-    '',
-    `Perfil no Alô Tio: ${profile}`,
-  ].filter(Boolean);
+    profile ? '' : null,
+    profile ? `Perfil no Alô Tio: ${profile}` : null,
+  ].filter((line) => line !== null);
   return lines.join('\n');
 }
 
-export function profileFromApi(profile: {
-  id: string;
-  displayName: string;
-  prefixo: string;
-  phone: string | null;
-  schools?: { school: { name: string } }[];
-  neighborhoods?: { neighborhood: { name: string } }[];
-  bio?: string | null;
-}): DigitalCardData {
+export function profileFromApi(
+  profile: {
+    id: string;
+    displayName: string;
+    prefixo: string;
+    phone: string | null;
+    avatarUrl?: string | null;
+    vehiclePhotos?: { url: string }[];
+    schools?: { school: { name: string } }[];
+    neighborhoods?: { neighborhood: { name: string } }[];
+    bio?: string | null;
+  },
+  resolveAssetUrl: (path: string | null | undefined) => string | null,
+): DigitalCardData {
+  const photo =
+    resolveAssetUrl(profile.avatarUrl) ||
+    resolveAssetUrl(profile.vehiclePhotos?.[0]?.url) ||
+    null;
+
   return {
     displayName: profile.displayName,
     prefixo: profile.prefixo,
@@ -83,5 +107,7 @@ export function profileFromApi(profile: {
       '',
     profileId: profile.id,
     tagline: profile.bio?.slice(0, 80) || 'Transporte escolar legalizado',
+    showImage: true,
+    imageUrl: photo,
   };
 }

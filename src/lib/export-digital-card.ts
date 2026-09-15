@@ -1,5 +1,5 @@
 import type { CardFormat, DigitalCardData } from '@/lib/digital-card';
-import { CARD_FORMATS, formatPhoneDisplay, profilePublicUrl } from '@/lib/digital-card';
+import { CARD_FORMATS, cardImageSrc, formatPhoneDisplay } from '@/lib/digital-card';
 
 function loadImage(src: string): Promise<HTMLImageElement> {
   return new Promise((resolve, reject) => {
@@ -56,6 +56,61 @@ function roundRect(
   ctx.closePath();
 }
 
+function drawCoverImage(
+  ctx: CanvasRenderingContext2D,
+  img: HTMLImageElement,
+  x: number,
+  y: number,
+  w: number,
+  h: number,
+) {
+  const imgRatio = img.width / img.height;
+  const boxRatio = w / h;
+  let sx = 0;
+  let sy = 0;
+  let sw = img.width;
+  let sh = img.height;
+
+  if (imgRatio > boxRatio) {
+    sw = img.height * boxRatio;
+    sx = (img.width - sw) / 2;
+  } else {
+    sh = img.width / boxRatio;
+    sy = (img.height - sh) / 2;
+  }
+
+  ctx.drawImage(img, sx, sy, sw, sh, x, y, w, h);
+}
+
+function drawContainImage(
+  ctx: CanvasRenderingContext2D,
+  img: HTMLImageElement,
+  x: number,
+  y: number,
+  w: number,
+  h: number,
+  padding: number,
+) {
+  const innerW = w - padding * 2;
+  const innerH = h - padding * 2;
+  const imgRatio = img.width / img.height;
+  const boxRatio = innerW / innerH;
+  let dw = innerW;
+  let dh = innerH;
+
+  if (imgRatio > boxRatio) {
+    dw = innerW;
+    dh = innerW / imgRatio;
+  } else {
+    dh = innerH;
+    dw = innerH * imgRatio;
+  }
+
+  const dx = x + (w - dw) / 2;
+  const dy = y + (h - dh) / 2;
+  ctx.drawImage(img, dx, dy, dw, dh);
+}
+
 export async function exportDigitalCardPng(
   data: DigitalCardData,
   format: CardFormat,
@@ -76,89 +131,109 @@ export async function exportDigitalCardPng(
   ctx.fillRect(0, 0, w, h);
 
   const pad = Math.round(w * 0.06);
+  const footH = Math.round(h * 0.12);
   const cardX = pad;
-  const cardY = Math.round(h * 0.12);
+  const cardY = Math.round(h * 0.06);
   const cardW = w - pad * 2;
-  const cardH = Math.round(h * 0.62);
+  const cardH = h - cardY - footH - Math.round(h * 0.03);
 
   ctx.fillStyle = '#ffffff';
-  roundRect(ctx, cardX, cardY, cardW, cardH, 32);
+  roundRect(ctx, cardX, cardY, cardW, cardH, 28);
   ctx.fill();
 
+  const imageSrc = cardImageSrc(data);
+  const isCustomImage = Boolean(data.showImage && data.imageUrl);
+  const imageH = imageSrc ? Math.round(cardH * 0.34) : 0;
+  let contentY = cardY + 36;
+
+  if (imageSrc) {
+    const imgX = cardX;
+    const imgY = cardY;
+    ctx.save();
+    roundRect(ctx, imgX, imgY, cardW, imageH + 8, 28);
+    ctx.clip();
+    ctx.fillStyle = '#f3f4f6';
+    ctx.fillRect(imgX, imgY, cardW, imageH + 8);
+    try {
+      const photo = await loadImage(
+        imageSrc.startsWith('/') ? `${window.location.origin}${imageSrc}` : imageSrc,
+      );
+      if (isCustomImage) {
+        drawCoverImage(ctx, photo, imgX, imgY, cardW, imageH + 8);
+      } else {
+        drawContainImage(ctx, photo, imgX, imgY, cardW, imageH + 8, Math.round(w * 0.04));
+      }
+    } catch {
+      ctx.fillStyle = '#e5e7eb';
+      ctx.fillRect(imgX, imgY, cardW, imageH + 8);
+    }
+    ctx.restore();
+    contentY = imgY + imageH + 40;
+  }
+
+  const textPad = 36;
+  const textMaxW = cardW - textPad * 2;
+
   ctx.fillStyle = '#04d361';
-  ctx.font = `bold ${Math.round(w * 0.028)}px system-ui, sans-serif`;
-  ctx.fillText('TRANSPORTE ESCOLAR', cardX + 40, cardY + 56);
+  ctx.font = `bold ${Math.round(w * 0.026)}px system-ui, sans-serif`;
+  ctx.fillText('TRANSPORTE ESCOLAR', cardX + textPad, contentY);
 
   ctx.fillStyle = '#1f2937';
-  ctx.font = `bold ${Math.round(w * 0.065)}px system-ui, sans-serif`;
-  const nameY = cardY + 120;
-  wrapText(ctx, data.displayName, cardX + 40, nameY, cardW - 80, Math.round(w * 0.075));
+  ctx.font = `bold ${Math.round(w * 0.058)}px system-ui, sans-serif`;
+  const nameY = contentY + 48;
+  wrapText(ctx, data.displayName, cardX + textPad, nameY, textMaxW, Math.round(w * 0.07));
 
+  let detailY = nameY + 68;
   if (data.prefixo) {
     ctx.fillStyle = '#8257e5';
-    ctx.font = `600 ${Math.round(w * 0.032)}px system-ui, sans-serif`;
-    ctx.fillText(`Prefixo ${data.prefixo}`, cardX + 40, cardY + 200);
+    ctx.font = `600 ${Math.round(w * 0.03)}px system-ui, sans-serif`;
+    ctx.fillText(`Prefixo ${data.prefixo}`, cardX + textPad, detailY);
+    detailY += 40;
   }
 
   const phone = formatPhoneDisplay(data.phone);
   if (phone) {
     ctx.fillStyle = '#374151';
-    ctx.font = `600 ${Math.round(w * 0.038)}px system-ui, sans-serif`;
-    ctx.fillText(`📱 ${phone}`, cardX + 40, cardY + 252);
+    ctx.font = `600 ${Math.round(w * 0.034)}px system-ui, sans-serif`;
+    ctx.fillText(`📱 ${phone}`, cardX + textPad, detailY);
+    detailY += 48;
   }
 
-  let ty = cardY + 310;
+  let ty = detailY + 4;
   if (data.schools) {
-    ctx.font = `600 ${Math.round(w * 0.026)}px system-ui, sans-serif`;
+    ctx.font = `600 ${Math.round(w * 0.024)}px system-ui, sans-serif`;
     ctx.fillStyle = '#4b5563';
-    ctx.fillText('Escolas', cardX + 40, ty);
-    ty += 36;
-    ctx.font = `${Math.round(w * 0.028)}px system-ui, sans-serif`;
+    ctx.fillText('Escolas', cardX + textPad, ty);
+    ty += 32;
+    ctx.font = `${Math.round(w * 0.026)}px system-ui, sans-serif`;
     ctx.fillStyle = '#6b7280';
-    ty = wrapText(ctx, data.schools, cardX + 40, ty, cardW - 120, 38);
-    ty += 12;
+    ty = wrapText(ctx, data.schools, cardX + textPad, ty, textMaxW, 34);
+    ty += 8;
   }
 
   if (data.neighborhoods) {
-    ctx.font = `600 ${Math.round(w * 0.026)}px system-ui, sans-serif`;
+    ctx.font = `600 ${Math.round(w * 0.024)}px system-ui, sans-serif`;
     ctx.fillStyle = '#4b5563';
-    ctx.fillText('Bairros', cardX + 40, ty);
-    ty += 36;
-    ctx.font = `${Math.round(w * 0.028)}px system-ui, sans-serif`;
-    wrapText(ctx, data.neighborhoods, cardX + 40, ty, cardW - 120, 38);
+    ctx.fillText('Bairros', cardX + textPad, ty);
+    ty += 32;
+    ctx.font = `${Math.round(w * 0.026)}px system-ui, sans-serif`;
+    wrapText(ctx, data.neighborhoods, cardX + textPad, ty, textMaxW, 34);
   }
 
-  const profileUrl = profilePublicUrl(data.profileId);
-  const qrSize = Math.round(w * 0.22);
-  const qrX = cardX + cardW - qrSize - 36;
-  const qrY = cardY + cardH - qrSize - 36;
+  const footerY = h - footH + 8;
+  ctx.fillStyle = '#ffffff';
+  ctx.font = `bold ${Math.round(w * 0.038)}px system-ui, sans-serif`;
+  ctx.fillText('Alô Tio', pad, footerY + 42);
 
-  try {
-    const qr = await loadImage(
-      `https://api.qrserver.com/v1/create-qr-code/?size=${qrSize}x${qrSize}&data=${encodeURIComponent(profileUrl)}`,
-    );
-    ctx.drawImage(qr, qrX, qrY, qrSize, qrSize);
-  } catch {
-    /* QR opcional */
-  }
-
-  ctx.fillStyle = 'rgba(255,255,255,0.95)';
-  const footH = Math.round(h * 0.14);
-  ctx.fillRect(0, h - footH, w, footH);
-
-  ctx.fillStyle = '#8257e5';
-  ctx.font = `bold ${Math.round(w * 0.04)}px system-ui, sans-serif`;
-  ctx.fillText('Alô Tio', pad, h - footH + 50);
-
-  ctx.fillStyle = '#6b7280';
-  ctx.font = `${Math.round(w * 0.024)}px system-ui, sans-serif`;
+  ctx.fillStyle = 'rgba(255,255,255,0.9)';
+  ctx.font = `${Math.round(w * 0.022)}px system-ui, sans-serif`;
   wrapText(
     ctx,
-    data.tagline || 'Cadastrado no Alô Tio — transporte escolar verificado',
+    data.tagline || 'Transporte escolar com segurança e confiança',
     pad,
-    h - footH + 90,
+    footerY + 78,
     w - pad * 2,
-    32,
+    28,
   );
 
   return new Promise((resolve, reject) => {
