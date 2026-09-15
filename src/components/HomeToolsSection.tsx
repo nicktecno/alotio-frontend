@@ -42,20 +42,24 @@ export default function HomeToolsSection() {
           </div>
         </div>
 
-        <div className="grid xl:grid-cols-2 gap-8 lg:gap-10 items-start">
-          <div>
+        <div className="grid xl:grid-cols-2 gap-8 lg:gap-10 items-stretch">
+          <div className="flex flex-col">
             <h3 className="font-heading text-lg font-bold text-gray-800 mb-4 flex items-center gap-2">
               <span className="text-2xl" aria-hidden>🧮</span>
               Quanto cobrar na mensalidade?
             </h3>
-            <MonthlyFeeCalculator variant="compact" />
+            <div className="flex-1">
+              <MonthlyFeeCalculator variant="compact" />
+            </div>
           </div>
-          <div>
+          <div className="flex flex-col">
             <h3 className="font-heading text-lg font-bold text-gray-800 mb-4 flex items-center gap-2">
               <span className="text-2xl" aria-hidden>💳</span>
               Cartão para Instagram e WhatsApp
             </h3>
-            <DigitalCardGenerator variant="compact" />
+            <div className="flex-1">
+              <DigitalCardGenerator variant="compact" />
+            </div>
           </div>
         </div>
       </div>

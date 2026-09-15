@@ -58,7 +58,7 @@ export default function MonthlyFeeCalculator({ variant = 'full' }: Props) {
     <div
       className={
         compact
-          ? 'rounded-2xl border border-secondary/30 bg-white shadow-xl overflow-hidden'
+          ? 'h-full flex flex-col rounded-2xl border border-secondary/30 bg-white shadow-xl overflow-hidden'
           : 'rounded-2xl border border-gray-200 bg-white shadow-lg overflow-hidden'
       }
     >
@@ -80,7 +80,7 @@ export default function MonthlyFeeCalculator({ variant = 'full' }: Props) {
         </p>
       </div>
 
-      <div className="grid lg:grid-cols-2 gap-0">
+      <div className={`grid lg:grid-cols-2 gap-0 ${compact ? 'flex-1' : ''}`}>
         <div className="p-5 sm:p-6 space-y-4 border-b lg:border-b-0 lg:border-r border-gray-100">
           <div className="grid sm:grid-cols-2 gap-4 items-start">
             <Field label="Km rodados por mês" hint="Ida + volta × dias úteis">

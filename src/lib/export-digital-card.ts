@@ -111,6 +111,33 @@ function drawContainImage(
   ctx.drawImage(img, dx, dy, dw, dh);
 }
 
+function drawSection(
+  ctx: CanvasRenderingContext2D,
+  label: string,
+  value: string,
+  x: number,
+  y: number,
+  maxWidth: number,
+  w: number,
+): number {
+  const labelSize = Math.round(w * 0.024);
+  const valueSize = Math.round(w * 0.027);
+  const labelGap = Math.round(w * 0.018);
+  const valueLineH = Math.round(w * 0.038);
+  const sectionGap = Math.round(w * 0.03);
+
+  ctx.font = `600 ${labelSize}px system-ui, sans-serif`;
+  ctx.fillStyle = '#4b5563';
+  ctx.fillText(label, x, y);
+  y += labelGap + labelSize;
+
+  ctx.font = `${valueSize}px system-ui, sans-serif`;
+  ctx.fillStyle = '#6b7280';
+  y = wrapText(ctx, value, x, y, maxWidth, valueLineH);
+
+  return y + sectionGap;
+}
+
 export async function exportDigitalCardPng(
   data: DigitalCardData,
   format: CardFormat,
@@ -123,6 +150,8 @@ export async function exportDigitalCardPng(
   const ctx = canvas.getContext('2d');
   if (!ctx) throw new Error('Canvas não disponível');
 
+  const gap = (mult: number) => Math.round(w * 0.032 * mult);
+
   const grad = ctx.createLinearGradient(0, 0, w, h);
   grad.addColorStop(0, '#5b21b6');
   grad.addColorStop(0.5, '#8257e5');
@@ -131,11 +160,11 @@ export async function exportDigitalCardPng(
   ctx.fillRect(0, 0, w, h);
 
   const pad = Math.round(w * 0.06);
-  const footH = Math.round(h * 0.12);
+  const footH = Math.round(h * 0.13);
   const cardX = pad;
-  const cardY = Math.round(h * 0.06);
+  const cardY = Math.round(h * 0.055);
   const cardW = w - pad * 2;
-  const cardH = h - cardY - footH - Math.round(h * 0.03);
+  const cardH = h - cardY - footH - Math.round(h * 0.035);
 
   ctx.fillStyle = '#ffffff';
   roundRect(ctx, cardX, cardY, cardW, cardH, 28);
@@ -143,97 +172,85 @@ export async function exportDigitalCardPng(
 
   const imageSrc = cardImageSrc(data);
   const isCustomImage = Boolean(data.showImage && data.imageUrl);
-  const imageH = imageSrc ? Math.round(cardH * 0.34) : 0;
-  let contentY = cardY + 36;
+  const imageH = imageSrc ? Math.round(cardH * 0.32) : 0;
+  let y = cardY + gap(1.4);
 
   if (imageSrc) {
     const imgX = cardX;
     const imgY = cardY;
     ctx.save();
-    roundRect(ctx, imgX, imgY, cardW, imageH + 8, 28);
+    roundRect(ctx, imgX, imgY, cardW, imageH + 12, 28);
     ctx.clip();
     ctx.fillStyle = '#f3f4f6';
-    ctx.fillRect(imgX, imgY, cardW, imageH + 8);
+    ctx.fillRect(imgX, imgY, cardW, imageH + 12);
     try {
       const photo = await loadImage(
         imageSrc.startsWith('/') ? `${window.location.origin}${imageSrc}` : imageSrc,
       );
       if (isCustomImage) {
-        drawCoverImage(ctx, photo, imgX, imgY, cardW, imageH + 8);
+        drawCoverImage(ctx, photo, imgX, imgY, cardW, imageH + 12);
       } else {
-        drawContainImage(ctx, photo, imgX, imgY, cardW, imageH + 8, Math.round(w * 0.04));
+        drawContainImage(ctx, photo, imgX, imgY, cardW, imageH + 12, Math.round(w * 0.05));
       }
     } catch {
       ctx.fillStyle = '#e5e7eb';
-      ctx.fillRect(imgX, imgY, cardW, imageH + 8);
+      ctx.fillRect(imgX, imgY, cardW, imageH + 12);
     }
     ctx.restore();
-    contentY = imgY + imageH + 40;
+    y = imgY + imageH + gap(1.8);
   }
 
-  const textPad = 36;
+  const textPad = Math.round(w * 0.04);
+  const textX = cardX + textPad;
   const textMaxW = cardW - textPad * 2;
 
   ctx.fillStyle = '#04d361';
   ctx.font = `bold ${Math.round(w * 0.026)}px system-ui, sans-serif`;
-  ctx.fillText('TRANSPORTE ESCOLAR', cardX + textPad, contentY);
+  ctx.fillText('TRANSPORTE ESCOLAR', textX, y);
+  y += gap(1.3);
 
   ctx.fillStyle = '#1f2937';
-  ctx.font = `bold ${Math.round(w * 0.058)}px system-ui, sans-serif`;
-  const nameY = contentY + 48;
-  wrapText(ctx, data.displayName, cardX + textPad, nameY, textMaxW, Math.round(w * 0.07));
+  ctx.font = `bold ${Math.round(w * 0.056)}px system-ui, sans-serif`;
+  y = wrapText(ctx, data.displayName, textX, y, textMaxW, Math.round(w * 0.072));
+  y += gap(0.6);
 
-  let detailY = nameY + 68;
   if (data.prefixo) {
     ctx.fillStyle = '#8257e5';
     ctx.font = `600 ${Math.round(w * 0.03)}px system-ui, sans-serif`;
-    ctx.fillText(`Prefixo ${data.prefixo}`, cardX + textPad, detailY);
-    detailY += 40;
+    ctx.fillText(`Prefixo ${data.prefixo}`, textX, y);
+    y += gap(1.1);
   }
 
   const phone = formatPhoneDisplay(data.phone);
   if (phone) {
     ctx.fillStyle = '#374151';
     ctx.font = `600 ${Math.round(w * 0.034)}px system-ui, sans-serif`;
-    ctx.fillText(`📱 ${phone}`, cardX + textPad, detailY);
-    detailY += 48;
+    ctx.fillText(`📱 ${phone}`, textX, y);
+    y += gap(1.2);
   }
 
-  let ty = detailY + 4;
   if (data.schools) {
-    ctx.font = `600 ${Math.round(w * 0.024)}px system-ui, sans-serif`;
-    ctx.fillStyle = '#4b5563';
-    ctx.fillText('Escolas', cardX + textPad, ty);
-    ty += 32;
-    ctx.font = `${Math.round(w * 0.026)}px system-ui, sans-serif`;
-    ctx.fillStyle = '#6b7280';
-    ty = wrapText(ctx, data.schools, cardX + textPad, ty, textMaxW, 34);
-    ty += 8;
+    y = drawSection(ctx, 'Escolas', data.schools, textX, y, textMaxW, w);
   }
 
   if (data.neighborhoods) {
-    ctx.font = `600 ${Math.round(w * 0.024)}px system-ui, sans-serif`;
-    ctx.fillStyle = '#4b5563';
-    ctx.fillText('Bairros', cardX + textPad, ty);
-    ty += 32;
-    ctx.font = `${Math.round(w * 0.026)}px system-ui, sans-serif`;
-    wrapText(ctx, data.neighborhoods, cardX + textPad, ty, textMaxW, 34);
+    y = drawSection(ctx, 'Bairros', data.neighborhoods, textX, y, textMaxW, w);
   }
 
-  const footerY = h - footH + 8;
+  const footerY = h - footH + gap(0.5);
   ctx.fillStyle = '#ffffff';
   ctx.font = `bold ${Math.round(w * 0.038)}px system-ui, sans-serif`;
-  ctx.fillText('Alô Tio', pad, footerY + 42);
+  ctx.fillText('Alô Tio', pad, footerY + gap(1.5));
 
-  ctx.fillStyle = 'rgba(255,255,255,0.9)';
+  ctx.fillStyle = 'rgba(255,255,255,0.92)';
   ctx.font = `${Math.round(w * 0.022)}px system-ui, sans-serif`;
   wrapText(
     ctx,
     data.tagline || 'Transporte escolar com segurança e confiança',
     pad,
-    footerY + 78,
+    footerY + gap(2.8),
     w - pad * 2,
-    28,
+    Math.round(w * 0.032),
   );
 
   return new Promise((resolve, reject) => {

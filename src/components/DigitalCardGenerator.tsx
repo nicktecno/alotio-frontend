@@ -77,7 +77,7 @@ export default function DigitalCardGenerator({ variant = 'full' }: Props) {
     }
     setExporting(true);
     try {
-      const blob = await exportDigitalCardPng(exportData, compact ? 'feed' : format);
+      const blob = await exportDigitalCardPng(exportData, format);
       const url = URL.createObjectURL(blob);
       const a = document.createElement('a');
       const slug = data.displayName.replace(/\s+/g, '-').slice(0, 30);
@@ -147,7 +147,7 @@ export default function DigitalCardGenerator({ variant = 'full' }: Props) {
   };
 
   return (
-    <div className="rounded-2xl border border-primary/20 bg-white shadow-xl overflow-hidden">
+    <div className="h-full rounded-2xl border border-primary/20 bg-white shadow-xl overflow-hidden flex flex-col">
       <div className="bg-gradient-to-r from-primary to-primary-600 px-5 py-4 sm:px-6">
         <p className="text-xs font-bold uppercase tracking-widest text-white/80">
           Ferramenta gratuita
@@ -155,21 +155,15 @@ export default function DigitalCardGenerator({ variant = 'full' }: Props) {
         <h3 className="font-heading text-xl sm:text-2xl font-bold text-white mt-1">
           Cartão de visita digital
         </h3>
-        <p className={`text-sm text-white/90 mt-1 ${compact ? 'max-w-xl' : ''}`}>
+        <p className="text-sm text-white/90 mt-1 max-w-xl">
           {compact
-            ? 'Nome, prefixo e WhatsApp — rápido para divulgar.'
+            ? 'Monte seu cartão com escolas, bairros e frase de destaque.'
             : 'Para bio do Instagram, grupos de pais e WhatsApp.'}
         </p>
       </div>
 
-      <div className={compact ? 'p-5 sm:p-6 space-y-4' : 'grid lg:grid-cols-2 gap-0'}>
-        <div
-          className={
-            compact
-              ? 'space-y-4'
-              : 'p-5 sm:p-6 space-y-4 border-b lg:border-b-0 lg:border-r border-gray-100'
-          }
-        >
+      <div className="grid lg:grid-cols-2 gap-0 flex-1">
+        <div className="p-5 sm:p-6 space-y-4 border-b lg:border-b-0 lg:border-r border-gray-100">
           <Field label="Nome / apelido">
             <input
               className={inputClass}
@@ -196,6 +190,49 @@ export default function DigitalCardGenerator({ variant = 'full' }: Props) {
               />
             </Field>
           </div>
+          <Field label="Escolas atendidas">
+            <input
+              className={inputClass}
+              value={data.schools}
+              onChange={(e) => update({ schools: e.target.value })}
+              placeholder="Colégio X, Escola Y"
+            />
+          </Field>
+          <Field label="Bairros">
+            <input
+              className={inputClass}
+              value={data.neighborhoods}
+              onChange={(e) => update({ neighborhoods: e.target.value })}
+              placeholder="Centro, Bairro Z"
+            />
+          </Field>
+          <Field label="Frase de destaque">
+            <input
+              className={inputClass}
+              value={data.tagline}
+              onChange={(e) => update({ tagline: e.target.value })}
+              placeholder="Transporte escolar legalizado"
+            />
+          </Field>
+          <Field label="Formato da imagem">
+            <div className="flex flex-wrap gap-2">
+              {CARD_FORMATS.map((f) => (
+                <button
+                  key={f.id}
+                  type="button"
+                  onClick={() => setFormat(f.id)}
+                  className={`px-3 py-2 rounded-lg text-sm font-semibold transition ${
+                    format === f.id
+                      ? 'bg-primary text-white'
+                      : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+                  }`}
+                >
+                  {f.label}
+                </button>
+              ))}
+            </div>
+          </Field>
+
           {!compact && (
             <Field label="Foto da van ou logo">
               <div className="space-y-2">
@@ -251,117 +288,53 @@ export default function DigitalCardGenerator({ variant = 'full' }: Props) {
               </div>
             </Field>
           )}
-          {!compact && (
-            <>
-              <Field label="Escolas atendidas">
-                <input
-                  className={inputClass}
-                  value={data.schools}
-                  onChange={(e) => update({ schools: e.target.value })}
-                  placeholder="Colégio X, Escola Y"
-                />
-              </Field>
-              <Field label="Bairros">
-                <input
-                  className={inputClass}
-                  value={data.neighborhoods}
-                  onChange={(e) => update({ neighborhoods: e.target.value })}
-                  placeholder="Centro, Bairro Z"
-                />
-              </Field>
-              <Field label="Frase de destaque">
-                <input
-                  className={inputClass}
-                  value={data.tagline}
-                  onChange={(e) => update({ tagline: e.target.value })}
-                  placeholder="Transporte escolar legalizado"
-                />
-              </Field>
-              <Field label="Formato da imagem">
-                <div className="flex flex-wrap gap-2">
-                  {CARD_FORMATS.map((f) => (
-                    <button
-                      key={f.id}
-                      type="button"
-                      onClick={() => setFormat(f.id)}
-                      className={`px-3 py-2 rounded-lg text-sm font-semibold transition ${
-                        format === f.id
-                          ? 'bg-primary text-white'
-                          : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
-                      }`}
-                    >
-                      {f.label}
-                    </button>
-                  ))}
-                </div>
-              </Field>
-            </>
+
+          {compact && (
+            <p className="text-xs text-gray-500">
+              <Link
+                href="/ferramentas/cartao-digital"
+                className="text-primary font-semibold hover:underline"
+              >
+                Abrir gerador completo
+              </Link>
+              {' '}
+              para adicionar foto da van ou logo da empresa.
+            </p>
           )}
         </div>
 
-        <div
-          className={
-            compact
-              ? 'flex items-center gap-4 rounded-xl bg-gray-50 p-4'
-              : 'p-5 sm:p-6 bg-gray-50 flex flex-col gap-4'
-          }
-        >
-          <DigitalCardPreview
-            data={exportData}
-            format={format}
-            compact={compact}
-            className={compact ? 'shrink-0' : undefined}
-          />
-          <div className={compact ? 'min-w-0 flex-1 space-y-2' : 'grid grid-cols-2 gap-2 w-full'}>
+        <div className="p-5 sm:p-6 bg-gray-50 flex flex-col justify-center gap-4">
+          <DigitalCardPreview data={exportData} format={format} />
+          <div className="grid grid-cols-2 gap-2 w-full">
             <button
               type="button"
               onClick={handleDownload}
               disabled={exporting}
-              className={
-                compact
-                  ? 'w-full bg-secondary hover:bg-secondary-600 disabled:opacity-60 text-white font-bold py-2.5 px-4 rounded-lg transition text-sm'
-                  : 'col-span-2 bg-secondary hover:bg-secondary-600 disabled:opacity-60 text-white font-bold py-3 px-4 rounded-lg transition text-sm'
-              }
+              className="col-span-2 bg-secondary hover:bg-secondary-600 disabled:opacity-60 text-white font-bold py-3 px-4 rounded-lg transition text-sm"
             >
               {exporting ? 'Gerando PNG…' : 'Baixar cartão (PNG)'}
             </button>
-            {!compact && (
-              <>
-                <button
-                  type="button"
-                  onClick={copyCaption}
-                  className="bg-white border border-gray-300 hover:bg-gray-50 text-gray-800 font-semibold py-2.5 px-3 rounded-lg text-sm transition"
-                >
-                  Copiar texto
-                </button>
-                <button
-                  type="button"
-                  onClick={copyShareLink}
-                  className="bg-white border border-gray-300 hover:bg-gray-50 text-gray-800 font-semibold py-2.5 px-3 rounded-lg text-sm transition"
-                >
-                  {data.profileId ? 'Copiar perfil' : 'Copiar WhatsApp'}
-                </button>
-                <button
-                  type="button"
-                  onClick={openWhatsApp}
-                  className="col-span-2 bg-[#25D366] hover:bg-[#20bd5a] text-white font-bold py-2.5 px-4 rounded-lg text-sm transition"
-                >
-                  Compartilhar no WhatsApp
-                </button>
-              </>
-            )}
-            {compact && (
-              <p className="text-xs text-gray-500">
-                <Link
-                  href="/ferramentas/cartao-digital"
-                  className="text-primary font-semibold hover:underline"
-                >
-                  Gerador completo
-                </Link>
-                {' '}
-                com foto da van, escolas, bairros e formatos para Stories.
-              </p>
-            )}
+            <button
+              type="button"
+              onClick={copyCaption}
+              className="bg-white border border-gray-300 hover:bg-gray-50 text-gray-800 font-semibold py-2.5 px-3 rounded-lg text-sm transition"
+            >
+              Copiar texto
+            </button>
+            <button
+              type="button"
+              onClick={copyShareLink}
+              className="bg-white border border-gray-300 hover:bg-gray-50 text-gray-800 font-semibold py-2.5 px-3 rounded-lg text-sm transition"
+            >
+              {data.profileId ? 'Copiar perfil' : 'Copiar WhatsApp'}
+            </button>
+            <button
+              type="button"
+              onClick={openWhatsApp}
+              className="col-span-2 bg-[#25D366] hover:bg-[#20bd5a] text-white font-bold py-2.5 px-4 rounded-lg text-sm transition"
+            >
+              Compartilhar no WhatsApp
+            </button>
           </div>
         </div>
       </div>

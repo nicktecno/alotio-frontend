@@ -4,8 +4,6 @@ import { CARD_FORMATS, cardImageSrc, formatPhoneDisplay } from '@/lib/digital-ca
 type Props = {
   data: DigitalCardData;
   format?: CardFormat;
-  /** Versão menor para a home (sem imagem, preview reduzido). */
-  compact?: boolean;
   className?: string;
 };
 
@@ -19,96 +17,72 @@ const FORMAT_ASPECT: Record<CardFormat, string> = {
 export default function DigitalCardPreview({
   data,
   format = 'story',
-  compact = false,
   className = '',
 }: Props) {
   const phone = formatPhoneDisplay(data.phone);
-  const previewFormat = compact ? 'feed' : format;
-  const imageSrc = compact ? null : cardImageSrc(data);
-  const isCustomImage = Boolean(!compact && data.showImage && data.imageUrl);
-  const formatLabel = CARD_FORMATS.find((f) => f.id === previewFormat)?.label ?? 'Stories';
+  const imageSrc = cardImageSrc(data);
+  const isCustomImage = Boolean(data.showImage && data.imageUrl);
+  const formatLabel = CARD_FORMATS.find((f) => f.id === format)?.label ?? 'Stories';
 
   return (
     <div className={className}>
-      {!compact ? (
-        <p className="mb-2 text-center text-xs font-semibold text-gray-500">
-          Preview — {formatLabel}
-        </p>
-      ) : null}
+      <p className="mb-2 text-center text-xs font-semibold text-gray-500">
+        Preview — {formatLabel}
+      </p>
       <div
-        key={`${previewFormat}-${compact}-${data.showImage}-${data.imageUrl ?? 'default'}`}
-        className={`relative mx-auto w-full overflow-hidden rounded-xl bg-gradient-to-br from-primary-700 via-primary to-secondary shadow-lg ${
-          compact ? 'max-w-[150px] aspect-[4/5]' : `max-w-[280px] shadow-xl rounded-2xl ${FORMAT_ASPECT[previewFormat]}`
-        }`}
+        key={`${format}-${data.showImage}-${data.imageUrl ?? 'default'}-${data.schools}-${data.neighborhoods}`}
+        className={`relative mx-auto w-full max-w-[220px] overflow-hidden rounded-2xl bg-gradient-to-br from-primary-700 via-primary to-secondary shadow-xl ${FORMAT_ASPECT[format]}`}
       >
-        <div className={`absolute inset-0 flex flex-col ${compact ? 'p-2' : 'p-3 sm:p-4'}`}>
+        <div className="absolute inset-0 flex flex-col p-3">
           <div className="flex min-h-0 flex-1 flex-col overflow-hidden rounded-lg bg-white">
             {imageSrc ? (
-              <div className="relative h-[38%] min-h-[88px] shrink-0 overflow-hidden bg-gradient-to-b from-gray-100 to-gray-50">
+              <div className="relative h-[34%] min-h-[72px] shrink-0 overflow-hidden bg-gradient-to-b from-gray-100 to-gray-50">
                 <img
                   src={imageSrc}
                   alt="Foto da van ou logo"
                   className={`h-full w-full ${
-                    isCustomImage ? 'object-cover' : 'object-contain p-3'
+                    isCustomImage ? 'object-cover' : 'object-contain p-2'
                   }`}
                 />
               </div>
             ) : null}
 
-            <div className={`flex min-h-0 flex-1 flex-col ${compact ? 'p-2' : 'p-4'}`}>
-              <p
-                className={`font-bold uppercase tracking-widest text-secondary ${
-                  compact ? 'text-[7px]' : 'text-[10px]'
-                }`}
-              >
+            <div className="flex min-h-0 flex-1 flex-col p-3 space-y-1.5">
+              <p className="text-[9px] font-bold uppercase tracking-widest text-secondary">
                 Transporte escolar
               </p>
-              <h3
-                className={`font-heading mt-0.5 font-bold leading-tight text-gray-900 line-clamp-2 ${
-                  compact ? 'text-[11px]' : 'text-xl'
-                }`}
-              >
+              <h3 className="font-heading text-base font-bold leading-tight text-gray-900 line-clamp-2">
                 {data.displayName || 'Seu nome'}
               </h3>
               {data.prefixo ? (
-                <p className={`mt-0.5 font-semibold text-primary ${compact ? 'text-[8px]' : 'text-xs'}`}>
-                  Prefixo {data.prefixo}
-                </p>
+                <p className="text-[10px] font-semibold text-primary">Prefixo {data.prefixo}</p>
               ) : null}
               {phone ? (
-                <p className={`mt-0.5 font-semibold text-gray-700 ${compact ? 'text-[8px]' : 'text-sm'}`}>
-                  📱 {phone}
-                </p>
+                <p className="text-xs font-semibold text-gray-700">📱 {phone}</p>
               ) : null}
 
-              {!compact ? (
-                <div className="mt-2 min-h-0 flex-1 space-y-2 overflow-hidden">
-                  {data.schools ? (
-                    <div>
-                      <p className="text-[10px] font-bold uppercase text-gray-500">Escolas</p>
-                      <p className="text-xs text-gray-600 line-clamp-2">{data.schools}</p>
-                    </div>
-                  ) : null}
-                  {data.neighborhoods ? (
-                    <div>
-                      <p className="text-[10px] font-bold uppercase text-gray-500">Bairros</p>
-                      <p className="text-xs text-gray-600 line-clamp-2">{data.neighborhoods}</p>
-                    </div>
-                  ) : null}
-                </div>
-              ) : null}
+              <div className="mt-1 min-h-0 flex-1 space-y-1.5 overflow-hidden">
+                {data.schools ? (
+                  <div>
+                    <p className="text-[9px] font-bold uppercase text-gray-500">Escolas</p>
+                    <p className="text-[10px] text-gray-600 line-clamp-2 leading-snug">{data.schools}</p>
+                  </div>
+                ) : null}
+                {data.neighborhoods ? (
+                  <div>
+                    <p className="text-[9px] font-bold uppercase text-gray-500">Bairros</p>
+                    <p className="text-[10px] text-gray-600 line-clamp-2 leading-snug">{data.neighborhoods}</p>
+                  </div>
+                ) : null}
+              </div>
             </div>
           </div>
 
-          <div className={`shrink-0 ${compact ? 'mt-1 px-0.5' : 'mt-2 px-1'}`}>
-            <p className={`font-heading font-bold text-white ${compact ? 'text-[9px]' : 'text-sm'}`}>
-              Alô Tio
+          <div className="mt-1.5 shrink-0 px-0.5">
+            <p className="font-heading text-xs font-bold text-white">Alô Tio</p>
+            <p className="text-[9px] text-white/85 line-clamp-2 leading-snug">
+              {data.tagline || 'Transporte escolar legalizado'}
             </p>
-            {!compact ? (
-              <p className="text-[10px] text-white/85 line-clamp-2">
-                {data.tagline || 'Transporte escolar legalizado'}
-              </p>
-            ) : null}
           </div>
         </div>
       </div>
