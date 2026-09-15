@@ -234,10 +234,19 @@ export default function MonthlyFeeCalculator({ variant = 'full' }: Props) {
           <div className="mt-6 flex flex-col sm:flex-row gap-3">
             <Link
               href="/cadastro"
-              className="flex-1 text-center bg-primary hover:bg-primary-600 text-white font-bold py-3 px-4 rounded-lg transition text-sm"
+              className="flex-1 text-center bg-primary hover:bg-primary-600 text-white font-bold py-3 px-4 rounded-lg transition text-sm shadow-sm"
             >
-              Cadastrar e salvar simulação
+              Cadastrar e salvar
             </Link>
+            {compact && (
+              <Link
+                href="/ferramentas/calculadora-mensalidade"
+                className="flex-1 text-center border-2 border-secondary bg-secondary/10 hover:bg-secondary hover:text-white text-secondary-900 font-bold py-3 px-4 rounded-lg transition text-sm flex items-center justify-center gap-1.5 shadow-sm"
+              >
+                <span>Calculadora completa</span>
+                <span>→</span>
+              </Link>
+            )}
             {!compact && (
               <Link
                 href="/seguro"
