@@ -84,6 +84,18 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       changeFrequency: 'weekly',
       priority: 0.9,
     },
+    {
+      url: `${siteUrl}/ferramentas/calculadora-mensalidade`,
+      lastModified: new Date(),
+      changeFrequency: 'monthly',
+      priority: 0.88,
+    },
+    {
+      url: `${siteUrl}/ferramentas/cartao-digital`,
+      lastModified: new Date(),
+      changeFrequency: 'monthly',
+      priority: 0.88,
+    },
   ];
 
   const guiaPages: MetadataRoute.Sitemap = ARTICLES.map((a) => ({

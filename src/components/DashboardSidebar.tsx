@@ -58,6 +58,30 @@ export default function DashboardSidebar({ isOpen, onClose }: Props) {
           <p className="px-3 mb-1.5 text-[11px] font-semibold uppercase tracking-wide text-gray-500">
             Ferramentas adicionais
           </p>
+          <Link
+            href="/ferramentas/cartao-digital"
+            onClick={onClose}
+            className={`flex items-center gap-3 px-3 py-2 rounded-lg text-sm font-medium transition ${
+              linkIsActive(pathname, '/ferramentas/cartao-digital')
+                ? 'bg-primary-50 text-primary border border-primary-200'
+                : 'text-gray-500 hover:bg-gray-50 hover:text-primary-800'
+            }`}
+          >
+            <span className="text-lg shrink-0">💳</span>
+            <span className="leading-snug">Cartão digital</span>
+          </Link>
+          <Link
+            href="/ferramentas/calculadora-mensalidade"
+            onClick={onClose}
+            className={`flex items-center gap-3 px-3 py-2 rounded-lg text-sm font-medium transition ${
+              linkIsActive(pathname, '/ferramentas/calculadora-mensalidade')
+                ? 'bg-primary-50 text-primary border border-primary-200'
+                : 'text-gray-500 hover:bg-gray-50 hover:text-primary-800'
+            }`}
+          >
+            <span className="text-lg shrink-0">🧮</span>
+            <span className="leading-snug">Calculadora de preço</span>
+          </Link>
           {meuTransporteLinks.map((item) => (
             <Link
               key={item.href}

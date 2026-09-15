@@ -6,6 +6,7 @@ import FeaturedStores from '@/components/FeaturedStores';
 import PartnerSchoolsCarousel from '@/components/PartnerSchoolsCarousel';
 import ProductCarousel from '@/components/ProductCarousel';
 import AdSlot from '@/components/AdSlot';
+import HomeToolsSection from '@/components/HomeToolsSection';
 import { ARTICLES } from '@/lib/articles-data';
 import { SEO_SITE_DESCRIPTION, SEO_SITE_TITLE } from '@/lib/seo-copy';
 
@@ -54,6 +55,14 @@ export default function Home() {
         acceptedAnswer: {
           '@type': 'Answer',
           text: 'Crie sua conta gratuitamente, preencha seu perfil com prefixo, escolas atendidas e bairros. Envie seu documento profissional para verificação. Após aprovação, seu perfil ficará visível para pais que buscam transporte escolar na sua região.',
+        },
+      },
+      {
+        '@type': 'Question',
+        name: 'Quanto cobrar de mensalidade no transporte escolar?',
+        acceptedAnswer: {
+          '@type': 'Answer',
+          text: 'Use a calculadora gratuita do Alô Tio: informe quilometragem, consumo da van, combustível, manutenção, seguro e margem de lucro para obter um valor sugerido por assento. Acesse em alotio.com.br/ferramentas/calculadora-mensalidade.',
         },
       },
     ],
@@ -156,6 +165,8 @@ export default function Home() {
             </div>
           </div>
         </section>
+
+        <HomeToolsSection />
 
         <section className="py-16 bg-white border-t border-gray-100">
           <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
