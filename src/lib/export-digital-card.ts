@@ -11,6 +11,10 @@ function loadImage(src: string): Promise<HTMLImageElement> {
   });
 }
 
+/**
+ * Quebra texto em múltiplas linhas com textBaseline = 'top'.
+ * Retorna a coordenada Y final (abaixo da última linha renderizada).
+ */
 function wrapText(
   ctx: CanvasRenderingContext2D,
   text: string,
@@ -119,20 +123,21 @@ function drawSection(
   y: number,
   maxWidth: number,
   w: number,
+  scale: number = 1,
 ): number {
-  const labelSize = Math.round(w * 0.024);
-  const valueSize = Math.round(w * 0.027);
-  const labelGap = Math.round(w * 0.018);
-  const valueLineH = Math.round(w * 0.038);
-  const sectionGap = Math.round(w * 0.03);
+  const labelSize = Math.round(w * 0.024 * scale);
+  const valueSize = Math.round(w * 0.03 * scale);
+  const labelGap = Math.round(w * 0.012 * scale);
+  const valueLineH = Math.round(valueSize * 1.35);
+  const sectionGap = Math.round(w * 0.032 * scale);
 
-  ctx.font = `600 ${labelSize}px system-ui, sans-serif`;
-  ctx.fillStyle = '#4b5563';
-  ctx.fillText(label, x, y);
-  y += labelGap + labelSize;
-
-  ctx.font = `${valueSize}px system-ui, sans-serif`;
+  ctx.font = `bold ${labelSize}px system-ui, -apple-system, sans-serif`;
   ctx.fillStyle = '#6b7280';
+  ctx.fillText(label.toUpperCase(), x, y);
+  y += labelSize + labelGap;
+
+  ctx.font = `500 ${valueSize}px system-ui, -apple-system, sans-serif`;
+  ctx.fillStyle = '#1f2937';
   y = wrapText(ctx, value, x, y, maxWidth, valueLineH);
 
   return y + sectionGap;
@@ -150,8 +155,7 @@ export async function exportDigitalCardPng(
   const ctx = canvas.getContext('2d');
   if (!ctx) throw new Error('Canvas não disponível');
 
-  const gap = (mult: number) => Math.round(w * 0.032 * mult);
-
+  // Gradiente de fundo sofisticado (roxo/verde Alô Tio)
   const grad = ctx.createLinearGradient(0, 0, w, h);
   grad.addColorStop(0, '#5b21b6');
   grad.addColorStop(0.5, '#8257e5');
@@ -159,12 +163,13 @@ export async function exportDigitalCardPng(
   ctx.fillStyle = grad;
   ctx.fillRect(0, 0, w, h);
 
-  const pad = Math.round(w * 0.06);
-  const footH = Math.round(h * 0.13);
+  // Dimensões do cartão branco central
+  const pad = Math.round(w * 0.055);
+  const footH = Math.round(h * 0.11);
   const cardX = pad;
-  const cardY = Math.round(h * 0.055);
+  const cardY = Math.round(h * 0.045);
   const cardW = w - pad * 2;
-  const cardH = h - cardY - footH - Math.round(h * 0.035);
+  const cardH = h - cardY - footH - Math.round(h * 0.025);
 
   ctx.fillStyle = '#ffffff';
   roundRect(ctx, cardX, cardY, cardW, cardH, 28);
@@ -172,85 +177,123 @@ export async function exportDigitalCardPng(
 
   const imageSrc = cardImageSrc(data);
   const isCustomImage = Boolean(data.showImage && data.imageUrl);
-  const imageH = imageSrc ? Math.round(cardH * 0.32) : 0;
-  let y = cardY + gap(1.4);
+  const imageH = imageSrc ? Math.round(cardH * 0.35) : 0;
+
+  // Garantir textBaseline top para que o espaçamento seja exato e previsível
+  ctx.textBaseline = 'top';
+
+  let y = cardY;
 
   if (imageSrc) {
     const imgX = cardX;
     const imgY = cardY;
     ctx.save();
-    roundRect(ctx, imgX, imgY, cardW, imageH + 12, 28);
+    roundRect(ctx, imgX, imgY, cardW, imageH, 28);
     ctx.clip();
     ctx.fillStyle = '#f3f4f6';
-    ctx.fillRect(imgX, imgY, cardW, imageH + 12);
+    ctx.fillRect(imgX, imgY, cardW, imageH);
     try {
       const photo = await loadImage(
         imageSrc.startsWith('/') ? `${window.location.origin}${imageSrc}` : imageSrc,
       );
       if (isCustomImage) {
-        drawCoverImage(ctx, photo, imgX, imgY, cardW, imageH + 12);
+        drawCoverImage(ctx, photo, imgX, imgY, cardW, imageH);
       } else {
-        drawContainImage(ctx, photo, imgX, imgY, cardW, imageH + 12, Math.round(w * 0.05));
+        drawContainImage(ctx, photo, imgX, imgY, cardW, imageH, Math.round(w * 0.05));
       }
     } catch {
       ctx.fillStyle = '#e5e7eb';
-      ctx.fillRect(imgX, imgY, cardW, imageH + 12);
+      ctx.fillRect(imgX, imgY, cardW, imageH);
     }
     ctx.restore();
-    y = imgY + imageH + gap(1.8);
+    y = imgY + imageH + Math.round(w * 0.05);
+  } else {
+    // Quando não tem imagem: respiro superior generoso dentro do cartão
+    y = cardY + Math.round(w * 0.08);
   }
 
-  const textPad = Math.round(w * 0.04);
+  // Fator de escala vertical para formatos longos (ex.: Story 9:16) sem foto
+  const isTall = h / w > 1.35;
+  const vScale = isTall && !imageSrc ? 1.25 : 1.0;
+
+  const textPad = Math.round(w * 0.06);
   const textX = cardX + textPad;
   const textMaxW = cardW - textPad * 2;
 
-  ctx.fillStyle = '#04d361';
-  ctx.font = `bold ${Math.round(w * 0.026)}px system-ui, sans-serif`;
+  // 1. Subtítulo / Categoria
+  const subSize = Math.round(w * 0.026 * vScale);
+  ctx.fillStyle = '#059669';
+  ctx.font = `bold ${subSize}px system-ui, -apple-system, sans-serif`;
   ctx.fillText('TRANSPORTE ESCOLAR', textX, y);
-  y += gap(1.3);
+  y += subSize + Math.round(w * 0.02 * vScale);
 
-  ctx.fillStyle = '#1f2937';
-  ctx.font = `bold ${Math.round(w * 0.056)}px system-ui, sans-serif`;
-  y = wrapText(ctx, data.displayName, textX, y, textMaxW, Math.round(w * 0.072));
-  y += gap(0.6);
+  // 2. Nome do Tio / Empresa
+  const titleSize = Math.round(w * 0.062 * vScale);
+  const titleLineH = Math.round(titleSize * 1.22);
+  ctx.fillStyle = '#111827';
+  ctx.font = `bold ${titleSize}px system-ui, -apple-system, sans-serif`;
+  y = wrapText(ctx, data.displayName || 'Condutor Escolar', textX, y, textMaxW, titleLineH);
+  y += Math.round(w * 0.028 * vScale);
 
+  // 3. Prefixo (se houver)
   if (data.prefixo) {
-    ctx.fillStyle = '#8257e5';
-    ctx.font = `600 ${Math.round(w * 0.03)}px system-ui, sans-serif`;
+    const prefixSize = Math.round(w * 0.032 * vScale);
+    ctx.fillStyle = '#7c3aed';
+    ctx.font = `bold ${prefixSize}px system-ui, -apple-system, sans-serif`;
     ctx.fillText(`Prefixo ${data.prefixo}`, textX, y);
-    y += gap(1.1);
+    y += prefixSize + Math.round(w * 0.022 * vScale);
   }
 
+  // 4. Telefone / WhatsApp
   const phone = formatPhoneDisplay(data.phone);
   if (phone) {
-    ctx.fillStyle = '#374151';
-    ctx.font = `600 ${Math.round(w * 0.034)}px system-ui, sans-serif`;
+    const phoneSize = Math.round(w * 0.038 * vScale);
+    ctx.fillStyle = '#1f2937';
+    ctx.font = `bold ${phoneSize}px system-ui, -apple-system, sans-serif`;
     ctx.fillText(`📱 ${phone}`, textX, y);
-    y += gap(1.2);
+    y += phoneSize + Math.round(w * 0.035 * vScale);
   }
 
+  // Linha divisória suave se houver escolas ou bairros
+  if (data.schools || data.neighborhoods) {
+    ctx.strokeStyle = '#f3f4f6';
+    ctx.lineWidth = Math.round(w * 0.003);
+    ctx.beginPath();
+    ctx.moveTo(textX, y);
+    ctx.lineTo(textX + textMaxW, y);
+    ctx.stroke();
+    y += Math.round(w * 0.032 * vScale);
+  }
+
+  // 5. Seção de Escolas
   if (data.schools) {
-    y = drawSection(ctx, 'Escolas', data.schools, textX, y, textMaxW, w);
+    y = drawSection(ctx, 'Escolas', data.schools, textX, y, textMaxW, w, vScale);
   }
 
+  // 6. Seção de Bairros
   if (data.neighborhoods) {
-    y = drawSection(ctx, 'Bairros', data.neighborhoods, textX, y, textMaxW, w);
+    y = drawSection(ctx, 'Bairros', data.neighborhoods, textX, y, textMaxW, w, vScale);
   }
 
-  const footerY = h - footH + gap(0.5);
-  ctx.fillStyle = '#ffffff';
-  ctx.font = `bold ${Math.round(w * 0.038)}px system-ui, sans-serif`;
-  ctx.fillText('Alô Tio', pad, footerY + gap(1.5));
+  // Rodapé do Cartão (fora do card branco, no gradiente)
+  const footerY = h - footH + Math.round(h * 0.015);
+  ctx.textBaseline = 'top';
 
+  const logoSize = Math.round(w * 0.038);
+  ctx.fillStyle = '#ffffff';
+  ctx.font = `bold ${logoSize}px system-ui, -apple-system, sans-serif`;
+  ctx.fillText('Alô Tio', pad, footerY);
+
+  const tagSize = Math.round(w * 0.022);
   ctx.fillStyle = 'rgba(255,255,255,0.92)';
-  ctx.font = `${Math.round(w * 0.022)}px system-ui, sans-serif`;
+  ctx.font = `500 ${tagSize}px system-ui, -apple-system, sans-serif`;
   wrapText(
     ctx,
     data.tagline || 'Transporte escolar com segurança e confiança',
     pad,
-    footerY + gap(2.8),
+    footerY + logoSize + Math.round(w * 0.015),
     w - pad * 2,
-    Math.round(w * 0.032),
+    Math.round(tagSize * 1.35),
   );
 
   return new Promise((resolve, reject) => {
