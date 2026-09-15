@@ -326,9 +326,9 @@ export default function Home() {
               </div>
               <Link
                 href="/seguro"
-                className="flex-shrink-0 inline-flex items-center gap-2 bg-orange-500 hover:bg-orange-600 text-white font-bold px-7 py-3 rounded-xl text-sm transition shadow-lg shadow-orange-500/20 w-full justify-center sm:w-auto"
+                className="flex-shrink-0 inline-flex items-center justify-center text-center gap-2 bg-orange-500 hover:bg-orange-600 text-white font-bold px-7 py-3 rounded-xl text-sm transition shadow-lg shadow-orange-500/20 w-full sm:w-auto"
               >
-                🛡️ Ver parceria
+                🛡️ Ver proteção veicular
               </Link>
             </div>
           </div>

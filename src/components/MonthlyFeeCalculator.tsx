@@ -234,14 +234,14 @@ export default function MonthlyFeeCalculator({ variant = 'full' }: Props) {
           <div className="mt-6 flex flex-col sm:flex-row gap-3">
             <Link
               href="/cadastro"
-              className="flex-1 text-center bg-primary hover:bg-primary-600 text-white font-bold py-3 px-4 rounded-lg transition text-sm shadow-sm"
+              className="flex-1 flex items-center justify-center text-center bg-primary hover:bg-primary-600 text-white font-bold py-3 px-4 rounded-lg transition text-sm shadow-sm"
             >
               Cadastrar e salvar
             </Link>
             {compact && (
               <Link
                 href="/ferramentas/calculadora-mensalidade"
-                className="flex-1 text-center border-2 border-secondary bg-secondary/10 hover:bg-secondary hover:text-white text-secondary-900 font-bold py-3 px-4 rounded-lg transition text-sm flex items-center justify-center gap-1.5 shadow-sm"
+                className="flex-1 border-2 border-secondary bg-secondary/10 hover:bg-secondary hover:text-white text-secondary-900 font-bold py-3 px-4 rounded-lg transition text-sm flex items-center justify-center text-center gap-1.5 shadow-sm"
               >
                 <span>Calculadora completa</span>
                 <span>→</span>
@@ -250,7 +250,7 @@ export default function MonthlyFeeCalculator({ variant = 'full' }: Props) {
             {!compact && (
               <Link
                 href="/seguro"
-                className="flex-1 text-center border border-orange-300 bg-orange-50 text-orange-900 hover:bg-orange-100 font-bold py-3 px-4 rounded-lg transition text-sm"
+                className="flex-1 flex items-center justify-center text-center border border-orange-300 bg-orange-50 text-orange-900 hover:bg-orange-100 font-bold py-3 px-4 rounded-lg transition text-sm shadow-sm"
               >
                 Ver proteção veicular
               </Link>
