@@ -290,18 +290,15 @@ export default function DigitalCardGenerator({ variant = 'full' }: Props) {
           )}
 
           {compact && (
-            <div className="rounded-xl border border-secondary/30 bg-secondary/10 p-3 text-xs text-gray-800 flex flex-col sm:flex-row items-center justify-between gap-2.5 shadow-sm">
-              <span className="font-medium text-center sm:text-left">
-                📷 Quer adicionar a <strong>foto da sua van</strong> ou <strong>logomarca</strong> no cartão?
-              </span>
+            <p className="text-xs text-gray-500 pt-1">
               <Link
                 href="/ferramentas/cartao-digital"
-                className="shrink-0 bg-secondary hover:bg-secondary-600 text-white font-bold px-3.5 py-1.5 rounded-lg transition text-xs shadow-sm flex items-center gap-1"
+                className="text-secondary-800 font-bold hover:underline inline-flex items-center gap-1"
               >
-                <span>Gerador completo</span>
-                <span>→</span>
-              </Link>
-            </div>
+                Abrir gerador completo →
+              </Link>{' '}
+              para adicionar foto da van ou logo da empresa.
+            </p>
           )}
         </div>
 
