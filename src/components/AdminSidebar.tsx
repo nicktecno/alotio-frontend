@@ -7,6 +7,7 @@ const links = [
   { href: '/admin', label: 'Dashboard', icon: '📊' },
   { href: '/admin/contatos', label: 'Mensagens', icon: '✉️' },
   { href: '/admin/whatsapp', label: 'WhatsApp', icon: '💬' },
+  { href: '/admin/disparador', label: 'Disparador SMS/Zap', icon: '📲' },
   { href: '/admin/avaliacoes', label: 'Avaliações', icon: '⭐' },
   { href: '/admin/anuncios', label: 'Anúncios', icon: '🏷️' },
   { href: '/admin/lojas', label: 'Lojas', icon: '🏪' },
