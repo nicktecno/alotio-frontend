@@ -18,33 +18,48 @@ interface ContactProgress {
   };
 }
 
+const MESSAGE_FOOTER =
+  ' Este cadastro foi feito para acelerar o processo da plataforma e é gratuito.';
+
 const TEMPLATE_PRESETS = [
   {
     id: 'credentials',
     name: 'Acesso com Login e Senha (Recomendado)',
-    text: 'Olá {nome}! Seu perfil no Alô Tio está ativo para pais encontrarem seu transporte escolar. Acesse https://alotio.com.br/login com Usuário: {usuario} e Senha: {senha}. Qualquer dúvida estamos à disposição!',
+    text:
+      'Olá {nome}! Seu perfil no Alô Tio está ativo para pais encontrarem seu transporte escolar. Acesse https://alotio.com.br/login com Login (seu telefone): {usuario} e Senha: {senha}. Qualquer dúvida estamos à disposição!',
   },
   {
     id: 'santos-divulgacao',
     name: 'Divulgação Geral (sem senha)',
-    text: 'Olá {nome}! Seu cadastro de transporte escolar no Alô Tio já está no ar para famílias da sua região encontrarem suas rotas. Confira em https://alotio.com.br/tios - Dúvidas no WhatsApp (13) 99107-8953.',
+    text:
+      'Olá {nome}! Seu cadastro de transporte escolar no Alô Tio já está no ar para famílias da sua região encontrarem suas rotas. Confira em https://alotio.com.br/tios - Dúvidas no WhatsApp (13) 99107-8953.',
   },
   {
     id: 'short-sms',
     name: 'SMS Curto (Até 160 caracteres)',
-    text: 'Ola {nome}! Acesse seu painel no Alo Tio: https://alotio.com.br/login com Usuario: {usuario} e Senha: {senha}. Dúvidas: contato@alotio.com.br',
+    text:
+      'Ola {nome}! Alo Tio: https://alotio.com.br/login Login (telefone): {usuario} Senha: {senha}.',
   },
   {
     id: 'vagas-ano',
     name: 'Atualização de Vagas e Escolas',
-    text: 'Olá {nome}! Estamos atualizando as vagas de transporte escolar no Alô Tio para novos pais. Acesse https://alotio.com.br/login com Login: {usuario} e Senha: {senha} para atualizar seu perfil.',
+    text:
+      'Olá {nome}! Atualize seu perfil no Alô Tio: https://alotio.com.br/login Login (telefone): {usuario} Senha: {senha}.',
   },
   {
     id: 'custom',
     name: 'Personalizado',
-    text: 'Olá {nome}! Acesse seu painel no Alô Tio: https://alotio.com.br/login (Login: {usuario} | Senha: {senha})',
+    text:
+      'Olá {nome}! Acesse https://alotio.com.br/login — Login (telefone): {usuario} | Senha: {senha}',
   },
 ];
+
+/** Login exibido na mensagem: telefone com DDD (só dígitos), mais fácil que e-mail. */
+function loginForContact(contact: ContactItem): string {
+  const phoneInfo = cleanPhoneForDispatch(contact.telefoneRaw || contact.telefone);
+  if (phoneInfo.digits) return phoneInfo.digits;
+  return String(contact.telefone || '').replace(/\D/g, '');
+}
 
 function cleanPhoneForDispatch(raw: string): { digits: string; formatted: string; isValid: boolean } {
   if (!raw) return { digits: '', formatted: '', isValid: false };
@@ -168,9 +183,15 @@ export default function AdminDisparadorPage() {
     [selectedListId],
   );
 
+  /** Fila ativa: enviados saem da lista definitivamente. */
+  const queueContacts = useMemo(() => {
+    return currentList.contacts.filter((c) => progress[c.id]?.status !== 'sent');
+  }, [currentList.contacts, progress]);
+
   const saveCurrentIndex = useCallback(
     (idx: number) => {
-      const clamped = Math.max(0, Math.min(idx, currentList.contacts.length - 1));
+      const maxIdx = Math.max(0, queueContacts.length - 1);
+      const clamped = Math.max(0, Math.min(idx, maxIdx));
       setCurrentIndex(clamped);
       try {
         localStorage.setItem(`alotio_disparador_idx_${selectedListId}`, String(clamped));
@@ -178,8 +199,18 @@ export default function AdminDisparadorPage() {
         /* ignore */
       }
     },
-    [currentList.contacts.length, selectedListId],
+    [queueContacts.length, selectedListId],
   );
+
+  useEffect(() => {
+    if (queueContacts.length === 0) {
+      if (currentIndex !== 0) setCurrentIndex(0);
+      return;
+    }
+    if (currentIndex >= queueContacts.length) {
+      saveCurrentIndex(queueContacts.length - 1);
+    }
+  }, [queueContacts.length, currentIndex, saveCurrentIndex]);
 
   // Statistics
   const stats = useMemo(() => {
@@ -191,13 +222,16 @@ export default function AdminDisparadorPage() {
       if (p?.status === 'sent') sent++;
       else if (p?.status === 'skipped') skipped++;
     }
-    const pending = Math.max(0, total - sent - skipped);
+    const remaining = queueContacts.length;
+    const pending = queueContacts.filter(
+      (c) => !progress[c.id] || progress[c.id]?.status === 'pending',
+    ).length;
     const percent = total > 0 ? Math.round((sent / total) * 100) : 0;
-    return { total, sent, skipped, pending, percent };
-  }, [currentList.contacts, progress]);
+    return { total, sent, skipped, pending, remaining, percent };
+  }, [currentList.contacts, progress, queueContacts]);
 
-  // Current contact
-  const currentContact: ContactItem | undefined = currentList.contacts[currentIndex];
+  // Current contact (somente na fila, sem enviados)
+  const currentContact: ContactItem | undefined = queueContacts[currentIndex];
   const currentContactStatus: ContactStatus = currentContact
     ? progress[currentContact.id]?.status || 'pending'
     : 'pending';
@@ -207,13 +241,17 @@ export default function AdminDisparadorPage() {
     (template: string, contact?: ContactItem): string => {
       if (!contact) return '';
       let text = template;
+      const login = loginForContact(contact);
       text = text.replace(/{nome}/g, contact.nome || 'Transportador(a)');
       text = text.replace(/{telefone}/g, contact.telefone || '');
-      text = text.replace(/{usuario}/g, contact.usuario || contact.telefone || '');
+      text = text.replace(/{usuario}/g, login || '(seu telefone)');
       text = text.replace(/{senha}/g, contact.senha || '(sua senha)');
       text = text.replace(/{prefixo}/g, contact.prefixo || '');
       text = text.replace(/{cidade}/g, contact.cidade || '');
       text = text.replace(/{link}/g, 'https://alotio.com.br/login');
+      if (!text.includes('cadastro foi feito para acelerar')) {
+        text += MESSAGE_FOOTER;
+      }
       return text;
     },
     [],
@@ -242,10 +280,7 @@ export default function AdminDisparadorPage() {
 
     if (autoAdvance) {
       updateContactStatus(currentContact.id, 'sent', 'sms');
-      if (currentIndex < currentList.contacts.length - 1) {
-        saveCurrentIndex(currentIndex + 1);
-      }
-      toast.success('SMS aberto! Avançando para o próximo...', { duration: 2500 });
+      toast.success('SMS aberto! Contato removido da fila.', { duration: 2500 });
     }
   };
 
@@ -263,10 +298,7 @@ export default function AdminDisparadorPage() {
 
     if (autoAdvance) {
       updateContactStatus(currentContact.id, 'sent', 'whatsapp');
-      if (currentIndex < currentList.contacts.length - 1) {
-        saveCurrentIndex(currentIndex + 1);
-      }
-      toast.success('WhatsApp aberto! Avançando para o próximo...', { duration: 2500 });
+      toast.success('WhatsApp aberto! Contato removido da fila.', { duration: 2500 });
     }
   };
 
@@ -274,17 +306,14 @@ export default function AdminDisparadorPage() {
   const handleMarkSent = () => {
     if (!currentContact) return;
     updateContactStatus(currentContact.id, 'sent', 'manual');
-    if (currentIndex < currentList.contacts.length - 1) {
-      saveCurrentIndex(currentIndex + 1);
-    }
-    toast.success('Marcado como enviado!');
+    toast.success('Enviado! Removido da fila.');
   };
 
   // Action: Skip contact
   const handleSkip = () => {
     if (!currentContact) return;
     updateContactStatus(currentContact.id, 'skipped');
-    if (currentIndex < currentList.contacts.length - 1) {
+    if (currentIndex < queueContacts.length - 1) {
       saveCurrentIndex(currentIndex + 1);
     }
     toast('Contato pulado', { icon: '⏭️' });
@@ -335,7 +364,7 @@ export default function AdminDisparadorPage() {
           telefone: phone.formatted || tel,
           telefoneRaw: phone.digits ? `55${phone.digits}` : tel,
           telefoneValido: phone.isValid,
-          usuario,
+          usuario: usuario || phone.digits,
           senha,
         });
       }
@@ -371,6 +400,7 @@ export default function AdminDisparadorPage() {
     return currentList.contacts.filter((c) => {
       const p = progress[c.id];
       const status = p?.status || 'pending';
+      if (statusFilter === 'all' && status === 'sent') return false;
       if (statusFilter !== 'all' && status !== statusFilter) return false;
       if (searchQuery) {
         const q = searchQuery.toLowerCase();
@@ -436,7 +466,7 @@ export default function AdminDisparadorPage() {
             </div>
             <div className="flex items-center gap-3 text-xs text-gray-500">
               <span className="text-amber-600 font-medium">{stats.skipped} pulados</span>
-              <span className="text-gray-500">{stats.pending} restantes</span>
+              <span className="text-gray-500">{stats.remaining} na fila</span>
             </div>
           </div>
           <div className="w-full bg-gray-100 rounded-full h-3 overflow-hidden flex">
@@ -503,6 +533,23 @@ export default function AdminDisparadorPage() {
             <div className="bg-white rounded-2xl p-8 text-center border border-gray-200 text-gray-500">
               Nenhum contato encontrado nesta lista.
             </div>
+          ) : queueContacts.length === 0 ? (
+            <div className="bg-white rounded-2xl p-8 text-center border border-gray-200 space-y-4">
+              <span className="text-4xl">🎉</span>
+              <h3 className="text-xl font-bold text-gray-900">Fila concluída!</h3>
+              <p className="text-sm text-gray-600 max-w-md mx-auto">
+                Todos os contatos foram enviados ({stats.sent} no total). Os enviados saem da fila
+                definitivamente.
+              </p>
+              <div className="flex justify-center gap-3 pt-2">
+                <button
+                  onClick={handleResetProgress}
+                  className="px-4 py-2 bg-red-50 hover:bg-red-100 text-red-600 rounded-xl font-semibold text-sm transition"
+                >
+                  Reiniciar disparos
+                </button>
+              </div>
+            </div>
           ) : !currentContact ? (
             <div className="bg-white rounded-2xl p-8 text-center border border-gray-200 space-y-4">
               <span className="text-4xl">🎉</span>
@@ -530,14 +577,9 @@ export default function AdminDisparadorPage() {
               {/* Card Navigation and Status */}
               <div className="flex items-center justify-between">
                 <span className="text-xs font-bold uppercase tracking-wider text-gray-400">
-                  Contato {currentIndex + 1} de {currentList.contacts.length}
+                  Contato {currentIndex + 1} de {queueContacts.length}
                 </span>
                 <div className="flex items-center gap-2">
-                  {currentContactStatus === 'sent' && (
-                    <span className="bg-green-100 text-green-800 text-xs font-bold px-3 py-1 rounded-full flex items-center gap-1">
-                      ✓ Já enviado
-                    </span>
-                  )}
                   {currentContactStatus === 'skipped' && (
                     <span className="bg-amber-100 text-amber-800 text-xs font-bold px-3 py-1 rounded-full flex items-center gap-1">
                       ⏭ Pulado
@@ -588,18 +630,20 @@ export default function AdminDisparadorPage() {
                 </div>
 
                 {/* Credentials details (if any) */}
-                {(currentContact.usuario || currentContact.senha) && (
+                {(loginForContact(currentContact) || currentContact.senha) && (
                   <div className="mt-4 pt-4 border-t border-primary-200/50 grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs">
-                    {currentContact.usuario && (
+                    {loginForContact(currentContact) && (
                       <div className="bg-white/80 p-2.5 rounded-xl border border-primary-100 flex items-center justify-between">
                         <div>
-                          <span className="text-gray-400 block font-semibold">USUÁRIO / LOGIN:</span>
-                          <span className="font-mono font-bold text-gray-800 break-all">{currentContact.usuario}</span>
+                          <span className="text-gray-400 block font-semibold">LOGIN (TELEFONE):</span>
+                          <span className="font-mono font-bold text-gray-800 break-all">
+                            {loginForContact(currentContact)}
+                          </span>
                         </div>
                         <button
                           onClick={() => {
-                            navigator.clipboard.writeText(currentContact.usuario || '');
-                            toast.success('Usuário copiado!');
+                            navigator.clipboard.writeText(loginForContact(currentContact));
+                            toast.success('Login copiado!');
                           }}
                           className="text-primary hover:text-primary-700 p-1"
                         >
@@ -697,7 +741,7 @@ export default function AdminDisparadorPage() {
 
                   <button
                     onClick={() => saveCurrentIndex(currentIndex + 1)}
-                    disabled={currentIndex >= currentList.contacts.length - 1}
+                    disabled={currentIndex >= queueContacts.length - 1}
                     className="px-3 sm:px-4 py-2.5 rounded-xl border border-gray-200 text-gray-700 font-semibold text-xs sm:text-sm hover:bg-gray-50 disabled:opacity-40 disabled:cursor-not-allowed transition"
                   >
                     Próximo ▶
@@ -707,7 +751,9 @@ export default function AdminDisparadorPage() {
 
               {/* Auto advance toggle */}
               <div className="pt-2 flex items-center justify-between bg-gray-50 p-3 rounded-xl text-xs text-gray-600">
-                <span>Modo rápido: avançar para o próximo contato automaticamente ao clicar em SMS ou WhatsApp</span>
+                <span>
+                  Modo rápido: ao enviar por SMS ou WhatsApp, marca como enviado e remove o contato da fila
+                </span>
                 <label className="relative inline-flex items-center cursor-pointer">
                   <input
                     type="checkbox"
@@ -758,7 +804,7 @@ export default function AdminDisparadorPage() {
                       : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
                   }`}
                 >
-                  {s === 'all' && `Todos (${stats.total})`}
+                  {s === 'all' && `Na fila (${stats.remaining})`}
                   {s === 'pending' && `Pendentes (${stats.pending})`}
                   {s === 'sent' && `Enviados (${stats.sent})`}
                   {s === 'skipped' && `Pulados (${stats.skipped})`}
@@ -775,7 +821,7 @@ export default function AdminDisparadorPage() {
                   <th className="p-3">#</th>
                   <th className="p-3">Nome</th>
                   <th className="p-3">Telefone</th>
-                  {currentList.hasCredentials && <th className="p-3">Usuário</th>}
+                  {currentList.hasCredentials && <th className="p-3">Login (tel.)</th>}
                   {currentList.hasCredentials && <th className="p-3">Senha</th>}
                   <th className="p-3">Status</th>
                   <th className="p-3 text-right">Ação</th>
@@ -784,7 +830,7 @@ export default function AdminDisparadorPage() {
               <tbody className="divide-y divide-gray-100">
                 {filteredContacts.map((contact, idx) => {
                   const status = progress[contact.id]?.status || 'pending';
-                  const isCurrent = currentList.contacts[currentIndex]?.id === contact.id;
+                  const isCurrent = queueContacts[currentIndex]?.id === contact.id;
 
                   return (
                     <tr
@@ -797,7 +843,9 @@ export default function AdminDisparadorPage() {
                       <td className="p-3 font-medium text-gray-900">{contact.nome}</td>
                       <td className="p-3 font-mono text-gray-700">{contact.telefone}</td>
                       {currentList.hasCredentials && (
-                        <td className="p-3 font-mono text-gray-500 truncate max-w-40">{contact.usuario || '-'}</td>
+                        <td className="p-3 font-mono text-gray-500 truncate max-w-40">
+                          {loginForContact(contact) || '-'}
+                        </td>
                       )}
                       {currentList.hasCredentials && (
                         <td className="p-3 font-mono text-primary font-bold">{contact.senha || '-'}</td>
@@ -822,10 +870,12 @@ export default function AdminDisparadorPage() {
                       <td className="p-3 text-right">
                         <button
                           onClick={() => {
-                            const realIdx = currentList.contacts.findIndex((c) => c.id === contact.id);
-                            if (realIdx >= 0) {
-                              saveCurrentIndex(realIdx);
+                            const queueIdx = queueContacts.findIndex((c) => c.id === contact.id);
+                            if (queueIdx >= 0) {
+                              saveCurrentIndex(queueIdx);
                               setActiveTab('queue');
+                            } else {
+                              toast.error('Este contato já foi enviado e saiu da fila.');
                             }
                           }}
                           className="text-primary hover:text-primary-700 font-bold text-xs bg-white border border-primary-200 px-2.5 py-1 rounded-lg shadow-sm"
@@ -893,7 +943,7 @@ export default function AdminDisparadorPage() {
               {[
                 { tag: '{nome}', desc: 'Nome do transportador' },
                 { tag: '{telefone}', desc: 'Telefone' },
-                { tag: '{usuario}', desc: 'Login / Usuário' },
+                { tag: '{usuario}', desc: 'Login (telefone com DDD, só números)' },
                 { tag: '{senha}', desc: 'Senha temporária' },
                 { tag: '{prefixo}', desc: 'Prefixo' },
                 { tag: '{cidade}', desc: 'Cidade' },
