@@ -61,6 +61,27 @@ function loginForContact(contact: ContactItem): string {
   return String(contact.telefone || '').replace(/\D/g, '');
 }
 
+function channelLabel(channel?: 'sms' | 'whatsapp' | 'manual'): string {
+  if (channel === 'sms') return 'SMS';
+  if (channel === 'whatsapp') return 'WhatsApp';
+  if (channel === 'manual') return 'Manual';
+  return '—';
+}
+
+function formatSentAt(iso?: string): string {
+  if (!iso) return '—';
+  try {
+    return new Date(iso).toLocaleString('pt-BR', {
+      day: '2-digit',
+      month: '2-digit',
+      hour: '2-digit',
+      minute: '2-digit',
+    });
+  } catch {
+    return '—';
+  }
+}
+
 function cleanPhoneForDispatch(raw: string): { digits: string; formatted: string; isValid: boolean } {
   if (!raw) return { digits: '', formatted: '', isValid: false };
   let d = String(raw).replace(/\D/g, '');
@@ -78,7 +99,9 @@ function cleanPhoneForDispatch(raw: string): { digits: string; formatted: string
 }
 
 export default function AdminDisparadorPage() {
-  const [activeTab, setActiveTab] = useState<'queue' | 'table' | 'template' | 'import'>('queue');
+  const [activeTab, setActiveTab] = useState<
+    'queue' | 'table' | 'history' | 'template' | 'import'
+  >('queue');
   const [selectedListId, setSelectedListId] = useState<string>('todos-senhas');
   const [customList, setCustomList] = useState<ContactListGroup | null>(null);
 
@@ -161,6 +184,17 @@ export default function AdminDisparadorPage() {
   }, [selectedTemplateId]);
 
   // Save progress helper
+  const persistProgress = useCallback(
+    (next: ContactProgress) => {
+      try {
+        localStorage.setItem(`alotio_disparador_prog_${selectedListId}`, JSON.stringify(next));
+      } catch {
+        /* ignore */
+      }
+    },
+    [selectedListId],
+  );
+
   const updateContactStatus = useCallback(
     (contactId: string, status: ContactStatus, channel?: 'sms' | 'whatsapp' | 'manual') => {
       setProgress((prev) => {
@@ -168,19 +202,29 @@ export default function AdminDisparadorPage() {
           ...prev,
           [contactId]: {
             status,
-            sentAt: new Date().toISOString(),
-            channel,
+            sentAt: status === 'sent' ? new Date().toISOString() : undefined,
+            channel: status === 'sent' ? channel : undefined,
           },
         };
-        try {
-          localStorage.setItem(`alotio_disparador_prog_${selectedListId}`, JSON.stringify(next));
-        } catch {
-          /* ignore */
-        }
+        persistProgress(next);
         return next;
       });
     },
-    [selectedListId],
+    [persistProgress],
+  );
+
+  /** Volta contato enviado (ou pulado) para a fila — ex.: falha no envio. */
+  const restoreContactToQueue = useCallback(
+    (contactId: string) => {
+      setProgress((prev) => {
+        const next = { ...prev };
+        delete next[contactId];
+        persistProgress(next);
+        return next;
+      });
+      toast.success('Contato restaurado na fila.');
+    },
+    [persistProgress],
   );
 
   /** Fila ativa: enviados saem da lista definitivamente. */
@@ -229,6 +273,27 @@ export default function AdminDisparadorPage() {
     const percent = total > 0 ? Math.round((sent / total) * 100) : 0;
     return { total, sent, skipped, pending, remaining, percent };
   }, [currentList.contacts, progress, queueContacts]);
+
+  const sentHistory = useMemo(() => {
+    return currentList.contacts
+      .filter((c) => progress[c.id]?.status === 'sent')
+      .map((contact) => ({
+        contact,
+        meta: progress[contact.id]!,
+      }))
+      .sort((a, b) => (b.meta.sentAt || '').localeCompare(a.meta.sentAt || ''));
+  }, [currentList.contacts, progress]);
+
+  const filteredSentHistory = useMemo(() => {
+    if (!searchQuery) return sentHistory;
+    const q = searchQuery.toLowerCase();
+    return sentHistory.filter(
+      ({ contact }) =>
+        contact.nome.toLowerCase().includes(q) ||
+        contact.telefone.includes(q) ||
+        loginForContact(contact).includes(q),
+    );
+  }, [sentHistory, searchQuery]);
 
   // Current contact (somente na fila, sem enviados)
   const currentContact: ContactItem | undefined = queueContacts[currentIndex];
@@ -504,6 +569,16 @@ export default function AdminDisparadorPage() {
             📋 Todos os Contatos ({stats.total})
           </button>
           <button
+            onClick={() => setActiveTab('history')}
+            className={`py-3 px-4 font-semibold border-b-2 transition whitespace-nowrap ${
+              activeTab === 'history'
+                ? 'border-primary text-primary'
+                : 'border-transparent text-gray-500 hover:text-gray-700'
+            }`}
+          >
+            📜 Histórico ({stats.sent})
+          </button>
+          <button
             onClick={() => setActiveTab('template')}
             className={`py-3 px-4 font-semibold border-b-2 transition whitespace-nowrap ${
               activeTab === 'template'
@@ -538,15 +613,23 @@ export default function AdminDisparadorPage() {
               <span className="text-4xl">🎉</span>
               <h3 className="text-xl font-bold text-gray-900">Fila concluída!</h3>
               <p className="text-sm text-gray-600 max-w-md mx-auto">
-                Todos os contatos foram enviados ({stats.sent} no total). Os enviados saem da fila
-                definitivamente.
+                Não há mais contatos na fila ({stats.sent} marcados como enviados). Veja o histórico
+                e restaure quem tiver falhado.
               </p>
-              <div className="flex justify-center gap-3 pt-2">
+              <div className="flex flex-wrap justify-center gap-3 pt-2">
                 <button
+                  type="button"
+                  onClick={() => setActiveTab('history')}
+                  className="px-4 py-2 bg-primary text-white hover:bg-primary-600 rounded-xl font-semibold text-sm transition"
+                >
+                  Ver histórico de enviados
+                </button>
+                <button
+                  type="button"
                   onClick={handleResetProgress}
                   className="px-4 py-2 bg-red-50 hover:bg-red-100 text-red-600 rounded-xl font-semibold text-sm transition"
                 >
-                  Reiniciar disparos
+                  Reiniciar tudo
                 </button>
               </div>
             </div>
@@ -867,21 +950,53 @@ export default function AdminDisparadorPage() {
                           </span>
                         )}
                       </td>
-                      <td className="p-3 text-right">
-                        <button
-                          onClick={() => {
-                            const queueIdx = queueContacts.findIndex((c) => c.id === contact.id);
-                            if (queueIdx >= 0) {
-                              saveCurrentIndex(queueIdx);
-                              setActiveTab('queue');
-                            } else {
-                              toast.error('Este contato já foi enviado e saiu da fila.');
-                            }
-                          }}
-                          className="text-primary hover:text-primary-700 font-bold text-xs bg-white border border-primary-200 px-2.5 py-1 rounded-lg shadow-sm"
-                        >
-                          Disparar →
-                        </button>
+                      <td className="p-3 text-right space-x-1">
+                        {status === 'sent' ? (
+                          <button
+                            type="button"
+                            onClick={() => restoreContactToQueue(contact.id)}
+                            className="text-amber-800 hover:text-amber-900 font-bold text-xs bg-amber-50 border border-amber-200 px-2.5 py-1 rounded-lg shadow-sm"
+                          >
+                            ↩ Restaurar
+                          </button>
+                        ) : status === 'skipped' ? (
+                          <>
+                            <button
+                              type="button"
+                              onClick={() => restoreContactToQueue(contact.id)}
+                              className="text-amber-800 font-bold text-xs bg-amber-50 border border-amber-200 px-2.5 py-1 rounded-lg"
+                            >
+                              ↩ Fila
+                            </button>
+                            <button
+                              type="button"
+                              onClick={() => {
+                                const queueIdx = queueContacts.findIndex((c) => c.id === contact.id);
+                                if (queueIdx >= 0) {
+                                  saveCurrentIndex(queueIdx);
+                                  setActiveTab('queue');
+                                }
+                              }}
+                              className="text-primary font-bold text-xs bg-white border border-primary-200 px-2.5 py-1 rounded-lg"
+                            >
+                              Disparar
+                            </button>
+                          </>
+                        ) : (
+                          <button
+                            type="button"
+                            onClick={() => {
+                              const queueIdx = queueContacts.findIndex((c) => c.id === contact.id);
+                              if (queueIdx >= 0) {
+                                saveCurrentIndex(queueIdx);
+                                setActiveTab('queue');
+                              }
+                            }}
+                            className="text-primary hover:text-primary-700 font-bold text-xs bg-white border border-primary-200 px-2.5 py-1 rounded-lg shadow-sm"
+                          >
+                            Disparar →
+                          </button>
+                        )}
                       </td>
                     </tr>
                   );
@@ -899,6 +1014,78 @@ export default function AdminDisparadorPage() {
               🗑️ Zerar status da lista
             </button>
           </div>
+        </div>
+      )}
+
+      {/* TAB: HISTÓRICO DE ENVIADOS */}
+      {activeTab === 'history' && (
+        <div className="bg-white rounded-3xl p-5 sm:p-7 shadow-sm border border-gray-200 space-y-4">
+          <div>
+            <h3 className="text-lg font-bold text-gray-900 font-heading">Histórico de enviados</h3>
+            <p className="text-xs sm:text-sm text-gray-500 mt-1">
+              Contatos marcados como enviados saem da fila, mas ficam aqui. Se houve falha, use{' '}
+              <strong>Restaurar</strong> para voltar à fila de disparo.
+            </p>
+          </div>
+
+          <div className="relative">
+            <input
+              type="text"
+              placeholder="Buscar no histórico..."
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+              className="w-full bg-gray-50 border border-gray-300 rounded-xl px-4 py-2 text-sm text-gray-800 focus:ring-2 focus:ring-primary focus:border-primary transition"
+            />
+          </div>
+
+          {filteredSentHistory.length === 0 ? (
+            <div className="text-center py-12 text-gray-500 text-sm border border-dashed border-gray-200 rounded-2xl">
+              {stats.sent === 0
+                ? 'Nenhum envio registrado nesta lista ainda.'
+                : 'Nenhum resultado para a busca.'}
+            </div>
+          ) : (
+            <div className="overflow-x-auto border border-gray-100 rounded-2xl">
+              <table className="w-full text-left text-xs sm:text-sm">
+                <thead className="bg-gray-50 text-gray-500 font-semibold border-b border-gray-100">
+                  <tr>
+                    <th className="p-3">Nome</th>
+                    <th className="p-3">Telefone</th>
+                    <th className="p-3">Enviado em</th>
+                    <th className="p-3">Canal</th>
+                    <th className="p-3 text-right">Ação</th>
+                  </tr>
+                </thead>
+                <tbody className="divide-y divide-gray-100">
+                  {filteredSentHistory.map(({ contact, meta }) => (
+                    <tr key={contact.id} className="hover:bg-gray-50/80">
+                      <td className="p-3 font-medium text-gray-900">{contact.nome}</td>
+                      <td className="p-3 font-mono text-gray-700">{contact.telefone}</td>
+                      <td className="p-3 text-gray-600">{formatSentAt(meta.sentAt)}</td>
+                      <td className="p-3">
+                        <span className="bg-green-100 text-green-800 text-[11px] font-bold px-2 py-0.5 rounded-full">
+                          {channelLabel(meta.channel)}
+                        </span>
+                      </td>
+                      <td className="p-3 text-right">
+                        <button
+                          type="button"
+                          onClick={() => restoreContactToQueue(contact.id)}
+                          className="text-amber-800 hover:text-amber-900 font-bold text-xs bg-amber-50 border border-amber-200 px-2.5 py-1 rounded-lg"
+                        >
+                          ↩ Restaurar à fila
+                        </button>
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          )}
+
+          <p className="text-xs text-gray-500">
+            {filteredSentHistory.length} de {stats.sent} enviados nesta lista.
+          </p>
         </div>
       )}
 
