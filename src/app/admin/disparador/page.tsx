@@ -1,11 +1,12 @@
 'use client';
 
-import React, { useState, useEffect, useMemo, useCallback } from 'react';
+import React, { useState, useEffect, useMemo, useCallback, useRef } from 'react';
 import {
   PRELOADED_CONTACT_LISTS,
   type ContactItem,
   type ContactListGroup,
 } from '@/data/preloaded-contact-lists';
+import { api } from '@/lib/api';
 import toast from 'react-hot-toast';
 
 type ContactStatus = 'pending' | 'sent' | 'skipped';
@@ -109,10 +110,12 @@ export default function AdminDisparadorPage() {
   const [selectedTemplateId, setSelectedTemplateId] = useState<string>('credentials');
   const [customTemplateText, setCustomTemplateText] = useState<string>(TEMPLATE_PRESETS[0].text);
 
-  // Progress state stored in localStorage per list
   const [progress, setProgress] = useState<ContactProgress>({});
   const [currentIndex, setCurrentIndex] = useState<number>(0);
   const [autoAdvance, setAutoAdvance] = useState<boolean>(true);
+  const [stateHydrated, setStateHydrated] = useState(false);
+  const [syncingState, setSyncingState] = useState(false);
+  const skipSaveRef = useRef(true);
 
   // Search and filter for table tab
   const [searchQuery, setSearchQuery] = useState('');
@@ -135,38 +138,73 @@ export default function AdminDisparadorPage() {
     return allLists.find((l) => l.id === selectedListId) || allLists[0];
   }, [allLists, selectedListId]);
 
-  // Load custom list and progress from localStorage on mount or list change
   useEffect(() => {
-    try {
-      const savedCustom = localStorage.getItem('alotio_disparador_custom_list');
-      if (savedCustom) {
-        setCustomList(JSON.parse(savedCustom));
-      }
-    } catch {
-      /* ignore */
-    }
+    let cancelled = false;
+    api
+      .adminGetDisparadorCustomList()
+      .then((raw) => {
+        if (!cancelled && raw) {
+          setCustomList(raw);
+        }
+      })
+      .catch(() => {
+        toast.error('Não foi possível carregar lista personalizada do servidor.');
+      });
+    return () => {
+      cancelled = true;
+    };
   }, []);
 
   useEffect(() => {
-    try {
-      const savedProgress = localStorage.getItem(`alotio_disparador_prog_${selectedListId}`);
-      if (savedProgress) {
-        setProgress(JSON.parse(savedProgress));
-      } else {
-        setProgress({});
-      }
+    let cancelled = false;
+    setStateHydrated(false);
+    skipSaveRef.current = true;
 
-      const savedIdx = localStorage.getItem(`alotio_disparador_idx_${selectedListId}`);
-      if (savedIdx) {
-        setCurrentIndex(Math.max(0, parseInt(savedIdx, 10) || 0));
-      } else {
-        setCurrentIndex(0);
-      }
-    } catch {
-      setProgress({});
-      setCurrentIndex(0);
-    }
+    api
+      .adminGetDisparadorState(selectedListId)
+      .then((data) => {
+        if (cancelled) return;
+        setProgress((data.progress as ContactProgress) || {});
+        setCurrentIndex(data.currentIndex ?? 0);
+        setStateHydrated(true);
+      })
+      .catch(() => {
+        if (!cancelled) {
+          toast.error('Não foi possível carregar o progresso desta lista.');
+          setProgress({});
+          setCurrentIndex(0);
+          setStateHydrated(true);
+        }
+      });
+
+    return () => {
+      cancelled = true;
+    };
   }, [selectedListId]);
+
+  useEffect(() => {
+    if (!stateHydrated) return;
+    if (skipSaveRef.current) {
+      skipSaveRef.current = false;
+      return;
+    }
+
+    const timer = window.setTimeout(() => {
+      setSyncingState(true);
+      api
+        .adminUpsertDisparadorState({
+          listId: selectedListId,
+          progress,
+          currentIndex,
+        })
+        .catch(() => {
+          toast.error('Falha ao salvar progresso no servidor.');
+        })
+        .finally(() => setSyncingState(false));
+    }, 300);
+
+    return () => window.clearTimeout(timer);
+  }, [progress, currentIndex, selectedListId, stateHydrated]);
 
   // Auto-select template based on list capabilities
   useEffect(() => {
@@ -183,49 +221,29 @@ export default function AdminDisparadorPage() {
     if (preset) setCustomTemplateText(preset.text);
   }, [selectedTemplateId]);
 
-  // Save progress helper
-  const persistProgress = useCallback(
-    (next: ContactProgress) => {
-      try {
-        localStorage.setItem(`alotio_disparador_prog_${selectedListId}`, JSON.stringify(next));
-      } catch {
-        /* ignore */
-      }
-    },
-    [selectedListId],
-  );
-
   const updateContactStatus = useCallback(
     (contactId: string, status: ContactStatus, channel?: 'sms' | 'whatsapp' | 'manual') => {
-      setProgress((prev) => {
-        const next: ContactProgress = {
-          ...prev,
-          [contactId]: {
-            status,
-            sentAt: status === 'sent' ? new Date().toISOString() : undefined,
-            channel: status === 'sent' ? channel : undefined,
-          },
-        };
-        persistProgress(next);
-        return next;
-      });
+      setProgress((prev) => ({
+        ...prev,
+        [contactId]: {
+          status,
+          sentAt: status === 'sent' ? new Date().toISOString() : undefined,
+          channel: status === 'sent' ? channel : undefined,
+        },
+      }));
     },
-    [persistProgress],
+    [],
   );
 
   /** Volta contato enviado (ou pulado) para a fila — ex.: falha no envio. */
-  const restoreContactToQueue = useCallback(
-    (contactId: string) => {
-      setProgress((prev) => {
-        const next = { ...prev };
-        delete next[contactId];
-        persistProgress(next);
-        return next;
-      });
-      toast.success('Contato restaurado na fila.');
-    },
-    [persistProgress],
-  );
+  const restoreContactToQueue = useCallback((contactId: string) => {
+    setProgress((prev) => {
+      const next = { ...prev };
+      delete next[contactId];
+      return next;
+    });
+    toast.success('Contato restaurado na fila.');
+  }, []);
 
   /** Fila ativa: enviados saem da lista definitivamente. */
   const queueContacts = useMemo(() => {
@@ -237,13 +255,8 @@ export default function AdminDisparadorPage() {
       const maxIdx = Math.max(0, queueContacts.length - 1);
       const clamped = Math.max(0, Math.min(idx, maxIdx));
       setCurrentIndex(clamped);
-      try {
-        localStorage.setItem(`alotio_disparador_idx_${selectedListId}`, String(clamped));
-      } catch {
-        /* ignore */
-      }
     },
-    [queueContacts.length, selectedListId],
+    [queueContacts.length],
   );
 
   useEffect(() => {
@@ -385,17 +398,18 @@ export default function AdminDisparadorPage() {
   };
 
   // Action: Reset progress for this list
-  const handleResetProgress = () => {
-    if (window.confirm(`Deseja zerar todo o progresso da lista "${currentList.title}"?`)) {
+  const handleResetProgress = async () => {
+    if (!window.confirm(`Deseja zerar todo o progresso da lista "${currentList.title}"?`)) {
+      return;
+    }
+    try {
+      await api.adminResetDisparadorState(selectedListId);
+      skipSaveRef.current = true;
       setProgress({});
       setCurrentIndex(0);
-      try {
-        localStorage.removeItem(`alotio_disparador_prog_${selectedListId}`);
-        localStorage.removeItem(`alotio_disparador_idx_${selectedListId}`);
-      } catch {
-        /* ignore */
-      }
       toast.success('Progresso zerado!');
+    } catch {
+      toast.error('Falha ao zerar progresso no servidor.');
     }
   };
 
@@ -448,16 +462,17 @@ export default function AdminDisparadorPage() {
       contacts: parsedContacts,
     };
 
-    setCustomList(newCustom);
-    setSelectedListId(newCustom.id);
-    try {
-      localStorage.setItem('alotio_disparador_custom_list', JSON.stringify(newCustom));
-    } catch {
-      /* ignore */
-    }
-
-    toast.success(`${parsedContacts.length} contatos importados com sucesso!`);
-    setActiveTab('queue');
+    void (async () => {
+      try {
+        await api.adminUpsertDisparadorCustomList(newCustom);
+        setCustomList(newCustom);
+        setSelectedListId(newCustom.id);
+        toast.success(`${parsedContacts.length} contatos importados com sucesso!`);
+        setActiveTab('queue');
+      } catch {
+        toast.error('Falha ao salvar lista personalizada no servidor.');
+      }
+    })();
   };
 
   // Filtered contacts for the table view
@@ -497,6 +512,9 @@ export default function AdminDisparadorPage() {
             </div>
             <p className="text-xs sm:text-sm text-gray-500 mt-1">
               Envie mensagens personalizadas em 1 toque usando o app nativo de SMS ou WhatsApp do seu celular.
+              {syncingState ? (
+                <span className="block text-primary font-semibold mt-1">Salvando no servidor…</span>
+              ) : null}
             </p>
           </div>
 
@@ -1224,16 +1242,14 @@ export default function AdminDisparadorPage() {
               {customList && (
                 <button
                   onClick={() => {
-                    if (window.confirm('Deseja remover a lista importada personalizada?')) {
+                    if (!window.confirm('Deseja remover a lista importada personalizada?')) return;
+                    void api.adminUpsertDisparadorCustomList(null).then(() => {
                       setCustomList(null);
                       setSelectedListId('todos-senhas');
-                      try {
-                        localStorage.removeItem('alotio_disparador_custom_list');
-                      } catch {
-                        /* ignore */
-                      }
                       toast.success('Lista personalizada removida.');
-                    }
+                    }).catch(() => {
+                      toast.error('Falha ao remover lista no servidor.');
+                    });
                   }}
                   className="bg-red-50 text-red-600 hover:bg-red-100 font-semibold px-4 py-3 rounded-xl text-sm transition"
                 >

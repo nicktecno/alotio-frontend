@@ -1,3 +1,4 @@
+import type { ContactListGroup } from '@/data/preloaded-contact-lists';
 import type {
   AdminUserListRow,
   CityResolveFromLocation,
@@ -467,6 +468,36 @@ export const api = {
     }>('/admin/whatsapp/bulk', {
       method: 'POST',
       body: JSON.stringify(body),
+    }),
+
+  adminGetDisparadorState: (listId: string) =>
+    request<{ progress: Record<string, unknown>; currentIndex: number }>(
+      `/admin/disparador/state?listId=${encodeURIComponent(listId)}`,
+    ),
+
+  adminUpsertDisparadorState: (body: {
+    listId: string;
+    progress: Record<string, unknown>;
+    currentIndex: number;
+  }) =>
+    request('/admin/disparador/state', {
+      method: 'PUT',
+      body: JSON.stringify(body),
+    }),
+
+  adminResetDisparadorState: (listId: string) =>
+    request<{ ok: boolean }>(
+      `/admin/disparador/state?listId=${encodeURIComponent(listId)}`,
+      { method: 'DELETE' },
+    ),
+
+  adminGetDisparadorCustomList: () =>
+    request<ContactListGroup | null>('/admin/disparador/custom-list'),
+
+  adminUpsertDisparadorCustomList: (list: ContactListGroup | null) =>
+    request('/admin/disparador/custom-list', {
+      method: 'PUT',
+      body: JSON.stringify({ list }),
     }),
 
   adminWhatsAppMessages: (params?: { page?: number; limit?: number }) => {
