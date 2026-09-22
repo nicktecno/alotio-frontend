@@ -37,6 +37,36 @@ class ApiError extends Error {
 
 let isRefreshing = false;
 
+async function parseJsonResponse<T>(res: Response): Promise<T> {
+  if (res.status === 204) return {} as T;
+  const text = await res.text();
+  if (!text) {
+    throw new ApiError(
+      res.status,
+      res.status === 304
+        ? 'Resposta em cache sem dados (304)'
+        : 'Resposta vazia do servidor',
+    );
+  }
+  return JSON.parse(text) as T;
+}
+
+async function apiFetch(
+  endpoint: string,
+  options: RequestInit = {},
+  bustCache = false,
+): Promise<Response> {
+  const path = bustCache
+    ? `${endpoint}${endpoint.includes('?') ? '&' : '?'}_nc=${Date.now()}`
+    : endpoint;
+  const { cache: cacheOpt, ...rest } = options;
+  return fetch(`${API_URL}${path}`, {
+    credentials: 'include',
+    cache: cacheOpt ?? 'no-store',
+    ...rest,
+  });
+}
+
 async function request<T>(endpoint: string, options: RequestInit = {}): Promise<T> {
   const { headers: customHeaders, ...rest } = options;
 
@@ -48,11 +78,12 @@ async function request<T>(endpoint: string, options: RequestInit = {}): Promise<
     headers['Content-Type'] = 'application/json';
   }
 
-  const res = await fetch(`${API_URL}${endpoint}`, {
-    headers,
-    credentials: 'include',
-    ...rest,
-  });
+  const fetchOpts: RequestInit = { headers, ...rest };
+
+  let res = await apiFetch(endpoint, fetchOpts);
+  if (res.status === 304) {
+    res = await apiFetch(endpoint, fetchOpts, true);
+  }
 
   if (!res.ok) {
     if (res.status === 401 && !isRefreshing && !endpoint.startsWith('/auth/') && typeof window !== 'undefined') {
@@ -61,17 +92,16 @@ async function request<T>(endpoint: string, options: RequestInit = {}): Promise<
         const refreshRes = await fetch(`${API_URL}/auth/refresh`, {
           method: 'POST',
           credentials: 'include',
+          cache: 'no-store',
         });
         if (refreshRes.ok) {
           isRefreshing = false;
-          const retry = await fetch(`${API_URL}${endpoint}`, {
-            headers,
-            credentials: 'include',
-            ...rest,
-          });
+          let retry = await apiFetch(endpoint, fetchOpts);
+          if (retry.status === 304) {
+            retry = await apiFetch(endpoint, fetchOpts, true);
+          }
           if (retry.ok) {
-            if (retry.status === 204) return {} as T;
-            return retry.json();
+            return parseJsonResponse<T>(retry);
           }
         }
       } catch {
@@ -88,9 +118,7 @@ async function request<T>(endpoint: string, options: RequestInit = {}): Promise<
     throw new ApiError(res.status, body.message || `Erro ${res.status}`);
   }
 
-  if (res.status === 204) return {} as T;
-
-  return res.json();
+  return parseJsonResponse<T>(res);
 }
 
 
@@ -492,7 +520,9 @@ export const api = {
     ),
 
   adminGetDisparadorCustomList: () =>
-    request<ContactListGroup | null>('/admin/disparador/custom-list'),
+    request<{ list: ContactListGroup | null }>('/admin/disparador/custom-list').then(
+      (r) => r?.list ?? null,
+    ),
 
   adminUpsertDisparadorCustomList: (list: ContactListGroup | null) =>
     request('/admin/disparador/custom-list', {

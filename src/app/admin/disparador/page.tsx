@@ -147,7 +147,9 @@ export default function AdminDisparadorPage() {
           setCustomList(raw);
         }
       })
-      .catch(() => {
+      .catch((err: unknown) => {
+        const status = err && typeof err === 'object' && 'status' in err ? (err as { status: number }).status : 0;
+        if (status === 404) return;
         toast.error('Não foi possível carregar lista personalizada do servidor.');
       });
     return () => {
@@ -164,6 +166,12 @@ export default function AdminDisparadorPage() {
       .adminGetDisparadorState(selectedListId)
       .then((data) => {
         if (cancelled) return;
+        if (!data || typeof data !== 'object') {
+          setProgress({});
+          setCurrentIndex(0);
+          setStateHydrated(true);
+          return;
+        }
         setProgress((data.progress as ContactProgress) || {});
         setCurrentIndex(data.currentIndex ?? 0);
         setStateHydrated(true);
