@@ -1,7 +1,7 @@
 [
   {
     "id": "todos-senhas",
-    "title": "🌟 Todos os Contatos com Senha (3035)",
+    "title": "🌟 Todos os Contatos com Senha (3135)",
     "description": "Lista geral consolidada contendo APENAS transportadores que possuem senha temporária",
     "hasCredentials": true,
     "contacts": [
@@ -36092,6 +36092,1969 @@
           "Luis Arruda Paes Maestro Escola Municipal",
           "Luzia Borba Ranciaro Escola Municipal"
         ]
+      },
+      {
+        "id": "pw-0086-42999819954",
+        "nome": "0086 Suzana Kovalski Transportes de Passeiros LTDA",
+        "telefone": "(42) 99981-9954",
+        "telefoneRaw": "5542999819954",
+        "telefoneValido": true,
+        "usuario": "escolar.42999819954p0086@cadastro-pontagrossa.alotio.local",
+        "senha": "grtcnc",
+        "prefixo": "0086",
+        "cidade": "Ponta Grossa (PR)",
+        "source": "AMTT Ponta Grossa",
+        "escolas": [
+          "Vivaldo Sasse C M e I",
+          "Walter Elias C M e I Professor",
+          "Zahira C P Mello e M Profaei Ef"
+        ],
+        "bairros": [
+          "Colonia D Luiza",
+          "Oficinas",
+          "Maria Otilia"
+        ],
+        "placa": "SER-0H16"
+      },
+      {
+        "id": "pw-0110-41999797790",
+        "nome": "0110 J Wolle Transportes e Turismo GT3 LTDA",
+        "telefone": "(41) 99979-7790",
+        "telefoneRaw": "5541999797790",
+        "telefoneValido": true,
+        "usuario": "escolar.41999797790p0110@cadastro-pontagrossa.alotio.local",
+        "senha": "x9tr9f",
+        "prefixo": "0110",
+        "cidade": "Ponta Grossa (PR)",
+        "source": "AMTT Ponta Grossa",
+        "escolas": [
+          "Darcy Ribeiro C M e I",
+          "Deodoro A Quintiliano e Mei Ef",
+          "Dercia do C Noviski e M Profaei Ef"
+        ],
+        "placa": "AWW0H22"
+      },
+      {
+        "id": "pw-0125-42988254929",
+        "nome": "0125 Viação Apoio LTDA",
+        "telefone": "(42) 98825-4929",
+        "telefoneRaw": "5542988254929",
+        "telefoneValido": true,
+        "usuario": "escolar.42988254929p0125@cadastro-pontagrossa.alotio.local",
+        "senha": "24ck5z",
+        "prefixo": "0125",
+        "cidade": "Ponta Grossa (PR)",
+        "source": "AMTT Ponta Grossa",
+        "escolas": [
+          "Glacy Camargo Secco e Mei Ef",
+          "Guaracy Parana Vieira e Me I e F",
+          "Guilherme H Bauer C M e I Dr"
+        ],
+        "placa": "SEE2H06"
+      },
+      {
+        "id": "pw-0126-42988254929",
+        "nome": "0126 Viação Apoio LTDA",
+        "telefone": "(42) 98825-4929",
+        "telefoneRaw": "5542988254929",
+        "telefoneValido": true,
+        "usuario": "escolar.42988254929p0126@cadastro-pontagrossa.alotio.local",
+        "senha": "vhvhqp",
+        "prefixo": "0126",
+        "cidade": "Ponta Grossa (PR)",
+        "source": "AMTT Ponta Grossa",
+        "escolas": [
+          "Halia T Gruba e e Profaef",
+          "Hayde Ercilia Larocca C M e I",
+          "Haydee F Oliveirae M Profaei Ef"
+        ],
+        "placa": "UBX5J34"
+      },
+      {
+        "id": "pw-0129-42988254929",
+        "nome": "0129 Viação Apoio LTDA",
+        "telefone": "(42) 98825-4929",
+        "telefoneRaw": "5542988254929",
+        "telefoneValido": true,
+        "usuario": "escolar.42988254929p0129@cadastro-pontagrossa.alotio.local",
+        "senha": "tkawhz",
+        "prefixo": "0129",
+        "cidade": "Ponta Grossa (PR)",
+        "source": "AMTT Ponta Grossa",
+        "escolas": [
+          "Integracao Centro de Educação Infantil Ef M",
+          "Iolando Taques Fonseca e e Profef",
+          "Iracema Machado Silva C M e I Profa"
+        ],
+        "placa": "UBX7C70"
+      },
+      {
+        "id": "pw-0131-42988254929",
+        "nome": "0131 Viação Apoio LTDA",
+        "telefone": "(42) 98825-4929",
+        "telefoneRaw": "5542988254929",
+        "telefoneValido": true,
+        "usuario": "escolar.42988254929p0131@cadastro-pontagrossa.alotio.local",
+        "senha": "w7gz5n",
+        "prefixo": "0131",
+        "cidade": "Ponta Grossa (PR)",
+        "source": "AMTT Ponta Grossa",
+        "escolas": [
+          "Janice Goncalves Oliveira C M e I Profa",
+          "Jesus Divino Operario e Eef",
+          "Jorge Dechandte M Profei Ef"
+        ],
+        "placa": "UCI3E60"
+      },
+      {
+        "id": "pw-0132-24998430873",
+        "nome": "0132 Fretcar Transporte Escolar LTDA",
+        "telefone": "(24) 99843-0873",
+        "telefoneRaw": "5524998430873",
+        "telefoneValido": true,
+        "usuario": "escolar.24998430873p0132@cadastro-pontagrossa.alotio.local",
+        "senha": "93wb8k",
+        "prefixo": "0132",
+        "cidade": "Ponta Grossa (PR)",
+        "source": "AMTT Ponta Grossa",
+        "escolas": [
+          "José B G Vilela e M Prefei Ef",
+          "José Bugatti e M Peei Ef",
+          "José Elias da Rocha C e Cmef M Profis"
+        ],
+        "placa": "ARK0F91"
+      },
+      {
+        "id": "pw-0136-42991121750",
+        "nome": "0136 Jorje Hayashi",
+        "telefone": "(42) 99112-1750",
+        "telefoneRaw": "5542991121750",
+        "telefoneValido": true,
+        "usuario": "escolar.42991121750p0136@cadastro-pontagrossa.alotio.local",
+        "senha": "a2dffp",
+        "prefixo": "0136",
+        "cidade": "Ponta Grossa (PR)",
+        "source": "AMTT Ponta Grossa",
+        "escolas": [
+          "Julio Teodorico e e Profef",
+          "Kamal Tebcherani e M Profei Ef",
+          "Kazuko Inoue e M Profaei Ef"
+        ],
+        "bairros": [
+          "Uvaranas"
+        ],
+        "placa": "BBE-1344"
+      },
+      {
+        "id": "pw-0137-42999732360",
+        "nome": "0137 M. V. Selmer e Cia LTDA",
+        "telefone": "(42) 99973-2360",
+        "telefoneRaw": "5542999732360",
+        "telefoneValido": true,
+        "usuario": "escolar.42999732360p0137@cadastro-pontagrossa.alotio.local",
+        "senha": "tt4fxf",
+        "prefixo": "0137",
+        "cidade": "Ponta Grossa (PR)",
+        "source": "AMTT Ponta Grossa",
+        "escolas": [
+          "Leonides Degraf C M e I",
+          "Leopoldo Lopes Sobrinho C M e I Professor",
+          "Leopoldo P Rosas e M Drei Ef"
+        ],
+        "placa": "QXB2H16"
+      },
+      {
+        "id": "pw-0138-42999499414",
+        "nome": "0138 Eliel Tullio Autonomo",
+        "telefone": "(42) 99949-9414",
+        "telefoneRaw": "5542999499414",
+        "telefoneValido": true,
+        "usuario": "escolar.42999499414p0138@cadastro-pontagrossa.alotio.local",
+        "senha": "zsb23q",
+        "prefixo": "0138",
+        "cidade": "Ponta Grossa (PR)",
+        "source": "AMTT Ponta Grossa",
+        "escolas": [
+          "Lindamara Paciesny C M e I Profa",
+          "Livio Bosetti C M e I Pe",
+          "Loise F de Lara e M Profaei Ef"
+        ],
+        "placa": "UBX8A71"
+      },
+      {
+        "id": "pw-0139-42999732360",
+        "nome": "0139 M. V. Selmer e Cia LTDA",
+        "telefone": "(42) 99973-2360",
+        "telefoneRaw": "5542999732360",
+        "telefoneValido": true,
+        "usuario": "escolar.42999732360p0139@cadastro-pontagrossa.alotio.local",
+        "senha": "fgsd6x",
+        "prefixo": "0139",
+        "cidade": "Ponta Grossa (PR)",
+        "source": "AMTT Ponta Grossa",
+        "escolas": [
+          "Ludovico Antonio Egg e Mei Ef",
+          "Luis Pereira Cardoso C M e I",
+          "Luiz Gonzaga Pinto C M e I Pref Eng"
+        ],
+        "placa": "AZT7687"
+      },
+      {
+        "id": "pw-0140-42999933908",
+        "nome": "0140 Aline Cristina Cunha de Oliveira LTDA",
+        "telefone": "(42) 99993-3908",
+        "telefoneRaw": "5542999933908",
+        "telefoneValido": true,
+        "usuario": "escolar.42999933908p0140@cadastro-pontagrossa.alotio.local",
+        "senha": "hf9sv2",
+        "prefixo": "0140",
+        "cidade": "Ponta Grossa (PR)",
+        "source": "AMTT Ponta Grossa",
+        "escolas": [
+          "Maple Bear Ponta Grossa Centro de Educação Infantil",
+          "Margarete M Mazur e e C Profaef",
+          "Maria A de Andrade e M Profaei Ef"
+        ],
+        "bairros": [
+          "Olarias"
+        ],
+        "placa": "ARZ3C66"
+      },
+      {
+        "id": "pw-0141-41999797790",
+        "nome": "0141 J Wolle Transportes e Turismo GT3 LTDA",
+        "telefone": "(41) 99979-7790",
+        "telefoneRaw": "5541999797790",
+        "telefoneValido": true,
+        "usuario": "escolar.41999797790p0141@cadastro-pontagrossa.alotio.local",
+        "senha": "7an5yv",
+        "prefixo": "0141",
+        "cidade": "Ponta Grossa (PR)",
+        "source": "AMTT Ponta Grossa",
+        "escolas": [
+          "Maria Dolores Eef Mod Ed Esp",
+          "Maria Eulina S Scheena Em Profei Ef",
+          "Maria Imaculada C M e I"
+        ],
+        "placa": "UBK6E52"
+      },
+      {
+        "id": "pw-0142-41999797790",
+        "nome": "0142 J Wolle Transportes e Turismo GT3 LTDA",
+        "telefone": "(41) 99979-7790",
+        "telefoneRaw": "5541999797790",
+        "telefoneValido": true,
+        "usuario": "escolar.41999797790p0142@cadastro-pontagrossa.alotio.local",
+        "senha": "p82aan",
+        "prefixo": "0142",
+        "cidade": "Ponta Grossa (PR)",
+        "source": "AMTT Ponta Grossa",
+        "escolas": [
+          "Maria Sirlei Machado C M e I",
+          "Maria V B Ramos e M Profaei Ef",
+          "Maria da Conceicao D Cunha C M e I"
+        ],
+        "placa": "DTA5H83"
+      },
+      {
+        "id": "pw-0143-42988254929",
+        "nome": "0143 Viação Apoio LTDA",
+        "telefone": "(42) 98825-4929",
+        "telefoneRaw": "5542988254929",
+        "telefoneValido": true,
+        "usuario": "escolar.42988254929p0143@cadastro-pontagrossa.alotio.local",
+        "senha": "g24vmr",
+        "prefixo": "0143",
+        "cidade": "Ponta Grossa (PR)",
+        "source": "AMTT Ponta Grossa",
+        "escolas": [
+          "Maria de L Canziani e Profaei Ef M Ee",
+          "Maria e J Schimidt e M Profaei Ef",
+          "Maricy C Teixeira Pinto C M e I"
+        ],
+        "placa": "UCI3E77"
+      },
+      {
+        "id": "pw-0144-42999732360",
+        "nome": "0144 M. V. Selmer e Cia LTDA",
+        "telefone": "(42) 99973-2360",
+        "telefoneRaw": "5542999732360",
+        "telefoneValido": true,
+        "usuario": "escolar.42999732360p0144@cadastro-pontagrossa.alotio.local",
+        "senha": "7xe8b8",
+        "prefixo": "0144",
+        "cidade": "Ponta Grossa (PR)",
+        "source": "AMTT Ponta Grossa",
+        "escolas": [
+          "Marjorie B Emilio Mendes C M e I Profa",
+          "Marlene Perez C M e I Profa",
+          "Marly C Camargo Chiafitela e M Profa"
+        ],
+        "placa": "BDC0B74"
+      },
+      {
+        "id": "pw-0146-42999732360",
+        "nome": "0146 M. V. Selmer e Cia LTDA",
+        "telefone": "(42) 99973-2360",
+        "telefoneRaw": "5542999732360",
+        "telefoneValido": true,
+        "usuario": "escolar.42999732360p0146@cadastro-pontagrossa.alotio.local",
+        "senha": "5sv6bs",
+        "prefixo": "0146",
+        "cidade": "Ponta Grossa (PR)",
+        "source": "AMTT Ponta Grossa",
+        "escolas": [
+          "Miguel Abrao Ajuz Neto C M e I",
+          "Miguel Arao Ribas Dropa C M e I Professor",
+          "Minervina F Scudlarecke M Profaei Ef"
+        ],
+        "placa": "BCU7H25"
+      },
+      {
+        "id": "pw-0148-42999293149",
+        "nome": "0148 E.r. Silva Transporte Rodoviário Escolar",
+        "telefone": "(42) 99929-3149",
+        "telefoneRaw": "5542999293149",
+        "telefoneValido": true,
+        "usuario": "escolar.42999293149p0148@cadastro-pontagrossa.alotio.local",
+        "senha": "df5ndv",
+        "prefixo": "0148",
+        "cidade": "Ponta Grossa (PR)",
+        "source": "AMTT Ponta Grossa",
+        "escolas": [
+          "Noly Zander Eei Ef Mod Ed Esp",
+          "Nossa Sra da Gloria C e Cmef M",
+          "Nossa Sra das Gracas C Eef M Profis"
+        ],
+        "bairros": [
+          "Ronda"
+        ],
+        "placa": "ASY-3827"
+      },
+      {
+        "id": "pw-0150-42999732360",
+        "nome": "0150 M. V. Selmer e Cia LTDA",
+        "telefone": "(42) 99973-2360",
+        "telefoneRaw": "5542999732360",
+        "telefoneValido": true,
+        "usuario": "escolar.42999732360p0150@cadastro-pontagrossa.alotio.local",
+        "senha": "nxh3xq",
+        "prefixo": "0150",
+        "cidade": "Ponta Grossa (PR)",
+        "source": "AMTT Ponta Grossa",
+        "escolas": [
+          "Orival C Martins e M Verei Ef",
+          "Osni Vilaca Mongruel e M Profei Ef",
+          "Osorio C e Cm Galef M Profis"
+        ],
+        "placa": "ELU4A49"
+      },
+      {
+        "id": "pw-0170-42999973526",
+        "nome": "0170 Joao Luiz de Azevedo",
+        "telefone": "(42) 99997-3526",
+        "telefoneRaw": "5542999973526",
+        "telefoneValido": true,
+        "usuario": "escolar.42999973526p0170@cadastro-pontagrossa.alotio.local",
+        "senha": "kq9ga9",
+        "prefixo": "0170",
+        "cidade": "Ponta Grossa (PR)",
+        "source": "AMTT Ponta Grossa",
+        "escolas": [
+          "Zeneida F Schnirmann e M Profaei Ef",
+          "Zila B Bach e M Profaei Ef",
+          "Zilda Arns e Draei Ef Mod Ed Esp"
+        ],
+        "bairros": [
+          "Uvaranas-neves"
+        ],
+        "placa": "AYL-7785"
+      },
+      {
+        "id": "pw-0178-42999499414",
+        "nome": "0178 Eliel Tullio",
+        "telefone": "(42) 99949-9414",
+        "telefoneRaw": "5542999499414",
+        "telefoneValido": true,
+        "usuario": "escolar.42999499414p0178@cadastro-pontagrossa.alotio.local",
+        "senha": "7fmgam",
+        "prefixo": "0178",
+        "cidade": "Ponta Grossa (PR)",
+        "source": "AMTT Ponta Grossa",
+        "escolas": [
+          "Arnaldo Jansen C e Peef M Profis",
+          "Arnaldo Janssen Sant Ana Eef",
+          "Augusto Canto C M e I"
+        ],
+        "bairros": [
+          "Orfaos",
+          "Jardim Carvalho"
+        ],
+        "placa": "LRV-4186"
+      },
+      {
+        "id": "pw-0191-42999830982",
+        "nome": "0191 Israel Lepek",
+        "telefone": "(42) 99983-0982",
+        "telefoneRaw": "5542999830982",
+        "telefoneValido": true,
+        "usuario": "escolar.42999830982p0191@cadastro-pontagrossa.alotio.local",
+        "senha": "epp2fa",
+        "prefixo": "0191",
+        "cidade": "Ponta Grossa (PR)",
+        "source": "AMTT Ponta Grossa",
+        "escolas": [
+          "Cristiane Levandowski e M Profei Ef",
+          "Cyrillo Domingos Ricci e Mei Ef",
+          "Cyro Martins e M Pref Engei Ef"
+        ],
+        "bairros": [
+          "Orfas"
+        ],
+        "placa": "AXN-4835"
+      },
+      {
+        "id": "pw-0209-42999751234",
+        "nome": "0209 Kamilla Correa",
+        "telefone": "(42) 99975-1234",
+        "telefoneRaw": "5542999751234",
+        "telefoneValido": true,
+        "usuario": "escolar.42999751234p0209@cadastro-pontagrossa.alotio.local",
+        "senha": "tyg4eq",
+        "prefixo": "0209",
+        "cidade": "Ponta Grossa (PR)",
+        "source": "AMTT Ponta Grossa",
+        "escolas": [
+          "Haydee F Oliveirae M Profaei Ef",
+          "Heitor Ditzel e M Prefei Ef",
+          "Helena Kolody Educação de Jovens e Adultos Centro Municipal Profª"
+        ],
+        "bairros": [
+          "Neves"
+        ],
+        "placa": "AWU-2314"
+      },
+      {
+        "id": "pw-0235-42999819188",
+        "nome": "0235 Rodovatty Transportes Rodoviario Ltda- Rodovan",
+        "telefone": "(42) 99981-9188",
+        "telefoneRaw": "5542999819188",
+        "telefoneValido": true,
+        "usuario": "escolar.42999819188p0235@cadastro-pontagrossa.alotio.local",
+        "senha": "cpkpr5",
+        "prefixo": "0235",
+        "cidade": "Ponta Grossa (PR)",
+        "source": "AMTT Ponta Grossa",
+        "escolas": [
+          "Nossa Sra da Gloria C e Cmef M",
+          "Nossa Sra das Gracas C Eef M Profis",
+          "Odette Cominato C M e I Profa"
+        ],
+        "bairros": [
+          "Centro"
+        ],
+        "placa": "AOS-5549"
+      },
+      {
+        "id": "pw-0245-42999819188",
+        "nome": "0245 Rodovatty Transportes Rodoviario Ltda- Rodovan",
+        "telefone": "(42) 99981-9188",
+        "telefoneRaw": "5542999819188",
+        "telefoneValido": true,
+        "usuario": "escolar.42999819188p0245@cadastro-pontagrossa.alotio.local",
+        "senha": "77jtdn",
+        "prefixo": "0245",
+        "cidade": "Ponta Grossa (PR)",
+        "source": "AMTT Ponta Grossa",
+        "escolas": [
+          "Rosicler Guzzoni Cmei Professora",
+          "Rubens e Furstenbergere M Profei Ef",
+          "Ruth Holzmann Ribas e M Profaei Ef"
+        ],
+        "bairros": [
+          "Centro-chapada"
+        ],
+        "placa": "AQQ-3042"
+      },
+      {
+        "id": "pw-0254-24991611702",
+        "nome": "0254 Pedro Izoel Pinheiro",
+        "telefone": "(24) 99161-1702",
+        "telefoneRaw": "5524991611702",
+        "telefoneValido": true,
+        "usuario": "escolar.24991611702p0254@cadastro-pontagrossa.alotio.local",
+        "senha": "bgrr44",
+        "prefixo": "0254",
+        "cidade": "Ponta Grossa (PR)",
+        "source": "AMTT Ponta Grossa",
+        "escolas": [
+          "Vanessa Kubaski Maciel Cmei",
+          "Vila Velha e e C Deef",
+          "Vila do Saber - C e I"
+        ],
+        "bairros": [
+          "Colonia Dona Luiza"
+        ],
+        "placa": "AUV6B48"
+      },
+      {
+        "id": "pw-0263-24999432005",
+        "nome": "0263 Haura e Haura Transportes LTDA",
+        "telefone": "(24) 99943-2005",
+        "telefoneRaw": "5524999432005",
+        "telefoneValido": true,
+        "usuario": "escolar.24999432005p0263@cadastro-pontagrossa.alotio.local",
+        "senha": "ern47c",
+        "prefixo": "0263",
+        "cidade": "Ponta Grossa (PR)",
+        "source": "AMTT Ponta Grossa",
+        "escolas": [
+          "Antonio Nunes Cottar C M e I Professor",
+          "Antonio Sampaio C e Cm Galef M",
+          "Arinda Borato C M e I Vovo"
+        ],
+        "bairros": [
+          "Jardim America",
+          "Olarias",
+          "Centro"
+        ],
+        "placa": "IRV8C53"
+      },
+      {
+        "id": "pw-0268-42999820653",
+        "nome": "0268 Jean George Moreira Ribeiro",
+        "telefone": "(42) 99982-0653",
+        "telefoneRaw": "5542999820653",
+        "telefoneValido": true,
+        "usuario": "escolar.42999820653p0268@cadastro-pontagrossa.alotio.local",
+        "senha": "xabmxe",
+        "prefixo": "0268",
+        "cidade": "Ponta Grossa (PR)",
+        "source": "AMTT Ponta Grossa",
+        "escolas": [
+          "Carlos R de Macedo e M Drei Ef",
+          "Carlos Zelesny C e Cm Peef M",
+          "Catarina Miro e Mei Ef"
+        ],
+        "bairros": [
+          "Oficinas"
+        ],
+        "placa": "APD-5D33"
+      },
+      {
+        "id": "pw-0310-42999177729",
+        "nome": "0310 Lyss Weiber Ribeiro da Costa",
+        "telefone": "(42) 99917-7729",
+        "telefoneRaw": "5542999177729",
+        "telefoneValido": true,
+        "usuario": "escolar.42999177729p0310@cadastro-pontagrossa.alotio.local",
+        "senha": "kj3t75",
+        "prefixo": "0310",
+        "cidade": "Ponta Grossa (PR)",
+        "source": "AMTT Ponta Grossa",
+        "escolas": [
+          "Lucia Pacher e Mei Ef Profa",
+          "Ludovico Antonio Egg e Mei Ef",
+          "Luis Pereira Cardoso C M e I"
+        ],
+        "bairros": [
+          "Uvaranas - Neves"
+        ],
+        "placa": "AUP-5776"
+      },
+      {
+        "id": "pw-0312-24999432005",
+        "nome": "0312 Haura e Haura Transportes LTDA",
+        "telefone": "(24) 99943-2005",
+        "telefoneRaw": "5524999432005",
+        "telefoneValido": true,
+        "usuario": "escolar.24999432005p0312@cadastro-pontagrossa.alotio.local",
+        "senha": "qsnswc",
+        "prefixo": "0312",
+        "cidade": "Ponta Grossa (PR)",
+        "source": "AMTT Ponta Grossa",
+        "escolas": [
+          "Maria A de Andrade e M Profaei Ef",
+          "Maria Coutin Riesembergem Profaei Ef",
+          "Maria Dolores Eef Mod Ed Esp"
+        ],
+        "bairros": [
+          "Olarias",
+          "Cel Claudio",
+          "Barreto",
+          "Pq dos Pinheiros"
+        ],
+        "placa": "END-3B90"
+      },
+      {
+        "id": "pw-0320-42999220876",
+        "nome": "0320 Renan Jose Miguel Camargo",
+        "telefone": "(42) 99922-0876",
+        "telefoneRaw": "5542999220876",
+        "telefoneValido": true,
+        "usuario": "escolar.42999220876p0320@cadastro-pontagrossa.alotio.local",
+        "senha": "gqjccb",
+        "prefixo": "0320",
+        "cidade": "Ponta Grossa (PR)",
+        "source": "AMTT Ponta Grossa",
+        "escolas": [
+          "Munhoz da Rocha C e do C Dref M",
+          "Nassima Sallum C M e I",
+          "Nelson Pereira Jorgee M Profei Ef"
+        ],
+        "bairros": [
+          "Parque dos Pinheiros"
+        ],
+        "placa": "BBP-8176"
+      },
+      {
+        "id": "pw-0332-42999147377",
+        "nome": "0332 Dircelia F K Gregorio & Cia LTDA",
+        "telefone": "(42) 99914-7377",
+        "telefoneRaw": "5542999147377",
+        "telefoneValido": true,
+        "usuario": "escolar.42999147377p0332@cadastro-pontagrossa.alotio.local",
+        "senha": "gss3ar",
+        "prefixo": "0332",
+        "cidade": "Ponta Grossa (PR)",
+        "source": "AMTT Ponta Grossa",
+        "escolas": [
+          "Ruth Holzmann Ribas e M Profaei Ef",
+          "Salete do Rocio Dimbarre C M e I Profa",
+          "Samuel Machado Bark Cmei"
+        ],
+        "bairros": [
+          "Uvaranas"
+        ],
+        "placa": "AZN-4749"
+      },
+      {
+        "id": "pw-0333-42999386284",
+        "nome": "0333 Edina de Lurdes Carneiro Ribas",
+        "telefone": "(42) 99938-6284",
+        "telefoneRaw": "5542999386284",
+        "telefoneValido": true,
+        "usuario": "escolar.42999386284p0333@cadastro-pontagrossa.alotio.local",
+        "senha": "d6zes4",
+        "prefixo": "0333",
+        "cidade": "Ponta Grossa (PR)",
+        "source": "AMTT Ponta Grossa",
+        "escolas": [
+          "Santa Maria Goretti Eei Ef",
+          "Santana Centro de Educação Infantil",
+          "Santana Colégio Ensino Fundamental Ensino Med Educ Profis"
+        ],
+        "bairros": [
+          "Cel Claudio",
+          "Uvaranas"
+        ],
+        "placa": "SEU-8E50"
+      },
+      {
+        "id": "pw-0373-42999110060",
+        "nome": "0373 Atamanczuk & Cia LTDA",
+        "telefone": "(42) 99911-0060",
+        "telefoneRaw": "5542999110060",
+        "telefoneValido": true,
+        "usuario": "escolar.42999110060p0373@cadastro-pontagrossa.alotio.local",
+        "senha": "njsste",
+        "prefixo": "0373",
+        "cidade": "Ponta Grossa (PR)",
+        "source": "AMTT Ponta Grossa",
+        "escolas": [
+          "Escola Adventista Ponta Grossa Eief",
+          "Escola Bom Pastor Escola Educação Infantil Ensino Fundamental",
+          "Escola Sagrada Familia São Zygmunt"
+        ],
+        "bairros": [
+          "Ronda"
+        ],
+        "placa": "TBB7B12"
+      },
+      {
+        "id": "pw-0376-42999147377",
+        "nome": "0376 Dircelia F K Gregorio & Cia LTDA",
+        "telefone": "(42) 99914-7377",
+        "telefoneRaw": "5542999147377",
+        "telefoneValido": true,
+        "usuario": "escolar.42999147377p0376@cadastro-pontagrossa.alotio.local",
+        "senha": "rkddzs",
+        "prefixo": "0376",
+        "cidade": "Ponta Grossa (PR)",
+        "source": "AMTT Ponta Grossa",
+        "escolas": [
+          "Fabiane Hernandez Barbosa C M e I Profa",
+          "Faris A Michaele e M Profei Ef",
+          "Felicio Francisquiny e Mei Ef"
+        ],
+        "bairros": [
+          "Uvaranas"
+        ],
+        "placa": "AWB-2747"
+      },
+      {
+        "id": "pw-0384-42998012067",
+        "nome": "0384 Sandra Mara de Oliveira Januario",
+        "telefone": "(42) 99801-2067",
+        "telefoneRaw": "5542998012067",
+        "telefoneValido": true,
+        "usuario": "escolar.42998012067p0384@cadastro-pontagrossa.alotio.local",
+        "senha": "zfpf26",
+        "prefixo": "0384",
+        "cidade": "Ponta Grossa (PR)",
+        "source": "AMTT Ponta Grossa",
+        "escolas": [
+          "Idalia Goes e M Profaei Ef",
+          "Inst Ed e Professor Cesar P Martinezf M N P",
+          "Integracao Centro de Educação Infantil Ef M"
+        ],
+        "bairros": [
+          "Oficinas"
+        ],
+        "placa": "AUY-4H39"
+      },
+      {
+        "id": "pw-0387-24999432005",
+        "nome": "0387 Haura e Haura Transportes LTDA",
+        "telefone": "(24) 99943-2005",
+        "telefoneRaw": "5524999432005",
+        "telefoneValido": true,
+        "usuario": "escolar.24999432005p0387@cadastro-pontagrossa.alotio.local",
+        "senha": "z32hfj",
+        "prefixo": "0387",
+        "cidade": "Ponta Grossa (PR)",
+        "source": "AMTT Ponta Grossa",
+        "escolas": [
+          "Jesus Divino Operario e Eef",
+          "Jorge Dechandte M Profei Ef",
+          "Joselfredo C de Oliveira C M e I Professor"
+        ],
+        "bairros": [
+          "Olarias",
+          "Veneza",
+          "Pq dos Pinheiros e Jd Barreto"
+        ],
+        "placa": "TIU3I16"
+      },
+      {
+        "id": "pw-0402-42999386284",
+        "nome": "0402 Wilmar Jorge Carneiro Ribas",
+        "telefone": "(42) 99938-6284",
+        "telefoneRaw": "5542999386284",
+        "telefoneValido": true,
+        "usuario": "escolar.42999386284p0402@cadastro-pontagrossa.alotio.local",
+        "senha": "7xwqgv",
+        "prefixo": "0402",
+        "cidade": "Ponta Grossa (PR)",
+        "source": "AMTT Ponta Grossa",
+        "escolas": [
+          "Maricy C Teixeira Pinto C M e I",
+          "Mario Braga Ramos e M Depe I e F",
+          "Marjorie B Emilio Mendes C M e I Profa"
+        ],
+        "bairros": [
+          "Uvaranas"
+        ],
+        "placa": "BBO-3678"
+      },
+      {
+        "id": "pw-0412-42999564491",
+        "nome": "0412 Benedita de Lima Brandao ME",
+        "telefone": "(42) 99956-4491",
+        "telefoneRaw": "5542999564491",
+        "telefoneValido": true,
+        "usuario": "escolar.42999564491p0412@cadastro-pontagrossa.alotio.local",
+        "senha": "8djeku",
+        "prefixo": "0412",
+        "cidade": "Ponta Grossa (PR)",
+        "source": "AMTT Ponta Grossa",
+        "escolas": [
+          "Paulo Grott e M Profei Ef",
+          "Pedro Grzelczaki C e Peef M",
+          "Pequeno Principe Escola Educação Infantil e Ensino Fundamental"
+        ],
+        "bairros": [
+          "Uvaranas"
+        ],
+        "placa": "BBT-8973"
+      },
+      {
+        "id": "pw-0430-42999220876",
+        "nome": "0430 Renan Jose Miguel Camargo",
+        "telefone": "(42) 99922-0876",
+        "telefoneRaw": "5542999220876",
+        "telefoneValido": true,
+        "usuario": "escolar.42999220876p0430@cadastro-pontagrossa.alotio.local",
+        "senha": "xqpz99",
+        "prefixo": "0430",
+        "cidade": "Ponta Grossa (PR)",
+        "source": "AMTT Ponta Grossa",
+        "escolas": [
+          "Zilda Arns e Draei Ef Mod Ed Esp",
+          "31 de Marco C Eef M",
+          "Adelaide T Chamma e M Profei Ef"
+        ],
+        "bairros": [
+          "Parque dos Pinheiros"
+        ],
+        "placa": "AZK4B46"
+      },
+      {
+        "id": "pw-0435-42999370603",
+        "nome": "0435 Guerlinguer & Martins LTDA",
+        "telefone": "(42) 99937-0603",
+        "telefoneRaw": "5542999370603",
+        "telefoneValido": true,
+        "usuario": "escolar.42999370603p0435@cadastro-pontagrossa.alotio.local",
+        "senha": "mupu2r",
+        "prefixo": "0435",
+        "cidade": "Ponta Grossa (PR)",
+        "source": "AMTT Ponta Grossa",
+        "escolas": [
+          "Anisio Teixeira C M e I",
+          "Anjo Azul Vila Estrela C e I",
+          "Antonio Nunes Cottar C M e I Professor"
+        ],
+        "bairros": [
+          "Chapada"
+        ],
+        "placa": "AYP-1319"
+      },
+      {
+        "id": "pw-0444-42999147377",
+        "nome": "0444 Dircelia F K Gregorio & Cia LTDA",
+        "telefone": "(42) 99914-7377",
+        "telefoneRaw": "5542999147377",
+        "telefoneValido": true,
+        "usuario": "escolar.42999147377p0444@cadastro-pontagrossa.alotio.local",
+        "senha": "wtwq57",
+        "prefixo": "0444",
+        "cidade": "Ponta Grossa (PR)",
+        "source": "AMTT Ponta Grossa",
+        "escolas": [
+          "Centro de Educação Infantil Sagrados Coracoes",
+          "Cescage Cef M",
+          "Claudio G Guimaraes e M Pref Celei Ef"
+        ],
+        "bairros": [
+          "Uvaranas"
+        ],
+        "placa": "AZA-4625"
+      },
+      {
+        "id": "pw-0468-42991122270",
+        "nome": "0468 Jorge Luiz Clemente de Souza",
+        "telefone": "(42) 99112-2270",
+        "telefoneRaw": "5542991122270",
+        "telefoneValido": true,
+        "usuario": "escolar.42991122270p0468@cadastro-pontagrossa.alotio.local",
+        "senha": "hzhg87",
+        "prefixo": "0468",
+        "cidade": "Ponta Grossa (PR)",
+        "source": "AMTT Ponta Grossa",
+        "escolas": [
+          "Hayde Ercilia Larocca C M e I",
+          "Haydee F Oliveirae M Profaei Ef",
+          "Heitor Ditzel e M Prefei Ef"
+        ],
+        "bairros": [
+          "Santa Paula- Jardim Maracana-centro"
+        ],
+        "placa": "DWK-0C99"
+      },
+      {
+        "id": "pw-0483-42998649994",
+        "nome": "0483 Luciano Alves da Cruz",
+        "telefone": "(42) 99864-9994",
+        "telefoneRaw": "5542998649994",
+        "telefoneValido": true,
+        "usuario": "escolar.42998649994p0483@cadastro-pontagrossa.alotio.local",
+        "senha": "tfsygg",
+        "prefixo": "0483",
+        "cidade": "Ponta Grossa (PR)",
+        "source": "AMTT Ponta Grossa",
+        "escolas": [
+          "Luis Pereira Cardoso C M e I",
+          "Luiz Gonzaga Pinto C M e I Pref Eng",
+          "Manoel V Bittencourt e M Pr Majei Ef"
+        ],
+        "bairros": [
+          "Neves"
+        ],
+        "placa": "AVJ-7A65"
+      },
+      {
+        "id": "pw-0484-42998062903",
+        "nome": "0484 Ana Paula Roloff Dzievieski",
+        "telefone": "(42) 99806-2903",
+        "telefoneRaw": "5542998062903",
+        "telefoneValido": true,
+        "usuario": "escolar.42998062903p0484@cadastro-pontagrossa.alotio.local",
+        "senha": "wqcpnz",
+        "prefixo": "0484",
+        "cidade": "Ponta Grossa (PR)",
+        "source": "AMTT Ponta Grossa",
+        "escolas": [
+          "Margarete M Mazur e e C Profaef",
+          "Maria A de Andrade e M Profaei Ef",
+          "Maria Coutin Riesembergem Profaei Ef"
+        ],
+        "bairros": [
+          "Colonia Dona Luiza",
+          "Oficinas"
+        ],
+        "placa": "APC-0545"
+      },
+      {
+        "id": "pw-0506-42998396519",
+        "nome": "0506 Olenir Johnny Gonçalves",
+        "telefone": "(42) 99839-6519",
+        "telefoneRaw": "5542998396519",
+        "telefoneValido": true,
+        "usuario": "escolar.42998396519p0506@cadastro-pontagrossa.alotio.local",
+        "senha": "43bsfr",
+        "prefixo": "0506",
+        "cidade": "Ponta Grossa (PR)",
+        "source": "AMTT Ponta Grossa",
+        "escolas": [
+          "Santa Maria Goretti Eei Ef",
+          "Santana Centro de Educação Infantil",
+          "Santana Colégio Ensino Fundamental Ensino Med Educ Profis"
+        ],
+        "bairros": [
+          "Oficinas"
+        ],
+        "placa": "EYE-7672"
+      },
+      {
+        "id": "pw-0513-42999236782",
+        "nome": "0513 Transportadora Florao",
+        "telefone": "(42) 99923-6782",
+        "telefoneRaw": "5542999236782",
+        "telefoneValido": true,
+        "usuario": "escolar.42999236782p0513@cadastro-pontagrossa.alotio.local",
+        "senha": "6pzkuj",
+        "prefixo": "0513",
+        "cidade": "Ponta Grossa (PR)",
+        "source": "AMTT Ponta Grossa",
+        "escolas": [
+          "Vanessa Kubaski Maciel Cmei",
+          "Vila Velha e e C Deef",
+          "Vila do Saber - C e I"
+        ],
+        "bairros": [
+          "Uvaranas"
+        ],
+        "placa": "BEK5B43"
+      },
+      {
+        "id": "pw-0545-42999236782",
+        "nome": "0545 Transportadora Florao",
+        "telefone": "(42) 99923-6782",
+        "telefoneRaw": "5542999236782",
+        "telefoneValido": true,
+        "usuario": "escolar.42999236782p0545@cadastro-pontagrossa.alotio.local",
+        "senha": "gc4xkd",
+        "prefixo": "0545",
+        "cidade": "Ponta Grossa (PR)",
+        "source": "AMTT Ponta Grossa",
+        "escolas": [
+          "Epaminondas N Ribas C e Cm Dref M P",
+          "Ernesto G Vilela e M Prefei Ef",
+          "Escola Adventista Ponta Grossa Eief"
+        ],
+        "bairros": [
+          "Uvaranas"
+        ],
+        "placa": "AYE-3205"
+      },
+      {
+        "id": "pw-0554-42988254929",
+        "nome": "0554 Viação Apoio LTDA",
+        "telefone": "(42) 98825-4929",
+        "telefoneRaw": "5542988254929",
+        "telefoneValido": true,
+        "usuario": "escolar.42988254929p0554@cadastro-pontagrossa.alotio.local",
+        "senha": "wwfmpb",
+        "prefixo": "0554",
+        "cidade": "Ponta Grossa (PR)",
+        "source": "AMTT Ponta Grossa",
+        "escolas": [
+          "Guitil Federmann e M Profaei Ef",
+          "Halia T Gruba e e Profaef",
+          "Hayde Ercilia Larocca C M e I"
+        ],
+        "placa": "SEE2H09"
+      },
+      {
+        "id": "pw-0564-42998759101",
+        "nome": "0564 Castorino Marinho de Melo",
+        "telefone": "(42) 99875-9101",
+        "telefoneRaw": "5542998759101",
+        "telefoneValido": true,
+        "usuario": "escolar.42998759101p0564@cadastro-pontagrossa.alotio.local",
+        "senha": "j7tnwy",
+        "prefixo": "0564",
+        "cidade": "Ponta Grossa (PR)",
+        "source": "AMTT Ponta Grossa",
+        "escolas": [
+          "João R V B Du Vernayce Profef M Profis",
+          "João Vitor Maciel Lepinski C M e I",
+          "Judith M Silveirae M Profaei Ef"
+        ],
+        "bairros": [
+          "Uvaranas"
+        ],
+        "placa": "AQR-4635"
+      },
+      {
+        "id": "pw-0580-42999858319",
+        "nome": "0580 Elizandro Wiedermann",
+        "telefone": "(42) 99985-8319",
+        "telefoneRaw": "5542999858319",
+        "telefoneValido": true,
+        "usuario": "escolar.42999858319p0580@cadastro-pontagrossa.alotio.local",
+        "senha": "d5gmx6",
+        "prefixo": "0580",
+        "cidade": "Ponta Grossa (PR)",
+        "source": "AMTT Ponta Grossa",
+        "escolas": [
+          "Nelson Pereira Jorgee M Profei Ef",
+          "Noly Zander Eei Ef Mod Ed Esp",
+          "Nossa Sra da Gloria C e Cmef M"
+        ],
+        "bairros": [
+          "Oficinas-dona Luiza"
+        ],
+        "placa": "BCQ-4F51"
+      },
+      {
+        "id": "pw-0616-24999432005",
+        "nome": "0616 Haura e Haura Transportes LTDA",
+        "telefone": "(24) 99943-2005",
+        "telefoneRaw": "5524999432005",
+        "telefoneValido": true,
+        "usuario": "escolar.24999432005p0616@cadastro-pontagrossa.alotio.local",
+        "senha": "rcaa7g",
+        "prefixo": "0616",
+        "cidade": "Ponta Grossa (PR)",
+        "source": "AMTT Ponta Grossa",
+        "escolas": [
+          "Ceebja Professor Odair Pasqualinief M",
+          "Ceebja Professor Paschoal S Rosaef M",
+          "Celina Correia Ganzert C M e I Profa"
+        ],
+        "bairros": [
+          "Olarias",
+          "Cel Claudio",
+          "Barreto",
+          "Pq dos Pinheiros"
+        ],
+        "placa": "BDN-2D26"
+      },
+      {
+        "id": "pw-0617-42998228565",
+        "nome": "0617 Morais e Santos Serviços de Transporte Escolar e de Turismo LTDA",
+        "telefone": "(42) 99822-8565",
+        "telefoneRaw": "5542998228565",
+        "telefoneValido": true,
+        "usuario": "escolar.42998228565p0617@cadastro-pontagrossa.alotio.local",
+        "senha": "9z72uq",
+        "prefixo": "0617",
+        "cidade": "Ponta Grossa (PR)",
+        "source": "AMTT Ponta Grossa",
+        "escolas": [
+          "Centro Est Educ Professor Agr Augusto Ribas",
+          "Centro Est Educ Profis de Ponta Grossa",
+          "Centro de Educação Infantil Sagrados Coracoes"
+        ],
+        "bairros": [
+          "Neves"
+        ],
+        "placa": "AWR-0571"
+      },
+      {
+        "id": "pw-0619-42984259033",
+        "nome": "0619 Valdemir Silvio da Luz",
+        "telefone": "(42) 98425-9033",
+        "telefoneRaw": "5542984259033",
+        "telefoneValido": true,
+        "usuario": "escolar.42984259033p0619@cadastro-pontagrossa.alotio.local",
+        "senha": "fa3e2a",
+        "prefixo": "0619",
+        "cidade": "Ponta Grossa (PR)",
+        "source": "AMTT Ponta Grossa",
+        "escolas": [
+          "Colares C e Cm Profef M",
+          "Colibri Ctro Educação Infantil",
+          "Colégio Elite Curitiba Unidade Ponta Grossa"
+        ],
+        "bairros": [
+          "Uvaranas"
+        ],
+        "placa": "AWX-4121"
+      },
+      {
+        "id": "pw-0662-24998430873",
+        "nome": "0662 Apoio Locadora de Veículos Ltda-me",
+        "telefone": "(24) 99843-0873",
+        "telefoneRaw": "5524998430873",
+        "telefoneValido": true,
+        "usuario": "escolar.24998430873p0662@cadastro-pontagrossa.alotio.local",
+        "senha": "7eazq4",
+        "prefixo": "0662",
+        "cidade": "Ponta Grossa (PR)",
+        "source": "AMTT Ponta Grossa",
+        "escolas": [
+          "Maria e J Schimidt e M Profaei Ef",
+          "Maricy C Teixeira Pinto C M e I",
+          "Mario Braga Ramos e M Depe I e F"
+        ],
+        "placa": "BDL1H52"
+      },
+      {
+        "id": "pw-0700-42988254929",
+        "nome": "0700 Viação Apoio LTDA",
+        "telefone": "(42) 98825-4929",
+        "telefoneRaw": "5542988254929",
+        "telefoneValido": true,
+        "usuario": "escolar.42988254929p0700@cadastro-pontagrossa.alotio.local",
+        "senha": "qrgdhe",
+        "prefixo": "0700",
+        "cidade": "Ponta Grossa (PR)",
+        "source": "AMTT Ponta Grossa",
+        "escolas": [
+          "Bernadete F G dos Santos C M e I Profa",
+          "Brasilio A da Silva C e Cef M Profis",
+          "Braulina C Quadros e M Profaei Ef"
+        ],
+        "placa": "AYQ-9B99"
+      },
+      {
+        "id": "pw-0722-42988254929",
+        "nome": "0722 Viação Apoio LTDA",
+        "telefone": "(42) 98825-4929",
+        "telefoneRaw": "5542988254929",
+        "telefoneValido": true,
+        "usuario": "escolar.42988254929p0722@cadastro-pontagrossa.alotio.local",
+        "senha": "p49jyh",
+        "prefixo": "0722",
+        "cidade": "Ponta Grossa (PR)",
+        "source": "AMTT Ponta Grossa",
+        "escolas": [
+          "Eugenio Malanski C e Profef M",
+          "Eurico B Rosas e M Pf Engei Ef",
+          "Evangelica Caminho do Saber Eei Ef"
+        ],
+        "placa": "AXW-4959"
+      },
+      {
+        "id": "pw-0730-24998430873",
+        "nome": "0730 Fretcar Transporte Escolar LTDA",
+        "telefone": "(24) 99843-0873",
+        "telefoneRaw": "5524998430873",
+        "telefoneValido": true,
+        "usuario": "escolar.24998430873p0730@cadastro-pontagrossa.alotio.local",
+        "senha": "ay8wsn",
+        "prefixo": "0730",
+        "cidade": "Ponta Grossa (PR)",
+        "source": "AMTT Ponta Grossa",
+        "escolas": [
+          "Helena Kolody Educação de Jovens e Adultos Centro Municipal Profª",
+          "Helena Parigot de S Cruz C M e I Profa",
+          "Henrique R de Lima C M e I Professor"
+        ],
+        "placa": "KVD-6G26"
+      },
+      {
+        "id": "pw-0752-42998541152",
+        "nome": "0752 Marcelo Felix Goncalves",
+        "telefone": "(42) 99854-1152",
+        "telefoneRaw": "5542998541152",
+        "telefoneValido": true,
+        "usuario": "escolar.42998541152p0752@cadastro-pontagrossa.alotio.local",
+        "senha": "ehk5kh",
+        "prefixo": "0752",
+        "cidade": "Ponta Grossa (PR)",
+        "source": "AMTT Ponta Grossa",
+        "escolas": [
+          "Medalha Milagrosa e Eef",
+          "Meneleu A Torres C e Profef M Profis",
+          "Miguel Abrao Ajuz Neto C M e I"
+        ],
+        "bairros": [
+          "Oficinas-dn Luiza"
+        ],
+        "placa": "HGF-1F24"
+      },
+      {
+        "id": "pw-0756-42988254929",
+        "nome": "0756 Viação Apoio LTDA",
+        "telefone": "(42) 98825-4929",
+        "telefoneRaw": "5542988254929",
+        "telefoneValido": true,
+        "usuario": "escolar.42988254929p0756@cadastro-pontagrossa.alotio.local",
+        "senha": "xt6gpe",
+        "prefixo": "0756",
+        "cidade": "Ponta Grossa (PR)",
+        "source": "AMTT Ponta Grossa",
+        "escolas": [
+          "Odette Maria Brauner C M e I Profa",
+          "Odyssea de O Hilgenberg C M e I Profa",
+          "Oraci Pedrozo Chiconato C M e I Profa"
+        ],
+        "placa": "BDU-2E53"
+      },
+      {
+        "id": "pw-0780-42998759101",
+        "nome": "0780 Castorino Marinho de Melo",
+        "telefone": "(42) 99875-9101",
+        "telefoneRaw": "5542998759101",
+        "telefoneValido": true,
+        "usuario": "escolar.42998759101p0780@cadastro-pontagrossa.alotio.local",
+        "senha": "sxtedb",
+        "prefixo": "0780",
+        "cidade": "Ponta Grossa (PR)",
+        "source": "AMTT Ponta Grossa",
+        "escolas": [
+          "Alda dos S Rebonato e M Profaei Ef",
+          "Aldo Bonde e M Gale I e F",
+          "Alfa Rede de Ensino"
+        ],
+        "bairros": [
+          "Uvaranas",
+          "Borsato"
+        ],
+        "placa": "EDU-1A84"
+      },
+      {
+        "id": "pw-0782-42998196533",
+        "nome": "0782 Alessandro Bueno",
+        "telefone": "(42) 99819-6533",
+        "telefoneRaw": "5542998196533",
+        "telefoneValido": true,
+        "usuario": "escolar.42998196533p0782@cadastro-pontagrossa.alotio.local",
+        "senha": "nry785",
+        "prefixo": "0782",
+        "cidade": "Ponta Grossa (PR)",
+        "source": "AMTT Ponta Grossa",
+        "escolas": [
+          "Ana Neri C M e I",
+          "Ana de B Holzmann e M Profaei Ef",
+          "Anisio Teixeira C M e I"
+        ],
+        "bairros": [
+          "Uvaranas-cara Cara"
+        ],
+        "placa": "AVU-1A52"
+      },
+      {
+        "id": "pw-0803-42998093925",
+        "nome": "0803 Stacheski Transportes LTDA",
+        "telefone": "(42) 99809-3925",
+        "telefoneRaw": "5542998093925",
+        "telefoneValido": true,
+        "usuario": "escolar.42998093925p0803@cadastro-pontagrossa.alotio.local",
+        "senha": "gng4ad",
+        "prefixo": "0803",
+        "cidade": "Ponta Grossa (PR)",
+        "source": "AMTT Ponta Grossa",
+        "escolas": [
+          "Edison Pietrobelli e e Cm Profef",
+          "Egdar Zanoni e M Profe I e F",
+          "Elias Zulian e M Frei Ef"
+        ],
+        "bairros": [
+          "Vila Estrela",
+          "Olarias",
+          "Centro"
+        ],
+        "placa": "AVV3C07"
+      },
+      {
+        "id": "pw-0804-42988254929",
+        "nome": "0804 Viação Apoio LTDA",
+        "telefone": "(42) 98825-4929",
+        "telefoneRaw": "5542988254929",
+        "telefoneValido": true,
+        "usuario": "escolar.42988254929p0804@cadastro-pontagrossa.alotio.local",
+        "senha": "j95txy",
+        "prefixo": "0804",
+        "cidade": "Ponta Grossa (PR)",
+        "source": "AMTT Ponta Grossa",
+        "escolas": [
+          "Elite Tales de Mileto Ei Ef M",
+          "Eloi Freitas de Oliveira C M e I",
+          "Eloy Avrechack e M Profef"
+        ],
+        "placa": "SEN3D19"
+      },
+      {
+        "id": "pw-0812-42988254929",
+        "nome": "0812 Viação Apoio LTDA",
+        "telefone": "(42) 98825-4929",
+        "telefoneRaw": "5542988254929",
+        "telefoneValido": true,
+        "usuario": "escolar.42988254929p0812@cadastro-pontagrossa.alotio.local",
+        "senha": "psfnds",
+        "prefixo": "0812",
+        "cidade": "Ponta Grossa (PR)",
+        "source": "AMTT Ponta Grossa",
+        "escolas": [
+          "Fulton V B Macedo e M Pref Drei Ef",
+          "Gabriel Bacila C M e I Dr",
+          "Geny J S Ribas e e Bil Surdei Ef"
+        ],
+        "placa": "SEN4I36"
+      },
+      {
+        "id": "pw-0815-42988254929",
+        "nome": "0815 Viação Apoio LTDA",
+        "telefone": "(42) 98825-4929",
+        "telefoneRaw": "5542988254929",
+        "telefoneValido": true,
+        "usuario": "escolar.42988254929p0815@cadastro-pontagrossa.alotio.local",
+        "senha": "7ktq9m",
+        "prefixo": "0815",
+        "cidade": "Ponta Grossa (PR)",
+        "source": "AMTT Ponta Grossa",
+        "escolas": [
+          "Hayde Ercilia Larocca C M e I",
+          "Haydee F Oliveirae M Profaei Ef",
+          "Heitor Ditzel e M Prefei Ef"
+        ],
+        "placa": "ECM9914"
+      },
+      {
+        "id": "pw-0822-42999006212",
+        "nome": "0822 Thais Gnatta",
+        "telefone": "(42) 99900-6212",
+        "telefoneRaw": "5542999006212",
+        "telefoneValido": true,
+        "usuario": "escolar.42999006212p0822@cadastro-pontagrossa.alotio.local",
+        "senha": "54kcja",
+        "prefixo": "0822",
+        "cidade": "Ponta Grossa (PR)",
+        "source": "AMTT Ponta Grossa",
+        "escolas": [
+          "José Elias da Rocha C e Cmef M Profis",
+          "José Gomes do Amaral C e Profefm",
+          "José Hoffmann e M Prefei Ef"
+        ],
+        "bairros": [
+          "Uvaranas/cel Claudio Princesa"
+        ],
+        "placa": "DVT4B86"
+      },
+      {
+        "id": "pw-0823-41999797790",
+        "nome": "0823 J Wolle Transportes e Turismo GT3 LTDA",
+        "telefone": "(41) 99979-7790",
+        "telefoneRaw": "5541999797790",
+        "telefoneValido": true,
+        "usuario": "escolar.41999797790p0823@cadastro-pontagrossa.alotio.local",
+        "senha": "qtwkb6",
+        "prefixo": "0823",
+        "cidade": "Ponta Grossa (PR)",
+        "source": "AMTT Ponta Grossa",
+        "escolas": [
+          "José Santana C M e I",
+          "João Haddad C M e I",
+          "João Maria Cruz e Mei Ef"
+        ],
+        "placa": "UBL7I83"
+      },
+      {
+        "id": "pw-0827-41999797790",
+        "nome": "0827 J Wolle Transportes e Turismo GT3 LTDA",
+        "telefone": "(41) 99979-7790",
+        "telefoneRaw": "5541999797790",
+        "telefoneValido": true,
+        "usuario": "escolar.41999797790p0827@cadastro-pontagrossa.alotio.local",
+        "senha": "3agjn5",
+        "prefixo": "0827",
+        "cidade": "Ponta Grossa (PR)",
+        "source": "AMTT Ponta Grossa",
+        "escolas": [
+          "Leopoldo P Rosas e M Drei Ef",
+          "Linda S Bacila C e Profaef M Profis",
+          "Lindamara Paciesny C M e I Profa"
+        ],
+        "placa": "UBK6E45"
+      },
+      {
+        "id": "pw-0830-41999797790",
+        "nome": "0830 J Wolle Transportes e Turismo GT3 LTDA",
+        "telefone": "(41) 99979-7790",
+        "telefoneRaw": "5541999797790",
+        "telefoneValido": true,
+        "usuario": "escolar.41999797790p0830@cadastro-pontagrossa.alotio.local",
+        "senha": "vczvfb",
+        "prefixo": "0830",
+        "cidade": "Ponta Grossa (PR)",
+        "source": "AMTT Ponta Grossa",
+        "escolas": [
+          "Maple Bear Ponta Grossa Centro de Educação Infantil",
+          "Margarete M Mazur e e C Profaef",
+          "Maria A de Andrade e M Profaei Ef"
+        ],
+        "placa": "BBO7C03"
+      },
+      {
+        "id": "pw-0831-41999797790",
+        "nome": "0831 J Wolle Transportes e Turismo GT3 LTDA",
+        "telefone": "(41) 99979-7790",
+        "telefoneRaw": "5541999797790",
+        "telefoneValido": true,
+        "usuario": "escolar.41999797790p0831@cadastro-pontagrossa.alotio.local",
+        "senha": "m2jhat",
+        "prefixo": "0831",
+        "cidade": "Ponta Grossa (PR)",
+        "source": "AMTT Ponta Grossa",
+        "escolas": [
+          "Maria Dolores Eef Mod Ed Esp",
+          "Maria Eulina S Scheena Em Profei Ef",
+          "Maria Imaculada C M e I"
+        ],
+        "placa": "UBK6E47"
+      },
+      {
+        "id": "pw-0836-24991611702",
+        "nome": "0836 Pedro Izoel Pinheiro",
+        "telefone": "(24) 99161-1702",
+        "telefoneRaw": "5524991611702",
+        "telefoneValido": true,
+        "usuario": "escolar.24991611702p0836@cadastro-pontagrossa.alotio.local",
+        "senha": "9rdh76",
+        "prefixo": "0836",
+        "cidade": "Ponta Grossa (PR)",
+        "source": "AMTT Ponta Grossa",
+        "escolas": [
+          "Martinho Lutero C M e I",
+          "Medalha Milagrosa e Eef",
+          "Meneleu A Torres C e Profef M Profis"
+        ],
+        "bairros": [
+          "Colonia Dona Luiza"
+        ],
+        "placa": "ITS9C23"
+      },
+      {
+        "id": "pw-0864-42999734545",
+        "nome": "0864 Expresso Royal Fretamento LTDA",
+        "telefone": "(42) 99973-4545",
+        "telefoneRaw": "5542999734545",
+        "telefoneValido": true,
+        "usuario": "escolar.42999734545p0864@cadastro-pontagrossa.alotio.local",
+        "senha": "t34tjr",
+        "prefixo": "0864",
+        "cidade": "Ponta Grossa (PR)",
+        "source": "AMTT Ponta Grossa",
+        "escolas": [
+          "Alair Stremel de Camargo C M e I Profa",
+          "Alberto Rebello Valente C Eef M",
+          "Alda dos S Rebonato e M Profaei Ef"
+        ],
+        "placa": "RHL3A57"
+      },
+      {
+        "id": "pw-0869-42999734545",
+        "nome": "0869 Expresso Royal Fretamento LTDA",
+        "telefone": "(42) 99973-4545",
+        "telefoneRaw": "5542999734545",
+        "telefoneValido": true,
+        "usuario": "escolar.42999734545p0869@cadastro-pontagrossa.alotio.local",
+        "senha": "k2ddn2",
+        "prefixo": "0869",
+        "cidade": "Ponta Grossa (PR)",
+        "source": "AMTT Ponta Grossa",
+        "escolas": [
+          "Aristeu C Pinto e M Profei Ef",
+          "Armida Frare Gracia e M Profaei Ef",
+          "Arnaldo Jansen C e Peef M Profis"
+        ],
+        "placa": "TBI0G90"
+      },
+      {
+        "id": "pw-0870-42999734545",
+        "nome": "0870 Expresso Royal Fretamento LTDA",
+        "telefone": "(42) 99973-4545",
+        "telefoneRaw": "5542999734545",
+        "telefoneValido": true,
+        "usuario": "escolar.42999734545p0870@cadastro-pontagrossa.alotio.local",
+        "senha": "f3z6d3",
+        "prefixo": "0870",
+        "cidade": "Ponta Grossa (PR)",
+        "source": "AMTT Ponta Grossa",
+        "escolas": [
+          "Augusto Canto C M e I",
+          "Becker e Silva C e Cm Profef M Profis",
+          "Bento Mossurunga C e Mtoefm"
+        ],
+        "placa": "UCG5C70"
+      },
+      {
+        "id": "pw-0871-42999734545",
+        "nome": "0871 Expresso Royal Fretamento LTDA",
+        "telefone": "(42) 99973-4545",
+        "telefoneRaw": "5542999734545",
+        "telefoneValido": true,
+        "usuario": "escolar.42999734545p0871@cadastro-pontagrossa.alotio.local",
+        "senha": "t3mfjx",
+        "prefixo": "0871",
+        "cidade": "Ponta Grossa (PR)",
+        "source": "AMTT Ponta Grossa",
+        "escolas": [
+          "Brasilio A da Silva C e Cef M Profis",
+          "Braulina C Quadros e M Profaei Ef",
+          "C A e e Llp Professor Raquel Sarraf Masini"
+        ],
+        "placa": "GKC7B99"
+      },
+      {
+        "id": "pw-0874-42999734545",
+        "nome": "0874 Expresso Royal Fretamento LTDA",
+        "telefone": "(42) 99973-4545",
+        "telefoneRaw": "5542999734545",
+        "telefoneValido": true,
+        "usuario": "escolar.42999734545p0874@cadastro-pontagrossa.alotio.local",
+        "senha": "9t36wn",
+        "prefixo": "0874",
+        "cidade": "Ponta Grossa (PR)",
+        "source": "AMTT Ponta Grossa",
+        "escolas": [
+          "Ceebja Professor Paschoal S Rosaef M",
+          "Celina Correia Ganzert C M e I Profa",
+          "Cenetec-centro Educacional e Tecnologico"
+        ],
+        "placa": "UBR2J39"
+      },
+      {
+        "id": "pw-0875-42999734545",
+        "nome": "0875 Expresso Royal Fretamento LTDA",
+        "telefone": "(42) 99973-4545",
+        "telefoneRaw": "5542999734545",
+        "telefoneValido": true,
+        "usuario": "escolar.42999734545p0875@cadastro-pontagrossa.alotio.local",
+        "senha": "cppk5t",
+        "prefixo": "0875",
+        "cidade": "Ponta Grossa (PR)",
+        "source": "AMTT Ponta Grossa",
+        "escolas": [
+          "Centro Est Educ Profis de Ponta Grossa",
+          "Centro de Educação Infantil Sagrados Coracoes",
+          "Cescage Cef M"
+        ],
+        "placa": "UBR0E90"
+      },
+      {
+        "id": "pw-0885-42999734545",
+        "nome": "0885 Expresso Royal Fretamento LTDA",
+        "telefone": "(42) 99973-4545",
+        "telefoneRaw": "5542999734545",
+        "telefoneValido": true,
+        "usuario": "escolar.42999734545p0885@cadastro-pontagrossa.alotio.local",
+        "senha": "vt7m8m",
+        "prefixo": "0885",
+        "cidade": "Ponta Grossa (PR)",
+        "source": "AMTT Ponta Grossa",
+        "escolas": [
+          "Dynamico Cef M",
+          "Eclea dos P Horn e M Profaei Ef",
+          "Edelzira Silveira C M e I Profa"
+        ],
+        "placa": "TAQ2D44"
+      },
+      {
+        "id": "pw-0886-42999017649",
+        "nome": "0886 Samuel Gnatta",
+        "telefone": "(42) 99901-7649",
+        "telefoneRaw": "5542999017649",
+        "telefoneValido": true,
+        "usuario": "escolar.42999017649p0886@cadastro-pontagrossa.alotio.local",
+        "senha": "nagbzb",
+        "prefixo": "0886",
+        "cidade": "Ponta Grossa (PR)",
+        "source": "AMTT Ponta Grossa",
+        "escolas": [
+          "Edison Pietrobelli e e Cm Profef",
+          "Egdar Zanoni e M Profe I e F",
+          "Elias Zulian e M Frei Ef"
+        ],
+        "bairros": [
+          "Uvaranas"
+        ],
+        "placa": "BEG7377"
+      },
+      {
+        "id": "pw-0895-42999734545",
+        "nome": "0895 Expresso Royal Fretamento LTDA",
+        "telefone": "(42) 99973-4545",
+        "telefoneRaw": "5542999734545",
+        "telefoneValido": true,
+        "usuario": "escolar.42999734545p0895@cadastro-pontagrossa.alotio.local",
+        "senha": "t968da",
+        "prefixo": "0895",
+        "cidade": "Ponta Grossa (PR)",
+        "source": "AMTT Ponta Grossa",
+        "escolas": [
+          "Frederico C Degraf e Mei Ef",
+          "Fulton V B Macedo e M Pref Drei Ef",
+          "Gabriel Bacila C M e I Dr"
+        ],
+        "placa": "TBG9D84"
+      },
+      {
+        "id": "pw-0896-42999563244",
+        "nome": "0896 Marcio Tebinca",
+        "telefone": "(42) 99956-3244",
+        "telefoneRaw": "5542999563244",
+        "telefoneValido": true,
+        "usuario": "escolar.42999563244p0896@cadastro-pontagrossa.alotio.local",
+        "senha": "9zzyt4",
+        "prefixo": "0896",
+        "cidade": "Ponta Grossa (PR)",
+        "source": "AMTT Ponta Grossa",
+        "escolas": [
+          "Geraldo Woyciechowski C M e I Professor",
+          "Gisele Maria Zander C M e I Profa",
+          "Glacy Camargo Secco e Mei Ef"
+        ],
+        "bairros": [
+          "Nova Russia Palmerinha"
+        ],
+        "placa": "AXL2G39"
+      },
+      {
+        "id": "pw-0908-24998430873",
+        "nome": "0908 Fretcar Transporte Escolar LTDA",
+        "telefone": "(24) 99843-0873",
+        "telefoneRaw": "5524998430873",
+        "telefoneValido": true,
+        "usuario": "escolar.24998430873p0908@cadastro-pontagrossa.alotio.local",
+        "senha": "t485sy",
+        "prefixo": "0908",
+        "cidade": "Ponta Grossa (PR)",
+        "source": "AMTT Ponta Grossa",
+        "escolas": [
+          "João Vitor Maciel Lepinski C M e I",
+          "Judith M Silveirae M Profaei Ef",
+          "Julieta Koppen C M e I Profa"
+        ],
+        "placa": "AVH0E30"
+      },
+      {
+        "id": "pw-0909-24998430873",
+        "nome": "0909 Fretcar Transporte Escolar LTDA",
+        "telefone": "(24) 99843-0873",
+        "telefoneRaw": "5524998430873",
+        "telefoneValido": true,
+        "usuario": "escolar.24998430873p0909@cadastro-pontagrossa.alotio.local",
+        "senha": "8dmf4c",
+        "prefixo": "0909",
+        "cidade": "Ponta Grossa (PR)",
+        "source": "AMTT Ponta Grossa",
+        "escolas": [
+          "Kamal Tebcherani e M Profei Ef",
+          "Kazuko Inoue e M Profaei Ef",
+          "Kennedy C e Presef M Profis"
+        ],
+        "placa": "AZU9A27"
+      },
+      {
+        "id": "pw-0912-42999732360",
+        "nome": "0912 M. V. Selmer e Cia LTDA",
+        "telefone": "(42) 99973-2360",
+        "telefoneRaw": "5542999732360",
+        "telefoneValido": true,
+        "usuario": "escolar.42999732360p0912@cadastro-pontagrossa.alotio.local",
+        "senha": "sjws3v",
+        "prefixo": "0912",
+        "cidade": "Ponta Grossa (PR)",
+        "source": "AMTT Ponta Grossa",
+        "escolas": [
+          "Lucia Pacher e Mei Ef Profa",
+          "Ludovico Antonio Egg e Mei Ef",
+          "Luis Pereira Cardoso C M e I"
+        ],
+        "placa": "RHO2G35"
+      },
+      {
+        "id": "pw-0913-42991122270",
+        "nome": "0913 Jorge Luiz Clemente de Souza",
+        "telefone": "(42) 99112-2270",
+        "telefoneRaw": "5542991122270",
+        "telefoneValido": true,
+        "usuario": "escolar.42991122270p0913@cadastro-pontagrossa.alotio.local",
+        "senha": "rtu7xn",
+        "prefixo": "0913",
+        "cidade": "Ponta Grossa (PR)",
+        "source": "AMTT Ponta Grossa",
+        "escolas": [
+          "Manoel V Bittencourt e M Pr Majei Ef",
+          "Maple Bear Ponta Grossa Centro de Educação Infantil",
+          "Margarete M Mazur e e C Profaef"
+        ],
+        "bairros": [
+          "Canaã",
+          "Sta Paula",
+          "Sta Terezinha",
+          "Jardim Maracanã",
+          "- Centro"
+        ],
+        "placa": "QQK8F33"
+      },
+      {
+        "id": "pw-0914-42999732360",
+        "nome": "0914 M. V. Selmer e Cia LTDA",
+        "telefone": "(42) 99973-2360",
+        "telefoneRaw": "5542999732360",
+        "telefoneValido": true,
+        "usuario": "escolar.42999732360p0914@cadastro-pontagrossa.alotio.local",
+        "senha": "4qeehh",
+        "prefixo": "0914",
+        "cidade": "Ponta Grossa (PR)",
+        "source": "AMTT Ponta Grossa",
+        "escolas": [
+          "Maria Coutin Riesembergem Profaei Ef",
+          "Maria Dolores Eef Mod Ed Esp",
+          "Maria Eulina S Scheena Em Profei Ef"
+        ],
+        "placa": "BAS4F82"
+      },
+      {
+        "id": "pw-0915-42999732360",
+        "nome": "0915 M. V. Selmer e Cia LTDA",
+        "telefone": "(42) 99973-2360",
+        "telefoneRaw": "5542999732360",
+        "telefoneValido": true,
+        "usuario": "escolar.42999732360p0915@cadastro-pontagrossa.alotio.local",
+        "senha": "ch84ju",
+        "prefixo": "0915",
+        "cidade": "Ponta Grossa (PR)",
+        "source": "AMTT Ponta Grossa",
+        "escolas": [
+          "Maria L Pereira e M Profaei Ef",
+          "Maria Sirlei Machado C M e I",
+          "Maria V B Ramos e M Profaei Ef"
+        ],
+        "placa": "BDD3B46"
+      },
+      {
+        "id": "pw-0916-42999732360",
+        "nome": "0916 M. V. Selmer e Cia LTDA",
+        "telefone": "(42) 99973-2360",
+        "telefoneRaw": "5542999732360",
+        "telefoneValido": true,
+        "usuario": "escolar.42999732360p0916@cadastro-pontagrossa.alotio.local",
+        "senha": "rjyx4f",
+        "prefixo": "0916",
+        "cidade": "Ponta Grossa (PR)",
+        "source": "AMTT Ponta Grossa",
+        "escolas": [
+          "Maria da Graca F Minini C M e I Profa",
+          "Maria de L Canziani e Profaei Ef M Ee",
+          "Maria e J Schimidt e M Profaei Ef"
+        ],
+        "placa": "RHK8E88"
+      },
+      {
+        "id": "pw-0918-42999732360",
+        "nome": "0918 M. V. Selmer e Cia LTDA",
+        "telefone": "(42) 99973-2360",
+        "telefoneRaw": "5542999732360",
+        "telefoneValido": true,
+        "usuario": "escolar.42999732360p0918@cadastro-pontagrossa.alotio.local",
+        "senha": "hjp9xu",
+        "prefixo": "0918",
+        "cidade": "Ponta Grossa (PR)",
+        "source": "AMTT Ponta Grossa",
+        "escolas": [
+          "Marly C Camargo Chiafitela e M Profa",
+          "Marta Filipkowski de Limae M Profei Ef",
+          "Martinho Lutero C M e I"
+        ],
+        "placa": "RHZ9H28"
+      },
+      {
+        "id": "pw-0919-42999732360",
+        "nome": "0919 M. V. Selmer e Cia LTDA",
+        "telefone": "(42) 99973-2360",
+        "telefoneRaw": "5542999732360",
+        "telefoneValido": true,
+        "usuario": "escolar.42999732360p0919@cadastro-pontagrossa.alotio.local",
+        "senha": "eemzrf",
+        "prefixo": "0919",
+        "cidade": "Ponta Grossa (PR)",
+        "source": "AMTT Ponta Grossa",
+        "escolas": [
+          "Meneleu A Torres C e Profef M Profis",
+          "Miguel Abrao Ajuz Neto C M e I",
+          "Miguel Arao Ribas Dropa C M e I Professor"
+        ],
+        "placa": "SEE9H19"
+      },
+      {
+        "id": "pw-0920-42999732360",
+        "nome": "0920 M. V. Selmer e Cia LTDA",
+        "telefone": "(42) 99973-2360",
+        "telefoneRaw": "5542999732360",
+        "telefoneValido": true,
+        "usuario": "escolar.42999732360p0920@cadastro-pontagrossa.alotio.local",
+        "senha": "kwcuve",
+        "prefixo": "0920",
+        "cidade": "Ponta Grossa (PR)",
+        "source": "AMTT Ponta Grossa",
+        "escolas": [
+          "Monteiro Lobato e Eef",
+          "Munhoz da Rocha C e do C Dref M",
+          "Nassima Sallum C M e I"
+        ],
+        "placa": "SEE9H21"
+      },
+      {
+        "id": "pw-0921-42999732360",
+        "nome": "0921 M. V. Selmer e Cia LTDA",
+        "telefone": "(42) 99973-2360",
+        "telefoneRaw": "5542999732360",
+        "telefoneValido": true,
+        "usuario": "escolar.42999732360p0921@cadastro-pontagrossa.alotio.local",
+        "senha": "2ywfp6",
+        "prefixo": "0921",
+        "cidade": "Ponta Grossa (PR)",
+        "source": "AMTT Ponta Grossa",
+        "escolas": [
+          "Noly Zander Eei Ef Mod Ed Esp",
+          "Nossa Sra da Gloria C e Cmef M",
+          "Nossa Sra das Gracas C Eef M Profis"
+        ],
+        "placa": "SEH6F48"
+      },
+      {
+        "id": "pw-0922-42999732360",
+        "nome": "0922 M. V. Selmer e Cia LTDA",
+        "telefone": "(42) 99973-2360",
+        "telefoneRaw": "5542999732360",
+        "telefoneValido": true,
+        "usuario": "escolar.42999732360p0922@cadastro-pontagrossa.alotio.local",
+        "senha": "uz3bzc",
+        "prefixo": "0922",
+        "cidade": "Ponta Grossa (PR)",
+        "source": "AMTT Ponta Grossa",
+        "escolas": [
+          "Odette Maria Brauner C M e I Profa",
+          "Odyssea de O Hilgenberg C M e I Profa",
+          "Oraci Pedrozo Chiconato C M e I Profa"
+        ],
+        "placa": "SEH6F51"
+      },
+      {
+        "id": "pw-0923-42999732360",
+        "nome": "0923 M. V. Selmer e Cia LTDA",
+        "telefone": "(42) 99973-2360",
+        "telefoneRaw": "5542999732360",
+        "telefoneValido": true,
+        "usuario": "escolar.42999732360p0923@cadastro-pontagrossa.alotio.local",
+        "senha": "cbye85",
+        "prefixo": "0923",
+        "cidade": "Ponta Grossa (PR)",
+        "source": "AMTT Ponta Grossa",
+        "escolas": [
+          "Osni Vilaca Mongruel e M Profei Ef",
+          "Osorio C e Cm Galef M Profis",
+          "Otacilia H Oliveirae M Profaei Ef"
+        ],
+        "placa": "SEH6F71"
+      },
+      {
+        "id": "pw-0924-42999732360",
+        "nome": "0924 M. V. Selmer e Cia LTDA",
+        "telefone": "(42) 99973-2360",
+        "telefoneRaw": "5542999732360",
+        "telefoneValido": true,
+        "usuario": "escolar.42999732360p0924@cadastro-pontagrossa.alotio.local",
+        "senha": "4hdqer",
+        "prefixo": "0924",
+        "cidade": "Ponta Grossa (PR)",
+        "source": "AMTT Ponta Grossa",
+        "escolas": [
+          "Pascoalino Provisiero e Mef",
+          "Paulo Cunha Nascimento C M e I Pref",
+          "Paulo Freire C M e I"
+        ],
+        "placa": "SEH6F97"
+      },
+      {
+        "id": "pw-0925-42999732360",
+        "nome": "0925 M. V. Selmer e Cia LTDA",
+        "telefone": "(42) 99973-2360",
+        "telefoneRaw": "5542999732360",
+        "telefoneValido": true,
+        "usuario": "escolar.42999732360p0925@cadastro-pontagrossa.alotio.local",
+        "senha": "jv8wgu",
+        "prefixo": "0925",
+        "cidade": "Ponta Grossa (PR)",
+        "source": "AMTT Ponta Grossa",
+        "escolas": [
+          "Pedro Grzelczaki C e Peef M",
+          "Pequeno Principe Escola Educação Infantil e Ensino Fundamental",
+          "Petronio Fernal C M e I Pref"
+        ],
+        "placa": "TBA3J18"
+      },
+      {
+        "id": "pw-0926-42999732360",
+        "nome": "0926 M. V. Selmer e Cia LTDA",
+        "telefone": "(42) 99973-2360",
+        "telefoneRaw": "5542999732360",
+        "telefoneValido": true,
+        "usuario": "escolar.42999732360p0926@cadastro-pontagrossa.alotio.local",
+        "senha": "rz6sdt",
+        "prefixo": "0926",
+        "cidade": "Ponta Grossa (PR)",
+        "source": "AMTT Ponta Grossa",
+        "escolas": [
+          "Plauto Miro Guimaraes e M Pref Drei Ef",
+          "Polivalente C Eef M Profis N",
+          "Primavera Centro de Educação Infantil"
+        ],
+        "placa": "TBB8H16"
+      },
+      {
+        "id": "pw-0927-42999732360",
+        "nome": "0927 M. V. Selmer e Cia LTDA",
+        "telefone": "(42) 99973-2360",
+        "telefoneRaw": "5542999732360",
+        "telefoneValido": true,
+        "usuario": "escolar.42999732360p0927@cadastro-pontagrossa.alotio.local",
+        "senha": "w67g3w",
+        "prefixo": "0927",
+        "cidade": "Ponta Grossa (PR)",
+        "source": "AMTT Ponta Grossa",
+        "escolas": [
+          "Prisma Arco Iris Eei Ef",
+          "Protazio Scheifer e Mei Ef",
+          "Raul P Machado e M Drei Ef"
+        ],
+        "placa": "TBB8H22"
+      },
+      {
+        "id": "pw-0930-41999797790",
+        "nome": "0930 J Wolle Transportes e Turismo GT3 LTDA",
+        "telefone": "(41) 99979-7790",
+        "telefoneRaw": "5541999797790",
+        "telefoneValido": true,
+        "usuario": "escolar.41999797790p0930@cadastro-pontagrossa.alotio.local",
+        "senha": "7bhj67",
+        "prefixo": "0930",
+        "cidade": "Ponta Grossa (PR)",
+        "source": "AMTT Ponta Grossa",
+        "escolas": [
+          "Ruth Holzmann Ribas e M Profaei Ef",
+          "Salete do Rocio Dimbarre C M e I Profa",
+          "Samuel Machado Bark Cmei"
+        ],
+        "placa": "UBK6E49"
       }
     ]
   },
@@ -44387,6 +46350,1977 @@
           "Luis Arruda Paes Maestro Escola Municipal",
           "Luzia Borba Ranciaro Escola Municipal"
         ]
+      }
+    ]
+  },
+  {
+    "id": "cidade-ponta-grossa-pr-",
+    "title": "Ponta Grossa (PR) (100 com senha)",
+    "description": "Transportadores escolares de Ponta Grossa (PR) com prefixos oficiais da AMTT DETRA e senhas temporárias",
+    "hasCredentials": true,
+    "contacts": [
+      {
+        "id": "pw-0086-42999819954",
+        "nome": "0086 Suzana Kovalski Transportes de Passeiros LTDA",
+        "telefone": "(42) 99981-9954",
+        "telefoneRaw": "5542999819954",
+        "telefoneValido": true,
+        "usuario": "escolar.42999819954p0086@cadastro-pontagrossa.alotio.local",
+        "senha": "grtcnc",
+        "prefixo": "0086",
+        "cidade": "Ponta Grossa (PR)",
+        "source": "AMTT Ponta Grossa",
+        "escolas": [
+          "Vivaldo Sasse C M e I",
+          "Walter Elias C M e I Professor",
+          "Zahira C P Mello e M Profaei Ef"
+        ],
+        "bairros": [
+          "Colonia D Luiza",
+          "Oficinas",
+          "Maria Otilia"
+        ],
+        "placa": "SER-0H16"
+      },
+      {
+        "id": "pw-0110-41999797790",
+        "nome": "0110 J Wolle Transportes e Turismo GT3 LTDA",
+        "telefone": "(41) 99979-7790",
+        "telefoneRaw": "5541999797790",
+        "telefoneValido": true,
+        "usuario": "escolar.41999797790p0110@cadastro-pontagrossa.alotio.local",
+        "senha": "x9tr9f",
+        "prefixo": "0110",
+        "cidade": "Ponta Grossa (PR)",
+        "source": "AMTT Ponta Grossa",
+        "escolas": [
+          "Darcy Ribeiro C M e I",
+          "Deodoro A Quintiliano e Mei Ef",
+          "Dercia do C Noviski e M Profaei Ef"
+        ],
+        "placa": "AWW0H22"
+      },
+      {
+        "id": "pw-0125-42988254929",
+        "nome": "0125 Viação Apoio LTDA",
+        "telefone": "(42) 98825-4929",
+        "telefoneRaw": "5542988254929",
+        "telefoneValido": true,
+        "usuario": "escolar.42988254929p0125@cadastro-pontagrossa.alotio.local",
+        "senha": "24ck5z",
+        "prefixo": "0125",
+        "cidade": "Ponta Grossa (PR)",
+        "source": "AMTT Ponta Grossa",
+        "escolas": [
+          "Glacy Camargo Secco e Mei Ef",
+          "Guaracy Parana Vieira e Me I e F",
+          "Guilherme H Bauer C M e I Dr"
+        ],
+        "placa": "SEE2H06"
+      },
+      {
+        "id": "pw-0126-42988254929",
+        "nome": "0126 Viação Apoio LTDA",
+        "telefone": "(42) 98825-4929",
+        "telefoneRaw": "5542988254929",
+        "telefoneValido": true,
+        "usuario": "escolar.42988254929p0126@cadastro-pontagrossa.alotio.local",
+        "senha": "vhvhqp",
+        "prefixo": "0126",
+        "cidade": "Ponta Grossa (PR)",
+        "source": "AMTT Ponta Grossa",
+        "escolas": [
+          "Halia T Gruba e e Profaef",
+          "Hayde Ercilia Larocca C M e I",
+          "Haydee F Oliveirae M Profaei Ef"
+        ],
+        "placa": "UBX5J34"
+      },
+      {
+        "id": "pw-0129-42988254929",
+        "nome": "0129 Viação Apoio LTDA",
+        "telefone": "(42) 98825-4929",
+        "telefoneRaw": "5542988254929",
+        "telefoneValido": true,
+        "usuario": "escolar.42988254929p0129@cadastro-pontagrossa.alotio.local",
+        "senha": "tkawhz",
+        "prefixo": "0129",
+        "cidade": "Ponta Grossa (PR)",
+        "source": "AMTT Ponta Grossa",
+        "escolas": [
+          "Integracao Centro de Educação Infantil Ef M",
+          "Iolando Taques Fonseca e e Profef",
+          "Iracema Machado Silva C M e I Profa"
+        ],
+        "placa": "UBX7C70"
+      },
+      {
+        "id": "pw-0131-42988254929",
+        "nome": "0131 Viação Apoio LTDA",
+        "telefone": "(42) 98825-4929",
+        "telefoneRaw": "5542988254929",
+        "telefoneValido": true,
+        "usuario": "escolar.42988254929p0131@cadastro-pontagrossa.alotio.local",
+        "senha": "w7gz5n",
+        "prefixo": "0131",
+        "cidade": "Ponta Grossa (PR)",
+        "source": "AMTT Ponta Grossa",
+        "escolas": [
+          "Janice Goncalves Oliveira C M e I Profa",
+          "Jesus Divino Operario e Eef",
+          "Jorge Dechandte M Profei Ef"
+        ],
+        "placa": "UCI3E60"
+      },
+      {
+        "id": "pw-0132-24998430873",
+        "nome": "0132 Fretcar Transporte Escolar LTDA",
+        "telefone": "(24) 99843-0873",
+        "telefoneRaw": "5524998430873",
+        "telefoneValido": true,
+        "usuario": "escolar.24998430873p0132@cadastro-pontagrossa.alotio.local",
+        "senha": "93wb8k",
+        "prefixo": "0132",
+        "cidade": "Ponta Grossa (PR)",
+        "source": "AMTT Ponta Grossa",
+        "escolas": [
+          "José B G Vilela e M Prefei Ef",
+          "José Bugatti e M Peei Ef",
+          "José Elias da Rocha C e Cmef M Profis"
+        ],
+        "placa": "ARK0F91"
+      },
+      {
+        "id": "pw-0136-42991121750",
+        "nome": "0136 Jorje Hayashi",
+        "telefone": "(42) 99112-1750",
+        "telefoneRaw": "5542991121750",
+        "telefoneValido": true,
+        "usuario": "escolar.42991121750p0136@cadastro-pontagrossa.alotio.local",
+        "senha": "a2dffp",
+        "prefixo": "0136",
+        "cidade": "Ponta Grossa (PR)",
+        "source": "AMTT Ponta Grossa",
+        "escolas": [
+          "Julio Teodorico e e Profef",
+          "Kamal Tebcherani e M Profei Ef",
+          "Kazuko Inoue e M Profaei Ef"
+        ],
+        "bairros": [
+          "Uvaranas"
+        ],
+        "placa": "BBE-1344"
+      },
+      {
+        "id": "pw-0137-42999732360",
+        "nome": "0137 M. V. Selmer e Cia LTDA",
+        "telefone": "(42) 99973-2360",
+        "telefoneRaw": "5542999732360",
+        "telefoneValido": true,
+        "usuario": "escolar.42999732360p0137@cadastro-pontagrossa.alotio.local",
+        "senha": "tt4fxf",
+        "prefixo": "0137",
+        "cidade": "Ponta Grossa (PR)",
+        "source": "AMTT Ponta Grossa",
+        "escolas": [
+          "Leonides Degraf C M e I",
+          "Leopoldo Lopes Sobrinho C M e I Professor",
+          "Leopoldo P Rosas e M Drei Ef"
+        ],
+        "placa": "QXB2H16"
+      },
+      {
+        "id": "pw-0138-42999499414",
+        "nome": "0138 Eliel Tullio Autonomo",
+        "telefone": "(42) 99949-9414",
+        "telefoneRaw": "5542999499414",
+        "telefoneValido": true,
+        "usuario": "escolar.42999499414p0138@cadastro-pontagrossa.alotio.local",
+        "senha": "zsb23q",
+        "prefixo": "0138",
+        "cidade": "Ponta Grossa (PR)",
+        "source": "AMTT Ponta Grossa",
+        "escolas": [
+          "Lindamara Paciesny C M e I Profa",
+          "Livio Bosetti C M e I Pe",
+          "Loise F de Lara e M Profaei Ef"
+        ],
+        "placa": "UBX8A71"
+      },
+      {
+        "id": "pw-0139-42999732360",
+        "nome": "0139 M. V. Selmer e Cia LTDA",
+        "telefone": "(42) 99973-2360",
+        "telefoneRaw": "5542999732360",
+        "telefoneValido": true,
+        "usuario": "escolar.42999732360p0139@cadastro-pontagrossa.alotio.local",
+        "senha": "fgsd6x",
+        "prefixo": "0139",
+        "cidade": "Ponta Grossa (PR)",
+        "source": "AMTT Ponta Grossa",
+        "escolas": [
+          "Ludovico Antonio Egg e Mei Ef",
+          "Luis Pereira Cardoso C M e I",
+          "Luiz Gonzaga Pinto C M e I Pref Eng"
+        ],
+        "placa": "AZT7687"
+      },
+      {
+        "id": "pw-0140-42999933908",
+        "nome": "0140 Aline Cristina Cunha de Oliveira LTDA",
+        "telefone": "(42) 99993-3908",
+        "telefoneRaw": "5542999933908",
+        "telefoneValido": true,
+        "usuario": "escolar.42999933908p0140@cadastro-pontagrossa.alotio.local",
+        "senha": "hf9sv2",
+        "prefixo": "0140",
+        "cidade": "Ponta Grossa (PR)",
+        "source": "AMTT Ponta Grossa",
+        "escolas": [
+          "Maple Bear Ponta Grossa Centro de Educação Infantil",
+          "Margarete M Mazur e e C Profaef",
+          "Maria A de Andrade e M Profaei Ef"
+        ],
+        "bairros": [
+          "Olarias"
+        ],
+        "placa": "ARZ3C66"
+      },
+      {
+        "id": "pw-0141-41999797790",
+        "nome": "0141 J Wolle Transportes e Turismo GT3 LTDA",
+        "telefone": "(41) 99979-7790",
+        "telefoneRaw": "5541999797790",
+        "telefoneValido": true,
+        "usuario": "escolar.41999797790p0141@cadastro-pontagrossa.alotio.local",
+        "senha": "7an5yv",
+        "prefixo": "0141",
+        "cidade": "Ponta Grossa (PR)",
+        "source": "AMTT Ponta Grossa",
+        "escolas": [
+          "Maria Dolores Eef Mod Ed Esp",
+          "Maria Eulina S Scheena Em Profei Ef",
+          "Maria Imaculada C M e I"
+        ],
+        "placa": "UBK6E52"
+      },
+      {
+        "id": "pw-0142-41999797790",
+        "nome": "0142 J Wolle Transportes e Turismo GT3 LTDA",
+        "telefone": "(41) 99979-7790",
+        "telefoneRaw": "5541999797790",
+        "telefoneValido": true,
+        "usuario": "escolar.41999797790p0142@cadastro-pontagrossa.alotio.local",
+        "senha": "p82aan",
+        "prefixo": "0142",
+        "cidade": "Ponta Grossa (PR)",
+        "source": "AMTT Ponta Grossa",
+        "escolas": [
+          "Maria Sirlei Machado C M e I",
+          "Maria V B Ramos e M Profaei Ef",
+          "Maria da Conceicao D Cunha C M e I"
+        ],
+        "placa": "DTA5H83"
+      },
+      {
+        "id": "pw-0143-42988254929",
+        "nome": "0143 Viação Apoio LTDA",
+        "telefone": "(42) 98825-4929",
+        "telefoneRaw": "5542988254929",
+        "telefoneValido": true,
+        "usuario": "escolar.42988254929p0143@cadastro-pontagrossa.alotio.local",
+        "senha": "g24vmr",
+        "prefixo": "0143",
+        "cidade": "Ponta Grossa (PR)",
+        "source": "AMTT Ponta Grossa",
+        "escolas": [
+          "Maria de L Canziani e Profaei Ef M Ee",
+          "Maria e J Schimidt e M Profaei Ef",
+          "Maricy C Teixeira Pinto C M e I"
+        ],
+        "placa": "UCI3E77"
+      },
+      {
+        "id": "pw-0144-42999732360",
+        "nome": "0144 M. V. Selmer e Cia LTDA",
+        "telefone": "(42) 99973-2360",
+        "telefoneRaw": "5542999732360",
+        "telefoneValido": true,
+        "usuario": "escolar.42999732360p0144@cadastro-pontagrossa.alotio.local",
+        "senha": "7xe8b8",
+        "prefixo": "0144",
+        "cidade": "Ponta Grossa (PR)",
+        "source": "AMTT Ponta Grossa",
+        "escolas": [
+          "Marjorie B Emilio Mendes C M e I Profa",
+          "Marlene Perez C M e I Profa",
+          "Marly C Camargo Chiafitela e M Profa"
+        ],
+        "placa": "BDC0B74"
+      },
+      {
+        "id": "pw-0146-42999732360",
+        "nome": "0146 M. V. Selmer e Cia LTDA",
+        "telefone": "(42) 99973-2360",
+        "telefoneRaw": "5542999732360",
+        "telefoneValido": true,
+        "usuario": "escolar.42999732360p0146@cadastro-pontagrossa.alotio.local",
+        "senha": "5sv6bs",
+        "prefixo": "0146",
+        "cidade": "Ponta Grossa (PR)",
+        "source": "AMTT Ponta Grossa",
+        "escolas": [
+          "Miguel Abrao Ajuz Neto C M e I",
+          "Miguel Arao Ribas Dropa C M e I Professor",
+          "Minervina F Scudlarecke M Profaei Ef"
+        ],
+        "placa": "BCU7H25"
+      },
+      {
+        "id": "pw-0148-42999293149",
+        "nome": "0148 E.r. Silva Transporte Rodoviário Escolar",
+        "telefone": "(42) 99929-3149",
+        "telefoneRaw": "5542999293149",
+        "telefoneValido": true,
+        "usuario": "escolar.42999293149p0148@cadastro-pontagrossa.alotio.local",
+        "senha": "df5ndv",
+        "prefixo": "0148",
+        "cidade": "Ponta Grossa (PR)",
+        "source": "AMTT Ponta Grossa",
+        "escolas": [
+          "Noly Zander Eei Ef Mod Ed Esp",
+          "Nossa Sra da Gloria C e Cmef M",
+          "Nossa Sra das Gracas C Eef M Profis"
+        ],
+        "bairros": [
+          "Ronda"
+        ],
+        "placa": "ASY-3827"
+      },
+      {
+        "id": "pw-0150-42999732360",
+        "nome": "0150 M. V. Selmer e Cia LTDA",
+        "telefone": "(42) 99973-2360",
+        "telefoneRaw": "5542999732360",
+        "telefoneValido": true,
+        "usuario": "escolar.42999732360p0150@cadastro-pontagrossa.alotio.local",
+        "senha": "nxh3xq",
+        "prefixo": "0150",
+        "cidade": "Ponta Grossa (PR)",
+        "source": "AMTT Ponta Grossa",
+        "escolas": [
+          "Orival C Martins e M Verei Ef",
+          "Osni Vilaca Mongruel e M Profei Ef",
+          "Osorio C e Cm Galef M Profis"
+        ],
+        "placa": "ELU4A49"
+      },
+      {
+        "id": "pw-0170-42999973526",
+        "nome": "0170 Joao Luiz de Azevedo",
+        "telefone": "(42) 99997-3526",
+        "telefoneRaw": "5542999973526",
+        "telefoneValido": true,
+        "usuario": "escolar.42999973526p0170@cadastro-pontagrossa.alotio.local",
+        "senha": "kq9ga9",
+        "prefixo": "0170",
+        "cidade": "Ponta Grossa (PR)",
+        "source": "AMTT Ponta Grossa",
+        "escolas": [
+          "Zeneida F Schnirmann e M Profaei Ef",
+          "Zila B Bach e M Profaei Ef",
+          "Zilda Arns e Draei Ef Mod Ed Esp"
+        ],
+        "bairros": [
+          "Uvaranas-neves"
+        ],
+        "placa": "AYL-7785"
+      },
+      {
+        "id": "pw-0178-42999499414",
+        "nome": "0178 Eliel Tullio",
+        "telefone": "(42) 99949-9414",
+        "telefoneRaw": "5542999499414",
+        "telefoneValido": true,
+        "usuario": "escolar.42999499414p0178@cadastro-pontagrossa.alotio.local",
+        "senha": "7fmgam",
+        "prefixo": "0178",
+        "cidade": "Ponta Grossa (PR)",
+        "source": "AMTT Ponta Grossa",
+        "escolas": [
+          "Arnaldo Jansen C e Peef M Profis",
+          "Arnaldo Janssen Sant Ana Eef",
+          "Augusto Canto C M e I"
+        ],
+        "bairros": [
+          "Orfaos",
+          "Jardim Carvalho"
+        ],
+        "placa": "LRV-4186"
+      },
+      {
+        "id": "pw-0191-42999830982",
+        "nome": "0191 Israel Lepek",
+        "telefone": "(42) 99983-0982",
+        "telefoneRaw": "5542999830982",
+        "telefoneValido": true,
+        "usuario": "escolar.42999830982p0191@cadastro-pontagrossa.alotio.local",
+        "senha": "epp2fa",
+        "prefixo": "0191",
+        "cidade": "Ponta Grossa (PR)",
+        "source": "AMTT Ponta Grossa",
+        "escolas": [
+          "Cristiane Levandowski e M Profei Ef",
+          "Cyrillo Domingos Ricci e Mei Ef",
+          "Cyro Martins e M Pref Engei Ef"
+        ],
+        "bairros": [
+          "Orfas"
+        ],
+        "placa": "AXN-4835"
+      },
+      {
+        "id": "pw-0209-42999751234",
+        "nome": "0209 Kamilla Correa",
+        "telefone": "(42) 99975-1234",
+        "telefoneRaw": "5542999751234",
+        "telefoneValido": true,
+        "usuario": "escolar.42999751234p0209@cadastro-pontagrossa.alotio.local",
+        "senha": "tyg4eq",
+        "prefixo": "0209",
+        "cidade": "Ponta Grossa (PR)",
+        "source": "AMTT Ponta Grossa",
+        "escolas": [
+          "Haydee F Oliveirae M Profaei Ef",
+          "Heitor Ditzel e M Prefei Ef",
+          "Helena Kolody Educação de Jovens e Adultos Centro Municipal Profª"
+        ],
+        "bairros": [
+          "Neves"
+        ],
+        "placa": "AWU-2314"
+      },
+      {
+        "id": "pw-0235-42999819188",
+        "nome": "0235 Rodovatty Transportes Rodoviario Ltda- Rodovan",
+        "telefone": "(42) 99981-9188",
+        "telefoneRaw": "5542999819188",
+        "telefoneValido": true,
+        "usuario": "escolar.42999819188p0235@cadastro-pontagrossa.alotio.local",
+        "senha": "cpkpr5",
+        "prefixo": "0235",
+        "cidade": "Ponta Grossa (PR)",
+        "source": "AMTT Ponta Grossa",
+        "escolas": [
+          "Nossa Sra da Gloria C e Cmef M",
+          "Nossa Sra das Gracas C Eef M Profis",
+          "Odette Cominato C M e I Profa"
+        ],
+        "bairros": [
+          "Centro"
+        ],
+        "placa": "AOS-5549"
+      },
+      {
+        "id": "pw-0245-42999819188",
+        "nome": "0245 Rodovatty Transportes Rodoviario Ltda- Rodovan",
+        "telefone": "(42) 99981-9188",
+        "telefoneRaw": "5542999819188",
+        "telefoneValido": true,
+        "usuario": "escolar.42999819188p0245@cadastro-pontagrossa.alotio.local",
+        "senha": "77jtdn",
+        "prefixo": "0245",
+        "cidade": "Ponta Grossa (PR)",
+        "source": "AMTT Ponta Grossa",
+        "escolas": [
+          "Rosicler Guzzoni Cmei Professora",
+          "Rubens e Furstenbergere M Profei Ef",
+          "Ruth Holzmann Ribas e M Profaei Ef"
+        ],
+        "bairros": [
+          "Centro-chapada"
+        ],
+        "placa": "AQQ-3042"
+      },
+      {
+        "id": "pw-0254-24991611702",
+        "nome": "0254 Pedro Izoel Pinheiro",
+        "telefone": "(24) 99161-1702",
+        "telefoneRaw": "5524991611702",
+        "telefoneValido": true,
+        "usuario": "escolar.24991611702p0254@cadastro-pontagrossa.alotio.local",
+        "senha": "bgrr44",
+        "prefixo": "0254",
+        "cidade": "Ponta Grossa (PR)",
+        "source": "AMTT Ponta Grossa",
+        "escolas": [
+          "Vanessa Kubaski Maciel Cmei",
+          "Vila Velha e e C Deef",
+          "Vila do Saber - C e I"
+        ],
+        "bairros": [
+          "Colonia Dona Luiza"
+        ],
+        "placa": "AUV6B48"
+      },
+      {
+        "id": "pw-0263-24999432005",
+        "nome": "0263 Haura e Haura Transportes LTDA",
+        "telefone": "(24) 99943-2005",
+        "telefoneRaw": "5524999432005",
+        "telefoneValido": true,
+        "usuario": "escolar.24999432005p0263@cadastro-pontagrossa.alotio.local",
+        "senha": "ern47c",
+        "prefixo": "0263",
+        "cidade": "Ponta Grossa (PR)",
+        "source": "AMTT Ponta Grossa",
+        "escolas": [
+          "Antonio Nunes Cottar C M e I Professor",
+          "Antonio Sampaio C e Cm Galef M",
+          "Arinda Borato C M e I Vovo"
+        ],
+        "bairros": [
+          "Jardim America",
+          "Olarias",
+          "Centro"
+        ],
+        "placa": "IRV8C53"
+      },
+      {
+        "id": "pw-0268-42999820653",
+        "nome": "0268 Jean George Moreira Ribeiro",
+        "telefone": "(42) 99982-0653",
+        "telefoneRaw": "5542999820653",
+        "telefoneValido": true,
+        "usuario": "escolar.42999820653p0268@cadastro-pontagrossa.alotio.local",
+        "senha": "xabmxe",
+        "prefixo": "0268",
+        "cidade": "Ponta Grossa (PR)",
+        "source": "AMTT Ponta Grossa",
+        "escolas": [
+          "Carlos R de Macedo e M Drei Ef",
+          "Carlos Zelesny C e Cm Peef M",
+          "Catarina Miro e Mei Ef"
+        ],
+        "bairros": [
+          "Oficinas"
+        ],
+        "placa": "APD-5D33"
+      },
+      {
+        "id": "pw-0310-42999177729",
+        "nome": "0310 Lyss Weiber Ribeiro da Costa",
+        "telefone": "(42) 99917-7729",
+        "telefoneRaw": "5542999177729",
+        "telefoneValido": true,
+        "usuario": "escolar.42999177729p0310@cadastro-pontagrossa.alotio.local",
+        "senha": "kj3t75",
+        "prefixo": "0310",
+        "cidade": "Ponta Grossa (PR)",
+        "source": "AMTT Ponta Grossa",
+        "escolas": [
+          "Lucia Pacher e Mei Ef Profa",
+          "Ludovico Antonio Egg e Mei Ef",
+          "Luis Pereira Cardoso C M e I"
+        ],
+        "bairros": [
+          "Uvaranas - Neves"
+        ],
+        "placa": "AUP-5776"
+      },
+      {
+        "id": "pw-0312-24999432005",
+        "nome": "0312 Haura e Haura Transportes LTDA",
+        "telefone": "(24) 99943-2005",
+        "telefoneRaw": "5524999432005",
+        "telefoneValido": true,
+        "usuario": "escolar.24999432005p0312@cadastro-pontagrossa.alotio.local",
+        "senha": "qsnswc",
+        "prefixo": "0312",
+        "cidade": "Ponta Grossa (PR)",
+        "source": "AMTT Ponta Grossa",
+        "escolas": [
+          "Maria A de Andrade e M Profaei Ef",
+          "Maria Coutin Riesembergem Profaei Ef",
+          "Maria Dolores Eef Mod Ed Esp"
+        ],
+        "bairros": [
+          "Olarias",
+          "Cel Claudio",
+          "Barreto",
+          "Pq dos Pinheiros"
+        ],
+        "placa": "END-3B90"
+      },
+      {
+        "id": "pw-0320-42999220876",
+        "nome": "0320 Renan Jose Miguel Camargo",
+        "telefone": "(42) 99922-0876",
+        "telefoneRaw": "5542999220876",
+        "telefoneValido": true,
+        "usuario": "escolar.42999220876p0320@cadastro-pontagrossa.alotio.local",
+        "senha": "gqjccb",
+        "prefixo": "0320",
+        "cidade": "Ponta Grossa (PR)",
+        "source": "AMTT Ponta Grossa",
+        "escolas": [
+          "Munhoz da Rocha C e do C Dref M",
+          "Nassima Sallum C M e I",
+          "Nelson Pereira Jorgee M Profei Ef"
+        ],
+        "bairros": [
+          "Parque dos Pinheiros"
+        ],
+        "placa": "BBP-8176"
+      },
+      {
+        "id": "pw-0332-42999147377",
+        "nome": "0332 Dircelia F K Gregorio & Cia LTDA",
+        "telefone": "(42) 99914-7377",
+        "telefoneRaw": "5542999147377",
+        "telefoneValido": true,
+        "usuario": "escolar.42999147377p0332@cadastro-pontagrossa.alotio.local",
+        "senha": "gss3ar",
+        "prefixo": "0332",
+        "cidade": "Ponta Grossa (PR)",
+        "source": "AMTT Ponta Grossa",
+        "escolas": [
+          "Ruth Holzmann Ribas e M Profaei Ef",
+          "Salete do Rocio Dimbarre C M e I Profa",
+          "Samuel Machado Bark Cmei"
+        ],
+        "bairros": [
+          "Uvaranas"
+        ],
+        "placa": "AZN-4749"
+      },
+      {
+        "id": "pw-0333-42999386284",
+        "nome": "0333 Edina de Lurdes Carneiro Ribas",
+        "telefone": "(42) 99938-6284",
+        "telefoneRaw": "5542999386284",
+        "telefoneValido": true,
+        "usuario": "escolar.42999386284p0333@cadastro-pontagrossa.alotio.local",
+        "senha": "d6zes4",
+        "prefixo": "0333",
+        "cidade": "Ponta Grossa (PR)",
+        "source": "AMTT Ponta Grossa",
+        "escolas": [
+          "Santa Maria Goretti Eei Ef",
+          "Santana Centro de Educação Infantil",
+          "Santana Colégio Ensino Fundamental Ensino Med Educ Profis"
+        ],
+        "bairros": [
+          "Cel Claudio",
+          "Uvaranas"
+        ],
+        "placa": "SEU-8E50"
+      },
+      {
+        "id": "pw-0373-42999110060",
+        "nome": "0373 Atamanczuk & Cia LTDA",
+        "telefone": "(42) 99911-0060",
+        "telefoneRaw": "5542999110060",
+        "telefoneValido": true,
+        "usuario": "escolar.42999110060p0373@cadastro-pontagrossa.alotio.local",
+        "senha": "njsste",
+        "prefixo": "0373",
+        "cidade": "Ponta Grossa (PR)",
+        "source": "AMTT Ponta Grossa",
+        "escolas": [
+          "Escola Adventista Ponta Grossa Eief",
+          "Escola Bom Pastor Escola Educação Infantil Ensino Fundamental",
+          "Escola Sagrada Familia São Zygmunt"
+        ],
+        "bairros": [
+          "Ronda"
+        ],
+        "placa": "TBB7B12"
+      },
+      {
+        "id": "pw-0376-42999147377",
+        "nome": "0376 Dircelia F K Gregorio & Cia LTDA",
+        "telefone": "(42) 99914-7377",
+        "telefoneRaw": "5542999147377",
+        "telefoneValido": true,
+        "usuario": "escolar.42999147377p0376@cadastro-pontagrossa.alotio.local",
+        "senha": "rkddzs",
+        "prefixo": "0376",
+        "cidade": "Ponta Grossa (PR)",
+        "source": "AMTT Ponta Grossa",
+        "escolas": [
+          "Fabiane Hernandez Barbosa C M e I Profa",
+          "Faris A Michaele e M Profei Ef",
+          "Felicio Francisquiny e Mei Ef"
+        ],
+        "bairros": [
+          "Uvaranas"
+        ],
+        "placa": "AWB-2747"
+      },
+      {
+        "id": "pw-0384-42998012067",
+        "nome": "0384 Sandra Mara de Oliveira Januario",
+        "telefone": "(42) 99801-2067",
+        "telefoneRaw": "5542998012067",
+        "telefoneValido": true,
+        "usuario": "escolar.42998012067p0384@cadastro-pontagrossa.alotio.local",
+        "senha": "zfpf26",
+        "prefixo": "0384",
+        "cidade": "Ponta Grossa (PR)",
+        "source": "AMTT Ponta Grossa",
+        "escolas": [
+          "Idalia Goes e M Profaei Ef",
+          "Inst Ed e Professor Cesar P Martinezf M N P",
+          "Integracao Centro de Educação Infantil Ef M"
+        ],
+        "bairros": [
+          "Oficinas"
+        ],
+        "placa": "AUY-4H39"
+      },
+      {
+        "id": "pw-0387-24999432005",
+        "nome": "0387 Haura e Haura Transportes LTDA",
+        "telefone": "(24) 99943-2005",
+        "telefoneRaw": "5524999432005",
+        "telefoneValido": true,
+        "usuario": "escolar.24999432005p0387@cadastro-pontagrossa.alotio.local",
+        "senha": "z32hfj",
+        "prefixo": "0387",
+        "cidade": "Ponta Grossa (PR)",
+        "source": "AMTT Ponta Grossa",
+        "escolas": [
+          "Jesus Divino Operario e Eef",
+          "Jorge Dechandte M Profei Ef",
+          "Joselfredo C de Oliveira C M e I Professor"
+        ],
+        "bairros": [
+          "Olarias",
+          "Veneza",
+          "Pq dos Pinheiros e Jd Barreto"
+        ],
+        "placa": "TIU3I16"
+      },
+      {
+        "id": "pw-0402-42999386284",
+        "nome": "0402 Wilmar Jorge Carneiro Ribas",
+        "telefone": "(42) 99938-6284",
+        "telefoneRaw": "5542999386284",
+        "telefoneValido": true,
+        "usuario": "escolar.42999386284p0402@cadastro-pontagrossa.alotio.local",
+        "senha": "7xwqgv",
+        "prefixo": "0402",
+        "cidade": "Ponta Grossa (PR)",
+        "source": "AMTT Ponta Grossa",
+        "escolas": [
+          "Maricy C Teixeira Pinto C M e I",
+          "Mario Braga Ramos e M Depe I e F",
+          "Marjorie B Emilio Mendes C M e I Profa"
+        ],
+        "bairros": [
+          "Uvaranas"
+        ],
+        "placa": "BBO-3678"
+      },
+      {
+        "id": "pw-0412-42999564491",
+        "nome": "0412 Benedita de Lima Brandao ME",
+        "telefone": "(42) 99956-4491",
+        "telefoneRaw": "5542999564491",
+        "telefoneValido": true,
+        "usuario": "escolar.42999564491p0412@cadastro-pontagrossa.alotio.local",
+        "senha": "8djeku",
+        "prefixo": "0412",
+        "cidade": "Ponta Grossa (PR)",
+        "source": "AMTT Ponta Grossa",
+        "escolas": [
+          "Paulo Grott e M Profei Ef",
+          "Pedro Grzelczaki C e Peef M",
+          "Pequeno Principe Escola Educação Infantil e Ensino Fundamental"
+        ],
+        "bairros": [
+          "Uvaranas"
+        ],
+        "placa": "BBT-8973"
+      },
+      {
+        "id": "pw-0430-42999220876",
+        "nome": "0430 Renan Jose Miguel Camargo",
+        "telefone": "(42) 99922-0876",
+        "telefoneRaw": "5542999220876",
+        "telefoneValido": true,
+        "usuario": "escolar.42999220876p0430@cadastro-pontagrossa.alotio.local",
+        "senha": "xqpz99",
+        "prefixo": "0430",
+        "cidade": "Ponta Grossa (PR)",
+        "source": "AMTT Ponta Grossa",
+        "escolas": [
+          "Zilda Arns e Draei Ef Mod Ed Esp",
+          "31 de Marco C Eef M",
+          "Adelaide T Chamma e M Profei Ef"
+        ],
+        "bairros": [
+          "Parque dos Pinheiros"
+        ],
+        "placa": "AZK4B46"
+      },
+      {
+        "id": "pw-0435-42999370603",
+        "nome": "0435 Guerlinguer & Martins LTDA",
+        "telefone": "(42) 99937-0603",
+        "telefoneRaw": "5542999370603",
+        "telefoneValido": true,
+        "usuario": "escolar.42999370603p0435@cadastro-pontagrossa.alotio.local",
+        "senha": "mupu2r",
+        "prefixo": "0435",
+        "cidade": "Ponta Grossa (PR)",
+        "source": "AMTT Ponta Grossa",
+        "escolas": [
+          "Anisio Teixeira C M e I",
+          "Anjo Azul Vila Estrela C e I",
+          "Antonio Nunes Cottar C M e I Professor"
+        ],
+        "bairros": [
+          "Chapada"
+        ],
+        "placa": "AYP-1319"
+      },
+      {
+        "id": "pw-0444-42999147377",
+        "nome": "0444 Dircelia F K Gregorio & Cia LTDA",
+        "telefone": "(42) 99914-7377",
+        "telefoneRaw": "5542999147377",
+        "telefoneValido": true,
+        "usuario": "escolar.42999147377p0444@cadastro-pontagrossa.alotio.local",
+        "senha": "wtwq57",
+        "prefixo": "0444",
+        "cidade": "Ponta Grossa (PR)",
+        "source": "AMTT Ponta Grossa",
+        "escolas": [
+          "Centro de Educação Infantil Sagrados Coracoes",
+          "Cescage Cef M",
+          "Claudio G Guimaraes e M Pref Celei Ef"
+        ],
+        "bairros": [
+          "Uvaranas"
+        ],
+        "placa": "AZA-4625"
+      },
+      {
+        "id": "pw-0468-42991122270",
+        "nome": "0468 Jorge Luiz Clemente de Souza",
+        "telefone": "(42) 99112-2270",
+        "telefoneRaw": "5542991122270",
+        "telefoneValido": true,
+        "usuario": "escolar.42991122270p0468@cadastro-pontagrossa.alotio.local",
+        "senha": "hzhg87",
+        "prefixo": "0468",
+        "cidade": "Ponta Grossa (PR)",
+        "source": "AMTT Ponta Grossa",
+        "escolas": [
+          "Hayde Ercilia Larocca C M e I",
+          "Haydee F Oliveirae M Profaei Ef",
+          "Heitor Ditzel e M Prefei Ef"
+        ],
+        "bairros": [
+          "Santa Paula- Jardim Maracana-centro"
+        ],
+        "placa": "DWK-0C99"
+      },
+      {
+        "id": "pw-0483-42998649994",
+        "nome": "0483 Luciano Alves da Cruz",
+        "telefone": "(42) 99864-9994",
+        "telefoneRaw": "5542998649994",
+        "telefoneValido": true,
+        "usuario": "escolar.42998649994p0483@cadastro-pontagrossa.alotio.local",
+        "senha": "tfsygg",
+        "prefixo": "0483",
+        "cidade": "Ponta Grossa (PR)",
+        "source": "AMTT Ponta Grossa",
+        "escolas": [
+          "Luis Pereira Cardoso C M e I",
+          "Luiz Gonzaga Pinto C M e I Pref Eng",
+          "Manoel V Bittencourt e M Pr Majei Ef"
+        ],
+        "bairros": [
+          "Neves"
+        ],
+        "placa": "AVJ-7A65"
+      },
+      {
+        "id": "pw-0484-42998062903",
+        "nome": "0484 Ana Paula Roloff Dzievieski",
+        "telefone": "(42) 99806-2903",
+        "telefoneRaw": "5542998062903",
+        "telefoneValido": true,
+        "usuario": "escolar.42998062903p0484@cadastro-pontagrossa.alotio.local",
+        "senha": "wqcpnz",
+        "prefixo": "0484",
+        "cidade": "Ponta Grossa (PR)",
+        "source": "AMTT Ponta Grossa",
+        "escolas": [
+          "Margarete M Mazur e e C Profaef",
+          "Maria A de Andrade e M Profaei Ef",
+          "Maria Coutin Riesembergem Profaei Ef"
+        ],
+        "bairros": [
+          "Colonia Dona Luiza",
+          "Oficinas"
+        ],
+        "placa": "APC-0545"
+      },
+      {
+        "id": "pw-0506-42998396519",
+        "nome": "0506 Olenir Johnny Gonçalves",
+        "telefone": "(42) 99839-6519",
+        "telefoneRaw": "5542998396519",
+        "telefoneValido": true,
+        "usuario": "escolar.42998396519p0506@cadastro-pontagrossa.alotio.local",
+        "senha": "43bsfr",
+        "prefixo": "0506",
+        "cidade": "Ponta Grossa (PR)",
+        "source": "AMTT Ponta Grossa",
+        "escolas": [
+          "Santa Maria Goretti Eei Ef",
+          "Santana Centro de Educação Infantil",
+          "Santana Colégio Ensino Fundamental Ensino Med Educ Profis"
+        ],
+        "bairros": [
+          "Oficinas"
+        ],
+        "placa": "EYE-7672"
+      },
+      {
+        "id": "pw-0513-42999236782",
+        "nome": "0513 Transportadora Florao",
+        "telefone": "(42) 99923-6782",
+        "telefoneRaw": "5542999236782",
+        "telefoneValido": true,
+        "usuario": "escolar.42999236782p0513@cadastro-pontagrossa.alotio.local",
+        "senha": "6pzkuj",
+        "prefixo": "0513",
+        "cidade": "Ponta Grossa (PR)",
+        "source": "AMTT Ponta Grossa",
+        "escolas": [
+          "Vanessa Kubaski Maciel Cmei",
+          "Vila Velha e e C Deef",
+          "Vila do Saber - C e I"
+        ],
+        "bairros": [
+          "Uvaranas"
+        ],
+        "placa": "BEK5B43"
+      },
+      {
+        "id": "pw-0545-42999236782",
+        "nome": "0545 Transportadora Florao",
+        "telefone": "(42) 99923-6782",
+        "telefoneRaw": "5542999236782",
+        "telefoneValido": true,
+        "usuario": "escolar.42999236782p0545@cadastro-pontagrossa.alotio.local",
+        "senha": "gc4xkd",
+        "prefixo": "0545",
+        "cidade": "Ponta Grossa (PR)",
+        "source": "AMTT Ponta Grossa",
+        "escolas": [
+          "Epaminondas N Ribas C e Cm Dref M P",
+          "Ernesto G Vilela e M Prefei Ef",
+          "Escola Adventista Ponta Grossa Eief"
+        ],
+        "bairros": [
+          "Uvaranas"
+        ],
+        "placa": "AYE-3205"
+      },
+      {
+        "id": "pw-0554-42988254929",
+        "nome": "0554 Viação Apoio LTDA",
+        "telefone": "(42) 98825-4929",
+        "telefoneRaw": "5542988254929",
+        "telefoneValido": true,
+        "usuario": "escolar.42988254929p0554@cadastro-pontagrossa.alotio.local",
+        "senha": "wwfmpb",
+        "prefixo": "0554",
+        "cidade": "Ponta Grossa (PR)",
+        "source": "AMTT Ponta Grossa",
+        "escolas": [
+          "Guitil Federmann e M Profaei Ef",
+          "Halia T Gruba e e Profaef",
+          "Hayde Ercilia Larocca C M e I"
+        ],
+        "placa": "SEE2H09"
+      },
+      {
+        "id": "pw-0564-42998759101",
+        "nome": "0564 Castorino Marinho de Melo",
+        "telefone": "(42) 99875-9101",
+        "telefoneRaw": "5542998759101",
+        "telefoneValido": true,
+        "usuario": "escolar.42998759101p0564@cadastro-pontagrossa.alotio.local",
+        "senha": "j7tnwy",
+        "prefixo": "0564",
+        "cidade": "Ponta Grossa (PR)",
+        "source": "AMTT Ponta Grossa",
+        "escolas": [
+          "João R V B Du Vernayce Profef M Profis",
+          "João Vitor Maciel Lepinski C M e I",
+          "Judith M Silveirae M Profaei Ef"
+        ],
+        "bairros": [
+          "Uvaranas"
+        ],
+        "placa": "AQR-4635"
+      },
+      {
+        "id": "pw-0580-42999858319",
+        "nome": "0580 Elizandro Wiedermann",
+        "telefone": "(42) 99985-8319",
+        "telefoneRaw": "5542999858319",
+        "telefoneValido": true,
+        "usuario": "escolar.42999858319p0580@cadastro-pontagrossa.alotio.local",
+        "senha": "d5gmx6",
+        "prefixo": "0580",
+        "cidade": "Ponta Grossa (PR)",
+        "source": "AMTT Ponta Grossa",
+        "escolas": [
+          "Nelson Pereira Jorgee M Profei Ef",
+          "Noly Zander Eei Ef Mod Ed Esp",
+          "Nossa Sra da Gloria C e Cmef M"
+        ],
+        "bairros": [
+          "Oficinas-dona Luiza"
+        ],
+        "placa": "BCQ-4F51"
+      },
+      {
+        "id": "pw-0616-24999432005",
+        "nome": "0616 Haura e Haura Transportes LTDA",
+        "telefone": "(24) 99943-2005",
+        "telefoneRaw": "5524999432005",
+        "telefoneValido": true,
+        "usuario": "escolar.24999432005p0616@cadastro-pontagrossa.alotio.local",
+        "senha": "rcaa7g",
+        "prefixo": "0616",
+        "cidade": "Ponta Grossa (PR)",
+        "source": "AMTT Ponta Grossa",
+        "escolas": [
+          "Ceebja Professor Odair Pasqualinief M",
+          "Ceebja Professor Paschoal S Rosaef M",
+          "Celina Correia Ganzert C M e I Profa"
+        ],
+        "bairros": [
+          "Olarias",
+          "Cel Claudio",
+          "Barreto",
+          "Pq dos Pinheiros"
+        ],
+        "placa": "BDN-2D26"
+      },
+      {
+        "id": "pw-0617-42998228565",
+        "nome": "0617 Morais e Santos Serviços de Transporte Escolar e de Turismo LTDA",
+        "telefone": "(42) 99822-8565",
+        "telefoneRaw": "5542998228565",
+        "telefoneValido": true,
+        "usuario": "escolar.42998228565p0617@cadastro-pontagrossa.alotio.local",
+        "senha": "9z72uq",
+        "prefixo": "0617",
+        "cidade": "Ponta Grossa (PR)",
+        "source": "AMTT Ponta Grossa",
+        "escolas": [
+          "Centro Est Educ Professor Agr Augusto Ribas",
+          "Centro Est Educ Profis de Ponta Grossa",
+          "Centro de Educação Infantil Sagrados Coracoes"
+        ],
+        "bairros": [
+          "Neves"
+        ],
+        "placa": "AWR-0571"
+      },
+      {
+        "id": "pw-0619-42984259033",
+        "nome": "0619 Valdemir Silvio da Luz",
+        "telefone": "(42) 98425-9033",
+        "telefoneRaw": "5542984259033",
+        "telefoneValido": true,
+        "usuario": "escolar.42984259033p0619@cadastro-pontagrossa.alotio.local",
+        "senha": "fa3e2a",
+        "prefixo": "0619",
+        "cidade": "Ponta Grossa (PR)",
+        "source": "AMTT Ponta Grossa",
+        "escolas": [
+          "Colares C e Cm Profef M",
+          "Colibri Ctro Educação Infantil",
+          "Colégio Elite Curitiba Unidade Ponta Grossa"
+        ],
+        "bairros": [
+          "Uvaranas"
+        ],
+        "placa": "AWX-4121"
+      },
+      {
+        "id": "pw-0662-24998430873",
+        "nome": "0662 Apoio Locadora de Veículos Ltda-me",
+        "telefone": "(24) 99843-0873",
+        "telefoneRaw": "5524998430873",
+        "telefoneValido": true,
+        "usuario": "escolar.24998430873p0662@cadastro-pontagrossa.alotio.local",
+        "senha": "7eazq4",
+        "prefixo": "0662",
+        "cidade": "Ponta Grossa (PR)",
+        "source": "AMTT Ponta Grossa",
+        "escolas": [
+          "Maria e J Schimidt e M Profaei Ef",
+          "Maricy C Teixeira Pinto C M e I",
+          "Mario Braga Ramos e M Depe I e F"
+        ],
+        "placa": "BDL1H52"
+      },
+      {
+        "id": "pw-0700-42988254929",
+        "nome": "0700 Viação Apoio LTDA",
+        "telefone": "(42) 98825-4929",
+        "telefoneRaw": "5542988254929",
+        "telefoneValido": true,
+        "usuario": "escolar.42988254929p0700@cadastro-pontagrossa.alotio.local",
+        "senha": "qrgdhe",
+        "prefixo": "0700",
+        "cidade": "Ponta Grossa (PR)",
+        "source": "AMTT Ponta Grossa",
+        "escolas": [
+          "Bernadete F G dos Santos C M e I Profa",
+          "Brasilio A da Silva C e Cef M Profis",
+          "Braulina C Quadros e M Profaei Ef"
+        ],
+        "placa": "AYQ-9B99"
+      },
+      {
+        "id": "pw-0722-42988254929",
+        "nome": "0722 Viação Apoio LTDA",
+        "telefone": "(42) 98825-4929",
+        "telefoneRaw": "5542988254929",
+        "telefoneValido": true,
+        "usuario": "escolar.42988254929p0722@cadastro-pontagrossa.alotio.local",
+        "senha": "p49jyh",
+        "prefixo": "0722",
+        "cidade": "Ponta Grossa (PR)",
+        "source": "AMTT Ponta Grossa",
+        "escolas": [
+          "Eugenio Malanski C e Profef M",
+          "Eurico B Rosas e M Pf Engei Ef",
+          "Evangelica Caminho do Saber Eei Ef"
+        ],
+        "placa": "AXW-4959"
+      },
+      {
+        "id": "pw-0730-24998430873",
+        "nome": "0730 Fretcar Transporte Escolar LTDA",
+        "telefone": "(24) 99843-0873",
+        "telefoneRaw": "5524998430873",
+        "telefoneValido": true,
+        "usuario": "escolar.24998430873p0730@cadastro-pontagrossa.alotio.local",
+        "senha": "ay8wsn",
+        "prefixo": "0730",
+        "cidade": "Ponta Grossa (PR)",
+        "source": "AMTT Ponta Grossa",
+        "escolas": [
+          "Helena Kolody Educação de Jovens e Adultos Centro Municipal Profª",
+          "Helena Parigot de S Cruz C M e I Profa",
+          "Henrique R de Lima C M e I Professor"
+        ],
+        "placa": "KVD-6G26"
+      },
+      {
+        "id": "pw-0752-42998541152",
+        "nome": "0752 Marcelo Felix Goncalves",
+        "telefone": "(42) 99854-1152",
+        "telefoneRaw": "5542998541152",
+        "telefoneValido": true,
+        "usuario": "escolar.42998541152p0752@cadastro-pontagrossa.alotio.local",
+        "senha": "ehk5kh",
+        "prefixo": "0752",
+        "cidade": "Ponta Grossa (PR)",
+        "source": "AMTT Ponta Grossa",
+        "escolas": [
+          "Medalha Milagrosa e Eef",
+          "Meneleu A Torres C e Profef M Profis",
+          "Miguel Abrao Ajuz Neto C M e I"
+        ],
+        "bairros": [
+          "Oficinas-dn Luiza"
+        ],
+        "placa": "HGF-1F24"
+      },
+      {
+        "id": "pw-0756-42988254929",
+        "nome": "0756 Viação Apoio LTDA",
+        "telefone": "(42) 98825-4929",
+        "telefoneRaw": "5542988254929",
+        "telefoneValido": true,
+        "usuario": "escolar.42988254929p0756@cadastro-pontagrossa.alotio.local",
+        "senha": "xt6gpe",
+        "prefixo": "0756",
+        "cidade": "Ponta Grossa (PR)",
+        "source": "AMTT Ponta Grossa",
+        "escolas": [
+          "Odette Maria Brauner C M e I Profa",
+          "Odyssea de O Hilgenberg C M e I Profa",
+          "Oraci Pedrozo Chiconato C M e I Profa"
+        ],
+        "placa": "BDU-2E53"
+      },
+      {
+        "id": "pw-0780-42998759101",
+        "nome": "0780 Castorino Marinho de Melo",
+        "telefone": "(42) 99875-9101",
+        "telefoneRaw": "5542998759101",
+        "telefoneValido": true,
+        "usuario": "escolar.42998759101p0780@cadastro-pontagrossa.alotio.local",
+        "senha": "sxtedb",
+        "prefixo": "0780",
+        "cidade": "Ponta Grossa (PR)",
+        "source": "AMTT Ponta Grossa",
+        "escolas": [
+          "Alda dos S Rebonato e M Profaei Ef",
+          "Aldo Bonde e M Gale I e F",
+          "Alfa Rede de Ensino"
+        ],
+        "bairros": [
+          "Uvaranas",
+          "Borsato"
+        ],
+        "placa": "EDU-1A84"
+      },
+      {
+        "id": "pw-0782-42998196533",
+        "nome": "0782 Alessandro Bueno",
+        "telefone": "(42) 99819-6533",
+        "telefoneRaw": "5542998196533",
+        "telefoneValido": true,
+        "usuario": "escolar.42998196533p0782@cadastro-pontagrossa.alotio.local",
+        "senha": "nry785",
+        "prefixo": "0782",
+        "cidade": "Ponta Grossa (PR)",
+        "source": "AMTT Ponta Grossa",
+        "escolas": [
+          "Ana Neri C M e I",
+          "Ana de B Holzmann e M Profaei Ef",
+          "Anisio Teixeira C M e I"
+        ],
+        "bairros": [
+          "Uvaranas-cara Cara"
+        ],
+        "placa": "AVU-1A52"
+      },
+      {
+        "id": "pw-0803-42998093925",
+        "nome": "0803 Stacheski Transportes LTDA",
+        "telefone": "(42) 99809-3925",
+        "telefoneRaw": "5542998093925",
+        "telefoneValido": true,
+        "usuario": "escolar.42998093925p0803@cadastro-pontagrossa.alotio.local",
+        "senha": "gng4ad",
+        "prefixo": "0803",
+        "cidade": "Ponta Grossa (PR)",
+        "source": "AMTT Ponta Grossa",
+        "escolas": [
+          "Edison Pietrobelli e e Cm Profef",
+          "Egdar Zanoni e M Profe I e F",
+          "Elias Zulian e M Frei Ef"
+        ],
+        "bairros": [
+          "Vila Estrela",
+          "Olarias",
+          "Centro"
+        ],
+        "placa": "AVV3C07"
+      },
+      {
+        "id": "pw-0804-42988254929",
+        "nome": "0804 Viação Apoio LTDA",
+        "telefone": "(42) 98825-4929",
+        "telefoneRaw": "5542988254929",
+        "telefoneValido": true,
+        "usuario": "escolar.42988254929p0804@cadastro-pontagrossa.alotio.local",
+        "senha": "j95txy",
+        "prefixo": "0804",
+        "cidade": "Ponta Grossa (PR)",
+        "source": "AMTT Ponta Grossa",
+        "escolas": [
+          "Elite Tales de Mileto Ei Ef M",
+          "Eloi Freitas de Oliveira C M e I",
+          "Eloy Avrechack e M Profef"
+        ],
+        "placa": "SEN3D19"
+      },
+      {
+        "id": "pw-0812-42988254929",
+        "nome": "0812 Viação Apoio LTDA",
+        "telefone": "(42) 98825-4929",
+        "telefoneRaw": "5542988254929",
+        "telefoneValido": true,
+        "usuario": "escolar.42988254929p0812@cadastro-pontagrossa.alotio.local",
+        "senha": "psfnds",
+        "prefixo": "0812",
+        "cidade": "Ponta Grossa (PR)",
+        "source": "AMTT Ponta Grossa",
+        "escolas": [
+          "Fulton V B Macedo e M Pref Drei Ef",
+          "Gabriel Bacila C M e I Dr",
+          "Geny J S Ribas e e Bil Surdei Ef"
+        ],
+        "placa": "SEN4I36"
+      },
+      {
+        "id": "pw-0815-42988254929",
+        "nome": "0815 Viação Apoio LTDA",
+        "telefone": "(42) 98825-4929",
+        "telefoneRaw": "5542988254929",
+        "telefoneValido": true,
+        "usuario": "escolar.42988254929p0815@cadastro-pontagrossa.alotio.local",
+        "senha": "7ktq9m",
+        "prefixo": "0815",
+        "cidade": "Ponta Grossa (PR)",
+        "source": "AMTT Ponta Grossa",
+        "escolas": [
+          "Hayde Ercilia Larocca C M e I",
+          "Haydee F Oliveirae M Profaei Ef",
+          "Heitor Ditzel e M Prefei Ef"
+        ],
+        "placa": "ECM9914"
+      },
+      {
+        "id": "pw-0822-42999006212",
+        "nome": "0822 Thais Gnatta",
+        "telefone": "(42) 99900-6212",
+        "telefoneRaw": "5542999006212",
+        "telefoneValido": true,
+        "usuario": "escolar.42999006212p0822@cadastro-pontagrossa.alotio.local",
+        "senha": "54kcja",
+        "prefixo": "0822",
+        "cidade": "Ponta Grossa (PR)",
+        "source": "AMTT Ponta Grossa",
+        "escolas": [
+          "José Elias da Rocha C e Cmef M Profis",
+          "José Gomes do Amaral C e Profefm",
+          "José Hoffmann e M Prefei Ef"
+        ],
+        "bairros": [
+          "Uvaranas/cel Claudio Princesa"
+        ],
+        "placa": "DVT4B86"
+      },
+      {
+        "id": "pw-0823-41999797790",
+        "nome": "0823 J Wolle Transportes e Turismo GT3 LTDA",
+        "telefone": "(41) 99979-7790",
+        "telefoneRaw": "5541999797790",
+        "telefoneValido": true,
+        "usuario": "escolar.41999797790p0823@cadastro-pontagrossa.alotio.local",
+        "senha": "qtwkb6",
+        "prefixo": "0823",
+        "cidade": "Ponta Grossa (PR)",
+        "source": "AMTT Ponta Grossa",
+        "escolas": [
+          "José Santana C M e I",
+          "João Haddad C M e I",
+          "João Maria Cruz e Mei Ef"
+        ],
+        "placa": "UBL7I83"
+      },
+      {
+        "id": "pw-0827-41999797790",
+        "nome": "0827 J Wolle Transportes e Turismo GT3 LTDA",
+        "telefone": "(41) 99979-7790",
+        "telefoneRaw": "5541999797790",
+        "telefoneValido": true,
+        "usuario": "escolar.41999797790p0827@cadastro-pontagrossa.alotio.local",
+        "senha": "3agjn5",
+        "prefixo": "0827",
+        "cidade": "Ponta Grossa (PR)",
+        "source": "AMTT Ponta Grossa",
+        "escolas": [
+          "Leopoldo P Rosas e M Drei Ef",
+          "Linda S Bacila C e Profaef M Profis",
+          "Lindamara Paciesny C M e I Profa"
+        ],
+        "placa": "UBK6E45"
+      },
+      {
+        "id": "pw-0830-41999797790",
+        "nome": "0830 J Wolle Transportes e Turismo GT3 LTDA",
+        "telefone": "(41) 99979-7790",
+        "telefoneRaw": "5541999797790",
+        "telefoneValido": true,
+        "usuario": "escolar.41999797790p0830@cadastro-pontagrossa.alotio.local",
+        "senha": "vczvfb",
+        "prefixo": "0830",
+        "cidade": "Ponta Grossa (PR)",
+        "source": "AMTT Ponta Grossa",
+        "escolas": [
+          "Maple Bear Ponta Grossa Centro de Educação Infantil",
+          "Margarete M Mazur e e C Profaef",
+          "Maria A de Andrade e M Profaei Ef"
+        ],
+        "placa": "BBO7C03"
+      },
+      {
+        "id": "pw-0831-41999797790",
+        "nome": "0831 J Wolle Transportes e Turismo GT3 LTDA",
+        "telefone": "(41) 99979-7790",
+        "telefoneRaw": "5541999797790",
+        "telefoneValido": true,
+        "usuario": "escolar.41999797790p0831@cadastro-pontagrossa.alotio.local",
+        "senha": "m2jhat",
+        "prefixo": "0831",
+        "cidade": "Ponta Grossa (PR)",
+        "source": "AMTT Ponta Grossa",
+        "escolas": [
+          "Maria Dolores Eef Mod Ed Esp",
+          "Maria Eulina S Scheena Em Profei Ef",
+          "Maria Imaculada C M e I"
+        ],
+        "placa": "UBK6E47"
+      },
+      {
+        "id": "pw-0836-24991611702",
+        "nome": "0836 Pedro Izoel Pinheiro",
+        "telefone": "(24) 99161-1702",
+        "telefoneRaw": "5524991611702",
+        "telefoneValido": true,
+        "usuario": "escolar.24991611702p0836@cadastro-pontagrossa.alotio.local",
+        "senha": "9rdh76",
+        "prefixo": "0836",
+        "cidade": "Ponta Grossa (PR)",
+        "source": "AMTT Ponta Grossa",
+        "escolas": [
+          "Martinho Lutero C M e I",
+          "Medalha Milagrosa e Eef",
+          "Meneleu A Torres C e Profef M Profis"
+        ],
+        "bairros": [
+          "Colonia Dona Luiza"
+        ],
+        "placa": "ITS9C23"
+      },
+      {
+        "id": "pw-0864-42999734545",
+        "nome": "0864 Expresso Royal Fretamento LTDA",
+        "telefone": "(42) 99973-4545",
+        "telefoneRaw": "5542999734545",
+        "telefoneValido": true,
+        "usuario": "escolar.42999734545p0864@cadastro-pontagrossa.alotio.local",
+        "senha": "t34tjr",
+        "prefixo": "0864",
+        "cidade": "Ponta Grossa (PR)",
+        "source": "AMTT Ponta Grossa",
+        "escolas": [
+          "Alair Stremel de Camargo C M e I Profa",
+          "Alberto Rebello Valente C Eef M",
+          "Alda dos S Rebonato e M Profaei Ef"
+        ],
+        "placa": "RHL3A57"
+      },
+      {
+        "id": "pw-0869-42999734545",
+        "nome": "0869 Expresso Royal Fretamento LTDA",
+        "telefone": "(42) 99973-4545",
+        "telefoneRaw": "5542999734545",
+        "telefoneValido": true,
+        "usuario": "escolar.42999734545p0869@cadastro-pontagrossa.alotio.local",
+        "senha": "k2ddn2",
+        "prefixo": "0869",
+        "cidade": "Ponta Grossa (PR)",
+        "source": "AMTT Ponta Grossa",
+        "escolas": [
+          "Aristeu C Pinto e M Profei Ef",
+          "Armida Frare Gracia e M Profaei Ef",
+          "Arnaldo Jansen C e Peef M Profis"
+        ],
+        "placa": "TBI0G90"
+      },
+      {
+        "id": "pw-0870-42999734545",
+        "nome": "0870 Expresso Royal Fretamento LTDA",
+        "telefone": "(42) 99973-4545",
+        "telefoneRaw": "5542999734545",
+        "telefoneValido": true,
+        "usuario": "escolar.42999734545p0870@cadastro-pontagrossa.alotio.local",
+        "senha": "f3z6d3",
+        "prefixo": "0870",
+        "cidade": "Ponta Grossa (PR)",
+        "source": "AMTT Ponta Grossa",
+        "escolas": [
+          "Augusto Canto C M e I",
+          "Becker e Silva C e Cm Profef M Profis",
+          "Bento Mossurunga C e Mtoefm"
+        ],
+        "placa": "UCG5C70"
+      },
+      {
+        "id": "pw-0871-42999734545",
+        "nome": "0871 Expresso Royal Fretamento LTDA",
+        "telefone": "(42) 99973-4545",
+        "telefoneRaw": "5542999734545",
+        "telefoneValido": true,
+        "usuario": "escolar.42999734545p0871@cadastro-pontagrossa.alotio.local",
+        "senha": "t3mfjx",
+        "prefixo": "0871",
+        "cidade": "Ponta Grossa (PR)",
+        "source": "AMTT Ponta Grossa",
+        "escolas": [
+          "Brasilio A da Silva C e Cef M Profis",
+          "Braulina C Quadros e M Profaei Ef",
+          "C A e e Llp Professor Raquel Sarraf Masini"
+        ],
+        "placa": "GKC7B99"
+      },
+      {
+        "id": "pw-0874-42999734545",
+        "nome": "0874 Expresso Royal Fretamento LTDA",
+        "telefone": "(42) 99973-4545",
+        "telefoneRaw": "5542999734545",
+        "telefoneValido": true,
+        "usuario": "escolar.42999734545p0874@cadastro-pontagrossa.alotio.local",
+        "senha": "9t36wn",
+        "prefixo": "0874",
+        "cidade": "Ponta Grossa (PR)",
+        "source": "AMTT Ponta Grossa",
+        "escolas": [
+          "Ceebja Professor Paschoal S Rosaef M",
+          "Celina Correia Ganzert C M e I Profa",
+          "Cenetec-centro Educacional e Tecnologico"
+        ],
+        "placa": "UBR2J39"
+      },
+      {
+        "id": "pw-0875-42999734545",
+        "nome": "0875 Expresso Royal Fretamento LTDA",
+        "telefone": "(42) 99973-4545",
+        "telefoneRaw": "5542999734545",
+        "telefoneValido": true,
+        "usuario": "escolar.42999734545p0875@cadastro-pontagrossa.alotio.local",
+        "senha": "cppk5t",
+        "prefixo": "0875",
+        "cidade": "Ponta Grossa (PR)",
+        "source": "AMTT Ponta Grossa",
+        "escolas": [
+          "Centro Est Educ Profis de Ponta Grossa",
+          "Centro de Educação Infantil Sagrados Coracoes",
+          "Cescage Cef M"
+        ],
+        "placa": "UBR0E90"
+      },
+      {
+        "id": "pw-0885-42999734545",
+        "nome": "0885 Expresso Royal Fretamento LTDA",
+        "telefone": "(42) 99973-4545",
+        "telefoneRaw": "5542999734545",
+        "telefoneValido": true,
+        "usuario": "escolar.42999734545p0885@cadastro-pontagrossa.alotio.local",
+        "senha": "vt7m8m",
+        "prefixo": "0885",
+        "cidade": "Ponta Grossa (PR)",
+        "source": "AMTT Ponta Grossa",
+        "escolas": [
+          "Dynamico Cef M",
+          "Eclea dos P Horn e M Profaei Ef",
+          "Edelzira Silveira C M e I Profa"
+        ],
+        "placa": "TAQ2D44"
+      },
+      {
+        "id": "pw-0886-42999017649",
+        "nome": "0886 Samuel Gnatta",
+        "telefone": "(42) 99901-7649",
+        "telefoneRaw": "5542999017649",
+        "telefoneValido": true,
+        "usuario": "escolar.42999017649p0886@cadastro-pontagrossa.alotio.local",
+        "senha": "nagbzb",
+        "prefixo": "0886",
+        "cidade": "Ponta Grossa (PR)",
+        "source": "AMTT Ponta Grossa",
+        "escolas": [
+          "Edison Pietrobelli e e Cm Profef",
+          "Egdar Zanoni e M Profe I e F",
+          "Elias Zulian e M Frei Ef"
+        ],
+        "bairros": [
+          "Uvaranas"
+        ],
+        "placa": "BEG7377"
+      },
+      {
+        "id": "pw-0895-42999734545",
+        "nome": "0895 Expresso Royal Fretamento LTDA",
+        "telefone": "(42) 99973-4545",
+        "telefoneRaw": "5542999734545",
+        "telefoneValido": true,
+        "usuario": "escolar.42999734545p0895@cadastro-pontagrossa.alotio.local",
+        "senha": "t968da",
+        "prefixo": "0895",
+        "cidade": "Ponta Grossa (PR)",
+        "source": "AMTT Ponta Grossa",
+        "escolas": [
+          "Frederico C Degraf e Mei Ef",
+          "Fulton V B Macedo e M Pref Drei Ef",
+          "Gabriel Bacila C M e I Dr"
+        ],
+        "placa": "TBG9D84"
+      },
+      {
+        "id": "pw-0896-42999563244",
+        "nome": "0896 Marcio Tebinca",
+        "telefone": "(42) 99956-3244",
+        "telefoneRaw": "5542999563244",
+        "telefoneValido": true,
+        "usuario": "escolar.42999563244p0896@cadastro-pontagrossa.alotio.local",
+        "senha": "9zzyt4",
+        "prefixo": "0896",
+        "cidade": "Ponta Grossa (PR)",
+        "source": "AMTT Ponta Grossa",
+        "escolas": [
+          "Geraldo Woyciechowski C M e I Professor",
+          "Gisele Maria Zander C M e I Profa",
+          "Glacy Camargo Secco e Mei Ef"
+        ],
+        "bairros": [
+          "Nova Russia Palmerinha"
+        ],
+        "placa": "AXL2G39"
+      },
+      {
+        "id": "pw-0908-24998430873",
+        "nome": "0908 Fretcar Transporte Escolar LTDA",
+        "telefone": "(24) 99843-0873",
+        "telefoneRaw": "5524998430873",
+        "telefoneValido": true,
+        "usuario": "escolar.24998430873p0908@cadastro-pontagrossa.alotio.local",
+        "senha": "t485sy",
+        "prefixo": "0908",
+        "cidade": "Ponta Grossa (PR)",
+        "source": "AMTT Ponta Grossa",
+        "escolas": [
+          "João Vitor Maciel Lepinski C M e I",
+          "Judith M Silveirae M Profaei Ef",
+          "Julieta Koppen C M e I Profa"
+        ],
+        "placa": "AVH0E30"
+      },
+      {
+        "id": "pw-0909-24998430873",
+        "nome": "0909 Fretcar Transporte Escolar LTDA",
+        "telefone": "(24) 99843-0873",
+        "telefoneRaw": "5524998430873",
+        "telefoneValido": true,
+        "usuario": "escolar.24998430873p0909@cadastro-pontagrossa.alotio.local",
+        "senha": "8dmf4c",
+        "prefixo": "0909",
+        "cidade": "Ponta Grossa (PR)",
+        "source": "AMTT Ponta Grossa",
+        "escolas": [
+          "Kamal Tebcherani e M Profei Ef",
+          "Kazuko Inoue e M Profaei Ef",
+          "Kennedy C e Presef M Profis"
+        ],
+        "placa": "AZU9A27"
+      },
+      {
+        "id": "pw-0912-42999732360",
+        "nome": "0912 M. V. Selmer e Cia LTDA",
+        "telefone": "(42) 99973-2360",
+        "telefoneRaw": "5542999732360",
+        "telefoneValido": true,
+        "usuario": "escolar.42999732360p0912@cadastro-pontagrossa.alotio.local",
+        "senha": "sjws3v",
+        "prefixo": "0912",
+        "cidade": "Ponta Grossa (PR)",
+        "source": "AMTT Ponta Grossa",
+        "escolas": [
+          "Lucia Pacher e Mei Ef Profa",
+          "Ludovico Antonio Egg e Mei Ef",
+          "Luis Pereira Cardoso C M e I"
+        ],
+        "placa": "RHO2G35"
+      },
+      {
+        "id": "pw-0913-42991122270",
+        "nome": "0913 Jorge Luiz Clemente de Souza",
+        "telefone": "(42) 99112-2270",
+        "telefoneRaw": "5542991122270",
+        "telefoneValido": true,
+        "usuario": "escolar.42991122270p0913@cadastro-pontagrossa.alotio.local",
+        "senha": "rtu7xn",
+        "prefixo": "0913",
+        "cidade": "Ponta Grossa (PR)",
+        "source": "AMTT Ponta Grossa",
+        "escolas": [
+          "Manoel V Bittencourt e M Pr Majei Ef",
+          "Maple Bear Ponta Grossa Centro de Educação Infantil",
+          "Margarete M Mazur e e C Profaef"
+        ],
+        "bairros": [
+          "Canaã",
+          "Sta Paula",
+          "Sta Terezinha",
+          "Jardim Maracanã",
+          "- Centro"
+        ],
+        "placa": "QQK8F33"
+      },
+      {
+        "id": "pw-0914-42999732360",
+        "nome": "0914 M. V. Selmer e Cia LTDA",
+        "telefone": "(42) 99973-2360",
+        "telefoneRaw": "5542999732360",
+        "telefoneValido": true,
+        "usuario": "escolar.42999732360p0914@cadastro-pontagrossa.alotio.local",
+        "senha": "4qeehh",
+        "prefixo": "0914",
+        "cidade": "Ponta Grossa (PR)",
+        "source": "AMTT Ponta Grossa",
+        "escolas": [
+          "Maria Coutin Riesembergem Profaei Ef",
+          "Maria Dolores Eef Mod Ed Esp",
+          "Maria Eulina S Scheena Em Profei Ef"
+        ],
+        "placa": "BAS4F82"
+      },
+      {
+        "id": "pw-0915-42999732360",
+        "nome": "0915 M. V. Selmer e Cia LTDA",
+        "telefone": "(42) 99973-2360",
+        "telefoneRaw": "5542999732360",
+        "telefoneValido": true,
+        "usuario": "escolar.42999732360p0915@cadastro-pontagrossa.alotio.local",
+        "senha": "ch84ju",
+        "prefixo": "0915",
+        "cidade": "Ponta Grossa (PR)",
+        "source": "AMTT Ponta Grossa",
+        "escolas": [
+          "Maria L Pereira e M Profaei Ef",
+          "Maria Sirlei Machado C M e I",
+          "Maria V B Ramos e M Profaei Ef"
+        ],
+        "placa": "BDD3B46"
+      },
+      {
+        "id": "pw-0916-42999732360",
+        "nome": "0916 M. V. Selmer e Cia LTDA",
+        "telefone": "(42) 99973-2360",
+        "telefoneRaw": "5542999732360",
+        "telefoneValido": true,
+        "usuario": "escolar.42999732360p0916@cadastro-pontagrossa.alotio.local",
+        "senha": "rjyx4f",
+        "prefixo": "0916",
+        "cidade": "Ponta Grossa (PR)",
+        "source": "AMTT Ponta Grossa",
+        "escolas": [
+          "Maria da Graca F Minini C M e I Profa",
+          "Maria de L Canziani e Profaei Ef M Ee",
+          "Maria e J Schimidt e M Profaei Ef"
+        ],
+        "placa": "RHK8E88"
+      },
+      {
+        "id": "pw-0918-42999732360",
+        "nome": "0918 M. V. Selmer e Cia LTDA",
+        "telefone": "(42) 99973-2360",
+        "telefoneRaw": "5542999732360",
+        "telefoneValido": true,
+        "usuario": "escolar.42999732360p0918@cadastro-pontagrossa.alotio.local",
+        "senha": "hjp9xu",
+        "prefixo": "0918",
+        "cidade": "Ponta Grossa (PR)",
+        "source": "AMTT Ponta Grossa",
+        "escolas": [
+          "Marly C Camargo Chiafitela e M Profa",
+          "Marta Filipkowski de Limae M Profei Ef",
+          "Martinho Lutero C M e I"
+        ],
+        "placa": "RHZ9H28"
+      },
+      {
+        "id": "pw-0919-42999732360",
+        "nome": "0919 M. V. Selmer e Cia LTDA",
+        "telefone": "(42) 99973-2360",
+        "telefoneRaw": "5542999732360",
+        "telefoneValido": true,
+        "usuario": "escolar.42999732360p0919@cadastro-pontagrossa.alotio.local",
+        "senha": "eemzrf",
+        "prefixo": "0919",
+        "cidade": "Ponta Grossa (PR)",
+        "source": "AMTT Ponta Grossa",
+        "escolas": [
+          "Meneleu A Torres C e Profef M Profis",
+          "Miguel Abrao Ajuz Neto C M e I",
+          "Miguel Arao Ribas Dropa C M e I Professor"
+        ],
+        "placa": "SEE9H19"
+      },
+      {
+        "id": "pw-0920-42999732360",
+        "nome": "0920 M. V. Selmer e Cia LTDA",
+        "telefone": "(42) 99973-2360",
+        "telefoneRaw": "5542999732360",
+        "telefoneValido": true,
+        "usuario": "escolar.42999732360p0920@cadastro-pontagrossa.alotio.local",
+        "senha": "kwcuve",
+        "prefixo": "0920",
+        "cidade": "Ponta Grossa (PR)",
+        "source": "AMTT Ponta Grossa",
+        "escolas": [
+          "Monteiro Lobato e Eef",
+          "Munhoz da Rocha C e do C Dref M",
+          "Nassima Sallum C M e I"
+        ],
+        "placa": "SEE9H21"
+      },
+      {
+        "id": "pw-0921-42999732360",
+        "nome": "0921 M. V. Selmer e Cia LTDA",
+        "telefone": "(42) 99973-2360",
+        "telefoneRaw": "5542999732360",
+        "telefoneValido": true,
+        "usuario": "escolar.42999732360p0921@cadastro-pontagrossa.alotio.local",
+        "senha": "2ywfp6",
+        "prefixo": "0921",
+        "cidade": "Ponta Grossa (PR)",
+        "source": "AMTT Ponta Grossa",
+        "escolas": [
+          "Noly Zander Eei Ef Mod Ed Esp",
+          "Nossa Sra da Gloria C e Cmef M",
+          "Nossa Sra das Gracas C Eef M Profis"
+        ],
+        "placa": "SEH6F48"
+      },
+      {
+        "id": "pw-0922-42999732360",
+        "nome": "0922 M. V. Selmer e Cia LTDA",
+        "telefone": "(42) 99973-2360",
+        "telefoneRaw": "5542999732360",
+        "telefoneValido": true,
+        "usuario": "escolar.42999732360p0922@cadastro-pontagrossa.alotio.local",
+        "senha": "uz3bzc",
+        "prefixo": "0922",
+        "cidade": "Ponta Grossa (PR)",
+        "source": "AMTT Ponta Grossa",
+        "escolas": [
+          "Odette Maria Brauner C M e I Profa",
+          "Odyssea de O Hilgenberg C M e I Profa",
+          "Oraci Pedrozo Chiconato C M e I Profa"
+        ],
+        "placa": "SEH6F51"
+      },
+      {
+        "id": "pw-0923-42999732360",
+        "nome": "0923 M. V. Selmer e Cia LTDA",
+        "telefone": "(42) 99973-2360",
+        "telefoneRaw": "5542999732360",
+        "telefoneValido": true,
+        "usuario": "escolar.42999732360p0923@cadastro-pontagrossa.alotio.local",
+        "senha": "cbye85",
+        "prefixo": "0923",
+        "cidade": "Ponta Grossa (PR)",
+        "source": "AMTT Ponta Grossa",
+        "escolas": [
+          "Osni Vilaca Mongruel e M Profei Ef",
+          "Osorio C e Cm Galef M Profis",
+          "Otacilia H Oliveirae M Profaei Ef"
+        ],
+        "placa": "SEH6F71"
+      },
+      {
+        "id": "pw-0924-42999732360",
+        "nome": "0924 M. V. Selmer e Cia LTDA",
+        "telefone": "(42) 99973-2360",
+        "telefoneRaw": "5542999732360",
+        "telefoneValido": true,
+        "usuario": "escolar.42999732360p0924@cadastro-pontagrossa.alotio.local",
+        "senha": "4hdqer",
+        "prefixo": "0924",
+        "cidade": "Ponta Grossa (PR)",
+        "source": "AMTT Ponta Grossa",
+        "escolas": [
+          "Pascoalino Provisiero e Mef",
+          "Paulo Cunha Nascimento C M e I Pref",
+          "Paulo Freire C M e I"
+        ],
+        "placa": "SEH6F97"
+      },
+      {
+        "id": "pw-0925-42999732360",
+        "nome": "0925 M. V. Selmer e Cia LTDA",
+        "telefone": "(42) 99973-2360",
+        "telefoneRaw": "5542999732360",
+        "telefoneValido": true,
+        "usuario": "escolar.42999732360p0925@cadastro-pontagrossa.alotio.local",
+        "senha": "jv8wgu",
+        "prefixo": "0925",
+        "cidade": "Ponta Grossa (PR)",
+        "source": "AMTT Ponta Grossa",
+        "escolas": [
+          "Pedro Grzelczaki C e Peef M",
+          "Pequeno Principe Escola Educação Infantil e Ensino Fundamental",
+          "Petronio Fernal C M e I Pref"
+        ],
+        "placa": "TBA3J18"
+      },
+      {
+        "id": "pw-0926-42999732360",
+        "nome": "0926 M. V. Selmer e Cia LTDA",
+        "telefone": "(42) 99973-2360",
+        "telefoneRaw": "5542999732360",
+        "telefoneValido": true,
+        "usuario": "escolar.42999732360p0926@cadastro-pontagrossa.alotio.local",
+        "senha": "rz6sdt",
+        "prefixo": "0926",
+        "cidade": "Ponta Grossa (PR)",
+        "source": "AMTT Ponta Grossa",
+        "escolas": [
+          "Plauto Miro Guimaraes e M Pref Drei Ef",
+          "Polivalente C Eef M Profis N",
+          "Primavera Centro de Educação Infantil"
+        ],
+        "placa": "TBB8H16"
+      },
+      {
+        "id": "pw-0927-42999732360",
+        "nome": "0927 M. V. Selmer e Cia LTDA",
+        "telefone": "(42) 99973-2360",
+        "telefoneRaw": "5542999732360",
+        "telefoneValido": true,
+        "usuario": "escolar.42999732360p0927@cadastro-pontagrossa.alotio.local",
+        "senha": "w67g3w",
+        "prefixo": "0927",
+        "cidade": "Ponta Grossa (PR)",
+        "source": "AMTT Ponta Grossa",
+        "escolas": [
+          "Prisma Arco Iris Eei Ef",
+          "Protazio Scheifer e Mei Ef",
+          "Raul P Machado e M Drei Ef"
+        ],
+        "placa": "TBB8H22"
+      },
+      {
+        "id": "pw-0930-41999797790",
+        "nome": "0930 J Wolle Transportes e Turismo GT3 LTDA",
+        "telefone": "(41) 99979-7790",
+        "telefoneRaw": "5541999797790",
+        "telefoneValido": true,
+        "usuario": "escolar.41999797790p0930@cadastro-pontagrossa.alotio.local",
+        "senha": "7bhj67",
+        "prefixo": "0930",
+        "cidade": "Ponta Grossa (PR)",
+        "source": "AMTT Ponta Grossa",
+        "escolas": [
+          "Ruth Holzmann Ribas e M Profaei Ef",
+          "Salete do Rocio Dimbarre C M e I Profa",
+          "Samuel Machado Bark Cmei"
+        ],
+        "placa": "UBK6E49"
       }
     ]
   },
