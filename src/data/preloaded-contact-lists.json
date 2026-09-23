@@ -1,7 +1,7 @@
 [
   {
     "id": "todos-senhas",
-    "title": "🌟 Todos os Contatos com Senha (2940)",
+    "title": "🌟 Todos os Contatos com Senha (3035)",
     "description": "Lista geral consolidada contendo APENAS transportadores que possuem senha temporária",
     "hasCredentials": true,
     "contacts": [
@@ -34394,6 +34394,1704 @@
           "Vila Santa Rita",
           "Vila Scarabucci"
         ]
+      },
+      {
+        "id": "pw-0004-13997149714",
+        "nome": "0004 Fort Car Transporte Escolar. - ME",
+        "telefone": "(13) 99714-9714",
+        "telefoneRaw": "5513997149714",
+        "telefoneValido": true,
+        "usuario": "escolar.13997149714p0004@cadastro-praiagrande.alotio.local",
+        "senha": "8mn3xc",
+        "prefixo": "0004",
+        "cidade": "Praia Grande (SP)",
+        "source": "SETRANSP Praia Grande",
+        "escolas": [
+          "Colégio Trivium",
+          "Passionista Santa Maria Colégio",
+          "Albert Einstein Escola Municipal"
+        ]
+      },
+      {
+        "id": "pw-0006-13981466371",
+        "nome": "0006 Cesar Augusto Moura Gazeti",
+        "telefone": "(13) 98146-6371",
+        "telefoneRaw": "5513981466371",
+        "telefoneValido": true,
+        "usuario": "escolar.13981466371p0006@cadastro-praiagrande.alotio.local",
+        "senha": "wdppb7",
+        "prefixo": "0006",
+        "cidade": "Praia Grande (SP)",
+        "source": "SETRANSP Praia Grande",
+        "escolas": [
+          "E.M. José Júlio Martins Baptista",
+          "E.M. São Francisco de Assis",
+          "E.M. Carlos Roberto Dias"
+        ]
+      },
+      {
+        "id": "pw-0014-13991254821",
+        "nome": "0014 Marcia Roschel Pereira",
+        "telefone": "(13) 99125-4821",
+        "telefoneRaw": "5513991254821",
+        "telefoneValido": true,
+        "usuario": "escolar.13991254821p0014@cadastro-praiagrande.alotio.local",
+        "senha": "byhkhj",
+        "prefixo": "0014",
+        "cidade": "Praia Grande (SP)",
+        "source": "SETRANSP Praia Grande",
+        "escolas": [
+          "Escola Municipal Professor Fued Temer",
+          "E.M. Roberto Mario Santini",
+          "Espaço Crescer Escola de Educação Infantil"
+        ]
+      },
+      {
+        "id": "pw-0021-13991325970",
+        "nome": "0021 Jose Roberto Andrade Oliveira",
+        "telefone": "(13) 99132-5970",
+        "telefoneRaw": "5513991325970",
+        "telefoneValido": true,
+        "usuario": "escolar.13991325970p0021@cadastro-praiagrande.alotio.local",
+        "senha": "e4ybsx",
+        "prefixo": "0021",
+        "cidade": "Praia Grande (SP)",
+        "source": "SETRANSP Praia Grande",
+        "escolas": [
+          "E.M. Lions Clube Ocian",
+          "E.M. Vereador Valter Salerno",
+          "Carlos Roberto Dias Escola Municipal"
+        ]
+      },
+      {
+        "id": "pw-0022-13997756637",
+        "nome": "0022 Silvia Helena de Carvalho Calado - ME",
+        "telefone": "(13) 99775-6637",
+        "telefoneRaw": "5513997756637",
+        "telefoneValido": true,
+        "usuario": "escolar.13997756637p0022@cadastro-praiagrande.alotio.local",
+        "senha": "hrnagt",
+        "prefixo": "0022",
+        "cidade": "Praia Grande (SP)",
+        "source": "SETRANSP Praia Grande",
+        "escolas": [
+          "E.M. Vereador Felipe Avelino Moraes",
+          "E.M. Mário Possani",
+          "Colégio França",
+          "Alexo Colégio",
+          "E.M. José Crego Painceira"
+        ]
+      },
+      {
+        "id": "pw-0037-13981279493",
+        "nome": "0037 Marcio de Oliveira Souza",
+        "telefone": "(13) 98127-9493",
+        "telefoneRaw": "5513981279493",
+        "telefoneValido": true,
+        "usuario": "escolar.13981279493p0037@cadastro-praiagrande.alotio.local",
+        "senha": "acvwnp",
+        "prefixo": "0037",
+        "cidade": "Praia Grande (SP)",
+        "source": "SETRANSP Praia Grande",
+        "escolas": [
+          "Oliveiras Colégio",
+          "E.M. Antônio Peres Ferreira",
+          "E.M. Idílio Perticaratti",
+          "E.M. Idalina da Conceição Pereira",
+          "Escola de Educação Infantil Projeto Educacional Poesis",
+          "E.M. Thereza Magri",
+          "Eei e Ensino Fundamental I Cantinho do Saber"
+        ]
+      },
+      {
+        "id": "pw-0041-13991029767",
+        "nome": "0041 Waldemar Teixeira Junior",
+        "telefone": "(13) 99102-9767",
+        "telefoneRaw": "5513991029767",
+        "telefoneValido": true,
+        "usuario": "escolar.13991029767p0041@cadastro-praiagrande.alotio.local",
+        "senha": "jg7zjg",
+        "prefixo": "0041",
+        "cidade": "Praia Grande (SP)",
+        "source": "SETRANSP Praia Grande",
+        "escolas": [
+          "Universo Colégio",
+          "E.M. Sebastião Tavares de Oliveira",
+          "E.E. Vila Tupi",
+          "E.M. José Padin Mouta",
+          "Colégio Piteco de Educação Infantil e Fundamental",
+          "E.M. Vila Tupiry",
+          "Magali Alonso Professora",
+          "E.M. Profª Esmeralda dos Santos Novaes"
+        ]
+      },
+      {
+        "id": "pw-0042-13988207479",
+        "nome": "0042 Karen de Souza",
+        "telefone": "(13) 98820-7479",
+        "telefoneRaw": "5513988207479",
+        "telefoneValido": true,
+        "usuario": "escolar.13988207479p0042@cadastro-praiagrande.alotio.local",
+        "senha": "vvrjk2",
+        "prefixo": "0042",
+        "cidade": "Praia Grande (SP)",
+        "source": "SETRANSP Praia Grande",
+        "escolas": [
+          "E.M. Carlos Roberto Dias",
+          "E.M. Manoel Nascimento Júnior",
+          "E.M. São Francisco de Assis",
+          "Maria Pacheco Nobre Professora"
+        ]
+      },
+      {
+        "id": "pw-0043-13981122195",
+        "nome": "0043 Flávio Leanderson w. de Morais",
+        "telefone": "(13) 98112-2195",
+        "telefoneRaw": "5513981122195",
+        "telefoneValido": true,
+        "usuario": "escolar.13981122195p0043@cadastro-praiagrande.alotio.local",
+        "senha": "ppzyjz",
+        "prefixo": "0043",
+        "cidade": "Praia Grande (SP)",
+        "source": "SETRANSP Praia Grande",
+        "escolas": [
+          "E.M. Paulo Shigueo Yamauti",
+          "E.M. Sebastião Tavares de Oliveira",
+          "E.M. Ary Cabral"
+        ]
+      },
+      {
+        "id": "pw-0044-11995137226",
+        "nome": "0044 Batista Manoel da Silva",
+        "telefone": "(11) 99513-7226",
+        "telefoneRaw": "5511995137226",
+        "telefoneValido": true,
+        "usuario": "escolar.11995137226p0044@cadastro-praiagrande.alotio.local",
+        "senha": "caep2j",
+        "prefixo": "0044",
+        "cidade": "Praia Grande (SP)",
+        "source": "SETRANSP Praia Grande",
+        "escolas": [
+          "E.M. Carlos Roberto Dias",
+          "Escola Municipal Icaro Batista Cardoso",
+          "E.M. São Francisco de Assis"
+        ]
+      },
+      {
+        "id": "pw-0045-13997061206",
+        "nome": "0045 Rosemeire de Oliveira Fereira Molina",
+        "telefone": "(13) 99706-1206",
+        "telefoneRaw": "5513997061206",
+        "telefoneValido": true,
+        "usuario": "escolar.13997061206p0045@cadastro-praiagrande.alotio.local",
+        "senha": "hz8yzj",
+        "prefixo": "0045",
+        "cidade": "Praia Grande (SP)",
+        "source": "SETRANSP Praia Grande",
+        "escolas": [
+          "Novomundo Colégio",
+          "Colégio Jean Piaget Unidade III",
+          "Escola Maple Bear Praia Grande"
+        ]
+      },
+      {
+        "id": "pw-0046-13974193641",
+        "nome": "0046 Marcia Regina Rossi",
+        "telefone": "(13) 97419-3641",
+        "telefoneRaw": "5513974193641",
+        "telefoneValido": true,
+        "usuario": "escolar.13974193641p0046@cadastro-praiagrande.alotio.local",
+        "senha": "krhh4k",
+        "prefixo": "0046",
+        "cidade": "Praia Grande (SP)",
+        "source": "SETRANSP Praia Grande",
+        "escolas": [
+          "E.M. Lions Clube Ocian",
+          "E.M. Oswaldo Justo",
+          "Escola Municipal Governador Orestes Quercia",
+          "E.M. Vila Mirim"
+        ]
+      },
+      {
+        "id": "pw-0049-13991354356",
+        "nome": "0049 Antonio José Marinho dos Santos jr.",
+        "telefone": "(13) 99135-4356",
+        "telefoneRaw": "5513991354356",
+        "telefoneValido": true,
+        "usuario": "escolar.13991354356p0049@cadastro-praiagrande.alotio.local",
+        "senha": "7e23nu",
+        "prefixo": "0049",
+        "cidade": "Praia Grande (SP)",
+        "source": "SETRANSP Praia Grande",
+        "escolas": [
+          "Escola Municipal Governador Orestes Quercia",
+          "E.M. Lions Clube Ocian",
+          "E.M. Vila Mirim",
+          "E.M. Vereador Valter Salerno"
+        ]
+      },
+      {
+        "id": "pw-0050-13982025434",
+        "nome": "0050 Geni Gamba",
+        "telefone": "(13) 98202-5434",
+        "telefoneRaw": "5513982025434",
+        "telefoneValido": true,
+        "usuario": "escolar.13982025434p0050@cadastro-praiagrande.alotio.local",
+        "senha": "pz4pve",
+        "prefixo": "0050",
+        "cidade": "Praia Grande (SP)",
+        "source": "SETRANSP Praia Grande",
+        "escolas": [
+          "Colégio França",
+          "Constance Kami Escola de Ensino Fundamental",
+          "Alexo Colégio",
+          "Laudelino Fernandes dos Santos Professor"
+        ]
+      },
+      {
+        "id": "pw-0052-13974223641",
+        "nome": "0052 Adriana Santos Paiva Esteves",
+        "telefone": "(13) 97422-3641",
+        "telefoneRaw": "5513974223641",
+        "telefoneValido": true,
+        "usuario": "escolar.13974223641p0052@cadastro-praiagrande.alotio.local",
+        "senha": "xk6m9n",
+        "prefixo": "0052",
+        "cidade": "Praia Grande (SP)",
+        "source": "SETRANSP Praia Grande",
+        "escolas": [
+          "E.M. Florivaldo Borges de Queiroz",
+          "E.M. Lions Clube Ocian",
+          "E.M. Vereador Valter Salerno"
+        ]
+      },
+      {
+        "id": "pw-0058-11996910350",
+        "nome": "0058 Dilcea Teresa Antonio Zanchim",
+        "telefone": "(11) 99691-0350",
+        "telefoneRaw": "5511996910350",
+        "telefoneValido": true,
+        "usuario": "escolar.11996910350p0058@cadastro-praiagrande.alotio.local",
+        "senha": "msj26y",
+        "prefixo": "0058",
+        "cidade": "Praia Grande (SP)",
+        "source": "SETRANSP Praia Grande",
+        "escolas": [
+          "Colégio Piteco de Educação Infantil e Fundamental",
+          "E.M. Anahy Navarro Trovão",
+          "E.M. Antônio Peres Ferreira"
+        ]
+      },
+      {
+        "id": "pw-0065-13996602708",
+        "nome": "0065 Carlos Roberto Silva",
+        "telefone": "(13) 99660-2708",
+        "telefoneRaw": "5513996602708",
+        "telefoneValido": true,
+        "usuario": "escolar.13996602708p0065@cadastro-praiagrande.alotio.local",
+        "senha": "4xgv6k",
+        "prefixo": "0065",
+        "cidade": "Praia Grande (SP)",
+        "source": "SETRANSP Praia Grande",
+        "escolas": [
+          "E.M. Profª. Isabel Figueroa Bréfere",
+          "E.M. João Gonçalves",
+          "Layde Rodrigues Reis Loria Escola Municipal"
+        ]
+      },
+      {
+        "id": "pw-0066-13981814370",
+        "nome": "0066 Bianca Caroline de Almeida",
+        "telefone": "(13) 98181-4370",
+        "telefoneRaw": "5513981814370",
+        "telefoneValido": true,
+        "usuario": "escolar.13981814370p0066@cadastro-praiagrande.alotio.local",
+        "senha": "kk4e5v",
+        "prefixo": "0066",
+        "cidade": "Praia Grande (SP)",
+        "source": "SETRANSP Praia Grande",
+        "escolas": [
+          "E.M. Vereador Felipe Avelino Moraes",
+          "E.M. José Crego Painceira",
+          "E.M. Mário Possani"
+        ]
+      },
+      {
+        "id": "pw-0071-11976573956",
+        "nome": "0071 Alessandro Martins Bassan",
+        "telefone": "(11) 97657-3956",
+        "telefoneRaw": "5511976573956",
+        "telefoneValido": true,
+        "usuario": "escolar.11976573956p0071@cadastro-praiagrande.alotio.local",
+        "senha": "djmtc5",
+        "prefixo": "0071",
+        "cidade": "Praia Grande (SP)",
+        "source": "SETRANSP Praia Grande",
+        "escolas": [
+          "Colégio Cultura",
+          "Guerreiro Colégio",
+          "E.M. Drº Wilson Guedes"
+        ]
+      },
+      {
+        "id": "pw-0073-13997235485",
+        "nome": "0073 Anderson Richard Bertolacci",
+        "telefone": "(13) 99723-5485",
+        "telefoneRaw": "5513997235485",
+        "telefoneValido": true,
+        "usuario": "escolar.13997235485p0073@cadastro-praiagrande.alotio.local",
+        "senha": "p6d7xs",
+        "prefixo": "0073",
+        "cidade": "Praia Grande (SP)",
+        "source": "SETRANSP Praia Grande",
+        "escolas": [
+          "Projeto Crescer Colégio",
+          "Universo Colégio",
+          "Colégio Adventista"
+        ]
+      },
+      {
+        "id": "pw-0077-13997498441",
+        "nome": "0077 Valeria Saraiva Santos de Melo",
+        "telefone": "(13) 99749-8441",
+        "telefoneRaw": "5513997498441",
+        "telefoneValido": true,
+        "usuario": "escolar.13997498441p0077@cadastro-praiagrande.alotio.local",
+        "senha": "r5zgpx",
+        "prefixo": "0077",
+        "cidade": "Praia Grande (SP)",
+        "source": "SETRANSP Praia Grande",
+        "escolas": [
+          "E.M. Mário Possani",
+          "E.M. Florivaldo Borges de Queiroz",
+          "E.M. Governador Franco Montoro"
+        ]
+      },
+      {
+        "id": "pw-0078-13988436607",
+        "nome": "0078 Jeremias Prates Dias",
+        "telefone": "(13) 98843-6607",
+        "telefoneRaw": "5513988436607",
+        "telefoneValido": true,
+        "usuario": "escolar.13988436607p0078@cadastro-praiagrande.alotio.local",
+        "senha": "ag77yc",
+        "prefixo": "0078",
+        "cidade": "Praia Grande (SP)",
+        "source": "SETRANSP Praia Grande",
+        "escolas": [
+          "E.M. Profª Maria Nilza da Silva Romão",
+          "E.M. Thereza Magri",
+          "E.M. Newton de Almeida Castro",
+          "E.M. Idílio Perticaratti",
+          "Escola de Educação Infantil Projeto Educacional Poesis"
+        ]
+      },
+      {
+        "id": "pw-0079-13974105017",
+        "nome": "0079 Giovenazi de Santana Oliveira",
+        "telefone": "(13) 97410-5017",
+        "telefoneRaw": "5513974105017",
+        "telefoneValido": true,
+        "usuario": "escolar.13974105017p0079@cadastro-praiagrande.alotio.local",
+        "senha": "7cnntc",
+        "prefixo": "0079",
+        "cidade": "Praia Grande (SP)",
+        "source": "SETRANSP Praia Grande",
+        "escolas": [
+          "E.M. Carlos Roberto Dias",
+          "Escola de Educação Infantil Projeto Educacional Poesis",
+          "E.M. São Francisco de Assis"
+        ]
+      },
+      {
+        "id": "pw-0084-13988686887",
+        "nome": "0084 Rodrigo Soares Feitosa",
+        "telefone": "(13) 98868-6887",
+        "telefoneRaw": "5513988686887",
+        "telefoneValido": true,
+        "usuario": "escolar.13988686887p0084@cadastro-praiagrande.alotio.local",
+        "senha": "ja3sux",
+        "prefixo": "0084",
+        "cidade": "Praia Grande (SP)",
+        "source": "SETRANSP Praia Grande",
+        "escolas": [
+          "Colégio Fortec",
+          "E.M. Carlos Roberto Dias",
+          "E.M. Manoel Nascimento Júnior",
+          "E.M. São Francisco de Assis",
+          "E.M. Dorivaldo Francisco Loria",
+          "E.M. Ronaldo Sérgio Alves Lameira Ramos"
+        ]
+      },
+      {
+        "id": "pw-0085-13988403904",
+        "nome": "0085 Simone Maria Sacramento Santana Teles",
+        "telefone": "(13) 98840-3904",
+        "telefoneRaw": "5513988403904",
+        "telefoneValido": true,
+        "usuario": "escolar.13988403904p0085@cadastro-praiagrande.alotio.local",
+        "senha": "zwryge",
+        "prefixo": "0085",
+        "cidade": "Praia Grande (SP)",
+        "source": "SETRANSP Praia Grande",
+        "escolas": [
+          "Colégio Jean Piaget Unidade III",
+          "Colégio Trivium",
+          "Colégio Adventista"
+        ]
+      },
+      {
+        "id": "pw-0088-13988259388",
+        "nome": "0088 Mauro Paz Junior",
+        "telefone": "(13) 98825-9388",
+        "telefoneRaw": "5513988259388",
+        "telefoneValido": true,
+        "usuario": "escolar.13988259388p0088@cadastro-praiagrande.alotio.local",
+        "senha": "ptmdr2",
+        "prefixo": "0088",
+        "cidade": "Praia Grande (SP)",
+        "source": "SETRANSP Praia Grande",
+        "escolas": [
+          "Escola Municipal Professor Fued Temer",
+          "E.M. Roberto Mario Santini",
+          "E.M. Joaquim Augusto Ferreira Mourão"
+        ]
+      },
+      {
+        "id": "pw-0089-13988572006",
+        "nome": "0089 Waneska Lucimar Devecchi",
+        "telefone": "(13) 98857-2006",
+        "telefoneRaw": "5513988572006",
+        "telefoneValido": true,
+        "usuario": "escolar.13988572006p0089@cadastro-praiagrande.alotio.local",
+        "senha": "uxh3ze",
+        "prefixo": "0089",
+        "cidade": "Praia Grande (SP)",
+        "source": "SETRANSP Praia Grande",
+        "escolas": [
+          "Celestin Freinet Eei e Pg",
+          "E.M. José Crego Painceira",
+          "E.M. José Júlio Martins Baptista"
+        ]
+      },
+      {
+        "id": "pw-0090-13997952695",
+        "nome": "0090 Carlos Andre Santos de Paiva",
+        "telefone": "(13) 99795-2695",
+        "telefoneRaw": "5513997952695",
+        "telefoneValido": true,
+        "usuario": "escolar.13997952695p0090@cadastro-praiagrande.alotio.local",
+        "senha": "vafmpb",
+        "prefixo": "0090",
+        "cidade": "Praia Grande (SP)",
+        "source": "SETRANSP Praia Grande",
+        "escolas": [
+          "E.M. Vila Mirim",
+          "Escola Municipal Governador Orestes Quercia",
+          "E.M. Oswaldo Justo"
+        ]
+      },
+      {
+        "id": "pw-0091-13982251325",
+        "nome": "0091 Fabiana de Paulo Alonso",
+        "telefone": "(13) 98225-1325",
+        "telefoneRaw": "5513982251325",
+        "telefoneValido": true,
+        "usuario": "escolar.13982251325p0091@cadastro-praiagrande.alotio.local",
+        "senha": "h33fzk",
+        "prefixo": "0091",
+        "cidade": "Praia Grande (SP)",
+        "source": "SETRANSP Praia Grande",
+        "escolas": [
+          "E.M. Paulo de Souza Sandoval",
+          "Antonio Rubens Costa de Lara Escola Municipal",
+          "João Batista Resine Alves Escola Municipal",
+          "E.M. Profª Maria Clotilde Lopes Comitre Rigo"
+        ]
+      },
+      {
+        "id": "pw-0092-13996095731",
+        "nome": "0092 Mauricio Annunciato",
+        "telefone": "(13) 99609-5731",
+        "telefoneRaw": "5513996095731",
+        "telefoneValido": true,
+        "usuario": "escolar.13996095731p0092@cadastro-praiagrande.alotio.local",
+        "senha": "7cengp",
+        "prefixo": "0092",
+        "cidade": "Praia Grande (SP)",
+        "source": "SETRANSP Praia Grande",
+        "escolas": [
+          "E.M. João Gonçalves",
+          "E.M. José Ribeiro dos Santos Cunha",
+          "E.M. Juliana Arias Rodrigues de Oliveira"
+        ]
+      },
+      {
+        "id": "pw-0094-13997883722",
+        "nome": "0094 Raimunda Nonata Satunino Nascimento",
+        "telefone": "(13) 99788-3722",
+        "telefoneRaw": "5513997883722",
+        "telefoneValido": true,
+        "usuario": "escolar.13997883722p0094@cadastro-praiagrande.alotio.local",
+        "senha": "wb4pc9",
+        "prefixo": "0094",
+        "cidade": "Praia Grande (SP)",
+        "source": "SETRANSP Praia Grande",
+        "escolas": [
+          "E.M. Drª Ana Maria Babette Bajer Fernandes",
+          "Francisco Martins dos Santos",
+          "Alexo Colégio",
+          "Julio Secco de Carvalho"
+        ]
+      },
+      {
+        "id": "pw-0098-13988357554",
+        "nome": "0098 Aline Lima Souza",
+        "telefone": "(13) 98835-7554",
+        "telefoneRaw": "5513988357554",
+        "telefoneValido": true,
+        "usuario": "escolar.13988357554p0098@cadastro-praiagrande.alotio.local",
+        "senha": "pqqa4r",
+        "prefixo": "0098",
+        "cidade": "Praia Grande (SP)",
+        "source": "SETRANSP Praia Grande",
+        "escolas": [
+          "E.M. João Gonçalves",
+          "E.M. Profª. Isabel Figueroa Bréfere",
+          "E.M. Maestro Luiz Arruda Paes"
+        ]
+      },
+      {
+        "id": "pw-0101-13997317831",
+        "nome": "0101 Elizete Pinto da Silva",
+        "telefone": "(13) 99731-7831",
+        "telefoneRaw": "5513997317831",
+        "telefoneValido": true,
+        "usuario": "escolar.13997317831p0101@cadastro-praiagrande.alotio.local",
+        "senha": "sb3pb3",
+        "prefixo": "0101",
+        "cidade": "Praia Grande (SP)",
+        "source": "SETRANSP Praia Grande",
+        "escolas": [
+          "E.M. Cidade da Criança",
+          "E.M. Engenheiro Sérgio Dias de Freitas",
+          "E.M. Maria dos Remédios Carmona Milan"
+        ]
+      },
+      {
+        "id": "pw-0102-13991696155",
+        "nome": "0102 Andre Thiago da Silva",
+        "telefone": "(13) 99169-6155",
+        "telefoneRaw": "5513991696155",
+        "telefoneValido": true,
+        "usuario": "escolar.13991696155p0102@cadastro-praiagrande.alotio.local",
+        "senha": "ddjucr",
+        "prefixo": "0102",
+        "cidade": "Praia Grande (SP)",
+        "source": "SETRANSP Praia Grande",
+        "escolas": [
+          "E.M. Circe Sanchez Toschi",
+          "E.M. Profª. Isabel Figueroa Bréfere",
+          "E.M. João Gonçalves"
+        ]
+      },
+      {
+        "id": "pw-0103-13988354241",
+        "nome": "0103 Ricardo da Silva Furlanis",
+        "telefone": "(13) 98835-4241",
+        "telefoneRaw": "5513988354241",
+        "telefoneValido": true,
+        "usuario": "escolar.13988354241p0103@cadastro-praiagrande.alotio.local",
+        "senha": "bnqmpe",
+        "prefixo": "0103",
+        "cidade": "Praia Grande (SP)",
+        "source": "SETRANSP Praia Grande",
+        "escolas": [
+          "E.M. João Gonçalves",
+          "E.M. Profª. Isabel Figueroa Bréfere",
+          "E.M. José Padin Mouta",
+          "Oliveiras Colégio",
+          "E.E. Vila Tupi"
+        ]
+      },
+      {
+        "id": "pw-0105-13997012232",
+        "nome": "0105 José Nicodemos da Silva",
+        "telefone": "(13) 99701-2232",
+        "telefoneRaw": "5513997012232",
+        "telefoneValido": true,
+        "usuario": "escolar.13997012232p0105@cadastro-praiagrande.alotio.local",
+        "senha": "dyp4a4",
+        "prefixo": "0105",
+        "cidade": "Praia Grande (SP)",
+        "source": "SETRANSP Praia Grande",
+        "escolas": [
+          "Escola Municipal Professor Fued Temer",
+          "E.M. República de Portugal",
+          "E.M. Nicolau Paal"
+        ]
+      },
+      {
+        "id": "pw-0109-13991581270",
+        "nome": "0109 Cristina de Jesus Bispo",
+        "telefone": "(13) 99158-1270",
+        "telefoneRaw": "5513991581270",
+        "telefoneValido": true,
+        "usuario": "escolar.13991581270p0109@cadastro-praiagrande.alotio.local",
+        "senha": "kqc3yg",
+        "prefixo": "0109",
+        "cidade": "Praia Grande (SP)",
+        "source": "SETRANSP Praia Grande",
+        "escolas": [
+          "E.M. Circe Sanchez Toschi",
+          "E.M. Profª. Isabel Figueroa Bréfere",
+          "E.M. João Gonçalves"
+        ]
+      },
+      {
+        "id": "pw-0115-13991159070",
+        "nome": "0115 Debora Betania da Silva",
+        "telefone": "(13) 99115-9070",
+        "telefoneRaw": "5513991159070",
+        "telefoneValido": true,
+        "usuario": "escolar.13991159070p0115@cadastro-praiagrande.alotio.local",
+        "senha": "uwgawj",
+        "prefixo": "0115",
+        "cidade": "Praia Grande (SP)",
+        "source": "SETRANSP Praia Grande",
+        "escolas": [
+          "Colégio Cultura",
+          "E.M. Profª Maria de Lourdes Santos",
+          "E.M. Profª Maria Nilza da Silva Romão"
+        ]
+      },
+      {
+        "id": "pw-0116-13997631370",
+        "nome": "0116 Dorival Gama",
+        "telefone": "(13) 99763-1370",
+        "telefoneRaw": "5513997631370",
+        "telefoneValido": true,
+        "usuario": "escolar.13997631370p0116@cadastro-praiagrande.alotio.local",
+        "senha": "qeusrn",
+        "prefixo": "0116",
+        "cidade": "Praia Grande (SP)",
+        "source": "SETRANSP Praia Grande",
+        "escolas": [
+          "E.M. Mário Possani",
+          "E.M. José Crego Painceira",
+          "E.M. Vereador Felipe Avelino Moraes"
+        ]
+      },
+      {
+        "id": "pw-0117-13981251642",
+        "nome": "0117 Rosiberta Quirino da Silva Sobrinho",
+        "telefone": "(13) 98125-1642",
+        "telefoneRaw": "5513981251642",
+        "telefoneValido": true,
+        "usuario": "escolar.13981251642p0117@cadastro-praiagrande.alotio.local",
+        "senha": "p32cd8",
+        "prefixo": "0117",
+        "cidade": "Praia Grande (SP)",
+        "source": "SETRANSP Praia Grande",
+        "escolas": [
+          "Colégio Adventista",
+          "Colégio Trivium",
+          "Vila Verde Centro Educacional"
+        ]
+      },
+      {
+        "id": "pw-0118-13997784067",
+        "nome": "0118 Marlene Pinto da Silva",
+        "telefone": "(13) 99778-4067",
+        "telefoneRaw": "5513997784067",
+        "telefoneValido": true,
+        "usuario": "escolar.13997784067p0118@cadastro-praiagrande.alotio.local",
+        "senha": "4y4sna",
+        "prefixo": "0118",
+        "cidade": "Praia Grande (SP)",
+        "source": "SETRANSP Praia Grande",
+        "escolas": [
+          "E.M. Engenheiro Sérgio Dias de Freitas",
+          "E.M. Cidade da Criança",
+          "E.M. República de Portugal"
+        ]
+      },
+      {
+        "id": "pw-0120-13991341097",
+        "nome": "0120 Flavio Luis de Mello",
+        "telefone": "(13) 99134-1097",
+        "telefoneRaw": "5513991341097",
+        "telefoneValido": true,
+        "usuario": "escolar.13991341097p0120@cadastro-praiagrande.alotio.local",
+        "senha": "gzyfme",
+        "prefixo": "0120",
+        "cidade": "Praia Grande (SP)",
+        "source": "SETRANSP Praia Grande",
+        "escolas": [
+          "Escola de Educação Infantil Projeto Educacional Poesis",
+          "E.M. Roberto Mario Santini",
+          "Escola Municipal Professor Fued Temer",
+          "E.M. República de Portugal"
+        ]
+      },
+      {
+        "id": "pw-0121-11951644921",
+        "nome": "0121 Orlando Lima",
+        "telefone": "(11) 95164-4921",
+        "telefoneRaw": "5511951644921",
+        "telefoneValido": true,
+        "usuario": "escolar.11951644921p0121@cadastro-praiagrande.alotio.local",
+        "senha": "xx7gr6",
+        "prefixo": "0121",
+        "cidade": "Praia Grande (SP)",
+        "source": "SETRANSP Praia Grande",
+        "escolas": [
+          "Maria Pacheco Nobre Professora",
+          "E.M. São Francisco de Assis",
+          "E.M. Carlos Roberto Dias",
+          "Escola Canto Vivo",
+          "Novomundo Colégio",
+          "Colégio Alpha - Escola de Ensino Infantil Fundamental e Médio Alpha do Futuro",
+          "Escola Maple Bear Praia Grande"
+        ]
+      },
+      {
+        "id": "pw-0124-13991914879",
+        "nome": "0124 Vanda Gomes Ferrari",
+        "telefone": "(13) 99191-4879",
+        "telefoneRaw": "5513991914879",
+        "telefoneValido": true,
+        "usuario": "escolar.13991914879p0124@cadastro-praiagrande.alotio.local",
+        "senha": "e8xp4r",
+        "prefixo": "0124",
+        "cidade": "Praia Grande (SP)",
+        "source": "SETRANSP Praia Grande",
+        "escolas": [
+          "Antonio Rubens Costa de Lara Escola Municipal",
+          "E.M. Profª Maria de Lourdes Santos",
+          "E.M. Sebastião Tavares de Oliveira"
+        ]
+      },
+      {
+        "id": "pw-0130-13997565517",
+        "nome": "0130 Felipe de Oliveira Souza",
+        "telefone": "(13) 99756-5517",
+        "telefoneRaw": "5513997565517",
+        "telefoneValido": true,
+        "usuario": "escolar.13997565517p0130@cadastro-praiagrande.alotio.local",
+        "senha": "fq5vzm",
+        "prefixo": "0130",
+        "cidade": "Praia Grande (SP)",
+        "source": "SETRANSP Praia Grande",
+        "escolas": [
+          "Escola Municipal Professor Fued Temer",
+          "E.M. Roberto Mario Santini",
+          "E.M. República de Portugal"
+        ]
+      },
+      {
+        "id": "pw-0131-13988012377",
+        "nome": "0131 William Ribeiro Pinto",
+        "telefone": "(13) 98801-2377",
+        "telefoneRaw": "5513988012377",
+        "telefoneValido": true,
+        "usuario": "escolar.13988012377p0131@cadastro-praiagrande.alotio.local",
+        "senha": "r2zpgj",
+        "prefixo": "0131",
+        "cidade": "Praia Grande (SP)",
+        "source": "SETRANSP Praia Grande",
+        "escolas": [
+          "E.M. Governador Franco Montoro",
+          "Escola Municipal Governador Orestes Quercia",
+          "E.M. Vila Mirim",
+          "E.M. Oswaldo Justo"
+        ]
+      },
+      {
+        "id": "pw-0132-13988310653",
+        "nome": "0132 Amilcar da Silva Borges",
+        "telefone": "(13) 98831-0653",
+        "telefoneRaw": "5513988310653",
+        "telefoneValido": true,
+        "usuario": "escolar.13988310653p0132@cadastro-praiagrande.alotio.local",
+        "senha": "ut8jtq",
+        "prefixo": "0132",
+        "cidade": "Praia Grande (SP)",
+        "source": "SETRANSP Praia Grande",
+        "escolas": [
+          "Escola Municipal Governador Orestes Quercia",
+          "E.M. Oswaldo Justo",
+          "E.M. Vila Mirim"
+        ]
+      },
+      {
+        "id": "pw-0133-13974241051",
+        "nome": "0133 Luciano Bueno da Assumpção",
+        "telefone": "(13) 97424-1051",
+        "telefoneRaw": "5513974241051",
+        "telefoneValido": true,
+        "usuario": "escolar.13974241051p0133@cadastro-praiagrande.alotio.local",
+        "senha": "mqkuxz",
+        "prefixo": "0133",
+        "cidade": "Praia Grande (SP)",
+        "source": "SETRANSP Praia Grande",
+        "escolas": [
+          "E.M. Drª Ana Maria Babette Bajer Fernandes",
+          "Alexo Colégio",
+          "Francisco Martins dos Santos",
+          "Julio Secco de Carvalho"
+        ]
+      },
+      {
+        "id": "pw-0136-13988686887",
+        "nome": "0136 Barbara Maria Rodrigues da Silva",
+        "telefone": "(13) 98868-6887",
+        "telefoneRaw": "5513988686887",
+        "telefoneValido": true,
+        "usuario": "escolar.13988686887p0136@cadastro-praiagrande.alotio.local",
+        "senha": "v497ut",
+        "prefixo": "0136",
+        "cidade": "Praia Grande (SP)",
+        "source": "SETRANSP Praia Grande",
+        "escolas": [
+          "E.M. Carlos Roberto Dias",
+          "E.M. Manoel Nascimento Júnior",
+          "E.M. Dorivaldo Francisco Loria",
+          "E.M. São Francisco de Assis"
+        ]
+      },
+      {
+        "id": "pw-0138-13997123241",
+        "nome": "0138 Luiz da Silva Carvalho",
+        "telefone": "(13) 99712-3241",
+        "telefoneRaw": "5513997123241",
+        "telefoneValido": true,
+        "usuario": "escolar.13997123241p0138@cadastro-praiagrande.alotio.local",
+        "senha": "hg85qn",
+        "prefixo": "0138",
+        "cidade": "Praia Grande (SP)",
+        "source": "SETRANSP Praia Grande",
+        "escolas": [
+          "Escola de Educação Infantil Projeto Educacional Poesis",
+          "Abrahao Jacob Lafer Doutor",
+          "Elza Oliveira de Carvalho Profa Escola Municipal"
+        ]
+      },
+      {
+        "id": "pw-0139-13991761519",
+        "nome": "0139 Pablo Tobal Martins",
+        "telefone": "(13) 99176-1519",
+        "telefoneRaw": "5513991761519",
+        "telefoneValido": true,
+        "usuario": "escolar.13991761519p0139@cadastro-praiagrande.alotio.local",
+        "senha": "zwdpkr",
+        "prefixo": "0139",
+        "cidade": "Praia Grande (SP)",
+        "source": "SETRANSP Praia Grande",
+        "escolas": [
+          "Colégio Objetivo",
+          "Escola Alpha",
+          "Escola Canto Vivo"
+        ]
+      },
+      {
+        "id": "pw-0141-13996702982",
+        "nome": "0141 Luzia Vergulino da Costa Alves",
+        "telefone": "(13) 99670-2982",
+        "telefoneRaw": "5513996702982",
+        "telefoneValido": true,
+        "usuario": "escolar.13996702982p0141@cadastro-praiagrande.alotio.local",
+        "senha": "v6xmdk",
+        "prefixo": "0141",
+        "cidade": "Praia Grande (SP)",
+        "source": "SETRANSP Praia Grande",
+        "escolas": [
+          "Maria Pacheco Nobre Professora",
+          "Adelaide Patrocinio dos Santos",
+          "E.M. Estina Campi Baptista",
+          "E.M. Carlos Roberto Dias",
+          "E.M. Fausto dos Santos Amaral"
+        ]
+      },
+      {
+        "id": "pw-0144-13981860379",
+        "nome": "0144 Marco Antonio Cardoso da Silva",
+        "telefone": "(13) 98186-0379",
+        "telefoneRaw": "5513981860379",
+        "telefoneValido": true,
+        "usuario": "escolar.13981860379p0144@cadastro-praiagrande.alotio.local",
+        "senha": "rj394k",
+        "prefixo": "0144",
+        "cidade": "Praia Grande (SP)",
+        "source": "SETRANSP Praia Grande",
+        "escolas": [
+          "E.M. Mahatma Gandhi",
+          "E.M. Drº Wilson Guedes",
+          "E.M. Estado do Amazonas",
+          "E.M. Maria dos Remédios Carmona Milan",
+          "Albert Einstein Escola Municipal"
+        ]
+      },
+      {
+        "id": "pw-0145-13991383879",
+        "nome": "0145 Bruno Galvanini de Freitas",
+        "telefone": "(13) 99138-3879",
+        "telefoneRaw": "5513991383879",
+        "telefoneValido": true,
+        "usuario": "escolar.13991383879p0145@cadastro-praiagrande.alotio.local",
+        "senha": "xfhr3s",
+        "prefixo": "0145",
+        "cidade": "Praia Grande (SP)",
+        "source": "SETRANSP Praia Grande",
+        "escolas": [
+          "E.M. Manoel Nascimento Júnior",
+          "E.M. Carlos Roberto Dias",
+          "E.M. São Francisco de Assis"
+        ]
+      },
+      {
+        "id": "pw-0149-13974040680",
+        "nome": "0149 Roberto da Silva Francisco",
+        "telefone": "(13) 97404-0680",
+        "telefoneRaw": "5513974040680",
+        "telefoneValido": true,
+        "usuario": "escolar.13974040680p0149@cadastro-praiagrande.alotio.local",
+        "senha": "cps384",
+        "prefixo": "0149",
+        "cidade": "Praia Grande (SP)",
+        "source": "SETRANSP Praia Grande",
+        "escolas": [
+          "E.M. Roberto Mario Santini",
+          "Escola de Educação Infantil Projeto Educacional Poesis",
+          "Eei e Ensino Fundamental I Cantinho do Saber"
+        ]
+      },
+      {
+        "id": "pw-0150-13997023464",
+        "nome": "0150 Izakel de Freitas",
+        "telefone": "(13) 99702-3464",
+        "telefoneRaw": "5513997023464",
+        "telefoneValido": true,
+        "usuario": "escolar.13997023464p0150@cadastro-praiagrande.alotio.local",
+        "senha": "et2t8x",
+        "prefixo": "0150",
+        "cidade": "Praia Grande (SP)",
+        "source": "SETRANSP Praia Grande",
+        "escolas": [
+          "Ruth Vilaca Correa Leite Cardoso Escola Municipal",
+          "E.M. Governador Franco Montoro",
+          "Escola Municipal José Padin Mouta"
+        ]
+      },
+      {
+        "id": "pw-0151-13974116417",
+        "nome": "0151 Flp Transporte Escolar e Locação LTDA",
+        "telefone": "(13) 97411-6417",
+        "telefoneRaw": "5513974116417",
+        "telefoneValido": true,
+        "usuario": "escolar.13974116417p0151@cadastro-praiagrande.alotio.local",
+        "senha": "gk53gn",
+        "prefixo": "0151",
+        "cidade": "Praia Grande (SP)",
+        "source": "SETRANSP Praia Grande",
+        "escolas": [
+          "Colégio Objetivo",
+          "E.M. Mário Possani",
+          "E.M. Vereador Felipe Avelino Moraes",
+          "Universo Colégio"
+        ]
+      },
+      {
+        "id": "pw-0152-11982833892",
+        "nome": "0152 José Nilson Machado da Silva",
+        "telefone": "(11) 98283-3892",
+        "telefoneRaw": "5511982833892",
+        "telefoneValido": true,
+        "usuario": "escolar.11982833892p0152@cadastro-praiagrande.alotio.local",
+        "senha": "zms2dy",
+        "prefixo": "0152",
+        "cidade": "Praia Grande (SP)",
+        "source": "SETRANSP Praia Grande",
+        "escolas": [
+          "Escola Municipal Professor Fued Temer",
+          "E.M. República de Portugal",
+          "Escola Municipal Roberto Francisco dos Santos"
+        ]
+      },
+      {
+        "id": "pw-0153-13982227254",
+        "nome": "0153 Cristiano de Moraes",
+        "telefone": "(13) 98222-7254",
+        "telefoneRaw": "5513982227254",
+        "telefoneValido": true,
+        "usuario": "escolar.13982227254p0153@cadastro-praiagrande.alotio.local",
+        "senha": "qsxknk",
+        "prefixo": "0153",
+        "cidade": "Praia Grande (SP)",
+        "source": "SETRANSP Praia Grande",
+        "escolas": [
+          "E.M. Oswaldo Justo",
+          "E.M. Vereador Valter Salerno",
+          "E.M. Lions Clube Ocian"
+        ]
+      },
+      {
+        "id": "pw-0154-13981354483",
+        "nome": "0154 M. Alves de Souza - ME",
+        "telefone": "(13) 98135-4483",
+        "telefoneRaw": "5513981354483",
+        "telefoneValido": true,
+        "usuario": "escolar.13981354483p0154@cadastro-praiagrande.alotio.local",
+        "senha": "8g27d3",
+        "prefixo": "0154",
+        "cidade": "Praia Grande (SP)",
+        "source": "SETRANSP Praia Grande",
+        "escolas": [
+          "E.M. Profª Maria de Lourdes Santos",
+          "E.M. Visconde de Mauá",
+          "Antonio Rubens Costa de Lara Escola Municipal",
+          "Ilha Brasil Colégio"
+        ]
+      },
+      {
+        "id": "pw-0155-13996852937",
+        "nome": "0155 Tcharles Wilker Batista Agostinho",
+        "telefone": "(13) 99685-2937",
+        "telefoneRaw": "5513996852937",
+        "telefoneValido": true,
+        "usuario": "escolar.13996852937p0155@cadastro-praiagrande.alotio.local",
+        "senha": "hdguxn",
+        "prefixo": "0155",
+        "cidade": "Praia Grande (SP)",
+        "source": "SETRANSP Praia Grande",
+        "escolas": [
+          "Maria Pacheco Nobre Professora",
+          "E.M. São Francisco de Assis",
+          "E.M. República de Portugal",
+          "Escola Municipal Professor Fued Temer",
+          "Cel Jto A Ee Reynaldo Kuntz Busch Doutor",
+          "E.M. Roberto Mario Santini"
+        ]
+      },
+      {
+        "id": "pw-0156-13974114577",
+        "nome": "0156 Fernando Jorge Ferreira Lopes",
+        "telefone": "(13) 97411-4577",
+        "telefoneRaw": "5513974114577",
+        "telefoneValido": true,
+        "usuario": "escolar.13974114577p0156@cadastro-praiagrande.alotio.local",
+        "senha": "dgpgea",
+        "prefixo": "0156",
+        "cidade": "Praia Grande (SP)",
+        "source": "SETRANSP Praia Grande",
+        "escolas": [
+          "Colégio Fortec",
+          "Escola Educar",
+          "Recanto Educacional Colégio"
+        ]
+      },
+      {
+        "id": "pw-0157-13991298161",
+        "nome": "0157 João Pedro Roschel dos Santos",
+        "telefone": "(13) 99129-8161",
+        "telefoneRaw": "5513991298161",
+        "telefoneValido": true,
+        "usuario": "escolar.13991298161p0157@cadastro-praiagrande.alotio.local",
+        "senha": "h4s9zq",
+        "prefixo": "0157",
+        "cidade": "Praia Grande (SP)",
+        "source": "SETRANSP Praia Grande",
+        "escolas": [
+          "E.M. Roberto Mario Santini",
+          "Escola Municipal Professor Fued Temer",
+          "E.M. São Francisco de Assis",
+          "Colégio Trivium"
+        ]
+      },
+      {
+        "id": "pw-0158-13997090471",
+        "nome": "0158 Ana Maria Rodrigues da Silva",
+        "telefone": "(13) 99709-0471",
+        "telefoneRaw": "5513997090471",
+        "telefoneValido": true,
+        "usuario": "escolar.13997090471p0158@cadastro-praiagrande.alotio.local",
+        "senha": "ptcy9r",
+        "prefixo": "0158",
+        "cidade": "Praia Grande (SP)",
+        "source": "SETRANSP Praia Grande",
+        "escolas": [
+          "E.M. Arquiteto Oscar Niemeyer",
+          "Francisco Martins dos Santos",
+          "Escola Pingo de Gente"
+        ]
+      },
+      {
+        "id": "pw-0159-13991046157",
+        "nome": "0159 Michel Ferreira Calado",
+        "telefone": "(13) 99104-6157",
+        "telefoneRaw": "5513991046157",
+        "telefoneValido": true,
+        "usuario": "escolar.13991046157p0159@cadastro-praiagrande.alotio.local",
+        "senha": "ndnc64",
+        "prefixo": "0159",
+        "cidade": "Praia Grande (SP)",
+        "source": "SETRANSP Praia Grande",
+        "escolas": [
+          "E.M. Drº Wilson Guedes",
+          "E.M. Albert Einstein",
+          "Futura Colégio"
+        ]
+      },
+      {
+        "id": "pw-0160-13985222031",
+        "nome": "0160 Vanessa Calado",
+        "telefone": "(13) 98522-2031",
+        "telefoneRaw": "5513985222031",
+        "telefoneValido": true,
+        "usuario": "escolar.13985222031p0160@cadastro-praiagrande.alotio.local",
+        "senha": "d74dac",
+        "prefixo": "0160",
+        "cidade": "Praia Grande (SP)",
+        "source": "SETRANSP Praia Grande",
+        "escolas": [
+          "E.M. Estina Campi Baptista",
+          "Adelaide Patrocinio dos Santos",
+          "Colégio Adventista",
+          "Colégio Aeon",
+          "E.M. Carlos Roberto Dias",
+          "E.M. São Francisco de Assis",
+          "E.M. Fausto dos Santos Amaral"
+        ]
+      },
+      {
+        "id": "pw-0161-13934811612",
+        "nome": "0161 Ailton Santos Araújo",
+        "telefone": "(13) 93481-1612",
+        "telefoneRaw": "5513934811612",
+        "telefoneValido": true,
+        "usuario": "escolar.13934811612p0161@cadastro-praiagrande.alotio.local",
+        "senha": "remks8",
+        "prefixo": "0161",
+        "cidade": "Praia Grande (SP)",
+        "source": "SETRANSP Praia Grande",
+        "escolas": [
+          "E.M. Idílio Perticaratti",
+          "E.M. Newton de Almeida Castro",
+          "E.M. Profª Maria Nilza da Silva Romão",
+          "E.M. Antônio Peres Ferreira",
+          "Escola de Educação Infantil Projeto Educacional Poesis",
+          "E.M. Thereza Magri",
+          "E.M. Idalina da Conceição Pereira",
+          "Eei e Ensino Fundamental I Cantinho do Saber"
+        ]
+      },
+      {
+        "id": "pw-0163-11960703623",
+        "nome": "0163 José Sebastião Leandro dos Santos",
+        "telefone": "(11) 96070-3623",
+        "telefoneRaw": "5511960703623",
+        "telefoneValido": true,
+        "usuario": "escolar.11960703623p0163@cadastro-praiagrande.alotio.local",
+        "senha": "8cvqky",
+        "prefixo": "0163",
+        "cidade": "Praia Grande (SP)",
+        "source": "SETRANSP Praia Grande",
+        "escolas": [
+          "Colégio Adventista",
+          "Colégio Trivium",
+          "Universo Colégio",
+          "Vila Verde Centro Educacional"
+        ]
+      },
+      {
+        "id": "pw-0165-13996879162",
+        "nome": "0165 Sandra Batista Felix",
+        "telefone": "(13) 99687-9162",
+        "telefoneRaw": "5513996879162",
+        "telefoneValido": true,
+        "usuario": "escolar.13996879162p0165@cadastro-praiagrande.alotio.local",
+        "senha": "bfy7mb",
+        "prefixo": "0165",
+        "cidade": "Praia Grande (SP)",
+        "source": "SETRANSP Praia Grande",
+        "escolas": [
+          "Escola de Educação Infantil Projeto Educacional Poesis",
+          "Escola Municipal Professor Fued Temer",
+          "E.M. Roberto Mario Santini",
+          "E.M. República de Portugal",
+          "Colégio Jean Piaget Unidade III",
+          "Abrahao Jacob Lafer Doutor",
+          "Escola Educar",
+          "Etec de Praia Grande"
+        ]
+      },
+      {
+        "id": "pw-0166-13996684251",
+        "nome": "0166 Ygor Henrique de Oliveira Reis",
+        "telefone": "(13) 99668-4251",
+        "telefoneRaw": "5513996684251",
+        "telefoneValido": true,
+        "usuario": "yygor8204@gmail.com",
+        "senha": "(ja_cadastrado)",
+        "prefixo": "0166",
+        "cidade": "Praia Grande (SP)",
+        "source": "SETRANSP Praia Grande",
+        "escolas": [
+          "Colégio Cultura",
+          "19 de Janeiro Escola Municipal",
+          "Fortec Escola Tecnica Unidade II",
+          "Franca Colégio"
+        ]
+      },
+      {
+        "id": "pw-0167-13996729593",
+        "nome": "0167 Luciana Ferreira de Moraes e Silva",
+        "telefone": "(13) 99672-9593",
+        "telefoneRaw": "5513996729593",
+        "telefoneValido": true,
+        "usuario": "escolar.13996729593p0167@cadastro-praiagrande.alotio.local",
+        "senha": "nvh7fc",
+        "prefixo": "0167",
+        "cidade": "Praia Grande (SP)",
+        "source": "SETRANSP Praia Grande",
+        "escolas": [
+          "E.M. Profª. Isabel Figueroa Bréfere",
+          "Layde Rodrigues Reis Loria Escola Municipal",
+          "E.M. João Gonçalves"
+        ]
+      },
+      {
+        "id": "pw-0168-13996037276",
+        "nome": "0168 Renato Ferreira Vanini",
+        "telefone": "(13) 99603-7276",
+        "telefoneRaw": "5513996037276",
+        "telefoneValido": true,
+        "usuario": "escolar.13996037276p0168@cadastro-praiagrande.alotio.local",
+        "senha": "65pcca",
+        "prefixo": "0168",
+        "cidade": "Praia Grande (SP)",
+        "source": "SETRANSP Praia Grande",
+        "escolas": [
+          "E.M. Profª Esmeralda dos Santos Novaes",
+          "Roberto Shoji Doutor Escola Municipal",
+          "E.M. Juliana Arias Rodrigues de Oliveira",
+          "E.M. Sebastião Tavares de Oliveira"
+        ]
+      },
+      {
+        "id": "pw-0170-13991410488",
+        "nome": "0170 Helen Karina da Cruz Oliveira",
+        "telefone": "(13) 99141-0488",
+        "telefoneRaw": "5513991410488",
+        "telefoneValido": true,
+        "usuario": "escolar.13991410488p0170@cadastro-praiagrande.alotio.local",
+        "senha": "cz4d5h",
+        "prefixo": "0170",
+        "cidade": "Praia Grande (SP)",
+        "source": "SETRANSP Praia Grande",
+        "escolas": [
+          "E.M. Visconde de Mauá",
+          "E.M. Gregório França de Siqueira",
+          "E.M. Roberto Francisco dos Santos",
+          "E.M. Profª Maria Clotilde Lopes Comitre Rigo",
+          "Antonio Nunes Lopes da Silva Professor",
+          "E.M. Profª Maria de Lourdes Santos",
+          "E.M. 19 de Janeiro",
+          "Antonio Rubens Costa de Lara Escola Municipal"
+        ]
+      },
+      {
+        "id": "pw-0172-13996375068",
+        "nome": "0172 João Vagner Vital de Almeida",
+        "telefone": "(13) 99637-5068",
+        "telefoneRaw": "5513996375068",
+        "telefoneValido": true,
+        "usuario": "escolar.13996375068p0172@cadastro-praiagrande.alotio.local",
+        "senha": "67k4gd",
+        "prefixo": "0172",
+        "cidade": "Praia Grande (SP)",
+        "source": "SETRANSP Praia Grande",
+        "escolas": [
+          "Arca de Noe Escola de Educação Infantil e Ensino Fundamental",
+          "Geracao 2000 Colégio",
+          "Gregorio Franca de Siqueira Em"
+        ]
+      },
+      {
+        "id": "pw-0173-11980841210",
+        "nome": "0173 Adriana Rodrigues de Faria",
+        "telefone": "(11) 98084-1210",
+        "telefoneRaw": "5511980841210",
+        "telefoneValido": true,
+        "usuario": "escolar.11980841210p0173@cadastro-praiagrande.alotio.local",
+        "senha": "jqw7d9",
+        "prefixo": "0173",
+        "cidade": "Praia Grande (SP)",
+        "source": "SETRANSP Praia Grande",
+        "escolas": [
+          "E.M. Oswaldo Justo",
+          "E.M. Vila Mirim",
+          "Gregorio Franca de Siqueira Em"
+        ]
+      },
+      {
+        "id": "pw-0174-13992008998",
+        "nome": "0174 Renata Karpfenstein Guida",
+        "telefone": "(13) 99200-8998",
+        "telefoneRaw": "5513992008998",
+        "telefoneValido": true,
+        "usuario": "escolar.13992008998p0174@cadastro-praiagrande.alotio.local",
+        "senha": "2vpjew",
+        "prefixo": "0174",
+        "cidade": "Praia Grande (SP)",
+        "source": "SETRANSP Praia Grande",
+        "escolas": [
+          "Guerreiro Colégio",
+          "Hilda de Carvalho Guedes Escola Municipal",
+          "Idalina da Conceicao Pereira Escola Municipal"
+        ]
+      },
+      {
+        "id": "pw-0175-13996285373",
+        "nome": "0175 Carlos Adriano Santos Paiva",
+        "telefone": "(13) 99628-5373",
+        "telefoneRaw": "5513996285373",
+        "telefoneValido": true,
+        "usuario": "escolar.13996285373p0175@cadastro-praiagrande.alotio.local",
+        "senha": "2d7tvy",
+        "prefixo": "0175",
+        "cidade": "Praia Grande (SP)",
+        "source": "SETRANSP Praia Grande",
+        "escolas": [
+          "Ruth Vilaca Correa Leite Cardoso Escola Municipal",
+          "E.M. Governador Franco Montoro",
+          "E.E. Balneário das Palmeiras",
+          "Etec de Praia Grande"
+        ]
+      },
+      {
+        "id": "pw-0176-13988436607",
+        "nome": "0176 Tio Jeremias LTDA",
+        "telefone": "(13) 98843-6607",
+        "telefoneRaw": "5513988436607",
+        "telefoneValido": true,
+        "usuario": "escolar.13988436607p0176@cadastro-praiagrande.alotio.local",
+        "senha": "e35x47",
+        "prefixo": "0176",
+        "cidade": "Praia Grande (SP)",
+        "source": "SETRANSP Praia Grande",
+        "escolas": [
+          "Escola de Educação Infantil Projeto Educacional Poesis",
+          "E.M. Profª Maria Nilza da Silva Romão",
+          "E.M. Newton de Almeida Castro",
+          "E.M. Thereza Magri",
+          "E.M. Idílio Perticaratti"
+        ]
+      },
+      {
+        "id": "pw-0177-13974185299",
+        "nome": "0177 Walmir Augusto",
+        "telefone": "(13) 97418-5299",
+        "telefoneRaw": "5513974185299",
+        "telefoneValido": true,
+        "usuario": "escolar.13974185299p0177@cadastro-praiagrande.alotio.local",
+        "senha": "ef5x34",
+        "prefixo": "0177",
+        "cidade": "Praia Grande (SP)",
+        "source": "SETRANSP Praia Grande",
+        "escolas": [
+          "Escola de Educação Infantil Projeto Educacional Poesis",
+          "Idilio Perticaratti Escola Municipal",
+          "Ilha Brasil Colégio"
+        ]
+      },
+      {
+        "id": "pw-0178-13988613509",
+        "nome": "0178 Alex Sandro Ferreira de Lima",
+        "telefone": "(13) 98861-3509",
+        "telefoneRaw": "5513988613509",
+        "telefoneValido": true,
+        "usuario": "escolar.13988613509p0178@cadastro-praiagrande.alotio.local",
+        "senha": "aew53s",
+        "prefixo": "0178",
+        "cidade": "Praia Grande (SP)",
+        "source": "SETRANSP Praia Grande",
+        "escolas": [
+          "Colégio Adventista",
+          "Oliveiras Colégio",
+          "Ilha Brasil Colégio"
+        ]
+      },
+      {
+        "id": "pw-0179-13988696975",
+        "nome": "0179 Andrea de Jesus Oliveira",
+        "telefone": "(13) 98869-6975",
+        "telefoneRaw": "5513988696975",
+        "telefoneValido": true,
+        "usuario": "escolar.13988696975p0179@cadastro-praiagrande.alotio.local",
+        "senha": "bwsq3y",
+        "prefixo": "0179",
+        "cidade": "Praia Grande (SP)",
+        "source": "SETRANSP Praia Grande",
+        "escolas": [
+          "Eei e Ensino Fundamental I Cantinho do Saber",
+          "Escola de Educação Infantil Projeto Educacional Poesis",
+          "E.M. Thereza Magri",
+          "E.M. Idalina da Conceição Pereira",
+          "E.M. Idílio Perticaratti",
+          "E.M. Antônio Peres Ferreira",
+          "Magali Alonso Professora",
+          "E.M. Profª Maria Nilza da Silva Romão",
+          "Colégio Monte Serrat"
+        ]
+      },
+      {
+        "id": "pw-0180-13988770775",
+        "nome": "0180 João Fernando do Carmo",
+        "telefone": "(13) 98877-0775",
+        "telefoneRaw": "5513988770775",
+        "telefoneValido": true,
+        "usuario": "escolar.13988770775p0180@cadastro-praiagrande.alotio.local",
+        "senha": "uknvn4",
+        "prefixo": "0180",
+        "cidade": "Praia Grande (SP)",
+        "source": "SETRANSP Praia Grande",
+        "escolas": [
+          "E.M. Sebastião Tavares de Oliveira",
+          "E.M. Paulo Shigueo Yamauti",
+          "E.M. Profª Esmeralda dos Santos Novaes",
+          "Roberto Shoji Doutor Escola Municipal",
+          "E.M. Pablo Trevisan Perutich"
+        ]
+      },
+      {
+        "id": "pw-0181-11940075561",
+        "nome": "0181 Amanda Maria Eneas",
+        "telefone": "(11) 94007-5561",
+        "telefoneRaw": "5511940075561",
+        "telefoneValido": true,
+        "usuario": "escolar.11940075561p0181@cadastro-praiagrande.alotio.local",
+        "senha": "ybz2aj",
+        "prefixo": "0181",
+        "cidade": "Praia Grande (SP)",
+        "source": "SETRANSP Praia Grande",
+        "escolas": [
+          "João Batista Resine Alves Escola Municipal",
+          "Joaquim Augusto Ferreira Mourao Escola Municipal",
+          "José Crego Painceira Escola Municipal"
+        ]
+      },
+      {
+        "id": "pw-0182-11993496412",
+        "nome": "0182 Fabio Pereira Guedes",
+        "telefone": "(11) 99349-6412",
+        "telefoneRaw": "5511993496412",
+        "telefoneValido": true,
+        "usuario": "escolar.11993496412p0182@cadastro-praiagrande.alotio.local",
+        "senha": "buxgtr",
+        "prefixo": "0182",
+        "cidade": "Praia Grande (SP)",
+        "source": "SETRANSP Praia Grande",
+        "escolas": [
+          "E.M. Gregório França de Siqueira",
+          "João Batista Resine Alves Escola Municipal",
+          "E.M. Profª Maria de Lourdes Santos",
+          "E.M. Estado do Amazonas",
+          "Antonio Rubens Costa de Lara Escola Municipal"
+        ]
+      },
+      {
+        "id": "pw-0183-13982319898",
+        "nome": "0183 Marcello Noran Nogueira Miranda",
+        "telefone": "(13) 98231-9898",
+        "telefoneRaw": "5513982319898",
+        "telefoneValido": true,
+        "usuario": "escolar.13982319898p0183@cadastro-praiagrande.alotio.local",
+        "senha": "2vaeat",
+        "prefixo": "0183",
+        "cidade": "Praia Grande (SP)",
+        "source": "SETRANSP Praia Grande",
+        "escolas": [
+          "Colégio Fortec",
+          "Recanto Educacional Colégio",
+          "E.M. Carlos Roberto Dias",
+          "E.M. São Francisco de Assis",
+          "E.M. Manoel Nascimento Júnior",
+          "Maria Pacheco Nobre Professora"
+        ]
+      },
+      {
+        "id": "pw-0184-13998034243",
+        "nome": "0184 Leticia de Souza Pinheiro",
+        "telefone": "(13) 99803-4243",
+        "telefoneRaw": "5513998034243",
+        "telefoneValido": true,
+        "usuario": "escolar.13998034243p0184@cadastro-praiagrande.alotio.local",
+        "senha": "wfyzx2",
+        "prefixo": "0184",
+        "cidade": "Praia Grande (SP)",
+        "source": "SETRANSP Praia Grande",
+        "escolas": [
+          "E.M. São Francisco de Assis",
+          "E.M. Carlos Roberto Dias",
+          "E.M. Manoel Nascimento Júnior"
+        ]
+      },
+      {
+        "id": "pw-0185-13988176620",
+        "nome": "0185 Carlos Alberto Carneiro",
+        "telefone": "(13) 98817-6620",
+        "telefoneRaw": "5513988176620",
+        "telefoneValido": true,
+        "usuario": "escolar.13988176620p0185@cadastro-praiagrande.alotio.local",
+        "senha": "btkquh",
+        "prefixo": "0185",
+        "cidade": "Praia Grande (SP)",
+        "source": "SETRANSP Praia Grande",
+        "escolas": [
+          "Escola de Educação Infantil Projeto Educacional Poesis",
+          "E.M. José Júlio Martins Baptista",
+          "E.M. José Ribeiro dos Santos Cunha",
+          "E.M. Idílio Perticaratti",
+          "E.M. Dorivaldo Francisco Loria",
+          "E.M. Ronaldo Sérgio Alves Lameira Ramos"
+        ]
+      },
+      {
+        "id": "pw-0186-13981497059",
+        "nome": "0186 Vanderlei Aparecido Virgulino",
+        "telefone": "(13) 98149-7059",
+        "telefoneRaw": "5513981497059",
+        "telefoneValido": true,
+        "usuario": "escolar.13981497059p0186@cadastro-praiagrande.alotio.local",
+        "senha": "3r73r9",
+        "prefixo": "0186",
+        "cidade": "Praia Grande (SP)",
+        "source": "SETRANSP Praia Grande",
+        "escolas": [
+          "E.M. Sebastião Tavares de Oliveira",
+          "E.M. Profª Esmeralda dos Santos Novaes",
+          "Roberto Shoji Doutor Escola Municipal"
+        ]
+      },
+      {
+        "id": "pw-0187-11967869064",
+        "nome": "0187 Francisco Dias Maciel",
+        "telefone": "(11) 96786-9064",
+        "telefoneRaw": "5511967869064",
+        "telefoneValido": true,
+        "usuario": "escolar.11967869064p0187@cadastro-praiagrande.alotio.local",
+        "senha": "dt2t9g",
+        "prefixo": "0187",
+        "cidade": "Praia Grande (SP)",
+        "source": "SETRANSP Praia Grande",
+        "escolas": [
+          "Julio Pardo Couto Professor",
+          "Julio Secco de Carvalho",
+          "Laudelino Fernandes dos Santos Professor"
+        ]
+      },
+      {
+        "id": "pw-0188-13991455593",
+        "nome": "0188 Edgard de Campos Neto",
+        "telefone": "(13) 99145-5593",
+        "telefoneRaw": "5513991455593",
+        "telefoneValido": true,
+        "usuario": "escolar.13991455593p0188@cadastro-praiagrande.alotio.local",
+        "senha": "z98dyd",
+        "prefixo": "0188",
+        "cidade": "Praia Grande (SP)",
+        "source": "SETRANSP Praia Grande",
+        "escolas": [
+          "Julio Secco de Carvalho",
+          "Laudelino Fernandes dos Santos Professor",
+          "Layde Rodrigues Reis Loria Escola Municipal"
+        ]
+      },
+      {
+        "id": "pw-0189-11962712609",
+        "nome": "0189 Neife Anderson da Silva",
+        "telefone": "(11) 96271-2609",
+        "telefoneRaw": "5511962712609",
+        "telefoneValido": true,
+        "usuario": "escolar.11962712609p0189@cadastro-praiagrande.alotio.local",
+        "senha": "wpfgr5",
+        "prefixo": "0189",
+        "cidade": "Praia Grande (SP)",
+        "source": "SETRANSP Praia Grande",
+        "escolas": [
+          "Laudelino Fernandes dos Santos Professor",
+          "Layde Rodrigues Reis Loria Escola Municipal",
+          "Leopoldo Estasio Vanderlinde Escola Municipal"
+        ]
+      },
+      {
+        "id": "pw-0190-11944207071",
+        "nome": "0190 Marcos Aurelio da Conceição",
+        "telefone": "(11) 94420-7071",
+        "telefoneRaw": "5511944207071",
+        "telefoneValido": true,
+        "usuario": "escolar.11944207071p0190@cadastro-praiagrande.alotio.local",
+        "senha": "w3padz",
+        "prefixo": "0190",
+        "cidade": "Praia Grande (SP)",
+        "source": "SETRANSP Praia Grande",
+        "escolas": [
+          "Layde Rodrigues Reis Loria Escola Municipal",
+          "Leopoldo Estasio Vanderlinde Escola Municipal",
+          "Lions Club Ocian Escola Municipal"
+        ]
+      },
+      {
+        "id": "pw-0191-13981601434",
+        "nome": "0191 Cintia de Fátima Barbosa",
+        "telefone": "(13) 98160-1434",
+        "telefoneRaw": "5513981601434",
+        "telefoneValido": true,
+        "usuario": "escolar.13981601434p0191@cadastro-praiagrande.alotio.local",
+        "senha": "furkb9",
+        "prefixo": "0191",
+        "cidade": "Praia Grande (SP)",
+        "source": "SETRANSP Praia Grande",
+        "escolas": [
+          "Leopoldo Estasio Vanderlinde Escola Municipal",
+          "Lions Club Ocian Escola Municipal",
+          "Lions Clube Centro"
+        ]
+      },
+      {
+        "id": "pw-0192-13991220954",
+        "nome": "0192 Simone dos Santos Nascimento",
+        "telefone": "(13) 99122-0954",
+        "telefoneRaw": "5513991220954",
+        "telefoneValido": true,
+        "usuario": "escolar.13991220954p0192@cadastro-praiagrande.alotio.local",
+        "senha": "wshfcf",
+        "prefixo": "0192",
+        "cidade": "Praia Grande (SP)",
+        "source": "SETRANSP Praia Grande",
+        "escolas": [
+          "Lions Club Ocian Escola Municipal",
+          "Lions Clube Centro",
+          "Luis Arruda Paes Maestro Escola Municipal"
+        ]
+      },
+      {
+        "id": "pw-0193-13988251388",
+        "nome": "0193 Transporte Escolar Tio Junior LTDA",
+        "telefone": "(13) 98825-1388",
+        "telefoneRaw": "5513988251388",
+        "telefoneValido": true,
+        "usuario": "escolar.13988251388p0193@cadastro-praiagrande.alotio.local",
+        "senha": "fc9wke",
+        "prefixo": "0193",
+        "cidade": "Praia Grande (SP)",
+        "source": "SETRANSP Praia Grande",
+        "escolas": [
+          "Lions Clube Centro",
+          "Luis Arruda Paes Maestro Escola Municipal",
+          "Luzia Borba Ranciaro Escola Municipal"
+        ]
       }
     ]
   },
@@ -40982,6 +42680,1712 @@
           "Vila Industrial",
           "Vila Santa Rita",
           "Vila Scarabucci"
+        ]
+      }
+    ]
+  },
+  {
+    "id": "cidade-praia-grande-sp-",
+    "title": "Praia Grande (SP) (95 com senha)",
+    "description": "Transportadores escolares de Praia Grande (SP) com prefixos oficiais da SETRANSP e senhas temporárias",
+    "hasCredentials": true,
+    "contacts": [
+      {
+        "id": "pw-0004-13997149714",
+        "nome": "0004 Fort Car Transporte Escolar. - ME",
+        "telefone": "(13) 99714-9714",
+        "telefoneRaw": "5513997149714",
+        "telefoneValido": true,
+        "usuario": "escolar.13997149714p0004@cadastro-praiagrande.alotio.local",
+        "senha": "8mn3xc",
+        "prefixo": "0004",
+        "cidade": "Praia Grande (SP)",
+        "source": "SETRANSP Praia Grande",
+        "escolas": [
+          "Colégio Trivium",
+          "Passionista Santa Maria Colégio",
+          "Albert Einstein Escola Municipal"
+        ]
+      },
+      {
+        "id": "pw-0006-13981466371",
+        "nome": "0006 Cesar Augusto Moura Gazeti",
+        "telefone": "(13) 98146-6371",
+        "telefoneRaw": "5513981466371",
+        "telefoneValido": true,
+        "usuario": "escolar.13981466371p0006@cadastro-praiagrande.alotio.local",
+        "senha": "wdppb7",
+        "prefixo": "0006",
+        "cidade": "Praia Grande (SP)",
+        "source": "SETRANSP Praia Grande",
+        "escolas": [
+          "E.M. José Júlio Martins Baptista",
+          "E.M. São Francisco de Assis",
+          "E.M. Carlos Roberto Dias"
+        ]
+      },
+      {
+        "id": "pw-0014-13991254821",
+        "nome": "0014 Marcia Roschel Pereira",
+        "telefone": "(13) 99125-4821",
+        "telefoneRaw": "5513991254821",
+        "telefoneValido": true,
+        "usuario": "escolar.13991254821p0014@cadastro-praiagrande.alotio.local",
+        "senha": "byhkhj",
+        "prefixo": "0014",
+        "cidade": "Praia Grande (SP)",
+        "source": "SETRANSP Praia Grande",
+        "escolas": [
+          "Escola Municipal Professor Fued Temer",
+          "E.M. Roberto Mario Santini",
+          "Espaço Crescer Escola de Educação Infantil"
+        ]
+      },
+      {
+        "id": "pw-0021-13991325970",
+        "nome": "0021 Jose Roberto Andrade Oliveira",
+        "telefone": "(13) 99132-5970",
+        "telefoneRaw": "5513991325970",
+        "telefoneValido": true,
+        "usuario": "escolar.13991325970p0021@cadastro-praiagrande.alotio.local",
+        "senha": "e4ybsx",
+        "prefixo": "0021",
+        "cidade": "Praia Grande (SP)",
+        "source": "SETRANSP Praia Grande",
+        "escolas": [
+          "E.M. Lions Clube Ocian",
+          "E.M. Vereador Valter Salerno",
+          "Carlos Roberto Dias Escola Municipal"
+        ]
+      },
+      {
+        "id": "pw-0022-13997756637",
+        "nome": "0022 Silvia Helena de Carvalho Calado - ME",
+        "telefone": "(13) 99775-6637",
+        "telefoneRaw": "5513997756637",
+        "telefoneValido": true,
+        "usuario": "escolar.13997756637p0022@cadastro-praiagrande.alotio.local",
+        "senha": "hrnagt",
+        "prefixo": "0022",
+        "cidade": "Praia Grande (SP)",
+        "source": "SETRANSP Praia Grande",
+        "escolas": [
+          "E.M. Vereador Felipe Avelino Moraes",
+          "E.M. Mário Possani",
+          "Colégio França",
+          "Alexo Colégio",
+          "E.M. José Crego Painceira"
+        ]
+      },
+      {
+        "id": "pw-0037-13981279493",
+        "nome": "0037 Marcio de Oliveira Souza",
+        "telefone": "(13) 98127-9493",
+        "telefoneRaw": "5513981279493",
+        "telefoneValido": true,
+        "usuario": "escolar.13981279493p0037@cadastro-praiagrande.alotio.local",
+        "senha": "acvwnp",
+        "prefixo": "0037",
+        "cidade": "Praia Grande (SP)",
+        "source": "SETRANSP Praia Grande",
+        "escolas": [
+          "Oliveiras Colégio",
+          "E.M. Antônio Peres Ferreira",
+          "E.M. Idílio Perticaratti",
+          "E.M. Idalina da Conceição Pereira",
+          "Escola de Educação Infantil Projeto Educacional Poesis",
+          "E.M. Thereza Magri",
+          "Eei e Ensino Fundamental I Cantinho do Saber"
+        ]
+      },
+      {
+        "id": "pw-0041-13991029767",
+        "nome": "0041 Waldemar Teixeira Junior",
+        "telefone": "(13) 99102-9767",
+        "telefoneRaw": "5513991029767",
+        "telefoneValido": true,
+        "usuario": "escolar.13991029767p0041@cadastro-praiagrande.alotio.local",
+        "senha": "jg7zjg",
+        "prefixo": "0041",
+        "cidade": "Praia Grande (SP)",
+        "source": "SETRANSP Praia Grande",
+        "escolas": [
+          "Universo Colégio",
+          "E.M. Sebastião Tavares de Oliveira",
+          "E.E. Vila Tupi",
+          "E.M. José Padin Mouta",
+          "Colégio Piteco de Educação Infantil e Fundamental",
+          "E.M. Vila Tupiry",
+          "Magali Alonso Professora",
+          "E.M. Profª Esmeralda dos Santos Novaes"
+        ]
+      },
+      {
+        "id": "pw-0042-13988207479",
+        "nome": "0042 Karen de Souza",
+        "telefone": "(13) 98820-7479",
+        "telefoneRaw": "5513988207479",
+        "telefoneValido": true,
+        "usuario": "escolar.13988207479p0042@cadastro-praiagrande.alotio.local",
+        "senha": "vvrjk2",
+        "prefixo": "0042",
+        "cidade": "Praia Grande (SP)",
+        "source": "SETRANSP Praia Grande",
+        "escolas": [
+          "E.M. Carlos Roberto Dias",
+          "E.M. Manoel Nascimento Júnior",
+          "E.M. São Francisco de Assis",
+          "Maria Pacheco Nobre Professora"
+        ]
+      },
+      {
+        "id": "pw-0043-13981122195",
+        "nome": "0043 Flávio Leanderson w. de Morais",
+        "telefone": "(13) 98112-2195",
+        "telefoneRaw": "5513981122195",
+        "telefoneValido": true,
+        "usuario": "escolar.13981122195p0043@cadastro-praiagrande.alotio.local",
+        "senha": "ppzyjz",
+        "prefixo": "0043",
+        "cidade": "Praia Grande (SP)",
+        "source": "SETRANSP Praia Grande",
+        "escolas": [
+          "E.M. Paulo Shigueo Yamauti",
+          "E.M. Sebastião Tavares de Oliveira",
+          "E.M. Ary Cabral"
+        ]
+      },
+      {
+        "id": "pw-0044-11995137226",
+        "nome": "0044 Batista Manoel da Silva",
+        "telefone": "(11) 99513-7226",
+        "telefoneRaw": "5511995137226",
+        "telefoneValido": true,
+        "usuario": "escolar.11995137226p0044@cadastro-praiagrande.alotio.local",
+        "senha": "caep2j",
+        "prefixo": "0044",
+        "cidade": "Praia Grande (SP)",
+        "source": "SETRANSP Praia Grande",
+        "escolas": [
+          "E.M. Carlos Roberto Dias",
+          "Escola Municipal Icaro Batista Cardoso",
+          "E.M. São Francisco de Assis"
+        ]
+      },
+      {
+        "id": "pw-0045-13997061206",
+        "nome": "0045 Rosemeire de Oliveira Fereira Molina",
+        "telefone": "(13) 99706-1206",
+        "telefoneRaw": "5513997061206",
+        "telefoneValido": true,
+        "usuario": "escolar.13997061206p0045@cadastro-praiagrande.alotio.local",
+        "senha": "hz8yzj",
+        "prefixo": "0045",
+        "cidade": "Praia Grande (SP)",
+        "source": "SETRANSP Praia Grande",
+        "escolas": [
+          "Novomundo Colégio",
+          "Colégio Jean Piaget Unidade III",
+          "Escola Maple Bear Praia Grande"
+        ]
+      },
+      {
+        "id": "pw-0046-13974193641",
+        "nome": "0046 Marcia Regina Rossi",
+        "telefone": "(13) 97419-3641",
+        "telefoneRaw": "5513974193641",
+        "telefoneValido": true,
+        "usuario": "escolar.13974193641p0046@cadastro-praiagrande.alotio.local",
+        "senha": "krhh4k",
+        "prefixo": "0046",
+        "cidade": "Praia Grande (SP)",
+        "source": "SETRANSP Praia Grande",
+        "escolas": [
+          "E.M. Lions Clube Ocian",
+          "E.M. Oswaldo Justo",
+          "Escola Municipal Governador Orestes Quercia",
+          "E.M. Vila Mirim"
+        ]
+      },
+      {
+        "id": "pw-0049-13991354356",
+        "nome": "0049 Antonio José Marinho dos Santos jr.",
+        "telefone": "(13) 99135-4356",
+        "telefoneRaw": "5513991354356",
+        "telefoneValido": true,
+        "usuario": "escolar.13991354356p0049@cadastro-praiagrande.alotio.local",
+        "senha": "7e23nu",
+        "prefixo": "0049",
+        "cidade": "Praia Grande (SP)",
+        "source": "SETRANSP Praia Grande",
+        "escolas": [
+          "Escola Municipal Governador Orestes Quercia",
+          "E.M. Lions Clube Ocian",
+          "E.M. Vila Mirim",
+          "E.M. Vereador Valter Salerno"
+        ]
+      },
+      {
+        "id": "pw-0050-13982025434",
+        "nome": "0050 Geni Gamba",
+        "telefone": "(13) 98202-5434",
+        "telefoneRaw": "5513982025434",
+        "telefoneValido": true,
+        "usuario": "escolar.13982025434p0050@cadastro-praiagrande.alotio.local",
+        "senha": "pz4pve",
+        "prefixo": "0050",
+        "cidade": "Praia Grande (SP)",
+        "source": "SETRANSP Praia Grande",
+        "escolas": [
+          "Colégio França",
+          "Constance Kami Escola de Ensino Fundamental",
+          "Alexo Colégio",
+          "Laudelino Fernandes dos Santos Professor"
+        ]
+      },
+      {
+        "id": "pw-0052-13974223641",
+        "nome": "0052 Adriana Santos Paiva Esteves",
+        "telefone": "(13) 97422-3641",
+        "telefoneRaw": "5513974223641",
+        "telefoneValido": true,
+        "usuario": "escolar.13974223641p0052@cadastro-praiagrande.alotio.local",
+        "senha": "xk6m9n",
+        "prefixo": "0052",
+        "cidade": "Praia Grande (SP)",
+        "source": "SETRANSP Praia Grande",
+        "escolas": [
+          "E.M. Florivaldo Borges de Queiroz",
+          "E.M. Lions Clube Ocian",
+          "E.M. Vereador Valter Salerno"
+        ]
+      },
+      {
+        "id": "pw-0058-11996910350",
+        "nome": "0058 Dilcea Teresa Antonio Zanchim",
+        "telefone": "(11) 99691-0350",
+        "telefoneRaw": "5511996910350",
+        "telefoneValido": true,
+        "usuario": "escolar.11996910350p0058@cadastro-praiagrande.alotio.local",
+        "senha": "msj26y",
+        "prefixo": "0058",
+        "cidade": "Praia Grande (SP)",
+        "source": "SETRANSP Praia Grande",
+        "escolas": [
+          "Colégio Piteco de Educação Infantil e Fundamental",
+          "E.M. Anahy Navarro Trovão",
+          "E.M. Antônio Peres Ferreira"
+        ]
+      },
+      {
+        "id": "pw-0065-13996602708",
+        "nome": "0065 Carlos Roberto Silva",
+        "telefone": "(13) 99660-2708",
+        "telefoneRaw": "5513996602708",
+        "telefoneValido": true,
+        "usuario": "escolar.13996602708p0065@cadastro-praiagrande.alotio.local",
+        "senha": "4xgv6k",
+        "prefixo": "0065",
+        "cidade": "Praia Grande (SP)",
+        "source": "SETRANSP Praia Grande",
+        "escolas": [
+          "E.M. Profª. Isabel Figueroa Bréfere",
+          "E.M. João Gonçalves",
+          "Layde Rodrigues Reis Loria Escola Municipal"
+        ]
+      },
+      {
+        "id": "pw-0066-13981814370",
+        "nome": "0066 Bianca Caroline de Almeida",
+        "telefone": "(13) 98181-4370",
+        "telefoneRaw": "5513981814370",
+        "telefoneValido": true,
+        "usuario": "escolar.13981814370p0066@cadastro-praiagrande.alotio.local",
+        "senha": "kk4e5v",
+        "prefixo": "0066",
+        "cidade": "Praia Grande (SP)",
+        "source": "SETRANSP Praia Grande",
+        "escolas": [
+          "E.M. Vereador Felipe Avelino Moraes",
+          "E.M. José Crego Painceira",
+          "E.M. Mário Possani"
+        ]
+      },
+      {
+        "id": "pw-0071-11976573956",
+        "nome": "0071 Alessandro Martins Bassan",
+        "telefone": "(11) 97657-3956",
+        "telefoneRaw": "5511976573956",
+        "telefoneValido": true,
+        "usuario": "escolar.11976573956p0071@cadastro-praiagrande.alotio.local",
+        "senha": "djmtc5",
+        "prefixo": "0071",
+        "cidade": "Praia Grande (SP)",
+        "source": "SETRANSP Praia Grande",
+        "escolas": [
+          "Colégio Cultura",
+          "Guerreiro Colégio",
+          "E.M. Drº Wilson Guedes"
+        ]
+      },
+      {
+        "id": "pw-0073-13997235485",
+        "nome": "0073 Anderson Richard Bertolacci",
+        "telefone": "(13) 99723-5485",
+        "telefoneRaw": "5513997235485",
+        "telefoneValido": true,
+        "usuario": "escolar.13997235485p0073@cadastro-praiagrande.alotio.local",
+        "senha": "p6d7xs",
+        "prefixo": "0073",
+        "cidade": "Praia Grande (SP)",
+        "source": "SETRANSP Praia Grande",
+        "escolas": [
+          "Projeto Crescer Colégio",
+          "Universo Colégio",
+          "Colégio Adventista"
+        ]
+      },
+      {
+        "id": "pw-0077-13997498441",
+        "nome": "0077 Valeria Saraiva Santos de Melo",
+        "telefone": "(13) 99749-8441",
+        "telefoneRaw": "5513997498441",
+        "telefoneValido": true,
+        "usuario": "escolar.13997498441p0077@cadastro-praiagrande.alotio.local",
+        "senha": "r5zgpx",
+        "prefixo": "0077",
+        "cidade": "Praia Grande (SP)",
+        "source": "SETRANSP Praia Grande",
+        "escolas": [
+          "E.M. Mário Possani",
+          "E.M. Florivaldo Borges de Queiroz",
+          "E.M. Governador Franco Montoro"
+        ]
+      },
+      {
+        "id": "pw-0078-13988436607",
+        "nome": "0078 Jeremias Prates Dias",
+        "telefone": "(13) 98843-6607",
+        "telefoneRaw": "5513988436607",
+        "telefoneValido": true,
+        "usuario": "escolar.13988436607p0078@cadastro-praiagrande.alotio.local",
+        "senha": "ag77yc",
+        "prefixo": "0078",
+        "cidade": "Praia Grande (SP)",
+        "source": "SETRANSP Praia Grande",
+        "escolas": [
+          "E.M. Profª Maria Nilza da Silva Romão",
+          "E.M. Thereza Magri",
+          "E.M. Newton de Almeida Castro",
+          "E.M. Idílio Perticaratti",
+          "Escola de Educação Infantil Projeto Educacional Poesis"
+        ]
+      },
+      {
+        "id": "pw-0079-13974105017",
+        "nome": "0079 Giovenazi de Santana Oliveira",
+        "telefone": "(13) 97410-5017",
+        "telefoneRaw": "5513974105017",
+        "telefoneValido": true,
+        "usuario": "escolar.13974105017p0079@cadastro-praiagrande.alotio.local",
+        "senha": "7cnntc",
+        "prefixo": "0079",
+        "cidade": "Praia Grande (SP)",
+        "source": "SETRANSP Praia Grande",
+        "escolas": [
+          "E.M. Carlos Roberto Dias",
+          "Escola de Educação Infantil Projeto Educacional Poesis",
+          "E.M. São Francisco de Assis"
+        ]
+      },
+      {
+        "id": "pw-0084-13988686887",
+        "nome": "0084 Rodrigo Soares Feitosa",
+        "telefone": "(13) 98868-6887",
+        "telefoneRaw": "5513988686887",
+        "telefoneValido": true,
+        "usuario": "escolar.13988686887p0084@cadastro-praiagrande.alotio.local",
+        "senha": "ja3sux",
+        "prefixo": "0084",
+        "cidade": "Praia Grande (SP)",
+        "source": "SETRANSP Praia Grande",
+        "escolas": [
+          "Colégio Fortec",
+          "E.M. Carlos Roberto Dias",
+          "E.M. Manoel Nascimento Júnior",
+          "E.M. São Francisco de Assis",
+          "E.M. Dorivaldo Francisco Loria",
+          "E.M. Ronaldo Sérgio Alves Lameira Ramos"
+        ]
+      },
+      {
+        "id": "pw-0085-13988403904",
+        "nome": "0085 Simone Maria Sacramento Santana Teles",
+        "telefone": "(13) 98840-3904",
+        "telefoneRaw": "5513988403904",
+        "telefoneValido": true,
+        "usuario": "escolar.13988403904p0085@cadastro-praiagrande.alotio.local",
+        "senha": "zwryge",
+        "prefixo": "0085",
+        "cidade": "Praia Grande (SP)",
+        "source": "SETRANSP Praia Grande",
+        "escolas": [
+          "Colégio Jean Piaget Unidade III",
+          "Colégio Trivium",
+          "Colégio Adventista"
+        ]
+      },
+      {
+        "id": "pw-0088-13988259388",
+        "nome": "0088 Mauro Paz Junior",
+        "telefone": "(13) 98825-9388",
+        "telefoneRaw": "5513988259388",
+        "telefoneValido": true,
+        "usuario": "escolar.13988259388p0088@cadastro-praiagrande.alotio.local",
+        "senha": "ptmdr2",
+        "prefixo": "0088",
+        "cidade": "Praia Grande (SP)",
+        "source": "SETRANSP Praia Grande",
+        "escolas": [
+          "Escola Municipal Professor Fued Temer",
+          "E.M. Roberto Mario Santini",
+          "E.M. Joaquim Augusto Ferreira Mourão"
+        ]
+      },
+      {
+        "id": "pw-0089-13988572006",
+        "nome": "0089 Waneska Lucimar Devecchi",
+        "telefone": "(13) 98857-2006",
+        "telefoneRaw": "5513988572006",
+        "telefoneValido": true,
+        "usuario": "escolar.13988572006p0089@cadastro-praiagrande.alotio.local",
+        "senha": "uxh3ze",
+        "prefixo": "0089",
+        "cidade": "Praia Grande (SP)",
+        "source": "SETRANSP Praia Grande",
+        "escolas": [
+          "Celestin Freinet Eei e Pg",
+          "E.M. José Crego Painceira",
+          "E.M. José Júlio Martins Baptista"
+        ]
+      },
+      {
+        "id": "pw-0090-13997952695",
+        "nome": "0090 Carlos Andre Santos de Paiva",
+        "telefone": "(13) 99795-2695",
+        "telefoneRaw": "5513997952695",
+        "telefoneValido": true,
+        "usuario": "escolar.13997952695p0090@cadastro-praiagrande.alotio.local",
+        "senha": "vafmpb",
+        "prefixo": "0090",
+        "cidade": "Praia Grande (SP)",
+        "source": "SETRANSP Praia Grande",
+        "escolas": [
+          "E.M. Vila Mirim",
+          "Escola Municipal Governador Orestes Quercia",
+          "E.M. Oswaldo Justo"
+        ]
+      },
+      {
+        "id": "pw-0091-13982251325",
+        "nome": "0091 Fabiana de Paulo Alonso",
+        "telefone": "(13) 98225-1325",
+        "telefoneRaw": "5513982251325",
+        "telefoneValido": true,
+        "usuario": "escolar.13982251325p0091@cadastro-praiagrande.alotio.local",
+        "senha": "h33fzk",
+        "prefixo": "0091",
+        "cidade": "Praia Grande (SP)",
+        "source": "SETRANSP Praia Grande",
+        "escolas": [
+          "E.M. Paulo de Souza Sandoval",
+          "Antonio Rubens Costa de Lara Escola Municipal",
+          "João Batista Resine Alves Escola Municipal",
+          "E.M. Profª Maria Clotilde Lopes Comitre Rigo"
+        ]
+      },
+      {
+        "id": "pw-0092-13996095731",
+        "nome": "0092 Mauricio Annunciato",
+        "telefone": "(13) 99609-5731",
+        "telefoneRaw": "5513996095731",
+        "telefoneValido": true,
+        "usuario": "escolar.13996095731p0092@cadastro-praiagrande.alotio.local",
+        "senha": "7cengp",
+        "prefixo": "0092",
+        "cidade": "Praia Grande (SP)",
+        "source": "SETRANSP Praia Grande",
+        "escolas": [
+          "E.M. João Gonçalves",
+          "E.M. José Ribeiro dos Santos Cunha",
+          "E.M. Juliana Arias Rodrigues de Oliveira"
+        ]
+      },
+      {
+        "id": "pw-0094-13997883722",
+        "nome": "0094 Raimunda Nonata Satunino Nascimento",
+        "telefone": "(13) 99788-3722",
+        "telefoneRaw": "5513997883722",
+        "telefoneValido": true,
+        "usuario": "escolar.13997883722p0094@cadastro-praiagrande.alotio.local",
+        "senha": "wb4pc9",
+        "prefixo": "0094",
+        "cidade": "Praia Grande (SP)",
+        "source": "SETRANSP Praia Grande",
+        "escolas": [
+          "E.M. Drª Ana Maria Babette Bajer Fernandes",
+          "Francisco Martins dos Santos",
+          "Alexo Colégio",
+          "Julio Secco de Carvalho"
+        ]
+      },
+      {
+        "id": "pw-0098-13988357554",
+        "nome": "0098 Aline Lima Souza",
+        "telefone": "(13) 98835-7554",
+        "telefoneRaw": "5513988357554",
+        "telefoneValido": true,
+        "usuario": "escolar.13988357554p0098@cadastro-praiagrande.alotio.local",
+        "senha": "pqqa4r",
+        "prefixo": "0098",
+        "cidade": "Praia Grande (SP)",
+        "source": "SETRANSP Praia Grande",
+        "escolas": [
+          "E.M. João Gonçalves",
+          "E.M. Profª. Isabel Figueroa Bréfere",
+          "E.M. Maestro Luiz Arruda Paes"
+        ]
+      },
+      {
+        "id": "pw-0101-13997317831",
+        "nome": "0101 Elizete Pinto da Silva",
+        "telefone": "(13) 99731-7831",
+        "telefoneRaw": "5513997317831",
+        "telefoneValido": true,
+        "usuario": "escolar.13997317831p0101@cadastro-praiagrande.alotio.local",
+        "senha": "sb3pb3",
+        "prefixo": "0101",
+        "cidade": "Praia Grande (SP)",
+        "source": "SETRANSP Praia Grande",
+        "escolas": [
+          "E.M. Cidade da Criança",
+          "E.M. Engenheiro Sérgio Dias de Freitas",
+          "E.M. Maria dos Remédios Carmona Milan"
+        ]
+      },
+      {
+        "id": "pw-0102-13991696155",
+        "nome": "0102 Andre Thiago da Silva",
+        "telefone": "(13) 99169-6155",
+        "telefoneRaw": "5513991696155",
+        "telefoneValido": true,
+        "usuario": "escolar.13991696155p0102@cadastro-praiagrande.alotio.local",
+        "senha": "ddjucr",
+        "prefixo": "0102",
+        "cidade": "Praia Grande (SP)",
+        "source": "SETRANSP Praia Grande",
+        "escolas": [
+          "E.M. Circe Sanchez Toschi",
+          "E.M. Profª. Isabel Figueroa Bréfere",
+          "E.M. João Gonçalves"
+        ]
+      },
+      {
+        "id": "pw-0103-13988354241",
+        "nome": "0103 Ricardo da Silva Furlanis",
+        "telefone": "(13) 98835-4241",
+        "telefoneRaw": "5513988354241",
+        "telefoneValido": true,
+        "usuario": "escolar.13988354241p0103@cadastro-praiagrande.alotio.local",
+        "senha": "bnqmpe",
+        "prefixo": "0103",
+        "cidade": "Praia Grande (SP)",
+        "source": "SETRANSP Praia Grande",
+        "escolas": [
+          "E.M. João Gonçalves",
+          "E.M. Profª. Isabel Figueroa Bréfere",
+          "E.M. José Padin Mouta",
+          "Oliveiras Colégio",
+          "E.E. Vila Tupi"
+        ]
+      },
+      {
+        "id": "pw-0105-13997012232",
+        "nome": "0105 José Nicodemos da Silva",
+        "telefone": "(13) 99701-2232",
+        "telefoneRaw": "5513997012232",
+        "telefoneValido": true,
+        "usuario": "escolar.13997012232p0105@cadastro-praiagrande.alotio.local",
+        "senha": "dyp4a4",
+        "prefixo": "0105",
+        "cidade": "Praia Grande (SP)",
+        "source": "SETRANSP Praia Grande",
+        "escolas": [
+          "Escola Municipal Professor Fued Temer",
+          "E.M. República de Portugal",
+          "E.M. Nicolau Paal"
+        ]
+      },
+      {
+        "id": "pw-0109-13991581270",
+        "nome": "0109 Cristina de Jesus Bispo",
+        "telefone": "(13) 99158-1270",
+        "telefoneRaw": "5513991581270",
+        "telefoneValido": true,
+        "usuario": "escolar.13991581270p0109@cadastro-praiagrande.alotio.local",
+        "senha": "kqc3yg",
+        "prefixo": "0109",
+        "cidade": "Praia Grande (SP)",
+        "source": "SETRANSP Praia Grande",
+        "escolas": [
+          "E.M. Circe Sanchez Toschi",
+          "E.M. Profª. Isabel Figueroa Bréfere",
+          "E.M. João Gonçalves"
+        ]
+      },
+      {
+        "id": "pw-0115-13991159070",
+        "nome": "0115 Debora Betania da Silva",
+        "telefone": "(13) 99115-9070",
+        "telefoneRaw": "5513991159070",
+        "telefoneValido": true,
+        "usuario": "escolar.13991159070p0115@cadastro-praiagrande.alotio.local",
+        "senha": "uwgawj",
+        "prefixo": "0115",
+        "cidade": "Praia Grande (SP)",
+        "source": "SETRANSP Praia Grande",
+        "escolas": [
+          "Colégio Cultura",
+          "E.M. Profª Maria de Lourdes Santos",
+          "E.M. Profª Maria Nilza da Silva Romão"
+        ]
+      },
+      {
+        "id": "pw-0116-13997631370",
+        "nome": "0116 Dorival Gama",
+        "telefone": "(13) 99763-1370",
+        "telefoneRaw": "5513997631370",
+        "telefoneValido": true,
+        "usuario": "escolar.13997631370p0116@cadastro-praiagrande.alotio.local",
+        "senha": "qeusrn",
+        "prefixo": "0116",
+        "cidade": "Praia Grande (SP)",
+        "source": "SETRANSP Praia Grande",
+        "escolas": [
+          "E.M. Mário Possani",
+          "E.M. José Crego Painceira",
+          "E.M. Vereador Felipe Avelino Moraes"
+        ]
+      },
+      {
+        "id": "pw-0117-13981251642",
+        "nome": "0117 Rosiberta Quirino da Silva Sobrinho",
+        "telefone": "(13) 98125-1642",
+        "telefoneRaw": "5513981251642",
+        "telefoneValido": true,
+        "usuario": "escolar.13981251642p0117@cadastro-praiagrande.alotio.local",
+        "senha": "p32cd8",
+        "prefixo": "0117",
+        "cidade": "Praia Grande (SP)",
+        "source": "SETRANSP Praia Grande",
+        "escolas": [
+          "Colégio Adventista",
+          "Colégio Trivium",
+          "Vila Verde Centro Educacional"
+        ]
+      },
+      {
+        "id": "pw-0118-13997784067",
+        "nome": "0118 Marlene Pinto da Silva",
+        "telefone": "(13) 99778-4067",
+        "telefoneRaw": "5513997784067",
+        "telefoneValido": true,
+        "usuario": "escolar.13997784067p0118@cadastro-praiagrande.alotio.local",
+        "senha": "4y4sna",
+        "prefixo": "0118",
+        "cidade": "Praia Grande (SP)",
+        "source": "SETRANSP Praia Grande",
+        "escolas": [
+          "E.M. Engenheiro Sérgio Dias de Freitas",
+          "E.M. Cidade da Criança",
+          "E.M. República de Portugal"
+        ]
+      },
+      {
+        "id": "pw-0120-13991341097",
+        "nome": "0120 Flavio Luis de Mello",
+        "telefone": "(13) 99134-1097",
+        "telefoneRaw": "5513991341097",
+        "telefoneValido": true,
+        "usuario": "escolar.13991341097p0120@cadastro-praiagrande.alotio.local",
+        "senha": "gzyfme",
+        "prefixo": "0120",
+        "cidade": "Praia Grande (SP)",
+        "source": "SETRANSP Praia Grande",
+        "escolas": [
+          "Escola de Educação Infantil Projeto Educacional Poesis",
+          "E.M. Roberto Mario Santini",
+          "Escola Municipal Professor Fued Temer",
+          "E.M. República de Portugal"
+        ]
+      },
+      {
+        "id": "pw-0121-11951644921",
+        "nome": "0121 Orlando Lima",
+        "telefone": "(11) 95164-4921",
+        "telefoneRaw": "5511951644921",
+        "telefoneValido": true,
+        "usuario": "escolar.11951644921p0121@cadastro-praiagrande.alotio.local",
+        "senha": "xx7gr6",
+        "prefixo": "0121",
+        "cidade": "Praia Grande (SP)",
+        "source": "SETRANSP Praia Grande",
+        "escolas": [
+          "Maria Pacheco Nobre Professora",
+          "E.M. São Francisco de Assis",
+          "E.M. Carlos Roberto Dias",
+          "Escola Canto Vivo",
+          "Novomundo Colégio",
+          "Colégio Alpha - Escola de Ensino Infantil Fundamental e Médio Alpha do Futuro",
+          "Escola Maple Bear Praia Grande"
+        ]
+      },
+      {
+        "id": "pw-0124-13991914879",
+        "nome": "0124 Vanda Gomes Ferrari",
+        "telefone": "(13) 99191-4879",
+        "telefoneRaw": "5513991914879",
+        "telefoneValido": true,
+        "usuario": "escolar.13991914879p0124@cadastro-praiagrande.alotio.local",
+        "senha": "e8xp4r",
+        "prefixo": "0124",
+        "cidade": "Praia Grande (SP)",
+        "source": "SETRANSP Praia Grande",
+        "escolas": [
+          "Antonio Rubens Costa de Lara Escola Municipal",
+          "E.M. Profª Maria de Lourdes Santos",
+          "E.M. Sebastião Tavares de Oliveira"
+        ]
+      },
+      {
+        "id": "pw-0130-13997565517",
+        "nome": "0130 Felipe de Oliveira Souza",
+        "telefone": "(13) 99756-5517",
+        "telefoneRaw": "5513997565517",
+        "telefoneValido": true,
+        "usuario": "escolar.13997565517p0130@cadastro-praiagrande.alotio.local",
+        "senha": "fq5vzm",
+        "prefixo": "0130",
+        "cidade": "Praia Grande (SP)",
+        "source": "SETRANSP Praia Grande",
+        "escolas": [
+          "Escola Municipal Professor Fued Temer",
+          "E.M. Roberto Mario Santini",
+          "E.M. República de Portugal"
+        ]
+      },
+      {
+        "id": "pw-0131-13988012377",
+        "nome": "0131 William Ribeiro Pinto",
+        "telefone": "(13) 98801-2377",
+        "telefoneRaw": "5513988012377",
+        "telefoneValido": true,
+        "usuario": "escolar.13988012377p0131@cadastro-praiagrande.alotio.local",
+        "senha": "r2zpgj",
+        "prefixo": "0131",
+        "cidade": "Praia Grande (SP)",
+        "source": "SETRANSP Praia Grande",
+        "escolas": [
+          "E.M. Governador Franco Montoro",
+          "Escola Municipal Governador Orestes Quercia",
+          "E.M. Vila Mirim",
+          "E.M. Oswaldo Justo"
+        ]
+      },
+      {
+        "id": "pw-0132-13988310653",
+        "nome": "0132 Amilcar da Silva Borges",
+        "telefone": "(13) 98831-0653",
+        "telefoneRaw": "5513988310653",
+        "telefoneValido": true,
+        "usuario": "escolar.13988310653p0132@cadastro-praiagrande.alotio.local",
+        "senha": "ut8jtq",
+        "prefixo": "0132",
+        "cidade": "Praia Grande (SP)",
+        "source": "SETRANSP Praia Grande",
+        "escolas": [
+          "Escola Municipal Governador Orestes Quercia",
+          "E.M. Oswaldo Justo",
+          "E.M. Vila Mirim"
+        ]
+      },
+      {
+        "id": "pw-0133-13974241051",
+        "nome": "0133 Luciano Bueno da Assumpção",
+        "telefone": "(13) 97424-1051",
+        "telefoneRaw": "5513974241051",
+        "telefoneValido": true,
+        "usuario": "escolar.13974241051p0133@cadastro-praiagrande.alotio.local",
+        "senha": "mqkuxz",
+        "prefixo": "0133",
+        "cidade": "Praia Grande (SP)",
+        "source": "SETRANSP Praia Grande",
+        "escolas": [
+          "E.M. Drª Ana Maria Babette Bajer Fernandes",
+          "Alexo Colégio",
+          "Francisco Martins dos Santos",
+          "Julio Secco de Carvalho"
+        ]
+      },
+      {
+        "id": "pw-0136-13988686887",
+        "nome": "0136 Barbara Maria Rodrigues da Silva",
+        "telefone": "(13) 98868-6887",
+        "telefoneRaw": "5513988686887",
+        "telefoneValido": true,
+        "usuario": "escolar.13988686887p0136@cadastro-praiagrande.alotio.local",
+        "senha": "v497ut",
+        "prefixo": "0136",
+        "cidade": "Praia Grande (SP)",
+        "source": "SETRANSP Praia Grande",
+        "escolas": [
+          "E.M. Carlos Roberto Dias",
+          "E.M. Manoel Nascimento Júnior",
+          "E.M. Dorivaldo Francisco Loria",
+          "E.M. São Francisco de Assis"
+        ]
+      },
+      {
+        "id": "pw-0138-13997123241",
+        "nome": "0138 Luiz da Silva Carvalho",
+        "telefone": "(13) 99712-3241",
+        "telefoneRaw": "5513997123241",
+        "telefoneValido": true,
+        "usuario": "escolar.13997123241p0138@cadastro-praiagrande.alotio.local",
+        "senha": "hg85qn",
+        "prefixo": "0138",
+        "cidade": "Praia Grande (SP)",
+        "source": "SETRANSP Praia Grande",
+        "escolas": [
+          "Escola de Educação Infantil Projeto Educacional Poesis",
+          "Abrahao Jacob Lafer Doutor",
+          "Elza Oliveira de Carvalho Profa Escola Municipal"
+        ]
+      },
+      {
+        "id": "pw-0139-13991761519",
+        "nome": "0139 Pablo Tobal Martins",
+        "telefone": "(13) 99176-1519",
+        "telefoneRaw": "5513991761519",
+        "telefoneValido": true,
+        "usuario": "escolar.13991761519p0139@cadastro-praiagrande.alotio.local",
+        "senha": "zwdpkr",
+        "prefixo": "0139",
+        "cidade": "Praia Grande (SP)",
+        "source": "SETRANSP Praia Grande",
+        "escolas": [
+          "Colégio Objetivo",
+          "Escola Alpha",
+          "Escola Canto Vivo"
+        ]
+      },
+      {
+        "id": "pw-0141-13996702982",
+        "nome": "0141 Luzia Vergulino da Costa Alves",
+        "telefone": "(13) 99670-2982",
+        "telefoneRaw": "5513996702982",
+        "telefoneValido": true,
+        "usuario": "escolar.13996702982p0141@cadastro-praiagrande.alotio.local",
+        "senha": "v6xmdk",
+        "prefixo": "0141",
+        "cidade": "Praia Grande (SP)",
+        "source": "SETRANSP Praia Grande",
+        "escolas": [
+          "Maria Pacheco Nobre Professora",
+          "Adelaide Patrocinio dos Santos",
+          "E.M. Estina Campi Baptista",
+          "E.M. Carlos Roberto Dias",
+          "E.M. Fausto dos Santos Amaral"
+        ]
+      },
+      {
+        "id": "pw-0144-13981860379",
+        "nome": "0144 Marco Antonio Cardoso da Silva",
+        "telefone": "(13) 98186-0379",
+        "telefoneRaw": "5513981860379",
+        "telefoneValido": true,
+        "usuario": "escolar.13981860379p0144@cadastro-praiagrande.alotio.local",
+        "senha": "rj394k",
+        "prefixo": "0144",
+        "cidade": "Praia Grande (SP)",
+        "source": "SETRANSP Praia Grande",
+        "escolas": [
+          "E.M. Mahatma Gandhi",
+          "E.M. Drº Wilson Guedes",
+          "E.M. Estado do Amazonas",
+          "E.M. Maria dos Remédios Carmona Milan",
+          "Albert Einstein Escola Municipal"
+        ]
+      },
+      {
+        "id": "pw-0145-13991383879",
+        "nome": "0145 Bruno Galvanini de Freitas",
+        "telefone": "(13) 99138-3879",
+        "telefoneRaw": "5513991383879",
+        "telefoneValido": true,
+        "usuario": "escolar.13991383879p0145@cadastro-praiagrande.alotio.local",
+        "senha": "xfhr3s",
+        "prefixo": "0145",
+        "cidade": "Praia Grande (SP)",
+        "source": "SETRANSP Praia Grande",
+        "escolas": [
+          "E.M. Manoel Nascimento Júnior",
+          "E.M. Carlos Roberto Dias",
+          "E.M. São Francisco de Assis"
+        ]
+      },
+      {
+        "id": "pw-0149-13974040680",
+        "nome": "0149 Roberto da Silva Francisco",
+        "telefone": "(13) 97404-0680",
+        "telefoneRaw": "5513974040680",
+        "telefoneValido": true,
+        "usuario": "escolar.13974040680p0149@cadastro-praiagrande.alotio.local",
+        "senha": "cps384",
+        "prefixo": "0149",
+        "cidade": "Praia Grande (SP)",
+        "source": "SETRANSP Praia Grande",
+        "escolas": [
+          "E.M. Roberto Mario Santini",
+          "Escola de Educação Infantil Projeto Educacional Poesis",
+          "Eei e Ensino Fundamental I Cantinho do Saber"
+        ]
+      },
+      {
+        "id": "pw-0150-13997023464",
+        "nome": "0150 Izakel de Freitas",
+        "telefone": "(13) 99702-3464",
+        "telefoneRaw": "5513997023464",
+        "telefoneValido": true,
+        "usuario": "escolar.13997023464p0150@cadastro-praiagrande.alotio.local",
+        "senha": "et2t8x",
+        "prefixo": "0150",
+        "cidade": "Praia Grande (SP)",
+        "source": "SETRANSP Praia Grande",
+        "escolas": [
+          "Ruth Vilaca Correa Leite Cardoso Escola Municipal",
+          "E.M. Governador Franco Montoro",
+          "Escola Municipal José Padin Mouta"
+        ]
+      },
+      {
+        "id": "pw-0151-13974116417",
+        "nome": "0151 Flp Transporte Escolar e Locação LTDA",
+        "telefone": "(13) 97411-6417",
+        "telefoneRaw": "5513974116417",
+        "telefoneValido": true,
+        "usuario": "escolar.13974116417p0151@cadastro-praiagrande.alotio.local",
+        "senha": "gk53gn",
+        "prefixo": "0151",
+        "cidade": "Praia Grande (SP)",
+        "source": "SETRANSP Praia Grande",
+        "escolas": [
+          "Colégio Objetivo",
+          "E.M. Mário Possani",
+          "E.M. Vereador Felipe Avelino Moraes",
+          "Universo Colégio"
+        ]
+      },
+      {
+        "id": "pw-0152-11982833892",
+        "nome": "0152 José Nilson Machado da Silva",
+        "telefone": "(11) 98283-3892",
+        "telefoneRaw": "5511982833892",
+        "telefoneValido": true,
+        "usuario": "escolar.11982833892p0152@cadastro-praiagrande.alotio.local",
+        "senha": "zms2dy",
+        "prefixo": "0152",
+        "cidade": "Praia Grande (SP)",
+        "source": "SETRANSP Praia Grande",
+        "escolas": [
+          "Escola Municipal Professor Fued Temer",
+          "E.M. República de Portugal",
+          "Escola Municipal Roberto Francisco dos Santos"
+        ]
+      },
+      {
+        "id": "pw-0153-13982227254",
+        "nome": "0153 Cristiano de Moraes",
+        "telefone": "(13) 98222-7254",
+        "telefoneRaw": "5513982227254",
+        "telefoneValido": true,
+        "usuario": "escolar.13982227254p0153@cadastro-praiagrande.alotio.local",
+        "senha": "qsxknk",
+        "prefixo": "0153",
+        "cidade": "Praia Grande (SP)",
+        "source": "SETRANSP Praia Grande",
+        "escolas": [
+          "E.M. Oswaldo Justo",
+          "E.M. Vereador Valter Salerno",
+          "E.M. Lions Clube Ocian"
+        ]
+      },
+      {
+        "id": "pw-0154-13981354483",
+        "nome": "0154 M. Alves de Souza - ME",
+        "telefone": "(13) 98135-4483",
+        "telefoneRaw": "5513981354483",
+        "telefoneValido": true,
+        "usuario": "escolar.13981354483p0154@cadastro-praiagrande.alotio.local",
+        "senha": "8g27d3",
+        "prefixo": "0154",
+        "cidade": "Praia Grande (SP)",
+        "source": "SETRANSP Praia Grande",
+        "escolas": [
+          "E.M. Profª Maria de Lourdes Santos",
+          "E.M. Visconde de Mauá",
+          "Antonio Rubens Costa de Lara Escola Municipal",
+          "Ilha Brasil Colégio"
+        ]
+      },
+      {
+        "id": "pw-0155-13996852937",
+        "nome": "0155 Tcharles Wilker Batista Agostinho",
+        "telefone": "(13) 99685-2937",
+        "telefoneRaw": "5513996852937",
+        "telefoneValido": true,
+        "usuario": "escolar.13996852937p0155@cadastro-praiagrande.alotio.local",
+        "senha": "hdguxn",
+        "prefixo": "0155",
+        "cidade": "Praia Grande (SP)",
+        "source": "SETRANSP Praia Grande",
+        "escolas": [
+          "Maria Pacheco Nobre Professora",
+          "E.M. São Francisco de Assis",
+          "E.M. República de Portugal",
+          "Escola Municipal Professor Fued Temer",
+          "Cel Jto A Ee Reynaldo Kuntz Busch Doutor",
+          "E.M. Roberto Mario Santini"
+        ]
+      },
+      {
+        "id": "pw-0156-13974114577",
+        "nome": "0156 Fernando Jorge Ferreira Lopes",
+        "telefone": "(13) 97411-4577",
+        "telefoneRaw": "5513974114577",
+        "telefoneValido": true,
+        "usuario": "escolar.13974114577p0156@cadastro-praiagrande.alotio.local",
+        "senha": "dgpgea",
+        "prefixo": "0156",
+        "cidade": "Praia Grande (SP)",
+        "source": "SETRANSP Praia Grande",
+        "escolas": [
+          "Colégio Fortec",
+          "Escola Educar",
+          "Recanto Educacional Colégio"
+        ]
+      },
+      {
+        "id": "pw-0157-13991298161",
+        "nome": "0157 João Pedro Roschel dos Santos",
+        "telefone": "(13) 99129-8161",
+        "telefoneRaw": "5513991298161",
+        "telefoneValido": true,
+        "usuario": "escolar.13991298161p0157@cadastro-praiagrande.alotio.local",
+        "senha": "h4s9zq",
+        "prefixo": "0157",
+        "cidade": "Praia Grande (SP)",
+        "source": "SETRANSP Praia Grande",
+        "escolas": [
+          "E.M. Roberto Mario Santini",
+          "Escola Municipal Professor Fued Temer",
+          "E.M. São Francisco de Assis",
+          "Colégio Trivium"
+        ]
+      },
+      {
+        "id": "pw-0158-13997090471",
+        "nome": "0158 Ana Maria Rodrigues da Silva",
+        "telefone": "(13) 99709-0471",
+        "telefoneRaw": "5513997090471",
+        "telefoneValido": true,
+        "usuario": "escolar.13997090471p0158@cadastro-praiagrande.alotio.local",
+        "senha": "ptcy9r",
+        "prefixo": "0158",
+        "cidade": "Praia Grande (SP)",
+        "source": "SETRANSP Praia Grande",
+        "escolas": [
+          "E.M. Arquiteto Oscar Niemeyer",
+          "Francisco Martins dos Santos",
+          "Escola Pingo de Gente"
+        ]
+      },
+      {
+        "id": "pw-0159-13991046157",
+        "nome": "0159 Michel Ferreira Calado",
+        "telefone": "(13) 99104-6157",
+        "telefoneRaw": "5513991046157",
+        "telefoneValido": true,
+        "usuario": "escolar.13991046157p0159@cadastro-praiagrande.alotio.local",
+        "senha": "ndnc64",
+        "prefixo": "0159",
+        "cidade": "Praia Grande (SP)",
+        "source": "SETRANSP Praia Grande",
+        "escolas": [
+          "E.M. Drº Wilson Guedes",
+          "E.M. Albert Einstein",
+          "Futura Colégio"
+        ]
+      },
+      {
+        "id": "pw-0160-13985222031",
+        "nome": "0160 Vanessa Calado",
+        "telefone": "(13) 98522-2031",
+        "telefoneRaw": "5513985222031",
+        "telefoneValido": true,
+        "usuario": "escolar.13985222031p0160@cadastro-praiagrande.alotio.local",
+        "senha": "d74dac",
+        "prefixo": "0160",
+        "cidade": "Praia Grande (SP)",
+        "source": "SETRANSP Praia Grande",
+        "escolas": [
+          "E.M. Estina Campi Baptista",
+          "Adelaide Patrocinio dos Santos",
+          "Colégio Adventista",
+          "Colégio Aeon",
+          "E.M. Carlos Roberto Dias",
+          "E.M. São Francisco de Assis",
+          "E.M. Fausto dos Santos Amaral"
+        ]
+      },
+      {
+        "id": "pw-0161-13934811612",
+        "nome": "0161 Ailton Santos Araújo",
+        "telefone": "(13) 93481-1612",
+        "telefoneRaw": "5513934811612",
+        "telefoneValido": true,
+        "usuario": "escolar.13934811612p0161@cadastro-praiagrande.alotio.local",
+        "senha": "remks8",
+        "prefixo": "0161",
+        "cidade": "Praia Grande (SP)",
+        "source": "SETRANSP Praia Grande",
+        "escolas": [
+          "E.M. Idílio Perticaratti",
+          "E.M. Newton de Almeida Castro",
+          "E.M. Profª Maria Nilza da Silva Romão",
+          "E.M. Antônio Peres Ferreira",
+          "Escola de Educação Infantil Projeto Educacional Poesis",
+          "E.M. Thereza Magri",
+          "E.M. Idalina da Conceição Pereira",
+          "Eei e Ensino Fundamental I Cantinho do Saber"
+        ]
+      },
+      {
+        "id": "pw-0163-11960703623",
+        "nome": "0163 José Sebastião Leandro dos Santos",
+        "telefone": "(11) 96070-3623",
+        "telefoneRaw": "5511960703623",
+        "telefoneValido": true,
+        "usuario": "escolar.11960703623p0163@cadastro-praiagrande.alotio.local",
+        "senha": "8cvqky",
+        "prefixo": "0163",
+        "cidade": "Praia Grande (SP)",
+        "source": "SETRANSP Praia Grande",
+        "escolas": [
+          "Colégio Adventista",
+          "Colégio Trivium",
+          "Universo Colégio",
+          "Vila Verde Centro Educacional"
+        ]
+      },
+      {
+        "id": "pw-0165-13996879162",
+        "nome": "0165 Sandra Batista Felix",
+        "telefone": "(13) 99687-9162",
+        "telefoneRaw": "5513996879162",
+        "telefoneValido": true,
+        "usuario": "escolar.13996879162p0165@cadastro-praiagrande.alotio.local",
+        "senha": "bfy7mb",
+        "prefixo": "0165",
+        "cidade": "Praia Grande (SP)",
+        "source": "SETRANSP Praia Grande",
+        "escolas": [
+          "Escola de Educação Infantil Projeto Educacional Poesis",
+          "Escola Municipal Professor Fued Temer",
+          "E.M. Roberto Mario Santini",
+          "E.M. República de Portugal",
+          "Colégio Jean Piaget Unidade III",
+          "Abrahao Jacob Lafer Doutor",
+          "Escola Educar",
+          "Etec de Praia Grande"
+        ]
+      },
+      {
+        "id": "pw-0166-13996684251",
+        "nome": "0166 Ygor Henrique de Oliveira Reis",
+        "telefone": "(13) 99668-4251",
+        "telefoneRaw": "5513996684251",
+        "telefoneValido": true,
+        "usuario": "yygor8204@gmail.com",
+        "senha": "(ja_cadastrado)",
+        "prefixo": "0166",
+        "cidade": "Praia Grande (SP)",
+        "source": "SETRANSP Praia Grande",
+        "escolas": [
+          "Colégio Cultura",
+          "19 de Janeiro Escola Municipal",
+          "Fortec Escola Tecnica Unidade II",
+          "Franca Colégio"
+        ]
+      },
+      {
+        "id": "pw-0167-13996729593",
+        "nome": "0167 Luciana Ferreira de Moraes e Silva",
+        "telefone": "(13) 99672-9593",
+        "telefoneRaw": "5513996729593",
+        "telefoneValido": true,
+        "usuario": "escolar.13996729593p0167@cadastro-praiagrande.alotio.local",
+        "senha": "nvh7fc",
+        "prefixo": "0167",
+        "cidade": "Praia Grande (SP)",
+        "source": "SETRANSP Praia Grande",
+        "escolas": [
+          "E.M. Profª. Isabel Figueroa Bréfere",
+          "Layde Rodrigues Reis Loria Escola Municipal",
+          "E.M. João Gonçalves"
+        ]
+      },
+      {
+        "id": "pw-0168-13996037276",
+        "nome": "0168 Renato Ferreira Vanini",
+        "telefone": "(13) 99603-7276",
+        "telefoneRaw": "5513996037276",
+        "telefoneValido": true,
+        "usuario": "escolar.13996037276p0168@cadastro-praiagrande.alotio.local",
+        "senha": "65pcca",
+        "prefixo": "0168",
+        "cidade": "Praia Grande (SP)",
+        "source": "SETRANSP Praia Grande",
+        "escolas": [
+          "E.M. Profª Esmeralda dos Santos Novaes",
+          "Roberto Shoji Doutor Escola Municipal",
+          "E.M. Juliana Arias Rodrigues de Oliveira",
+          "E.M. Sebastião Tavares de Oliveira"
+        ]
+      },
+      {
+        "id": "pw-0170-13991410488",
+        "nome": "0170 Helen Karina da Cruz Oliveira",
+        "telefone": "(13) 99141-0488",
+        "telefoneRaw": "5513991410488",
+        "telefoneValido": true,
+        "usuario": "escolar.13991410488p0170@cadastro-praiagrande.alotio.local",
+        "senha": "cz4d5h",
+        "prefixo": "0170",
+        "cidade": "Praia Grande (SP)",
+        "source": "SETRANSP Praia Grande",
+        "escolas": [
+          "E.M. Visconde de Mauá",
+          "E.M. Gregório França de Siqueira",
+          "E.M. Roberto Francisco dos Santos",
+          "E.M. Profª Maria Clotilde Lopes Comitre Rigo",
+          "Antonio Nunes Lopes da Silva Professor",
+          "E.M. Profª Maria de Lourdes Santos",
+          "E.M. 19 de Janeiro",
+          "Antonio Rubens Costa de Lara Escola Municipal"
+        ]
+      },
+      {
+        "id": "pw-0172-13996375068",
+        "nome": "0172 João Vagner Vital de Almeida",
+        "telefone": "(13) 99637-5068",
+        "telefoneRaw": "5513996375068",
+        "telefoneValido": true,
+        "usuario": "escolar.13996375068p0172@cadastro-praiagrande.alotio.local",
+        "senha": "67k4gd",
+        "prefixo": "0172",
+        "cidade": "Praia Grande (SP)",
+        "source": "SETRANSP Praia Grande",
+        "escolas": [
+          "Arca de Noe Escola de Educação Infantil e Ensino Fundamental",
+          "Geracao 2000 Colégio",
+          "Gregorio Franca de Siqueira Em"
+        ]
+      },
+      {
+        "id": "pw-0173-11980841210",
+        "nome": "0173 Adriana Rodrigues de Faria",
+        "telefone": "(11) 98084-1210",
+        "telefoneRaw": "5511980841210",
+        "telefoneValido": true,
+        "usuario": "escolar.11980841210p0173@cadastro-praiagrande.alotio.local",
+        "senha": "jqw7d9",
+        "prefixo": "0173",
+        "cidade": "Praia Grande (SP)",
+        "source": "SETRANSP Praia Grande",
+        "escolas": [
+          "E.M. Oswaldo Justo",
+          "E.M. Vila Mirim",
+          "Gregorio Franca de Siqueira Em"
+        ]
+      },
+      {
+        "id": "pw-0174-13992008998",
+        "nome": "0174 Renata Karpfenstein Guida",
+        "telefone": "(13) 99200-8998",
+        "telefoneRaw": "5513992008998",
+        "telefoneValido": true,
+        "usuario": "escolar.13992008998p0174@cadastro-praiagrande.alotio.local",
+        "senha": "2vpjew",
+        "prefixo": "0174",
+        "cidade": "Praia Grande (SP)",
+        "source": "SETRANSP Praia Grande",
+        "escolas": [
+          "Guerreiro Colégio",
+          "Hilda de Carvalho Guedes Escola Municipal",
+          "Idalina da Conceicao Pereira Escola Municipal"
+        ]
+      },
+      {
+        "id": "pw-0175-13996285373",
+        "nome": "0175 Carlos Adriano Santos Paiva",
+        "telefone": "(13) 99628-5373",
+        "telefoneRaw": "5513996285373",
+        "telefoneValido": true,
+        "usuario": "escolar.13996285373p0175@cadastro-praiagrande.alotio.local",
+        "senha": "2d7tvy",
+        "prefixo": "0175",
+        "cidade": "Praia Grande (SP)",
+        "source": "SETRANSP Praia Grande",
+        "escolas": [
+          "Ruth Vilaca Correa Leite Cardoso Escola Municipal",
+          "E.M. Governador Franco Montoro",
+          "E.E. Balneário das Palmeiras",
+          "Etec de Praia Grande"
+        ]
+      },
+      {
+        "id": "pw-0176-13988436607",
+        "nome": "0176 Tio Jeremias LTDA",
+        "telefone": "(13) 98843-6607",
+        "telefoneRaw": "5513988436607",
+        "telefoneValido": true,
+        "usuario": "escolar.13988436607p0176@cadastro-praiagrande.alotio.local",
+        "senha": "e35x47",
+        "prefixo": "0176",
+        "cidade": "Praia Grande (SP)",
+        "source": "SETRANSP Praia Grande",
+        "escolas": [
+          "Escola de Educação Infantil Projeto Educacional Poesis",
+          "E.M. Profª Maria Nilza da Silva Romão",
+          "E.M. Newton de Almeida Castro",
+          "E.M. Thereza Magri",
+          "E.M. Idílio Perticaratti"
+        ]
+      },
+      {
+        "id": "pw-0177-13974185299",
+        "nome": "0177 Walmir Augusto",
+        "telefone": "(13) 97418-5299",
+        "telefoneRaw": "5513974185299",
+        "telefoneValido": true,
+        "usuario": "escolar.13974185299p0177@cadastro-praiagrande.alotio.local",
+        "senha": "ef5x34",
+        "prefixo": "0177",
+        "cidade": "Praia Grande (SP)",
+        "source": "SETRANSP Praia Grande",
+        "escolas": [
+          "Escola de Educação Infantil Projeto Educacional Poesis",
+          "Idilio Perticaratti Escola Municipal",
+          "Ilha Brasil Colégio"
+        ]
+      },
+      {
+        "id": "pw-0178-13988613509",
+        "nome": "0178 Alex Sandro Ferreira de Lima",
+        "telefone": "(13) 98861-3509",
+        "telefoneRaw": "5513988613509",
+        "telefoneValido": true,
+        "usuario": "escolar.13988613509p0178@cadastro-praiagrande.alotio.local",
+        "senha": "aew53s",
+        "prefixo": "0178",
+        "cidade": "Praia Grande (SP)",
+        "source": "SETRANSP Praia Grande",
+        "escolas": [
+          "Colégio Adventista",
+          "Oliveiras Colégio",
+          "Ilha Brasil Colégio"
+        ]
+      },
+      {
+        "id": "pw-0179-13988696975",
+        "nome": "0179 Andrea de Jesus Oliveira",
+        "telefone": "(13) 98869-6975",
+        "telefoneRaw": "5513988696975",
+        "telefoneValido": true,
+        "usuario": "escolar.13988696975p0179@cadastro-praiagrande.alotio.local",
+        "senha": "bwsq3y",
+        "prefixo": "0179",
+        "cidade": "Praia Grande (SP)",
+        "source": "SETRANSP Praia Grande",
+        "escolas": [
+          "Eei e Ensino Fundamental I Cantinho do Saber",
+          "Escola de Educação Infantil Projeto Educacional Poesis",
+          "E.M. Thereza Magri",
+          "E.M. Idalina da Conceição Pereira",
+          "E.M. Idílio Perticaratti",
+          "E.M. Antônio Peres Ferreira",
+          "Magali Alonso Professora",
+          "E.M. Profª Maria Nilza da Silva Romão",
+          "Colégio Monte Serrat"
+        ]
+      },
+      {
+        "id": "pw-0180-13988770775",
+        "nome": "0180 João Fernando do Carmo",
+        "telefone": "(13) 98877-0775",
+        "telefoneRaw": "5513988770775",
+        "telefoneValido": true,
+        "usuario": "escolar.13988770775p0180@cadastro-praiagrande.alotio.local",
+        "senha": "uknvn4",
+        "prefixo": "0180",
+        "cidade": "Praia Grande (SP)",
+        "source": "SETRANSP Praia Grande",
+        "escolas": [
+          "E.M. Sebastião Tavares de Oliveira",
+          "E.M. Paulo Shigueo Yamauti",
+          "E.M. Profª Esmeralda dos Santos Novaes",
+          "Roberto Shoji Doutor Escola Municipal",
+          "E.M. Pablo Trevisan Perutich"
+        ]
+      },
+      {
+        "id": "pw-0181-11940075561",
+        "nome": "0181 Amanda Maria Eneas",
+        "telefone": "(11) 94007-5561",
+        "telefoneRaw": "5511940075561",
+        "telefoneValido": true,
+        "usuario": "escolar.11940075561p0181@cadastro-praiagrande.alotio.local",
+        "senha": "ybz2aj",
+        "prefixo": "0181",
+        "cidade": "Praia Grande (SP)",
+        "source": "SETRANSP Praia Grande",
+        "escolas": [
+          "João Batista Resine Alves Escola Municipal",
+          "Joaquim Augusto Ferreira Mourao Escola Municipal",
+          "José Crego Painceira Escola Municipal"
+        ]
+      },
+      {
+        "id": "pw-0182-11993496412",
+        "nome": "0182 Fabio Pereira Guedes",
+        "telefone": "(11) 99349-6412",
+        "telefoneRaw": "5511993496412",
+        "telefoneValido": true,
+        "usuario": "escolar.11993496412p0182@cadastro-praiagrande.alotio.local",
+        "senha": "buxgtr",
+        "prefixo": "0182",
+        "cidade": "Praia Grande (SP)",
+        "source": "SETRANSP Praia Grande",
+        "escolas": [
+          "E.M. Gregório França de Siqueira",
+          "João Batista Resine Alves Escola Municipal",
+          "E.M. Profª Maria de Lourdes Santos",
+          "E.M. Estado do Amazonas",
+          "Antonio Rubens Costa de Lara Escola Municipal"
+        ]
+      },
+      {
+        "id": "pw-0183-13982319898",
+        "nome": "0183 Marcello Noran Nogueira Miranda",
+        "telefone": "(13) 98231-9898",
+        "telefoneRaw": "5513982319898",
+        "telefoneValido": true,
+        "usuario": "escolar.13982319898p0183@cadastro-praiagrande.alotio.local",
+        "senha": "2vaeat",
+        "prefixo": "0183",
+        "cidade": "Praia Grande (SP)",
+        "source": "SETRANSP Praia Grande",
+        "escolas": [
+          "Colégio Fortec",
+          "Recanto Educacional Colégio",
+          "E.M. Carlos Roberto Dias",
+          "E.M. São Francisco de Assis",
+          "E.M. Manoel Nascimento Júnior",
+          "Maria Pacheco Nobre Professora"
+        ]
+      },
+      {
+        "id": "pw-0184-13998034243",
+        "nome": "0184 Leticia de Souza Pinheiro",
+        "telefone": "(13) 99803-4243",
+        "telefoneRaw": "5513998034243",
+        "telefoneValido": true,
+        "usuario": "escolar.13998034243p0184@cadastro-praiagrande.alotio.local",
+        "senha": "wfyzx2",
+        "prefixo": "0184",
+        "cidade": "Praia Grande (SP)",
+        "source": "SETRANSP Praia Grande",
+        "escolas": [
+          "E.M. São Francisco de Assis",
+          "E.M. Carlos Roberto Dias",
+          "E.M. Manoel Nascimento Júnior"
+        ]
+      },
+      {
+        "id": "pw-0185-13988176620",
+        "nome": "0185 Carlos Alberto Carneiro",
+        "telefone": "(13) 98817-6620",
+        "telefoneRaw": "5513988176620",
+        "telefoneValido": true,
+        "usuario": "escolar.13988176620p0185@cadastro-praiagrande.alotio.local",
+        "senha": "btkquh",
+        "prefixo": "0185",
+        "cidade": "Praia Grande (SP)",
+        "source": "SETRANSP Praia Grande",
+        "escolas": [
+          "Escola de Educação Infantil Projeto Educacional Poesis",
+          "E.M. José Júlio Martins Baptista",
+          "E.M. José Ribeiro dos Santos Cunha",
+          "E.M. Idílio Perticaratti",
+          "E.M. Dorivaldo Francisco Loria",
+          "E.M. Ronaldo Sérgio Alves Lameira Ramos"
+        ]
+      },
+      {
+        "id": "pw-0186-13981497059",
+        "nome": "0186 Vanderlei Aparecido Virgulino",
+        "telefone": "(13) 98149-7059",
+        "telefoneRaw": "5513981497059",
+        "telefoneValido": true,
+        "usuario": "escolar.13981497059p0186@cadastro-praiagrande.alotio.local",
+        "senha": "3r73r9",
+        "prefixo": "0186",
+        "cidade": "Praia Grande (SP)",
+        "source": "SETRANSP Praia Grande",
+        "escolas": [
+          "E.M. Sebastião Tavares de Oliveira",
+          "E.M. Profª Esmeralda dos Santos Novaes",
+          "Roberto Shoji Doutor Escola Municipal"
+        ]
+      },
+      {
+        "id": "pw-0187-11967869064",
+        "nome": "0187 Francisco Dias Maciel",
+        "telefone": "(11) 96786-9064",
+        "telefoneRaw": "5511967869064",
+        "telefoneValido": true,
+        "usuario": "escolar.11967869064p0187@cadastro-praiagrande.alotio.local",
+        "senha": "dt2t9g",
+        "prefixo": "0187",
+        "cidade": "Praia Grande (SP)",
+        "source": "SETRANSP Praia Grande",
+        "escolas": [
+          "Julio Pardo Couto Professor",
+          "Julio Secco de Carvalho",
+          "Laudelino Fernandes dos Santos Professor"
+        ]
+      },
+      {
+        "id": "pw-0188-13991455593",
+        "nome": "0188 Edgard de Campos Neto",
+        "telefone": "(13) 99145-5593",
+        "telefoneRaw": "5513991455593",
+        "telefoneValido": true,
+        "usuario": "escolar.13991455593p0188@cadastro-praiagrande.alotio.local",
+        "senha": "z98dyd",
+        "prefixo": "0188",
+        "cidade": "Praia Grande (SP)",
+        "source": "SETRANSP Praia Grande",
+        "escolas": [
+          "Julio Secco de Carvalho",
+          "Laudelino Fernandes dos Santos Professor",
+          "Layde Rodrigues Reis Loria Escola Municipal"
+        ]
+      },
+      {
+        "id": "pw-0189-11962712609",
+        "nome": "0189 Neife Anderson da Silva",
+        "telefone": "(11) 96271-2609",
+        "telefoneRaw": "5511962712609",
+        "telefoneValido": true,
+        "usuario": "escolar.11962712609p0189@cadastro-praiagrande.alotio.local",
+        "senha": "wpfgr5",
+        "prefixo": "0189",
+        "cidade": "Praia Grande (SP)",
+        "source": "SETRANSP Praia Grande",
+        "escolas": [
+          "Laudelino Fernandes dos Santos Professor",
+          "Layde Rodrigues Reis Loria Escola Municipal",
+          "Leopoldo Estasio Vanderlinde Escola Municipal"
+        ]
+      },
+      {
+        "id": "pw-0190-11944207071",
+        "nome": "0190 Marcos Aurelio da Conceição",
+        "telefone": "(11) 94420-7071",
+        "telefoneRaw": "5511944207071",
+        "telefoneValido": true,
+        "usuario": "escolar.11944207071p0190@cadastro-praiagrande.alotio.local",
+        "senha": "w3padz",
+        "prefixo": "0190",
+        "cidade": "Praia Grande (SP)",
+        "source": "SETRANSP Praia Grande",
+        "escolas": [
+          "Layde Rodrigues Reis Loria Escola Municipal",
+          "Leopoldo Estasio Vanderlinde Escola Municipal",
+          "Lions Club Ocian Escola Municipal"
+        ]
+      },
+      {
+        "id": "pw-0191-13981601434",
+        "nome": "0191 Cintia de Fátima Barbosa",
+        "telefone": "(13) 98160-1434",
+        "telefoneRaw": "5513981601434",
+        "telefoneValido": true,
+        "usuario": "escolar.13981601434p0191@cadastro-praiagrande.alotio.local",
+        "senha": "furkb9",
+        "prefixo": "0191",
+        "cidade": "Praia Grande (SP)",
+        "source": "SETRANSP Praia Grande",
+        "escolas": [
+          "Leopoldo Estasio Vanderlinde Escola Municipal",
+          "Lions Club Ocian Escola Municipal",
+          "Lions Clube Centro"
+        ]
+      },
+      {
+        "id": "pw-0192-13991220954",
+        "nome": "0192 Simone dos Santos Nascimento",
+        "telefone": "(13) 99122-0954",
+        "telefoneRaw": "5513991220954",
+        "telefoneValido": true,
+        "usuario": "escolar.13991220954p0192@cadastro-praiagrande.alotio.local",
+        "senha": "wshfcf",
+        "prefixo": "0192",
+        "cidade": "Praia Grande (SP)",
+        "source": "SETRANSP Praia Grande",
+        "escolas": [
+          "Lions Club Ocian Escola Municipal",
+          "Lions Clube Centro",
+          "Luis Arruda Paes Maestro Escola Municipal"
+        ]
+      },
+      {
+        "id": "pw-0193-13988251388",
+        "nome": "0193 Transporte Escolar Tio Junior LTDA",
+        "telefone": "(13) 98825-1388",
+        "telefoneRaw": "5513988251388",
+        "telefoneValido": true,
+        "usuario": "escolar.13988251388p0193@cadastro-praiagrande.alotio.local",
+        "senha": "fc9wke",
+        "prefixo": "0193",
+        "cidade": "Praia Grande (SP)",
+        "source": "SETRANSP Praia Grande",
+        "escolas": [
+          "Lions Clube Centro",
+          "Luis Arruda Paes Maestro Escola Municipal",
+          "Luzia Borba Ranciaro Escola Municipal"
         ]
       }
     ]
