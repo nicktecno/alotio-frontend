@@ -9,7 +9,7 @@ import {
 import { api } from '@/lib/api';
 import toast from 'react-hot-toast';
 
-type ContactStatus = 'new' | 'reprocess' | 'sent' | 'skipped';
+type ContactStatus = 'new' | 'reprocess' | 'sent' | 'skipped' | 'excluded';
 
 interface ContactProgress {
   [contactId: string]: {
@@ -17,6 +17,7 @@ interface ContactProgress {
     sentAt?: string;
     previousSentAt?: string;
     reprocessAt?: string;
+    excludedAt?: string;
     channel?: 'sms' | 'whatsapp' | 'manual';
   };
 }
@@ -122,7 +123,10 @@ export default function AdminDisparadorPage() {
 
   // Search and filter for table tab
   const [searchQuery, setSearchQuery] = useState('');
-  const [statusFilter, setStatusFilter] = useState<'all' | 'new' | 'reprocess' | 'sent' | 'skipped'>('all');
+  const [statusFilter, setStatusFilter] = useState<
+    'all' | 'new' | 'reprocess' | 'sent' | 'skipped' | 'excluded'
+  >('all');
+  const [selectedContactIds, setSelectedContactIds] = useState<Set<string>>(new Set());
 
   // Import raw text state
   const [importText, setImportText] = useState('');
@@ -273,6 +277,101 @@ export default function AdminDisparadorPage() {
     toast.success('Contato colocado de volta na fila de Reprocessamento.');
   }, []);
 
+  /** Exclusão individual de contato */
+  const handleExcludeContact = useCallback((contactId: string, confirmMessage?: string) => {
+    if (confirmMessage && !window.confirm(confirmMessage)) return;
+    setProgress((prev) => {
+      const cur = prev[contactId];
+      return {
+        ...prev,
+        [contactId]: {
+          ...cur,
+          status: 'excluded',
+          excludedAt: new Date().toISOString(),
+        },
+      };
+    });
+    setSelectedContactIds((prev) => {
+      if (!prev.has(contactId)) return prev;
+      const next = new Set(prev);
+      next.delete(contactId);
+      return next;
+    });
+    toast.success('Contato excluído dos processados.');
+  }, []);
+
+  /** Exclusão em lote de contatos selecionados */
+  const handleExcludeBatch = useCallback((contactIds: string[], label = 'contatos') => {
+    if (contactIds.length === 0) return;
+    if (!window.confirm(`Deseja realmente excluir os ${contactIds.length} ${label} selecionados?`)) return;
+
+    const now = new Date().toISOString();
+    setProgress((prev) => {
+      const next = { ...prev };
+      for (const id of contactIds) {
+        const cur = next[id];
+        next[id] = {
+          ...cur,
+          status: 'excluded',
+          excludedAt: now,
+        };
+      }
+      return next;
+    });
+    setSelectedContactIds(new Set());
+    toast.success(`${contactIds.length} ${label} excluídos com sucesso.`);
+  }, []);
+
+  /** Reprocessar em lote os contatos selecionados */
+  const handleReprocessBatch = useCallback((contactIds: string[]) => {
+    if (contactIds.length === 0) return;
+    const now = new Date().toISOString();
+    setProgress((prev) => {
+      const next = { ...prev };
+      for (const id of contactIds) {
+        const cur = next[id];
+        next[id] = {
+          ...cur,
+          status: 'reprocess',
+          previousSentAt: cur?.sentAt || cur?.previousSentAt || now,
+          reprocessAt: now,
+        };
+      }
+      return next;
+    });
+    setSelectedContactIds(new Set());
+    toast.success(`${contactIds.length} contatos movidos para a fila de Reprocessamento!`);
+  }, []);
+
+  /** Toggle de seleção individual de contato */
+  const toggleContactSelection = useCallback((id: string) => {
+    setSelectedContactIds((prev) => {
+      const next = new Set(prev);
+      if (next.has(id)) {
+        next.delete(id);
+      } else {
+        next.add(id);
+      }
+      return next;
+    });
+  }, []);
+
+  /** Restaurar contato excluído de volta para Reprocessamento */
+  const handleRestoreExcluded = useCallback((contactId: string) => {
+    setProgress((prev) => {
+      const cur = prev[contactId];
+      return {
+        ...prev,
+        [contactId]: {
+          ...cur,
+          status: 'reprocess',
+          reprocessAt: new Date().toISOString(),
+        },
+      };
+    });
+    toast.success('Contato restaurado para a fila de Reprocessamento.');
+  }, []);
+
   /** Fila de Novos: apenas contatos que nunca foram processados nem enviados. */
   const newContacts = useMemo(() => {
     return currentList.contacts.filter((c) => {
@@ -295,6 +394,16 @@ export default function AdminDisparadorPage() {
   const skippedContacts = useMemo(() => {
     return currentList.contacts.filter((c) => progress[c.id]?.status === 'skipped');
   }, [currentList.contacts, progress]);
+
+  /** Excluídos dos processados. */
+  const excludedContacts = useMemo(() => {
+    return currentList.contacts.filter((c) => progress[c.id]?.status === 'excluded');
+  }, [currentList.contacts, progress]);
+
+  // Limpar seleção ao mudar de lista ou de aba
+  useEffect(() => {
+    setSelectedContactIds(new Set());
+  }, [selectedListId, activeTab, statusFilter]);
 
   // Clamp indexes
   useEffect(() => {
@@ -320,14 +429,17 @@ export default function AdminDisparadorPage() {
     const reprocessCount = reprocessContacts.length;
     const sent = sentContacts.length;
     const skipped = skippedContacts.length;
-    const percent = total > 0 ? Math.round((sent / total) * 100) : 0;
-    return { total, newCount, reprocessCount, sent, skipped, percent };
+    const excludedCount = excludedContacts.length;
+    const activeTotal = Math.max(0, total - excludedCount);
+    const percent = activeTotal > 0 ? Math.round((sent / activeTotal) * 100) : 0;
+    return { total, activeTotal, newCount, reprocessCount, sent, skipped, excludedCount, percent };
   }, [
     currentList.contacts.length,
     newContacts.length,
     reprocessContacts.length,
     sentContacts.length,
     skippedContacts.length,
+    excludedContacts.length,
   ]);
 
   const sentHistory = useMemo(() => {
@@ -349,6 +461,24 @@ export default function AdminDisparadorPage() {
         loginForContact(contact).includes(q),
     );
   }, [sentHistory, searchQuery]);
+
+  // Toggle de seleção em massa no histórico
+  const isAllHistorySelected = useMemo(() => {
+    return (
+      filteredSentHistory.length > 0 &&
+      filteredSentHistory.every(({ contact }) => selectedContactIds.has(contact.id))
+    );
+  }, [filteredSentHistory, selectedContactIds]);
+
+  const toggleSelectAllHistory = useCallback(() => {
+    if (isAllHistorySelected) {
+      setSelectedContactIds(new Set());
+    } else {
+      const next = new Set(selectedContactIds);
+      for (const { contact } of filteredSentHistory) next.add(contact.id);
+      setSelectedContactIds(next);
+    }
+  }, [isAllHistorySelected, selectedContactIds, filteredSentHistory]);
 
   // Dynamic queue selection based on activeTab
   const isReprocessQueue = activeTab === 'queue_reprocess';
@@ -477,6 +607,101 @@ export default function AdminDisparadorPage() {
     toast.success(`${sentContacts.length} contatos movidos para a fila de Reprocessamento!`);
   };
 
+  // Action: Excluir todos os enviados
+  const handleExcludeAllSent = () => {
+    if (sentContacts.length === 0) {
+      toast.error('Nenhum contato no histórico de enviados.');
+      return;
+    }
+    const count = sentContacts.length;
+    if (!window.confirm(`Deseja realmente excluir TODOS os ${count} contatos do histórico de enviados?`)) {
+      return;
+    }
+    const ids = sentContacts.map((c) => c.id);
+    const now = new Date().toISOString();
+    setProgress((prev) => {
+      const next = { ...prev };
+      for (const id of ids) {
+        const cur = next[id];
+        next[id] = {
+          ...cur,
+          status: 'excluded',
+          excludedAt: now,
+        };
+      }
+      return next;
+    });
+    setSelectedContactIds(new Set());
+    toast.success(`${count} contatos do histórico de enviados foram excluídos!`);
+  };
+
+  // Action: Excluir todos da fila de reprocessamento
+  const handleExcludeAllReprocess = () => {
+    if (reprocessContacts.length === 0) {
+      toast.error('Não há contatos na fila de Reprocessamento.');
+      return;
+    }
+    const count = reprocessContacts.length;
+    if (!window.confirm(`Deseja realmente excluir TODOS os ${count} contatos da fila de Reprocessamento?`)) {
+      return;
+    }
+    const ids = reprocessContacts.map((c) => c.id);
+    const now = new Date().toISOString();
+    setProgress((prev) => {
+      const next = { ...prev };
+      for (const id of ids) {
+        const cur = next[id];
+        next[id] = {
+          ...cur,
+          status: 'excluded',
+          excludedAt: now,
+        };
+      }
+      return next;
+    });
+    setReprocessIndex(0);
+    setSelectedContactIds(new Set());
+    toast.success(`${count} contatos da fila de Reprocessamento foram excluídos!`);
+  };
+
+  // Action: Excluir todos os processados (reprocessamento e enviados)
+  const handleExcludeAllProcessed = () => {
+    const processedIds: string[] = [];
+    for (const c of currentList.contacts) {
+      const st = progress[c.id]?.status;
+      if (st === 'reprocess' || st === 'sent') {
+        processedIds.push(c.id);
+      }
+    }
+    if (processedIds.length === 0) {
+      toast.error('Nenhum contato processado (reprocessamento ou enviado) encontrado.');
+      return;
+    }
+    if (
+      !window.confirm(
+        `Deseja realmente excluir TODOS os ${processedIds.length} contatos processados (reprocessamento e enviados) desta lista?`,
+      )
+    ) {
+      return;
+    }
+    const now = new Date().toISOString();
+    setProgress((prev) => {
+      const next = { ...prev };
+      for (const id of processedIds) {
+        const cur = next[id];
+        next[id] = {
+          ...cur,
+          status: 'excluded',
+          excludedAt: now,
+        };
+      }
+      return next;
+    });
+    setReprocessIndex(0);
+    setSelectedContactIds(new Set());
+    toast.success(`${processedIds.length} contatos processados foram excluídos com sucesso!`);
+  };
+
   // Action: Reset progress for this list
   const handleResetProgress = async () => {
     if (!window.confirm(`Deseja mover todos os contatos processados da lista "${currentList.title}" para Reprocessamento?`)) {
@@ -569,7 +794,12 @@ export default function AdminDisparadorPage() {
       const p = progress[c.id];
       const contactStatus: ContactStatus = p ? p.status : 'new';
 
-      if (statusFilter !== 'all' && contactStatus !== statusFilter) return false;
+      if (statusFilter === 'all') {
+        if (contactStatus === 'excluded') return false;
+      } else if (contactStatus !== statusFilter) {
+        return false;
+      }
+
       if (searchQuery) {
         const q = searchQuery.toLowerCase();
         return (
@@ -582,6 +812,24 @@ export default function AdminDisparadorPage() {
       return true;
     });
   }, [currentList.contacts, progress, statusFilter, searchQuery]);
+
+  // Toggle de seleção em massa na tabela geral
+  const isAllTableSelected = useMemo(() => {
+    return (
+      filteredContacts.length > 0 &&
+      filteredContacts.every((c) => selectedContactIds.has(c.id))
+    );
+  }, [filteredContacts, selectedContactIds]);
+
+  const toggleSelectAllTable = useCallback(() => {
+    if (isAllTableSelected) {
+      setSelectedContactIds(new Set());
+    } else {
+      const next = new Set(selectedContactIds);
+      for (const c of filteredContacts) next.add(c.id);
+      setSelectedContactIds(next);
+    }
+  }, [isAllTableSelected, selectedContactIds, filteredContacts]);
 
   return (
     <div className="max-w-4xl mx-auto space-y-6 pb-12">
@@ -630,7 +878,7 @@ export default function AdminDisparadorPage() {
           <div className="flex flex-wrap items-center justify-between text-xs sm:text-sm mb-2 gap-2">
             <div className="flex items-center gap-2 sm:gap-3 flex-wrap">
               <span className="font-bold text-gray-800">
-                {stats.sent} de {stats.total} enviados ({stats.percent}%)
+                {stats.sent} de {stats.activeTotal} ativos ({stats.percent}%)
               </span>
               <span className="text-gray-300">•</span>
               <span className="text-blue-700 bg-blue-50 font-bold px-2.5 py-0.5 rounded-md text-xs border border-blue-200">
@@ -639,26 +887,39 @@ export default function AdminDisparadorPage() {
               <span className="text-purple-700 bg-purple-50 font-bold px-2.5 py-0.5 rounded-md text-xs border border-purple-200">
                 🔄 {stats.reprocessCount} reprocessamento
               </span>
+              {stats.excludedCount > 0 && (
+                <button
+                  type="button"
+                  onClick={() => {
+                    setStatusFilter('excluded');
+                    setActiveTab('table');
+                  }}
+                  className="text-red-700 bg-red-50 hover:bg-red-100 font-bold px-2.5 py-0.5 rounded-md text-xs border border-red-200 transition"
+                  title="Clique para ver os contatos excluídos"
+                >
+                  🗑️ {stats.excludedCount} excluídos
+                </button>
+              )}
             </div>
             <div className="flex items-center gap-3 text-xs text-gray-500">
               <span className="text-amber-600 font-medium">{stats.skipped} pulados</span>
-              <span className="text-gray-600 font-semibold">{stats.total} total</span>
+              <span className="text-gray-600 font-semibold">{stats.total} no total</span>
             </div>
           </div>
           <div className="w-full bg-gray-100 rounded-full h-3 overflow-hidden flex">
             <div
               className="bg-green-500 h-full transition-all duration-300"
-              style={{ width: `${stats.total > 0 ? (stats.sent / stats.total) * 100 : 0}%` }}
+              style={{ width: `${stats.activeTotal > 0 ? (stats.sent / stats.activeTotal) * 100 : 0}%` }}
               title={`${stats.sent} enviados`}
             />
             <div
               className="bg-purple-400 h-full transition-all duration-300"
-              style={{ width: `${stats.total > 0 ? (stats.reprocessCount / stats.total) * 100 : 0}%` }}
+              style={{ width: `${stats.activeTotal > 0 ? (stats.reprocessCount / stats.activeTotal) * 100 : 0}%` }}
               title={`${stats.reprocessCount} em reprocessamento`}
             />
             <div
               className="bg-amber-400 h-full transition-all duration-300"
-              style={{ width: `${stats.total > 0 ? (stats.skipped / stats.total) * 100 : 0}%` }}
+              style={{ width: `${stats.activeTotal > 0 ? (stats.skipped / stats.activeTotal) * 100 : 0}%` }}
               title={`${stats.skipped} pulados`}
             />
           </div>
@@ -829,6 +1090,16 @@ export default function AdminDisparadorPage() {
                   )}
                 </div>
                 <div className="flex items-center gap-2">
+                  {isReprocessQueue && (
+                    <button
+                      type="button"
+                      onClick={handleExcludeAllReprocess}
+                      className="text-xs text-red-600 hover:text-red-700 font-semibold px-2.5 py-1 rounded-lg hover:bg-red-50 border border-red-200 transition"
+                      title="Excluir todos os contatos da fila de reprocessamento"
+                    >
+                      🗑️ Excluir Todos da Fila
+                    </button>
+                  )}
                   {currentContactStatus === 'skipped' && (
                     <span className="bg-amber-100 text-amber-800 text-xs font-bold px-3 py-1 rounded-full flex items-center gap-1">
                       ⏭ Pulado
@@ -1009,6 +1280,21 @@ export default function AdminDisparadorPage() {
                     >
                       ✓ Marcar como enviado
                     </button>
+                    {isReprocessQueue && (
+                      <button
+                        type="button"
+                        onClick={() =>
+                          handleExcludeContact(
+                            currentContact.id,
+                            `Deseja excluir "${currentContact.nome}" da fila de reprocessamento?`,
+                          )
+                        }
+                        className="px-3 py-2 text-xs font-bold text-red-700 bg-red-50 hover:bg-red-100 border border-red-200 rounded-xl transition"
+                        title="Excluir este contato da fila"
+                      >
+                        🗑️ Excluir da Fila
+                      </button>
+                    )}
                   </div>
                 </div>
 
@@ -1045,18 +1331,30 @@ export default function AdminDisparadorPage() {
                 Todos os Contatos da Lista
               </h3>
               <p className="text-xs sm:text-sm text-gray-500 mt-0.5">
-                {currentList.contacts.length} cadastrados no total. Filtrar por status ou buscar por nome/telefone.
+                {currentList.contacts.length} cadastrados no total ({stats.activeTotal} ativos, {stats.excludedCount} excluídos).
               </p>
             </div>
-            {stats.sent > 0 && (
-              <button
-                type="button"
-                onClick={handleReprocessAllSent}
-                className="text-xs font-bold text-purple-700 bg-purple-50 hover:bg-purple-100 border border-purple-200 px-3 py-2 rounded-xl transition shadow-sm self-start sm:self-auto"
-              >
-                🔄 Mover todos os enviados ({stats.sent}) para Reprocessamento
-              </button>
-            )}
+            <div className="flex items-center gap-2 self-start sm:self-auto flex-wrap">
+              {stats.sent > 0 && (
+                <button
+                  type="button"
+                  onClick={handleReprocessAllSent}
+                  className="text-xs font-bold text-purple-700 bg-purple-50 hover:bg-purple-100 border border-purple-200 px-3 py-2 rounded-xl transition shadow-sm"
+                >
+                  🔄 Reprocessar enviados ({stats.sent})
+                </button>
+              )}
+              {stats.reprocessCount + stats.sent > 0 && (
+                <button
+                  type="button"
+                  onClick={handleExcludeAllProcessed}
+                  className="text-xs font-bold text-red-700 bg-red-50 hover:bg-red-100 border border-red-200 px-3 py-2 rounded-xl transition shadow-sm"
+                  title="Excluir todos os contatos que já foram processados (reprocessamento e enviados)"
+                >
+                  🗑️ Excluir todos processados ({stats.reprocessCount + stats.sent})
+                </button>
+              )}
+            </div>
           </div>
 
           {/* Search & Filter Bar */}
@@ -1079,7 +1377,7 @@ export default function AdminDisparadorPage() {
                     : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
                 }`}
               >
-                Todos ({stats.total})
+                Todos ({stats.activeTotal})
               </button>
               <button
                 onClick={() => setStatusFilter('new')}
@@ -1121,14 +1419,70 @@ export default function AdminDisparadorPage() {
               >
                 Pulados ({stats.skipped})
               </button>
+              {stats.excludedCount > 0 && (
+                <button
+                  onClick={() => setStatusFilter('excluded')}
+                  className={`px-3 py-2 rounded-xl transition whitespace-nowrap flex items-center gap-1 ${
+                    statusFilter === 'excluded'
+                      ? 'bg-red-600 text-white'
+                      : 'bg-red-50 text-red-700 hover:bg-red-100'
+                  }`}
+                >
+                  🗑️ Excluídos ({stats.excludedCount})
+                </button>
+              )}
             </div>
           </div>
+
+          {/* Bulk Action Bar for Table */}
+          {selectedContactIds.size > 0 && activeTab === 'table' && (
+            <div className="bg-red-50 border border-red-200 rounded-2xl p-3 flex flex-wrap items-center justify-between gap-3 text-xs">
+              <div className="flex items-center gap-2">
+                <span className="font-bold text-red-900 bg-red-200 px-2.5 py-1 rounded-lg">
+                  {selectedContactIds.size} selecionados
+                </span>
+                <span className="text-red-700 font-medium">Ações em lote para os contatos selecionados:</span>
+              </div>
+              <div className="flex flex-wrap items-center gap-2">
+                <button
+                  type="button"
+                  onClick={() => handleExcludeBatch(Array.from(selectedContactIds), 'contatos')}
+                  className="px-3 py-1.5 bg-red-600 hover:bg-red-700 text-white font-bold rounded-lg shadow-sm transition"
+                >
+                  🗑️ Excluir Selecionados
+                </button>
+                <button
+                  type="button"
+                  onClick={() => handleReprocessBatch(Array.from(selectedContactIds))}
+                  className="px-3 py-1.5 bg-purple-700 hover:bg-purple-800 text-white font-bold rounded-lg shadow-sm transition"
+                >
+                  🔄 Mover para Reprocessamento
+                </button>
+                <button
+                  type="button"
+                  onClick={() => setSelectedContactIds(new Set())}
+                  className="px-3 py-1.5 bg-white hover:bg-gray-100 text-gray-700 font-semibold border border-gray-300 rounded-lg transition"
+                >
+                  Desmarcar
+                </button>
+              </div>
+            </div>
+          )}
 
           {/* Table */}
           <div className="overflow-x-auto border border-gray-100 rounded-2xl">
             <table className="w-full text-left text-xs sm:text-sm">
               <thead className="bg-gray-50 text-gray-500 font-semibold border-b border-gray-100">
                 <tr>
+                  <th className="p-3 w-10 text-center">
+                    <input
+                      type="checkbox"
+                      checked={isAllTableSelected}
+                      onChange={toggleSelectAllTable}
+                      className="rounded text-red-600 focus:ring-red-500 w-4 h-4 cursor-pointer"
+                      title="Selecionar todos os contatos visíveis"
+                    />
+                  </th>
                   <th className="p-3">#</th>
                   <th className="p-3">Nome</th>
                   <th className="p-3">Telefone</th>
@@ -1142,20 +1496,33 @@ export default function AdminDisparadorPage() {
                 {filteredContacts.map((contact, idx) => {
                   const p = progress[contact.id];
                   const status: ContactStatus = p ? p.status : 'new';
+                  const isSelected = selectedContactIds.has(contact.id);
 
                   return (
                     <tr
                       key={contact.id}
-                      className={
-                        status === 'sent'
-                          ? 'bg-green-50/20'
+                      className={`transition ${
+                        isSelected
+                          ? 'bg-red-50/50'
+                          : status === 'sent'
+                          ? 'bg-green-50/20 hover:bg-green-50/40'
                           : status === 'reprocess'
-                          ? 'bg-purple-50/20'
+                          ? 'bg-purple-50/20 hover:bg-purple-50/40'
                           : status === 'skipped'
-                          ? 'bg-amber-50/20'
+                          ? 'bg-amber-50/20 hover:bg-amber-50/40'
+                          : status === 'excluded'
+                          ? 'bg-red-50/20 opacity-70 hover:opacity-100 hover:bg-red-50/40'
                           : 'hover:bg-gray-50/80'
-                      }
+                      }`}
                     >
+                      <td className="p-3 text-center">
+                        <input
+                          type="checkbox"
+                          checked={isSelected}
+                          onChange={() => toggleContactSelection(contact.id)}
+                          className="rounded text-red-600 focus:ring-red-500 w-4 h-4 cursor-pointer"
+                        />
+                      </td>
                       <td className="p-3 text-gray-400 font-mono">{idx + 1}</td>
                       <td className="p-3 font-medium text-gray-900">{contact.nome}</td>
                       <td className="p-3 font-mono text-gray-700">{contact.telefone}</td>
@@ -1188,28 +1555,72 @@ export default function AdminDisparadorPage() {
                             🆕 Novo
                           </span>
                         )}
+                        {status === 'excluded' && (
+                          <span className="bg-red-100 text-red-800 text-[11px] font-bold px-2.5 py-0.5 rounded-full">
+                            🗑️ Excluído
+                          </span>
+                        )}
                       </td>
                       <td className="p-3 text-right space-x-1 whitespace-nowrap">
                         {status === 'sent' ? (
-                          <button
-                            type="button"
-                            onClick={() => restoreContactToQueue(contact.id)}
-                            className="text-purple-800 hover:text-purple-900 font-bold text-xs bg-purple-50 border border-purple-200 px-2.5 py-1 rounded-lg shadow-sm"
-                            title="Mover para a fila de Reprocessamento"
-                          >
-                            🔄 Reprocessar
-                          </button>
+                          <>
+                            <button
+                              type="button"
+                              onClick={() => restoreContactToQueue(contact.id)}
+                              className="text-purple-800 hover:text-purple-900 font-bold text-xs bg-purple-50 border border-purple-200 px-2.5 py-1 rounded-lg shadow-sm"
+                              title="Mover para a fila de Reprocessamento"
+                            >
+                              🔄 Reprocessar
+                            </button>
+                            <button
+                              type="button"
+                              onClick={() =>
+                                handleExcludeContact(
+                                  contact.id,
+                                  `Deseja excluir "${contact.nome}" dos processados?`,
+                                )
+                              }
+                              className="text-red-700 hover:text-red-900 font-bold text-xs bg-red-50 hover:bg-red-100 border border-red-200 px-2 py-1 rounded-lg shadow-sm"
+                              title="Excluir este contato"
+                            >
+                              🗑️
+                            </button>
+                          </>
                         ) : status === 'reprocess' ? (
+                          <>
+                            <button
+                              type="button"
+                              onClick={() => {
+                                const qIdx = reprocessContacts.findIndex((c) => c.id === contact.id);
+                                if (qIdx >= 0) setReprocessIndex(qIdx);
+                                setActiveTab('queue_reprocess');
+                              }}
+                              className="text-purple-700 hover:text-purple-900 font-bold text-xs bg-purple-50 hover:bg-purple-100 border border-purple-200 px-2.5 py-1 rounded-lg shadow-sm"
+                            >
+                              Disparar 🔄
+                            </button>
+                            <button
+                              type="button"
+                              onClick={() =>
+                                handleExcludeContact(
+                                  contact.id,
+                                  `Deseja excluir "${contact.nome}" da fila de reprocessamento?`,
+                                )
+                              }
+                              className="text-red-700 hover:text-red-900 font-bold text-xs bg-red-50 hover:bg-red-100 border border-red-200 px-2 py-1 rounded-lg shadow-sm"
+                              title="Excluir este contato"
+                            >
+                              🗑️
+                            </button>
+                          </>
+                        ) : status === 'excluded' ? (
                           <button
                             type="button"
-                            onClick={() => {
-                              const qIdx = reprocessContacts.findIndex((c) => c.id === contact.id);
-                              if (qIdx >= 0) setReprocessIndex(qIdx);
-                              setActiveTab('queue_reprocess');
-                            }}
+                            onClick={() => handleRestoreExcluded(contact.id)}
                             className="text-purple-700 hover:text-purple-900 font-bold text-xs bg-purple-50 hover:bg-purple-100 border border-purple-200 px-2.5 py-1 rounded-lg shadow-sm"
+                            title="Restaurar para a fila de Reprocessamento"
                           >
-                            Disparar 🔄
+                            ↩️ Restaurar
                           </button>
                         ) : status === 'skipped' ? (
                           <>
@@ -1278,13 +1689,23 @@ export default function AdminDisparadorPage() {
               </p>
             </div>
             {stats.sent > 0 && (
-              <button
-                type="button"
-                onClick={handleReprocessAllSent}
-                className="text-xs font-bold text-purple-700 bg-purple-50 hover:bg-purple-100 border border-purple-200 px-3 py-2 rounded-xl transition shadow-sm self-start sm:self-auto"
-              >
-                🔄 Mover Todos para Reprocessamento
-              </button>
+              <div className="flex items-center gap-2 self-start sm:self-auto flex-wrap">
+                <button
+                  type="button"
+                  onClick={handleReprocessAllSent}
+                  className="text-xs font-bold text-purple-700 bg-purple-50 hover:bg-purple-100 border border-purple-200 px-3 py-2 rounded-xl transition shadow-sm"
+                >
+                  🔄 Reprocessar Todos ({stats.sent})
+                </button>
+                <button
+                  type="button"
+                  onClick={handleExcludeAllSent}
+                  className="text-xs font-bold text-red-700 bg-red-50 hover:bg-red-100 border border-red-200 px-3 py-2 rounded-xl transition shadow-sm"
+                  title="Excluir todos os contatos do histórico de enviados"
+                >
+                  🗑️ Excluir Todos do Histórico ({stats.sent})
+                </button>
+              </div>
             )}
           </div>
 
@@ -1298,6 +1719,41 @@ export default function AdminDisparadorPage() {
             />
           </div>
 
+          {/* Bulk Action Bar for History */}
+          {selectedContactIds.size > 0 && activeTab === 'history' && (
+            <div className="bg-red-50 border border-red-200 rounded-2xl p-3 flex flex-wrap items-center justify-between gap-3 text-xs">
+              <div className="flex items-center gap-2">
+                <span className="font-bold text-red-900 bg-red-200 px-2.5 py-1 rounded-lg">
+                  {selectedContactIds.size} selecionados
+                </span>
+                <span className="text-red-700 font-medium">Ações em lote para o histórico:</span>
+              </div>
+              <div className="flex flex-wrap items-center gap-2">
+                <button
+                  type="button"
+                  onClick={() => handleExcludeBatch(Array.from(selectedContactIds), 'enviados')}
+                  className="px-3 py-1.5 bg-red-600 hover:bg-red-700 text-white font-bold rounded-lg shadow-sm transition"
+                >
+                  🗑️ Excluir Selecionados
+                </button>
+                <button
+                  type="button"
+                  onClick={() => handleReprocessBatch(Array.from(selectedContactIds))}
+                  className="px-3 py-1.5 bg-purple-700 hover:bg-purple-800 text-white font-bold rounded-lg shadow-sm transition"
+                >
+                  🔄 Mover para Reprocessamento
+                </button>
+                <button
+                  type="button"
+                  onClick={() => setSelectedContactIds(new Set())}
+                  className="px-3 py-1.5 bg-white hover:bg-gray-100 text-gray-700 font-semibold border border-gray-300 rounded-lg transition"
+                >
+                  Desmarcar
+                </button>
+              </div>
+            </div>
+          )}
+
           {filteredSentHistory.length === 0 ? (
             <div className="text-center py-12 text-gray-500 text-sm border border-dashed border-gray-200 rounded-2xl">
               {stats.sent === 0
@@ -1309,6 +1765,15 @@ export default function AdminDisparadorPage() {
               <table className="w-full text-left text-xs sm:text-sm">
                 <thead className="bg-gray-50 text-gray-500 font-semibold border-b border-gray-100">
                   <tr>
+                    <th className="p-3 w-10 text-center">
+                      <input
+                        type="checkbox"
+                        checked={isAllHistorySelected}
+                        onChange={toggleSelectAllHistory}
+                        className="rounded text-red-600 focus:ring-red-500 w-4 h-4 cursor-pointer"
+                        title="Selecionar todos os contatos visíveis no histórico"
+                      />
+                    </th>
                     <th className="p-3">Nome</th>
                     <th className="p-3">Telefone</th>
                     <th className="p-3">Enviado em</th>
@@ -1317,28 +1782,57 @@ export default function AdminDisparadorPage() {
                   </tr>
                 </thead>
                 <tbody className="divide-y divide-gray-100">
-                  {filteredSentHistory.map(({ contact, meta }) => (
-                    <tr key={contact.id} className="hover:bg-gray-50/80">
-                      <td className="p-3 font-medium text-gray-900">{contact.nome}</td>
-                      <td className="p-3 font-mono text-gray-700">{contact.telefone}</td>
-                      <td className="p-3 text-gray-600">{formatSentAt(meta.sentAt)}</td>
-                      <td className="p-3">
-                        <span className="bg-green-100 text-green-800 text-[11px] font-bold px-2 py-0.5 rounded-full">
-                          {channelLabel(meta.channel)}
-                        </span>
-                      </td>
-                      <td className="p-3 text-right">
-                        <button
-                          type="button"
-                          onClick={() => restoreContactToQueue(contact.id)}
-                          className="text-purple-800 hover:text-purple-900 font-bold text-xs bg-purple-50 border border-purple-200 px-2.5 py-1 rounded-lg transition hover:bg-purple-100"
-                          title="Sempre que colocar de volta pra fila vai para Reprocessados"
-                        >
-                          🔄 Colocar em Reprocessamento
-                        </button>
-                      </td>
-                    </tr>
-                  ))}
+                  {filteredSentHistory.map(({ contact, meta }) => {
+                    const isSelected = selectedContactIds.has(contact.id);
+                    return (
+                      <tr
+                        key={contact.id}
+                        className={`transition hover:bg-gray-50/80 ${
+                          isSelected ? 'bg-red-50/50' : ''
+                        }`}
+                      >
+                        <td className="p-3 text-center">
+                          <input
+                            type="checkbox"
+                            checked={isSelected}
+                            onChange={() => toggleContactSelection(contact.id)}
+                            className="rounded text-red-600 focus:ring-red-500 w-4 h-4 cursor-pointer"
+                          />
+                        </td>
+                        <td className="p-3 font-medium text-gray-900">{contact.nome}</td>
+                        <td className="p-3 font-mono text-gray-700">{contact.telefone}</td>
+                        <td className="p-3 text-gray-600">{formatSentAt(meta.sentAt)}</td>
+                        <td className="p-3">
+                          <span className="bg-green-100 text-green-800 text-[11px] font-bold px-2 py-0.5 rounded-full">
+                            {channelLabel(meta.channel)}
+                          </span>
+                        </td>
+                        <td className="p-3 text-right space-x-1 whitespace-nowrap">
+                          <button
+                            type="button"
+                            onClick={() => restoreContactToQueue(contact.id)}
+                            className="text-purple-800 hover:text-purple-900 font-bold text-xs bg-purple-50 border border-purple-200 px-2.5 py-1 rounded-lg transition hover:bg-purple-100 shadow-sm"
+                            title="Colocar de volta na fila de Reprocessamento"
+                          >
+                            🔄 Reprocessar
+                          </button>
+                          <button
+                            type="button"
+                            onClick={() =>
+                              handleExcludeContact(
+                                contact.id,
+                                `Deseja excluir "${contact.nome}" do histórico e da lista de processados?`,
+                              )
+                            }
+                            className="text-red-700 hover:text-red-900 font-bold text-xs bg-red-50 hover:bg-red-100 border border-red-200 px-2.5 py-1 rounded-lg transition shadow-sm"
+                            title="Excluir este contato"
+                          >
+                            🗑️ Excluir
+                          </button>
+                        </td>
+                      </tr>
+                    );
+                  })}
                 </tbody>
               </table>
             </div>
