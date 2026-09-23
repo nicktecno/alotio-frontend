@@ -9,12 +9,14 @@ import {
 import { api } from '@/lib/api';
 import toast from 'react-hot-toast';
 
-type ContactStatus = 'pending' | 'sent' | 'skipped';
+type ContactStatus = 'new' | 'reprocess' | 'sent' | 'skipped';
 
 interface ContactProgress {
   [contactId: string]: {
     status: ContactStatus;
     sentAt?: string;
+    previousSentAt?: string;
+    reprocessAt?: string;
     channel?: 'sms' | 'whatsapp' | 'manual';
   };
 }
@@ -101,8 +103,8 @@ function cleanPhoneForDispatch(raw: string): { digits: string; formatted: string
 
 export default function AdminDisparadorPage() {
   const [activeTab, setActiveTab] = useState<
-    'queue' | 'table' | 'history' | 'template' | 'import'
-  >('queue');
+    'queue_new' | 'queue_reprocess' | 'table' | 'history' | 'template' | 'import'
+  >('queue_new');
   const [selectedListId, setSelectedListId] = useState<string>('todos-senhas');
   const [customList, setCustomList] = useState<ContactListGroup | null>(null);
 
@@ -111,7 +113,8 @@ export default function AdminDisparadorPage() {
   const [customTemplateText, setCustomTemplateText] = useState<string>(TEMPLATE_PRESETS[0].text);
 
   const [progress, setProgress] = useState<ContactProgress>({});
-  const [currentIndex, setCurrentIndex] = useState<number>(0);
+  const [newIndex, setNewIndex] = useState<number>(0);
+  const [reprocessIndex, setReprocessIndex] = useState<number>(0);
   const [autoAdvance, setAutoAdvance] = useState<boolean>(true);
   const [stateHydrated, setStateHydrated] = useState(false);
   const [syncingState, setSyncingState] = useState(false);
@@ -119,7 +122,7 @@ export default function AdminDisparadorPage() {
 
   // Search and filter for table tab
   const [searchQuery, setSearchQuery] = useState('');
-  const [statusFilter, setStatusFilter] = useState<'all' | 'pending' | 'sent' | 'skipped'>('all');
+  const [statusFilter, setStatusFilter] = useState<'all' | 'new' | 'reprocess' | 'sent' | 'skipped'>('all');
 
   // Import raw text state
   const [importText, setImportText] = useState('');
@@ -168,19 +171,22 @@ export default function AdminDisparadorPage() {
         if (cancelled) return;
         if (!data || typeof data !== 'object') {
           setProgress({});
-          setCurrentIndex(0);
+          setNewIndex(0);
+          setReprocessIndex(0);
           setStateHydrated(true);
           return;
         }
         setProgress((data.progress as ContactProgress) || {});
-        setCurrentIndex(data.currentIndex ?? 0);
+        setNewIndex(data.currentIndex ?? 0);
+        setReprocessIndex(data.currentIndex ?? 0);
         setStateHydrated(true);
       })
       .catch(() => {
         if (!cancelled) {
           toast.error('Não foi possível carregar o progresso desta lista.');
           setProgress({});
-          setCurrentIndex(0);
+          setNewIndex(0);
+          setReprocessIndex(0);
           setStateHydrated(true);
         }
       });
@@ -203,7 +209,7 @@ export default function AdminDisparadorPage() {
         .adminUpsertDisparadorState({
           listId: selectedListId,
           progress,
-          currentIndex,
+          currentIndex: activeTab === 'queue_reprocess' ? reprocessIndex : newIndex,
         })
         .catch(() => {
           toast.error('Falha ao salvar progresso no servidor.');
@@ -212,7 +218,7 @@ export default function AdminDisparadorPage() {
     }, 300);
 
     return () => window.clearTimeout(timer);
-  }, [progress, currentIndex, selectedListId, stateHydrated]);
+  }, [progress, newIndex, reprocessIndex, selectedListId, stateHydrated, activeTab]);
 
   // Auto-select template based on list capabilities
   useEffect(() => {
@@ -231,79 +237,107 @@ export default function AdminDisparadorPage() {
 
   const updateContactStatus = useCallback(
     (contactId: string, status: ContactStatus, channel?: 'sms' | 'whatsapp' | 'manual') => {
-      setProgress((prev) => ({
-        ...prev,
-        [contactId]: {
-          status,
-          sentAt: status === 'sent' ? new Date().toISOString() : undefined,
-          channel: status === 'sent' ? channel : undefined,
-        },
-      }));
+      setProgress((prev) => {
+        const cur = prev[contactId];
+        return {
+          ...prev,
+          [contactId]: {
+            ...cur,
+            status,
+            sentAt: status === 'sent' ? new Date().toISOString() : cur?.sentAt,
+            channel: status === 'sent' ? channel : cur?.channel,
+          },
+        };
+      });
     },
     [],
   );
 
-  /** Volta contato enviado (ou pulado) para a fila — ex.: falha no envio. */
+  /**
+   * Sempre que colocar de volta pra fila vai para esse reprocessados.
+   * Não apaga o registro nem o transforma em 'novo', mas sim marca como 'reprocess'.
+   */
   const restoreContactToQueue = useCallback((contactId: string) => {
     setProgress((prev) => {
-      const next = { ...prev };
-      delete next[contactId];
-      return next;
+      const current = prev[contactId];
+      return {
+        ...prev,
+        [contactId]: {
+          ...current,
+          status: 'reprocess',
+          previousSentAt: current?.sentAt || current?.previousSentAt || new Date().toISOString(),
+          reprocessAt: new Date().toISOString(),
+        },
+      };
     });
-    toast.success('Contato restaurado na fila.');
+    toast.success('Contato colocado de volta na fila de Reprocessamento.');
   }, []);
 
-  /** Fila ativa: enviados saem da lista definitivamente. */
-  const queueContacts = useMemo(() => {
-    return currentList.contacts.filter((c) => progress[c.id]?.status !== 'sent');
+  /** Fila de Novos: apenas contatos que nunca foram processados nem enviados. */
+  const newContacts = useMemo(() => {
+    return currentList.contacts.filter((c) => {
+      const p = progress[c.id];
+      return !p || p.status === 'new';
+    });
   }, [currentList.contacts, progress]);
 
-  const saveCurrentIndex = useCallback(
-    (idx: number) => {
-      const maxIdx = Math.max(0, queueContacts.length - 1);
-      const clamped = Math.max(0, Math.min(idx, maxIdx));
-      setCurrentIndex(clamped);
-    },
-    [queueContacts.length],
-  );
+  /** Fila de Reprocessamento: contatos que já foram processados anteriormente ou devolvidos à fila. */
+  const reprocessContacts = useMemo(() => {
+    return currentList.contacts.filter((c) => progress[c.id]?.status === 'reprocess');
+  }, [currentList.contacts, progress]);
+
+  /** Enviados nesta rodada. */
+  const sentContacts = useMemo(() => {
+    return currentList.contacts.filter((c) => progress[c.id]?.status === 'sent');
+  }, [currentList.contacts, progress]);
+
+  /** Pulados. */
+  const skippedContacts = useMemo(() => {
+    return currentList.contacts.filter((c) => progress[c.id]?.status === 'skipped');
+  }, [currentList.contacts, progress]);
+
+  // Clamp indexes
+  useEffect(() => {
+    if (newContacts.length === 0) {
+      if (newIndex !== 0) setNewIndex(0);
+    } else if (newIndex >= newContacts.length) {
+      setNewIndex(Math.max(0, newContacts.length - 1));
+    }
+  }, [newContacts.length, newIndex]);
 
   useEffect(() => {
-    if (queueContacts.length === 0) {
-      if (currentIndex !== 0) setCurrentIndex(0);
-      return;
+    if (reprocessContacts.length === 0) {
+      if (reprocessIndex !== 0) setReprocessIndex(0);
+    } else if (reprocessIndex >= reprocessContacts.length) {
+      setReprocessIndex(Math.max(0, reprocessContacts.length - 1));
     }
-    if (currentIndex >= queueContacts.length) {
-      saveCurrentIndex(queueContacts.length - 1);
-    }
-  }, [queueContacts.length, currentIndex, saveCurrentIndex]);
+  }, [reprocessContacts.length, reprocessIndex]);
 
   // Statistics
   const stats = useMemo(() => {
     const total = currentList.contacts.length;
-    let sent = 0;
-    let skipped = 0;
-    for (const c of currentList.contacts) {
-      const p = progress[c.id];
-      if (p?.status === 'sent') sent++;
-      else if (p?.status === 'skipped') skipped++;
-    }
-    const remaining = queueContacts.length;
-    const pending = queueContacts.filter(
-      (c) => !progress[c.id] || progress[c.id]?.status === 'pending',
-    ).length;
+    const newCount = newContacts.length;
+    const reprocessCount = reprocessContacts.length;
+    const sent = sentContacts.length;
+    const skipped = skippedContacts.length;
     const percent = total > 0 ? Math.round((sent / total) * 100) : 0;
-    return { total, sent, skipped, pending, remaining, percent };
-  }, [currentList.contacts, progress, queueContacts]);
+    return { total, newCount, reprocessCount, sent, skipped, percent };
+  }, [
+    currentList.contacts.length,
+    newContacts.length,
+    reprocessContacts.length,
+    sentContacts.length,
+    skippedContacts.length,
+  ]);
 
   const sentHistory = useMemo(() => {
-    return currentList.contacts
-      .filter((c) => progress[c.id]?.status === 'sent')
+    return sentContacts
       .map((contact) => ({
         contact,
         meta: progress[contact.id]!,
       }))
       .sort((a, b) => (b.meta.sentAt || '').localeCompare(a.meta.sentAt || ''));
-  }, [currentList.contacts, progress]);
+  }, [sentContacts, progress]);
 
   const filteredSentHistory = useMemo(() => {
     if (!searchQuery) return sentHistory;
@@ -316,11 +350,16 @@ export default function AdminDisparadorPage() {
     );
   }, [sentHistory, searchQuery]);
 
-  // Current contact (somente na fila, sem enviados)
-  const currentContact: ContactItem | undefined = queueContacts[currentIndex];
+  // Dynamic queue selection based on activeTab
+  const isReprocessQueue = activeTab === 'queue_reprocess';
+  const activeQueueContacts = isReprocessQueue ? reprocessContacts : newContacts;
+  const currentQueueIndex = isReprocessQueue ? reprocessIndex : newIndex;
+  const setCurrentQueueIndex = isReprocessQueue ? setReprocessIndex : setNewIndex;
+
+  const currentContact: ContactItem | undefined = activeQueueContacts[currentQueueIndex];
   const currentContactStatus: ContactStatus = currentContact
-    ? progress[currentContact.id]?.status || 'pending'
-    : 'pending';
+    ? progress[currentContact.id]?.status || (isReprocessQueue ? 'reprocess' : 'new')
+    : 'new';
 
   // Format message text with variables
   const formatMessage = useCallback(
@@ -356,7 +395,6 @@ export default function AdminDisparadorPage() {
       return;
     }
 
-    // iOS Safari expects "&body=", Android Chrome expects "?body="
     const isIOS =
       typeof navigator !== 'undefined' && /iPad|iPhone|iPod/.test(navigator.userAgent);
     const separator = isIOS ? '&' : '?';
@@ -366,7 +404,10 @@ export default function AdminDisparadorPage() {
 
     if (autoAdvance) {
       updateContactStatus(currentContact.id, 'sent', 'sms');
-      toast.success('SMS aberto! Contato removido da fila.', { duration: 2500 });
+      toast.success(
+        isReprocessQueue ? 'SMS aberto! Contato reprocessado com sucesso.' : 'SMS aberto! Contato enviado.',
+        { duration: 2500 },
+      );
     }
   };
 
@@ -384,7 +425,12 @@ export default function AdminDisparadorPage() {
 
     if (autoAdvance) {
       updateContactStatus(currentContact.id, 'sent', 'whatsapp');
-      toast.success('WhatsApp aberto! Contato removido da fila.', { duration: 2500 });
+      toast.success(
+        isReprocessQueue
+          ? 'WhatsApp aberto! Contato reprocessado com sucesso.'
+          : 'WhatsApp aberto! Contato enviado.',
+        { duration: 2500 },
+      );
     }
   };
 
@@ -392,33 +438,68 @@ export default function AdminDisparadorPage() {
   const handleMarkSent = () => {
     if (!currentContact) return;
     updateContactStatus(currentContact.id, 'sent', 'manual');
-    toast.success('Enviado! Removido da fila.');
+    toast.success('Marcado como enviado!');
   };
 
   // Action: Skip contact
   const handleSkip = () => {
     if (!currentContact) return;
     updateContactStatus(currentContact.id, 'skipped');
-    if (currentIndex < queueContacts.length - 1) {
-      saveCurrentIndex(currentIndex + 1);
+    if (currentQueueIndex < activeQueueContacts.length - 1) {
+      setCurrentQueueIndex(currentQueueIndex + 1);
     }
     toast('Contato pulado', { icon: '⏭️' });
   };
 
-  // Action: Reset progress for this list
-  const handleResetProgress = async () => {
-    if (!window.confirm(`Deseja zerar todo o progresso da lista "${currentList.title}"?`)) {
+  // Action: Mover todos os enviados para reprocessamento
+  const handleReprocessAllSent = () => {
+    if (sentContacts.length === 0) {
+      toast.error('Nenhum contato enviado no histórico.');
       return;
     }
-    try {
-      await api.adminResetDisparadorState(selectedListId);
-      skipSaveRef.current = true;
-      setProgress({});
-      setCurrentIndex(0);
-      toast.success('Progresso zerado!');
-    } catch {
-      toast.error('Falha ao zerar progresso no servidor.');
+    if (!window.confirm(`Deseja mover todos os ${sentContacts.length} contatos enviados para a fila de Reprocessamento?`)) {
+      return;
     }
+    setProgress((prev) => {
+      const next = { ...prev };
+      for (const c of sentContacts) {
+        const cur = next[c.id];
+        next[c.id] = {
+          ...cur,
+          status: 'reprocess',
+          previousSentAt: cur?.sentAt || cur?.previousSentAt || new Date().toISOString(),
+          reprocessAt: new Date().toISOString(),
+        };
+      }
+      return next;
+    });
+    setActiveTab('queue_reprocess');
+    toast.success(`${sentContacts.length} contatos movidos para a fila de Reprocessamento!`);
+  };
+
+  // Action: Reset progress for this list
+  const handleResetProgress = async () => {
+    if (!window.confirm(`Deseja mover todos os contatos processados da lista "${currentList.title}" para Reprocessamento?`)) {
+      return;
+    }
+    setProgress((prev) => {
+      const next = { ...prev };
+      for (const c of currentList.contacts) {
+        const cur = next[c.id];
+        if (cur) {
+          next[c.id] = {
+            ...cur,
+            status: 'reprocess',
+            previousSentAt: cur?.sentAt || cur?.previousSentAt || new Date().toISOString(),
+            reprocessAt: new Date().toISOString(),
+          };
+        }
+      }
+      return next;
+    });
+    setReprocessIndex(0);
+    setActiveTab('queue_reprocess');
+    toast.success('Todos os contatos processados foram movidos para a fila de Reprocessamento!');
   };
 
   // Action: Parse pasted text or CSV
@@ -432,7 +513,6 @@ export default function AdminDisparadorPage() {
     const parsedContacts: ContactItem[] = [];
 
     lines.forEach((line, i) => {
-      // support tab or comma or semicolon
       let parts = line.split('\t');
       if (parts.length < 2) parts = line.split(';');
       if (parts.length < 2) parts = line.split(',');
@@ -476,7 +556,7 @@ export default function AdminDisparadorPage() {
         setCustomList(newCustom);
         setSelectedListId(newCustom.id);
         toast.success(`${parsedContacts.length} contatos importados com sucesso!`);
-        setActiveTab('queue');
+        setActiveTab('queue_new');
       } catch {
         toast.error('Falha ao salvar lista personalizada no servidor.');
       }
@@ -487,9 +567,9 @@ export default function AdminDisparadorPage() {
   const filteredContacts = useMemo(() => {
     return currentList.contacts.filter((c) => {
       const p = progress[c.id];
-      const status = p?.status || 'pending';
-      if (statusFilter === 'all' && status === 'sent') return false;
-      if (statusFilter !== 'all' && status !== statusFilter) return false;
+      const contactStatus: ContactStatus = p ? p.status : 'new';
+
+      if (statusFilter !== 'all' && contactStatus !== statusFilter) return false;
       if (searchQuery) {
         const q = searchQuery.toLowerCase();
         return (
@@ -547,27 +627,39 @@ export default function AdminDisparadorPage() {
 
         {/* Progress Bar & Badges */}
         <div className="mt-5 pt-5 border-t border-gray-100">
-          <div className="flex items-center justify-between text-xs sm:text-sm mb-2">
-            <div className="flex items-center gap-3">
+          <div className="flex flex-wrap items-center justify-between text-xs sm:text-sm mb-2 gap-2">
+            <div className="flex items-center gap-2 sm:gap-3 flex-wrap">
               <span className="font-bold text-gray-800">
-                {stats.sent} de {stats.total} enviados
+                {stats.sent} de {stats.total} enviados ({stats.percent}%)
               </span>
-              <span className="text-gray-400">•</span>
-              <span className="text-green-600 font-semibold">{stats.percent}% concluído</span>
+              <span className="text-gray-300">•</span>
+              <span className="text-blue-700 bg-blue-50 font-bold px-2.5 py-0.5 rounded-md text-xs border border-blue-200">
+                🆕 {stats.newCount} novos
+              </span>
+              <span className="text-purple-700 bg-purple-50 font-bold px-2.5 py-0.5 rounded-md text-xs border border-purple-200">
+                🔄 {stats.reprocessCount} reprocessamento
+              </span>
             </div>
             <div className="flex items-center gap-3 text-xs text-gray-500">
               <span className="text-amber-600 font-medium">{stats.skipped} pulados</span>
-              <span className="text-gray-500">{stats.remaining} na fila</span>
+              <span className="text-gray-600 font-semibold">{stats.total} total</span>
             </div>
           </div>
           <div className="w-full bg-gray-100 rounded-full h-3 overflow-hidden flex">
             <div
               className="bg-green-500 h-full transition-all duration-300"
               style={{ width: `${stats.total > 0 ? (stats.sent / stats.total) * 100 : 0}%` }}
+              title={`${stats.sent} enviados`}
+            />
+            <div
+              className="bg-purple-400 h-full transition-all duration-300"
+              style={{ width: `${stats.total > 0 ? (stats.reprocessCount / stats.total) * 100 : 0}%` }}
+              title={`${stats.reprocessCount} em reprocessamento`}
             />
             <div
               className="bg-amber-400 h-full transition-all duration-300"
               style={{ width: `${stats.total > 0 ? (stats.skipped / stats.total) * 100 : 0}%` }}
+              title={`${stats.skipped} pulados`}
             />
           </div>
         </div>
@@ -575,14 +667,26 @@ export default function AdminDisparadorPage() {
         {/* Navigation Tabs */}
         <div className="flex border-b border-gray-200 mt-6 -mb-4 sm:-mb-6 overflow-x-auto text-sm">
           <button
-            onClick={() => setActiveTab('queue')}
-            className={`py-3 px-4 font-semibold border-b-2 transition whitespace-nowrap ${
-              activeTab === 'queue'
-                ? 'border-primary text-primary'
+            onClick={() => setActiveTab('queue_new')}
+            className={`py-3 px-4 font-semibold border-b-2 transition whitespace-nowrap flex items-center gap-1.5 ${
+              activeTab === 'queue_new'
+                ? 'border-blue-600 text-blue-600'
                 : 'border-transparent text-gray-500 hover:text-gray-700'
             }`}
           >
-            ⚡ Fila de Disparo (1 Toque)
+            <span>🆕</span>
+            <span>Novos na Fila ({stats.newCount})</span>
+          </button>
+          <button
+            onClick={() => setActiveTab('queue_reprocess')}
+            className={`py-3 px-4 font-semibold border-b-2 transition whitespace-nowrap flex items-center gap-1.5 ${
+              activeTab === 'queue_reprocess'
+                ? 'border-purple-600 text-purple-600'
+                : 'border-transparent text-gray-500 hover:text-gray-700'
+            }`}
+          >
+            <span>🔄</span>
+            <span>Reprocessamento ({stats.reprocessCount})</span>
           </button>
           <button
             onClick={() => setActiveTab('table')}
@@ -627,57 +731,80 @@ export default function AdminDisparadorPage() {
         </div>
       </div>
 
-      {/* TAB 1: QUEUE (CARD INTERATIVO MOBILE-FIRST) */}
-      {activeTab === 'queue' && (
+      {/* QUEUE CARD COMPONENT (USADO PARA NOVOS E REPROCESSAMENTO) */}
+      {(activeTab === 'queue_new' || activeTab === 'queue_reprocess') && (
         <div className="space-y-4">
           {currentList.contacts.length === 0 ? (
             <div className="bg-white rounded-2xl p-8 text-center border border-gray-200 text-gray-500">
               Nenhum contato encontrado nesta lista.
             </div>
-          ) : queueContacts.length === 0 ? (
+          ) : activeQueueContacts.length === 0 ? (
             <div className="bg-white rounded-2xl p-8 text-center border border-gray-200 space-y-4">
-              <span className="text-4xl">🎉</span>
-              <h3 className="text-xl font-bold text-gray-900">Fila concluída!</h3>
+              <span className="text-4xl">{isReprocessQueue ? '✨' : '🎉'}</span>
+              <h3 className="text-xl font-bold text-gray-900">
+                {isReprocessQueue
+                  ? 'Fila de reprocessamento zerada!'
+                  : 'Fila de novos contatos concluída!'}
+              </h3>
               <p className="text-sm text-gray-600 max-w-md mx-auto">
-                Não há mais contatos na fila ({stats.sent} marcados como enviados). Veja o histórico
-                e restaure quem tiver falhado.
+                {isReprocessQueue
+                  ? `Nenhum contato aguardando reprocessamento nesta lista no momento. Existem ${stats.newCount} contatos na fila de novos e ${stats.sent} contatos no histórico.`
+                  : `Todos os contatos novos foram processados! Existem ${stats.reprocessCount} contatos na fila de reprocessamento e ${stats.sent} enviados.`}
               </p>
               <div className="flex flex-wrap justify-center gap-3 pt-2">
-                <button
-                  type="button"
-                  onClick={() => setActiveTab('history')}
-                  className="px-4 py-2 bg-primary text-white hover:bg-primary-600 rounded-xl font-semibold text-sm transition"
-                >
-                  Ver histórico de enviados
-                </button>
-                <button
-                  type="button"
-                  onClick={handleResetProgress}
-                  className="px-4 py-2 bg-red-50 hover:bg-red-100 text-red-600 rounded-xl font-semibold text-sm transition"
-                >
-                  Reiniciar tudo
-                </button>
+                {isReprocessQueue ? (
+                  <>
+                    {stats.newCount > 0 && (
+                      <button
+                        type="button"
+                        onClick={() => setActiveTab('queue_new')}
+                        className="px-4 py-2 bg-blue-600 text-white hover:bg-blue-700 rounded-xl font-semibold text-sm transition"
+                      >
+                        Ir para Novos na Fila ({stats.newCount}) →
+                      </button>
+                    )}
+                    {stats.sent > 0 && (
+                      <button
+                        type="button"
+                        onClick={handleReprocessAllSent}
+                        className="px-4 py-2 bg-purple-50 text-purple-700 hover:bg-purple-100 border border-purple-200 rounded-xl font-semibold text-sm transition"
+                      >
+                        🔄 Reprocessar Todos os Enviados ({stats.sent})
+                      </button>
+                    )}
+                  </>
+                ) : (
+                  <>
+                    {stats.reprocessCount > 0 && (
+                      <button
+                        type="button"
+                        onClick={() => setActiveTab('queue_reprocess')}
+                        className="px-4 py-2 bg-purple-600 text-white hover:bg-purple-700 rounded-xl font-semibold text-sm transition"
+                      >
+                        Ir para Reprocessamento ({stats.reprocessCount}) →
+                      </button>
+                    )}
+                    <button
+                      type="button"
+                      onClick={() => setActiveTab('history')}
+                      className="px-4 py-2 bg-primary text-white hover:bg-primary-600 rounded-xl font-semibold text-sm transition"
+                    >
+                      Ver Histórico ({stats.sent})
+                    </button>
+                  </>
+                )}
               </div>
             </div>
           ) : !currentContact ? (
             <div className="bg-white rounded-2xl p-8 text-center border border-gray-200 space-y-4">
               <span className="text-4xl">🎉</span>
-              <h3 className="text-xl font-bold text-gray-900">Você chegou ao final da lista!</h3>
-              <p className="text-sm text-gray-600 max-w-md mx-auto">
-                Todos os {stats.total} contatos foram processados ({stats.sent} enviados, {stats.skipped} pulados).
-              </p>
+              <h3 className="text-xl font-bold text-gray-900">Final da fila alcançado!</h3>
               <div className="flex justify-center gap-3 pt-2">
                 <button
-                  onClick={() => saveCurrentIndex(0)}
+                  onClick={() => setCurrentQueueIndex(0)}
                   className="px-4 py-2 bg-gray-100 hover:bg-gray-200 text-gray-800 rounded-xl font-semibold text-sm transition"
                 >
                   Voltar ao início
-                </button>
-                <button
-                  onClick={handleResetProgress}
-                  className="px-4 py-2 bg-red-50 hover:bg-red-100 text-red-600 rounded-xl font-semibold text-sm transition"
-                >
-                  Reiniciar disparos
                 </button>
               </div>
             </div>
@@ -685,32 +812,46 @@ export default function AdminDisparadorPage() {
             <div className="bg-white rounded-3xl p-5 sm:p-7 shadow-lg border border-gray-200 space-y-6">
               {/* Card Navigation and Status */}
               <div className="flex items-center justify-between">
-                <span className="text-xs font-bold uppercase tracking-wider text-gray-400">
-                  Contato {currentIndex + 1} de {queueContacts.length}
-                </span>
+                <div className="flex items-center gap-2">
+                  {isReprocessQueue ? (
+                    <span className="bg-purple-100 text-purple-800 text-xs font-black px-3 py-1 rounded-full border border-purple-200 flex items-center gap-1">
+                      🔄 REPROCESSAMENTO • {currentQueueIndex + 1} de {activeQueueContacts.length}
+                    </span>
+                  ) : (
+                    <span className="bg-blue-100 text-blue-800 text-xs font-black px-3 py-1 rounded-full border border-blue-200 flex items-center gap-1">
+                      🆕 CONTATO NOVO • {currentQueueIndex + 1} de {activeQueueContacts.length}
+                    </span>
+                  )}
+                  {progress[currentContact.id]?.previousSentAt && (
+                    <span className="text-[11px] text-gray-400 hidden sm:inline">
+                      (Anteriormente enviado em {formatSentAt(progress[currentContact.id]?.previousSentAt)})
+                    </span>
+                  )}
+                </div>
                 <div className="flex items-center gap-2">
                   {currentContactStatus === 'skipped' && (
                     <span className="bg-amber-100 text-amber-800 text-xs font-bold px-3 py-1 rounded-full flex items-center gap-1">
                       ⏭ Pulado
                     </span>
                   )}
-                  {currentContactStatus === 'pending' && (
-                    <span className="bg-gray-100 text-gray-600 text-xs font-bold px-3 py-1 rounded-full">
-                      Pendente
-                    </span>
-                  )}
                 </div>
               </div>
 
               {/* Main Contact Info Card */}
-              <div className="bg-gradient-to-br from-primary-50/50 to-amber-50/30 rounded-2xl p-5 border border-primary-100/60">
+              <div
+                className={`rounded-2xl p-5 border ${
+                  isReprocessQueue
+                    ? 'bg-gradient-to-br from-purple-50/60 to-indigo-50/30 border-purple-100'
+                    : 'bg-gradient-to-br from-primary-50/50 to-blue-50/30 border-primary-100/60'
+                }`}
+              >
                 <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
                   <div>
                     <h2 className="text-xl sm:text-2xl font-black text-gray-900 font-heading">
                       {currentContact.nome}
                     </h2>
                     <div className="flex flex-wrap items-center gap-2 mt-2">
-                      <span className="inline-flex items-center gap-1 font-mono text-base font-bold text-primary-900 bg-white px-3 py-1 rounded-lg border border-primary-200 shadow-sm">
+                      <span className="inline-flex items-center gap-1 font-mono text-base font-bold text-gray-900 bg-white px-3 py-1 rounded-lg border border-gray-200 shadow-sm">
                         📞 {currentContact.telefone}
                       </span>
                       {currentContact.prefixo && (
@@ -740,9 +881,9 @@ export default function AdminDisparadorPage() {
 
                 {/* Credentials details (if any) */}
                 {(loginForContact(currentContact) || currentContact.senha) && (
-                  <div className="mt-4 pt-4 border-t border-primary-200/50 grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs">
+                  <div className="mt-4 pt-4 border-t border-gray-200/50 grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs">
                     {loginForContact(currentContact) && (
-                      <div className="bg-white/80 p-2.5 rounded-xl border border-primary-100 flex items-center justify-between">
+                      <div className="bg-white/80 p-2.5 rounded-xl border border-gray-200 flex items-center justify-between">
                         <div>
                           <span className="text-gray-400 block font-semibold">LOGIN (TELEFONE):</span>
                           <span className="font-mono font-bold text-gray-800 break-all">
@@ -754,26 +895,28 @@ export default function AdminDisparadorPage() {
                             navigator.clipboard.writeText(loginForContact(currentContact));
                             toast.success('Login copiado!');
                           }}
-                          className="text-primary hover:text-primary-700 p-1"
+                          className="text-gray-400 hover:text-gray-600 text-xs ml-2"
                         >
-                          📋
+                          Copiar
                         </button>
                       </div>
                     )}
                     {currentContact.senha && (
-                      <div className="bg-white/80 p-2.5 rounded-xl border border-primary-100 flex items-center justify-between">
+                      <div className="bg-white/80 p-2.5 rounded-xl border border-gray-200 flex items-center justify-between">
                         <div>
-                          <span className="text-gray-400 block font-semibold">SENHA PROVISÓRIA:</span>
-                          <span className="font-mono font-bold text-primary-700 text-sm">{currentContact.senha}</span>
+                          <span className="text-gray-400 block font-semibold">SENHA TEMPORÁRIA:</span>
+                          <span className="font-mono font-black text-primary text-sm tracking-wide">
+                            {currentContact.senha}
+                          </span>
                         </div>
                         <button
                           onClick={() => {
                             navigator.clipboard.writeText(currentContact.senha || '');
                             toast.success('Senha copiada!');
                           }}
-                          className="text-primary hover:text-primary-700 p-1"
+                          className="text-gray-400 hover:text-gray-600 text-xs ml-2"
                         >
-                          📋
+                          Copiar
                         </button>
                       </div>
                     )}
@@ -781,144 +924,203 @@ export default function AdminDisparadorPage() {
                 )}
               </div>
 
-              {/* Message Bubble Preview */}
-              <div>
-                <div className="flex items-center justify-between text-xs text-gray-500 mb-2">
-                  <span className="font-semibold uppercase tracking-wider">Preview da Mensagem que será enviada:</span>
-                  <span>{activeMessageText.length} caracteres (~{Math.ceil(activeMessageText.length / 160)} SMS)</span>
-                </div>
-                <div className="bg-gray-50 rounded-2xl p-4 border border-gray-200 text-gray-800 text-sm leading-relaxed whitespace-pre-wrap font-sans relative group">
-                  {activeMessageText}
+              {/* Message Preview Box */}
+              <div className="space-y-2">
+                <div className="flex items-center justify-between">
+                  <span className="text-xs font-bold uppercase tracking-wider text-gray-500">
+                    Prévia da Mensagem Personalizada
+                  </span>
                   <button
                     onClick={() => {
                       navigator.clipboard.writeText(activeMessageText);
-                      toast.success('Texto da mensagem copiado!');
+                      toast.success('Mensagem copiada para a área de transferência!');
                     }}
-                    className="absolute top-2 right-2 opacity-80 hover:opacity-100 bg-white border border-gray-200 px-2 py-1 rounded text-xs text-gray-600 shadow-sm"
+                    className="text-xs text-primary hover:text-primary-700 font-semibold flex items-center gap-1"
                   >
-                    Copiar
+                    <span>📋</span> Copiar texto completo
                   </button>
+                </div>
+                <div className="bg-gray-50 rounded-2xl p-4 border border-gray-200 text-xs sm:text-sm text-gray-800 leading-relaxed font-sans whitespace-pre-wrap">
+                  {activeMessageText}
+                </div>
+                <div className="flex items-center justify-between text-[11px] text-gray-400 pt-1">
+                  <span>{activeMessageText.length} caracteres</span>
+                  <span>Variáveis dinâmicas preenchidas</span>
                 </div>
               </div>
 
-              {/* BIG ACTION BUTTONS (MOBILE-FIRST) */}
+              {/* Primary Dispatch Buttons (Mobile-First 1-Touch) */}
               <div className="space-y-3 pt-2">
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                  {/* WhatsApp Big Button */}
-                  <button
-                    onClick={handleOpenWhatsApp}
-                    className="flex items-center justify-center gap-3 bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-4 px-6 rounded-2xl text-base sm:text-lg shadow-lg shadow-emerald-600/20 active:scale-[0.98] transition cursor-pointer"
-                  >
-                    <span className="text-2xl">💬</span>
-                    <span>Enviar no WhatsApp</span>
-                  </button>
-
-                  {/* SMS Big Button */}
+                  {/* SMS Button (Primary) */}
                   <button
                     onClick={handleOpenSms}
-                    className="flex items-center justify-center gap-3 bg-blue-600 hover:bg-blue-700 text-white font-bold py-4 px-6 rounded-2xl text-base sm:text-lg shadow-lg shadow-blue-600/20 active:scale-[0.98] transition cursor-pointer"
+                    className="w-full bg-blue-600 hover:bg-blue-700 active:bg-blue-800 text-white font-black py-4 px-6 rounded-2xl text-base shadow-md hover:shadow-lg transition flex items-center justify-center gap-3 transform active:scale-[0.98]"
                   >
-                    <span className="text-2xl">📱</span>
-                    <span>Enviar por SMS</span>
+                    <span className="text-xl">💬</span>
+                    <span>{isReprocessQueue ? 'Reenviar SMS (1 Toque)' : 'Enviar SMS (1 Toque)'}</span>
+                  </button>
+
+                  {/* WhatsApp Button */}
+                  <button
+                    onClick={handleOpenWhatsApp}
+                    className="w-full bg-green-600 hover:bg-green-700 active:bg-green-800 text-white font-black py-4 px-6 rounded-2xl text-base shadow-md hover:shadow-lg transition flex items-center justify-center gap-3 transform active:scale-[0.98]"
+                  >
+                    <span className="text-xl">📱</span>
+                    <span>{isReprocessQueue ? 'Reenviar WhatsApp' : 'Enviar WhatsApp'}</span>
                   </button>
                 </div>
 
-                {/* Secondary controls */}
-                <div className="flex items-center justify-between pt-3 border-t border-gray-100 gap-2">
-                  <button
-                    onClick={() => saveCurrentIndex(currentIndex - 1)}
-                    disabled={currentIndex === 0}
-                    className="px-3 sm:px-4 py-2.5 rounded-xl border border-gray-200 text-gray-700 font-semibold text-xs sm:text-sm hover:bg-gray-50 disabled:opacity-40 disabled:cursor-not-allowed transition"
-                  >
-                    ◀ Anterior
-                  </button>
+                {/* Secondary navigation and manual controls */}
+                <div className="flex flex-wrap items-center justify-between gap-2 pt-2 border-t border-gray-100">
+                  <div className="flex items-center gap-2">
+                    <button
+                      onClick={() => {
+                        if (currentQueueIndex > 0) setCurrentQueueIndex(currentQueueIndex - 1);
+                      }}
+                      disabled={currentQueueIndex === 0}
+                      className="px-3 py-2 text-xs font-bold text-gray-600 hover:text-gray-900 bg-gray-100 hover:bg-gray-200 disabled:opacity-40 disabled:hover:bg-gray-100 rounded-xl transition"
+                    >
+                      ← Anterior
+                    </button>
+                    <button
+                      onClick={() => {
+                        if (currentQueueIndex < activeQueueContacts.length - 1) {
+                          setCurrentQueueIndex(currentQueueIndex + 1);
+                        }
+                      }}
+                      disabled={currentQueueIndex >= activeQueueContacts.length - 1}
+                      className="px-3 py-2 text-xs font-bold text-gray-600 hover:text-gray-900 bg-gray-100 hover:bg-gray-200 disabled:opacity-40 disabled:hover:bg-gray-100 rounded-xl transition"
+                    >
+                      Próximo →
+                    </button>
+                  </div>
 
                   <div className="flex items-center gap-2">
                     <button
                       onClick={handleSkip}
-                      className="px-3 sm:px-4 py-2.5 rounded-xl bg-gray-100 hover:bg-gray-200 text-gray-700 font-semibold text-xs sm:text-sm transition"
+                      className="px-3 py-2 text-xs font-bold text-amber-700 bg-amber-50 hover:bg-amber-100 rounded-xl transition"
                     >
                       Pular ⏭
                     </button>
                     <button
                       onClick={handleMarkSent}
-                      className="px-3 sm:px-4 py-2.5 rounded-xl bg-green-50 hover:bg-green-100 text-green-700 border border-green-200 font-semibold text-xs sm:text-sm transition"
+                      className="px-3 py-2 text-xs font-bold text-gray-700 bg-gray-100 hover:bg-gray-200 rounded-xl transition"
                     >
-                      ✓ Marcar Enviado
+                      ✓ Marcar como enviado
                     </button>
                   </div>
+                </div>
 
+                {/* Auto advance toggle */}
+                <div className="flex items-center justify-between text-xs text-gray-500 pt-1">
+                  <label className="flex items-center gap-2 cursor-pointer select-none">
+                    <input
+                      type="checkbox"
+                      checked={autoAdvance}
+                      onChange={(e) => setAutoAdvance(e.target.checked)}
+                      className="rounded text-primary focus:ring-primary w-4 h-4"
+                    />
+                    <span>Remover contato da fila e avançar automaticamente ao disparar</span>
+                  </label>
                   <button
-                    onClick={() => saveCurrentIndex(currentIndex + 1)}
-                    disabled={currentIndex >= queueContacts.length - 1}
-                    className="px-3 sm:px-4 py-2.5 rounded-xl border border-gray-200 text-gray-700 font-semibold text-xs sm:text-sm hover:bg-gray-50 disabled:opacity-40 disabled:cursor-not-allowed transition"
+                    onClick={() => setActiveTab('template')}
+                    className="text-primary hover:underline text-xs"
                   >
-                    Próximo ▶
+                    Alterar modelo de mensagem ↗
                   </button>
                 </div>
-              </div>
-
-              {/* Auto advance toggle */}
-              <div className="pt-2 flex items-center justify-between bg-gray-50 p-3 rounded-xl text-xs text-gray-600">
-                <span>
-                  Modo rápido: ao enviar por SMS ou WhatsApp, marca como enviado e remove o contato da fila
-                </span>
-                <label className="relative inline-flex items-center cursor-pointer">
-                  <input
-                    type="checkbox"
-                    checked={autoAdvance}
-                    onChange={(e) => setAutoAdvance(e.target.checked)}
-                    className="sr-only peer"
-                  />
-                  <div className="w-9 h-5 bg-gray-200 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-4 after:w-4 after:transition-all peer-checked:bg-primary"></div>
-                </label>
               </div>
             </div>
           )}
         </div>
       )}
 
-      {/* TAB 2: TABLE / LISTA COMPLETA */}
+      {/* TAB 2: TODOS OS CONTATOS (TABELA COM FILTRO DE STATUS) */}
       {activeTab === 'table' && (
         <div className="bg-white rounded-3xl p-5 sm:p-7 shadow-sm border border-gray-200 space-y-4">
-          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
-            {/* Search */}
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+            <div>
+              <h3 className="text-lg font-bold text-gray-900 font-heading">
+                Todos os Contatos da Lista
+              </h3>
+              <p className="text-xs sm:text-sm text-gray-500 mt-0.5">
+                {currentList.contacts.length} cadastrados no total. Filtrar por status ou buscar por nome/telefone.
+              </p>
+            </div>
+            {stats.sent > 0 && (
+              <button
+                type="button"
+                onClick={handleReprocessAllSent}
+                className="text-xs font-bold text-purple-700 bg-purple-50 hover:bg-purple-100 border border-purple-200 px-3 py-2 rounded-xl transition shadow-sm self-start sm:self-auto"
+              >
+                🔄 Mover todos os enviados ({stats.sent}) para Reprocessamento
+              </button>
+            )}
+          </div>
+
+          {/* Search & Filter Bar */}
+          <div className="flex flex-col sm:flex-row gap-3">
             <div className="relative flex-1">
               <input
                 type="text"
-                placeholder="Buscar por nome, telefone, prefixo..."
+                placeholder="Buscar por nome, telefone, login ou prefixo..."
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
                 className="w-full bg-gray-50 border border-gray-300 rounded-xl px-4 py-2 text-sm text-gray-800 focus:ring-2 focus:ring-primary focus:border-primary transition"
               />
-              {searchQuery && (
-                <button
-                  onClick={() => setSearchQuery('')}
-                  className="absolute right-3 top-2.5 text-gray-400 hover:text-gray-600 text-xs"
-                >
-                  ✕
-                </button>
-              )}
             </div>
-
-            {/* Filter */}
-            <div className="flex gap-2 text-xs font-semibold">
-              {(['all', 'pending', 'sent', 'skipped'] as const).map((s) => (
-                <button
-                  key={s}
-                  onClick={() => setStatusFilter(s)}
-                  className={`px-3 py-2 rounded-xl transition ${
-                    statusFilter === s
-                      ? 'bg-primary text-white'
-                      : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
-                  }`}
-                >
-                  {s === 'all' && `Na fila (${stats.remaining})`}
-                  {s === 'pending' && `Pendentes (${stats.pending})`}
-                  {s === 'sent' && `Enviados (${stats.sent})`}
-                  {s === 'skipped' && `Pulados (${stats.skipped})`}
-                </button>
-              ))}
+            <div className="flex items-center gap-1.5 overflow-x-auto text-xs font-semibold">
+              <button
+                onClick={() => setStatusFilter('all')}
+                className={`px-3 py-2 rounded-xl transition whitespace-nowrap ${
+                  statusFilter === 'all'
+                    ? 'bg-gray-900 text-white'
+                    : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
+                }`}
+              >
+                Todos ({stats.total})
+              </button>
+              <button
+                onClick={() => setStatusFilter('new')}
+                className={`px-3 py-2 rounded-xl transition whitespace-nowrap flex items-center gap-1 ${
+                  statusFilter === 'new'
+                    ? 'bg-blue-600 text-white'
+                    : 'bg-blue-50 text-blue-700 hover:bg-blue-100'
+                }`}
+              >
+                🆕 Novos ({stats.newCount})
+              </button>
+              <button
+                onClick={() => setStatusFilter('reprocess')}
+                className={`px-3 py-2 rounded-xl transition whitespace-nowrap flex items-center gap-1 ${
+                  statusFilter === 'reprocess'
+                    ? 'bg-purple-600 text-white'
+                    : 'bg-purple-50 text-purple-700 hover:bg-purple-100'
+                }`}
+              >
+                🔄 Reprocessar ({stats.reprocessCount})
+              </button>
+              <button
+                onClick={() => setStatusFilter('sent')}
+                className={`px-3 py-2 rounded-xl transition whitespace-nowrap flex items-center gap-1 ${
+                  statusFilter === 'sent'
+                    ? 'bg-green-600 text-white'
+                    : 'bg-green-50 text-green-700 hover:bg-green-100'
+                }`}
+              >
+                ✓ Enviados ({stats.sent})
+              </button>
+              <button
+                onClick={() => setStatusFilter('skipped')}
+                className={`px-3 py-2 rounded-xl transition whitespace-nowrap ${
+                  statusFilter === 'skipped'
+                    ? 'bg-amber-600 text-white'
+                    : 'bg-amber-50 text-amber-700 hover:bg-amber-100'
+                }`}
+              >
+                Pulados ({stats.skipped})
+              </button>
             </div>
           </div>
 
@@ -930,7 +1132,7 @@ export default function AdminDisparadorPage() {
                   <th className="p-3">#</th>
                   <th className="p-3">Nome</th>
                   <th className="p-3">Telefone</th>
-                  {currentList.hasCredentials && <th className="p-3">Login (tel.)</th>}
+                  {currentList.hasCredentials && <th className="p-3">Login</th>}
                   {currentList.hasCredentials && <th className="p-3">Senha</th>}
                   <th className="p-3">Status</th>
                   <th className="p-3 text-right">Ação</th>
@@ -938,15 +1140,21 @@ export default function AdminDisparadorPage() {
               </thead>
               <tbody className="divide-y divide-gray-100">
                 {filteredContacts.map((contact, idx) => {
-                  const status = progress[contact.id]?.status || 'pending';
-                  const isCurrent = queueContacts[currentIndex]?.id === contact.id;
+                  const p = progress[contact.id];
+                  const status: ContactStatus = p ? p.status : 'new';
 
                   return (
                     <tr
                       key={contact.id}
-                      className={`hover:bg-gray-50/80 transition ${
-                        isCurrent ? 'bg-primary-50/40 font-semibold' : ''
-                      }`}
+                      className={
+                        status === 'sent'
+                          ? 'bg-green-50/20'
+                          : status === 'reprocess'
+                          ? 'bg-purple-50/20'
+                          : status === 'skipped'
+                          ? 'bg-amber-50/20'
+                          : 'hover:bg-gray-50/80'
+                      }
                     >
                       <td className="p-3 text-gray-400 font-mono">{idx + 1}</td>
                       <td className="p-3 font-medium text-gray-900">{contact.nome}</td>
@@ -961,47 +1169,64 @@ export default function AdminDisparadorPage() {
                       )}
                       <td className="p-3">
                         {status === 'sent' && (
-                          <span className="bg-green-100 text-green-800 text-[11px] font-bold px-2 py-0.5 rounded-full">
-                            Enviado
+                          <span className="bg-green-100 text-green-800 text-[11px] font-bold px-2.5 py-0.5 rounded-full">
+                            ✓ Enviado
+                          </span>
+                        )}
+                        {status === 'reprocess' && (
+                          <span className="bg-purple-100 text-purple-800 text-[11px] font-bold px-2.5 py-0.5 rounded-full">
+                            🔄 Reprocessar
                           </span>
                         )}
                         {status === 'skipped' && (
-                          <span className="bg-amber-100 text-amber-800 text-[11px] font-bold px-2 py-0.5 rounded-full">
-                            Pulado
+                          <span className="bg-amber-100 text-amber-800 text-[11px] font-bold px-2.5 py-0.5 rounded-full">
+                            ⏭ Pulado
                           </span>
                         )}
-                        {status === 'pending' && (
-                          <span className="bg-gray-100 text-gray-600 text-[11px] font-bold px-2 py-0.5 rounded-full">
-                            Pendente
+                        {status === 'new' && (
+                          <span className="bg-blue-100 text-blue-800 text-[11px] font-bold px-2.5 py-0.5 rounded-full">
+                            🆕 Novo
                           </span>
                         )}
                       </td>
-                      <td className="p-3 text-right space-x-1">
+                      <td className="p-3 text-right space-x-1 whitespace-nowrap">
                         {status === 'sent' ? (
                           <button
                             type="button"
                             onClick={() => restoreContactToQueue(contact.id)}
-                            className="text-amber-800 hover:text-amber-900 font-bold text-xs bg-amber-50 border border-amber-200 px-2.5 py-1 rounded-lg shadow-sm"
+                            className="text-purple-800 hover:text-purple-900 font-bold text-xs bg-purple-50 border border-purple-200 px-2.5 py-1 rounded-lg shadow-sm"
+                            title="Mover para a fila de Reprocessamento"
                           >
-                            ↩ Restaurar
+                            🔄 Reprocessar
+                          </button>
+                        ) : status === 'reprocess' ? (
+                          <button
+                            type="button"
+                            onClick={() => {
+                              const qIdx = reprocessContacts.findIndex((c) => c.id === contact.id);
+                              if (qIdx >= 0) setReprocessIndex(qIdx);
+                              setActiveTab('queue_reprocess');
+                            }}
+                            className="text-purple-700 hover:text-purple-900 font-bold text-xs bg-purple-50 hover:bg-purple-100 border border-purple-200 px-2.5 py-1 rounded-lg shadow-sm"
+                          >
+                            Disparar 🔄
                           </button>
                         ) : status === 'skipped' ? (
                           <>
                             <button
                               type="button"
                               onClick={() => restoreContactToQueue(contact.id)}
-                              className="text-amber-800 font-bold text-xs bg-amber-50 border border-amber-200 px-2.5 py-1 rounded-lg"
+                              className="text-purple-800 font-bold text-xs bg-purple-50 border border-purple-200 px-2.5 py-1 rounded-lg"
+                              title="Mover para a fila de Reprocessamento"
                             >
-                              ↩ Fila
+                              🔄 Reprocessar
                             </button>
                             <button
                               type="button"
                               onClick={() => {
-                                const queueIdx = queueContacts.findIndex((c) => c.id === contact.id);
-                                if (queueIdx >= 0) {
-                                  saveCurrentIndex(queueIdx);
-                                  setActiveTab('queue');
-                                }
+                                const qIdx = newContacts.findIndex((c) => c.id === contact.id);
+                                if (qIdx >= 0) setNewIndex(qIdx);
+                                setActiveTab('queue_new');
                               }}
                               className="text-primary font-bold text-xs bg-white border border-primary-200 px-2.5 py-1 rounded-lg"
                             >
@@ -1012,15 +1237,13 @@ export default function AdminDisparadorPage() {
                           <button
                             type="button"
                             onClick={() => {
-                              const queueIdx = queueContacts.findIndex((c) => c.id === contact.id);
-                              if (queueIdx >= 0) {
-                                saveCurrentIndex(queueIdx);
-                                setActiveTab('queue');
-                              }
+                              const qIdx = newContacts.findIndex((c) => c.id === contact.id);
+                              if (qIdx >= 0) setNewIndex(qIdx);
+                              setActiveTab('queue_new');
                             }}
-                            className="text-primary hover:text-primary-700 font-bold text-xs bg-white border border-primary-200 px-2.5 py-1 rounded-lg shadow-sm"
+                            className="text-blue-700 hover:text-blue-900 font-bold text-xs bg-blue-50 hover:bg-blue-100 border border-blue-200 px-2.5 py-1 rounded-lg shadow-sm"
                           >
-                            Disparar →
+                            Disparar Novo →
                           </button>
                         )}
                       </td>
@@ -1035,9 +1258,9 @@ export default function AdminDisparadorPage() {
             <span className="text-xs text-gray-500">Mostrando {filteredContacts.length} contatos</span>
             <button
               onClick={handleResetProgress}
-              className="text-xs text-red-600 hover:text-red-700 font-semibold px-3 py-1.5 rounded-lg hover:bg-red-50 transition"
+              className="text-xs text-purple-700 hover:text-purple-800 font-semibold px-3 py-1.5 rounded-lg hover:bg-purple-50 border border-purple-200 transition"
             >
-              🗑️ Zerar status da lista
+              🔄 Mover todos processados para Reprocessamento
             </button>
           </div>
         </div>
@@ -1046,12 +1269,23 @@ export default function AdminDisparadorPage() {
       {/* TAB: HISTÓRICO DE ENVIADOS */}
       {activeTab === 'history' && (
         <div className="bg-white rounded-3xl p-5 sm:p-7 shadow-sm border border-gray-200 space-y-4">
-          <div>
-            <h3 className="text-lg font-bold text-gray-900 font-heading">Histórico de enviados</h3>
-            <p className="text-xs sm:text-sm text-gray-500 mt-1">
-              Contatos marcados como enviados saem da fila, mas ficam aqui. Se houve falha, use{' '}
-              <strong>Restaurar</strong> para voltar à fila de disparo.
-            </p>
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+            <div>
+              <h3 className="text-lg font-bold text-gray-900 font-heading">Histórico de Enviados</h3>
+              <p className="text-xs sm:text-sm text-gray-500 mt-1">
+                Contatos enviados nesta rodada. Se desejar disparar novamente, clique em{' '}
+                <strong>Reprocessar</strong> para colocar de volta na fila de Reprocessamento.
+              </p>
+            </div>
+            {stats.sent > 0 && (
+              <button
+                type="button"
+                onClick={handleReprocessAllSent}
+                className="text-xs font-bold text-purple-700 bg-purple-50 hover:bg-purple-100 border border-purple-200 px-3 py-2 rounded-xl transition shadow-sm self-start sm:self-auto"
+              >
+                🔄 Mover Todos para Reprocessamento
+              </button>
+            )}
           </div>
 
           <div className="relative">
@@ -1067,7 +1301,7 @@ export default function AdminDisparadorPage() {
           {filteredSentHistory.length === 0 ? (
             <div className="text-center py-12 text-gray-500 text-sm border border-dashed border-gray-200 rounded-2xl">
               {stats.sent === 0
-                ? 'Nenhum envio registrado nesta lista ainda.'
+                ? 'Nenhum envio registrado nesta rodada ainda. Dispare contatos da fila de Novos ou de Reprocessamento.'
                 : 'Nenhum resultado para a busca.'}
             </div>
           ) : (
@@ -1097,9 +1331,10 @@ export default function AdminDisparadorPage() {
                         <button
                           type="button"
                           onClick={() => restoreContactToQueue(contact.id)}
-                          className="text-amber-800 hover:text-amber-900 font-bold text-xs bg-amber-50 border border-amber-200 px-2.5 py-1 rounded-lg"
+                          className="text-purple-800 hover:text-purple-900 font-bold text-xs bg-purple-50 border border-purple-200 px-2.5 py-1 rounded-lg transition hover:bg-purple-100"
+                          title="Sempre que colocar de volta pra fila vai para Reprocessados"
                         >
-                          ↩ Restaurar à fila
+                          🔄 Colocar em Reprocessamento
                         </button>
                       </td>
                     </tr>
@@ -1194,12 +1429,12 @@ export default function AdminDisparadorPage() {
 
           <button
             onClick={() => {
-              setActiveTab('queue');
+              setActiveTab('queue_new');
               toast.success('Modelo salvo e pronto para envio!');
             }}
             className="w-full sm:w-auto bg-primary hover:bg-primary-600 text-white font-bold px-6 py-3 rounded-xl transition"
           >
-            Usar Este Modelo e Voltar à Fila →
+            Usar Este Modelo e Voltar à Fila de Novos →
           </button>
         </div>
       )}
