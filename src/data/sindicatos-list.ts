@@ -12,6 +12,8 @@ export interface SindicatoContactItem extends ContactItem {
   endereco?: string;
   cnpj?: string;
   observacoes?: string;
+  usuario?: string;
+  senha?: string;
 }
 
 export const SINDICATOS_LIST: SindicatoContactItem[] = sindicatosJson as SindicatoContactItem[];
@@ -20,7 +22,7 @@ export const SINDICATOS_CONTACT_GROUP: ContactListGroup = {
   id: 'sindicatos-associacoes',
   title: '🏛️ Sindicatos & Associações Brasil (' + SINDICATOS_LIST.length + ')',
   description: 'Sindicatos, associações e cooperativas de transporte escolar em cidades cadastradas no Alô Tio',
-  hasCredentials: false,
+  hasCredentials: true,
   contacts: SINDICATOS_LIST,
 };
 

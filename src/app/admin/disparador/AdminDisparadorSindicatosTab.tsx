@@ -15,8 +15,28 @@ interface SindicatosProgress {
   [contactId: string]: ContactProgressItem;
 }
 
-const DEFAULT_SINDICATO_TEMPLATE =
-  'Olá, {nome}! Tudo bem? Sou da equipe do Alô Tio (https://alotio.com.br), o maior portal de vans e transporte escolar do Brasil.\n\nNotamos o importante trabalho de vocês junto aos transportadores escolares de {cidade} ({uf}). Gostaríamos de propor uma parceria gratuita: criamos um canal oficial para o sindicato/associação cadastrar seus associados e divulgar benefícios, ajudando os pais da sua região a encontrarem vans escolares regulamentadas e fortalecendo a categoria.\n\nPodemos conversar no WhatsApp sobre como levar essa parceria aos seus associados?';
+export const SINDICATO_TEMPLATE_PRESETS = [
+  {
+    id: 'com-senha',
+    name: '🔑 Acesso Oficial com Senha Temporária (Recomendado)',
+    text:
+      'Olá {responsavel}! Aqui é da equipe do Alô Tio (https://alotio.com.br).\n\nLiberamos o acesso oficial do {nome} no portal Alô Tio para gestão e apoio aos transportadores escolares de {cidade} ({uf}).\n\n🔑 Seus Dados de Acesso:\n• Painel: https://alotio.com.br/login\n• Login: {usuario}\n• Senha Temporária: {senha}\n\nCom esse acesso vocês podem validar condutores associados, divulgar comunicados e ajudar os pais a encontrarem transporte escolar legalizado na região.\n\nQualquer dúvida estamos à disposição por este WhatsApp!',
+  },
+  {
+    id: 'convite-rapido',
+    name: '⚡ Convite Rápido com Login e Senha',
+    text:
+      'Olá, {nome}! Tudo bem? Liberamos o acesso oficial da sua entidade no Alô Tio (https://alotio.com.br) para apoiar os condutores escolares de {cidade} ({uf}).\n\nAcesse https://alotio.com.br/login\nLogin: {usuario}\nSenha: {senha}\n\nEstamos à disposição para ajudar no primeiro acesso!',
+  },
+  {
+    id: 'sem-senha',
+    name: '🏛️ Proposta de Parceria Institucional (sem senha)',
+    text:
+      'Olá, {nome}! Tudo bem? Sou da equipe do Alô Tio (https://alotio.com.br), o maior portal de vans e transporte escolar do Brasil.\n\nNotamos o importante trabalho de vocês junto aos transportadores escolares de {cidade} ({uf}). Gostaríamos de propor uma parceria gratuita: criamos um canal oficial para o sindicato/associação cadastrar seus associados e divulgar benefícios, ajudando os pais da sua região a encontrarem vans escolares regulamentadas e fortalecendo a categoria.\n\nPodemos conversar no WhatsApp sobre como levar essa parceria aos seus associados?',
+  },
+];
+
+const DEFAULT_SINDICATO_TEMPLATE = SINDICATO_TEMPLATE_PRESETS[0].text;
 
 function cleanPhoneForDispatch(raw: string): { digits: string; formatted: string; isValid: boolean } {
   if (!raw) return { digits: '', formatted: '', isValid: false };
@@ -219,11 +239,25 @@ export default function AdminDisparadorSindicatosTab() {
   const interpolateMessage = (template: string, contact: SindicatoContactItem): string => {
     let msg = template;
     const displayName = contact.sigla || contact.nome.split('-')[0].split('|')[0].trim();
+    const phoneInfo = cleanPhoneForDispatch(contact.telefoneRaw || contact.telefone);
+    const userLogin =
+      contact.usuario ||
+      (phoneInfo.isValid ? phoneInfo.digits : '') ||
+      contact.email ||
+      contact.telefone ||
+      '';
+    const userPassword = contact.senha || 'alotio2026';
+
     msg = msg.replace(/\{nome\}/g, displayName);
     msg = msg.replace(/\{cidade\}/g, contact.cidade || 'sua cidade');
     msg = msg.replace(/\{uf\}/g, contact.uf || 'Brasil');
     msg = msg.replace(/\{responsavel\}/g, contact.responsavel || 'Diretoria');
     msg = msg.replace(/\{telefone\}/g, contact.telefone || '');
+    msg = msg.replace(/\{usuario\}/g, userLogin);
+    msg = msg.replace(/\{login\}/g, userLogin);
+    msg = msg.replace(/\{senha\}/g, userPassword);
+    msg = msg.replace(/\{email\}/g, contact.email || '');
+    msg = msg.replace(/\{link\}/g, 'https://alotio.com.br/login');
     return msg;
   };
 
@@ -510,25 +544,59 @@ export default function AdminDisparadorSindicatosTab() {
               </button>
             </div>
 
+            {/* Modelos Predefinidos */}
+            <div>
+              <span className="text-xs font-bold text-emerald-900 block mb-1.5 uppercase tracking-wide">
+                Modelos Rápidos Prontos:
+              </span>
+              <div className="flex flex-wrap gap-2">
+                {SINDICATO_TEMPLATE_PRESETS.map((preset) => (
+                  <button
+                    key={preset.id}
+                    type="button"
+                    onClick={() => {
+                      setTemplateText(preset.text);
+                      toast.success(`Modelo "${preset.name.split('(')[0].trim()}" aplicado!`);
+                    }}
+                    className={`text-xs px-3 py-1.5 rounded-xl border font-bold transition flex items-center gap-1.5 ${
+                      templateText === preset.text
+                        ? 'bg-emerald-700 text-white border-emerald-800 shadow-sm'
+                        : 'bg-white hover:bg-emerald-100 text-emerald-900 border-emerald-300'
+                    }`}
+                  >
+                    <span>{preset.name}</span>
+                  </button>
+                ))}
+              </div>
+            </div>
+
             {/* Variable Tags */}
-            <div className="flex flex-wrap gap-2 text-xs">
-              {[
-                { tag: '{nome}', desc: 'Nome ou sigla da entidade' },
-                { tag: '{cidade}', desc: 'Cidade da entidade' },
-                { tag: '{uf}', desc: 'Estado (UF)' },
-                { tag: '{responsavel}', desc: 'Responsável / Presidente' },
-                { tag: '{telefone}', desc: 'Telefone oficial' },
-              ].map(({ tag, desc }) => (
-                <button
-                  key={tag}
-                  type="button"
-                  onClick={() => setTemplateText((prev) => `${prev} ${tag}`)}
-                  className="bg-white hover:bg-emerald-100 text-emerald-800 border border-emerald-300 px-2.5 py-1 rounded-lg font-mono font-bold text-xs transition"
-                  title={desc}
-                >
-                  {tag}
-                </button>
-              ))}
+            <div>
+              <span className="text-xs font-bold text-emerald-900 block mb-1.5 uppercase tracking-wide">
+                Tags Dinâmicas (clique para inserir):
+              </span>
+              <div className="flex flex-wrap gap-2 text-xs">
+                {[
+                  { tag: '{nome}', desc: 'Nome ou sigla da entidade' },
+                  { tag: '{responsavel}', desc: 'Responsável / Presidente' },
+                  { tag: '{usuario}', desc: 'Login / E-mail de acesso' },
+                  { tag: '{senha}', desc: 'Senha temporária de acesso' },
+                  { tag: '{link}', desc: 'Link do painel de login' },
+                  { tag: '{cidade}', desc: 'Cidade da entidade' },
+                  { tag: '{uf}', desc: 'Estado (UF)' },
+                  { tag: '{telefone}', desc: 'Telefone oficial' },
+                ].map(({ tag, desc }) => (
+                  <button
+                    key={tag}
+                    type="button"
+                    onClick={() => setTemplateText((prev) => `${prev} ${tag}`)}
+                    className="bg-white hover:bg-emerald-100 text-emerald-800 border border-emerald-300 px-2.5 py-1 rounded-lg font-mono font-bold text-xs transition"
+                    title={desc}
+                  >
+                    {tag}
+                  </button>
+                ))}
+              </div>
             </div>
 
             <textarea
@@ -688,7 +756,7 @@ export default function AdminDisparadorSindicatosTab() {
               </div>
 
               {/* Entity Info Grid */}
-              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
                 <div className="bg-gray-50 rounded-2xl p-4 border border-gray-100">
                   <span className="block text-xs uppercase font-semibold text-gray-400">Telefone / WhatsApp</span>
                   <div className="flex items-center gap-2 mt-1">
@@ -735,6 +803,40 @@ export default function AdminDisparadorSindicatosTab() {
                       Sigla: {currentContact.sigla}
                     </span>
                   )}
+                </div>
+
+                <div className="bg-amber-50/80 rounded-2xl p-4 border border-amber-200 flex flex-col justify-between">
+                  <div className="flex items-center justify-between">
+                    <span className="block text-xs uppercase font-extrabold text-amber-900">
+                      🔑 Acesso & Senha
+                    </span>
+                    {currentContact.senha && (
+                      <button
+                        onClick={() => {
+                          navigator.clipboard.writeText(currentContact.senha || '');
+                          toast.success('Senha temporária copiada!');
+                        }}
+                        className="text-[11px] font-bold text-amber-900 bg-amber-200/90 hover:bg-amber-300 px-2 py-0.5 rounded-md transition"
+                        title="Copiar senha"
+                      >
+                        Copiar Senha
+                      </button>
+                    )}
+                  </div>
+                  <div className="mt-2 space-y-1">
+                    <div className="flex items-center justify-between text-xs">
+                      <span className="text-gray-500 font-medium">Login:</span>
+                      <span className="font-bold text-gray-900 font-mono truncate max-w-[150px]">
+                        {currentContact.usuario || currentContact.telefone}
+                      </span>
+                    </div>
+                    <div className="flex items-center justify-between text-xs">
+                      <span className="text-gray-500 font-medium">Senha:</span>
+                      <span className="font-black text-amber-950 font-mono bg-white px-2 py-0.5 rounded border border-amber-300">
+                        {currentContact.senha || 'alotio2026'}
+                      </span>
+                    </div>
+                  </div>
                 </div>
               </div>
 
@@ -871,6 +973,7 @@ export default function AdminDisparadorSindicatosTab() {
                   <th className="py-3 px-3">Tipo</th>
                   <th className="py-3 px-3">Cidade / UF</th>
                   <th className="py-3 px-4">Telefone / WhatsApp</th>
+                  <th className="py-3 px-3">Login / Senha</th>
                   <th className="py-3 px-3">E-mail / Site</th>
                   <th className="py-3 px-3">Status</th>
                   <th className="py-3 px-4 text-right">Ações Rápidas</th>
@@ -904,6 +1007,28 @@ export default function AdminDisparadorSindicatosTab() {
                         {c.telefoneFixo && (
                           <span className="text-xs text-gray-400 block">Fixo: {c.telefoneFixo}</span>
                         )}
+                      </td>
+                      <td className="py-3 px-3 whitespace-nowrap">
+                        <div className="flex items-center gap-1.5 font-mono text-xs">
+                          <span className="font-bold text-amber-950 bg-amber-50 px-2 py-0.5 rounded border border-amber-200">
+                            {c.senha || '—'}
+                          </span>
+                          {c.senha && (
+                            <button
+                              onClick={() => {
+                                navigator.clipboard.writeText(c.senha || '');
+                                toast.success('Senha copiada!');
+                              }}
+                              className="p-1 hover:bg-gray-100 rounded text-gray-500 hover:text-gray-800 transition"
+                              title="Copiar senha"
+                            >
+                              📋
+                            </button>
+                          )}
+                        </div>
+                        <span className="text-[10px] text-gray-400 block truncate max-w-36 mt-0.5 font-mono">
+                          {c.usuario || c.telefone}
+                        </span>
                       </td>
                       <td className="py-3 px-3">
                         {c.email ? (

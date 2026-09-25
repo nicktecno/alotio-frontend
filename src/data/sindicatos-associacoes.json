@@ -15,7 +15,9 @@
     "responsavel": "Diretoria SINTTEASP",
     "endereco": "São Paulo - SP",
     "source": "Google / Cadastro Sindical SP",
-    "observacoes": "Principal sindicato representativo dos transportadores escolares da capital paulista."
+    "observacoes": "Principal sindicato representativo dos transportadores escolares da capital paulista.",
+    "usuario": "contato@sintteasp.org.br",
+    "senha": "alodss5"
   },
   {
     "id": "sind-sp-ugtesp",
@@ -33,7 +35,9 @@
     "responsavel": "Diretoria Executiva",
     "endereco": "São Paulo - SP",
     "source": "Google / UGTESP",
-    "observacoes": "Entidade de forte atuação no Transporte Escolar Gratuito (TEG) e vistorias em SP."
+    "observacoes": "Entidade de forte atuação no Transporte Escolar Gratuito (TEG) e vistorias em SP.",
+    "usuario": "atendimento@ugtesp.com.br",
+    "senha": "alodgvu"
   },
   {
     "id": "sind-sp-acebs-santos",
@@ -51,7 +55,9 @@
     "responsavel": "Diretoria ACEBS",
     "endereco": "Santos - SP",
     "source": "Google / Baixada Santista",
-    "observacoes": "Representa os condutores escolares de Santos, São Vicente, Guarujá, Cubatão e Praia Grande."
+    "observacoes": "Representa os condutores escolares de Santos, São Vicente, Guarujá, Cubatão e Praia Grande.",
+    "usuario": "contato@acebs.org.br",
+    "senha": "alo3tz2"
   },
   {
     "id": "sind-sp-astepg-praia-grande",
@@ -69,7 +75,9 @@
     "responsavel": "Coordenação ASTEPG",
     "endereco": "Praia Grande - SP",
     "source": "Google / Setor Escolar PG",
-    "observacoes": "Associação local de condutores permissionários de Praia Grande."
+    "observacoes": "Associação local de condutores permissionários de Praia Grande.",
+    "usuario": "astepg.praiagrande@gmail.com",
+    "senha": "alo2vhw"
   },
   {
     "id": "sind-sp-sintratesp-abc",
@@ -87,7 +95,9 @@
     "responsavel": "Presidência Regional ABC",
     "endereco": "Santo André, São Bernardo do Campo e Diadema - SP",
     "source": "Google / CSB",
-    "observacoes": "Representa os transportadores escolares de Santo André, São Bernardo, Diadema e região."
+    "observacoes": "Representa os transportadores escolares de Santo André, São Bernardo, Diadema e região.",
+    "usuario": "contato@sintratespabc.com.br",
+    "senha": "alod4q4"
   },
   {
     "id": "sind-sp-univans-sbc",
@@ -105,7 +115,9 @@
     "responsavel": "Coordenação UNIVANS",
     "endereco": "São Bernardo do Campo - SP",
     "source": "Google / Univans",
-    "observacoes": "União de permissionários com portal consolidado e atuação expressiva no ABC Paulista."
+    "observacoes": "União de permissionários com portal consolidado e atuação expressiva no ABC Paulista.",
+    "usuario": "contato@univansescolar.com.br",
+    "senha": "aloyygh"
   },
   {
     "id": "sind-sp-sintrautodescamp-campinas",
@@ -123,7 +135,9 @@
     "responsavel": "Diretoria Sindical Campinas",
     "endereco": "Campinas - SP",
     "source": "Google / Campinas",
-    "observacoes": "Representa a categoria de transporte escolar no polo de Campinas e Região Metropolitana."
+    "observacoes": "Representa a categoria de transporte escolar no polo de Campinas e Região Metropolitana.",
+    "usuario": "sintrautodescamp@gmail.com",
+    "senha": "alo9739"
   },
   {
     "id": "sind-sp-assolicam-campinas",
@@ -139,7 +153,9 @@
     "responsavel": "Presidência ASSOLICAM",
     "endereco": "Campinas - SP",
     "source": "Google / EMDEC Campinas",
-    "observacoes": "Associação de transportadores escolares permissionários integrados à EMDEC."
+    "observacoes": "Associação de transportadores escolares permissionários integrados à EMDEC.",
+    "usuario": "assolicam.campinas@gmail.com",
+    "senha": "aloscmu"
   },
   {
     "id": "sind-sp-asteser-sorocaba",
@@ -156,7 +172,9 @@
     "responsavel": "Diretoria ASTESER",
     "endereco": "Sorocaba - SP",
     "source": "Google / URBES Sorocaba",
-    "observacoes": "Mais de 400 transportadores na base de Sorocaba; atuação junto à URBES."
+    "observacoes": "Mais de 400 transportadores na base de Sorocaba; atuação junto à URBES.",
+    "usuario": "asteser.sorocaba@gmail.com",
+    "senha": "alokr6y"
   },
   {
     "id": "sind-sp-terper-ribeirao-preto",
@@ -173,7 +191,9 @@
     "responsavel": "Coordenação Geral TERPER",
     "endereco": "Ribeirão Preto - SP",
     "source": "Google / TERPER RP",
-    "observacoes": "Forte organização local com centenas de permissionários cadastrados."
+    "observacoes": "Forte organização local com centenas de permissionários cadastrados.",
+    "usuario": "terper.rp@gmail.com",
+    "senha": "alouazn"
   },
   {
     "id": "sind-sp-atef-franca",
@@ -189,7 +209,9 @@
     "responsavel": "Diretoria ATEF",
     "endereco": "Franca - SP",
     "source": "Google / ATEF Franca",
-    "observacoes": "Associação de transportadores escolares autorizados de Franca e região."
+    "observacoes": "Associação de transportadores escolares autorizados de Franca e região.",
+    "usuario": "atef.franca@gmail.com",
+    "senha": "aloqpvs"
   },
   {
     "id": "sind-sp-ateb-bauru",
@@ -205,7 +227,9 @@
     "responsavel": "Diretoria ATEB",
     "endereco": "Bauru - SP",
     "source": "Google / EMDURB Bauru",
-    "observacoes": "Atua junto à EMDURB em Bauru na defesa e organização dos condutores escolares."
+    "observacoes": "Atua junto à EMDURB em Bauru na defesa e organização dos condutores escolares.",
+    "usuario": "ateb.bauru@gmail.com",
+    "senha": "alods2v"
   },
   {
     "id": "sind-sp-sinteor-osasco",
@@ -222,7 +246,9 @@
     "responsavel": "Presidência SINTEOR",
     "endereco": "Osasco e Carapicuíba - SP",
     "source": "Google / Sinteor",
-    "observacoes": "Abrange transportadores escolares de Osasco, Carapicuíba e zona oeste metropolitana."
+    "observacoes": "Abrange transportadores escolares de Osasco, Carapicuíba e zona oeste metropolitana.",
+    "usuario": "sinteor.osasco@gmail.com",
+    "senha": "alos7jq"
   },
   {
     "id": "sind-sp-atesc-sao-carlos",
@@ -238,7 +264,9 @@
     "responsavel": "Diretoria ATESC",
     "endereco": "São Carlos - SP",
     "source": "Google / São Carlos",
-    "observacoes": "Associação representativa dos transportadores escolares credenciados em São Carlos."
+    "observacoes": "Associação representativa dos transportadores escolares credenciados em São Carlos.",
+    "usuario": "atesc.saocarlos@gmail.com",
+    "senha": "alo7rta"
   },
   {
     "id": "sind-pr-sindotec-curitiba",
@@ -256,7 +284,9 @@
     "responsavel": "Diretoria SINDOTEC",
     "endereco": "Rua 24 de Maio, Curitiba - PR",
     "source": "Google / Sindotec PR",
-    "observacoes": "Um dos sindicatos mais estruturados do Brasil, abrangendo Curitiba, Colombo e São José dos Pinhais."
+    "observacoes": "Um dos sindicatos mais estruturados do Brasil, abrangendo Curitiba, Colombo e São José dos Pinhais.",
+    "usuario": "sindotec@sindotec.com.br",
+    "senha": "alogdby"
   },
   {
     "id": "sind-pr-atel-londrina",
@@ -272,7 +302,9 @@
     "responsavel": "Presidência ATEL",
     "endereco": "Londrina - PR",
     "source": "Google / CMTU Londrina",
-    "observacoes": "Representa os transportadores escolares autorizados pela CMTU em Londrina."
+    "observacoes": "Representa os transportadores escolares autorizados pela CMTU em Londrina.",
+    "usuario": "atel.londrina@gmail.com",
+    "senha": "alo6dwr"
   },
   {
     "id": "sind-pr-soapp-maringa",
@@ -288,7 +320,9 @@
     "responsavel": "Coordenação SOAPP",
     "endereco": "Maringá - PR",
     "source": "Google / Maringá",
-    "observacoes": "Associação ativa em Maringá com dezenas de veículos escolares associados."
+    "observacoes": "Associação ativa em Maringá com dezenas de veículos escolares associados.",
+    "usuario": "soapp.maringa@gmail.com",
+    "senha": "alorh6w"
   },
   {
     "id": "sind-pr-sintropas-ponta-grossa",
@@ -306,7 +340,9 @@
     "responsavel": "Diretoria SINTROPAS",
     "endereco": "Ponta Grossa - PR",
     "source": "Google / AMTT Ponta Grossa",
-    "observacoes": "Atua junto à AMTT na fiscalização e representação do transporte escolar em Ponta Grossa."
+    "observacoes": "Atua junto à AMTT na fiscalização e representação do transporte escolar em Ponta Grossa.",
+    "usuario": "contato@sintropas.com.br",
+    "senha": "alorr79"
   },
   {
     "id": "sind-pr-associacao-cascavel",
@@ -322,7 +358,9 @@
     "responsavel": "Presidência ASTECAS",
     "endereco": "Cascavel - PR",
     "source": "Google / Transitar Cascavel",
-    "observacoes": "Associação atuante junto à Transitar e permissionários de Cascavel."
+    "observacoes": "Associação atuante junto à Transitar e permissionários de Cascavel.",
+    "usuario": "astecas.cascavel@gmail.com",
+    "senha": "alotuxk"
   },
   {
     "id": "sind-rj-sinterj",
@@ -340,7 +378,9 @@
     "responsavel": "Diretoria Estadual SINTERJ",
     "endereco": "Rio de Janeiro - RJ",
     "source": "Google / Sinterj",
-    "observacoes": "Principal entidade sindical do transporte escolar no Estado do Rio de Janeiro."
+    "observacoes": "Principal entidade sindical do transporte escolar no Estado do Rio de Janeiro.",
+    "usuario": "sinterj@sinterj.com.br",
+    "senha": "alo3sr6"
   },
   {
     "id": "sind-rj-sinttevr-volta-redonda",
@@ -356,7 +396,9 @@
     "responsavel": "Coordenação SINTTEVR",
     "endereco": "Volta Redonda - RJ",
     "source": "Google / STMU Volta Redonda",
-    "observacoes": "Representa os mais de 80 transportadores escolares autorizados pela STMU em Volta Redonda."
+    "observacoes": "Representa os mais de 80 transportadores escolares autorizados pela STMU em Volta Redonda.",
+    "usuario": "sinttevr.vr@gmail.com",
+    "senha": "aloqkjb"
   },
   {
     "id": "sind-rj-citet-nova-iguacu",
@@ -372,7 +414,9 @@
     "responsavel": "Diretoria Executiva",
     "endereco": "Duque de Caxias e Nova Iguaçu - RJ",
     "source": "Google / Baixada Fluminense",
-    "observacoes": "Cooperativa atuante na Baixada Fluminense organizando condutores escolares."
+    "observacoes": "Cooperativa atuante na Baixada Fluminense organizando condutores escolares.",
+    "usuario": "citet.transporte@gmail.com",
+    "senha": "aloxvrt"
   },
   {
     "id": "sind-rj-atem-marica",
@@ -388,7 +432,9 @@
     "responsavel": "Presidência ATEM",
     "endereco": "Maricá - RJ",
     "source": "Google / Maricá RJ",
-    "observacoes": "Associação de transportadores municipais de Maricá e Região dos Lagos."
+    "observacoes": "Associação de transportadores municipais de Maricá e Região dos Lagos.",
+    "usuario": "atem.marica@gmail.com",
+    "senha": "alos7js"
   },
   {
     "id": "sind-mg-sintesc-bh",
@@ -406,7 +452,9 @@
     "responsavel": "Presidência SINTESC",
     "endereco": "Belo Horizonte e Contagem - MG",
     "source": "Google / BHTRANS / Sintesc",
-    "observacoes": "Referência em Minas Gerais: oferece assessoria jurídica, gestão de vistorias e convênios para BH e Contagem."
+    "observacoes": "Referência em Minas Gerais: oferece assessoria jurídica, gestão de vistorias e convênios para BH e Contagem.",
+    "usuario": "sintesc@sintesc.com.br",
+    "senha": "alos44u"
   },
   {
     "id": "sind-mg-aeteu-uberlandia",
@@ -423,7 +471,9 @@
     "responsavel": "Diretoria AETEU",
     "endereco": "Uberlândia - MG",
     "source": "Google / Uberlândia",
-    "observacoes": "Representa mais de 200 condutores do transporte escolar em Uberlândia e Triângulo Mineiro."
+    "observacoes": "Representa mais de 200 condutores do transporte escolar em Uberlândia e Triângulo Mineiro.",
+    "usuario": "aeteu.uberlandia@gmail.com",
+    "senha": "alo74k7"
   },
   {
     "id": "sind-rs-sintepa-porto-alegre",
@@ -441,7 +491,9 @@
     "responsavel": "Diretoria Estadual SINTEPA",
     "endereco": "Porto Alegre - RS",
     "source": "Google / EPTC Porto Alegre",
-    "observacoes": "Entidade máxima estadual do transporte escolar no RS, com atuação forte junto à EPTC em Porto Alegre."
+    "observacoes": "Entidade máxima estadual do transporte escolar no RS, com atuação forte junto à EPTC em Porto Alegre.",
+    "usuario": "sintepa@sintepaescolar.org.br",
+    "senha": "alody3s"
   },
   {
     "id": "sind-rs-sinditranspf-caxias",
@@ -459,7 +511,9 @@
     "responsavel": "Presidência SINDITRANSPF",
     "endereco": "Caxias do Sul - RS",
     "source": "Google / Serra Gaúcha",
-    "observacoes": "Representa os quase 200 transportadores de Caxias do Sul e municípios vizinhos da Serra Gaúcha."
+    "observacoes": "Representa os quase 200 transportadores de Caxias do Sul e municípios vizinhos da Serra Gaúcha.",
+    "usuario": "contato@sinditranspf.com.br",
+    "senha": "alor885"
   },
   {
     "id": "sind-sc-sintraturb-florianopolis",
@@ -476,7 +530,9 @@
     "responsavel": "Coordenação Setorial Escolar",
     "endereco": "Florianópolis e São José - SC",
     "source": "Google / PMF Florianópolis",
-    "observacoes": "Representa os mais de 150 transportadores escolares autorizados na Grande Florianópolis."
+    "observacoes": "Representa os mais de 150 transportadores escolares autorizados na Grande Florianópolis.",
+    "usuario": "contato@sintraturb.org.br",
+    "senha": "alorbjs"
   },
   {
     "id": "sind-sc-actej-joinville",
@@ -494,7 +550,9 @@
     "responsavel": "Diretoria Executiva ACTEJ",
     "endereco": "Joinville - SC",
     "source": "Google / Detrans Joinville",
-    "observacoes": "Associação oficial de referência para transporte escolar no polo industrial de Joinville."
+    "observacoes": "Associação oficial de referência para transporte escolar no polo industrial de Joinville.",
+    "usuario": "contato@actej.com.br",
+    "senha": "aloc2pq"
   },
   {
     "id": "sind-ce-setrece-fortaleza",
@@ -512,7 +570,9 @@
     "responsavel": "Presidência SETRECE",
     "endereco": "Fortaleza - CE",
     "source": "Google / AMC Fortaleza",
-    "observacoes": "Entidade sindical de representação em Fortaleza com atuação junto à AMC."
+    "observacoes": "Entidade sindical de representação em Fortaleza com atuação junto à AMC.",
+    "usuario": "setrece.ce@gmail.com",
+    "senha": "aloaau7"
   },
   {
     "id": "sind-mt-sinpetec-cuiaba",
@@ -528,7 +588,9 @@
     "responsavel": "Diretoria SINPETEC",
     "endereco": "Cuiabá e Várzea Grande - MT",
     "source": "Google / Semob Cuiabá",
-    "observacoes": "Representa os operadores escolares de Cuiabá e Várzea Grande."
+    "observacoes": "Representa os operadores escolares de Cuiabá e Várzea Grande.",
+    "usuario": "sinpetec.mt@gmail.com",
+    "senha": "aloc3hw"
   },
   {
     "id": "sind-df-sintresc-brasilia",
@@ -545,7 +607,9 @@
     "responsavel": "Presidência SINTRESC",
     "endereco": "Brasília - DF",
     "source": "Google / TCB / Detran-DF",
-    "observacoes": "Entidade de classe dos condutores escolares de Brasília e cidades-satélites do DF."
+    "observacoes": "Entidade de classe dos condutores escolares de Brasília e cidades-satélites do DF.",
+    "usuario": "sintresc.df@gmail.com",
+    "senha": "alo28xw"
   },
   {
     "id": "sind-go-siteg-goiania",
@@ -563,7 +627,9 @@
     "responsavel": "Diretoria SITEG",
     "endereco": "Goiânia e Aparecida de Goiânia - GO",
     "source": "Google / SMM Goiânia",
-    "observacoes": "Sindicato estadual com base territorial forte na Grande Goiânia e Anápolis."
+    "observacoes": "Sindicato estadual com base territorial forte na Grande Goiânia e Anápolis.",
+    "usuario": "siteg.goias@gmail.com",
+    "senha": "aloekv2"
   },
   {
     "id": "sind-am-acontema-manaus",
@@ -579,7 +645,9 @@
     "responsavel": "Coordenação ACONTEMA",
     "endereco": "Manaus - AM",
     "source": "Google / IMMU Manaus",
-    "observacoes": "Mais de 320 permissionários na capital amazonense; atua diretamente com o IMMU."
+    "observacoes": "Mais de 320 permissionários na capital amazonense; atua diretamente com o IMMU.",
+    "usuario": "acontema.manaus@gmail.com",
+    "senha": "alo8sze"
   },
   {
     "id": "sind-ba-sintest-salvador",
@@ -596,7 +664,9 @@
     "responsavel": "Diretoria Executiva",
     "endereco": "Salvador - BA",
     "source": "Google / Transalvador",
-    "observacoes": "Origem na ASTEB, atua em Salvador e cidades da Região Metropolitana."
+    "observacoes": "Origem na ASTEB, atua em Salvador e cidades da Região Metropolitana.",
+    "usuario": "sintest.ba@gmail.com",
+    "senha": "alogv86"
   },
   {
     "id": "sind-pe-sintespe-recife",
@@ -613,7 +683,9 @@
     "responsavel": "Presidência SINTESPE",
     "endereco": "Recife e Olinda - PE",
     "source": "Google / CTTU Recife",
-    "observacoes": "Fundado em 1998, representa a categoria em Pernambuco com assistência jurídica e convênios."
+    "observacoes": "Fundado em 1998, representa a categoria em Pernambuco com assistência jurídica e convênios.",
+    "usuario": "sintespe.pe@gmail.com",
+    "senha": "aloscx7"
   },
   {
     "id": "sind-al-associacao-dos-transportadores",
@@ -631,7 +703,9 @@
     "responsavel": "Diretoria Executiva / Representação Maceió",
     "endereco": "Maceió - AL",
     "source": "Scraper Google/DDG (Maceió - AL)",
-    "observacoes": "Entidade representativa de condutores e transportadores escolares que atuam em Maceió (AL) e região metropolitana."
+    "observacoes": "Entidade representativa de condutores e transportadores escolares que atuam em Maceió (AL) e região metropolitana.",
+    "usuario": "8230000000",
+    "senha": "alo37kp"
   },
   {
     "id": "sind-ap-sintrae",
@@ -649,7 +723,9 @@
     "responsavel": "Diretoria Executiva / Representação Macapá",
     "endereco": "Macapá - AP",
     "source": "Scraper Google/DDG (Macapá - AP)",
-    "observacoes": "Entidade representativa de condutores e transportadores escolares que atuam em Macapá (AP) e região metropolitana."
+    "observacoes": "Entidade representativa de condutores e transportadores escolares que atuam em Macapá (AP) e região metropolitana.",
+    "usuario": "9630000000",
+    "senha": "alo4tga"
   },
   {
     "id": "sind-am-sindicato-de-transporte-escola",
@@ -667,7 +743,9 @@
     "responsavel": "Diretoria Executiva / Representação Manaus",
     "endereco": "Manaus - AM",
     "source": "Scraper Google/DDG (Manaus - AM)",
-    "observacoes": "Entidade representativa de condutores e transportadores escolares que atuam em Manaus (AM) e região metropolitana."
+    "observacoes": "Entidade representativa de condutores e transportadores escolares que atuam em Manaus (AM) e região metropolitana.",
+    "usuario": "9230000000",
+    "senha": "alod6bm"
   },
   {
     "id": "sind-sp-sintrejur-jundiai",
@@ -685,7 +763,9 @@
     "responsavel": "Diretoria SINTREJUR",
     "endereco": "Rua Floriano Giglioli, 65, Vila Helena, Jundiaí - SP",
     "source": "Prefeitura de Jundiaí / Cadastro Oficial SINTREJUR",
-    "observacoes": "Sindicato oficial representativo dos transportadores escolares legalizados de Jundiaí e cidades do Aglomerado Urbano de Jundiaí."
+    "observacoes": "Sindicato oficial representativo dos transportadores escolares legalizados de Jundiaí e cidades do Aglomerado Urbano de Jundiaí.",
+    "usuario": "contato@sintrejur.com.br",
+    "senha": "alom2as"
   },
   {
     "id": "sind-sp-amprote-sao-jose-dos-campos",
@@ -703,7 +783,9 @@
     "responsavel": "Diretoria AMPROTE",
     "endereco": "Avenida Pedro Álvares Cabral, 655, Jardim Paulista, São José dos Campos - SP",
     "source": "Cadastro Oficial Permissionários SJC / SEMOB",
-    "observacoes": "Associação profissional de classe dos condutores de vans escolares que operam sob alvará da Prefeitura de São José dos Campos."
+    "observacoes": "Associação profissional de classe dos condutores de vans escolares que operam sob alvará da Prefeitura de São José dos Campos.",
+    "usuario": "amprote.sjc@gmail.com",
+    "senha": "alomkmd"
   },
   {
     "id": "sind-sp-uptep-piracicaba",
@@ -721,7 +803,9 @@
     "responsavel": "Diretoria UPTEP",
     "endereco": "Piracicaba - SP",
     "source": "Prefeitura de Piracicaba / Sistema Sem Papel Trânsito",
-    "observacoes": "Associação de representação dos prestadores de serviço e condutores autônomos de transporte escolar de Piracicaba."
+    "observacoes": "Associação de representação dos prestadores de serviço e condutores autônomos de transporte escolar de Piracicaba.",
+    "usuario": "uptep.piracicaba@gmail.com",
+    "senha": "alo8u3e"
   },
   {
     "id": "sind-sp-asteas-americana",
@@ -739,7 +823,9 @@
     "responsavel": "Presidência ASTEAS",
     "endereco": "Americana - SP",
     "source": "Utransv / Americana Inteligente",
-    "observacoes": "Entidade de representação dos condutores cadastrados de Americana, Santa Bárbara d'Oeste e Nova Odessa."
+    "observacoes": "Entidade de representação dos condutores cadastrados de Americana, Santa Bárbara d'Oeste e Nova Odessa.",
+    "usuario": "asteas.americana@hotmail.com",
+    "senha": "alotqmv"
   },
   {
     "id": "sind-sp-astel-limeira",
@@ -757,7 +843,9 @@
     "responsavel": "Diretoria ASTEL",
     "endereco": "Limeira - SP",
     "source": "Secretaria de Mobilidade e Educação de Limeira",
-    "observacoes": "Associação de motoristas permissionários de vans e micro-ônibus escolares em Limeira."
+    "observacoes": "Associação de motoristas permissionários de vans e micro-ônibus escolares em Limeira.",
+    "usuario": "astel.limeira@gmail.com",
+    "senha": "aloycpg"
   },
   {
     "id": "sind-sp-cooptec-campinas",
@@ -775,7 +863,9 @@
     "responsavel": "Conselho de Administração COOPTEC",
     "endereco": "Campinas - SP",
     "source": "EMDEC / Cooperativas Campinas",
-    "observacoes": "Cooperativa pioneira de permissionários do transporte escolar atuante nas redes municipal e particular de Campinas."
+    "observacoes": "Cooperativa pioneira de permissionários do transporte escolar atuante nas redes municipal e particular de Campinas.",
+    "usuario": "cooptec.campinas@terra.com.br",
+    "senha": "alo7bt5"
   },
   {
     "id": "sind-sp-asteg-guarulhos",
@@ -793,7 +883,9 @@
     "responsavel": "Diretoria Executiva ASTEG",
     "endereco": "Guarulhos - SP",
     "source": "Secretaria de Transportes e Mobilidade Urbana de Guarulhos",
-    "observacoes": "Associação representativa dos transportadores escolares credenciados no município de Guarulhos."
+    "observacoes": "Associação representativa dos transportadores escolares credenciados no município de Guarulhos.",
+    "usuario": "contato.asteg@gmail.com",
+    "senha": "alor2fz"
   },
   {
     "id": "sind-sp-sindesc-at-mogi",
@@ -811,7 +903,9 @@
     "responsavel": "Coordenação Regional Alto Tietê",
     "endereco": "Mogi das Cruzes - SP",
     "source": "Prefeitura de Mogi / Alto Tietê Mobilidade",
-    "observacoes": "Atuação representativa para transportadores de Mogi das Cruzes, Suzano, Poá, Ferraz de Vasconcelos e Itaquaquecetuba."
+    "observacoes": "Atuação representativa para transportadores de Mogi das Cruzes, Suzano, Poá, Ferraz de Vasconcelos e Itaquaquecetuba.",
+    "usuario": "sindesc.altotiete@gmail.com",
+    "senha": "alo6et3"
   },
   {
     "id": "sind-sp-sindcondutores-vale-taubate",
@@ -829,7 +923,9 @@
     "responsavel": "Representação Setorial Taubaté",
     "endereco": "Taubaté - SP",
     "source": "SEMOB Taubaté / Sindicato Regional",
-    "observacoes": "Representação coletiva e apoio aos motoristas autônomos e permissionários do transporte escolar em Taubaté e Pindamonhangaba."
+    "observacoes": "Representação coletiva e apoio aos motoristas autônomos e permissionários do transporte escolar em Taubaté e Pindamonhangaba.",
+    "usuario": "taubate.escolar@sindicatocondutores.org.br",
+    "senha": "alot8e5"
   },
   {
     "id": "sind-sp-asteco-jacarei",
@@ -847,7 +943,9 @@
     "responsavel": "Diretoria ASTECO",
     "endereco": "Jacareí - SP",
     "source": "Secretaria de Mobilidade Urbana de Jacareí",
-    "observacoes": "Associação de motoristas e donos de vans escolares legalizados junto à Prefeitura de Jacareí."
+    "observacoes": "Associação de motoristas e donos de vans escolares legalizados junto à Prefeitura de Jacareí.",
+    "usuario": "asteco.jacarei@gmail.com",
+    "senha": "alopqpc"
   },
   {
     "id": "sind-sp-astem-maua",
@@ -865,7 +963,9 @@
     "responsavel": "Diretoria ASTEM",
     "endereco": "Mauá - SP",
     "source": "Secretaria de Mobilidade Urbana de Mauá",
-    "observacoes": "Entidade de representação dos condutores de Mauá e Ribeirão Pires."
+    "observacoes": "Entidade de representação dos condutores de Mauá e Ribeirão Pires.",
+    "usuario": "astem.maua@hotmail.com",
+    "senha": "alokmjs"
   },
   {
     "id": "sind-sp-asted-diadema",
@@ -883,7 +983,9 @@
     "responsavel": "Diretoria ASTED",
     "endereco": "Diadema - SP",
     "source": "Prefeitura de Diadema / Trânsito",
-    "observacoes": "Associação dos prestadores de serviço de transporte escolar de Diadema."
+    "observacoes": "Associação dos prestadores de serviço de transporte escolar de Diadema.",
+    "usuario": "asted.diadema@gmail.com",
+    "senha": "alo3prm"
   },
   {
     "id": "sind-sp-astecar-carapicuiba",
@@ -901,7 +1003,9 @@
     "responsavel": "Diretoria Executiva ASTECAR",
     "endereco": "Carapicuíba - SP",
     "source": "Secretaria de Transporte de Carapicuíba",
-    "observacoes": "Entidade representativa dos condutores de vans escolares com alvará em Carapicuíba."
+    "observacoes": "Entidade representativa dos condutores de vans escolares com alvará em Carapicuíba.",
+    "usuario": "astecar.carapicuiba@gmail.com",
+    "senha": "alord33"
   },
   {
     "id": "sind-sp-astebap-barueri",
@@ -919,7 +1023,9 @@
     "responsavel": "Presidência ASTEBAP",
     "endereco": "Barueri - SP",
     "source": "Demutran Barueri",
-    "observacoes": "Associação congregando transportadores escolares de Alphaville, Barueri e Santana de Parnaíba."
+    "observacoes": "Associação congregando transportadores escolares de Alphaville, Barueri e Santana de Parnaíba.",
+    "usuario": "astebap.barueri@gmail.com",
+    "senha": "alo45h8"
   },
   {
     "id": "sind-sp-astecot-cotia",
@@ -937,7 +1043,9 @@
     "responsavel": "Diretoria ASTECOT",
     "endereco": "Cotia - SP",
     "source": "Secretaria de Transportes de Cotia",
-    "observacoes": "Representa os motoristas de escolares que atendem Cotia, Granja Viana e Vargem Grande Paulista."
+    "observacoes": "Representa os motoristas de escolares que atendem Cotia, Granja Viana e Vargem Grande Paulista.",
+    "usuario": "astecot.cotia@gmail.com",
+    "senha": "alo6xp3"
   },
   {
     "id": "sind-sp-astetse-taboao",
@@ -955,7 +1063,9 @@
     "responsavel": "Diretoria ASTETSE",
     "endereco": "Taboão da Serra - SP",
     "source": "Semutran Taboão da Serra",
-    "observacoes": "Associação de condutores de vans escolares de Taboão da Serra e Embu das Artes."
+    "observacoes": "Associação de condutores de vans escolares de Taboão da Serra e Embu das Artes.",
+    "usuario": "astetse.taboao@gmail.com",
+    "senha": "alo5x8m"
   },
   {
     "id": "sind-sp-atem-marilia",
@@ -973,7 +1083,9 @@
     "responsavel": "Diretoria ATEM",
     "endereco": "Marília - SP",
     "source": "Emdurb Marília",
-    "observacoes": "Associação representativa dos condutores de vans escolares de Marília e região."
+    "observacoes": "Associação representativa dos condutores de vans escolares de Marília e região.",
+    "usuario": "atem.marilia@hotmail.com",
+    "senha": "aloeuut"
   },
   {
     "id": "sind-sp-atepp-prudente",
@@ -991,7 +1103,9 @@
     "responsavel": "Diretoria ATEPP",
     "endereco": "Presidente Prudente - SP",
     "source": "Semob Presidente Prudente",
-    "observacoes": "Associação dos proprietários de veículos escolares autorizados de Presidente Prudente."
+    "observacoes": "Associação dos proprietários de veículos escolares autorizados de Presidente Prudente.",
+    "usuario": "atepp.prudente@gmail.com",
+    "senha": "alodzuu"
   },
   {
     "id": "sind-sp-ateata-aracatuba",
@@ -1009,7 +1123,9 @@
     "responsavel": "Presidência ATEATA",
     "endereco": "Araçatuba - SP",
     "source": "Secretaria de Mobilidade Urbana de Araçatuba",
-    "observacoes": "Entidade de classe dos prestadores de serviço escolar no noroeste paulista."
+    "observacoes": "Entidade de classe dos prestadores de serviço escolar no noroeste paulista.",
+    "usuario": "ateata.aracatuba@gmail.com",
+    "senha": "alogkju"
   },
   {
     "id": "sind-sp-atea-araraquara",
@@ -1027,7 +1143,9 @@
     "responsavel": "Diretoria ATEA",
     "endereco": "Araraquara - SP",
     "source": "Controltrans Araraquara",
-    "observacoes": "Associação de motoristas credenciados em Araraquara e Américo Brasiliense."
+    "observacoes": "Associação de motoristas credenciados em Araraquara e Américo Brasiliense.",
+    "usuario": "atea.araraquara@gmail.com",
+    "senha": "alodj8f"
   },
   {
     "id": "sind-sp-aterc-rio-claro",
@@ -1045,7 +1163,9 @@
     "responsavel": "Diretoria ATERC",
     "endereco": "Rio Claro - SP",
     "source": "Secretaria de Mobilidade Urbana de Rio Claro",
-    "observacoes": "Entidade representativa dos condutores escolares de Rio Claro e Santa Gertrudes."
+    "observacoes": "Entidade representativa dos condutores escolares de Rio Claro e Santa Gertrudes.",
+    "usuario": "aterc.rioclaro@gmail.com",
+    "senha": "aloy2zf"
   },
   {
     "id": "sind-sp-astebrag-braganca",
@@ -1063,7 +1183,9 @@
     "responsavel": "Diretoria ASTEBRAG",
     "endereco": "Bragança Paulista - SP",
     "source": "Secretaria de Trânsito de Bragança Paulista",
-    "observacoes": "Associação de transporte escolar para Bragança Paulista, Atibaia e cidades vizinhas."
+    "observacoes": "Associação de transporte escolar para Bragança Paulista, Atibaia e cidades vizinhas.",
+    "usuario": "astebrag.braganca@gmail.com",
+    "senha": "alowsj4"
   },
   {
     "id": "sind-sp-astei-indaiatuba",
@@ -1081,7 +1203,9 @@
     "responsavel": "Diretoria ASTEI",
     "endereco": "Indaiatuba - SP",
     "source": "Departamento de Trânsito de Indaiatuba",
-    "observacoes": "Associação representativa dos motoristas permissionários de vans escolares em Indaiatuba."
+    "observacoes": "Associação representativa dos motoristas permissionários de vans escolares em Indaiatuba.",
+    "usuario": "astei.indaiatuba@gmail.com",
+    "senha": "alokkjb"
   },
   {
     "id": "sind-sp-asteva-valinhos",
@@ -1099,7 +1223,9 @@
     "responsavel": "Diretoria ASTEVA",
     "endereco": "Valinhos - SP",
     "source": "Secretaria de Mobilidade Urbana de Valinhos",
-    "observacoes": "Associação de condutores de vans escolares que operam em Valinhos e Vinhedo."
+    "observacoes": "Associação de condutores de vans escolares que operam em Valinhos e Vinhedo.",
+    "usuario": "asteva.valinhos@gmail.com",
+    "senha": "alop63p"
   },
   {
     "id": "sind-sp-astesh-sumare",
@@ -1117,7 +1243,9 @@
     "responsavel": "Diretoria ASTESH",
     "endereco": "Sumaré - SP",
     "source": "Secretaria de Mobilidade Urbana de Sumaré",
-    "observacoes": "Associação de prestadores de transporte escolar de Sumaré e Hortolândia."
+    "observacoes": "Associação de prestadores de transporte escolar de Sumaré e Hortolândia.",
+    "usuario": "astesh.sumare@gmail.com",
+    "senha": "aloacad"
   },
   {
     "id": "sind-sp-astels-itanhaem",
@@ -1135,7 +1263,9 @@
     "responsavel": "Diretoria ASTELS",
     "endereco": "Itanhaém - SP",
     "source": "Departamento de Trânsito de Itanhaém",
-    "observacoes": "Associação representativa dos condutores de Itanhaém, Mongaguá e Peruíbe."
+    "observacoes": "Associação representativa dos condutores de Itanhaém, Mongaguá e Peruíbe.",
+    "usuario": "astels.litoralsul@gmail.com",
+    "senha": "aloyu8m"
   },
   {
     "id": "sind-sp-asterp-sj-rio-preto",
@@ -1153,7 +1283,9 @@
     "responsavel": "Diretoria Executiva",
     "endereco": "São José do Rio Preto - SP",
     "source": "Empro / SMTC São José do Rio Preto",
-    "observacoes": "Entidade congregando condutores e proprietários de vans escolares no polo de Rio Preto."
+    "observacoes": "Entidade congregando condutores e proprietários de vans escolares no polo de Rio Preto.",
+    "usuario": "asterp.riopreto@gmail.com",
+    "senha": "alo3vxw"
   },
   {
     "id": "sind-rj-sindesc-capital",
@@ -1171,7 +1303,9 @@
     "responsavel": "Presidência SINDESC-RJ",
     "endereco": "Centro, Rio de Janeiro - RJ",
     "source": "SMTR Rio / Cadastro Sindical RJ",
-    "observacoes": "Sindicato histórico dos motoristas e donos de vans escolares da capital fluminense."
+    "observacoes": "Sindicato histórico dos motoristas e donos de vans escolares da capital fluminense.",
+    "usuario": "contato@sindescrj.org.br",
+    "senha": "alo7kgr"
   },
   {
     "id": "sind-rj-astenit-niteroi",
@@ -1189,7 +1323,9 @@
     "responsavel": "Diretoria ASTENIT",
     "endereco": "Niterói - RJ",
     "source": "NITTUR / Subsecretaria de Transportes de Niterói",
-    "observacoes": "Associação dos condutores de veículos escolares autorizados pela Prefeitura de Niterói."
+    "observacoes": "Associação dos condutores de veículos escolares autorizados pela Prefeitura de Niterói.",
+    "usuario": "astenit.niteroi@gmail.com",
+    "senha": "alo96y5"
   },
   {
     "id": "sind-rj-astesg-sao-goncalo",
@@ -1207,7 +1343,9 @@
     "responsavel": "Diretoria Executiva",
     "endereco": "São Gonçalo - RJ",
     "source": "Subsecretaria de Transportes de São Gonçalo",
-    "observacoes": "Entidade de classe dos transportadores de vans escolares de São Gonçalo e Itaboraí."
+    "observacoes": "Entidade de classe dos transportadores de vans escolares de São Gonçalo e Itaboraí.",
+    "usuario": "astesg.saogoncalo@gmail.com",
+    "senha": "aloy7p8"
   },
   {
     "id": "sind-rj-astebf-nova-iguacu",
@@ -1225,7 +1363,9 @@
     "responsavel": "Diretoria ASTEBF",
     "endereco": "Nova Iguaçu - RJ",
     "source": "Secretaria de Transporte e Mobilidade de Nova Iguaçu",
-    "observacoes": "Representa permissionários de vans escolares em Nova Iguaçu, Mesquita, Nilópolis e Belford Roxo."
+    "observacoes": "Representa permissionários de vans escolares em Nova Iguaçu, Mesquita, Nilópolis e Belford Roxo.",
+    "usuario": "astebf.baixada@gmail.com",
+    "senha": "alonzqa"
   },
   {
     "id": "sind-rj-astepet-petropolis",
@@ -1243,7 +1383,9 @@
     "responsavel": "Diretoria ASTEPET",
     "endereco": "Petrópolis - RJ",
     "source": "CPTrans Petrópolis",
-    "observacoes": "Associação dos motoristas de vans escolares da Região Serrana do Rio de Janeiro."
+    "observacoes": "Associação dos motoristas de vans escolares da Região Serrana do Rio de Janeiro.",
+    "usuario": "astepet.petropolis@gmail.com",
+    "senha": "aloyj83"
   },
   {
     "id": "sind-rj-astecamp-campos",
@@ -1261,7 +1403,9 @@
     "responsavel": "Presidência ASTECAMP",
     "endereco": "Campos dos Goytacazes - RJ",
     "source": "IMTT Campos dos Goytacazes",
-    "observacoes": "Entidade de representação dos transportadores de vans e micro-ônibus escolares em Campos e Norte Fluminense."
+    "observacoes": "Entidade de representação dos transportadores de vans e micro-ônibus escolares em Campos e Norte Fluminense.",
+    "usuario": "astecamp.campos@gmail.com",
+    "senha": "alod2k6"
   },
   {
     "id": "sind-rj-astelagos-cabo-frio",
@@ -1279,7 +1423,9 @@
     "responsavel": "Diretoria ASTELAGOS",
     "endereco": "Cabo Frio - RJ",
     "source": "Secretaria de Mobilidade Urbana de Cabo Frio",
-    "observacoes": "Representa motoristas escolares de Cabo Frio, São Pedro da Aldeia e Arraial do Cabo."
+    "observacoes": "Representa motoristas escolares de Cabo Frio, São Pedro da Aldeia e Arraial do Cabo.",
+    "usuario": "astelagos@gmail.com",
+    "senha": "alotmuz"
   },
   {
     "id": "sind-mg-ascopte-bh",
@@ -1297,7 +1443,9 @@
     "responsavel": "Diretoria Executiva",
     "endereco": "Belo Horizonte - MG",
     "source": "BHTRANS / Prefeitura de Belo Horizonte",
-    "observacoes": "Associação de motoristas permissionários de transporte escolar atuantes na capital mineira."
+    "observacoes": "Associação de motoristas permissionários de transporte escolar atuantes na capital mineira.",
+    "usuario": "ascoptebh@yahoo.com.br",
+    "senha": "alodwdd"
   },
   {
     "id": "sind-mg-astecont-contagem",
@@ -1315,7 +1463,9 @@
     "responsavel": "Diretoria ASTECONT",
     "endereco": "Contagem - MG",
     "source": "TransCon Contagem",
-    "observacoes": "Associação oficial de condutores de transporte escolar cadastrados na Autarquia de Transportes de Contagem."
+    "observacoes": "Associação oficial de condutores de transporte escolar cadastrados na Autarquia de Transportes de Contagem.",
+    "usuario": "astecont.contagem@gmail.com",
+    "senha": "alomxxa"
   },
   {
     "id": "sind-mg-astebet-betim",
@@ -1333,7 +1483,9 @@
     "responsavel": "Presidência ASTEBET",
     "endereco": "Betim - MG",
     "source": "Transbetim / Prefeitura de Betim",
-    "observacoes": "Associação de donos de vans escolares permissionários em Betim."
+    "observacoes": "Associação de donos de vans escolares permissionários em Betim.",
+    "usuario": "astebet.betim@gmail.com",
+    "senha": "alounnh"
   },
   {
     "id": "sind-mg-astejf-juiz-de-fora",
@@ -1351,7 +1503,9 @@
     "responsavel": "Diretoria ASTEJF",
     "endereco": "Juiz de Fora - MG",
     "source": "SMU Juiz de Fora",
-    "observacoes": "Associação representativa dos operadores de transporte escolar de Juiz de Fora e cidades vizinhas da Zona da Mata."
+    "observacoes": "Associação representativa dos operadores de transporte escolar de Juiz de Fora e cidades vizinhas da Zona da Mata.",
+    "usuario": "astejf.juizdefora@gmail.com",
+    "senha": "aloqgdt"
   },
   {
     "id": "sind-mg-ateu-uberaba",
@@ -1369,7 +1523,9 @@
     "responsavel": "Diretoria ATEU",
     "endereco": "Uberaba - MG",
     "source": "Sedest Uberaba / Trânsito",
-    "observacoes": "Associação dos profissionais que realizam o transporte escolar regulamentado no Triângulo Mineiro."
+    "observacoes": "Associação dos profissionais que realizam o transporte escolar regulamentado no Triângulo Mineiro.",
+    "usuario": "ateu.uberaba@gmail.com",
+    "senha": "alox7yp"
   },
   {
     "id": "sind-mg-astemc-montes-claros",
@@ -1387,7 +1543,9 @@
     "responsavel": "Diretoria ASTEMC",
     "endereco": "Montes Claros - MG",
     "source": "MCTrans Montes Claros",
-    "observacoes": "Representa os condutores do transporte escolar em Montes Claros e Norte de Minas."
+    "observacoes": "Representa os condutores do transporte escolar em Montes Claros e Norte de Minas.",
+    "usuario": "astemc.moc@gmail.com",
+    "senha": "aloheaj"
   },
   {
     "id": "sind-mg-astevaco-ipatinga",
@@ -1405,7 +1563,9 @@
     "responsavel": "Presidência ASTEVACO",
     "endereco": "Ipatinga - MG",
     "source": "Prefeitura de Ipatinga / Vale do Aço",
-    "observacoes": "Associação dos transportadores de Ipatinga, Coronel Fabriciano e Timóteo."
+    "observacoes": "Associação dos transportadores de Ipatinga, Coronel Fabriciano e Timóteo.",
+    "usuario": "astevaco.ipatinga@gmail.com",
+    "senha": "alorjk8"
   },
   {
     "id": "sind-mg-astegv-valadares",
@@ -1423,7 +1583,9 @@
     "responsavel": "Diretoria ASTEGV",
     "endereco": "Governador Valadares - MG",
     "source": "Secretaria de Trânsito de Valadares",
-    "observacoes": "Entidade de representação dos condutores de escolares de Governador Valadares."
+    "observacoes": "Entidade de representação dos condutores de escolares de Governador Valadares.",
+    "usuario": "astegv.valadares@gmail.com",
+    "senha": "alov5ux"
   },
   {
     "id": "sind-pr-astec-curitiba",
@@ -1441,7 +1603,9 @@
     "responsavel": "Diretoria ASTEC",
     "endereco": "Curitiba - PR",
     "source": "URBS Curitiba",
-    "observacoes": "Associação dos transportadores autorizados e credenciados junto à URBS em Curitiba."
+    "observacoes": "Associação dos transportadores autorizados e credenciados junto à URBS em Curitiba.",
+    "usuario": "astec.curitiba@terra.com.br",
+    "senha": "alo8sjw"
   },
   {
     "id": "sind-pr-astefoz-foz-do-iguacu",
@@ -1459,7 +1623,9 @@
     "responsavel": "Diretoria ASTEFOZ",
     "endereco": "Foz do Iguaçu - PR",
     "source": "Foztrans Foz do Iguaçu",
-    "observacoes": "Associação de motoristas permissionários de vans escolares na fronteira oeste paranaense."
+    "observacoes": "Associação de motoristas permissionários de vans escolares na fronteira oeste paranaense.",
+    "usuario": "astefoz.foz@gmail.com",
+    "senha": "alo2kxa"
   },
   {
     "id": "sind-pr-astesjp-sao-jose-dos-pinhais",
@@ -1477,7 +1643,9 @@
     "responsavel": "Presidência ASTESJP",
     "endereco": "São José dos Pinhais - PR",
     "source": "SEMUTRAN São José dos Pinhais",
-    "observacoes": "Associação de condutores escolares de São José dos Pinhais e Fazenda Rio Grande."
+    "observacoes": "Associação de condutores escolares de São José dos Pinhais e Fazenda Rio Grande.",
+    "usuario": "astesjp@gmail.com",
+    "senha": "alo9r9y"
   },
   {
     "id": "sind-pr-astegua-guarapuava",
@@ -1495,7 +1663,9 @@
     "responsavel": "Diretoria ASTEGUA",
     "endereco": "Guarapuava - PR",
     "source": "Guaratran Guarapuava",
-    "observacoes": "Associação representativa dos transportadores escolares do centro-sul paranaense."
+    "observacoes": "Associação representativa dos transportadores escolares do centro-sul paranaense.",
+    "usuario": "astegua.guarapuava@gmail.com",
+    "senha": "alo577p"
   },
   {
     "id": "sind-sc-sintroblu-blumenau",
@@ -1513,7 +1683,9 @@
     "responsavel": "Diretoria SINTROBLU",
     "endereco": "Rua Frei José, 383, Do Salto, Blumenau - SC",
     "source": "SMTT Blumenau / Cadastro SINTROBLU",
-    "observacoes": "Sindicato oficial de trabalhadores e condutores de transporte no Vale do Itajaí, atuante no apoio aos motoristas escolares."
+    "observacoes": "Sindicato oficial de trabalhadores e condutores de transporte no Vale do Itajaí, atuante no apoio aos motoristas escolares.",
+    "usuario": "contato@sintroblu.com.br",
+    "senha": "alo98h4"
   },
   {
     "id": "sind-sc-aprovei-itajai",
@@ -1531,7 +1703,9 @@
     "responsavel": "Presidência APROVEI",
     "endereco": "Itajaí - SC",
     "source": "Codetran Itajaí / Portal APROVEI",
-    "observacoes": "Associação de referência para donos e condutores de vans escolares em Itajaí, Balneário Camboriú e Navegantes."
+    "observacoes": "Associação de referência para donos e condutores de vans escolares em Itajaí, Balneário Camboriú e Navegantes.",
+    "usuario": "contato@associacaoaprovei.com.br",
+    "senha": "alomgnw"
   },
   {
     "id": "sind-sc-astecri-criciuma",
@@ -1549,7 +1723,9 @@
     "responsavel": "Diretoria ASTECRI",
     "endereco": "Criciúma - SC",
     "source": "DTT Criciúma",
-    "observacoes": "Associação congregando transportadores de vans escolares de Criciúma, Içara e região carbonífera catarinense."
+    "observacoes": "Associação congregando transportadores de vans escolares de Criciúma, Içara e região carbonífera catarinense.",
+    "usuario": "astecri.criciuma@gmail.com",
+    "senha": "alour3u"
   },
   {
     "id": "sind-sc-astechap-chapeco",
@@ -1567,7 +1743,9 @@
     "responsavel": "Diretoria Executiva",
     "endereco": "Chapecó - SC",
     "source": "Diretoria de Segurança Pública de Chapecó",
-    "observacoes": "Entidade de representação dos condutores de veículos de transporte de estudantes no grande oeste de SC."
+    "observacoes": "Entidade de representação dos condutores de veículos de transporte de estudantes no grande oeste de SC.",
+    "usuario": "astechap.chapeco@gmail.com",
+    "senha": "alofwe6"
   },
   {
     "id": "sind-sc-sintesc-estadual",
@@ -1585,7 +1763,9 @@
     "responsavel": "Diretoria Estadual SINTESC-SC",
     "endereco": "Florianópolis - SC",
     "source": "DETRAN-SC / Ministério do Trabalho SC",
-    "observacoes": "Sindicato de base estadual com representação de condutores de vans escolares em municípios catarinenses."
+    "observacoes": "Sindicato de base estadual com representação de condutores de vans escolares em municípios catarinenses.",
+    "usuario": "sintescsc@gmail.com",
+    "senha": "alo844y"
   },
   {
     "id": "sind-rs-sttrp-pelotas",
@@ -1603,7 +1783,9 @@
     "responsavel": "Diretoria STTRP",
     "endereco": "Rua Senador Mendonça, 160, Centro, Pelotas - RS",
     "source": "Secretaria de Transporte e Trânsito de Pelotas / STTRP",
-    "observacoes": "Sindicato atuante na representação e apoio aos condutores e profissionais de transporte de Pelotas e região sul do RS."
+    "observacoes": "Sindicato atuante na representação e apoio aos condutores e profissionais de transporte de Pelotas e região sul do RS.",
+    "usuario": "sindicatorodpelotas@gmail.com",
+    "senha": "alo3wcn"
   },
   {
     "id": "sind-rs-astesm-santa-maria",
@@ -1621,7 +1803,9 @@
     "responsavel": "Presidência ASTESM",
     "endereco": "Santa Maria - RS",
     "source": "Secretaria de Mobilidade Urbana de Santa Maria",
-    "observacoes": "Associação congregando donos e motoristas de vans escolares da região central do Rio Grande do Sul."
+    "observacoes": "Associação congregando donos e motoristas de vans escolares da região central do Rio Grande do Sul.",
+    "usuario": "astesm.santamaria@gmail.com",
+    "senha": "alozez9"
   },
   {
     "id": "sind-rs-astecan-canoas",
@@ -1639,7 +1823,9 @@
     "responsavel": "Diretoria ASTECAN",
     "endereco": "Canoas - RS",
     "source": "Secretaria de Transportes e Mobilidade de Canoas",
-    "observacoes": "Associação de condutores de transporte escolar permissionários em Canoas."
+    "observacoes": "Associação de condutores de transporte escolar permissionários em Canoas.",
+    "usuario": "astecan.canoas@gmail.com",
+    "senha": "aloag5v"
   },
   {
     "id": "sind-rs-astevs-vale-dos-sinos",
@@ -1657,7 +1843,9 @@
     "responsavel": "Diretoria ASTEVS",
     "endereco": "Novo Hamburgo - RS",
     "source": "Diretoria de Trânsito de Novo Hamburgo e São Leopoldo",
-    "observacoes": "Entidade de representação dos transportadores de vans de Novo Hamburgo, São Leopoldo e Campo Bom."
+    "observacoes": "Entidade de representação dos transportadores de vans de Novo Hamburgo, São Leopoldo e Campo Bom.",
+    "usuario": "astevs.sinos@gmail.com",
+    "senha": "alou8n8"
   },
   {
     "id": "sind-rs-astepf-passo-fundo",
@@ -1675,7 +1863,9 @@
     "responsavel": "Diretoria ASTEPF",
     "endereco": "Passo Fundo - RS",
     "source": "Secretaria de Segurança Pública de Passo Fundo / Trânsito",
-    "observacoes": "Associação de permissionários de vans escolares no planalto médio gaúcho."
+    "observacoes": "Associação de permissionários de vans escolares no planalto médio gaúcho.",
+    "usuario": "astepf.passofundo@gmail.com",
+    "senha": "alotwes"
   },
   {
     "id": "sind-rs-atesc-poa",
@@ -1693,7 +1883,9 @@
     "responsavel": "Presidência ATESC",
     "endereco": "Porto Alegre - RS",
     "source": "EPTC Porto Alegre",
-    "observacoes": "Associação atuante junto aos operadores e permissionários de transporte escolar cadastrados na EPTC."
+    "observacoes": "Associação atuante junto aos operadores e permissionários de transporte escolar cadastrados na EPTC.",
+    "usuario": "atescpoa@gmail.com",
+    "senha": "aloczmj"
   },
   {
     "id": "sind-go-astego-goiania",
@@ -1711,7 +1903,9 @@
     "responsavel": "Presidência ASTEGO",
     "endereco": "Goiânia - GO",
     "source": "SMT Goiânia",
-    "observacoes": "Associação pioneira de condutores de veículos de transporte escolar da Grande Goiânia."
+    "observacoes": "Associação pioneira de condutores de veículos de transporte escolar da Grande Goiânia.",
+    "usuario": "astegogoias@gmail.com",
+    "senha": "alobv3f"
   },
   {
     "id": "sind-go-astean-anapolis",
@@ -1729,7 +1923,9 @@
     "responsavel": "Diretoria ASTEAN",
     "endereco": "Anápolis - GO",
     "source": "CMTT Anápolis",
-    "observacoes": "Associação de motoristas permissionários de vans escolares no polo industrial de Anápolis."
+    "observacoes": "Associação de motoristas permissionários de vans escolares no polo industrial de Anápolis.",
+    "usuario": "astean.anapolis@gmail.com",
+    "senha": "aloktn9"
   },
   {
     "id": "sind-go-asteap-aparecida",
@@ -1747,7 +1943,9 @@
     "responsavel": "Diretoria Executiva",
     "endereco": "Aparecida de Goiânia - GO",
     "source": "SMTA Aparecida de Goiânia",
-    "observacoes": "Entidade de representação dos condutores de veículos escolares de Aparecida."
+    "observacoes": "Entidade de representação dos condutores de veículos escolares de Aparecida.",
+    "usuario": "asteap.aparecida@gmail.com",
+    "senha": "alof2av"
   },
   {
     "id": "sind-df-uniescolar-brasilia",
@@ -1765,7 +1963,9 @@
     "responsavel": "Coordenação Geral UNIESCOLAR",
     "endereco": "Brasília - DF",
     "source": "SEMOB-DF / Transporte Escolar Brasília",
-    "observacoes": "Associação de transportadores escolares autorizados que operam nas regiões administrativas do Distrito Federal."
+    "observacoes": "Associação de transportadores escolares autorizados que operam nas regiões administrativas do Distrito Federal.",
+    "usuario": "uniescolardf@gmail.com",
+    "senha": "alorq46"
   },
   {
     "id": "sind-ba-sintest-feira-de-santana",
@@ -1783,7 +1983,9 @@
     "responsavel": "Delegacia Regional Feira de Santana",
     "endereco": "Feira de Santana - BA",
     "source": "SMTT Feira de Santana / Lei 4.024/20",
-    "observacoes": "Núcleo de representação dos permissionários de vans escolares em Feira de Santana sob a base do sindicato estadual SINTEST-BA."
+    "observacoes": "Núcleo de representação dos permissionários de vans escolares em Feira de Santana sob a base do sindicato estadual SINTEST-BA.",
+    "usuario": "sintest.feira@gmail.com",
+    "senha": "alo99ft"
   },
   {
     "id": "sind-ba-atest-salvador",
@@ -1801,7 +2003,9 @@
     "responsavel": "Diretoria ATEST",
     "endereco": "Salvador - BA",
     "source": "SEMOB Salvador / STEC",
-    "observacoes": "Associação de donos de veículos do transporte escolar autorizados da capital baiana."
+    "observacoes": "Associação de donos de veículos do transporte escolar autorizados da capital baiana.",
+    "usuario": "atest.salvador@gmail.com",
+    "senha": "aloftf6"
   },
   {
     "id": "sind-ba-astevc-vitoria-conquista",
@@ -1819,7 +2023,9 @@
     "responsavel": "Diretoria Executiva",
     "endereco": "Vitória da Conquista - BA",
     "source": "SIMTRANS Vitória da Conquista",
-    "observacoes": "Entidade de representação dos condutores escolares do sudoeste baiano."
+    "observacoes": "Entidade de representação dos condutores escolares do sudoeste baiano.",
+    "usuario": "astevc.conquista@gmail.com",
+    "senha": "alos6wa"
   },
   {
     "id": "sind-ce-ascotece-fortaleza",
@@ -1837,7 +2043,9 @@
     "responsavel": "Presidência ASCOTECE",
     "endereco": "Fortaleza - CE",
     "source": "ETUFOR Fortaleza",
-    "observacoes": "Associação dos operadores de vans escolares credenciados pela ETUFOR em Fortaleza e Região Metropolitana."
+    "observacoes": "Associação dos operadores de vans escolares credenciados pela ETUFOR em Fortaleza e Região Metropolitana.",
+    "usuario": "ascotece@gmail.com",
+    "senha": "alonnge"
   },
   {
     "id": "sind-pe-astepe-recife",
@@ -1855,7 +2063,9 @@
     "responsavel": "Diretoria Executiva ASTEPE",
     "endereco": "Recife - PE",
     "source": "CTTU Recife",
-    "observacoes": "Associação representativa dos operadores de transporte de alunos no Grande Recife."
+    "observacoes": "Associação representativa dos operadores de transporte de alunos no Grande Recife.",
+    "usuario": "astepe.recife@gmail.com",
+    "senha": "alovd9s"
   },
   {
     "id": "sind-pe-astecaru-caruaru",
@@ -1873,7 +2083,9 @@
     "responsavel": "Diretoria ASTECARU",
     "endereco": "Caruaru - PE",
     "source": "DESTRA Caruaru",
-    "observacoes": "Associação de motoristas permissionários de vans escolares no agreste pernambucano."
+    "observacoes": "Associação de motoristas permissionários de vans escolares no agreste pernambucano.",
+    "usuario": "astecaru.caruaru@gmail.com",
+    "senha": "alo6znw"
   },
   {
     "id": "sind-rn-coopten-natal",
@@ -1891,7 +2103,9 @@
     "responsavel": "Presidência COOPTEN",
     "endereco": "Natal - RN",
     "source": "STTU Natal / Portal COOPTEN",
-    "observacoes": "Principal cooperativa e referência para os profissionais autônomos e permissionários do transporte escolar em Natal e RM."
+    "observacoes": "Principal cooperativa e referência para os profissionais autônomos e permissionários do transporte escolar em Natal e RM.",
+    "usuario": "contato@cooptenrn.com.br",
+    "senha": "aloxm7d"
   },
   {
     "id": "sind-rn-sindesc-estadual",
@@ -1909,7 +2123,9 @@
     "responsavel": "Diretoria Estadual SINDESC-RN",
     "endereco": "Natal - RN",
     "source": "STTU Natal / Ministério do Trabalho RN",
-    "observacoes": "Sindicato representativo de base estadual dos motoristas de veículos escolares do RN."
+    "observacoes": "Sindicato representativo de base estadual dos motoristas de veículos escolares do RN.",
+    "usuario": "sindescrn@gmail.com",
+    "senha": "alot4yr"
   },
   {
     "id": "sind-pb-sindesc-joao-pessoa",
@@ -1927,7 +2143,9 @@
     "responsavel": "Diretoria SINDESC-PB",
     "endereco": "João Pessoa - PB",
     "source": "SEMOB João Pessoa",
-    "observacoes": "Entidade de representação dos transportadores escolares credenciados de João Pessoa e Campina Grande."
+    "observacoes": "Entidade de representação dos transportadores escolares credenciados de João Pessoa e Campina Grande.",
+    "usuario": "sindescpb@gmail.com",
+    "senha": "alovc3c"
   },
   {
     "id": "sind-se-sindesc-aracaju",
@@ -1945,7 +2163,9 @@
     "responsavel": "Diretoria Estadual",
     "endereco": "Aracaju - SE",
     "source": "SMTT Aracaju",
-    "observacoes": "Sindicato representativo dos permissionários de transporte escolar de Aracaju e municípios sergipanos."
+    "observacoes": "Sindicato representativo dos permissionários de transporte escolar de Aracaju e municípios sergipanos.",
+    "usuario": "sindesc.se@gmail.com",
+    "senha": "alosk2h"
   },
   {
     "id": "sind-pi-sindesc-teresina",
@@ -1963,7 +2183,9 @@
     "responsavel": "Presidência SINDESC-PI",
     "endereco": "Teresina - PI",
     "source": "STRANS Teresina",
-    "observacoes": "Entidade sindical de representação dos condutores autônomos de vans escolares no Piauí."
+    "observacoes": "Entidade sindical de representação dos condutores autônomos de vans escolares no Piauí.",
+    "usuario": "sindescpi@gmail.com",
+    "senha": "alomsm7"
   },
   {
     "id": "sind-ma-sindesc-sao-luis",
@@ -1981,7 +2203,9 @@
     "responsavel": "Diretoria SINDESC-MA",
     "endereco": "São Luís - MA",
     "source": "SMTT São Luís",
-    "observacoes": "Sindicato de base estadual dos condutores de veículos de transporte de estudantes no Maranhão."
+    "observacoes": "Sindicato de base estadual dos condutores de veículos de transporte de estudantes no Maranhão.",
+    "usuario": "sindesc.ma@gmail.com",
+    "senha": "aloz5pf"
   },
   {
     "id": "sind-ms-sintesc-campo-grande",
@@ -1999,7 +2223,9 @@
     "responsavel": "Presidência SINTESC-MS",
     "endereco": "Campo Grande - MS",
     "source": "AGETRAN Campo Grande",
-    "observacoes": "Sindicato oficial representativo dos condutores de vans escolares em Campo Grande e Dourados."
+    "observacoes": "Sindicato oficial representativo dos condutores de vans escolares em Campo Grande e Dourados.",
+    "usuario": "sintescms@gmail.com",
+    "senha": "alo3gym"
   },
   {
     "id": "sind-es-sintesc-vitoria",
@@ -2017,7 +2243,9 @@
     "responsavel": "Diretoria SINTESC-ES",
     "endereco": "Vitória - ES",
     "source": "SETRAN Vitória / DETRAN-ES",
-    "observacoes": "Sindicato representativo de condutores de escolares de Vitória, Vila Velha, Serra e Cariacica."
+    "observacoes": "Sindicato representativo de condutores de escolares de Vitória, Vila Velha, Serra e Cariacica.",
+    "usuario": "sintesces@gmail.com",
+    "senha": "alo3p3n"
   },
   {
     "id": "sind-pa-sindesc-belem",
@@ -2035,7 +2263,9 @@
     "responsavel": "Diretoria SINDESC-PA",
     "endereco": "Belém - PA",
     "source": "SEMOB Belém",
-    "observacoes": "Sindicato dos prestadores de serviço e condutores de vans escolares de Belém e Ananindeua."
+    "observacoes": "Sindicato dos prestadores de serviço e condutores de vans escolares de Belém e Ananindeua.",
+    "usuario": "sindescpa@gmail.com",
+    "senha": "aloe2xd"
   },
   {
     "id": "sind-ro-sindesc-porto-velho",
@@ -2053,7 +2283,9 @@
     "responsavel": "Diretoria Estadual SINDESC-RO",
     "endereco": "Porto Velho - RO",
     "source": "SEMTRAN Porto Velho",
-    "observacoes": "Entidade de representação dos motoristas de veículos escolares de Porto Velho e Ji-Paraná."
+    "observacoes": "Entidade de representação dos motoristas de veículos escolares de Porto Velho e Ji-Paraná.",
+    "usuario": "sindescro@gmail.com",
+    "senha": "aloj4k5"
   },
   {
     "id": "sind-to-sindesc-palmas",
@@ -2071,7 +2303,9 @@
     "responsavel": "Presidência SINDESC-TO",
     "endereco": "Palmas - TO",
     "source": "Secretaria de Segurança e Mobilidade Urbana de Palmas",
-    "observacoes": "Representa os motoristas de escolares na capital tocantinense e interior do estado."
+    "observacoes": "Representa os motoristas de escolares na capital tocantinense e interior do estado.",
+    "usuario": "sindescto@gmail.com",
+    "senha": "aloqewh"
   },
   {
     "id": "sind-ac-sindesc-rio-branco",
@@ -2089,7 +2323,9 @@
     "responsavel": "Diretoria SINDESC-AC",
     "endereco": "Rio Branco - AC",
     "source": "RBTRANS Rio Branco",
-    "observacoes": "Entidade representativa dos condutores de transporte escolar de Rio Branco e Cruzeiro do Sul."
+    "observacoes": "Entidade representativa dos condutores de transporte escolar de Rio Branco e Cruzeiro do Sul.",
+    "usuario": "sindescac@gmail.com",
+    "senha": "alo9udk"
   },
   {
     "id": "sind-rr-sindesc-boa-vista",
@@ -2107,6 +2343,8 @@
     "responsavel": "Diretoria SINDESC-RR",
     "endereco": "Boa Vista - RR",
     "source": "EMHUR Boa Vista",
-    "observacoes": "Sindicato oficial de condutores de transporte de estudantes em Boa Vista."
+    "observacoes": "Sindicato oficial de condutores de transporte de estudantes em Boa Vista.",
+    "usuario": "sindescrr@gmail.com",
+    "senha": "alorpaz"
   }
 ]
