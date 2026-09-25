@@ -1,3 +1,4 @@
+import { Suspense } from 'react';
 import type { Metadata } from 'next';
 import SindicatosClient from './SindicatosClient';
 
@@ -8,5 +9,9 @@ export const metadata: Metadata = {
 };
 
 export default function SindicatosPage() {
-  return <SindicatosClient />;
+  return (
+    <Suspense fallback={<div className="min-h-screen bg-gray-50 flex items-center justify-center text-sm text-gray-500">Carregando sindicatos…</div>}>
+      <SindicatosClient />
+    </Suspense>
+  );
 }

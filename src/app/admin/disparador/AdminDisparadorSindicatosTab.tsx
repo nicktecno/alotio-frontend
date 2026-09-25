@@ -618,6 +618,86 @@ export default function AdminDisparadorSindicatosTab() {
           </div>
         )}
 
+        {/* QUICK STATE PILLS (CLICK TO FILTER BY UF) */}
+        <div className="flex items-center gap-1.5 overflow-x-auto pb-1 pt-1 text-xs scrollbar-thin">
+          <span className="text-xs font-bold text-gray-500 whitespace-nowrap mr-1">Estado (UF):</span>
+          <button
+            type="button"
+            onClick={() => {
+              setUfFilter('ALL');
+              setCityFilter('ALL');
+              setCurrentIndex(0);
+            }}
+            className={`px-3 py-1.5 rounded-xl font-bold transition whitespace-nowrap flex items-center gap-1.5 shrink-0 ${
+              ufFilter === 'ALL'
+                ? 'bg-emerald-700 text-white shadow-sm ring-2 ring-emerald-400'
+                : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+            }`}
+          >
+            <span>Todos</span>
+            <span
+              className={`text-[10px] px-1.5 py-0.2 rounded-full font-black ${
+                ufFilter === 'ALL' ? 'bg-emerald-800 text-emerald-100' : 'bg-gray-200 text-gray-600'
+              }`}
+            >
+              {contacts.length}
+            </span>
+          </button>
+          {availableUfs.map((uf) => {
+            const count = contacts.filter((c) => c.uf === uf).length;
+            const isSelected = ufFilter === uf;
+            return (
+              <button
+                key={uf}
+                type="button"
+                onClick={() => {
+                  setUfFilter(uf);
+                  setCityFilter('ALL');
+                  setCurrentIndex(0);
+                }}
+                className={`px-3 py-1.5 rounded-xl font-bold transition whitespace-nowrap flex items-center gap-1.5 shrink-0 ${
+                  isSelected
+                    ? 'bg-emerald-700 text-white shadow-sm ring-2 ring-emerald-400'
+                    : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+                }`}
+              >
+                <span>{uf}</span>
+                <span
+                  className={`text-[10px] px-1.5 py-0.2 rounded-full font-black ${
+                    isSelected ? 'bg-emerald-800 text-emerald-100' : 'bg-gray-200 text-gray-600'
+                  }`}
+                >
+                  {count}
+                </span>
+              </button>
+            );
+          })}
+        </div>
+
+        {/* ACTIVE UF FILTER BANNER */}
+        {ufFilter !== 'ALL' && (
+          <div className="flex items-center justify-between bg-emerald-50 border border-emerald-200 rounded-xl px-4 py-2 text-xs text-emerald-950">
+            <div className="flex items-center gap-2">
+              <span className="text-sm">📍</span>
+              <span>
+                Filtrando entidades de <strong className="bg-emerald-700 text-white px-2 py-0.5 rounded text-xs font-black">{ufFilter}</strong> ({filteredContacts.length} {filteredContacts.length === 1 ? 'entidade' : 'entidades'})
+              </span>
+            </div>
+            <button
+              type="button"
+              onClick={() => {
+                setUfFilter('ALL');
+                setCityFilter('ALL');
+                setCurrentIndex(0);
+              }}
+              className="text-emerald-800 font-bold hover:underline flex items-center gap-1"
+            >
+              <span>✕</span>
+              <span>Limpar filtro UF (Ver todas as {contacts.length})</span>
+            </button>
+          </div>
+        )}
+
         {/* FILTERS BAR */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-3 pt-2">
           {/* Search */}
@@ -726,8 +806,23 @@ export default function AdminDisparadorSindicatosTab() {
                     <h3 className="text-lg sm:text-xl font-black text-gray-900 mt-1 font-heading">
                       {currentContact.nome}
                     </h3>
-                    <p className="text-xs text-gray-500">
-                      {currentContact.cidade} ({currentContact.uf}) • Fonte: {currentContact.source}
+                    <p className="text-xs text-gray-500 flex items-center gap-1.5 flex-wrap mt-0.5">
+                      <span>{currentContact.cidade}</span>
+                      {currentContact.uf && (
+                        <button
+                          type="button"
+                          onClick={() => {
+                            setUfFilter(currentContact.uf || 'ALL');
+                            setCityFilter('ALL');
+                            setCurrentIndex(0);
+                          }}
+                          className="font-black text-emerald-800 bg-emerald-100 hover:bg-emerald-200 px-2 py-0.5 rounded text-xs transition border border-emerald-200"
+                          title={`Filtrar apenas entidades de ${currentContact.uf}`}
+                        >
+                          {currentContact.uf}
+                        </button>
+                      )}
+                      <span>• Fonte: {currentContact.source}</span>
                     </p>
                   </div>
                 </div>
@@ -999,8 +1094,21 @@ export default function AdminDisparadorSindicatosTab() {
                         </span>
                       </td>
                       <td className="py-3 px-3">
-                        <span className="font-semibold text-gray-900">{c.cidade}</span>
-                        <span className="text-xs text-gray-400 block">{c.uf}</span>
+                        <span className="font-semibold text-gray-900 block">{c.cidade}</span>
+                        {c.uf && (
+                          <button
+                            type="button"
+                            onClick={() => {
+                              setUfFilter(c.uf || 'ALL');
+                              setCityFilter('ALL');
+                              setCurrentIndex(0);
+                            }}
+                            className="text-xs font-black text-emerald-700 hover:text-emerald-900 hover:underline bg-emerald-50 px-1.5 py-0.5 rounded border border-emerald-200 inline-block mt-0.5 transition"
+                            title={`Filtrar apenas ${c.uf}`}
+                          >
+                            {c.uf}
+                          </button>
+                        )}
                       </td>
                       <td className="py-3 px-4 whitespace-nowrap">
                         <span className="font-semibold text-gray-800">{c.telefone}</span>
