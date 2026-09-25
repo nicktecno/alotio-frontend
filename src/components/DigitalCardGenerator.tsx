@@ -148,7 +148,7 @@ export default function DigitalCardGenerator({ variant = 'full' }: Props) {
 
   return (
     <div className="h-full rounded-2xl border border-primary/20 bg-white shadow-xl overflow-hidden flex flex-col">
-      <div className="bg-gradient-to-r from-primary to-primary-600 px-5 py-4 sm:px-6">
+      <div className="bg-gradient-to-r from-primary to-primary-600 px-6 py-5">
         <p className="text-xs font-bold uppercase tracking-widest text-white/80">
           Ferramenta gratuita
         </p>
@@ -162,8 +162,8 @@ export default function DigitalCardGenerator({ variant = 'full' }: Props) {
         </p>
       </div>
 
-      <div className="grid lg:grid-cols-2 gap-0 flex-1">
-        <div className="p-5 sm:p-6 space-y-4 border-b lg:border-b-0 lg:border-r border-gray-100">
+      <div className="grid lg:grid-cols-12 gap-0 flex-1">
+        <div className="lg:col-span-7 p-6 sm:p-7 space-y-4 border-b lg:border-b-0 lg:border-r border-gray-100 flex flex-col justify-between">
           <Field label="Nome / apelido">
             <input
               className={inputClass}
@@ -302,7 +302,7 @@ export default function DigitalCardGenerator({ variant = 'full' }: Props) {
           )}
         </div>
 
-        <div className="p-5 sm:p-6 bg-gray-50 flex flex-col justify-center gap-4">
+        <div className="lg:col-span-5 p-6 sm:p-7 bg-gray-50 flex flex-col justify-center gap-4">
           <DigitalCardPreview data={exportData} format={format} />
           <div className="grid grid-cols-2 gap-2 w-full">
             <button

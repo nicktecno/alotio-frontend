@@ -27,7 +27,7 @@ function Field({
     <label className="block h-full">
       <span className="text-sm font-semibold text-gray-800 leading-snug">{label}</span>
       <span
-        className={`mt-0.5 block min-h-[2rem] text-xs leading-snug ${
+        className={`mt-0.5 block min-h-[1.25rem] text-xs leading-snug ${
           hint ? 'text-gray-500' : 'text-transparent'
         }`}
         aria-hidden={!hint}
@@ -80,8 +80,8 @@ export default function MonthlyFeeCalculator({ variant = 'full' }: Props) {
         </p>
       </div>
 
-      <div className={`grid lg:grid-cols-2 gap-0 ${compact ? 'flex-1' : ''}`}>
-        <div className="p-5 sm:p-6 space-y-4 border-b lg:border-b-0 lg:border-r border-gray-100">
+      <div className={`grid lg:grid-cols-12 gap-0 ${compact ? 'flex-1' : ''}`}>
+        <div className="lg:col-span-7 p-6 sm:p-7 space-y-4 border-b lg:border-b-0 lg:border-r border-gray-100 flex flex-col justify-between">
           <div className="grid sm:grid-cols-2 gap-4 items-start">
             <Field label="Km rodados por mês" hint="Ida + volta × dias úteis">
               <input
@@ -197,7 +197,7 @@ export default function MonthlyFeeCalculator({ variant = 'full' }: Props) {
           )}
         </div>
 
-        <div className="p-5 sm:p-6 bg-gray-50 flex flex-col justify-center">
+        <div className="lg:col-span-5 p-6 sm:p-7 bg-gray-50 flex flex-col justify-center">
           <div className="text-center lg:text-left">
             <p className="text-sm font-semibold text-gray-600 uppercase tracking-wide">
               Mensalidade sugerida por assento

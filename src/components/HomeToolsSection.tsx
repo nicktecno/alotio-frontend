@@ -9,8 +9,8 @@ export default function HomeToolsSection() {
       className="py-16 sm:py-20 bg-gradient-to-b from-white to-primary/5 border-y border-primary/10"
       aria-labelledby="home-tools-heading"
     >
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center max-w-3xl mx-auto mb-10">
+      <div className="w-full max-w-[1720px] mx-auto px-4 sm:px-6 lg:px-8 2xl:px-12">
+        <div className="text-center max-w-4xl mx-auto mb-10">
           <span className="inline-flex items-center gap-2 rounded-full bg-secondary/15 px-3.5 py-1 text-xs font-bold uppercase tracking-wider text-secondary-700">
             Ferramentas gratuitas
           </span>
@@ -27,7 +27,7 @@ export default function HomeToolsSection() {
           </p>
 
           {/* Destaque principal para as chamadas das ferramentas completas */}
-          <div className="mt-8 grid sm:grid-cols-2 gap-4 max-w-2xl mx-auto">
+          <div className="mt-8 grid sm:grid-cols-2 gap-4 max-w-3xl mx-auto">
             <Link
               href="/ferramentas/calculadora-mensalidade"
               className="group relative flex items-center gap-3.5 p-4 rounded-2xl bg-white border-2 border-primary/20 hover:border-primary shadow-md hover:shadow-xl transition-all duration-300 text-left transform hover:-translate-y-0.5"
@@ -68,7 +68,7 @@ export default function HomeToolsSection() {
           </div>
         </div>
 
-        <div className="grid xl:grid-cols-2 gap-8 lg:gap-10 items-stretch">
+        <div className="grid xl:grid-cols-2 gap-8 lg:gap-10 2xl:gap-12 items-stretch">
           {/* Card Calculadora */}
           <div className="flex flex-col">
             <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 mb-4">
@@ -87,13 +87,16 @@ export default function HomeToolsSection() {
             <div className="flex-1">
               <MonthlyFeeCalculator variant="compact" />
             </div>
-            <div className="mt-3.5 text-center">
+            <div className="mt-4">
               <Link
                 href="/ferramentas/calculadora-mensalidade"
-                className="inline-flex items-center gap-2 rounded-xl bg-white border border-primary/20 px-4 py-2 text-sm font-semibold text-primary hover:bg-primary hover:text-white shadow-sm transition"
+                className="w-full flex flex-col sm:flex-row items-center justify-between gap-2.5 rounded-2xl bg-white hover:bg-primary-50/50 border border-primary/20 hover:border-primary/40 px-5 py-3 text-sm font-semibold text-primary shadow-sm hover:shadow transition"
               >
-                <span>💡 Quer simular custos completos e margem de lucro?</span>
-                <span className="underline font-bold">Abrir Calculadora Completa →</span>
+                <span className="flex items-center gap-2 text-center sm:text-left">
+                  <span>💡</span>
+                  <span>Quer simular custos completos e margem de lucro?</span>
+                </span>
+                <span className="font-bold underline shrink-0">Abrir Calculadora Completa →</span>
               </Link>
             </div>
           </div>
@@ -116,13 +119,16 @@ export default function HomeToolsSection() {
             <div className="flex-1">
               <DigitalCardGenerator variant="compact" />
             </div>
-            <div className="mt-3.5 text-center">
+            <div className="mt-4">
               <Link
                 href="/ferramentas/cartao-digital"
-                className="inline-flex items-center gap-2 rounded-xl bg-white border border-secondary/30 px-4 py-2 text-sm font-semibold text-secondary-800 hover:bg-secondary hover:text-white shadow-sm transition"
+                className="w-full flex flex-col sm:flex-row items-center justify-between gap-2.5 rounded-2xl bg-white hover:bg-secondary-50/50 border border-secondary/30 hover:border-secondary/50 px-5 py-3 text-sm font-semibold text-secondary-800 shadow-sm hover:shadow transition"
               >
-                <span>🎨 Personalize com a foto da sua van e logomarca:</span>
-                <span className="underline font-bold">Abrir Gerador Completo →</span>
+                <span className="flex items-center gap-2 text-center sm:text-left">
+                  <span>🎨</span>
+                  <span>Personalize com a foto da sua van e logomarca:</span>
+                </span>
+                <span className="font-bold underline shrink-0">Abrir Gerador Completo →</span>
               </Link>
             </div>
           </div>
