@@ -105,6 +105,7 @@ function cleanPhoneForDispatch(raw: string): { digits: string; formatted: string
 }
 
 export default function AdminDisparadorPage() {
+  const [mainBlock, setMainBlock] = useState<'transportadores' | 'sindicatos'>('transportadores');
   const [activeTab, setActiveTab] = useState<
     'queue_new' | 'queue_reprocess' | 'table' | 'history' | 'template' | 'import' | 'sindicatos'
   >('queue_new');
@@ -136,7 +137,7 @@ export default function AdminDisparadorPage() {
 
   // All available lists (preloaded + custom if exists)
   const allLists = useMemo(() => {
-    const base = [...PRELOADED_CONTACT_LISTS, SINDICATOS_CONTACT_GROUP];
+    const base = [...PRELOADED_CONTACT_LISTS];
     if (customList) {
       return [...base, customList];
     }
@@ -835,9 +836,86 @@ export default function AdminDisparadorPage() {
   }, [isAllTableSelected, selectedContactIds, filteredContacts]);
 
   return (
-    <div className="max-w-4xl mx-auto space-y-6 pb-12">
-      {/* Header */}
-      <div className="bg-white rounded-2xl p-4 sm:p-6 shadow-sm border border-gray-200">
+    <div className="max-w-6xl mx-auto space-y-6 pb-12">
+      {/* SELEÇÃO DE BLOCOS PRINCIPAIS DO DISPARADOR */}
+      <div className="grid sm:grid-cols-2 gap-3 sm:gap-4 p-1.5 bg-gray-200/70 rounded-2xl border border-gray-300/80 shadow-sm">
+        <button
+          type="button"
+          onClick={() => {
+            setMainBlock('transportadores');
+            if (activeTab === 'sindicatos') setActiveTab('queue_new');
+          }}
+          className={`flex items-center gap-3.5 p-3.5 sm:p-4 rounded-xl font-bold transition text-left ${
+            mainBlock === 'transportadores'
+              ? 'bg-white text-gray-900 shadow-md border border-gray-200 ring-2 ring-primary/20'
+              : 'text-gray-600 hover:text-gray-900 hover:bg-white/60'
+          }`}
+        >
+          <div
+            className={`w-11 h-11 rounded-xl flex items-center justify-center text-2xl shrink-0 transition ${
+              mainBlock === 'transportadores'
+                ? 'bg-primary text-white shadow-sm'
+                : 'bg-gray-100 text-gray-700'
+            }`}
+          >
+            🚐
+          </div>
+          <div className="min-w-0">
+            <div className="flex items-center gap-2">
+              <span className="text-sm sm:text-base font-extrabold truncate">
+                Transportadores Escolares
+              </span>
+              <span className="text-[10px] bg-primary-100 text-primary-800 font-bold px-2 py-0.5 rounded-full shrink-0">
+                {stats.total} contatos
+              </span>
+            </div>
+            <p className="text-xs text-gray-500 font-normal truncate mt-0.5">
+              Envio de credenciais, filas de novos, reprocessamento e listas municipais
+            </p>
+          </div>
+        </button>
+
+        <button
+          type="button"
+          onClick={() => {
+            setMainBlock('sindicatos');
+            setActiveTab('sindicatos');
+          }}
+          className={`flex items-center gap-3.5 p-3.5 sm:p-4 rounded-xl font-bold transition text-left ${
+            mainBlock === 'sindicatos'
+              ? 'bg-white text-emerald-950 shadow-md border border-emerald-200 ring-2 ring-emerald-500/20'
+              : 'text-gray-600 hover:text-gray-900 hover:bg-white/60'
+          }`}
+        >
+          <div
+            className={`w-11 h-11 rounded-xl flex items-center justify-center text-2xl shrink-0 transition ${
+              mainBlock === 'sindicatos'
+                ? 'bg-emerald-700 text-white shadow-sm'
+                : 'bg-gray-100 text-gray-700'
+            }`}
+          >
+            🏛️
+          </div>
+          <div className="min-w-0">
+            <div className="flex items-center gap-2">
+              <span className="text-sm sm:text-base font-extrabold truncate">
+                Sindicatos & Associações
+              </span>
+              <span className="text-[10px] bg-emerald-100 text-emerald-800 font-bold px-2 py-0.5 rounded-full shrink-0">
+                {SINDICATOS_LIST.length} entidades
+              </span>
+            </div>
+            <p className="text-xs text-gray-500 font-normal truncate mt-0.5">
+              Difusão nacional do Alô Tio e propostas de parcerias institucionais
+            </p>
+          </div>
+        </button>
+      </div>
+
+      {mainBlock === 'transportadores' && (
+        <>
+          {/* Header dos Transportadores */}
+          <div className="bg-white rounded-2xl p-4 sm:p-6 shadow-sm border border-gray-200">
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
           <div>
             <div className="flex items-center gap-2">
@@ -991,17 +1069,6 @@ export default function AdminDisparadorPage() {
             }`}
           >
             📥 Importar CSV / Texto
-          </button>
-          <button
-            onClick={() => setActiveTab('sindicatos')}
-            className={`py-3 px-4 font-semibold border-b-2 transition whitespace-nowrap flex items-center gap-1.5 ${
-              activeTab === 'sindicatos'
-                ? 'border-emerald-600 text-emerald-700 bg-emerald-50/50'
-                : 'border-transparent text-gray-600 hover:text-gray-900'
-            }`}
-          >
-            <span>🏛️</span>
-            <span>Sindicatos & Associações ({SINDICATOS_LIST.length})</span>
           </button>
         </div>
       </div>
@@ -2012,8 +2079,11 @@ export default function AdminDisparadorPage() {
         </div>
       )}
 
-      {/* TAB 5: SINDICATOS & ASSOCIAÇÕES */}
-      {activeTab === 'sindicatos' && <AdminDisparadorSindicatosTab />}
+        </>
+      )}
+
+      {/* BLOCO DEDICADO DE SINDICATOS & ASSOCIAÇÕES */}
+      {mainBlock === 'sindicatos' && <AdminDisparadorSindicatosTab />}
     </div>
   );
 }
