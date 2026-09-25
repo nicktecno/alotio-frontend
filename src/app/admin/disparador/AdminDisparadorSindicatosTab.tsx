@@ -428,46 +428,49 @@ export default function AdminDisparadorSindicatosTab() {
   };
 
   return (
-    <div className="space-y-4 sm:space-y-6 pb-8">
-      {/* HERO BANNER */}
-      <div className="bg-gradient-to-r from-emerald-800 via-teal-800 to-emerald-900 rounded-2xl sm:rounded-3xl p-4 sm:p-8 text-white shadow-md relative overflow-hidden">
-        <div className="absolute top-0 right-0 w-96 h-96 bg-white/5 rounded-full blur-3xl pointer-events-none" />
-        <div className="relative z-10 max-w-3xl">
-          <div className="inline-flex items-center gap-2 bg-emerald-700/60 backdrop-blur border border-emerald-500/30 px-2.5 py-1 rounded-full text-[10px] sm:text-xs font-semibold uppercase tracking-wider text-emerald-200 mb-2 sm:mb-3">
-            <span>🏛️</span>
-            <span>Expansão Brasil • Sindicatos & Associações</span>
+    <div className="space-y-3 sm:space-y-6 pb-12 w-full max-w-full min-w-0 overflow-hidden">
+      {/* HERO BANNER (COMPACT ON MOBILE) */}
+      <div className="bg-gradient-to-r from-emerald-800 via-teal-800 to-emerald-900 rounded-2xl sm:rounded-3xl p-3 sm:p-7 text-white shadow-md relative overflow-hidden w-full max-w-full">
+        <div className="relative z-10">
+          <div className="flex items-center justify-between gap-2">
+            <div className="inline-flex items-center gap-1.5 bg-emerald-700/60 backdrop-blur border border-emerald-500/30 px-2.5 py-0.5 rounded-full text-[10px] sm:text-xs font-semibold uppercase tracking-wider text-emerald-200">
+              <span>🏛️</span>
+              <span>Sindicatos & Associações</span>
+            </div>
+            <span className="text-[11px] font-bold text-emerald-200 sm:hidden">
+              {stats.sent} de {stats.total} contatados ({stats.percent}%)
+            </span>
           </div>
-          <h2 className="text-xl sm:text-3xl font-extrabold font-heading text-white tracking-tight">
+          <h2 className="text-lg sm:text-2xl font-extrabold font-heading text-white tracking-tight mt-1.5 sm:mt-2">
             Parcerias com Sindicatos e Associações
           </h2>
-          <p className="mt-1.5 sm:mt-2 text-emerald-100 text-xs sm:text-base leading-relaxed">
-            Contate lideranças, cooperativas, sindicatos e associações de transporte escolar em cada cidade cadastrada no Alô Tio.
-            Proponha parceria gratuita para cadastrar associados, publicar comunicados oficiais e acelerar a difusão da plataforma em todo o Brasil.
+          <p className="hidden sm:block mt-1.5 text-emerald-100 text-xs sm:text-sm leading-relaxed max-w-3xl">
+            Contate lideranças, cooperativas, sindicatos e associações de transporte escolar em cada cidade cadastrada no Alô Tio. Proponha parceria gratuita para cadastrar associados e acelerar a difusão da plataforma.
           </p>
         </div>
 
-        {/* METRICS BAR */}
-        <div className="mt-4 sm:mt-6 pt-4 sm:pt-6 border-t border-emerald-700/60 grid grid-cols-2 sm:grid-cols-4 gap-2 sm:gap-4 text-center">
-          <div className="bg-emerald-900/50 backdrop-blur rounded-xl sm:rounded-2xl p-2.5 sm:p-3 border border-emerald-600/30">
-            <span className="block text-xl sm:text-2xl font-black text-white">{stats.total}</span>
-            <span className="text-[10px] sm:text-xs text-emerald-200 uppercase font-medium">Entidades Mapeadas</span>
+        {/* METRICS BAR (4 COLUMNS ALWAYS) */}
+        <div className="mt-3 sm:mt-5 pt-2.5 sm:pt-4 border-t border-emerald-700/60 grid grid-cols-4 gap-1.5 sm:gap-3 text-center">
+          <div className="bg-emerald-900/60 backdrop-blur rounded-xl p-1.5 sm:p-3 border border-emerald-600/30">
+            <span className="block text-base sm:text-2xl font-black text-white">{stats.total}</span>
+            <span className="text-[9px] sm:text-xs text-emerald-200 uppercase font-medium">Mapeados</span>
           </div>
-          <div className="bg-emerald-900/50 backdrop-blur rounded-xl sm:rounded-2xl p-2.5 sm:p-3 border border-emerald-600/30">
-            <span className="block text-xl sm:text-2xl font-black text-emerald-300">{stats.citiesCount}</span>
-            <span className="text-[10px] sm:text-xs text-emerald-200 uppercase font-medium">Cidades Cobertas</span>
+          <div className="bg-emerald-900/60 backdrop-blur rounded-xl p-1.5 sm:p-3 border border-emerald-600/30">
+            <span className="block text-base sm:text-2xl font-black text-emerald-300">{stats.citiesCount}</span>
+            <span className="text-[9px] sm:text-xs text-emerald-200 uppercase font-medium">Cidades</span>
           </div>
-          <div className="bg-emerald-900/50 backdrop-blur rounded-xl sm:rounded-2xl p-2.5 sm:p-3 border border-emerald-600/30">
-            <span className="block text-xl sm:text-2xl font-black text-green-400">{stats.sent}</span>
-            <span className="text-[10px] sm:text-xs text-emerald-200 uppercase font-medium">Contatados ({stats.percent}%)</span>
+          <div className="bg-emerald-900/60 backdrop-blur rounded-xl p-1.5 sm:p-3 border border-emerald-600/30">
+            <span className="block text-base sm:text-2xl font-black text-green-400">{stats.sent}</span>
+            <span className="text-[9px] sm:text-xs text-emerald-200 uppercase font-medium">Enviados</span>
           </div>
-          <div className="bg-emerald-900/50 backdrop-blur rounded-xl sm:rounded-2xl p-2.5 sm:p-3 border border-emerald-600/30">
-            <span className="block text-xl sm:text-2xl font-black text-amber-300">{stats.pending}</span>
-            <span className="text-[10px] sm:text-xs text-emerald-200 uppercase font-medium">Pendentes na Fila</span>
+          <div className="bg-emerald-900/60 backdrop-blur rounded-xl p-1.5 sm:p-3 border border-emerald-600/30">
+            <span className="block text-base sm:text-2xl font-black text-amber-300">{stats.pending}</span>
+            <span className="text-[9px] sm:text-xs text-emerald-200 uppercase font-medium">Fila</span>
           </div>
         </div>
 
         {/* PROGRESS BAR */}
-        <div className="mt-3 sm:mt-4 w-full bg-emerald-950/60 rounded-full h-2 sm:h-2.5 overflow-hidden">
+        <div className="mt-2.5 sm:mt-3 w-full bg-emerald-950/60 rounded-full h-1.5 sm:h-2 overflow-hidden">
           <div
             className="bg-emerald-400 h-full transition-all duration-500 rounded-full"
             style={{ width: `${stats.percent}%` }}
@@ -476,16 +479,16 @@ export default function AdminDisparadorSindicatosTab() {
       </div>
 
       {/* TOOLBAR & ACTIONS */}
-      <div className="bg-white rounded-2xl sm:rounded-3xl p-3.5 sm:p-5 shadow-sm border border-gray-200 space-y-3.5 sm:space-y-4">
-        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2.5 sm:gap-3">
-          {/* View Mode Switches */}
-          <div className="grid grid-cols-2 sm:flex sm:items-center gap-1.5 sm:gap-2 w-full sm:w-auto">
+      <div className="bg-white rounded-2xl sm:rounded-3xl p-3 sm:p-5 shadow-sm border border-gray-200 space-y-3 w-full max-w-full min-w-0 overflow-hidden">
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2.5">
+          {/* Mode switch */}
+          <div className="grid grid-cols-2 gap-1.5 p-1 bg-gray-100 rounded-xl w-full sm:w-auto">
             <button
               onClick={() => setViewMode('card')}
-              className={`px-3 sm:px-4 py-2.5 sm:py-2 rounded-xl text-xs sm:text-sm font-bold transition flex items-center justify-center gap-1.5 min-h-[42px] ${
+              className={`py-2 px-2.5 rounded-lg text-xs font-bold transition flex items-center justify-center gap-1.5 min-h-[36px] ${
                 viewMode === 'card'
                   ? 'bg-emerald-600 text-white shadow-sm'
-                  : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+                  : 'text-gray-600 hover:text-gray-900'
               }`}
             >
               <span>🎴</span>
@@ -493,10 +496,10 @@ export default function AdminDisparadorSindicatosTab() {
             </button>
             <button
               onClick={() => setViewMode('table')}
-              className={`px-3 sm:px-4 py-2.5 sm:py-2 rounded-xl text-xs sm:text-sm font-bold transition flex items-center justify-center gap-1.5 min-h-[42px] ${
+              className={`py-2 px-2.5 rounded-lg text-xs font-bold transition flex items-center justify-center gap-1.5 min-h-[36px] ${
                 viewMode === 'table'
                   ? 'bg-emerald-600 text-white shadow-sm'
-                  : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+                  : 'text-gray-600 hover:text-gray-900'
               }`}
             >
               <span>📋</span>
@@ -504,40 +507,40 @@ export default function AdminDisparadorSindicatosTab() {
             </button>
           </div>
 
-          {/* Quick Actions */}
-          <div className="grid grid-cols-2 sm:flex sm:items-center gap-1.5 sm:gap-2 w-full sm:w-auto">
+          {/* Quick Actions Buttons */}
+          <div className="grid grid-cols-3 sm:flex sm:items-center gap-1.5 w-full sm:w-auto">
             <button
               onClick={() => setIsTemplateEditorOpen(!isTemplateEditorOpen)}
-              className="px-2.5 sm:px-3.5 py-2.5 sm:py-2 rounded-xl border border-gray-300 bg-white hover:bg-gray-50 text-xs sm:text-sm font-semibold text-gray-700 transition flex items-center justify-center gap-1.5 min-h-[42px]"
+              className="px-2 py-2 rounded-xl border border-gray-300 bg-white hover:bg-gray-50 text-xs font-semibold text-gray-700 transition flex items-center justify-center gap-1 min-h-[38px]"
             >
               <span>✍️</span>
               <span>Mensagem</span>
             </button>
             <button
               onClick={() => setIsAddModalOpen(true)}
-              className="px-2.5 sm:px-3.5 py-2.5 sm:py-2 rounded-xl bg-primary hover:bg-primary-600 text-white text-xs sm:text-sm font-semibold transition flex items-center justify-center gap-1.5 min-h-[42px]"
+              className="px-2 py-2 rounded-xl bg-primary hover:bg-primary-600 text-white text-xs font-semibold transition flex items-center justify-center gap-1 min-h-[38px]"
             >
               <span>➕</span>
               <span>Cadastrar</span>
             </button>
             <button
               onClick={handleExportCsv}
-              className="col-span-2 sm:col-span-1 px-3 py-2.5 sm:py-2 rounded-xl border border-gray-300 bg-white hover:bg-gray-50 text-xs sm:text-sm font-semibold text-gray-700 transition flex items-center justify-center gap-1.5 min-h-[42px]"
+              className="px-2 py-2 rounded-xl border border-gray-300 bg-white hover:bg-gray-50 text-xs font-semibold text-gray-700 transition flex items-center justify-center gap-1 min-h-[38px]"
               title="Exportar CSV de Sindicatos"
             >
               <span>📤</span>
-              <span>Exportar CSV</span>
+              <span>CSV</span>
             </button>
           </div>
         </div>
 
         {/* TEMPLATE EDITOR ACCORDION */}
         {isTemplateEditorOpen && (
-          <div className="bg-emerald-50/60 border border-emerald-200 rounded-xl sm:rounded-2xl p-3.5 sm:p-5 space-y-3 sm:space-y-4 animate-in fade-in duration-200">
+          <div className="bg-emerald-50/60 border border-emerald-200 rounded-xl p-3 sm:p-5 space-y-3 animate-in fade-in duration-200">
             <div className="flex items-center justify-between">
               <div>
-                <h4 className="font-bold text-emerald-950 text-xs sm:text-sm">Mensagem Proposta de Parceria Alô Tio</h4>
-                <p className="text-[11px] sm:text-xs text-emerald-700">Esta mensagem é usada nos envios de WhatsApp e SMS.</p>
+                <h4 className="font-bold text-emerald-950 text-xs sm:text-sm">Mensagem de Parceria</h4>
+                <p className="text-[11px] text-emerald-700">Usada nos disparos de WhatsApp e SMS.</p>
               </div>
               <button
                 onClick={handleResetTemplate}
@@ -548,82 +551,48 @@ export default function AdminDisparadorSindicatosTab() {
             </div>
 
             {/* Modelos Predefinidos */}
-            <div>
-              <span className="text-[11px] sm:text-xs font-bold text-emerald-900 block mb-1.5 uppercase tracking-wide">
-                Modelos Rápidos Prontos:
-              </span>
-              <div className="flex flex-wrap gap-1.5 sm:gap-2">
-                {SINDICATO_TEMPLATE_PRESETS.map((preset) => (
-                  <button
-                    key={preset.id}
-                    type="button"
-                    onClick={() => {
-                      setTemplateText(preset.text);
-                      toast.success(`Modelo "${preset.name.split('(')[0].trim()}" aplicado!`);
-                    }}
-                    className={`text-xs px-2.5 sm:px-3 py-1.5 rounded-xl border font-bold transition flex items-center gap-1 min-h-[34px] ${
-                      templateText === preset.text
-                        ? 'bg-emerald-700 text-white border-emerald-800 shadow-sm'
-                        : 'bg-white hover:bg-emerald-100 text-emerald-900 border-emerald-300'
-                    }`}
-                  >
-                    <span>{preset.name}</span>
-                  </button>
-                ))}
-              </div>
-            </div>
-
-            {/* Variable Tags */}
-            <div>
-              <span className="text-[11px] sm:text-xs font-bold text-emerald-900 block mb-1.5 uppercase tracking-wide">
-                Tags Dinâmicas (clique para inserir):
-              </span>
-              <div className="flex flex-wrap gap-1.5 text-xs">
-                {[
-                  { tag: '{nome}', desc: 'Nome ou sigla da entidade' },
-                  { tag: '{responsavel}', desc: 'Responsável / Presidente' },
-                  { tag: '{usuario}', desc: 'Login / E-mail de acesso' },
-                  { tag: '{senha}', desc: 'Senha temporária de acesso' },
-                  { tag: '{link}', desc: 'Link do painel de login' },
-                  { tag: '{cidade}', desc: 'Cidade da entidade' },
-                  { tag: '{uf}', desc: 'Estado (UF)' },
-                  { tag: '{telefone}', desc: 'Telefone oficial' },
-                ].map(({ tag, desc }) => (
-                  <button
-                    key={tag}
-                    type="button"
-                    onClick={() => setTemplateText((prev) => `${prev} ${tag}`)}
-                    className="bg-white hover:bg-emerald-100 text-emerald-800 border border-emerald-300 px-2 py-1 rounded-lg font-mono font-bold text-[11px] sm:text-xs transition min-h-[30px]"
-                    title={desc}
-                  >
-                    {tag}
-                  </button>
-                ))}
-              </div>
+            <div className="flex flex-wrap gap-1.5">
+              {SINDICATO_TEMPLATE_PRESETS.map((preset) => (
+                <button
+                  key={preset.id}
+                  type="button"
+                  onClick={() => {
+                    setTemplateText(preset.text);
+                    toast.success(`Modelo "${preset.name.split('(')[0].trim()}" aplicado!`);
+                  }}
+                  className={`text-xs px-2.5 py-1 rounded-lg border font-bold transition min-h-[32px] ${
+                    templateText === preset.text
+                      ? 'bg-emerald-700 text-white border-emerald-800'
+                      : 'bg-white hover:bg-emerald-100 text-emerald-900 border-emerald-300'
+                  }`}
+                >
+                  {preset.name}
+                </button>
+              ))}
             </div>
 
             <textarea
-              rows={5}
+              rows={4}
               value={templateText}
               onChange={(e) => setTemplateText(e.target.value)}
-              className="w-full bg-white border border-emerald-300 rounded-xl p-3 text-xs sm:text-sm text-gray-800 focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 transition leading-relaxed"
+              className="w-full bg-white border border-emerald-300 rounded-xl p-2.5 text-xs sm:text-sm text-gray-800 focus:ring-2 focus:ring-emerald-500 leading-relaxed"
             />
 
-            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 text-xs text-emerald-800">
+            <div className="flex items-center justify-between text-xs text-emerald-800">
               <span>{templateText.length} caracteres</span>
               <button
                 onClick={handleSaveTemplate}
-                className="w-full sm:w-auto bg-emerald-700 hover:bg-emerald-800 text-white font-bold px-4 py-2.5 rounded-xl transition text-center min-h-[42px]"
+                className="bg-emerald-700 hover:bg-emerald-800 text-white font-bold px-3 py-1.5 rounded-lg transition min-h-[34px]"
               >
-                Salvar Alterações
+                Salvar Modelo
               </button>
             </div>
           </div>
         )}
 
-        {/* QUICK STATE PILLS (CLICK TO FILTER BY UF - MOBILE EDGE-TO-EDGE SCROLL) */}
-        <div className="-mx-3.5 px-3.5 sm:mx-0 sm:px-0 flex items-center gap-1.5 overflow-x-auto pb-1.5 pt-1 text-xs scrollbar-thin">
-          <span className="text-xs font-bold text-gray-500 whitespace-nowrap mr-1 shrink-0">Estado (UF):</span>
+        {/* QUICK STATE PILLS (CLICK TO FILTER BY UF - STRICTLY BOUNDED HORIZONTAL SCROLL) */}
+        <div className="w-full max-w-full overflow-x-auto pb-1 pt-0.5 text-xs scrollbar-thin flex items-center gap-1.5 min-w-0">
+          <span className="text-xs font-bold text-gray-500 whitespace-nowrap mr-0.5 shrink-0">UF:</span>
           <button
             type="button"
             onClick={() => {
@@ -631,15 +600,15 @@ export default function AdminDisparadorSindicatosTab() {
               setCityFilter('ALL');
               setCurrentIndex(0);
             }}
-            className={`px-3 py-1.5 rounded-xl font-bold transition whitespace-nowrap flex items-center gap-1.5 shrink-0 min-h-[34px] ${
+            className={`px-2.5 py-1 rounded-lg font-bold transition whitespace-nowrap flex items-center gap-1 shrink-0 min-h-[30px] ${
               ufFilter === 'ALL'
-                ? 'bg-emerald-700 text-white shadow-sm ring-2 ring-emerald-400'
+                ? 'bg-emerald-700 text-white shadow-sm ring-1 ring-emerald-500'
                 : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
             }`}
           >
             <span>Todos</span>
             <span
-              className={`text-[10px] px-1.5 py-0.2 rounded-full font-black ${
+              className={`text-[9px] px-1 py-0.2 rounded-full font-black ${
                 ufFilter === 'ALL' ? 'bg-emerald-800 text-emerald-100' : 'bg-gray-200 text-gray-600'
               }`}
             >
@@ -658,15 +627,15 @@ export default function AdminDisparadorSindicatosTab() {
                   setCityFilter('ALL');
                   setCurrentIndex(0);
                 }}
-                className={`px-3 py-1.5 rounded-xl font-bold transition whitespace-nowrap flex items-center gap-1.5 shrink-0 min-h-[34px] ${
+                className={`px-2.5 py-1 rounded-lg font-bold transition whitespace-nowrap flex items-center gap-1 shrink-0 min-h-[30px] ${
                   isSelected
-                    ? 'bg-emerald-700 text-white shadow-sm ring-2 ring-emerald-400'
+                    ? 'bg-emerald-700 text-white shadow-sm ring-1 ring-emerald-500'
                     : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
                 }`}
               >
                 <span>{uf}</span>
                 <span
-                  className={`text-[10px] px-1.5 py-0.2 rounded-full font-black ${
+                  className={`text-[9px] px-1 py-0.2 rounded-full font-black ${
                     isSelected ? 'bg-emerald-800 text-emerald-100' : 'bg-gray-200 text-gray-600'
                   }`}
                 >
@@ -679,13 +648,10 @@ export default function AdminDisparadorSindicatosTab() {
 
         {/* ACTIVE UF FILTER BANNER */}
         {ufFilter !== 'ALL' && (
-          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 bg-emerald-50 border border-emerald-200 rounded-xl p-3 sm:px-4 sm:py-2 text-xs text-emerald-950">
-            <div className="flex items-center gap-2">
-              <span className="text-sm">📍</span>
-              <span>
-                Filtrando entidades de <strong className="bg-emerald-700 text-white px-2 py-0.5 rounded text-xs font-black">{ufFilter}</strong> ({filteredContacts.length} {filteredContacts.length === 1 ? 'entidade' : 'entidades'})
-              </span>
-            </div>
+          <div className="flex items-center justify-between gap-2 bg-emerald-50 border border-emerald-200 rounded-xl px-3 py-1.5 text-xs text-emerald-950">
+            <span className="truncate">
+              📍 Entidades de <strong className="bg-emerald-700 text-white px-1.5 py-0.2 rounded text-[11px] font-black">{ufFilter}</strong> ({filteredContacts.length})
+            </span>
             <button
               type="button"
               onClick={() => {
@@ -693,18 +659,17 @@ export default function AdminDisparadorSindicatosTab() {
                 setCityFilter('ALL');
                 setCurrentIndex(0);
               }}
-              className="text-emerald-800 font-bold hover:underline flex items-center gap-1 self-start sm:self-auto"
+              className="text-emerald-800 font-bold hover:underline shrink-0 text-xs"
             >
-              <span>✕</span>
-              <span>Limpar filtro UF (Ver todas as {contacts.length})</span>
+              ✕ Ver todas
             </button>
           </div>
         )}
 
         {/* FILTERS BAR */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-2.5 sm:gap-3 pt-1 sm:pt-2">
+        <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 pt-1">
           {/* Search */}
-          <div className="sm:col-span-2 lg:col-span-2">
+          <div className="col-span-2">
             <input
               type="text"
               value={searchQuery}
@@ -712,29 +677,9 @@ export default function AdminDisparadorSindicatosTab() {
                 setSearchQuery(e.target.value);
                 setCurrentIndex(0);
               }}
-              placeholder="Buscar por nome, sigla, cidade ou telefone…"
-              className="w-full bg-gray-50 border border-gray-300 rounded-xl px-3.5 py-2.5 sm:py-2 text-xs sm:text-sm text-gray-800 focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 min-h-[42px]"
+              placeholder="Buscar por nome, sigla, cidade…"
+              className="w-full bg-gray-50 border border-gray-300 rounded-xl px-3 py-2 text-xs sm:text-sm text-gray-800 focus:ring-2 focus:ring-emerald-500 min-h-[38px]"
             />
-          </div>
-
-          {/* UF Filter */}
-          <div>
-            <select
-              value={ufFilter}
-              onChange={(e) => {
-                setUfFilter(e.target.value);
-                setCityFilter('ALL');
-                setCurrentIndex(0);
-              }}
-              className="w-full bg-gray-50 border border-gray-300 rounded-xl px-3 py-2.5 sm:py-2 text-xs sm:text-sm font-semibold text-gray-700 focus:ring-2 focus:ring-emerald-500 min-h-[42px]"
-            >
-              <option value="ALL">Todos os Estados (UF)</option>
-              {availableUfs.map((uf) => (
-                <option key={uf} value={uf}>
-                  {uf}
-                </option>
-              ))}
-            </select>
           </div>
 
           {/* City Filter */}
@@ -745,9 +690,9 @@ export default function AdminDisparadorSindicatosTab() {
                 setCityFilter(e.target.value);
                 setCurrentIndex(0);
               }}
-              className="w-full bg-gray-50 border border-gray-300 rounded-xl px-3 py-2.5 sm:py-2 text-xs sm:text-sm font-semibold text-gray-700 focus:ring-2 focus:ring-emerald-500 min-h-[42px]"
+              className="w-full bg-gray-50 border border-gray-300 rounded-xl px-2 py-2 text-xs sm:text-sm font-semibold text-gray-700 focus:ring-2 focus:ring-emerald-500 min-h-[38px]"
             >
-              <option value="ALL">Todas as Cidades ({availableCities.length})</option>
+              <option value="ALL">Cidades ({availableCities.length})</option>
               {availableCities.map((city) => (
                 <option key={city} value={city}>
                   {city}
@@ -757,14 +702,14 @@ export default function AdminDisparadorSindicatosTab() {
           </div>
 
           {/* Status Filter */}
-          <div className="sm:col-span-2 lg:col-span-1">
+          <div>
             <select
               value={statusFilter}
               onChange={(e) => {
                 setStatusFilter(e.target.value as any);
                 setCurrentIndex(0);
               }}
-              className="w-full bg-gray-50 border border-gray-300 rounded-xl px-3 py-2.5 sm:py-2 text-xs sm:text-sm font-semibold text-gray-700 focus:ring-2 focus:ring-emerald-500 min-h-[42px]"
+              className="w-full bg-gray-50 border border-gray-300 rounded-xl px-2 py-2 text-xs sm:text-sm font-semibold text-gray-700 focus:ring-2 focus:ring-emerald-500 min-h-[38px]"
             >
               <option value="all">Status: Todos</option>
               <option value="new">🆕 Pendentes ({stats.pending})</option>
@@ -775,13 +720,13 @@ export default function AdminDisparadorSindicatosTab() {
         </div>
       </div>
 
-      {/* VIEW MODE 1: STEPPER CARD VIEW */}
+      {/* VIEW MODE 1: STEPPER CARD VIEW (MOBILE-FIRST TOP ACTIONS) */}
       {viewMode === 'card' && (
-        <div>
+        <div className="w-full max-w-full min-w-0">
           {filteredContacts.length === 0 ? (
-            <div className="bg-white rounded-2xl sm:rounded-3xl p-6 sm:p-10 text-center border border-gray-200 text-gray-500 space-y-3">
-              <span className="text-4xl block">🔍</span>
-              <p className="font-bold text-gray-800 text-sm sm:text-base">Nenhum sindicato ou associação encontrado com estes filtros.</p>
+            <div className="bg-white rounded-2xl p-6 sm:p-10 text-center border border-gray-200 text-gray-500 space-y-2">
+              <span className="text-3xl block">🔍</span>
+              <p className="font-bold text-gray-800 text-sm">Nenhum sindicato ou associação encontrado com estes filtros.</p>
               <button
                 onClick={() => {
                   setUfFilter('ALL');
@@ -789,22 +734,19 @@ export default function AdminDisparadorSindicatosTab() {
                   setStatusFilter('all');
                   setSearchQuery('');
                 }}
-                className="text-emerald-700 underline text-xs sm:text-sm font-semibold"
+                className="text-emerald-700 underline text-xs font-semibold"
               >
                 Limpar filtros de busca
               </button>
             </div>
           ) : currentContact ? (
-            <div className="bg-white rounded-2xl sm:rounded-3xl p-4 sm:p-7 shadow-sm border border-gray-200 space-y-4 sm:space-y-6">
-              {/* Card Stepper Header (Stack on Mobile, Row on Desktop) */}
-              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-4 sm:pb-5 border-b border-gray-100">
-                <div className="flex items-start sm:items-center gap-3">
-                  <div className="w-11 h-11 sm:w-12 sm:h-12 rounded-2xl bg-emerald-100 text-emerald-800 flex items-center justify-center text-lg sm:text-xl font-bold shrink-0 mt-0.5 sm:mt-0">
-                    🏛️
-                  </div>
+            <div className="bg-white rounded-2xl sm:rounded-3xl p-3.5 sm:p-6 shadow-sm border border-gray-200 space-y-3.5 sm:space-y-5 w-full max-w-full min-w-0 overflow-hidden">
+              {/* 1. Header: Entidade + Status + Stepper Nav */}
+              <div className="space-y-2.5 pb-3 border-b border-gray-100">
+                <div className="flex items-start justify-between gap-2">
                   <div className="min-w-0 flex-1">
                     <div className="flex items-center gap-1.5 flex-wrap">
-                      <span className="text-[10px] sm:text-xs uppercase font-extrabold tracking-wider text-emerald-800 bg-emerald-50 px-2 py-0.5 rounded-md border border-emerald-200">
+                      <span className="text-[10px] uppercase font-black tracking-wider text-emerald-800 bg-emerald-50 px-2 py-0.5 rounded border border-emerald-200">
                         {currentContact.tipo ? currentContact.tipo.toUpperCase() : 'ENTIDADE'}
                       </span>
                       {currentContact.uf && (
@@ -815,230 +757,84 @@ export default function AdminDisparadorSindicatosTab() {
                             setCityFilter('ALL');
                             setCurrentIndex(0);
                           }}
-                          className="font-black text-emerald-800 bg-emerald-100 hover:bg-emerald-200 px-2 py-0.5 rounded text-[10px] sm:text-xs transition border border-emerald-200"
-                          title={`Filtrar apenas entidades de ${currentContact.uf}`}
+                          className="font-black text-emerald-800 bg-emerald-100 hover:bg-emerald-200 px-1.5 py-0.5 rounded text-[10px] transition border border-emerald-200"
                         >
                           {currentContact.uf}
                         </button>
                       )}
+                      <span className="text-gray-400 text-xs">•</span>
+                      <span className="text-xs font-semibold text-gray-700">{currentContact.cidade}</span>
                     </div>
                     <h3 className="text-base sm:text-xl font-black text-gray-900 mt-1 font-heading break-words">
                       {currentContact.nome}
                     </h3>
-                    <p className="text-xs text-gray-500 flex items-center gap-1.5 flex-wrap mt-0.5">
-                      <span className="font-semibold text-gray-700">{currentContact.cidade}</span>
-                      <span>• {currentContact.source}</span>
-                    </p>
+                  </div>
+
+                  {/* Status badge */}
+                  <div className="shrink-0 text-right">
+                    {progress[currentContact.id]?.status === 'sent' ? (
+                      <span className="bg-green-100 text-green-800 font-bold px-2 py-0.5 rounded-full text-[10px] sm:text-xs inline-flex items-center gap-1">
+                        ✓ Enviado
+                      </span>
+                    ) : progress[currentContact.id]?.status === 'skipped' ? (
+                      <span className="bg-amber-100 text-amber-800 font-bold px-2 py-0.5 rounded-full text-[10px] sm:text-xs">
+                        ⏭️ Pulado
+                      </span>
+                    ) : (
+                      <span className="bg-blue-100 text-blue-800 font-bold px-2 py-0.5 rounded-full text-[10px] sm:text-xs">
+                        🆕 Pendente
+                      </span>
+                    )}
                   </div>
                 </div>
 
-                {/* Mobile-Friendly Stepper Nav Controls */}
-                <div className="flex items-center justify-between sm:justify-end gap-2 w-full sm:w-auto pt-2.5 sm:pt-0 border-t sm:border-t-0 border-gray-100">
+                {/* Stepper bar (Anterior / X de Y / Próximo) */}
+                <div className="flex items-center justify-between gap-1.5 bg-gray-50 p-1.5 rounded-xl border border-gray-100">
                   <button
                     onClick={() => setCurrentIndex(Math.max(0, currentIndex - 1))}
                     disabled={currentIndex === 0}
-                    className="flex-1 sm:flex-initial px-3.5 py-2.5 sm:p-2.5 rounded-xl border border-gray-200 hover:bg-gray-100 disabled:opacity-30 disabled:hover:bg-transparent transition text-gray-700 font-bold text-xs sm:text-sm flex items-center justify-center gap-1.5 min-h-[42px]"
-                    title="Anterior"
+                    className="px-3 py-1.5 rounded-lg border border-gray-200 bg-white hover:bg-gray-100 disabled:opacity-30 disabled:hover:bg-white text-gray-700 font-bold text-xs flex items-center gap-1 min-h-[36px]"
                   >
                     <span>◀</span>
-                    <span className="sm:hidden">Anterior</span>
+                    <span>Anterior</span>
                   </button>
-                  <span className="text-xs font-bold text-gray-700 px-2 whitespace-nowrap text-center">
+                  <span className="text-xs font-extrabold text-gray-800">
                     {currentIndex + 1} de {filteredContacts.length}
                   </span>
                   <button
                     onClick={() => setCurrentIndex(Math.min(filteredContacts.length - 1, currentIndex + 1))}
                     disabled={currentIndex >= filteredContacts.length - 1}
-                    className="flex-1 sm:flex-initial px-3.5 py-2.5 sm:p-2.5 rounded-xl border border-gray-200 hover:bg-gray-100 disabled:opacity-30 disabled:hover:bg-transparent transition text-gray-700 font-bold text-xs sm:text-sm flex items-center justify-center gap-1.5 min-h-[42px]"
-                    title="Próximo"
+                    className="px-3 py-1.5 rounded-lg border border-gray-200 bg-white hover:bg-gray-100 disabled:opacity-30 disabled:hover:bg-white text-gray-700 font-bold text-xs flex items-center gap-1 min-h-[36px]"
                   >
-                    <span className="sm:hidden">Próximo</span>
+                    <span>Próximo</span>
                     <span>▶</span>
                   </button>
                 </div>
               </div>
 
-              {/* Entity Info Grid */}
-              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-2.5 sm:gap-4">
-                <div className="bg-gray-50 rounded-xl sm:rounded-2xl p-3.5 sm:p-4 border border-gray-100">
-                  <span className="block text-[11px] sm:text-xs uppercase font-semibold text-gray-400">Telefone / WhatsApp</span>
-                  <div className="flex items-center gap-2 mt-1 flex-wrap">
-                    <span className="font-bold text-gray-900 text-sm sm:text-base font-mono">{currentContact.telefone}</span>
-                    {currentContact.telefoneValido && (
-                      <span className="bg-green-100 text-green-800 text-[10px] font-bold px-2 py-0.5 rounded-full">
-                        Zap Válido
-                      </span>
-                    )}
-                  </div>
-                  {currentContact.telefoneFixo && (
-                    <span className="text-xs text-gray-500 block mt-1 font-mono">Fixo: {currentContact.telefoneFixo}</span>
-                  )}
-                </div>
-
-                <div className="bg-gray-50 rounded-xl sm:rounded-2xl p-3.5 sm:p-4 border border-gray-100">
-                  <span className="block text-[11px] sm:text-xs uppercase font-semibold text-gray-400">E-mail Institucional</span>
-                  <span className="font-bold text-gray-900 text-xs sm:text-sm mt-1 block truncate">
-                    {currentContact.email || '—'}
-                  </span>
-                  {currentContact.responsavel && (
-                    <span className="text-xs text-gray-500 block mt-1 truncate">
-                      Resp: {currentContact.responsavel}
-                    </span>
-                  )}
-                </div>
-
-                <div className="bg-gray-50 rounded-xl sm:rounded-2xl p-3.5 sm:p-4 border border-gray-100">
-                  <span className="block text-[11px] sm:text-xs uppercase font-semibold text-gray-400">Website / Canal Oficial</span>
-                  {currentContact.website ? (
-                    <a
-                      href={currentContact.website}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="font-bold text-emerald-700 hover:underline text-xs sm:text-sm mt-1 block truncate"
-                    >
-                      {currentContact.website.replace(/^https?:\/\//, '')} ↗
-                    </a>
-                  ) : (
-                    <span className="font-bold text-gray-400 text-xs sm:text-sm mt-1 block">Não informado</span>
-                  )}
-                  {currentContact.sigla && (
-                    <span className="text-xs text-emerald-800 font-semibold block mt-1">
-                      Sigla: {currentContact.sigla}
-                    </span>
-                  )}
-                </div>
-
-                <div className="bg-amber-50/80 rounded-xl sm:rounded-2xl p-3.5 sm:p-4 border border-amber-200 flex flex-col justify-between">
-                  <div className="flex items-center justify-between">
-                    <span className="block text-[11px] sm:text-xs uppercase font-extrabold text-amber-900">
-                      🔑 Acesso & Senha
-                    </span>
-                    {currentContact.senha && (
-                      <button
-                        onClick={() => {
-                          navigator.clipboard.writeText(currentContact.senha || '');
-                          toast.success('Senha temporária copiada!');
-                        }}
-                        className="text-[11px] font-bold text-amber-900 bg-amber-200/90 hover:bg-amber-300 px-2 py-0.5 rounded-md transition min-h-[28px]"
-                        title="Copiar senha"
-                      >
-                        Copiar Senha
-                      </button>
-                    )}
-                  </div>
-                  <div className="mt-2 space-y-1">
-                    <div className="flex items-center justify-between text-xs gap-2">
-                      <span className="text-gray-500 font-medium shrink-0">Login:</span>
-                      <span className="font-bold text-gray-900 font-mono truncate text-right">
-                        {currentContact.usuario || currentContact.telefone}
-                      </span>
-                    </div>
-                    <div className="flex items-center justify-between text-xs gap-2">
-                      <span className="text-gray-500 font-medium shrink-0">Senha:</span>
-                      <span className="font-black text-amber-950 font-mono bg-white px-2 py-0.5 rounded border border-amber-300">
-                        {currentContact.senha || 'alotio2026'}
-                      </span>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              {/* Status Badge & Auto Advance Row */}
-              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2.5 text-xs pt-1">
-                <div className="flex items-center gap-2 flex-wrap">
-                  <span className="font-semibold text-gray-500">Status atual:</span>
-                  {progress[currentContact.id]?.status === 'sent' ? (
-                    <span className="bg-green-100 text-green-800 font-bold px-2.5 py-1 rounded-full flex items-center gap-1">
-                      <span>✅</span>
-                      <span>
-                        Enviado via {progress[currentContact.id]?.channel?.toUpperCase() || 'CANAL'} em{' '}
-                        {new Date(progress[currentContact.id]?.sentAt || '').toLocaleDateString('pt-BR')}
-                      </span>
-                    </span>
-                  ) : progress[currentContact.id]?.status === 'skipped' ? (
-                    <span className="bg-amber-100 text-amber-800 font-bold px-2.5 py-1 rounded-full">
-                      ⏭️ Pulado
-                    </span>
-                  ) : (
-                    <span className="bg-blue-100 text-blue-800 font-bold px-2.5 py-1 rounded-full">
-                      🆕 Pendente de Contato
-                    </span>
-                  )}
-                </div>
-
-                <label className="flex items-center gap-2 text-gray-600 cursor-pointer select-none">
-                  <input
-                    type="checkbox"
-                    checked={autoAdvance}
-                    onChange={(e) => setAutoAdvance(e.target.checked)}
-                    className="rounded text-emerald-600 focus:ring-emerald-500 w-4 h-4 shrink-0"
-                  />
-                  <span>Avançar automaticamente após disparar</span>
-                </label>
-              </div>
-
-              {/* Live Preview Box */}
-              <div className="bg-emerald-50/40 rounded-xl sm:rounded-2xl p-3.5 sm:p-5 border border-emerald-200/80 space-y-2">
-                <div className="flex items-center justify-between">
-                  <span className="text-[11px] sm:text-xs uppercase font-extrabold tracking-wider text-emerald-900">
-                    Pré-visualização da Mensagem:
-                  </span>
-                  <button
-                    onClick={() => handleCopyMessage()}
-                    className="text-xs font-semibold text-emerald-700 hover:text-emerald-900 underline flex items-center gap-1"
-                  >
-                    <span>📋</span>
-                    <span>Copiar Texto</span>
-                  </button>
-                </div>
-                <div className="bg-white rounded-xl p-3.5 sm:p-4 border border-emerald-200 text-xs sm:text-sm text-gray-800 whitespace-pre-wrap leading-relaxed shadow-inner font-sans break-words max-h-48 sm:max-h-60 overflow-y-auto">
-                  {activeMessageText}
-                </div>
-              </div>
-
-              {/* Big Action Buttons (Touch Friendly for Mobile & Thumb navigation) */}
-              <div className="space-y-2.5 sm:space-y-0 sm:grid sm:grid-cols-2 lg:grid-cols-4 gap-3 pt-1 sm:pt-2">
+              {/* 2. THE BIG ACTION DISPATCH BUTTONS (IMMEDIATELY VISIBLE ON MOBILE!) */}
+              <div className="space-y-2 pt-0.5">
                 <button
                   onClick={() => handleOpenWhatsApp()}
-                  className="w-full bg-green-600 hover:bg-green-700 active:scale-[0.99] text-white font-extrabold px-4 sm:px-6 py-3.5 sm:py-4 rounded-2xl shadow-md transition flex items-center justify-center gap-2.5 text-sm sm:text-base min-h-[52px]"
+                  className="w-full bg-green-600 hover:bg-green-700 active:scale-[0.98] text-white font-black py-3 sm:py-3.5 px-4 rounded-xl shadow-md transition flex items-center justify-center gap-2 text-sm sm:text-base min-h-[50px]"
                 >
                   <span className="text-xl">💬</span>
-                  <span>Enviar WhatsApp</span>
+                  <span>Enviar WhatsApp ({currentContact.telefone})</span>
                 </button>
 
                 <button
                   onClick={() => handleOpenSms()}
-                  className="w-full bg-blue-600 hover:bg-blue-700 active:scale-[0.99] text-white font-extrabold px-4 sm:px-6 py-3.5 sm:py-4 rounded-2xl shadow-md transition flex items-center justify-center gap-2.5 text-sm sm:text-base min-h-[52px]"
+                  className="w-full bg-blue-600 hover:bg-blue-700 active:scale-[0.98] text-white font-black py-2.5 sm:py-3 px-4 rounded-xl shadow-md transition flex items-center justify-center gap-2 text-xs sm:text-sm min-h-[44px]"
                 >
-                  <span className="text-xl">📱</span>
+                  <span className="text-lg">📱</span>
                   <span>Enviar SMS</span>
                 </button>
 
-                {currentContact.email ? (
-                  <a
-                    href={`mailto:${currentContact.email}?subject=${encodeURIComponent(
-                      'Alô Tio — Proposta de Parceria com Transporte Escolar',
-                    )}&body=${encodeURIComponent(activeMessageText)}`}
-                    onClick={() => updateContactStatus(currentContact.id, 'sent', 'email')}
-                    className="w-full bg-purple-600 hover:bg-purple-700 active:scale-[0.99] text-white font-extrabold px-4 py-3.5 sm:py-4 rounded-2xl shadow-md transition flex items-center justify-center gap-2 text-xs sm:text-sm text-center min-h-[48px]"
-                  >
-                    <span className="text-lg">✉️</span>
-                    <span>Enviar E-mail</span>
-                  </a>
-                ) : (
-                  <a
-                    href={`tel:${cleanPhoneForDispatch(currentContact.telefone).digits}`}
-                    className="w-full bg-gray-700 hover:bg-gray-800 active:scale-[0.99] text-white font-extrabold px-4 py-3.5 sm:py-4 rounded-2xl shadow-md transition flex items-center justify-center gap-2 text-xs sm:text-sm text-center min-h-[48px]"
-                  >
-                    <span className="text-lg">📞</span>
-                    <span>Ligar no Telefone</span>
-                  </a>
-                )}
-
-                <div className="grid grid-cols-2 gap-2 w-full">
+                {/* Secondary actions: Pular / Marcar Enviado / Ligar */}
+                <div className="grid grid-cols-3 gap-1.5">
                   <button
                     onClick={handleSkip}
-                    className="w-full bg-gray-100 hover:bg-gray-200 text-gray-700 font-bold px-3 py-3 sm:py-4 rounded-2xl transition text-xs sm:text-sm flex items-center justify-center gap-1 min-h-[46px]"
+                    className="bg-amber-50 hover:bg-amber-100 border border-amber-200 text-amber-800 font-bold py-2 px-1 rounded-xl text-xs transition flex items-center justify-center gap-1 min-h-[40px]"
                     title="Pular este contato"
                   >
                     <span>⏭️</span>
@@ -1052,13 +848,156 @@ export default function AdminDisparadorSindicatosTab() {
                         setCurrentIndex(currentIndex + 1);
                       }
                     }}
-                    className="w-full bg-emerald-100 hover:bg-emerald-200 text-emerald-800 font-bold px-3 py-3 sm:py-4 rounded-2xl transition text-xs sm:text-sm flex items-center justify-center gap-1 min-h-[46px]"
-                    title="Marcar manualmente"
+                    className="bg-emerald-50 hover:bg-emerald-100 border border-emerald-200 text-emerald-800 font-bold py-2 px-1 rounded-xl text-xs transition flex items-center justify-center gap-1 min-h-[40px]"
+                    title="Marcar como Enviado"
                   >
                     <span>✅</span>
-                    <span>Marcar</span>
+                    <span>Enviado</span>
+                  </button>
+                  {currentContact.email ? (
+                    <a
+                      href={`mailto:${currentContact.email}?subject=${encodeURIComponent(
+                        'Alô Tio — Proposta de Parceria com Transporte Escolar',
+                      )}&body=${encodeURIComponent(activeMessageText)}`}
+                      onClick={() => updateContactStatus(currentContact.id, 'sent', 'email')}
+                      className="bg-purple-50 hover:bg-purple-100 border border-purple-200 text-purple-800 font-bold py-2 px-1 rounded-xl text-xs transition flex items-center justify-center gap-1 min-h-[40px] text-center"
+                    >
+                      <span>✉️</span>
+                      <span>E-mail</span>
+                    </a>
+                  ) : (
+                    <a
+                      href={`tel:${cleanPhoneForDispatch(currentContact.telefone).digits}`}
+                      className="bg-gray-100 hover:bg-gray-200 border border-gray-200 text-gray-700 font-bold py-2 px-1 rounded-xl text-xs transition flex items-center justify-center gap-1 min-h-[40px] text-center"
+                    >
+                      <span>📞</span>
+                      <span>Ligar</span>
+                    </a>
+                  )}
+                </div>
+              </div>
+
+              {/* 3. COMPACT CONTACT & CREDENTIALS CARD (NEVER CUTS OFF, NEVER OVERFLOWS) */}
+              <div className="bg-gray-50 rounded-xl p-3 border border-gray-200 space-y-2 text-xs">
+                <div className="flex items-center justify-between border-b border-gray-200/60 pb-2">
+                  <span className="font-extrabold text-gray-800 uppercase text-[10px] tracking-wider">
+                    Dados de Acesso & Contato
+                  </span>
+                  <button
+                    onClick={() => {
+                      navigator.clipboard.writeText(currentContact.senha || 'alotio2026');
+                      toast.success('Senha copiada!');
+                    }}
+                    className="text-[11px] font-bold text-amber-900 bg-amber-200 hover:bg-amber-300 px-2 py-0.5 rounded transition"
+                  >
+                    Copiar Senha
                   </button>
                 </div>
+
+                <div className="grid grid-cols-2 gap-2">
+                  <div className="bg-white p-2 rounded-lg border border-gray-200/80">
+                    <span className="text-[10px] text-gray-400 block font-semibold uppercase">Telefone / Zap</span>
+                    <div className="flex items-center justify-between gap-1 mt-0.5">
+                      <span className="font-mono font-bold text-gray-900 text-xs truncate">
+                        {currentContact.telefone}
+                      </span>
+                      <button
+                        onClick={() => {
+                          navigator.clipboard.writeText(currentContact.telefone);
+                          toast.success('Telefone copiado!');
+                        }}
+                        className="text-[10px] text-gray-500 hover:text-gray-800"
+                        title="Copiar telefone"
+                      >
+                        📋
+                      </button>
+                    </div>
+                  </div>
+
+                  <div className="bg-amber-50 p-2 rounded-lg border border-amber-200">
+                    <span className="text-[10px] text-amber-800 block font-semibold uppercase">Senha Temporária</span>
+                    <span className="font-mono font-black text-amber-950 text-xs block truncate mt-0.5">
+                      {currentContact.senha || 'alotio2026'}
+                    </span>
+                  </div>
+
+                  <div className="bg-white p-2 rounded-lg border border-gray-200/80 col-span-2">
+                    <div className="flex items-center justify-between">
+                      <span className="text-[10px] text-gray-400 block font-semibold uppercase">Login da Entidade</span>
+                      <button
+                        onClick={() => {
+                          navigator.clipboard.writeText(currentContact.usuario || currentContact.telefone);
+                          toast.success('Login copiado!');
+                        }}
+                        className="text-[10px] text-gray-500 hover:text-gray-800 underline"
+                      >
+                        Copiar
+                      </button>
+                    </div>
+                    <span className="font-mono font-bold text-gray-800 text-xs block truncate mt-0.5">
+                      {currentContact.usuario || currentContact.telefone}
+                    </span>
+                  </div>
+                </div>
+
+                {(currentContact.email || currentContact.website) && (
+                  <div className="flex items-center justify-between gap-2 pt-1 border-t border-gray-200/60 text-[11px]">
+                    {currentContact.email && (
+                      <span className="text-gray-600 truncate max-w-[50%]" title={currentContact.email}>
+                        ✉️ {currentContact.email}
+                      </span>
+                    )}
+                    {currentContact.website && (
+                      <a
+                        href={currentContact.website}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="text-emerald-700 font-bold hover:underline truncate max-w-[50%]"
+                      >
+                        🌐 {currentContact.website.replace(/^https?:\/\//, '')} ↗
+                      </a>
+                    )}
+                  </div>
+                )}
+              </div>
+
+              {/* 4. MESSAGE PREVIEW (COLLAPSIBLE / ACCORDION ON MOBILE) */}
+              <details className="bg-emerald-50/50 rounded-xl border border-emerald-200/80 p-2.5 group">
+                <summary className="cursor-pointer list-none flex items-center justify-between text-xs font-bold text-emerald-950 select-none">
+                  <span className="flex items-center gap-1.5">
+                    <span>💬</span>
+                    <span>Pré-visualização da Mensagem</span>
+                  </span>
+                  <div className="flex items-center gap-2">
+                    <button
+                      type="button"
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        handleCopyMessage();
+                      }}
+                      className="text-[11px] text-emerald-700 hover:text-emerald-900 bg-white border border-emerald-200 px-2 py-0.5 rounded font-semibold"
+                    >
+                      Copiar
+                    </button>
+                    <span className="text-xs text-emerald-700 transition group-open:rotate-180">▼</span>
+                  </div>
+                </summary>
+                <div className="mt-2.5 bg-white rounded-lg p-2.5 border border-emerald-200 text-xs text-gray-800 whitespace-pre-wrap leading-relaxed max-h-48 overflow-y-auto break-words font-sans shadow-inner">
+                  {activeMessageText}
+                </div>
+              </details>
+
+              {/* Auto-advance checkbox */}
+              <div className="flex items-center justify-between text-xs text-gray-500 pt-1">
+                <label className="flex items-center gap-2 cursor-pointer select-none">
+                  <input
+                    type="checkbox"
+                    checked={autoAdvance}
+                    onChange={(e) => setAutoAdvance(e.target.checked)}
+                    className="rounded text-emerald-600 focus:ring-emerald-500 w-4 h-4 shrink-0"
+                  />
+                  <span>Avançar automaticamente após disparar</span>
+                </label>
               </div>
             </div>
           ) : null}

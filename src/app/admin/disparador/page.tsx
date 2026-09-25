@@ -836,7 +836,7 @@ export default function AdminDisparadorPage() {
   }, [isAllTableSelected, selectedContactIds, filteredContacts]);
 
   return (
-    <div className="max-w-6xl mx-auto space-y-4 sm:space-y-6 pb-16 px-1 sm:px-0">
+    <div className="max-w-6xl mx-auto space-y-3 sm:space-y-6 pb-16 w-full max-w-full min-w-0 overflow-x-hidden">
       {/* SELEÇÃO DE BLOCOS PRINCIPAIS DO DISPARADOR */}
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 sm:gap-4 p-1.5 bg-gray-200/70 rounded-2xl border border-gray-300/80 shadow-sm">
         <button
@@ -1007,8 +1007,8 @@ export default function AdminDisparadorPage() {
           </div>
         </div>
 
-        {/* Navigation Tabs (Smooth Mobile Horizontal Scroll) */}
-        <div className="flex border-b border-gray-200 mt-5 -mx-4 px-4 sm:mx-0 sm:px-0 overflow-x-auto text-xs sm:text-sm scrollbar-thin">
+        {/* Navigation Tabs (Smooth Mobile Horizontal Scroll without container blowout) */}
+        <div className="w-full max-w-full overflow-x-auto text-xs sm:text-sm scrollbar-thin flex border-b border-gray-200 mt-4 min-w-0 pb-0.5">
           <button
             onClick={() => setActiveTab('queue_new')}
             className={`py-3 px-3 sm:px-4 font-semibold border-b-2 transition whitespace-nowrap flex items-center gap-1.5 shrink-0 ${
@@ -1235,11 +1235,11 @@ export default function AdminDisparadorPage() {
 
                 {/* Credentials details (if any) */}
                 {(loginForContact(currentContact) || currentContact.senha) && (
-                  <div className="mt-3.5 pt-3.5 border-t border-gray-200/50 grid grid-cols-1 sm:grid-cols-2 gap-2.5 text-xs">
+                  <div className="mt-3.5 pt-3.5 border-t border-gray-200/50 grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs">
                     {loginForContact(currentContact) && (
                       <div className="bg-white/90 p-2.5 rounded-xl border border-gray-200 flex items-center justify-between gap-2">
                         <div className="min-w-0 flex-1">
-                          <span className="text-gray-400 block font-semibold text-[10px] uppercase">LOGIN (TELEFONE):</span>
+                          <span className="text-gray-400 block font-semibold text-[10px] uppercase">LOGIN:</span>
                           <span className="font-mono font-bold text-gray-800 break-all text-xs sm:text-sm">
                             {loginForContact(currentContact)}
                           </span>
@@ -1258,7 +1258,7 @@ export default function AdminDisparadorPage() {
                     {currentContact.senha && (
                       <div className="bg-white/90 p-2.5 rounded-xl border border-gray-200 flex items-center justify-between gap-2">
                         <div className="min-w-0 flex-1">
-                          <span className="text-gray-400 block font-semibold text-[10px] uppercase">SENHA TEMPORÁRIA:</span>
+                          <span className="text-gray-400 block font-semibold text-[10px] uppercase">SENHA:</span>
                           <span className="font-mono font-black text-primary text-sm tracking-wide">
                             {currentContact.senha}
                           </span>
@@ -1278,38 +1278,13 @@ export default function AdminDisparadorPage() {
                 )}
               </div>
 
-              {/* Message Preview Box */}
-              <div className="space-y-1.5">
-                <div className="flex items-center justify-between">
-                  <span className="text-xs font-bold uppercase tracking-wider text-gray-500">
-                    Prévia da Mensagem
-                  </span>
-                  <button
-                    onClick={() => {
-                      navigator.clipboard.writeText(activeMessageText);
-                      toast.success('Mensagem copiada para a área de transferência!');
-                    }}
-                    className="text-xs text-primary hover:text-primary-700 font-semibold flex items-center gap-1"
-                  >
-                    <span>📋</span> Copiar texto
-                  </button>
-                </div>
-                <div className="bg-gray-50 rounded-2xl p-3.5 sm:p-4 border border-gray-200 text-xs sm:text-sm text-gray-800 leading-relaxed font-sans whitespace-pre-wrap break-words">
-                  {activeMessageText}
-                </div>
-                <div className="flex items-center justify-between text-[11px] text-gray-400 pt-0.5">
-                  <span>{activeMessageText.length} caracteres</span>
-                  <span>Variáveis dinâmicas preenchidas</span>
-                </div>
-              </div>
-
-              {/* Primary Dispatch Buttons (Mobile-First 1-Touch) */}
-              <div className="space-y-3 pt-1">
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
+              {/* Primary Dispatch Buttons (Mobile-First 1-Touch - At TOP for zero scrolling!) */}
+              <div className="space-y-2.5 pt-1">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
                   {/* SMS Button (Primary) */}
                   <button
                     onClick={handleOpenSms}
-                    className="w-full bg-blue-600 hover:bg-blue-700 active:bg-blue-800 text-white font-black py-3.5 sm:py-4 px-5 rounded-2xl text-base shadow-md hover:shadow-lg transition flex items-center justify-center gap-2.5 transform active:scale-[0.98] min-h-[52px] sm:min-h-[56px]"
+                    className="w-full bg-blue-600 hover:bg-blue-700 active:bg-blue-800 text-white font-black py-3 sm:py-3.5 px-4 rounded-xl text-sm sm:text-base shadow-md transition flex items-center justify-center gap-2 transform active:scale-[0.98] min-h-[50px]"
                   >
                     <span className="text-xl">💬</span>
                     <span>{isReprocessQueue ? 'Reenviar SMS (1 Toque)' : 'Enviar SMS (1 Toque)'}</span>
@@ -1318,7 +1293,7 @@ export default function AdminDisparadorPage() {
                   {/* WhatsApp Button */}
                   <button
                     onClick={handleOpenWhatsApp}
-                    className="w-full bg-green-600 hover:bg-green-700 active:bg-green-800 text-white font-black py-3.5 sm:py-4 px-5 rounded-2xl text-base shadow-md hover:shadow-lg transition flex items-center justify-center gap-2.5 transform active:scale-[0.98] min-h-[52px] sm:min-h-[56px]"
+                    className="w-full bg-green-600 hover:bg-green-700 active:bg-green-800 text-white font-black py-3 sm:py-3.5 px-4 rounded-xl text-sm sm:text-base shadow-md transition flex items-center justify-center gap-2 transform active:scale-[0.98] min-h-[50px]"
                   >
                     <span className="text-xl">📱</span>
                     <span>{isReprocessQueue ? 'Reenviar WhatsApp' : 'Enviar WhatsApp'}</span>
@@ -1326,14 +1301,14 @@ export default function AdminDisparadorPage() {
                 </div>
 
                 {/* Secondary navigation and manual controls (Fully mobile-responsive) */}
-                <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2.5 pt-2 border-t border-gray-100">
-                  <div className="grid grid-cols-2 gap-2 sm:flex sm:items-center">
+                <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 pt-1 border-t border-gray-100">
+                  <div className="grid grid-cols-2 gap-1.5 sm:flex sm:items-center">
                     <button
                       onClick={() => {
                         if (currentQueueIndex > 0) setCurrentQueueIndex(currentQueueIndex - 1);
                       }}
                       disabled={currentQueueIndex === 0}
-                      className="w-full sm:w-auto px-4 py-2.5 text-xs font-bold text-gray-700 hover:text-gray-900 bg-gray-100 hover:bg-gray-200 disabled:opacity-40 disabled:hover:bg-gray-100 rounded-xl transition flex items-center justify-center gap-1 min-h-[42px]"
+                      className="w-full sm:w-auto px-3.5 py-2 text-xs font-bold text-gray-700 hover:text-gray-900 bg-gray-100 hover:bg-gray-200 disabled:opacity-40 disabled:hover:bg-gray-100 rounded-xl transition flex items-center justify-center gap-1 min-h-[38px]"
                     >
                       ← Anterior
                     </button>
@@ -1344,22 +1319,22 @@ export default function AdminDisparadorPage() {
                         }
                       }}
                       disabled={currentQueueIndex >= activeQueueContacts.length - 1}
-                      className="w-full sm:w-auto px-4 py-2.5 text-xs font-bold text-gray-700 hover:text-gray-900 bg-gray-100 hover:bg-gray-200 disabled:opacity-40 disabled:hover:bg-gray-100 rounded-xl transition flex items-center justify-center gap-1 min-h-[42px]"
+                      className="w-full sm:w-auto px-3.5 py-2 text-xs font-bold text-gray-700 hover:text-gray-900 bg-gray-100 hover:bg-gray-200 disabled:opacity-40 disabled:hover:bg-gray-100 rounded-xl transition flex items-center justify-center gap-1 min-h-[38px]"
                     >
                       Próximo →
                     </button>
                   </div>
 
-                  <div className="grid grid-cols-2 sm:flex sm:items-center gap-2">
+                  <div className="grid grid-cols-2 sm:flex sm:items-center gap-1.5">
                     <button
                       onClick={handleSkip}
-                      className="w-full sm:w-auto px-3.5 py-2.5 text-xs font-bold text-amber-800 bg-amber-50 hover:bg-amber-100 border border-amber-200 rounded-xl transition flex items-center justify-center gap-1 min-h-[42px]"
+                      className="w-full sm:w-auto px-3.5 py-2 text-xs font-bold text-amber-800 bg-amber-50 hover:bg-amber-100 border border-amber-200 rounded-xl transition flex items-center justify-center gap-1 min-h-[38px]"
                     >
                       Pular ⏭
                     </button>
                     <button
                       onClick={handleMarkSent}
-                      className="w-full sm:w-auto px-3.5 py-2.5 text-xs font-bold text-emerald-800 bg-emerald-50 hover:bg-emerald-100 border border-emerald-200 rounded-xl transition flex items-center justify-center gap-1 min-h-[42px]"
+                      className="w-full sm:w-auto px-3.5 py-2 text-xs font-bold text-emerald-800 bg-emerald-50 hover:bg-emerald-100 border border-emerald-200 rounded-xl transition flex items-center justify-center gap-1 min-h-[38px]"
                     >
                       ✓ Enviado
                     </button>
@@ -1372,7 +1347,7 @@ export default function AdminDisparadorPage() {
                             `Deseja excluir "${currentContact.nome}" da fila de reprocessamento?`,
                           )
                         }
-                        className="col-span-2 sm:col-span-1 px-3.5 py-2.5 text-xs font-bold text-red-700 bg-red-50 hover:bg-red-100 border border-red-200 rounded-xl transition flex items-center justify-center gap-1 min-h-[42px]"
+                        className="col-span-2 sm:col-span-1 px-3 py-2 text-xs font-bold text-red-700 bg-red-50 hover:bg-red-100 border border-red-200 rounded-xl transition flex items-center justify-center gap-1 min-h-[38px]"
                         title="Excluir este contato da fila"
                       >
                         🗑️ Excluir da Fila
@@ -1382,7 +1357,7 @@ export default function AdminDisparadorPage() {
                 </div>
 
                 {/* Auto advance toggle */}
-                <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 text-xs text-gray-500 pt-1">
+                <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-1.5 text-xs text-gray-500 pt-0.5">
                   <label className="flex items-center gap-2 cursor-pointer select-none">
                     <input
                       type="checkbox"
@@ -1400,6 +1375,33 @@ export default function AdminDisparadorPage() {
                   </button>
                 </div>
               </div>
+
+              {/* Message Preview Box (Collapsible Accordion on Mobile) */}
+              <details className="bg-gray-50 rounded-xl border border-gray-200 p-2.5 group">
+                <summary className="cursor-pointer list-none flex items-center justify-between text-xs font-bold text-gray-800 select-none">
+                  <span className="flex items-center gap-1.5">
+                    <span>💬</span>
+                    <span>Prévia da Mensagem ({activeMessageText.length} caracteres)</span>
+                  </span>
+                  <div className="flex items-center gap-2">
+                    <button
+                      type="button"
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        navigator.clipboard.writeText(activeMessageText);
+                        toast.success('Mensagem copiada para a área de transferência!');
+                      }}
+                      className="text-[11px] text-primary hover:underline font-semibold bg-white border border-gray-200 px-2 py-0.5 rounded"
+                    >
+                      Copiar
+                    </button>
+                    <span className="text-xs text-gray-400 transition group-open:rotate-180">▼</span>
+                  </div>
+                </summary>
+                <div className="mt-2 bg-white rounded-lg p-3 border border-gray-200 text-xs sm:text-sm text-gray-800 leading-relaxed font-sans whitespace-pre-wrap break-words max-h-40 overflow-y-auto">
+                  {activeMessageText}
+                </div>
+              </details>
             </div>
           )}
         </div>
