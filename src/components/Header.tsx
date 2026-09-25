@@ -48,65 +48,88 @@ export default function Header() {
           </Link>
 
           {/* Desktop Navigation */}
-          <nav className="hidden md:flex items-center gap-6">
+          <nav className="hidden md:flex items-center gap-1 lg:gap-2">
             <Link
               href="/tios"
-              className="text-primary-100 hover:text-white transition font-medium text-sm lg:text-base"
+              className={`px-3 py-1.5 rounded-lg text-sm transition ${
+                pathname === '/tios' || pathname.startsWith('/tios/')
+                  ? 'bg-primary-800/80 text-white font-semibold'
+                  : 'text-primary-100 hover:text-white hover:bg-primary-600/50 font-medium'
+              }`}
             >
-              Encontrar transporte escolar
+              Encontrar Transporte
             </Link>
+
             <Link
               href="/lojas"
-              className="text-primary-100 hover:text-white transition font-medium text-sm lg:text-base"
+              className={`px-3 py-1.5 rounded-lg text-sm transition ${
+                pathname === '/lojas' || pathname.startsWith('/lojas/')
+                  ? 'bg-primary-800/80 text-white font-semibold'
+                  : 'text-primary-100 hover:text-white hover:bg-primary-600/50 font-medium'
+              }`}
             >
               Lojas
             </Link>
+
             <Link
               href="/escolas-parceiras"
-              className="text-primary-100 hover:text-white transition font-medium text-sm lg:text-base"
+              className={`px-3 py-1.5 rounded-lg text-sm transition ${
+                pathname === '/escolas-parceiras' || pathname.startsWith('/escolas-parceiras/')
+                  ? 'bg-primary-800/80 text-white font-semibold'
+                  : 'text-primary-100 hover:text-white hover:bg-primary-600/50 font-medium'
+              }`}
             >
-              Escolas parceiras
+              Escolas Parceiras
             </Link>
+
             <Link
               href="/sindicatos"
-              className="text-primary-100 hover:text-white transition font-medium text-sm lg:text-base"
+              className={`px-3 py-1.5 rounded-lg text-sm transition ${
+                pathname === '/sindicatos' || pathname.startsWith('/sindicatos/')
+                  ? 'bg-primary-800/80 text-white font-semibold'
+                  : 'text-primary-100 hover:text-white hover:bg-primary-600/50 font-medium'
+              }`}
             >
               Sindicatos & Associações
             </Link>
-            <Link
-              href="/guias"
-              className="text-primary-100 hover:text-white transition font-medium text-sm lg:text-base"
-            >
-              Guias & Dicas
-            </Link>
+
             <Link
               href="/seguro"
-              className="flex items-center gap-1.5 text-orange-400 hover:text-orange-300 transition font-semibold text-sm lg:text-base"
+              className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-sm transition ${
+                pathname === '/seguro'
+                  ? 'bg-primary-800/80 text-amber-300 font-bold'
+                  : 'text-amber-300 hover:text-amber-200 hover:bg-primary-600/50 font-semibold'
+              }`}
             >
-              🛡️ Proteção Veicular
+              <span>🛡️</span>
+              <span>Proteção Veicular</span>
             </Link>
+
+            {/* Divider */}
+            <div className="h-5 w-px bg-primary-600/60 mx-1.5 hidden lg:block" />
+
             {loaded && !isLoading && (
-              <>
+              <div className="flex items-center gap-2">
                 {user ? (
                   <>
                     {user.role === 'ADMIN' ? (
                       <Link
                         href="/admin"
-                        className="text-primary-100 hover:text-white transition font-medium text-sm lg:text-base"
+                        className="px-3 py-1.5 rounded-lg text-sm font-semibold bg-primary-800/90 text-white hover:bg-primary-900 transition"
                       >
-                        Admin
+                        Painel Admin
                       </Link>
                     ) : (
                       <Link
                         href={panelHref}
-                        className="text-primary-100 hover:text-white transition font-medium text-sm lg:text-base"
+                        className="px-3 py-1.5 rounded-lg text-sm font-semibold bg-primary-800/90 text-white hover:bg-primary-900 transition"
                       >
                         Meu Painel
                       </Link>
                     )}
                     <button
                       onClick={handleLogout}
-                      className="text-primary-200 hover:text-red-300 transition font-medium cursor-pointer text-sm lg:text-base"
+                      className="text-primary-200 hover:text-red-300 transition font-medium cursor-pointer text-sm px-2.5 py-1.5 rounded-lg hover:bg-primary-600/40"
                     >
                       Sair
                     </button>
@@ -115,19 +138,19 @@ export default function Header() {
                   <>
                     <Link
                       href="/login"
-                      className="text-primary-100 hover:text-white transition font-medium text-sm lg:text-base"
+                      className="text-primary-100 hover:text-white hover:bg-primary-600/50 px-3 py-1.5 rounded-lg transition font-medium text-sm"
                     >
                       Entrar
                     </Link>
                     <Link
                       href="/cadastro"
-                      className="bg-secondary hover:bg-secondary-600 text-white px-4 py-2 rounded-lg transition font-semibold text-sm lg:text-base"
+                      className="bg-secondary hover:bg-secondary-600 text-white px-3.5 py-1.5 rounded-xl transition font-bold text-sm shadow-sm"
                     >
                       Cadastrar
                     </Link>
                   </>
                 )}
-              </>
+              </div>
             )}
           </nav>
 
@@ -194,14 +217,6 @@ export default function Header() {
           >
             <span className="text-lg">🏛️</span>
             <span>Sindicatos & Associações</span>
-          </Link>
-          <Link
-            href="/guias"
-            onClick={() => setIsMobileMenuOpen(false)}
-            className="flex items-center gap-3 px-3 py-2.5 rounded-lg text-primary-100 hover:text-white hover:bg-primary-700 font-medium transition"
-          >
-            <span className="text-lg">📚</span>
-            <span>Guias & Dicas</span>
           </Link>
           <Link
             href="/seguro"
