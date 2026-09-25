@@ -836,23 +836,23 @@ export default function AdminDisparadorPage() {
   }, [isAllTableSelected, selectedContactIds, filteredContacts]);
 
   return (
-    <div className="max-w-6xl mx-auto space-y-6 pb-12">
+    <div className="max-w-6xl mx-auto space-y-4 sm:space-y-6 pb-16 px-1 sm:px-0">
       {/* SELEÇÃO DE BLOCOS PRINCIPAIS DO DISPARADOR */}
-      <div className="grid sm:grid-cols-2 gap-3 sm:gap-4 p-1.5 bg-gray-200/70 rounded-2xl border border-gray-300/80 shadow-sm">
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 sm:gap-4 p-1.5 bg-gray-200/70 rounded-2xl border border-gray-300/80 shadow-sm">
         <button
           type="button"
           onClick={() => {
             setMainBlock('transportadores');
             if (activeTab === 'sindicatos') setActiveTab('queue_new');
           }}
-          className={`flex items-center gap-3.5 p-3.5 sm:p-4 rounded-xl font-bold transition text-left ${
+          className={`flex items-center gap-3 p-3 sm:p-4 rounded-xl font-bold transition text-left ${
             mainBlock === 'transportadores'
               ? 'bg-white text-gray-900 shadow-md border border-gray-200 ring-2 ring-primary/20'
               : 'text-gray-600 hover:text-gray-900 hover:bg-white/60'
           }`}
         >
           <div
-            className={`w-11 h-11 rounded-xl flex items-center justify-center text-2xl shrink-0 transition ${
+            className={`w-10 h-10 sm:w-11 sm:h-11 rounded-xl flex items-center justify-center text-xl sm:text-2xl shrink-0 transition ${
               mainBlock === 'transportadores'
                 ? 'bg-primary text-white shadow-sm'
                 : 'bg-gray-100 text-gray-700'
@@ -860,17 +860,17 @@ export default function AdminDisparadorPage() {
           >
             🚐
           </div>
-          <div className="min-w-0">
-            <div className="flex items-center gap-2">
+          <div className="min-w-0 flex-1">
+            <div className="flex items-center gap-1.5 justify-between">
               <span className="text-sm sm:text-base font-extrabold truncate">
                 Transportadores Escolares
               </span>
               <span className="text-[10px] bg-primary-100 text-primary-800 font-bold px-2 py-0.5 rounded-full shrink-0">
-                {stats.total} contatos
+                {stats.total}
               </span>
             </div>
             <p className="text-xs text-gray-500 font-normal truncate mt-0.5">
-              Envio de credenciais, filas de novos, reprocessamento e listas municipais
+              Filas de novos, reprocessamento e listas municipais
             </p>
           </div>
         </button>
@@ -881,14 +881,14 @@ export default function AdminDisparadorPage() {
             setMainBlock('sindicatos');
             setActiveTab('sindicatos');
           }}
-          className={`flex items-center gap-3.5 p-3.5 sm:p-4 rounded-xl font-bold transition text-left ${
+          className={`flex items-center gap-3 p-3 sm:p-4 rounded-xl font-bold transition text-left ${
             mainBlock === 'sindicatos'
               ? 'bg-white text-emerald-950 shadow-md border border-emerald-200 ring-2 ring-emerald-500/20'
               : 'text-gray-600 hover:text-gray-900 hover:bg-white/60'
           }`}
         >
           <div
-            className={`w-11 h-11 rounded-xl flex items-center justify-center text-2xl shrink-0 transition ${
+            className={`w-10 h-10 sm:w-11 sm:h-11 rounded-xl flex items-center justify-center text-xl sm:text-2xl shrink-0 transition ${
               mainBlock === 'sindicatos'
                 ? 'bg-emerald-700 text-white shadow-sm'
                 : 'bg-gray-100 text-gray-700'
@@ -896,17 +896,17 @@ export default function AdminDisparadorPage() {
           >
             🏛️
           </div>
-          <div className="min-w-0">
-            <div className="flex items-center gap-2">
+          <div className="min-w-0 flex-1">
+            <div className="flex items-center gap-1.5 justify-between">
               <span className="text-sm sm:text-base font-extrabold truncate">
                 Sindicatos & Associações
               </span>
               <span className="text-[10px] bg-emerald-100 text-emerald-800 font-bold px-2 py-0.5 rounded-full shrink-0">
-                {SINDICATOS_LIST.length} entidades
+                {SINDICATOS_LIST.length}
               </span>
             </div>
             <p className="text-xs text-gray-500 font-normal truncate mt-0.5">
-              Difusão nacional do Alô Tio e propostas de parcerias institucionais
+              Difusão nacional do Alô Tio e propostas institucionais
             </p>
           </div>
         </button>
@@ -936,7 +936,7 @@ export default function AdminDisparadorPage() {
           </div>
 
           {/* List Selector Dropdown */}
-          <div className="min-w-64">
+          <div className="w-full sm:w-auto sm:min-w-64">
             <label className="block text-xs font-semibold uppercase tracking-wider text-gray-500 mb-1">
               Lista Ativa:
             </label>
@@ -955,18 +955,18 @@ export default function AdminDisparadorPage() {
         </div>
 
         {/* Progress Bar & Badges */}
-        <div className="mt-5 pt-5 border-t border-gray-100">
+        <div className="mt-4 sm:mt-5 pt-4 sm:pt-5 border-t border-gray-100">
           <div className="flex flex-wrap items-center justify-between text-xs sm:text-sm mb-2 gap-2">
-            <div className="flex items-center gap-2 sm:gap-3 flex-wrap">
+            <div className="flex items-center gap-1.5 sm:gap-3 flex-wrap">
               <span className="font-bold text-gray-800">
                 {stats.sent} de {stats.activeTotal} ativos ({stats.percent}%)
               </span>
-              <span className="text-gray-300">•</span>
-              <span className="text-blue-700 bg-blue-50 font-bold px-2.5 py-0.5 rounded-md text-xs border border-blue-200">
+              <span className="text-gray-300 hidden sm:inline">•</span>
+              <span className="text-blue-700 bg-blue-50 font-bold px-2 py-0.5 rounded-md text-xs border border-blue-200">
                 🆕 {stats.newCount} novos
               </span>
-              <span className="text-purple-700 bg-purple-50 font-bold px-2.5 py-0.5 rounded-md text-xs border border-purple-200">
-                🔄 {stats.reprocessCount} reprocessamento
+              <span className="text-purple-700 bg-purple-50 font-bold px-2 py-0.5 rounded-md text-xs border border-purple-200">
+                🔄 {stats.reprocessCount} reprocessar
               </span>
               {stats.excludedCount > 0 && (
                 <button
@@ -975,19 +975,20 @@ export default function AdminDisparadorPage() {
                     setStatusFilter('excluded');
                     setActiveTab('table');
                   }}
-                  className="text-red-700 bg-red-50 hover:bg-red-100 font-bold px-2.5 py-0.5 rounded-md text-xs border border-red-200 transition"
+                  className="text-red-700 bg-red-50 hover:bg-red-100 font-bold px-2 py-0.5 rounded-md text-xs border border-red-200 transition"
                   title="Clique para ver os contatos excluídos"
                 >
                   🗑️ {stats.excludedCount} excluídos
                 </button>
               )}
             </div>
-            <div className="flex items-center gap-3 text-xs text-gray-500">
+            <div className="flex items-center gap-2 text-xs text-gray-500">
               <span className="text-amber-600 font-medium">{stats.skipped} pulados</span>
-              <span className="text-gray-600 font-semibold">{stats.total} no total</span>
+              <span className="text-gray-400">•</span>
+              <span className="text-gray-600 font-semibold">{stats.total} total</span>
             </div>
           </div>
-          <div className="w-full bg-gray-100 rounded-full h-3 overflow-hidden flex">
+          <div className="w-full bg-gray-100 rounded-full h-2.5 sm:h-3 overflow-hidden flex">
             <div
               className="bg-green-500 h-full transition-all duration-300"
               style={{ width: `${stats.activeTotal > 0 ? (stats.sent / stats.activeTotal) * 100 : 0}%` }}
@@ -1006,11 +1007,11 @@ export default function AdminDisparadorPage() {
           </div>
         </div>
 
-        {/* Navigation Tabs */}
-        <div className="flex border-b border-gray-200 mt-6 -mb-4 sm:-mb-6 overflow-x-auto text-sm">
+        {/* Navigation Tabs (Smooth Mobile Horizontal Scroll) */}
+        <div className="flex border-b border-gray-200 mt-5 -mx-4 px-4 sm:mx-0 sm:px-0 overflow-x-auto text-xs sm:text-sm scrollbar-thin">
           <button
             onClick={() => setActiveTab('queue_new')}
-            className={`py-3 px-4 font-semibold border-b-2 transition whitespace-nowrap flex items-center gap-1.5 ${
+            className={`py-3 px-3 sm:px-4 font-semibold border-b-2 transition whitespace-nowrap flex items-center gap-1.5 shrink-0 ${
               activeTab === 'queue_new'
                 ? 'border-blue-600 text-blue-600'
                 : 'border-transparent text-gray-500 hover:text-gray-700'
@@ -1021,7 +1022,7 @@ export default function AdminDisparadorPage() {
           </button>
           <button
             onClick={() => setActiveTab('queue_reprocess')}
-            className={`py-3 px-4 font-semibold border-b-2 transition whitespace-nowrap flex items-center gap-1.5 ${
+            className={`py-3 px-3 sm:px-4 font-semibold border-b-2 transition whitespace-nowrap flex items-center gap-1.5 shrink-0 ${
               activeTab === 'queue_reprocess'
                 ? 'border-purple-600 text-purple-600'
                 : 'border-transparent text-gray-500 hover:text-gray-700'
@@ -1032,7 +1033,7 @@ export default function AdminDisparadorPage() {
           </button>
           <button
             onClick={() => setActiveTab('table')}
-            className={`py-3 px-4 font-semibold border-b-2 transition whitespace-nowrap ${
+            className={`py-3 px-3 sm:px-4 font-semibold border-b-2 transition whitespace-nowrap shrink-0 ${
               activeTab === 'table'
                 ? 'border-primary text-primary'
                 : 'border-transparent text-gray-500 hover:text-gray-700'
@@ -1042,7 +1043,7 @@ export default function AdminDisparadorPage() {
           </button>
           <button
             onClick={() => setActiveTab('history')}
-            className={`py-3 px-4 font-semibold border-b-2 transition whitespace-nowrap ${
+            className={`py-3 px-3 sm:px-4 font-semibold border-b-2 transition whitespace-nowrap shrink-0 ${
               activeTab === 'history'
                 ? 'border-primary text-primary'
                 : 'border-transparent text-gray-500 hover:text-gray-700'
@@ -1052,7 +1053,7 @@ export default function AdminDisparadorPage() {
           </button>
           <button
             onClick={() => setActiveTab('template')}
-            className={`py-3 px-4 font-semibold border-b-2 transition whitespace-nowrap ${
+            className={`py-3 px-3 sm:px-4 font-semibold border-b-2 transition whitespace-nowrap shrink-0 ${
               activeTab === 'template'
                 ? 'border-primary text-primary'
                 : 'border-transparent text-gray-500 hover:text-gray-700'
@@ -1062,13 +1063,13 @@ export default function AdminDisparadorPage() {
           </button>
           <button
             onClick={() => setActiveTab('import')}
-            className={`py-3 px-4 font-semibold border-b-2 transition whitespace-nowrap ${
+            className={`py-3 px-3 sm:px-4 font-semibold border-b-2 transition whitespace-nowrap shrink-0 ${
               activeTab === 'import'
                 ? 'border-primary text-primary'
                 : 'border-transparent text-gray-500 hover:text-gray-700'
             }`}
           >
-            📥 Importar CSV / Texto
+            📥 Importar CSV
           </button>
         </div>
       </div>
@@ -1151,10 +1152,10 @@ export default function AdminDisparadorPage() {
               </div>
             </div>
           ) : (
-            <div className="bg-white rounded-3xl p-5 sm:p-7 shadow-lg border border-gray-200 space-y-6">
+            <div className="bg-white rounded-3xl p-4 sm:p-7 shadow-lg border border-gray-200 space-y-5 sm:space-y-6">
               {/* Card Navigation and Status */}
-              <div className="flex items-center justify-between">
-                <div className="flex items-center gap-2">
+              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2.5">
+                <div className="flex items-center gap-2 flex-wrap">
                   {isReprocessQueue ? (
                     <span className="bg-purple-100 text-purple-800 text-xs font-black px-3 py-1 rounded-full border border-purple-200 flex items-center gap-1">
                       🔄 REPROCESSAMENTO • {currentQueueIndex + 1} de {activeQueueContacts.length}
@@ -1165,12 +1166,12 @@ export default function AdminDisparadorPage() {
                     </span>
                   )}
                   {progress[currentContact.id]?.previousSentAt && (
-                    <span className="text-[11px] text-gray-400 hidden sm:inline">
-                      (Anteriormente enviado em {formatSentAt(progress[currentContact.id]?.previousSentAt)})
+                    <span className="text-[11px] text-gray-400">
+                      (Enviado {formatSentAt(progress[currentContact.id]?.previousSentAt)})
                     </span>
                   )}
                 </div>
-                <div className="flex items-center gap-2">
+                <div className="flex items-center gap-2 self-start sm:self-auto">
                   {isReprocessQueue && (
                     <button
                       type="button"
@@ -1191,28 +1192,28 @@ export default function AdminDisparadorPage() {
 
               {/* Main Contact Info Card */}
               <div
-                className={`rounded-2xl p-5 border ${
+                className={`rounded-2xl p-4 sm:p-5 border ${
                   isReprocessQueue
                     ? 'bg-gradient-to-br from-purple-50/60 to-indigo-50/30 border-purple-100'
                     : 'bg-gradient-to-br from-primary-50/50 to-blue-50/30 border-primary-100/60'
                 }`}
               >
-                <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
-                  <div>
-                    <h2 className="text-xl sm:text-2xl font-black text-gray-900 font-heading">
+                <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 sm:gap-4">
+                  <div className="min-w-0 flex-1">
+                    <h2 className="text-xl sm:text-2xl font-black text-gray-900 font-heading break-words">
                       {currentContact.nome}
                     </h2>
-                    <div className="flex flex-wrap items-center gap-2 mt-2">
-                      <span className="inline-flex items-center gap-1 font-mono text-base font-bold text-gray-900 bg-white px-3 py-1 rounded-lg border border-gray-200 shadow-sm">
+                    <div className="flex flex-wrap items-center gap-1.5 sm:gap-2 mt-2">
+                      <span className="inline-flex items-center gap-1 font-mono text-sm sm:text-base font-bold text-gray-900 bg-white px-2.5 sm:px-3 py-1 rounded-lg border border-gray-200 shadow-sm">
                         📞 {currentContact.telefone}
                       </span>
                       {currentContact.prefixo && (
-                        <span className="text-xs font-semibold bg-white text-gray-600 px-2.5 py-1 rounded-md border border-gray-200">
+                        <span className="text-xs font-semibold bg-white text-gray-600 px-2 py-1 rounded-md border border-gray-200">
                           Prefixo: {currentContact.prefixo}
                         </span>
                       )}
                       {currentContact.cidade && (
-                        <span className="text-xs font-semibold bg-white text-gray-600 px-2.5 py-1 rounded-md border border-gray-200">
+                        <span className="text-xs font-semibold bg-white text-gray-600 px-2 py-1 rounded-md border border-gray-200">
                           📍 {currentContact.cidade}
                         </span>
                       )}
@@ -1225,20 +1226,21 @@ export default function AdminDisparadorPage() {
                       navigator.clipboard.writeText(currentContact.telefone);
                       toast.success('Telefone copiado!');
                     }}
-                    className="self-start sm:self-auto text-xs font-bold text-gray-600 bg-white hover:bg-gray-50 border border-gray-200 px-3 py-2 rounded-xl transition shadow-sm"
+                    className="self-start sm:self-auto text-xs font-bold text-gray-700 bg-white hover:bg-gray-50 border border-gray-200 px-3.5 py-2 rounded-xl transition shadow-sm min-h-[38px] flex items-center gap-1 shrink-0"
                   >
-                    📋 Copiar número
+                    <span>📋</span>
+                    <span>Copiar número</span>
                   </button>
                 </div>
 
                 {/* Credentials details (if any) */}
                 {(loginForContact(currentContact) || currentContact.senha) && (
-                  <div className="mt-4 pt-4 border-t border-gray-200/50 grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs">
+                  <div className="mt-3.5 pt-3.5 border-t border-gray-200/50 grid grid-cols-1 sm:grid-cols-2 gap-2.5 text-xs">
                     {loginForContact(currentContact) && (
-                      <div className="bg-white/80 p-2.5 rounded-xl border border-gray-200 flex items-center justify-between">
-                        <div>
-                          <span className="text-gray-400 block font-semibold">LOGIN (TELEFONE):</span>
-                          <span className="font-mono font-bold text-gray-800 break-all">
+                      <div className="bg-white/90 p-2.5 rounded-xl border border-gray-200 flex items-center justify-between gap-2">
+                        <div className="min-w-0 flex-1">
+                          <span className="text-gray-400 block font-semibold text-[10px] uppercase">LOGIN (TELEFONE):</span>
+                          <span className="font-mono font-bold text-gray-800 break-all text-xs sm:text-sm">
                             {loginForContact(currentContact)}
                           </span>
                         </div>
@@ -1247,16 +1249,16 @@ export default function AdminDisparadorPage() {
                             navigator.clipboard.writeText(loginForContact(currentContact));
                             toast.success('Login copiado!');
                           }}
-                          className="text-gray-400 hover:text-gray-600 text-xs ml-2"
+                          className="text-gray-600 bg-gray-100 hover:bg-gray-200 font-bold px-2 py-1 rounded-lg text-xs shrink-0"
                         >
                           Copiar
                         </button>
                       </div>
                     )}
                     {currentContact.senha && (
-                      <div className="bg-white/80 p-2.5 rounded-xl border border-gray-200 flex items-center justify-between">
-                        <div>
-                          <span className="text-gray-400 block font-semibold">SENHA TEMPORÁRIA:</span>
+                      <div className="bg-white/90 p-2.5 rounded-xl border border-gray-200 flex items-center justify-between gap-2">
+                        <div className="min-w-0 flex-1">
+                          <span className="text-gray-400 block font-semibold text-[10px] uppercase">SENHA TEMPORÁRIA:</span>
                           <span className="font-mono font-black text-primary text-sm tracking-wide">
                             {currentContact.senha}
                           </span>
@@ -1266,7 +1268,7 @@ export default function AdminDisparadorPage() {
                             navigator.clipboard.writeText(currentContact.senha || '');
                             toast.success('Senha copiada!');
                           }}
-                          className="text-gray-400 hover:text-gray-600 text-xs ml-2"
+                          className="text-primary bg-primary-50 hover:bg-primary-100 font-bold px-2 py-1 rounded-lg text-xs shrink-0"
                         >
                           Copiar
                         </button>
@@ -1277,10 +1279,10 @@ export default function AdminDisparadorPage() {
               </div>
 
               {/* Message Preview Box */}
-              <div className="space-y-2">
+              <div className="space-y-1.5">
                 <div className="flex items-center justify-between">
                   <span className="text-xs font-bold uppercase tracking-wider text-gray-500">
-                    Prévia da Mensagem Personalizada
+                    Prévia da Mensagem
                   </span>
                   <button
                     onClick={() => {
@@ -1289,25 +1291,25 @@ export default function AdminDisparadorPage() {
                     }}
                     className="text-xs text-primary hover:text-primary-700 font-semibold flex items-center gap-1"
                   >
-                    <span>📋</span> Copiar texto completo
+                    <span>📋</span> Copiar texto
                   </button>
                 </div>
-                <div className="bg-gray-50 rounded-2xl p-4 border border-gray-200 text-xs sm:text-sm text-gray-800 leading-relaxed font-sans whitespace-pre-wrap">
+                <div className="bg-gray-50 rounded-2xl p-3.5 sm:p-4 border border-gray-200 text-xs sm:text-sm text-gray-800 leading-relaxed font-sans whitespace-pre-wrap break-words">
                   {activeMessageText}
                 </div>
-                <div className="flex items-center justify-between text-[11px] text-gray-400 pt-1">
+                <div className="flex items-center justify-between text-[11px] text-gray-400 pt-0.5">
                   <span>{activeMessageText.length} caracteres</span>
                   <span>Variáveis dinâmicas preenchidas</span>
                 </div>
               </div>
 
               {/* Primary Dispatch Buttons (Mobile-First 1-Touch) */}
-              <div className="space-y-3 pt-2">
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+              <div className="space-y-3 pt-1">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
                   {/* SMS Button (Primary) */}
                   <button
                     onClick={handleOpenSms}
-                    className="w-full bg-blue-600 hover:bg-blue-700 active:bg-blue-800 text-white font-black py-4 px-6 rounded-2xl text-base shadow-md hover:shadow-lg transition flex items-center justify-center gap-3 transform active:scale-[0.98]"
+                    className="w-full bg-blue-600 hover:bg-blue-700 active:bg-blue-800 text-white font-black py-3.5 sm:py-4 px-5 rounded-2xl text-base shadow-md hover:shadow-lg transition flex items-center justify-center gap-2.5 transform active:scale-[0.98] min-h-[52px] sm:min-h-[56px]"
                   >
                     <span className="text-xl">💬</span>
                     <span>{isReprocessQueue ? 'Reenviar SMS (1 Toque)' : 'Enviar SMS (1 Toque)'}</span>
@@ -1316,22 +1318,22 @@ export default function AdminDisparadorPage() {
                   {/* WhatsApp Button */}
                   <button
                     onClick={handleOpenWhatsApp}
-                    className="w-full bg-green-600 hover:bg-green-700 active:bg-green-800 text-white font-black py-4 px-6 rounded-2xl text-base shadow-md hover:shadow-lg transition flex items-center justify-center gap-3 transform active:scale-[0.98]"
+                    className="w-full bg-green-600 hover:bg-green-700 active:bg-green-800 text-white font-black py-3.5 sm:py-4 px-5 rounded-2xl text-base shadow-md hover:shadow-lg transition flex items-center justify-center gap-2.5 transform active:scale-[0.98] min-h-[52px] sm:min-h-[56px]"
                   >
                     <span className="text-xl">📱</span>
                     <span>{isReprocessQueue ? 'Reenviar WhatsApp' : 'Enviar WhatsApp'}</span>
                   </button>
                 </div>
 
-                {/* Secondary navigation and manual controls */}
-                <div className="flex flex-wrap items-center justify-between gap-2 pt-2 border-t border-gray-100">
-                  <div className="flex items-center gap-2">
+                {/* Secondary navigation and manual controls (Fully mobile-responsive) */}
+                <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2.5 pt-2 border-t border-gray-100">
+                  <div className="grid grid-cols-2 gap-2 sm:flex sm:items-center">
                     <button
                       onClick={() => {
                         if (currentQueueIndex > 0) setCurrentQueueIndex(currentQueueIndex - 1);
                       }}
                       disabled={currentQueueIndex === 0}
-                      className="px-3 py-2 text-xs font-bold text-gray-600 hover:text-gray-900 bg-gray-100 hover:bg-gray-200 disabled:opacity-40 disabled:hover:bg-gray-100 rounded-xl transition"
+                      className="w-full sm:w-auto px-4 py-2.5 text-xs font-bold text-gray-700 hover:text-gray-900 bg-gray-100 hover:bg-gray-200 disabled:opacity-40 disabled:hover:bg-gray-100 rounded-xl transition flex items-center justify-center gap-1 min-h-[42px]"
                     >
                       ← Anterior
                     </button>
@@ -1342,24 +1344,24 @@ export default function AdminDisparadorPage() {
                         }
                       }}
                       disabled={currentQueueIndex >= activeQueueContacts.length - 1}
-                      className="px-3 py-2 text-xs font-bold text-gray-600 hover:text-gray-900 bg-gray-100 hover:bg-gray-200 disabled:opacity-40 disabled:hover:bg-gray-100 rounded-xl transition"
+                      className="w-full sm:w-auto px-4 py-2.5 text-xs font-bold text-gray-700 hover:text-gray-900 bg-gray-100 hover:bg-gray-200 disabled:opacity-40 disabled:hover:bg-gray-100 rounded-xl transition flex items-center justify-center gap-1 min-h-[42px]"
                     >
                       Próximo →
                     </button>
                   </div>
 
-                  <div className="flex items-center gap-2">
+                  <div className="grid grid-cols-2 sm:flex sm:items-center gap-2">
                     <button
                       onClick={handleSkip}
-                      className="px-3 py-2 text-xs font-bold text-amber-700 bg-amber-50 hover:bg-amber-100 rounded-xl transition"
+                      className="w-full sm:w-auto px-3.5 py-2.5 text-xs font-bold text-amber-800 bg-amber-50 hover:bg-amber-100 border border-amber-200 rounded-xl transition flex items-center justify-center gap-1 min-h-[42px]"
                     >
                       Pular ⏭
                     </button>
                     <button
                       onClick={handleMarkSent}
-                      className="px-3 py-2 text-xs font-bold text-gray-700 bg-gray-100 hover:bg-gray-200 rounded-xl transition"
+                      className="w-full sm:w-auto px-3.5 py-2.5 text-xs font-bold text-emerald-800 bg-emerald-50 hover:bg-emerald-100 border border-emerald-200 rounded-xl transition flex items-center justify-center gap-1 min-h-[42px]"
                     >
-                      ✓ Marcar como enviado
+                      ✓ Enviado
                     </button>
                     {isReprocessQueue && (
                       <button
@@ -1370,7 +1372,7 @@ export default function AdminDisparadorPage() {
                             `Deseja excluir "${currentContact.nome}" da fila de reprocessamento?`,
                           )
                         }
-                        className="px-3 py-2 text-xs font-bold text-red-700 bg-red-50 hover:bg-red-100 border border-red-200 rounded-xl transition"
+                        className="col-span-2 sm:col-span-1 px-3.5 py-2.5 text-xs font-bold text-red-700 bg-red-50 hover:bg-red-100 border border-red-200 rounded-xl transition flex items-center justify-center gap-1 min-h-[42px]"
                         title="Excluir este contato da fila"
                       >
                         🗑️ Excluir da Fila
@@ -1380,19 +1382,19 @@ export default function AdminDisparadorPage() {
                 </div>
 
                 {/* Auto advance toggle */}
-                <div className="flex items-center justify-between text-xs text-gray-500 pt-1">
+                <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 text-xs text-gray-500 pt-1">
                   <label className="flex items-center gap-2 cursor-pointer select-none">
                     <input
                       type="checkbox"
                       checked={autoAdvance}
                       onChange={(e) => setAutoAdvance(e.target.checked)}
-                      className="rounded text-primary focus:ring-primary w-4 h-4"
+                      className="rounded text-primary focus:ring-primary w-4 h-4 shrink-0"
                     />
-                    <span>Remover contato da fila e avançar automaticamente ao disparar</span>
+                    <span>Avançar automaticamente ao disparar</span>
                   </label>
                   <button
                     onClick={() => setActiveTab('template')}
-                    className="text-primary hover:underline text-xs"
+                    className="text-primary hover:underline text-xs text-left sm:text-right"
                   >
                     Alterar modelo de mensagem ↗
                   </button>

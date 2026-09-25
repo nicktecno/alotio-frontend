@@ -428,46 +428,46 @@ export default function AdminDisparadorSindicatosTab() {
   };
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-4 sm:space-y-6 pb-8">
       {/* HERO BANNER */}
-      <div className="bg-gradient-to-r from-emerald-800 via-teal-800 to-emerald-900 rounded-3xl p-6 sm:p-8 text-white shadow-md relative overflow-hidden">
+      <div className="bg-gradient-to-r from-emerald-800 via-teal-800 to-emerald-900 rounded-2xl sm:rounded-3xl p-4 sm:p-8 text-white shadow-md relative overflow-hidden">
         <div className="absolute top-0 right-0 w-96 h-96 bg-white/5 rounded-full blur-3xl pointer-events-none" />
         <div className="relative z-10 max-w-3xl">
-          <div className="inline-flex items-center gap-2 bg-emerald-700/60 backdrop-blur border border-emerald-500/30 px-3 py-1 rounded-full text-xs font-semibold uppercase tracking-wider text-emerald-200 mb-3">
+          <div className="inline-flex items-center gap-2 bg-emerald-700/60 backdrop-blur border border-emerald-500/30 px-2.5 py-1 rounded-full text-[10px] sm:text-xs font-semibold uppercase tracking-wider text-emerald-200 mb-2 sm:mb-3">
             <span>🏛️</span>
             <span>Expansão Brasil • Sindicatos & Associações</span>
           </div>
-          <h2 className="text-2xl sm:text-3xl font-extrabold font-heading text-white tracking-tight">
+          <h2 className="text-xl sm:text-3xl font-extrabold font-heading text-white tracking-tight">
             Parcerias com Sindicatos e Associações
           </h2>
-          <p className="mt-2 text-emerald-100 text-sm sm:text-base leading-relaxed">
-            Contate lideranças, sindicatos e associações de transporte escolar em cada cidade cadastrada no Alô Tio.
+          <p className="mt-1.5 sm:mt-2 text-emerald-100 text-xs sm:text-base leading-relaxed">
+            Contate lideranças, cooperativas, sindicatos e associações de transporte escolar em cada cidade cadastrada no Alô Tio.
             Proponha parceria gratuita para cadastrar associados, publicar comunicados oficiais e acelerar a difusão da plataforma em todo o Brasil.
           </p>
         </div>
 
         {/* METRICS BAR */}
-        <div className="mt-6 pt-6 border-t border-emerald-700/60 grid grid-cols-2 sm:grid-cols-4 gap-4 text-center">
-          <div className="bg-emerald-900/50 backdrop-blur rounded-2xl p-3 border border-emerald-600/30">
-            <span className="block text-2xl font-black text-white">{stats.total}</span>
-            <span className="text-xs text-emerald-200 uppercase font-medium">Entidades Mapeadas</span>
+        <div className="mt-4 sm:mt-6 pt-4 sm:pt-6 border-t border-emerald-700/60 grid grid-cols-2 sm:grid-cols-4 gap-2 sm:gap-4 text-center">
+          <div className="bg-emerald-900/50 backdrop-blur rounded-xl sm:rounded-2xl p-2.5 sm:p-3 border border-emerald-600/30">
+            <span className="block text-xl sm:text-2xl font-black text-white">{stats.total}</span>
+            <span className="text-[10px] sm:text-xs text-emerald-200 uppercase font-medium">Entidades Mapeadas</span>
           </div>
-          <div className="bg-emerald-900/50 backdrop-blur rounded-2xl p-3 border border-emerald-600/30">
-            <span className="block text-2xl font-black text-emerald-300">{stats.citiesCount}</span>
-            <span className="text-xs text-emerald-200 uppercase font-medium">Cidades Cobertas</span>
+          <div className="bg-emerald-900/50 backdrop-blur rounded-xl sm:rounded-2xl p-2.5 sm:p-3 border border-emerald-600/30">
+            <span className="block text-xl sm:text-2xl font-black text-emerald-300">{stats.citiesCount}</span>
+            <span className="text-[10px] sm:text-xs text-emerald-200 uppercase font-medium">Cidades Cobertas</span>
           </div>
-          <div className="bg-emerald-900/50 backdrop-blur rounded-2xl p-3 border border-emerald-600/30">
-            <span className="block text-2xl font-black text-green-400">{stats.sent}</span>
-            <span className="text-xs text-emerald-200 uppercase font-medium">Contatados ({stats.percent}%)</span>
+          <div className="bg-emerald-900/50 backdrop-blur rounded-xl sm:rounded-2xl p-2.5 sm:p-3 border border-emerald-600/30">
+            <span className="block text-xl sm:text-2xl font-black text-green-400">{stats.sent}</span>
+            <span className="text-[10px] sm:text-xs text-emerald-200 uppercase font-medium">Contatados ({stats.percent}%)</span>
           </div>
-          <div className="bg-emerald-900/50 backdrop-blur rounded-2xl p-3 border border-emerald-600/30">
-            <span className="block text-2xl font-black text-amber-300">{stats.pending}</span>
-            <span className="text-xs text-emerald-200 uppercase font-medium">Pendentes na Fila</span>
+          <div className="bg-emerald-900/50 backdrop-blur rounded-xl sm:rounded-2xl p-2.5 sm:p-3 border border-emerald-600/30">
+            <span className="block text-xl sm:text-2xl font-black text-amber-300">{stats.pending}</span>
+            <span className="text-[10px] sm:text-xs text-emerald-200 uppercase font-medium">Pendentes na Fila</span>
           </div>
         </div>
 
         {/* PROGRESS BAR */}
-        <div className="mt-4 w-full bg-emerald-950/60 rounded-full h-2.5 overflow-hidden">
+        <div className="mt-3 sm:mt-4 w-full bg-emerald-950/60 rounded-full h-2 sm:h-2.5 overflow-hidden">
           <div
             className="bg-emerald-400 h-full transition-all duration-500 rounded-full"
             style={{ width: `${stats.percent}%` }}
@@ -476,12 +476,13 @@ export default function AdminDisparadorSindicatosTab() {
       </div>
 
       {/* TOOLBAR & ACTIONS */}
-      <div className="bg-white rounded-3xl p-5 shadow-sm border border-gray-200 space-y-4">
-        <div className="flex flex-wrap items-center justify-between gap-3">
-          <div className="flex items-center gap-2">
+      <div className="bg-white rounded-2xl sm:rounded-3xl p-3.5 sm:p-5 shadow-sm border border-gray-200 space-y-3.5 sm:space-y-4">
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2.5 sm:gap-3">
+          {/* View Mode Switches */}
+          <div className="grid grid-cols-2 sm:flex sm:items-center gap-1.5 sm:gap-2 w-full sm:w-auto">
             <button
               onClick={() => setViewMode('card')}
-              className={`px-4 py-2 rounded-xl text-xs sm:text-sm font-bold transition flex items-center gap-1.5 ${
+              className={`px-3 sm:px-4 py-2.5 sm:py-2 rounded-xl text-xs sm:text-sm font-bold transition flex items-center justify-center gap-1.5 min-h-[42px] ${
                 viewMode === 'card'
                   ? 'bg-emerald-600 text-white shadow-sm'
                   : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
@@ -492,49 +493,51 @@ export default function AdminDisparadorSindicatosTab() {
             </button>
             <button
               onClick={() => setViewMode('table')}
-              className={`px-4 py-2 rounded-xl text-xs sm:text-sm font-bold transition flex items-center gap-1.5 ${
+              className={`px-3 sm:px-4 py-2.5 sm:py-2 rounded-xl text-xs sm:text-sm font-bold transition flex items-center justify-center gap-1.5 min-h-[42px] ${
                 viewMode === 'table'
                   ? 'bg-emerald-600 text-white shadow-sm'
                   : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
               }`}
             >
               <span>📋</span>
-              <span>Tabela Geral ({filteredContacts.length})</span>
+              <span>Tabela ({filteredContacts.length})</span>
             </button>
           </div>
 
-          <div className="flex items-center gap-2 flex-wrap">
+          {/* Quick Actions */}
+          <div className="grid grid-cols-2 sm:flex sm:items-center gap-1.5 sm:gap-2 w-full sm:w-auto">
             <button
               onClick={() => setIsTemplateEditorOpen(!isTemplateEditorOpen)}
-              className="px-3.5 py-2 rounded-xl border border-gray-300 bg-white hover:bg-gray-50 text-xs sm:text-sm font-semibold text-gray-700 transition flex items-center gap-1.5"
+              className="px-2.5 sm:px-3.5 py-2.5 sm:py-2 rounded-xl border border-gray-300 bg-white hover:bg-gray-50 text-xs sm:text-sm font-semibold text-gray-700 transition flex items-center justify-center gap-1.5 min-h-[42px]"
             >
               <span>✍️</span>
-              <span>Personalizar Mensagem</span>
+              <span>Mensagem</span>
             </button>
             <button
               onClick={() => setIsAddModalOpen(true)}
-              className="px-3.5 py-2 rounded-xl bg-primary hover:bg-primary-600 text-white text-xs sm:text-sm font-semibold transition flex items-center gap-1.5"
+              className="px-2.5 sm:px-3.5 py-2.5 sm:py-2 rounded-xl bg-primary hover:bg-primary-600 text-white text-xs sm:text-sm font-semibold transition flex items-center justify-center gap-1.5 min-h-[42px]"
             >
               <span>➕</span>
-              <span>Adicionar Sindicato</span>
+              <span>Cadastrar</span>
             </button>
             <button
               onClick={handleExportCsv}
-              className="px-3 py-2 rounded-xl border border-gray-300 bg-white hover:bg-gray-50 text-xs sm:text-sm font-semibold text-gray-700 transition"
+              className="col-span-2 sm:col-span-1 px-3 py-2.5 sm:py-2 rounded-xl border border-gray-300 bg-white hover:bg-gray-50 text-xs sm:text-sm font-semibold text-gray-700 transition flex items-center justify-center gap-1.5 min-h-[42px]"
               title="Exportar CSV de Sindicatos"
             >
-              📤 CSV
+              <span>📤</span>
+              <span>Exportar CSV</span>
             </button>
           </div>
         </div>
 
         {/* TEMPLATE EDITOR ACCORDION */}
         {isTemplateEditorOpen && (
-          <div className="bg-emerald-50/60 border border-emerald-200 rounded-2xl p-5 space-y-4 animate-in fade-in duration-200">
+          <div className="bg-emerald-50/60 border border-emerald-200 rounded-xl sm:rounded-2xl p-3.5 sm:p-5 space-y-3 sm:space-y-4 animate-in fade-in duration-200">
             <div className="flex items-center justify-between">
               <div>
-                <h4 className="font-bold text-emerald-950 text-sm">Mensagem Proposta de Parceria Alô Tio</h4>
-                <p className="text-xs text-emerald-700">Esta mensagem é usada nos envios de WhatsApp e SMS.</p>
+                <h4 className="font-bold text-emerald-950 text-xs sm:text-sm">Mensagem Proposta de Parceria Alô Tio</h4>
+                <p className="text-[11px] sm:text-xs text-emerald-700">Esta mensagem é usada nos envios de WhatsApp e SMS.</p>
               </div>
               <button
                 onClick={handleResetTemplate}
@@ -546,10 +549,10 @@ export default function AdminDisparadorSindicatosTab() {
 
             {/* Modelos Predefinidos */}
             <div>
-              <span className="text-xs font-bold text-emerald-900 block mb-1.5 uppercase tracking-wide">
+              <span className="text-[11px] sm:text-xs font-bold text-emerald-900 block mb-1.5 uppercase tracking-wide">
                 Modelos Rápidos Prontos:
               </span>
-              <div className="flex flex-wrap gap-2">
+              <div className="flex flex-wrap gap-1.5 sm:gap-2">
                 {SINDICATO_TEMPLATE_PRESETS.map((preset) => (
                   <button
                     key={preset.id}
@@ -558,7 +561,7 @@ export default function AdminDisparadorSindicatosTab() {
                       setTemplateText(preset.text);
                       toast.success(`Modelo "${preset.name.split('(')[0].trim()}" aplicado!`);
                     }}
-                    className={`text-xs px-3 py-1.5 rounded-xl border font-bold transition flex items-center gap-1.5 ${
+                    className={`text-xs px-2.5 sm:px-3 py-1.5 rounded-xl border font-bold transition flex items-center gap-1 min-h-[34px] ${
                       templateText === preset.text
                         ? 'bg-emerald-700 text-white border-emerald-800 shadow-sm'
                         : 'bg-white hover:bg-emerald-100 text-emerald-900 border-emerald-300'
@@ -572,10 +575,10 @@ export default function AdminDisparadorSindicatosTab() {
 
             {/* Variable Tags */}
             <div>
-              <span className="text-xs font-bold text-emerald-900 block mb-1.5 uppercase tracking-wide">
+              <span className="text-[11px] sm:text-xs font-bold text-emerald-900 block mb-1.5 uppercase tracking-wide">
                 Tags Dinâmicas (clique para inserir):
               </span>
-              <div className="flex flex-wrap gap-2 text-xs">
+              <div className="flex flex-wrap gap-1.5 text-xs">
                 {[
                   { tag: '{nome}', desc: 'Nome ou sigla da entidade' },
                   { tag: '{responsavel}', desc: 'Responsável / Presidente' },
@@ -590,7 +593,7 @@ export default function AdminDisparadorSindicatosTab() {
                     key={tag}
                     type="button"
                     onClick={() => setTemplateText((prev) => `${prev} ${tag}`)}
-                    className="bg-white hover:bg-emerald-100 text-emerald-800 border border-emerald-300 px-2.5 py-1 rounded-lg font-mono font-bold text-xs transition"
+                    className="bg-white hover:bg-emerald-100 text-emerald-800 border border-emerald-300 px-2 py-1 rounded-lg font-mono font-bold text-[11px] sm:text-xs transition min-h-[30px]"
                     title={desc}
                   >
                     {tag}
@@ -603,14 +606,14 @@ export default function AdminDisparadorSindicatosTab() {
               rows={5}
               value={templateText}
               onChange={(e) => setTemplateText(e.target.value)}
-              className="w-full bg-white border border-emerald-300 rounded-xl p-3 text-sm text-gray-800 focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 transition leading-relaxed"
+              className="w-full bg-white border border-emerald-300 rounded-xl p-3 text-xs sm:text-sm text-gray-800 focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 transition leading-relaxed"
             />
 
-            <div className="flex items-center justify-between text-xs text-emerald-800">
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 text-xs text-emerald-800">
               <span>{templateText.length} caracteres</span>
               <button
                 onClick={handleSaveTemplate}
-                className="bg-emerald-700 hover:bg-emerald-800 text-white font-bold px-4 py-2 rounded-xl transition"
+                className="w-full sm:w-auto bg-emerald-700 hover:bg-emerald-800 text-white font-bold px-4 py-2.5 rounded-xl transition text-center min-h-[42px]"
               >
                 Salvar Alterações
               </button>
@@ -618,9 +621,9 @@ export default function AdminDisparadorSindicatosTab() {
           </div>
         )}
 
-        {/* QUICK STATE PILLS (CLICK TO FILTER BY UF) */}
-        <div className="flex items-center gap-1.5 overflow-x-auto pb-1 pt-1 text-xs scrollbar-thin">
-          <span className="text-xs font-bold text-gray-500 whitespace-nowrap mr-1">Estado (UF):</span>
+        {/* QUICK STATE PILLS (CLICK TO FILTER BY UF - MOBILE EDGE-TO-EDGE SCROLL) */}
+        <div className="-mx-3.5 px-3.5 sm:mx-0 sm:px-0 flex items-center gap-1.5 overflow-x-auto pb-1.5 pt-1 text-xs scrollbar-thin">
+          <span className="text-xs font-bold text-gray-500 whitespace-nowrap mr-1 shrink-0">Estado (UF):</span>
           <button
             type="button"
             onClick={() => {
@@ -628,7 +631,7 @@ export default function AdminDisparadorSindicatosTab() {
               setCityFilter('ALL');
               setCurrentIndex(0);
             }}
-            className={`px-3 py-1.5 rounded-xl font-bold transition whitespace-nowrap flex items-center gap-1.5 shrink-0 ${
+            className={`px-3 py-1.5 rounded-xl font-bold transition whitespace-nowrap flex items-center gap-1.5 shrink-0 min-h-[34px] ${
               ufFilter === 'ALL'
                 ? 'bg-emerald-700 text-white shadow-sm ring-2 ring-emerald-400'
                 : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
@@ -655,7 +658,7 @@ export default function AdminDisparadorSindicatosTab() {
                   setCityFilter('ALL');
                   setCurrentIndex(0);
                 }}
-                className={`px-3 py-1.5 rounded-xl font-bold transition whitespace-nowrap flex items-center gap-1.5 shrink-0 ${
+                className={`px-3 py-1.5 rounded-xl font-bold transition whitespace-nowrap flex items-center gap-1.5 shrink-0 min-h-[34px] ${
                   isSelected
                     ? 'bg-emerald-700 text-white shadow-sm ring-2 ring-emerald-400'
                     : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
@@ -676,7 +679,7 @@ export default function AdminDisparadorSindicatosTab() {
 
         {/* ACTIVE UF FILTER BANNER */}
         {ufFilter !== 'ALL' && (
-          <div className="flex items-center justify-between bg-emerald-50 border border-emerald-200 rounded-xl px-4 py-2 text-xs text-emerald-950">
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 bg-emerald-50 border border-emerald-200 rounded-xl p-3 sm:px-4 sm:py-2 text-xs text-emerald-950">
             <div className="flex items-center gap-2">
               <span className="text-sm">📍</span>
               <span>
@@ -690,7 +693,7 @@ export default function AdminDisparadorSindicatosTab() {
                 setCityFilter('ALL');
                 setCurrentIndex(0);
               }}
-              className="text-emerald-800 font-bold hover:underline flex items-center gap-1"
+              className="text-emerald-800 font-bold hover:underline flex items-center gap-1 self-start sm:self-auto"
             >
               <span>✕</span>
               <span>Limpar filtro UF (Ver todas as {contacts.length})</span>
@@ -699,9 +702,9 @@ export default function AdminDisparadorSindicatosTab() {
         )}
 
         {/* FILTERS BAR */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-3 pt-2">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-2.5 sm:gap-3 pt-1 sm:pt-2">
           {/* Search */}
-          <div className="lg:col-span-2">
+          <div className="sm:col-span-2 lg:col-span-2">
             <input
               type="text"
               value={searchQuery}
@@ -710,7 +713,7 @@ export default function AdminDisparadorSindicatosTab() {
                 setCurrentIndex(0);
               }}
               placeholder="Buscar por nome, sigla, cidade ou telefone…"
-              className="w-full bg-gray-50 border border-gray-300 rounded-xl px-3.5 py-2 text-sm text-gray-800 focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500"
+              className="w-full bg-gray-50 border border-gray-300 rounded-xl px-3.5 py-2.5 sm:py-2 text-xs sm:text-sm text-gray-800 focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 min-h-[42px]"
             />
           </div>
 
@@ -723,7 +726,7 @@ export default function AdminDisparadorSindicatosTab() {
                 setCityFilter('ALL');
                 setCurrentIndex(0);
               }}
-              className="w-full bg-gray-50 border border-gray-300 rounded-xl px-3 py-2 text-sm font-semibold text-gray-700 focus:ring-2 focus:ring-emerald-500"
+              className="w-full bg-gray-50 border border-gray-300 rounded-xl px-3 py-2.5 sm:py-2 text-xs sm:text-sm font-semibold text-gray-700 focus:ring-2 focus:ring-emerald-500 min-h-[42px]"
             >
               <option value="ALL">Todos os Estados (UF)</option>
               {availableUfs.map((uf) => (
@@ -742,7 +745,7 @@ export default function AdminDisparadorSindicatosTab() {
                 setCityFilter(e.target.value);
                 setCurrentIndex(0);
               }}
-              className="w-full bg-gray-50 border border-gray-300 rounded-xl px-3 py-2 text-sm font-semibold text-gray-700 focus:ring-2 focus:ring-emerald-500"
+              className="w-full bg-gray-50 border border-gray-300 rounded-xl px-3 py-2.5 sm:py-2 text-xs sm:text-sm font-semibold text-gray-700 focus:ring-2 focus:ring-emerald-500 min-h-[42px]"
             >
               <option value="ALL">Todas as Cidades ({availableCities.length})</option>
               {availableCities.map((city) => (
@@ -754,14 +757,14 @@ export default function AdminDisparadorSindicatosTab() {
           </div>
 
           {/* Status Filter */}
-          <div>
+          <div className="sm:col-span-2 lg:col-span-1">
             <select
               value={statusFilter}
               onChange={(e) => {
                 setStatusFilter(e.target.value as any);
                 setCurrentIndex(0);
               }}
-              className="w-full bg-gray-50 border border-gray-300 rounded-xl px-3 py-2 text-sm font-semibold text-gray-700 focus:ring-2 focus:ring-emerald-500"
+              className="w-full bg-gray-50 border border-gray-300 rounded-xl px-3 py-2.5 sm:py-2 text-xs sm:text-sm font-semibold text-gray-700 focus:ring-2 focus:ring-emerald-500 min-h-[42px]"
             >
               <option value="all">Status: Todos</option>
               <option value="new">🆕 Pendentes ({stats.pending})</option>
@@ -776,9 +779,9 @@ export default function AdminDisparadorSindicatosTab() {
       {viewMode === 'card' && (
         <div>
           {filteredContacts.length === 0 ? (
-            <div className="bg-white rounded-3xl p-10 text-center border border-gray-200 text-gray-500 space-y-3">
+            <div className="bg-white rounded-2xl sm:rounded-3xl p-6 sm:p-10 text-center border border-gray-200 text-gray-500 space-y-3">
               <span className="text-4xl block">🔍</span>
-              <p className="font-bold text-gray-800 text-base">Nenhum sindicato ou associação encontrado com estes filtros.</p>
+              <p className="font-bold text-gray-800 text-sm sm:text-base">Nenhum sindicato ou associação encontrado com estes filtros.</p>
               <button
                 onClick={() => {
                   setUfFilter('ALL');
@@ -786,28 +789,24 @@ export default function AdminDisparadorSindicatosTab() {
                   setStatusFilter('all');
                   setSearchQuery('');
                 }}
-                className="text-emerald-700 underline text-sm font-semibold"
+                className="text-emerald-700 underline text-xs sm:text-sm font-semibold"
               >
                 Limpar filtros de busca
               </button>
             </div>
           ) : currentContact ? (
-            <div className="bg-white rounded-3xl p-6 sm:p-8 shadow-sm border border-gray-200 space-y-6">
-              {/* Card Stepper Header */}
-              <div className="flex flex-wrap items-center justify-between gap-3 pb-5 border-b border-gray-100">
-                <div className="flex items-center gap-3">
-                  <div className="w-12 h-12 rounded-2xl bg-emerald-100 text-emerald-800 flex items-center justify-center text-xl font-bold">
+            <div className="bg-white rounded-2xl sm:rounded-3xl p-4 sm:p-7 shadow-sm border border-gray-200 space-y-4 sm:space-y-6">
+              {/* Card Stepper Header (Stack on Mobile, Row on Desktop) */}
+              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-4 sm:pb-5 border-b border-gray-100">
+                <div className="flex items-start sm:items-center gap-3">
+                  <div className="w-11 h-11 sm:w-12 sm:h-12 rounded-2xl bg-emerald-100 text-emerald-800 flex items-center justify-center text-lg sm:text-xl font-bold shrink-0 mt-0.5 sm:mt-0">
                     🏛️
                   </div>
-                  <div>
-                    <span className="text-xs uppercase font-extrabold tracking-wider text-emerald-800 bg-emerald-50 px-2.5 py-1 rounded-md border border-emerald-200">
-                      {currentContact.tipo ? currentContact.tipo.toUpperCase() : 'ENTIDADE'}
-                    </span>
-                    <h3 className="text-lg sm:text-xl font-black text-gray-900 mt-1 font-heading">
-                      {currentContact.nome}
-                    </h3>
-                    <p className="text-xs text-gray-500 flex items-center gap-1.5 flex-wrap mt-0.5">
-                      <span>{currentContact.cidade}</span>
+                  <div className="min-w-0 flex-1">
+                    <div className="flex items-center gap-1.5 flex-wrap">
+                      <span className="text-[10px] sm:text-xs uppercase font-extrabold tracking-wider text-emerald-800 bg-emerald-50 px-2 py-0.5 rounded-md border border-emerald-200">
+                        {currentContact.tipo ? currentContact.tipo.toUpperCase() : 'ENTIDADE'}
+                      </span>
                       {currentContact.uf && (
                         <button
                           type="button"
@@ -816,60 +815,69 @@ export default function AdminDisparadorSindicatosTab() {
                             setCityFilter('ALL');
                             setCurrentIndex(0);
                           }}
-                          className="font-black text-emerald-800 bg-emerald-100 hover:bg-emerald-200 px-2 py-0.5 rounded text-xs transition border border-emerald-200"
+                          className="font-black text-emerald-800 bg-emerald-100 hover:bg-emerald-200 px-2 py-0.5 rounded text-[10px] sm:text-xs transition border border-emerald-200"
                           title={`Filtrar apenas entidades de ${currentContact.uf}`}
                         >
                           {currentContact.uf}
                         </button>
                       )}
-                      <span>• Fonte: {currentContact.source}</span>
+                    </div>
+                    <h3 className="text-base sm:text-xl font-black text-gray-900 mt-1 font-heading break-words">
+                      {currentContact.nome}
+                    </h3>
+                    <p className="text-xs text-gray-500 flex items-center gap-1.5 flex-wrap mt-0.5">
+                      <span className="font-semibold text-gray-700">{currentContact.cidade}</span>
+                      <span>• {currentContact.source}</span>
                     </p>
                   </div>
                 </div>
 
-                <div className="flex items-center gap-2">
+                {/* Mobile-Friendly Stepper Nav Controls */}
+                <div className="flex items-center justify-between sm:justify-end gap-2 w-full sm:w-auto pt-2.5 sm:pt-0 border-t sm:border-t-0 border-gray-100">
                   <button
                     onClick={() => setCurrentIndex(Math.max(0, currentIndex - 1))}
                     disabled={currentIndex === 0}
-                    className="p-2.5 rounded-xl border border-gray-200 hover:bg-gray-100 disabled:opacity-30 disabled:hover:bg-transparent transition text-gray-700"
+                    className="flex-1 sm:flex-initial px-3.5 py-2.5 sm:p-2.5 rounded-xl border border-gray-200 hover:bg-gray-100 disabled:opacity-30 disabled:hover:bg-transparent transition text-gray-700 font-bold text-xs sm:text-sm flex items-center justify-center gap-1.5 min-h-[42px]"
                     title="Anterior"
                   >
-                    ◀
+                    <span>◀</span>
+                    <span className="sm:hidden">Anterior</span>
                   </button>
-                  <span className="text-xs font-bold text-gray-600 px-2">
+                  <span className="text-xs font-bold text-gray-700 px-2 whitespace-nowrap text-center">
                     {currentIndex + 1} de {filteredContacts.length}
                   </span>
                   <button
                     onClick={() => setCurrentIndex(Math.min(filteredContacts.length - 1, currentIndex + 1))}
                     disabled={currentIndex >= filteredContacts.length - 1}
-                    className="p-2.5 rounded-xl border border-gray-200 hover:bg-gray-100 disabled:opacity-30 disabled:hover:bg-transparent transition text-gray-700"
+                    className="flex-1 sm:flex-initial px-3.5 py-2.5 sm:p-2.5 rounded-xl border border-gray-200 hover:bg-gray-100 disabled:opacity-30 disabled:hover:bg-transparent transition text-gray-700 font-bold text-xs sm:text-sm flex items-center justify-center gap-1.5 min-h-[42px]"
                     title="Próximo"
                   >
-                    ▶
+                    <span className="sm:hidden">Próximo</span>
+                    <span>▶</span>
                   </button>
                 </div>
               </div>
 
               {/* Entity Info Grid */}
-              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-                <div className="bg-gray-50 rounded-2xl p-4 border border-gray-100">
-                  <span className="block text-xs uppercase font-semibold text-gray-400">Telefone / WhatsApp</span>
-                  <div className="flex items-center gap-2 mt-1">
-                    <span className="font-bold text-gray-900 text-base">{currentContact.telefone}</span>
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-2.5 sm:gap-4">
+                <div className="bg-gray-50 rounded-xl sm:rounded-2xl p-3.5 sm:p-4 border border-gray-100">
+                  <span className="block text-[11px] sm:text-xs uppercase font-semibold text-gray-400">Telefone / WhatsApp</span>
+                  <div className="flex items-center gap-2 mt-1 flex-wrap">
+                    <span className="font-bold text-gray-900 text-sm sm:text-base font-mono">{currentContact.telefone}</span>
                     {currentContact.telefoneValido && (
                       <span className="bg-green-100 text-green-800 text-[10px] font-bold px-2 py-0.5 rounded-full">
-                        WhatsApp Válido
+                        Zap Válido
                       </span>
                     )}
                   </div>
                   {currentContact.telefoneFixo && (
-                    <span className="text-xs text-gray-500 block mt-1">Fixo: {currentContact.telefoneFixo}</span>
+                    <span className="text-xs text-gray-500 block mt-1 font-mono">Fixo: {currentContact.telefoneFixo}</span>
                   )}
                 </div>
 
-                <div className="bg-gray-50 rounded-2xl p-4 border border-gray-100">
-                  <span className="block text-xs uppercase font-semibold text-gray-400">E-mail Institucional</span>
-                  <span className="font-bold text-gray-900 text-sm mt-1 block truncate">
+                <div className="bg-gray-50 rounded-xl sm:rounded-2xl p-3.5 sm:p-4 border border-gray-100">
+                  <span className="block text-[11px] sm:text-xs uppercase font-semibold text-gray-400">E-mail Institucional</span>
+                  <span className="font-bold text-gray-900 text-xs sm:text-sm mt-1 block truncate">
                     {currentContact.email || '—'}
                   </span>
                   {currentContact.responsavel && (
@@ -879,19 +887,19 @@ export default function AdminDisparadorSindicatosTab() {
                   )}
                 </div>
 
-                <div className="bg-gray-50 rounded-2xl p-4 border border-gray-100">
-                  <span className="block text-xs uppercase font-semibold text-gray-400">Website / Canal Oficial</span>
+                <div className="bg-gray-50 rounded-xl sm:rounded-2xl p-3.5 sm:p-4 border border-gray-100">
+                  <span className="block text-[11px] sm:text-xs uppercase font-semibold text-gray-400">Website / Canal Oficial</span>
                   {currentContact.website ? (
                     <a
                       href={currentContact.website}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="font-bold text-emerald-700 hover:underline text-sm mt-1 block truncate"
+                      className="font-bold text-emerald-700 hover:underline text-xs sm:text-sm mt-1 block truncate"
                     >
                       {currentContact.website.replace(/^https?:\/\//, '')} ↗
                     </a>
                   ) : (
-                    <span className="font-bold text-gray-400 text-sm mt-1 block">Não informado</span>
+                    <span className="font-bold text-gray-400 text-xs sm:text-sm mt-1 block">Não informado</span>
                   )}
                   {currentContact.sigla && (
                     <span className="text-xs text-emerald-800 font-semibold block mt-1">
@@ -900,9 +908,9 @@ export default function AdminDisparadorSindicatosTab() {
                   )}
                 </div>
 
-                <div className="bg-amber-50/80 rounded-2xl p-4 border border-amber-200 flex flex-col justify-between">
+                <div className="bg-amber-50/80 rounded-xl sm:rounded-2xl p-3.5 sm:p-4 border border-amber-200 flex flex-col justify-between">
                   <div className="flex items-center justify-between">
-                    <span className="block text-xs uppercase font-extrabold text-amber-900">
+                    <span className="block text-[11px] sm:text-xs uppercase font-extrabold text-amber-900">
                       🔑 Acesso & Senha
                     </span>
                     {currentContact.senha && (
@@ -911,7 +919,7 @@ export default function AdminDisparadorSindicatosTab() {
                           navigator.clipboard.writeText(currentContact.senha || '');
                           toast.success('Senha temporária copiada!');
                         }}
-                        className="text-[11px] font-bold text-amber-900 bg-amber-200/90 hover:bg-amber-300 px-2 py-0.5 rounded-md transition"
+                        className="text-[11px] font-bold text-amber-900 bg-amber-200/90 hover:bg-amber-300 px-2 py-0.5 rounded-md transition min-h-[28px]"
                         title="Copiar senha"
                       >
                         Copiar Senha
@@ -919,14 +927,14 @@ export default function AdminDisparadorSindicatosTab() {
                     )}
                   </div>
                   <div className="mt-2 space-y-1">
-                    <div className="flex items-center justify-between text-xs">
-                      <span className="text-gray-500 font-medium">Login:</span>
-                      <span className="font-bold text-gray-900 font-mono truncate max-w-[150px]">
+                    <div className="flex items-center justify-between text-xs gap-2">
+                      <span className="text-gray-500 font-medium shrink-0">Login:</span>
+                      <span className="font-bold text-gray-900 font-mono truncate text-right">
                         {currentContact.usuario || currentContact.telefone}
                       </span>
                     </div>
-                    <div className="flex items-center justify-between text-xs">
-                      <span className="text-gray-500 font-medium">Senha:</span>
+                    <div className="flex items-center justify-between text-xs gap-2">
+                      <span className="text-gray-500 font-medium shrink-0">Senha:</span>
                       <span className="font-black text-amber-950 font-mono bg-white px-2 py-0.5 rounded border border-amber-300">
                         {currentContact.senha || 'alotio2026'}
                       </span>
@@ -935,12 +943,12 @@ export default function AdminDisparadorSindicatosTab() {
                 </div>
               </div>
 
-              {/* Status Badge */}
-              <div className="flex items-center justify-between text-xs pt-1">
-                <div className="flex items-center gap-2">
+              {/* Status Badge & Auto Advance Row */}
+              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2.5 text-xs pt-1">
+                <div className="flex items-center gap-2 flex-wrap">
                   <span className="font-semibold text-gray-500">Status atual:</span>
                   {progress[currentContact.id]?.status === 'sent' ? (
-                    <span className="bg-green-100 text-green-800 font-bold px-3 py-1 rounded-full flex items-center gap-1">
+                    <span className="bg-green-100 text-green-800 font-bold px-2.5 py-1 rounded-full flex items-center gap-1">
                       <span>✅</span>
                       <span>
                         Enviado via {progress[currentContact.id]?.channel?.toUpperCase() || 'CANAL'} em{' '}
@@ -948,11 +956,11 @@ export default function AdminDisparadorSindicatosTab() {
                       </span>
                     </span>
                   ) : progress[currentContact.id]?.status === 'skipped' ? (
-                    <span className="bg-amber-100 text-amber-800 font-bold px-3 py-1 rounded-full">
+                    <span className="bg-amber-100 text-amber-800 font-bold px-2.5 py-1 rounded-full">
                       ⏭️ Pulado
                     </span>
                   ) : (
-                    <span className="bg-blue-100 text-blue-800 font-bold px-3 py-1 rounded-full">
+                    <span className="bg-blue-100 text-blue-800 font-bold px-2.5 py-1 rounded-full">
                       🆕 Pendente de Contato
                     </span>
                   )}
@@ -963,17 +971,17 @@ export default function AdminDisparadorSindicatosTab() {
                     type="checkbox"
                     checked={autoAdvance}
                     onChange={(e) => setAutoAdvance(e.target.checked)}
-                    className="rounded text-emerald-600 focus:ring-emerald-500"
+                    className="rounded text-emerald-600 focus:ring-emerald-500 w-4 h-4 shrink-0"
                   />
                   <span>Avançar automaticamente após disparar</span>
                 </label>
               </div>
 
               {/* Live Preview Box */}
-              <div className="bg-emerald-50/40 rounded-2xl p-5 border border-emerald-200/80 space-y-2">
+              <div className="bg-emerald-50/40 rounded-xl sm:rounded-2xl p-3.5 sm:p-5 border border-emerald-200/80 space-y-2">
                 <div className="flex items-center justify-between">
-                  <span className="text-xs uppercase font-extrabold tracking-wider text-emerald-900">
-                    Pré-visualização da Mensagem Personalizada:
+                  <span className="text-[11px] sm:text-xs uppercase font-extrabold tracking-wider text-emerald-900">
+                    Pré-visualização da Mensagem:
                   </span>
                   <button
                     onClick={() => handleCopyMessage()}
@@ -983,16 +991,16 @@ export default function AdminDisparadorSindicatosTab() {
                     <span>Copiar Texto</span>
                   </button>
                 </div>
-                <div className="bg-white rounded-xl p-4 border border-emerald-200 text-sm text-gray-800 whitespace-pre-wrap leading-relaxed shadow-inner font-sans">
+                <div className="bg-white rounded-xl p-3.5 sm:p-4 border border-emerald-200 text-xs sm:text-sm text-gray-800 whitespace-pre-wrap leading-relaxed shadow-inner font-sans break-words max-h-48 sm:max-h-60 overflow-y-auto">
                   {activeMessageText}
                 </div>
               </div>
 
-              {/* Big Action Buttons */}
-              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 pt-2">
+              {/* Big Action Buttons (Touch Friendly for Mobile & Thumb navigation) */}
+              <div className="space-y-2.5 sm:space-y-0 sm:grid sm:grid-cols-2 lg:grid-cols-4 gap-3 pt-1 sm:pt-2">
                 <button
                   onClick={() => handleOpenWhatsApp()}
-                  className="w-full bg-green-600 hover:bg-green-700 text-white font-extrabold px-6 py-4 rounded-2xl shadow-md transition flex items-center justify-center gap-2.5 text-base"
+                  className="w-full bg-green-600 hover:bg-green-700 active:scale-[0.99] text-white font-extrabold px-4 sm:px-6 py-3.5 sm:py-4 rounded-2xl shadow-md transition flex items-center justify-center gap-2.5 text-sm sm:text-base min-h-[52px]"
                 >
                   <span className="text-xl">💬</span>
                   <span>Enviar WhatsApp</span>
@@ -1000,7 +1008,7 @@ export default function AdminDisparadorSindicatosTab() {
 
                 <button
                   onClick={() => handleOpenSms()}
-                  className="w-full bg-blue-600 hover:bg-blue-700 text-white font-extrabold px-6 py-4 rounded-2xl shadow-md transition flex items-center justify-center gap-2.5 text-base"
+                  className="w-full bg-blue-600 hover:bg-blue-700 active:scale-[0.99] text-white font-extrabold px-4 sm:px-6 py-3.5 sm:py-4 rounded-2xl shadow-md transition flex items-center justify-center gap-2.5 text-sm sm:text-base min-h-[52px]"
                 >
                   <span className="text-xl">📱</span>
                   <span>Enviar SMS</span>
@@ -1012,7 +1020,7 @@ export default function AdminDisparadorSindicatosTab() {
                       'Alô Tio — Proposta de Parceria com Transporte Escolar',
                     )}&body=${encodeURIComponent(activeMessageText)}`}
                     onClick={() => updateContactStatus(currentContact.id, 'sent', 'email')}
-                    className="w-full bg-purple-600 hover:bg-purple-700 text-white font-extrabold px-4 py-4 rounded-2xl shadow-md transition flex items-center justify-center gap-2 text-sm text-center"
+                    className="w-full bg-purple-600 hover:bg-purple-700 active:scale-[0.99] text-white font-extrabold px-4 py-3.5 sm:py-4 rounded-2xl shadow-md transition flex items-center justify-center gap-2 text-xs sm:text-sm text-center min-h-[48px]"
                   >
                     <span className="text-lg">✉️</span>
                     <span>Enviar E-mail</span>
@@ -1020,17 +1028,17 @@ export default function AdminDisparadorSindicatosTab() {
                 ) : (
                   <a
                     href={`tel:${cleanPhoneForDispatch(currentContact.telefone).digits}`}
-                    className="w-full bg-gray-700 hover:bg-gray-800 text-white font-extrabold px-4 py-4 rounded-2xl shadow-md transition flex items-center justify-center gap-2 text-sm text-center"
+                    className="w-full bg-gray-700 hover:bg-gray-800 active:scale-[0.99] text-white font-extrabold px-4 py-3.5 sm:py-4 rounded-2xl shadow-md transition flex items-center justify-center gap-2 text-xs sm:text-sm text-center min-h-[48px]"
                   >
                     <span className="text-lg">📞</span>
                     <span>Ligar no Telefone</span>
                   </a>
                 )}
 
-                <div className="flex gap-2">
+                <div className="grid grid-cols-2 gap-2 w-full">
                   <button
                     onClick={handleSkip}
-                    className="flex-1 bg-gray-100 hover:bg-gray-200 text-gray-700 font-bold px-3 py-4 rounded-2xl transition text-sm flex items-center justify-center gap-1"
+                    className="w-full bg-gray-100 hover:bg-gray-200 text-gray-700 font-bold px-3 py-3 sm:py-4 rounded-2xl transition text-xs sm:text-sm flex items-center justify-center gap-1 min-h-[46px]"
                     title="Pular este contato"
                   >
                     <span>⏭️</span>
@@ -1044,7 +1052,7 @@ export default function AdminDisparadorSindicatosTab() {
                         setCurrentIndex(currentIndex + 1);
                       }
                     }}
-                    className="flex-1 bg-emerald-100 hover:bg-emerald-200 text-emerald-800 font-bold px-3 py-4 rounded-2xl transition text-sm flex items-center justify-center gap-1"
+                    className="w-full bg-emerald-100 hover:bg-emerald-200 text-emerald-800 font-bold px-3 py-3 sm:py-4 rounded-2xl transition text-xs sm:text-sm flex items-center justify-center gap-1 min-h-[46px]"
                     title="Marcar manualmente"
                   >
                     <span>✅</span>
@@ -1059,19 +1067,19 @@ export default function AdminDisparadorSindicatosTab() {
 
       {/* VIEW MODE 2: TABLE VIEW */}
       {viewMode === 'table' && (
-        <div className="bg-white rounded-3xl p-5 shadow-sm border border-gray-200 overflow-hidden">
-          <div className="overflow-x-auto">
-            <table className="w-full text-left text-sm text-gray-700">
-              <thead className="bg-gray-50 text-xs uppercase font-extrabold text-gray-500 border-b border-gray-200">
+        <div className="bg-white rounded-2xl sm:rounded-3xl p-3 sm:p-5 shadow-sm border border-gray-200 overflow-hidden">
+          <div className="-mx-3 sm:mx-0 overflow-x-auto scrollbar-thin">
+            <table className="w-full text-left text-xs sm:text-sm text-gray-700">
+              <thead className="bg-gray-50 text-[10px] sm:text-xs uppercase font-extrabold text-gray-500 border-b border-gray-200">
                 <tr>
-                  <th className="py-3 px-4">Entidade & Sigla</th>
-                  <th className="py-3 px-3">Tipo</th>
-                  <th className="py-3 px-3">Cidade / UF</th>
-                  <th className="py-3 px-4">Telefone / WhatsApp</th>
-                  <th className="py-3 px-3">Login / Senha</th>
-                  <th className="py-3 px-3">E-mail / Site</th>
-                  <th className="py-3 px-3">Status</th>
-                  <th className="py-3 px-4 text-right">Ações Rápidas</th>
+                  <th className="py-3 px-3 sm:px-4">Entidade & Sigla</th>
+                  <th className="py-3 px-2.5 sm:px-3">Tipo</th>
+                  <th className="py-3 px-2.5 sm:px-3">Cidade / UF</th>
+                  <th className="py-3 px-3 sm:px-4">Telefone / WhatsApp</th>
+                  <th className="py-3 px-2.5 sm:px-3">Login / Senha</th>
+                  <th className="py-3 px-2.5 sm:px-3">E-mail / Site</th>
+                  <th className="py-3 px-2.5 sm:px-3">Status</th>
+                  <th className="py-3 px-3 sm:px-4 text-right">Ações Rápidas</th>
                 </tr>
               </thead>
               <tbody className="divide-y divide-gray-100">
@@ -1080,20 +1088,20 @@ export default function AdminDisparadorSindicatosTab() {
                   const isSent = p?.status === 'sent';
                   return (
                     <tr key={c.id} className="hover:bg-gray-50/80 transition">
-                      <td className="py-3 px-4">
+                      <td className="py-3 px-3 sm:px-4">
                         <span className="font-bold text-gray-900 block">{c.nome}</span>
                         {c.sigla && (
-                          <span className="text-xs font-bold text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded border border-emerald-200 inline-block mt-0.5">
+                          <span className="text-[10px] sm:text-xs font-bold text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded border border-emerald-200 inline-block mt-0.5">
                             {c.sigla}
                           </span>
                         )}
                       </td>
-                      <td className="py-3 px-3">
-                        <span className="text-xs uppercase font-semibold text-gray-500">
+                      <td className="py-3 px-2.5 sm:px-3">
+                        <span className="text-[10px] sm:text-xs uppercase font-semibold text-gray-500">
                           {c.tipo || 'Sindicato'}
                         </span>
                       </td>
-                      <td className="py-3 px-3">
+                      <td className="py-3 px-2.5 sm:px-3">
                         <span className="font-semibold text-gray-900 block">{c.cidade}</span>
                         {c.uf && (
                           <button
@@ -1103,20 +1111,20 @@ export default function AdminDisparadorSindicatosTab() {
                               setCityFilter('ALL');
                               setCurrentIndex(0);
                             }}
-                            className="text-xs font-black text-emerald-700 hover:text-emerald-900 hover:underline bg-emerald-50 px-1.5 py-0.5 rounded border border-emerald-200 inline-block mt-0.5 transition"
+                            className="text-[10px] sm:text-xs font-black text-emerald-700 hover:text-emerald-900 hover:underline bg-emerald-50 px-1.5 py-0.5 rounded border border-emerald-200 inline-block mt-0.5 transition"
                             title={`Filtrar apenas ${c.uf}`}
                           >
                             {c.uf}
                           </button>
                         )}
                       </td>
-                      <td className="py-3 px-4 whitespace-nowrap">
-                        <span className="font-semibold text-gray-800">{c.telefone}</span>
+                      <td className="py-3 px-3 sm:px-4 whitespace-nowrap">
+                        <span className="font-semibold text-gray-800 font-mono">{c.telefone}</span>
                         {c.telefoneFixo && (
-                          <span className="text-xs text-gray-400 block">Fixo: {c.telefoneFixo}</span>
+                          <span className="text-xs text-gray-400 block font-mono">Fixo: {c.telefoneFixo}</span>
                         )}
                       </td>
-                      <td className="py-3 px-3 whitespace-nowrap">
+                      <td className="py-3 px-2.5 sm:px-3 whitespace-nowrap">
                         <div className="flex items-center gap-1.5 font-mono text-xs">
                           <span className="font-bold text-amber-950 bg-amber-50 px-2 py-0.5 rounded border border-amber-200">
                             {c.senha || '—'}
@@ -1138,7 +1146,7 @@ export default function AdminDisparadorSindicatosTab() {
                           {c.usuario || c.telefone}
                         </span>
                       </td>
-                      <td className="py-3 px-3">
+                      <td className="py-3 px-2.5 sm:px-3">
                         {c.email ? (
                           <span className="text-xs text-gray-600 block truncate max-w-40" title={c.email}>
                             {c.email}
@@ -1155,40 +1163,40 @@ export default function AdminDisparadorSindicatosTab() {
                           </a>
                         ) : null}
                       </td>
-                      <td className="py-3 px-3 whitespace-nowrap">
+                      <td className="py-3 px-2.5 sm:px-3 whitespace-nowrap">
                         {isSent ? (
-                          <span className="bg-green-100 text-green-800 text-xs font-bold px-2.5 py-1 rounded-full">
+                          <span className="bg-green-100 text-green-800 text-[11px] sm:text-xs font-bold px-2.5 py-1 rounded-full">
                             ✅ Enviado
                           </span>
                         ) : p?.status === 'skipped' ? (
-                          <span className="bg-amber-100 text-amber-800 text-xs font-bold px-2.5 py-1 rounded-full">
+                          <span className="bg-amber-100 text-amber-800 text-[11px] sm:text-xs font-bold px-2.5 py-1 rounded-full">
                             ⏭️ Pulado
                           </span>
                         ) : (
-                          <span className="bg-gray-100 text-gray-600 text-xs font-bold px-2.5 py-1 rounded-full">
+                          <span className="bg-gray-100 text-gray-600 text-[11px] sm:text-xs font-bold px-2.5 py-1 rounded-full">
                             Pendente
                           </span>
                         )}
                       </td>
-                      <td className="py-3 px-4 text-right whitespace-nowrap">
+                      <td className="py-3 px-3 sm:px-4 text-right whitespace-nowrap">
                         <div className="flex items-center justify-end gap-1.5">
                           <button
                             onClick={() => handleOpenWhatsApp(c)}
-                            className="p-2 bg-green-50 hover:bg-green-100 text-green-700 rounded-lg font-bold text-xs transition"
+                            className="p-2 sm:px-2.5 sm:py-1.5 bg-green-50 hover:bg-green-100 text-green-700 rounded-lg font-bold text-xs transition"
                             title="Disparar WhatsApp"
                           >
                             💬 Zap
                           </button>
                           <button
                             onClick={() => handleOpenSms(c)}
-                            className="p-2 bg-blue-50 hover:bg-blue-100 text-blue-700 rounded-lg font-bold text-xs transition"
+                            className="p-2 sm:px-2.5 sm:py-1.5 bg-blue-50 hover:bg-blue-100 text-blue-700 rounded-lg font-bold text-xs transition"
                             title="Disparar SMS"
                           >
                             📱 SMS
                           </button>
                           <button
                             onClick={() => handleCopyMessage(c)}
-                            className="p-2 bg-gray-50 hover:bg-gray-100 text-gray-700 rounded-lg font-bold text-xs transition"
+                            className="p-2 sm:px-2.5 sm:py-1.5 bg-gray-50 hover:bg-gray-100 text-gray-700 rounded-lg font-bold text-xs transition"
                             title="Copiar mensagem"
                           >
                             📋
@@ -1196,7 +1204,7 @@ export default function AdminDisparadorSindicatosTab() {
                           {isSent ? (
                             <button
                               onClick={() => updateContactStatus(c.id, 'new')}
-                              className="p-2 text-xs text-gray-400 hover:text-gray-700 font-medium"
+                              className="p-2 sm:px-2.5 sm:py-1.5 text-xs text-gray-400 hover:text-gray-700 font-medium"
                               title="Marcar como pendente"
                             >
                               ↺
@@ -1204,7 +1212,7 @@ export default function AdminDisparadorSindicatosTab() {
                           ) : (
                             <button
                               onClick={() => updateContactStatus(c.id, 'sent', 'manual')}
-                              className="p-2 text-xs text-emerald-700 hover:text-emerald-900 font-bold"
+                              className="p-2 sm:px-2.5 sm:py-1.5 text-xs text-emerald-700 hover:text-emerald-900 font-bold"
                               title="Marcar como enviado"
                             >
                               ✓
@@ -1223,24 +1231,24 @@ export default function AdminDisparadorSindicatosTab() {
 
       {/* MODAL: ADICIONAR NOVO SINDICATO */}
       {isAddModalOpen && (
-        <div className="fixed inset-0 z-50 bg-black/50 backdrop-blur-sm flex items-center justify-center p-4">
-          <div className="bg-white rounded-3xl max-w-lg w-full p-6 sm:p-7 shadow-2xl space-y-4 max-h-[90vh] overflow-y-auto animate-in fade-in zoom-in-95 duration-200">
+        <div className="fixed inset-0 z-50 bg-black/50 backdrop-blur-sm flex items-center justify-center p-3 sm:p-4">
+          <div className="bg-white rounded-2xl sm:rounded-3xl max-w-lg w-full p-4 sm:p-7 shadow-2xl space-y-3.5 sm:space-y-4 max-h-[92vh] overflow-y-auto animate-in fade-in zoom-in-95 duration-200">
             <div className="flex items-center justify-between pb-3 border-b border-gray-100">
               <div className="flex items-center gap-2">
-                <span className="text-2xl">🏛️</span>
-                <h3 className="text-lg font-bold text-gray-900 font-heading">
+                <span className="text-xl sm:text-2xl">🏛️</span>
+                <h3 className="text-base sm:text-lg font-bold text-gray-900 font-heading">
                   Cadastrar Sindicato ou Associação
                 </h3>
               </div>
               <button
                 onClick={() => setIsAddModalOpen(false)}
-                className="text-gray-400 hover:text-gray-600 p-1 rounded-lg"
+                className="text-gray-400 hover:text-gray-600 p-1.5 rounded-lg"
               >
                 ✕
               </button>
             </div>
 
-            <form onSubmit={handleAddSubmit} className="space-y-3.5 text-sm">
+            <form onSubmit={handleAddSubmit} className="space-y-3 sm:space-y-3.5 text-xs sm:text-sm">
               <div>
                 <label className="block text-xs font-semibold text-gray-700 mb-1">
                   Nome da Entidade *
@@ -1250,18 +1258,18 @@ export default function AdminDisparadorSindicatosTab() {
                   value={newForm.nome}
                   onChange={(e) => setNewForm({ ...newForm, nome: e.target.value })}
                   placeholder="Ex: SINDOTEC - Sindicato dos Transportadores..."
-                  className="w-full bg-gray-50 border border-gray-300 rounded-xl px-3 py-2 text-sm text-gray-800 focus:ring-2 focus:ring-emerald-500"
+                  className="w-full bg-gray-50 border border-gray-300 rounded-xl px-3 py-2.5 text-xs sm:text-sm text-gray-800 focus:ring-2 focus:ring-emerald-500 min-h-[40px]"
                 />
               </div>
 
-              <div className="grid grid-cols-2 gap-3">
+              <div className="grid grid-cols-2 gap-2.5 sm:gap-3">
                 <div>
                   <label className="block text-xs font-semibold text-gray-700 mb-1">Sigla</label>
                   <input
                     value={newForm.sigla}
                     onChange={(e) => setNewForm({ ...newForm, sigla: e.target.value })}
                     placeholder="Ex: SINDOTEC"
-                    className="w-full bg-gray-50 border border-gray-300 rounded-xl px-3 py-2 text-sm text-gray-800 focus:ring-2 focus:ring-emerald-500"
+                    className="w-full bg-gray-50 border border-gray-300 rounded-xl px-3 py-2.5 text-xs sm:text-sm text-gray-800 focus:ring-2 focus:ring-emerald-500 min-h-[40px]"
                   />
                 </div>
                 <div>
@@ -1269,7 +1277,7 @@ export default function AdminDisparadorSindicatosTab() {
                   <select
                     value={newForm.tipo}
                     onChange={(e) => setNewForm({ ...newForm, tipo: e.target.value as any })}
-                    className="w-full bg-gray-50 border border-gray-300 rounded-xl px-3 py-2 text-sm text-gray-800 focus:ring-2 focus:ring-emerald-500"
+                    className="w-full bg-gray-50 border border-gray-300 rounded-xl px-3 py-2.5 text-xs sm:text-sm text-gray-800 focus:ring-2 focus:ring-emerald-500 min-h-[40px]"
                   >
                     <option value="sindicato">Sindicato</option>
                     <option value="associacao">Associação</option>
@@ -1279,7 +1287,7 @@ export default function AdminDisparadorSindicatosTab() {
                 </div>
               </div>
 
-              <div className="grid grid-cols-3 gap-3">
+              <div className="grid grid-cols-3 gap-2.5 sm:gap-3">
                 <div className="col-span-2">
                   <label className="block text-xs font-semibold text-gray-700 mb-1">Cidade *</label>
                   <input
@@ -1287,7 +1295,7 @@ export default function AdminDisparadorSindicatosTab() {
                     value={newForm.cidade}
                     onChange={(e) => setNewForm({ ...newForm, cidade: e.target.value })}
                     placeholder="Ex: Curitiba"
-                    className="w-full bg-gray-50 border border-gray-300 rounded-xl px-3 py-2 text-sm text-gray-800 focus:ring-2 focus:ring-emerald-500"
+                    className="w-full bg-gray-50 border border-gray-300 rounded-xl px-3 py-2.5 text-xs sm:text-sm text-gray-800 focus:ring-2 focus:ring-emerald-500 min-h-[40px]"
                   />
                 </div>
                 <div>
@@ -1298,7 +1306,7 @@ export default function AdminDisparadorSindicatosTab() {
                     value={newForm.uf}
                     onChange={(e) => setNewForm({ ...newForm, uf: e.target.value.toUpperCase() })}
                     placeholder="PR"
-                    className="w-full bg-gray-50 border border-gray-300 rounded-xl px-3 py-2 text-sm text-gray-800 uppercase focus:ring-2 focus:ring-emerald-500 text-center font-bold"
+                    className="w-full bg-gray-50 border border-gray-300 rounded-xl px-3 py-2.5 text-xs sm:text-sm text-gray-800 uppercase focus:ring-2 focus:ring-emerald-500 text-center font-bold min-h-[40px]"
                   />
                 </div>
               </div>
@@ -1312,11 +1320,11 @@ export default function AdminDisparadorSindicatosTab() {
                   value={newForm.telefone}
                   onChange={(e) => setNewForm({ ...newForm, telefone: e.target.value })}
                   placeholder="(41) 99999-8888"
-                  className="w-full bg-gray-50 border border-gray-300 rounded-xl px-3 py-2 text-sm text-gray-800 focus:ring-2 focus:ring-emerald-500"
+                  className="w-full bg-gray-50 border border-gray-300 rounded-xl px-3 py-2.5 text-xs sm:text-sm text-gray-800 focus:ring-2 focus:ring-emerald-500 min-h-[40px]"
                 />
               </div>
 
-              <div className="grid grid-cols-2 gap-3">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5 sm:gap-3">
                 <div>
                   <label className="block text-xs font-semibold text-gray-700 mb-1">E-mail</label>
                   <input
@@ -1324,7 +1332,7 @@ export default function AdminDisparadorSindicatosTab() {
                     value={newForm.email}
                     onChange={(e) => setNewForm({ ...newForm, email: e.target.value })}
                     placeholder="contato@entidade.com.br"
-                    className="w-full bg-gray-50 border border-gray-300 rounded-xl px-3 py-2 text-sm text-gray-800 focus:ring-2 focus:ring-emerald-500"
+                    className="w-full bg-gray-50 border border-gray-300 rounded-xl px-3 py-2.5 text-xs sm:text-sm text-gray-800 focus:ring-2 focus:ring-emerald-500 min-h-[40px]"
                   />
                 </div>
                 <div>
@@ -1333,7 +1341,7 @@ export default function AdminDisparadorSindicatosTab() {
                     value={newForm.website}
                     onChange={(e) => setNewForm({ ...newForm, website: e.target.value })}
                     placeholder="https://..."
-                    className="w-full bg-gray-50 border border-gray-300 rounded-xl px-3 py-2 text-sm text-gray-800 focus:ring-2 focus:ring-emerald-500"
+                    className="w-full bg-gray-50 border border-gray-300 rounded-xl px-3 py-2.5 text-xs sm:text-sm text-gray-800 focus:ring-2 focus:ring-emerald-500 min-h-[40px]"
                   />
                 </div>
               </div>
@@ -1346,7 +1354,7 @@ export default function AdminDisparadorSindicatosTab() {
                   value={newForm.responsavel}
                   onChange={(e) => setNewForm({ ...newForm, responsavel: e.target.value })}
                   placeholder="Nome do Presidente ou Diretor"
-                  className="w-full bg-gray-50 border border-gray-300 rounded-xl px-3 py-2 text-sm text-gray-800 focus:ring-2 focus:ring-emerald-500"
+                  className="w-full bg-gray-50 border border-gray-300 rounded-xl px-3 py-2.5 text-xs sm:text-sm text-gray-800 focus:ring-2 focus:ring-emerald-500 min-h-[40px]"
                 />
               </div>
 
@@ -1354,13 +1362,13 @@ export default function AdminDisparadorSindicatosTab() {
                 <button
                   type="button"
                   onClick={() => setIsAddModalOpen(false)}
-                  className="px-4 py-2.5 rounded-xl border border-gray-200 text-gray-700 font-semibold hover:bg-gray-50"
+                  className="px-4 py-2.5 rounded-xl border border-gray-200 text-gray-700 font-semibold hover:bg-gray-50 min-h-[42px]"
                 >
                   Cancelar
                 </button>
                 <button
                   type="submit"
-                  className="px-5 py-2.5 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white font-bold transition shadow-sm"
+                  className="px-5 py-2.5 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white font-bold transition shadow-sm min-h-[42px]"
                 >
                   Salvar Entidade
                 </button>
