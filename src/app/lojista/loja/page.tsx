@@ -148,7 +148,11 @@ export default function LojaSettingsPage() {
   return (
     <div className="max-w-2xl">
       <h1 className="text-2xl font-bold text-primary-900 mb-6">
-        {store.type === 'ESCOLA' ? 'Perfil da escola' : 'Minha Loja'}
+        {store.type === 'ESCOLA'
+          ? 'Perfil da escola'
+          : store.type === 'SINDICATO'
+            ? 'Perfil da Entidade / Sindicato'
+            : 'Minha Loja'}
       </h1>
 
       <div className="bg-white border border-gray-200 rounded-xl p-6 shadow-sm mb-6 flex items-center gap-4">
@@ -212,6 +216,7 @@ export default function LojaSettingsPage() {
             <option value="VAN">Vans / veículos</option>
             <option value="PECAS">Peças e acessórios</option>
             <option value="ESCOLA">Escola parceira</option>
+            <option value="SINDICATO">Sindicato / Associação de Transporte Escolar</option>
           </select>
         </div>
         <div className="grid sm:grid-cols-2 gap-4">

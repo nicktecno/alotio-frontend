@@ -244,6 +244,60 @@ export default function Home() {
           </div>
         </section>
 
+        {/* CTA para Sindicatos & Associações */}
+        <section className="py-14 bg-gradient-to-r from-emerald-800 to-teal-900 text-white">
+          <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="grid md:grid-cols-2 gap-8 items-center">
+              <div>
+                <span className="inline-block bg-emerald-700/70 border border-emerald-500/40 text-emerald-200 text-xs font-bold uppercase tracking-widest px-3 py-1 rounded-full mb-3">
+                  🏛️ Parceria Oficial Gratuita
+                </span>
+                <h2 className="text-2xl sm:text-3xl font-bold text-white font-heading">
+                  Sindicato ou Associação de Transporte Escolar?
+                </h2>
+                <p className="mt-3 text-emerald-100">
+                  Una forças com o Alô Tio para fortalecer os transportadores regularizados da sua cidade e região:
+                </p>
+                <ul className="mt-5 space-y-2 text-emerald-50 text-sm">
+                  <li className="flex items-start gap-2">
+                    <span className="text-emerald-300 font-bold">✓</span>
+                    Cadastre a entidade 100% gratuitamente
+                  </li>
+                  <li className="flex items-start gap-2">
+                    <span className="text-emerald-300 font-bold">✓</span>
+                    Página oficial exclusiva com cidades atendidas e diretoria
+                  </li>
+                  <li className="flex items-start gap-2">
+                    <span className="text-emerald-300 font-bold">✓</span>
+                    Mural com até 20 comunicados, notícias e benefícios aos associados
+                  </li>
+                  <li className="flex items-start gap-2">
+                    <span className="text-emerald-300 font-bold">✓</span>
+                    Canal direto para as famílias encontrarem vans credenciadas
+                  </li>
+                </ul>
+                <div className="mt-7 flex flex-col sm:flex-row gap-3">
+                  <Link
+                    href="/cadastro-sindicato"
+                    className="bg-emerald-400 hover:bg-emerald-300 text-emerald-950 px-6 py-3 rounded-lg font-bold font-heading tracking-wide transition shadow-lg text-center text-sm"
+                  >
+                    Cadastrar Entidade Parceira
+                  </Link>
+                  <Link
+                    href="/sindicatos"
+                    className="bg-emerald-900/60 hover:bg-emerald-900 text-white border border-emerald-600/50 px-6 py-3 rounded-lg font-bold font-heading tracking-wide transition text-center text-sm"
+                  >
+                    Ver Sindicatos no Brasil
+                  </Link>
+                </div>
+              </div>
+              <div className="hidden md:flex justify-center">
+                <div className="text-[110px] leading-none select-none">🏛️🤝</div>
+              </div>
+            </div>
+          </div>
+        </section>
+
         <AdSlot
           slot={process.env.NEXT_PUBLIC_ADSENSE_SLOT_HOME_MID}
           format="horizontal"

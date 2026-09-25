@@ -8,6 +8,8 @@ import {
 } from '@/data/preloaded-contact-lists';
 import { api } from '@/lib/api';
 import toast from 'react-hot-toast';
+import AdminDisparadorSindicatosTab from './AdminDisparadorSindicatosTab';
+import { SINDICATOS_CONTACT_GROUP, SINDICATOS_LIST } from '@/data/sindicatos-list';
 
 type ContactStatus = 'new' | 'reprocess' | 'sent' | 'skipped' | 'excluded';
 
@@ -104,7 +106,7 @@ function cleanPhoneForDispatch(raw: string): { digits: string; formatted: string
 
 export default function AdminDisparadorPage() {
   const [activeTab, setActiveTab] = useState<
-    'queue_new' | 'queue_reprocess' | 'table' | 'history' | 'template' | 'import'
+    'queue_new' | 'queue_reprocess' | 'table' | 'history' | 'template' | 'import' | 'sindicatos'
   >('queue_new');
   const [selectedListId, setSelectedListId] = useState<string>('todos-senhas');
   const [customList, setCustomList] = useState<ContactListGroup | null>(null);
@@ -134,10 +136,11 @@ export default function AdminDisparadorPage() {
 
   // All available lists (preloaded + custom if exists)
   const allLists = useMemo(() => {
+    const base = [...PRELOADED_CONTACT_LISTS, SINDICATOS_CONTACT_GROUP];
     if (customList) {
-      return [...PRELOADED_CONTACT_LISTS, customList];
+      return [...base, customList];
     }
-    return PRELOADED_CONTACT_LISTS;
+    return base;
   }, [customList]);
 
   // Current active list
@@ -988,6 +991,17 @@ export default function AdminDisparadorPage() {
             }`}
           >
             📥 Importar CSV / Texto
+          </button>
+          <button
+            onClick={() => setActiveTab('sindicatos')}
+            className={`py-3 px-4 font-semibold border-b-2 transition whitespace-nowrap flex items-center gap-1.5 ${
+              activeTab === 'sindicatos'
+                ? 'border-emerald-600 text-emerald-700 bg-emerald-50/50'
+                : 'border-transparent text-gray-600 hover:text-gray-900'
+            }`}
+          >
+            <span>🏛️</span>
+            <span>Sindicatos & Associações ({SINDICATOS_LIST.length})</span>
           </button>
         </div>
       </div>
@@ -1997,6 +2011,9 @@ export default function AdminDisparadorPage() {
           </div>
         </div>
       )}
+
+      {/* TAB 5: SINDICATOS & ASSOCIAÇÕES */}
+      {activeTab === 'sindicatos' && <AdminDisparadorSindicatosTab />}
     </div>
   );
 }

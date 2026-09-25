@@ -72,6 +72,24 @@ export default function Footer() {
             <span className="text-primary-700 select-none hidden sm:inline" aria-hidden>
               |
             </span>
+            <Link
+              href="/sindicatos"
+              className="text-primary-200 hover:text-white transition [overflow-wrap:anywhere] max-w-full"
+            >
+              Sindicatos & Associações
+            </Link>
+            <span className="text-primary-700 select-none hidden sm:inline" aria-hidden>
+              |
+            </span>
+            <Link
+              href="/cadastro-sindicato"
+              className="text-emerald-300 hover:text-white transition [overflow-wrap:anywhere] max-w-full font-semibold"
+            >
+              Para Sindicatos & Associações
+            </Link>
+            <span className="text-primary-700 select-none hidden sm:inline" aria-hidden>
+              |
+            </span>
             <a
               href="mailto:contato@alotio.com.br"
               className="text-primary-200 hover:text-white transition [overflow-wrap:anywhere] break-all sm:break-normal"

@@ -17,7 +17,7 @@ export type SubscriptionStatus = 'ACTIVE' | 'PAST_DUE' | 'CANCELLED' | 'EXPIRED'
 export type PlanInterval = 'MONTHLY' | 'YEARLY';
 
 // -------------------------------------------------------------- Marketplace (lojista)
-export type StoreType = 'VAN' | 'PECAS' | 'ESCOLA';
+export type StoreType = 'VAN' | 'PECAS' | 'ESCOLA' | 'SINDICATO';
 export type StorePlan = 'FREE' | 'PREMIUM';
 export type ProductStatus = 'ACTIVE' | 'PAUSED' | 'BLOCKED';
 

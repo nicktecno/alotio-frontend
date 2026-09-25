@@ -68,6 +68,12 @@ export default function Header() {
               Escolas parceiras
             </Link>
             <Link
+              href="/sindicatos"
+              className="text-primary-100 hover:text-white transition font-medium text-sm lg:text-base"
+            >
+              Sindicatos & Associações
+            </Link>
+            <Link
               href="/guias"
               className="text-primary-100 hover:text-white transition font-medium text-sm lg:text-base"
             >
@@ -180,6 +186,14 @@ export default function Header() {
           >
             <span className="text-lg">🏫</span>
             <span>Escolas parceiras</span>
+          </Link>
+          <Link
+            href="/sindicatos"
+            onClick={() => setIsMobileMenuOpen(false)}
+            className="flex items-center gap-3 px-3 py-2.5 rounded-lg text-primary-100 hover:text-white hover:bg-primary-700 font-medium transition"
+          >
+            <span className="text-lg">🏛️</span>
+            <span>Sindicatos & Associações</span>
           </Link>
           <Link
             href="/guias"
