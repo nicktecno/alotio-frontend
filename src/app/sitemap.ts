@@ -4,6 +4,7 @@ import {
   fetchAllCitiesWithTios,
 } from '@/lib/seo-transporte-api';
 import { ARTICLES } from '@/lib/articles-data';
+import { SINDICATOS_LIST } from '@/data/sindicatos-list';
 
 const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://alotio.com.br';
 
@@ -96,6 +97,18 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       changeFrequency: 'monthly',
       priority: 0.88,
     },
+    {
+      url: `${siteUrl}/sindicatos`,
+      lastModified: new Date(),
+      changeFrequency: 'weekly',
+      priority: 0.85,
+    },
+    {
+      url: `${siteUrl}/cadastro-sindicato`,
+      lastModified: new Date(),
+      changeFrequency: 'monthly',
+      priority: 0.5,
+    },
   ];
 
   const guiaPages: MetadataRoute.Sitemap = ARTICLES.map((a) => ({
@@ -103,6 +116,13 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     lastModified: new Date(a.updatedAt),
     changeFrequency: 'monthly' as const,
     priority: 0.85,
+  }));
+
+  const sindicatoPages: MetadataRoute.Sitemap = SINDICATOS_LIST.map((s) => ({
+    url: `${siteUrl}/sindicatos/${s.id}`,
+    lastModified: new Date(),
+    changeFrequency: 'monthly' as const,
+    priority: 0.75,
   }));
 
   const [tioIds, citiesWithTios] = await Promise.all([
@@ -126,5 +146,6 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     }),
   );
 
-  return [...staticPages, ...guiaPages, ...transporteCidadePages, ...tioPages];
+  return [...staticPages, ...guiaPages, ...transporteCidadePages, ...tioPages, ...sindicatoPages];
 }
+

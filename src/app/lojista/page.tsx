@@ -219,11 +219,17 @@ export default function LojistaOverviewPage() {
             href={
               store.type === 'ESCOLA'
                 ? `/escolas-parceiras/${store.slug}`
-                : `/lojas/${store.slug}`
+                : store.type === 'SINDICATO'
+                  ? `/sindicatos/${store.slug}`
+                  : `/lojas/${store.slug}`
             }
             className="text-primary font-semibold hover:underline break-all"
           >
-            {store.type === 'ESCOLA' ? '/escolas-parceiras/' : '/lojas/'}
+            {store.type === 'ESCOLA'
+              ? '/escolas-parceiras/'
+              : store.type === 'SINDICATO'
+                ? '/sindicatos/'
+                : '/lojas/'}
             {store.slug}
           </Link>
         </div>

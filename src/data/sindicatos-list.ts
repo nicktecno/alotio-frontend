@@ -23,3 +23,22 @@ export const SINDICATOS_CONTACT_GROUP: ContactListGroup = {
   hasCredentials: false,
   contacts: SINDICATOS_LIST,
 };
+
+export function findSindicatoByIdOrSlug(slugOrId: string): SindicatoContactItem | undefined {
+  if (!slugOrId) return undefined;
+  const target = decodeURIComponent(slugOrId).trim().toLowerCase();
+  return SINDICATOS_LIST.find((s) => {
+    if (s.id.toLowerCase() === target) return true;
+    if (s.sigla && s.sigla.toLowerCase() === target) return true;
+    const nameSlug = s.nome
+      .normalize('NFD')
+      .replace(/[\u0300-\u036f]/g, '')
+      .toLowerCase()
+      .trim()
+      .replace(/[^a-z0-9]+/g, '-')
+      .replace(/^-|-$/g, '');
+    if (nameSlug === target) return true;
+    return false;
+  });
+}
+

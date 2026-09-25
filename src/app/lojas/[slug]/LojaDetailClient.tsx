@@ -1,7 +1,7 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import { useParams } from 'next/navigation';
+import { useParams, useRouter } from 'next/navigation';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import { api, assetUrl } from '@/lib/api';
@@ -17,6 +17,7 @@ function onlyDigits(v?: string | null) {
 }
 
 export default function LojaDetailClient() {
+  const router = useRouter();
   const { slug } = useParams<{ slug: string }>();
   const [store, setStore] = useState<Store | null>(null);
   const [loading, setLoading] = useState(true);
@@ -25,10 +26,20 @@ export default function LojaDetailClient() {
     if (!slug) return;
     api
       .marketplaceGetStore(slug)
-      .then((s) => setStore(s))
+      .then((s) => {
+        if (s.type === 'SINDICATO') {
+          router.replace(`/sindicatos/${slug}`);
+          return;
+        }
+        if (s.type === 'ESCOLA') {
+          router.replace(`/escolas-parceiras/${slug}`);
+          return;
+        }
+        setStore(s);
+      })
       .catch(() => setStore(null))
       .finally(() => setLoading(false));
-  }, [slug]);
+  }, [slug, router]);
 
   const whatsappDigits = onlyDigits(store?.whatsapp || store?.phone);
   const whatsappHref = whatsappDigits

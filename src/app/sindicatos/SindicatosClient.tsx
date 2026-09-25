@@ -141,8 +141,8 @@ export default function SindicatosClient() {
                 {platformStores.map((store) => (
                   <Link
                     key={store.id}
-                    href={`/lojas/${store.slug}`}
-                    className="bg-white border-2 border-emerald-500/40 rounded-2xl p-5 hover:shadow-lg transition relative overflow-hidden flex flex-col justify-between"
+                    href={`/sindicatos/${store.slug}`}
+                    className="bg-white border-2 border-emerald-500/40 rounded-2xl p-5 hover:shadow-lg transition relative overflow-hidden flex flex-col justify-between group"
                   >
                     <div>
                       <div className="flex gap-4 items-center mb-3">
@@ -158,7 +158,7 @@ export default function SindicatosClient() {
                           )}
                         </div>
                         <div className="min-w-0">
-                          <h3 className="font-bold text-base text-gray-900 truncate">
+                          <h3 className="font-bold text-base text-gray-900 group-hover:text-emerald-700 transition truncate">
                             {store.displayName}
                           </h3>
                           <p className="text-xs text-gray-500">
@@ -177,7 +177,9 @@ export default function SindicatosClient() {
                     </div>
 
                     <div className="mt-4 pt-3 border-t border-gray-100 flex items-center justify-between">
-                      <span className="text-xs font-bold text-emerald-700">Ver página completa →</span>
+                      <span className="text-xs font-bold text-emerald-700 group-hover:translate-x-1 transition-transform inline-block">
+                        Ver página completa →
+                      </span>
                       {store.whatsapp && (
                         <span className="text-xs text-gray-500">WhatsApp Ativo</span>
                       )}
@@ -216,9 +218,9 @@ export default function SindicatosClient() {
                 {filteredSindicatos.map((s) => (
                   <div
                     key={s.id}
-                    className="bg-white border border-gray-200 rounded-2xl p-5 hover:border-emerald-300 hover:shadow-md transition flex flex-col justify-between"
+                    className="bg-white border border-gray-200 hover:border-emerald-400 rounded-2xl p-5 hover:shadow-md transition flex flex-col justify-between group relative"
                   >
-                    <div>
+                    <Link href={`/sindicatos/${s.id}`} className="block">
                       <div className="flex items-start justify-between gap-2 mb-2">
                         <span className="text-xs font-bold uppercase tracking-wider text-emerald-800 bg-emerald-50 px-2.5 py-0.5 rounded-md border border-emerald-200">
                           {s.tipo ? s.tipo.toUpperCase() : 'SINDICATO'}
@@ -228,7 +230,7 @@ export default function SindicatosClient() {
                         </span>
                       </div>
 
-                      <h3 className="font-bold text-base text-gray-900 leading-snug">
+                      <h3 className="font-bold text-base text-gray-900 group-hover:text-emerald-700 transition leading-snug">
                         {s.nome}
                       </h3>
                       <p className="text-xs text-gray-500 mt-1">
@@ -240,14 +242,16 @@ export default function SindicatosClient() {
                           {s.observacoes}
                         </p>
                       )}
-                    </div>
+                    </Link>
 
                     <div className="mt-5 pt-3 border-t border-gray-100 flex items-center justify-between gap-2">
-                      <div className="min-w-0">
-                        <span className="text-xs font-semibold text-gray-800 block truncate">
-                          📞 {s.telefone}
-                        </span>
-                      </div>
+                      <Link
+                        href={`/sindicatos/${s.id}`}
+                        className="text-xs font-bold text-emerald-700 hover:text-emerald-800 group-hover:translate-x-0.5 transition-transform flex items-center gap-1"
+                      >
+                        <span>Ver detalhes</span>
+                        <span>→</span>
+                      </Link>
 
                       <div className="flex items-center gap-1.5 shrink-0">
                         {s.telefoneValido && (
@@ -257,6 +261,7 @@ export default function SindicatosClient() {
                             )}`}
                             target="_blank"
                             rel="noopener noreferrer"
+                            onClick={(e) => e.stopPropagation()}
                             className="bg-green-500 hover:bg-green-600 text-white px-3 py-1.5 rounded-lg text-xs font-bold transition flex items-center gap-1 shadow-sm"
                           >
                             <span>WhatsApp</span>
@@ -268,6 +273,7 @@ export default function SindicatosClient() {
                             href={s.website}
                             target="_blank"
                             rel="noopener noreferrer"
+                            onClick={(e) => e.stopPropagation()}
                             className="bg-gray-100 hover:bg-gray-200 text-gray-700 px-2.5 py-1.5 rounded-lg text-xs font-bold transition"
                             title="Site Oficial"
                           >
