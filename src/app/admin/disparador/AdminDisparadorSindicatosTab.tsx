@@ -38,12 +38,27 @@ export const SINDICATO_TEMPLATE_PRESETS = [
 
 const DEFAULT_SINDICATO_TEMPLATE = SINDICATO_TEMPLATE_PRESETS[0].text;
 
-function cleanPhoneForDispatch(raw: string): { digits: string; formatted: string; isValid: boolean } {
-  if (!raw) return { digits: '', formatted: '', isValid: false };
+function cleanPhoneForDispatch(raw: string): {
+  digits: string;
+  formatted: string;
+  isValid: boolean;
+  isMobile: boolean;
+  isLandline: boolean;
+} {
+  if (!raw) return { digits: '', formatted: '', isValid: false, isMobile: false, isLandline: false };
   let d = String(raw).replace(/\D/g, '');
   if (d.startsWith('55') && (d.length === 12 || d.length === 13)) {
     d = d.slice(2);
   }
+
+  // Celular brasileiro com 10 dígitos (DDD + 8 dígitos iniciando com 6, 7, 8 ou 9)
+  // Adiciona automaticamente o 9º dígito exigido pelas operadoras em todo o Brasil (DDDs 11 a 99)
+  if (d.length === 10 && ['6', '7', '8', '9'].includes(d[2])) {
+    d = d.slice(0, 2) + '9' + d.slice(2);
+  }
+
+  const isLandline = d.length === 10 && ['2', '3', '4', '5'].includes(d[2]);
+  const isMobile = d.length === 11 && d[2] === '9';
   const isValid = d.length >= 10 && d.length <= 11;
   let formatted = raw;
   if (d.length === 11) {
@@ -51,7 +66,7 @@ function cleanPhoneForDispatch(raw: string): { digits: string; formatted: string
   } else if (d.length === 10) {
     formatted = `(${d.slice(0, 2)}) ${d.slice(2, 6)}-${d.slice(6)}`;
   }
-  return { digits: d, formatted, isValid };
+  return { digits: d, formatted, isValid, isMobile, isLandline };
 }
 
 export default function AdminDisparadorSindicatosTab() {
@@ -292,10 +307,14 @@ export default function AdminDisparadorSindicatosTab() {
       toast.error('Telefone inválido para envio de SMS.');
       return;
     }
+    if (phoneInfo.isLandline) {
+      toast.error(`O número ${phoneInfo.formatted} é telefone fixo e não recebe SMS.`);
+      return;
+    }
     const text = interpolateMessage(templateText, target);
     const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent);
     const separator = isIOS ? '&' : '?';
-    const smsUrl = `sms:${phoneInfo.digits}${separator}body=${encodeURIComponent(text)}`;
+    const smsUrl = `sms:+55${phoneInfo.digits}${separator}body=${encodeURIComponent(text)}`;
     window.location.href = smsUrl;
 
     updateContactStatus(target.id, 'sent', 'sms');
