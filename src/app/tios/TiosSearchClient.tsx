@@ -2,6 +2,7 @@
 
 import { useEffect, useState, useCallback, useRef, type ReactNode } from 'react';
 import Link from 'next/link';
+import { useSearchParams } from 'next/navigation';
 import { MdMyLocation } from 'react-icons/md';
 import toast from 'react-hot-toast';
 import Header from '@/components/Header';
@@ -32,17 +33,27 @@ export default function TiosSearchClient({
   /** HTML indexável (SSR) quando a URL traz uf/cidade — oculto após busca por escola. */
   geoPreview?: ReactNode;
 }) {
+  const searchParams = useSearchParams();
+  const spState = searchParams?.get('stateId') || '';
+  const spUf = searchParams?.get('uf') || '';
+  const spCity = searchParams?.get('cityId') || '';
+  const spCidade = searchParams?.get('cidade') || '';
+  const spSchool = searchParams?.get('schoolId') || searchParams?.get('escola') || '';
+  const spNeighborhood = searchParams?.get('neighborhoodId') || searchParams?.get('bairro') || '';
+  const spPageRaw = searchParams?.get('page');
+  const spPage = spPageRaw ? parseInt(spPageRaw, 10) : 1;
+
   const init = initialFilters ?? {};
-  const [selectedState, setSelectedState] = useState(init.stateId ?? '');
-  const [selectedCity, setSelectedCity] = useState(init.cityId ?? '');
-  const [selectedSchool, setSelectedSchool] = useState(init.schoolId ?? '');
+  const [selectedState, setSelectedState] = useState(init.stateId || spState);
+  const [selectedCity, setSelectedCity] = useState(init.cityId || spCity);
+  const [selectedSchool, setSelectedSchool] = useState(init.schoolId || spSchool);
   const [selectedNeighborhood, setSelectedNeighborhood] = useState(
-    init.neighborhoodId ?? '',
+    init.neighborhoodId || spNeighborhood,
   );
   const [searchName, setSearchName] = useState('');
   const [tios, setTios] = useState<TioPublicView[]>([]);
   const [totalPages, setTotalPages] = useState(0);
-  const [page, setPage] = useState(Math.max(1, init.page ?? 1));
+  const [page, setPage] = useState(Math.max(1, init.page || spPage || 1));
   const [loading, setLoading] = useState(false);
   const [hasSearched, setHasSearched] = useState(false);
   const [locatingGeo, setLocatingGeo] = useState(false);
@@ -159,13 +170,34 @@ export default function TiosSearchClient({
     loadingNeighborhoods,
   ]);
 
-  /** Escola vinda da URL (?escola=) após carregar a lista. */
+  /** Resolve ?uf=SP para stateId */
   useEffect(() => {
-    if (!init.schoolId || !selectedCity || loadingSchoolsData) return;
-    if (schools.some((s) => s.id === init.schoolId) && !selectedSchool) {
-      setSelectedSchool(init.schoolId);
-    }
-  }, [init.schoolId, selectedCity, schools, loadingSchoolsData, selectedSchool]);
+    if (selectedState || loadingStates || !spUf || states.length === 0) return;
+    const match = states.find(
+      (s) => s.uf.toLowerCase() === spUf.toLowerCase(),
+    );
+    if (match) setSelectedState(match.id);
+  }, [states, loadingStates, spUf, selectedState]);
+
+  /** Resolve ?cidade=slug para cityId */
+  useEffect(() => {
+    if (selectedCity || loadingCities || !spCidade || cities.length === 0) return;
+    const norm = spCidade.toLowerCase();
+    const match = cities.find(
+      (c) => c.slug === norm || c.slug.startsWith(`${norm}-`),
+    );
+    if (match) setSelectedCity(match.id);
+  }, [cities, loadingCities, spCidade, selectedCity]);
+
+  /** Resolve ?bairro=slug para neighborhoodId */
+  useEffect(() => {
+    if (selectedNeighborhood || loadingNeighborhoods || !spNeighborhood || neighborhoods.length === 0) return;
+    const norm = spNeighborhood.toLowerCase();
+    const match = neighborhoods.find(
+      (n) => neighborhoodSlug(n.name) === norm,
+    );
+    if (match) setSelectedNeighborhood(match.id);
+  }, [neighborhoods, loadingNeighborhoods, spNeighborhood, selectedNeighborhood]);
 
   /** URL compartilhável — replaceState (sem round-trip ao server / Vercel). */
   useEffect(() => {

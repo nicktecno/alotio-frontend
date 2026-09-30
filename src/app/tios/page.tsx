@@ -1,57 +1,25 @@
-import TiosSearchClient, {
-  type TiosSearchInitialFilters,
-} from './TiosSearchClient';
-import { TiosGeoPreview } from '@/components/seo/TiosGeoPreview';
-import {
-  fetchTiosForGeo,
-  resolveTiosSearchParams,
-} from '@/lib/seo-transporte-api';
+import { Suspense } from 'react';
+import type { Metadata } from 'next';
+import TiosSearchClient from './TiosSearchClient';
+import Loading from '@/components/Loading';
 
-type Props = {
-  searchParams: Promise<Record<string, string | string[] | undefined>>;
+export const metadata: Metadata = {
+  title: 'Buscar Transporte Escolar — Vans e Condutores por Escola e Cidade',
+  description:
+    'Encontre transporte escolar seguro para a escola do seu filho. Busque condutores escolares credenciados por estado, cidade, escola e bairro no Alô Tio.',
+  alternates: { canonical: 'https://alotio.com.br/tios' },
 };
 
 /**
- * ISR 30 dias por URL (literal estático exigido pelo Next.js).
- * /tios sem params = shell estático.
+ * Shell 100% estático servido pela Edge CDN da Vercel.
+ * Filtros de URL são lidos no client via useSearchParams em Suspense (0 CPU de Function).
  */
 export const revalidate = 2_592_000;
 
-export default async function TiosPage({ searchParams }: Props) {
-  const sp = await searchParams;
-  const resolved = await resolveTiosSearchParams(sp);
-
-  const initialFilters: TiosSearchInitialFilters = {
-    stateId: resolved.stateId,
-    cityId: resolved.cityId,
-    neighborhoodId: resolved.neighborhoodId,
-    schoolId: resolved.schoolId,
-    page: resolved.page,
-  };
-
-  const hasGeoFilter = Boolean(resolved.cityId || resolved.stateId);
-
-  const geoPreview = hasGeoFilter
-    ? await fetchTiosForGeo({
-        cityId: resolved.cityId,
-        stateId: resolved.stateId,
-        neighborhoodId: resolved.neighborhoodId,
-        limit: 12,
-      })
-    : null;
-
-  const regionLabel =
-    geoPreview?.data[0]?.city?.name &&
-    geoPreview?.data[0]?.city?.state?.uf
-      ? `${geoPreview.data[0].city.name} (${geoPreview.data[0].city.state.uf})`
-      : undefined;
-
-  const previewBlock =
-    geoPreview && geoPreview.data.length > 0 ? (
-      <TiosGeoPreview preview={geoPreview} regionLabel={regionLabel} />
-    ) : null;
-
+export default function TiosPage() {
   return (
-    <TiosSearchClient initialFilters={initialFilters} geoPreview={previewBlock} />
+    <Suspense fallback={<Loading />}>
+      <TiosSearchClient />
+    </Suspense>
   );
 }

@@ -5,7 +5,6 @@ import Providers from '@/components/Providers';
 import CookieConsent from '@/components/CookieConsent';
 import { organizationSameAsUrls } from '@/lib/seo-env';
 import { SEO_CORE_KEYWORDS } from '@/lib/seo-keywords';
-import { seoKeywordsFromRegisteredCities } from '@/lib/seo-city-keywords';
 import { SEO_SITE_DESCRIPTION, SEO_SITE_TITLE } from '@/lib/seo-copy';
 
 const poppins = Poppins({
@@ -28,26 +27,22 @@ const archivo = Archivo({
 
 const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://alotio.com.br';
 
-export async function generateMetadata(): Promise<Metadata> {
-  const regionKeywords = await seoKeywordsFromRegisteredCities();
-
-  return {
-    metadataBase: new URL(siteUrl),
-    title: {
-      default: SEO_SITE_TITLE,
-      template: '%s | Alô Tio',
-    },
-    description: SEO_SITE_DESCRIPTION,
-    keywords: [
-      ...SEO_CORE_KEYWORDS,
-      'tio de escola',
-      'transporte escolar seguro',
-      'transporte de crianças',
-      'encontrar van escolar',
-      'transporte escolar perto de mim',
-      'serviço de transporte escolar',
-      ...regionKeywords,
-    ],
+export const metadata: Metadata = {
+  metadataBase: new URL(siteUrl),
+  title: {
+    default: SEO_SITE_TITLE,
+    template: '%s | Alô Tio',
+  },
+  description: SEO_SITE_DESCRIPTION,
+  keywords: [
+    ...SEO_CORE_KEYWORDS,
+    'tio de escola',
+    'transporte escolar seguro',
+    'transporte de crianças',
+    'encontrar van escolar',
+    'transporte escolar perto de mim',
+    'serviço de transporte escolar',
+  ],
     authors: [{ name: 'Alô Tio' }],
     creator: 'Alô Tio',
     publisher: 'Alô Tio',
@@ -97,7 +92,6 @@ export async function generateMetadata(): Promise<Metadata> {
         : {}),
     },
   };
-}
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   const logoUrl = `${siteUrl}/bannerAlotio.png`;

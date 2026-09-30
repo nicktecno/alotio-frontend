@@ -7,6 +7,11 @@ const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://alotio.com.br';
 
 /** ISR 30 dias (literal estático exigido pelo Next.js). */
 export const revalidate = 2_592_000;
+export const dynamicParams = true;
+
+export async function generateStaticParams() {
+  return [];
+}
 
 export async function generateMetadata({
   params,
