@@ -37,6 +37,16 @@ class ApiError extends Error {
 
 let isRefreshing = false;
 
+function isPublicAuthEndpoint(endpoint: string): boolean {
+  return (
+    endpoint.startsWith('/auth/login') ||
+    endpoint.startsWith('/auth/refresh') ||
+    endpoint.startsWith('/auth/register') ||
+    endpoint.startsWith('/auth/forgot-password') ||
+    endpoint.startsWith('/auth/reset-password')
+  );
+}
+
 async function parseJsonResponse<T>(res: Response): Promise<T> {
   if (res.status === 204) return {} as T;
   const text = await res.text();
@@ -86,7 +96,7 @@ async function request<T>(endpoint: string, options: RequestInit = {}): Promise<
   }
 
   if (!res.ok) {
-    if (res.status === 401 && !isRefreshing && !endpoint.startsWith('/auth/') && typeof window !== 'undefined') {
+    if (res.status === 401 && !isRefreshing && !isPublicAuthEndpoint(endpoint) && typeof window !== 'undefined') {
       isRefreshing = true;
       try {
         const refreshRes = await fetch(`${API_URL}/auth/refresh`, {
@@ -108,8 +118,7 @@ async function request<T>(endpoint: string, options: RequestInit = {}): Promise<
         // Refresh failed
       }
       isRefreshing = false;
-      const isAuthEndpoint = endpoint.startsWith('/auth/');
-      if (!isAuthEndpoint) {
+      if (!isPublicAuthEndpoint(endpoint)) {
         window.location.href = '/login';
       }
       throw new ApiError(401, 'Sessão expirada');
@@ -143,7 +152,7 @@ async function authBlob(endpoint: string): Promise<Blob> {
   let res = await doFetch();
 
   if (!res.ok) {
-    if (res.status === 401 && !isRefreshing && !endpoint.startsWith('/auth/') && typeof window !== 'undefined') {
+    if (res.status === 401 && !isRefreshing && !isPublicAuthEndpoint(endpoint) && typeof window !== 'undefined') {
       isRefreshing = true;
       try {
         const refreshRes = await fetch(`${API_URL}/auth/refresh`, {
@@ -161,7 +170,9 @@ async function authBlob(endpoint: string): Promise<Blob> {
         /* refresh failed */
       }
       isRefreshing = false;
-      window.location.href = '/login';
+      if (!isPublicAuthEndpoint(endpoint)) {
+        window.location.href = '/login';
+      }
       throw new ApiError(401, 'Sessão expirada');
     }
     const body = await res.json().catch(() => ({ message: 'Erro' }));
