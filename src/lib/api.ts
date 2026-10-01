@@ -16,7 +16,7 @@ import type {
   WhatsAppMessageLog,
 } from '@/types';
 
-const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3000/api';
+const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3001/api';
 const BACKEND_URL = API_URL.replace(/\/api$/, '');
 
 export function assetUrl(path: string | null | undefined): string | null {
