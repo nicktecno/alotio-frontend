@@ -7,8 +7,23 @@ export default function robots(): MetadataRoute.Robots {
     rules: [
       {
         userAgent: '*',
-        allow: '/',
-        disallow: ['/dashboard/', '/admin/', '/api/', '/tios?*', '/contrato/'],
+        disallow: [
+          '/dashboard/',
+          '/admin/',
+          '/api/',
+          '/tios?*',
+          '/contrato/',
+          '/login',
+          '/cadastro',
+          '/cadastro-pai',
+          '/cadastro-lojista',
+          '/cadastro-sindicato',
+          '/cadastro-associacao',
+          '/cadastro-escola-parceira',
+          '/esqueci-senha',
+          '/redefinir-senha',
+          '/lojista/',
+        ],
       },
       {
         userAgent: [

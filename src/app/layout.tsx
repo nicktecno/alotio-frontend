@@ -87,9 +87,7 @@ export const metadata: Metadata = {
       ...(process.env.GOOGLE_SITE_VERIFICATION
         ? { google: process.env.GOOGLE_SITE_VERIFICATION }
         : {}),
-      ...(process.env.NEXT_PUBLIC_ADSENSE_CLIENT
-        ? { other: { 'google-adsense-account': process.env.NEXT_PUBLIC_ADSENSE_CLIENT } }
-        : {}),
+
     },
   };
 

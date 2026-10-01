@@ -16,6 +16,9 @@ export const metadata: Metadata = {
   alternates: {
     canonical: process.env.NEXT_PUBLIC_SITE_URL || 'https://alotio.com.br',
   },
+  ...(process.env.NEXT_PUBLIC_ADSENSE_CLIENT
+    ? { verification: { other: { 'google-adsense-account': process.env.NEXT_PUBLIC_ADSENSE_CLIENT } } }
+    : {}),
 };
 
 export default function Home() {
@@ -189,11 +192,7 @@ export default function Home() {
           </div>
         </section>
 
-        <AdSlot
-          slot={process.env.NEXT_PUBLIC_ADSENSE_SLOT_HOME_TOP}
-          format="horizontal"
-          className="py-8 bg-white border-t border-gray-100"
-        />
+
 
         <FeaturedStores />
 
