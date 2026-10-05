@@ -11,6 +11,7 @@ const links = [
   { href: '/admin/avaliacoes', label: 'Avaliações', icon: '⭐' },
   { href: '/admin/anuncios', label: 'Anúncios', icon: '🏷️' },
   { href: '/admin/lojas', label: 'Lojas', icon: '🏪' },
+  { href: '/admin/sindicatos', label: 'Sindicatos', icon: '🏛️' },
   { href: '/admin/perfis', label: 'Perfis', icon: '👤' },
   { href: '/admin/usuarios', label: 'Usuários', icon: '👥' },
   { href: '/admin/estados', label: 'Estados', icon: '🗺️' },

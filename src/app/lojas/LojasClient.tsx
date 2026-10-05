@@ -86,7 +86,7 @@ export default function LojasClient() {
 
   useEffect(() => {
     api
-      .marketplaceFeatured(6, { excludeType: 'ESCOLA' })
+      .marketplaceFeatured(6, { excludeTypes: 'ESCOLA,SINDICATO' })
       .then(setFeatured)
       .catch(() => setFeatured([]));
     (api.getStates(true) as Promise<State[]>)
@@ -109,7 +109,7 @@ export default function LojasClient() {
   const load = useCallback(async () => {
     setLoading(true);
     try {
-      const params: Record<string, string> = { limit: '24', excludeType: 'ESCOLA' };
+      const params: Record<string, string> = { limit: '24', excludeTypes: 'ESCOLA,SINDICATO' };
       if (type) params.type = type;
       if (search) params.search = search;
       if (cityId) params.cityId = cityId;

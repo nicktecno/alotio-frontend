@@ -734,11 +734,23 @@ export const api = {
   },
   marketplaceFeatured: (
     limit = 6,
-    filters?: { type?: StoreType; excludeType?: StoreType },
+    filters?: {
+      type?: StoreType;
+      excludeType?: StoreType;
+      excludeTypes?: StoreType[] | string;
+    },
   ) => {
     const params = new URLSearchParams({ limit: String(limit) });
     if (filters?.type) params.set('type', filters.type);
     if (filters?.excludeType) params.set('excludeType', filters.excludeType);
+    if (filters?.excludeTypes) {
+      params.set(
+        'excludeTypes',
+        Array.isArray(filters.excludeTypes)
+          ? filters.excludeTypes.join(',')
+          : filters.excludeTypes,
+      );
+    }
     return publicRequest<Store[]>(`/marketplace/featured?${params}`);
   },
   marketplaceProducts: (type: StoreType, limit = 12) =>
