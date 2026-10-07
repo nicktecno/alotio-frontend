@@ -452,6 +452,7 @@ export default function TiosSearchClient({
                 <Link
                   key={tio.id}
                   href={`/tios/${tio.id}`}
+                  prefetch={false}
                   className="bg-white rounded-xl border border-gray-200 p-6 hover:shadow-lg transition group"
                 >
                   <div className="flex items-center gap-4 mb-4">

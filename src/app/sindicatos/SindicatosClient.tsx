@@ -368,7 +368,7 @@ export default function SindicatosClient() {
                     key={s.id}
                     className="bg-white border border-gray-200 hover:border-emerald-400 rounded-2xl p-5 hover:shadow-md transition flex flex-col justify-between group relative"
                   >
-                    <Link href={`/sindicatos/${s.id}`} className="block">
+                    <Link href={`/sindicatos/${s.id}`} prefetch={false} className="block">
                       <div className="flex items-start justify-between gap-2 mb-2">
                         <span className="text-xs font-bold uppercase tracking-wider text-emerald-800 bg-emerald-50 px-2.5 py-0.5 rounded-md border border-emerald-200">
                           {s.tipo ? s.tipo.toUpperCase() : 'SINDICATO'}
@@ -408,6 +408,7 @@ export default function SindicatosClient() {
                     <div className="mt-5 pt-3 border-t border-gray-100 flex items-center justify-between gap-2">
                       <Link
                         href={`/sindicatos/${s.id}`}
+                        prefetch={false}
                         className="text-xs font-bold text-emerald-700 hover:text-emerald-800 group-hover:translate-x-0.5 transition-transform flex items-center gap-1"
                       >
                         <span>Ver detalhes</span>
