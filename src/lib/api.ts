@@ -47,6 +47,17 @@ function isPublicAuthEndpoint(endpoint: string): boolean {
   );
 }
 
+function shouldRedirectToLogin(endpoint: string): boolean {
+  if (typeof window === 'undefined') return false;
+  // Nunca redireciona em endpoints de autenticação ou verificação (ex: /auth/me)
+  if (endpoint.startsWith('/auth/')) return false;
+
+  // Redireciona somente se o usuário estiver em rotas restritas/protegidas
+  const protectedPrefixes = ['/dashboard', '/admin', '/lojista'];
+  const pathname = window.location.pathname;
+  return protectedPrefixes.some((prefix) => pathname.startsWith(prefix));
+}
+
 async function parseJsonResponse<T>(res: Response): Promise<T> {
   if (res.status === 204) return {} as T;
   const text = await res.text();
@@ -118,7 +129,7 @@ async function request<T>(endpoint: string, options: RequestInit = {}): Promise<
         // Refresh failed
       }
       isRefreshing = false;
-      if (!isPublicAuthEndpoint(endpoint)) {
+      if (shouldRedirectToLogin(endpoint)) {
         window.location.href = '/login';
       }
       throw new ApiError(401, 'Sessão expirada');
@@ -170,7 +181,7 @@ async function authBlob(endpoint: string): Promise<Blob> {
         /* refresh failed */
       }
       isRefreshing = false;
-      if (!isPublicAuthEndpoint(endpoint)) {
+      if (shouldRedirectToLogin(endpoint)) {
         window.location.href = '/login';
       }
       throw new ApiError(401, 'Sessão expirada');
