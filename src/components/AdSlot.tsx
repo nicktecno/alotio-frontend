@@ -26,9 +26,19 @@ export default function AdSlot({
     if (!ADSENSE_CLIENT || !slot || pushed.current) return;
     pushed.current = true;
     try {
+      const consent =
+        typeof window !== 'undefined'
+          ? window.localStorage.getItem('alotio-cookie-consent')
+          : null;
+      const win = window as unknown as {
+        adsbygoogle?: unknown[] & { requestNonPersonalizedAds?: number };
+      };
+      win.adsbygoogle = win.adsbygoogle || [];
+      if (consent !== 'accepted') {
+        win.adsbygoogle.requestNonPersonalizedAds = 1;
+      }
       // O script do AdSense injeta window.adsbygoogle; o push dispara o preenchimento do bloco.
-      ((window as unknown as { adsbygoogle?: unknown[] }).adsbygoogle =
-        (window as unknown as { adsbygoogle?: unknown[] }).adsbygoogle || []).push({});
+      win.adsbygoogle.push({});
     } catch {
       // Bloqueadores de anúncio podem impedir o carregamento — o slot apenas fica vazio.
     }

@@ -3,6 +3,7 @@ import { Poppins, Rajdhani, Archivo } from 'next/font/google';
 import './globals.css';
 import Providers from '@/components/Providers';
 import CookieConsent from '@/components/CookieConsent';
+import AdSense from '@/components/AdSense';
 import { organizationSameAsUrls } from '@/lib/seo-env';
 import { SEO_CORE_KEYWORDS } from '@/lib/seo-keywords';
 import { SEO_SITE_DESCRIPTION, SEO_SITE_TITLE } from '@/lib/seo-copy';
@@ -87,7 +88,9 @@ export const metadata: Metadata = {
       ...(process.env.GOOGLE_SITE_VERIFICATION
         ? { google: process.env.GOOGLE_SITE_VERIFICATION }
         : {}),
-
+      ...(process.env.NEXT_PUBLIC_ADSENSE_CLIENT
+        ? { other: { 'google-adsense-account': process.env.NEXT_PUBLIC_ADSENSE_CLIENT } }
+        : {}),
     },
   };
 
@@ -173,6 +176,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         />
       </head>
       <body className={`${poppins.variable} ${rajdhani.variable} ${archivo.variable} font-sans antialiased`}>
+        <AdSense />
         <CookieConsent />
         <Providers>{children}</Providers>
       </body>

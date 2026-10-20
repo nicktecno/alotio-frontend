@@ -2,7 +2,6 @@
 
 import Link from 'next/link';
 import { useSyncExternalStore } from 'react';
-import AdSense from '@/components/AdSense';
 import GoogleAnalytics from '@/components/GoogleAnalytics';
 
 type Consent = 'accepted' | 'rejected' | null;
@@ -34,12 +33,7 @@ export default function CookieConsent() {
 
   return (
     <>
-      {consent === 'accepted' && (
-        <>
-          <GoogleAnalytics />
-          <AdSense />
-        </>
-      )}
+      {consent === 'accepted' && <GoogleAnalytics />}
       {consent === null && (
         <aside
           aria-label="Preferências de cookies"

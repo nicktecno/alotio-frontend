@@ -56,7 +56,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     ],
     alternates: { canonical: `${siteUrl}/transporte-escolar/${city.slug}` },
     robots: {
-      index: total > 0,
+      index: true,
       follow: true,
     },
     openGraph: {

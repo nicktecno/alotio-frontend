@@ -522,6 +522,291 @@ Se o veículo estiver constantemente atrasado, apresentar problemas mecânicos r
 
 A relação entre família e condutor deve ser sempre pautada pelo diálogo respeitoso e pela priorização absoluta da segurança física e emocional dos pequenos passageiros.`,
   },
+  {
+    slug: 'checklist-vistoria-van-escolar-equipamentos-obrigatorios',
+    title:
+      'Checklist de Vistoria de Van Escolar: Conheça os Equipamentos Obrigatórios por Lei',
+    subtitle:
+      'Do cronotacógrafo aos cintos individuais, veja quais itens são exigidos pelo CTB e órgãos municipais para autorização do veículo.',
+    category: 'Segurança',
+    publishedAt: '2026-09-15',
+    updatedAt: '2026-10-18',
+    readTime: '10 min de leitura',
+    author: {
+      name: 'Equipe Editorial Alô Tio',
+      role: 'Especialistas em Mobilidade e Transporte Escolar',
+    },
+    excerpt:
+      'Guia técnico completo com todos os equipamentos obrigatórios exigidos em veículos de transporte escolar pelo Código de Trânsito Brasileiro e secretarias de transporte.',
+    tags: [
+      'vistoria escolar',
+      'equipamentos obrigatorios',
+      'cronotacografo',
+      'cinto de seguranca',
+      'artigo 136 ctb',
+      'seguranca veicular',
+    ],
+    content: `A prestação do serviço de transporte coletivo de escolares é uma atividade de alta responsabilidade pública. Para que uma van, micro-ônibus ou ônibus escolar possa circular legalmente pelas ruas brasileiras, o Código de Trânsito Brasileiro (CTB), em seu Artigo 136, impõe requisitos rigorosos de segurança ativa e passiva.
+
+Tanto pais quanto condutores devem conhecer em detalhes quais equipamentos e condições técnicas são indispensáveis para garantir que o trajeto diário ocorra sem riscos.
+
+---
+
+## 1. Faixa Amarela com Inscrição ESCOLAR
+
+O primeiro elemento visual e obrigatório de identificação é a faixa horizontal na cor amarela, com 40 centímetros de largura, à meia altura da carroçaria ao longo de toda a extensão das partes laterais e traseira do veículo.
+
+- **Cor e contraste:** A inscrição **ESCOLAR** deve ser feita com caracteres pretos de 20 centímetros de altura.
+- **Veículos de cor amarela:** Caso a carroceria do veículo já seja amarela, a faixa deve ser obrigatoriamente preta com as letras em amarelo.
+- **Proibição de publicidade:** A faixa não pode ser encoberta por propagandas, adesivos promocionais ou placas informativas.
+
+---
+
+## 2. Registrador Instantâneo e Inalterável de Velocidade e Tempo (Cronotacógrafo)
+
+O cronotacógrafo é a "caixa preta" do transporte escolar. Ele registra de forma contínua a velocidade desenvolvida, a distância percorrida, os períodos de movimentação e as paradas do veículo.
+
+- **Certificado do Inmetro:** O equipamento deve ser certificado pelo Inmetro e passar por aferição periódica obrigatória.
+- **Preservação de registros:** Os discos diagrama ou registros digitais devem ser mantidos sob guarda do condutor ou empresa à disposição da fiscalização de trânsito em caso de auditorias ou perícias de acidentes.
+
+---
+
+## 3. Cintos de Segurança Individuais para Todos os Ocupantes
+
+É expressamente proibido transportar crianças no colo ou compartilhar o mesmo cinto de segurança entre dois passageiros.
+
+- Todo assento deve dispor de cinto de segurança individual em perfeito estado de funcionamento e retração.
+- O veículo não pode transportar passageiros acima do limite homologado no Certificado de Registro e Licenciamento do Veículo (CRLV).
+- Em vans escolares convencionais, a lotação deve respeitar a quantidade exata de bancos instalados de fábrica ou devidamente regularizados perante o Inmetro/Detran.
+
+---
+
+## 4. Lanternas de Advertência no Teto (Luzes de Embarque e Desembarque)
+
+O veículo deve possuir lanternas de luz branca, fosca ou amarela na parte dianteira superior do teto, e lanternas de luz vermelha na parte traseira superior.
+
+- Essas luzes intermitentes acionam-se para advertir os motoristas que trafegam na mesma via durante os momentos de parada para entrada ou descida de estudantes.
+- Essa sinalização alerta os veículos vizinhos a reduzirem a velocidade e redobrarem a atenção com pedestres infantis nas proximidades.
+
+---
+
+## 5. Limitadores de Abertura de Janelas
+
+Por medida preventiva contra quedas e projeção de membros do corpo para o exterior da van, as janelas corrediças devem possuir travas limitadoras:
+- A abertura máxima dos vidros das janelas laterais não pode ultrapassar **10 centímetros**.
+- Travas quebradas ou modificadas resultam em reprovação imediata na vistoria municipal.
+
+---
+
+## 6. Dispositivos de Visibilidade Adicional e Espelhos Auxiliares
+
+Pontos cegos representam o maior perigo em veículos de grande porte ao redor de crianças:
+- **Espelhos convexos adicionais:** Posicionados estrategicamente para enxergar pontos cegos na lateral direita e traseira.
+- **Sensores ou câmeras de ré:** Equipamentos altamente recomendados e já obrigatórios em muitas legislações municipais para manobras seguras nas imediações das portas das escolas.
+
+---
+
+## 7. Extintor de Incêndio com Carga e Manômetro em Dia
+
+Diferente de veículos de passeio leves comuns, veículos destinados ao transporte de passageiros continuam tendo a obrigatoriedade de extintor de incêndio com carga de pó químico ABC dentro do prazo de validade e com o ponteiro na faixa verde operacional.`,
+  },
+  {
+    slug: 'adaptacao-escolar-e-primeira-viagem-de-van',
+    title:
+      'Primeira Vez na Van Escolar: Como Preparar a Criança e Facilitar a Adaptação',
+    subtitle:
+      'Estratégias práticas, acolhimento pelo monitor e orientações aos pais para uma transição tranquila e alegre no início do trajeto escolar.',
+    category: 'Dicas para Pais',
+    publishedAt: '2026-09-20',
+    updatedAt: '2026-10-18',
+    readTime: '8 min de leitura',
+    author: {
+      name: 'Equipe Editorial Alô Tio',
+      role: 'Especialistas em Mobilidade e Transporte Escolar',
+    },
+    excerpt:
+      'Como preparar os pequenos para a rotina da van escolar. Dicas de diálogo, familiarização prévia, regras de convivência e a importância do acolhimento do monitor.',
+    tags: [
+      'adaptacao escolar',
+      'primeira viagem de van',
+      'rotina escolar',
+      'dicas para pais',
+      'monitor escolar',
+      'seguranca emocional',
+    ],
+    content: `O início da utilização da van escolar representa um marco importante na vida de uma criança e de seus responsáveis. Para muitos pequenos, é a primeira experiência de deslocamento diário sem a presença física direta dos pais, o que pode gerar uma mistura natural de entusiasmo, curiosidade e insegurança.
+
+Uma transição bem planejada e amorosa transforma a van escolar em um espaço seguro de socialização, independência saudável e alegria.
+
+---
+
+## 1. Visita Prévia e Apresentação do Condutor e Monitor
+
+Antes do primeiro dia letivo, agende um momento para apresentar a criança ao motorista e ao monitor (ou monitora) que farão o acompanhamento no trajeto:
+- **Conhecer o veículo por dentro:** Deixe a criança subir na van vazia, sentar no banco e experimentar o cinto de segurança.
+- **Criar laço de confiança:** Apresente o profissional com afeto (*"Este é o Tio Carlos e a Tia Juliana, que vão cuidar de você com todo carinho no caminho da escola"*).
+- **Reduzir o medo do desconhecido:** Ao reconhecer o rosto do condutor e a cor do veículo no primeiro dia, o nível de estresse da criança cai drasticamente.
+
+---
+
+## 2. Alinhamento da Rotina Matinal sem Ansiedade
+
+A pressa matinal é um dos maiores gatilhos de choro e ansiedade infantil:
+- **Organize o material na véspera:** Mochila pronta, uniforme separado e lanches organizados evitam correria e estresse antes do horário previsto.
+- **Esteja pronto 5 minutos antes:** Esperar a van na calçada ou portaria com tranquilidade evita a sensação de urgência que assusta a criança.
+- **Despedidas curtas e afetuosas:** Despedidas excessivamente prolongadas ou com tom de apreensão comunicam insegurança para a criança. Um abraço caloroso, um sorriso confiante e um *"Boa aula, no final da tarde o Tio traz você de volta pra gente brincar!"* bastam.
+
+---
+
+## 3. Ensinando as Regras de Ouro de Segurança
+
+Converse com a criança em linguagem simples e lúdica sobre as regras de convivência e segurança do veículo:
+- **Cinto sempre afivelado:** O cinto só pode ser solto quando a monitora autorizar, após o veículo estacionar completamente na porta da escola.
+- **Permanecer sentado:** Nunca se levantar com o veículo em movimento para pegar brinquedos ou conversar com colegas de outros bancos.
+- **Braços e cabeça dentro do veículo:** Jamais colocar as mãos ou cabeça para fora da janela.
+- **Respeito aos colegas:** Não gritar, não jogar objetos dentro da van e respeitar as orientações do condutor e monitor.
+
+---
+
+## 4. O Papel do Monitor Escolar na Adaptação
+
+O monitor de transporte escolar desempenha função indispensável:
+- Auxiliar no embarque, afivelar cintos e posicionar mochilas em locais seguros.
+- Acolher crianças que estejam chorando com palavras de carinho, brinquedos ou músicas infantis durante o trajeto.
+- Acompanhar os alunos da porta da van até a entrada da escola, entregando-os em mãos aos inspetores ou professores responsáveis.
+
+Com paciência, diálogo e parceria sólida entre família e equipe da van, em poucos dias a viagem escolar se torna um dos momentos mais divertidos do dia da criança!`,
+  },
+  {
+    slug: 'seguro-transporte-escolar-app-rcf-coberturas',
+    title:
+      'Seguro para Transporte Escolar: Entenda APP, RCF e as Coberturas Indispensáveis',
+    subtitle:
+      'Como funciona o seguro de acidentes pessoais a passageiros, limites de indenização e a importância dessa proteção para pais e transportadores.',
+    category: 'Para Condutores',
+    publishedAt: '2026-09-25',
+    updatedAt: '2026-10-18',
+    readTime: '9 min de leitura',
+    author: {
+      name: 'Equipe Editorial Alô Tio',
+      role: 'Especialistas em Seguros e Mobilidade Urbana',
+    },
+    excerpt:
+      'Tudo sobre seguros no transporte escolar: coberturas de APP (passageiros), DMHO (despesas médicas) e RCF-V (terceiros). Proteja seu patrimônio e seus alunos.',
+    tags: [
+      'seguro transporte escolar',
+      'seguro app passageiros',
+      'rcf-v terceiros',
+      'cobertura dmho',
+      'protecao veicular',
+      'gestao de frotas',
+    ],
+    content: `A atividade do transporte escolar lida diariamente com vidas humanas insubstituíveis. Mesmo os motoristas mais experientes e cautelosos estão sujeitos a imprevistos, falhas mecânicas repentinas e imprudência de outros condutores no trânsito das cidades.
+
+Ter uma apólice de seguro adequada não é apenas uma exigência da maioria dos órgãos reguladores municipais, mas sim um pilar de sobrevivência financeira para o condutor e de tranquilidade inegociável para as famílias atendidas.
+
+---
+
+## 1. O que é o Seguro APP (Acidentes Pessoais a Passageiros)?
+
+O Seguro APP é a modalidade voltada exclusivamente para indenizar os passageiros transportados em caso de sinistro:
+- **Morte Acidental:** Indenização financeira para a família do passageiro.
+- **Invalidez Permanente Total ou Parcial por Acidente:** Suporte financeiro para custeio de reabilitação e adaptações necessárias.
+- **Despesas Médicas, Hospitalares e Odontológicas (DMHO):** Cobertura fundamental que reembolsa ou arca com atendimento médico, exames, internações e medicamentos emergenciais logo após o acidente.
+
+---
+
+## 2. Responsabilidade Civil Facultativa de Veículos (RCF-V)
+
+Enquanto o APP atende os passageiros que estão dentro da van, a cobertura de RCF protege contra danos provocados a pessoas e bens fora do veículo:
+- **Danos Materiais:** Cobertura de colisões contra outros automóveis, postes, muros ou patrimônio público e privado.
+- **Danos Corporais a Terceiros:** Indenização a pedestres, ciclistas ou ocupantes de outros veículos atingidos em um eventual sinistro.
+- **Danos Morais:** Protege o transportador contra condenações judiciais por abalo moral decorrente do acidente.
+
+---
+
+## 3. Limites de Cobertura Recomendados
+
+Em transporte escolar, apólices com valores de cobertura muito baixos podem ser insuficientes em ocorrências que envolvam múltiplos passageiros:
+- A apólice de APP deve ter limite contratado **por assento homologado**, garantindo que todas as crianças a bordo estejam cobertas simultaneamente.
+- Especialistas recomendam limites mínimos de R$ 50.000 a R$ 100.000 por passageiro para morte/invalidez, além de pelo menos R$ 10.000 a R$ 20.000 por ocupante em despesas médicas imediatas (DMHO).
+
+---
+
+## 4. O Seguro como Ferramenta de Credibilidade Comercial
+
+Para o transportador autônomo, apresentar a apólice de seguro vigente durante a negociação com as famílias é um dos diferenciais mais persuasivos:
+- Demonstra profissionalismo e respeito à vida das crianças.
+- Gera segurança psicológica imediata para pais que estão indecisos entre concorrentes.
+- Pode ser mencionado no próprio contrato de prestação de serviços com o número da apólice e nome da seguradora credenciada.`,
+  },
+  {
+    slug: 'transporte-escolar-educacao-infantil-regras-cuidados',
+    title:
+      'Transporte Escolar na Educação Infantil: Regras de Embarque, Monitor e Cuidados',
+    subtitle:
+      'Diretrizes de segurança para crianças de creche e pré-escola, papel do auxiliar de bordo e procedimentos de entrega segura na escola.',
+    category: 'Legislação',
+    publishedAt: '2026-09-30',
+    updatedAt: '2026-10-18',
+    readTime: '9 min de leitura',
+    author: {
+      name: 'Equipe Editorial Alô Tio',
+      role: 'Especialistas em Legislação de Trânsito',
+    },
+    excerpt:
+      'Regras específicas para o transporte de crianças pequenas na educação infantil: exigência de monitor, dispositivos de retenção, procedimentos de portaria e segurança.',
+    tags: [
+      'educacao infantil',
+      'transporte escolar criancas',
+      'monitor escolar obrigatorio',
+      'portaria da escola',
+      'legislacao municipal',
+      'seguranca na creche',
+    ],
+    content: `O transporte de crianças na faixa da primeira infância (de 0 a 5 anos, compreendendo creches e pré-escolas) requer cuidados operacionais muito superiores aos de estudantes mais velhos dos Ensinos Fundamental e Médio.
+
+Crianças pequenas ainda não possuem percepção de risco formada, têm menor coordenação motora e necessitam de supervisão humana constante desde o momento em que saem do portão de casa até a entrega aos educadores na sala de aula.
+
+---
+
+## 1. A Obrigatoriedade do Monitor Escolar
+
+Em diversas cidades brasileiras (como São Paulo, Curitiba, Belo Horizonte e Rio de Janeiro), as legislações municipais determinam a presença obrigatória de um monitor ou auxiliar de transporte escolar nos veículos que transportam crianças da Educação Infantil.
+
+As principais atribuições do monitor incluem:
+- Realizar o embarque e desembarque seguro, auxiliando na descida dos degraus da van.
+- Conferir e travar os cintos de segurança de todas as crianças antes do veículo iniciar a marcha.
+- Manter a ordem interna e o bem-estar emocional das crianças durante todo o percurso.
+- Não permitir que qualquer criança se levante ou coloque membros para fora das janelas.
+- Conduzir as crianças pessoalmente até a portaria interna ou dependências designadas pela direção da escola.
+
+---
+
+## 2. Protocolo de Identificação e Entrega das Crianças
+
+Um dos momentos mais sensíveis no transporte da Educação Infantil é a transição de custódia na portaria:
+- **Entrega nominal:** O motorista ou monitor só pode entregar o aluno a professores, coordenadores ou funcionários previamente autorizados pela escola.
+- **Retorno para casa:** No desembarque da tarde, a criança nunca deve ser deixada sozinha na calçada. Ela só deve ser liberada perante a presença física do pai, mãe ou adulto formalmente autorizado em ficha de cadastro.
+- **Caso não haja responsável em casa:** O condutor não pode deixar a criança com vizinhos sem autorização expressa prévia dos pais. O procedimento padrão é tentar contato telefônico e, em último caso, manter a criança em segurança na van até o término da rota para novo contato.
+
+---
+
+## 3. Dispositivos de Retenção e Resoluções do CONTRAN
+
+Para veículos de transporte escolar da categoria micro-ônibus e ônibus com Peso Bruto Total (PBT) superior a 3,5 toneladas, as normas federais do CONTRAN estabelecem especificidades sobre o uso de cadeirinhas convencionais de automóveis de passeio, focando nos cintos de segurança adequados e na presença do monitor. No entanto, para vans menores com cintos de 3 pontos, o uso de assentos de elevação ou dispositivos específicos para os menores é uma prática altamente benéfica recomendada por entidades pediátricas.
+
+---
+
+## 4. Comunicação Direta com os Pais
+
+Na Educação Infantil, criar um canal ágil de comunicação (como grupo de avisos ou mensagens com o monitor) traz enorme tranquilidade para as famílias:
+- Notificação de imprevistos de trânsito ou alterações de ordem de desembarque.
+- Avisos caso a criança apresente indisposição, febre ou sonolência excessiva durante o caminho.
+- Confirmação de que o pequeno foi devidamente entregue à escola no início da manhã.
+
+A segurança no transporte da Educação Infantil é construída na soma de equipamentos adequados, vigilância ativa e carinho pelo desenvolvimento dos pequenos.`,
+  },
 ];
 
 export function getArticleBySlug(slug: string): Article | undefined {
