@@ -14,7 +14,8 @@ const links = [
 
 const meuTransporteLinks = [
   { href: '/dashboard/meu-transporte', label: 'Meu transporte', icon: '🚐' },
-  { href: '/dashboard/meu-transporte/dados', label: 'Dados do transportador', icon: '📋' },
+  { href: '/dashboard/meu-transporte/mensalidades', label: 'Mensalidades e PIX', icon: '💸' },
+  { href: '/dashboard/meu-transporte/dados', label: 'Dados e Chave PIX', icon: '📋' },
   { href: '/dashboard/meu-transporte/responsaveis', label: 'Responsáveis e recibos', icon: '👨‍👩‍👧' },
   { href: '/dashboard/meu-transporte/contratos', label: 'Contratos', icon: '📝' },
 ] as const;

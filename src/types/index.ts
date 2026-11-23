@@ -130,6 +130,9 @@ export interface Neighborhood {
   cityId: string;
 }
 
+export type PixKeyType = 'CPF' | 'CNPJ' | 'EMAIL' | 'PHONE' | 'EVP';
+export type TuitionStatus = 'PENDING' | 'PAID';
+
 export interface Profile {
   id: string;
   userId: string;
@@ -137,6 +140,8 @@ export interface Profile {
   legalName?: string | null;
   cnpj?: string | null;
   transportadorCpf?: string | null;
+  pixKeyType?: PixKeyType | null;
+  pixKey?: string | null;
   prefixo: string;
   phone: string | null;
   bio: string | null;

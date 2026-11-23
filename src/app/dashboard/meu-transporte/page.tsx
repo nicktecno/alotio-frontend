@@ -10,10 +10,17 @@ const sections: {
   icon: string;
 }[] = [
   {
-    href: '/dashboard/meu-transporte/dados',
-    title: 'Dados do transportador',
+    href: '/dashboard/meu-transporte/mensalidades',
+    title: 'Mensalidades e Cobrança PIX',
     description:
-      'Nome ou razão social e CNPJ/CPF usados nos PDFs de contrato e recibo — separados do perfil público da AloTio.',
+      'Controle quem pagou no mês, envie lembrete com link de fatura PIX Copia e Cola em 1 clique no WhatsApp e emita o recibo.',
+    icon: '💸',
+  },
+  {
+    href: '/dashboard/meu-transporte/dados',
+    title: 'Dados e Chave PIX',
+    description:
+      'Razão social/nome, CNPJ/CPF para contratos e recibos, além da sua Chave PIX para receber direto na sua conta sem taxas.',
     icon: '📋',
   },
   {
@@ -50,7 +57,7 @@ export default function MeuTransportePage() {
 
       <div>
         <h2 className="text-sm font-semibold text-gray-900 mb-3">O que você pode fazer</h2>
-        <ul className="grid gap-4 sm:grid-cols-1 md:grid-cols-3">
+        <ul className="grid gap-4 sm:grid-cols-1 md:grid-cols-2">
           {sections.map((s) => (
             <li key={s.href}>
               <Link

@@ -717,6 +717,61 @@ export const api = {
   contractsDelete: (id: string) =>
     request(`/served-parents/contracts/${id}`, { method: 'DELETE' }),
 
+  tuitionsList: (month: number, year: number) =>
+    request<unknown[]>(
+      `/served-parents/tuitions?month=${encodeURIComponent(String(month))}&year=${encodeURIComponent(String(year))}`,
+    ),
+  tuitionsUpsert: (data: {
+    servedParentId: string;
+    month: number;
+    year: number;
+    amountCents: number;
+    dueDay: number;
+    contractId?: string;
+  }) =>
+    request('/served-parents/tuitions', {
+      method: 'POST',
+      body: JSON.stringify(data),
+    }),
+  tuitionsSetPaid: (id: string, paid: boolean) =>
+    request(`/served-parents/tuitions/${id}/paid`, {
+      method: 'PATCH',
+      body: JSON.stringify({ paid }),
+    }),
+  tuitionsMarkReminderSent: (id: string) =>
+    request(`/served-parents/tuitions/${id}/reminder-sent`, {
+      method: 'POST',
+    }),
+  tuitionsDelete: (id: string) =>
+    request(`/served-parents/tuitions/${id}`, { method: 'DELETE' }),
+
+  publicTuitionInvoice: (token: string) =>
+    publicRequest<{
+      id: string;
+      month: number;
+      year: number;
+      amountCents: number;
+      dueDay: number;
+      status: 'PENDING' | 'PAID';
+      paidAt: string | null;
+      parentName: string;
+      parentNeighborhood: string | null;
+      parentCity: string | null;
+      transportador: {
+        id: string;
+        displayName: string;
+        legalName: string | null;
+        prefixo: string;
+        phone: string | null;
+        avatarUrl: string | null;
+        cityName: string;
+        stateUf: string;
+        pixKey: string | null;
+        pixKeyType: string | null;
+      };
+      pixBrCode: string | null;
+    }>(`/public/tuitions/${encodeURIComponent(token)}`),
+
   publicParentInvitePreview: (token: string) =>
     publicRequest<{ valid: boolean; transportadorName: string }>(
       `/public/parent-invites/${encodeURIComponent(token)}`,

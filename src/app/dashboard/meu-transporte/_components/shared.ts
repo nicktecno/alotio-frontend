@@ -12,8 +12,26 @@ export interface ContractRow {
   servedParentId: string;
   installmentCount: number;
   installmentValueCents: number;
+  paymentDueDay?: number;
   tioSignedAt?: string | null;
   parentAcceptedAt?: string | null;
+}
+
+export interface TuitionRow {
+  id: string;
+  profileId: string;
+  servedParentId: string;
+  contractId: string | null;
+  month: number;
+  year: number;
+  amountCents: number;
+  dueDay: number;
+  status: 'PENDING' | 'PAID';
+  publicToken: string;
+  invoiceUrl: string;
+  reminderSentAt: string | null;
+  paidAt: string | null;
+  servedParent: ServedParentRow;
 }
 
 export const CONTRACT_STATUS_PT: Record<string, string> = {
