@@ -79,12 +79,12 @@ export function TioProfileForm({ variant, profile, onSubmittingChange }: TioProf
     variant === 'cadastro' || (variant === 'dashboard' && !profile);
 
   const { data: states = [] } = useStates();
-  const { data: cities = [], isLoading: loadingCities } = useCities(form.stateId || undefined);
+  const { data: cities = [], isLoading: loadingCities, mutate: mutateCities } = useCities(form.stateId || undefined);
   const showCityPicker = form.isIntermunicipal && !!form.secondaryCityId;
   const effectiveDefaultCityId = showCityPicker ? (defaultSchoolCityId || form.cityId) : form.cityId;
   const effectiveSecondaryCityId = showCityPicker ? (secondarySchoolCityId || form.cityId) : form.cityId;
-  const { data: defaultSchools = [], isLoading: loadingDefaultSchools } = useSchools(effectiveDefaultCityId || undefined);
-  const { data: secondarySchools = [], isLoading: loadingSecondarySchools } = useSchools(effectiveSecondaryCityId || undefined);
+  const { data: defaultSchools = [], isLoading: loadingDefaultSchools, mutate: mutateDefaultSchools } = useSchools(effectiveDefaultCityId || undefined);
+  const { data: secondarySchools = [], isLoading: loadingSecondarySchools, mutate: mutateSecondarySchools } = useSchools(effectiveSecondaryCityId || undefined);
   const cityIdForNeighborhoods = profile?.cityId ?? form.cityId;
   const secondaryCityIdForNeighborhoods =
     profile?.secondaryCityId ?? (form.isIntermunicipal && form.secondaryCityId ? form.secondaryCityId : undefined);
@@ -234,7 +234,7 @@ export function TioProfileForm({ variant, profile, onSubmittingChange }: TioProf
       `Cidade já escolhida na lista: ${cityLabel ?? '—'}`,
     ].join('\n');
     try {
-      await api.sendSchoolRegistrationRequest({
+      const res = await api.sendSchoolRegistrationRequest({
         name: (profile?.displayName?.trim() || form.displayName?.trim() || contactEmail.split('@')[0]).slice(0, 100),
         email: contactEmail,
         uf: state.uf,
@@ -242,7 +242,21 @@ export function TioProfileForm({ variant, profile, onSubmittingChange }: TioProf
         ...(schoolInput && { schoolName: schoolInput }),
         details,
       });
-      toast.success('Pedido enviado! A equipe cadastra e avisa quando estiver disponível.');
+      await mutateCities();
+      await Promise.all([mutateDefaultSchools(), mutateSecondarySchools()]);
+      if (res.city?.id && !form.cityId) {
+        setForm((prev) => ({ ...prev, cityId: res.city!.id }));
+      }
+      if (res.school?.id) {
+        setForm((prev) => ({
+          ...prev,
+          cityId: prev.cityId || res.school!.cityId,
+          defaultSchoolId: prev.defaultSchoolId || res.school!.id,
+        }));
+      }
+      toast.success(
+        res.message || 'Escola cadastrada automaticamente! Você já pode selecioná-la na lista.',
+      );
     } catch (e) {
       toast.error(e instanceof Error ? e.message : 'Não foi possível enviar o pedido.');
       throw e;

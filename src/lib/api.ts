@@ -676,7 +676,7 @@ export const api = {
   }) =>
     request<{ message: string }>('/contact', { method: 'POST', body: JSON.stringify(data) }),
 
-  /** Transportador: não encontrou cidade/escola — envia para admin (Resend). */
+  /** Transportador: não encontrou cidade/escola — cadastra automaticamente no banco e notifica admin. */
   sendSchoolRegistrationRequest: (data: {
     name: string;
     email: string;
@@ -685,7 +685,13 @@ export const api = {
     schoolName?: string;
     details?: string;
   }) =>
-    request<{ message: string }>('/contact/school-registration-request', {
+    request<{
+      message: string;
+      city?: { id: string; name: string; slug: string; stateId: string } | null;
+      school?: { id: string; name: string; cityId: string; type: string } | null;
+      cityCreated?: boolean;
+      schoolCreated?: boolean;
+    }>('/contact/school-registration-request', {
       method: 'POST',
       body: JSON.stringify(data),
     }),

@@ -54,10 +54,10 @@ export function SchoolRegistrationModal({
         onClick={(e) => e.stopPropagation()}
       >
         <h2 id="school-reg-title" className="text-lg font-semibold text-gray-900">
-          Pedir cadastro no sistema
+          Cadastrar escola ou cidade no sistema
         </h2>
         <p className="text-xs text-gray-500">
-          Preencha o que faltar na lista. Pelo menos cidade ou escola. Seus dados de login vão no pedido automaticamente.
+          Informe o nome da escola (e a cidade, caso não esteja selecionada). O sistema formatará o nome e disponibilizará na lista imediatamente para você selecionar.
         </p>
         <form onSubmit={handleSubmit} className="space-y-4">
           <div>
